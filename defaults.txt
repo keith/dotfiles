@@ -1,0 +1,45 @@
+- To stop the display from half dimming before full display 'sleep'  "sudo pmset halfdim 0" [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)
+
+# Should remove downloaded from the internet warnings
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Disables shutting down inactive applications
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+# Allow text selection in QuickLook
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Disk image changes
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+
+# Shows ethernet connected computers in airdrop
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+# Dock tweeks
+defaults write com.apple.dock mouse-over-hilte-stack -bool true
+defaults write com.apple.dock no-glass -bool true
+defaults write com.apple.dock showhidden -bool true
+
+# Change the Safari search to find strings contained in other words
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# iTunes 10 tweeks
+defaults write com.apple.iTunes show-store-arrow-links -bool false
+defaults write com.apple.iTunes disablePingSidebar -bool true
+defaults write com.apple.iTunes disablePing -bool true
+
+# Only take address@example.com when copying email addresses in main
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+# Disable new disks for time machine warning
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Default to local files instead of iCloud
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false

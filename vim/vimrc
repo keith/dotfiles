@@ -1,0 +1,30 @@
+set sts=2
+set wildmode=list:longest
+set shiftwidth=2
+
+set number
+" set ruler
+
+set incsearch
+set hlsearch
+
+set wrap
+
+set ignorecase
+set smartcase
+
+map <Leader>t :FuzzyFinderTextMate<Enter>
+
+" Tab mappings.
+map <leader>tt :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmove
+
+" Remap F4 to toggle search highlights
+:noremap <F4> :set hlsearch! hlsearch?<CR>
