@@ -1,6 +1,8 @@
-set sts=2
+set tabstop=2
 set wildmode=list:longest
 set shiftwidth=2
+set expandtab
+
 
 set number
 " set ruler

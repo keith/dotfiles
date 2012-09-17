@@ -27,9 +27,17 @@ alias v="mvim"
 alias vv="mvim ."
 
 # SSH configuration
-alias linode="ssh -R 52698:127.0.0.1:52698 ksmiley@66.175.208.254"
+alias linode="ssh ksmiley@66.175.208.254"
+alias linoder="ssh -R 52698:127.0.0.1:52698 ksmiley@66.175.208.254"
 
-alias ip="curl ifconfig.me | pbcopy; echo 'Copied '`pbpaste`' to clipboard'"
+alias u="uname"
+
+# Winthrop
+alias wl="ssh acc.smileyk2@austin.winthrop.edu"
+alias wa="ssh acc.smileyk2@reno.winthrop.edu"
+
+
+# alias ip="curl ifconfig.me | pbcopy; echo 'Copied '`pbpaste`' to clipboard'"
 
 # Scripts
 alias xc="~/Dropbox/Code/Scripts/xcworkspace.rb"
@@ -59,10 +67,10 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # alias sudo='sudo '
 
 # Get OS X Software Updates, and update Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade;' # npm update npm -g; npm update -g'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; gem update --system; gem update;' # npm update npm -g; npm update -g'
 
 # IP addresses
-# alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 # alias localip="ipconfig getifaddr en1"
 # alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
 
@@ -70,7 +78,7 @@ alias update='sudo softwareupdate -i -a; brew update; brew upgrade;' # npm updat
 # alias whois="whois -h whois-servers.net"
 
 # Flush Directory Service cache
-# alias flush="dscacheutil -flushcache"
+alias flush="dscacheutil -flushcache"
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
@@ -108,8 +116,8 @@ alias c="tr -d '\n' | pbcopy"
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
 
 # Show/hide hidden files in Finder
-alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
+alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
+alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Finder"
 
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
