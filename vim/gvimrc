@@ -1,4 +1,4 @@
 syntax enable
-set background=light
+" set background=light
+set background=dark
 colorscheme solarized
-

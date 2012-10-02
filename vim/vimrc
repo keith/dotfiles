@@ -5,7 +5,7 @@ set expandtab
 
 
 set number
-" set ruler
+set ruler
 
 set incsearch
 set hlsearch
