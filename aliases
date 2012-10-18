@@ -27,6 +27,11 @@ alias v="mvim"
 alias vv="mvim ."
 
 
+# Rails
+alias bi="bundle install"
+alias rt="rails server"
+
+
 # Archive Stuff
 alias mktar="tar -pvczf"
 
