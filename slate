@@ -1,0 +1,31 @@
+# Keith's [Slate](https://github.com/jigish/slate) configuration file
+# A constant work in progresss
+
+# I assume this means with multiple monitors it defaults to the one your cursor is on
+config defaultToCurrentScreen true
+
+# I assume these make sure it takes percentages from the overall resolution of your currently focused screen
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+# Moving Windows using Control+Alt and the Arrow or vim keys
+bind left:ctrl;alt         nudge -10% +0 
+bind right:ctrl;alt        nudge +10% +0
+bind up:ctrl;alt           nudge +0  -10%
+bind down:ctrl;alt         nudge +0  +10%
+
+bind h:ctrl;alt            nudge -10% +0 
+bind l:ctrl;alt            nudge +10% +0
+bind k:ctrl;alt            nudge +0  -10%
+bind j:ctrl;alt            nudge +0  +10%
+
+# Resizing Windows by the bottom right using Control+Alt+Cmd and they arrow or vim keys
+bind left:ctrl;alt;cmd     resize  -10% +0
+bind right:ctrl;alt;cmd    resize  +10% +0
+bind up:ctrl;alt;cmd       resize  +0   -10%
+bind down:ctrl;alt;cmd     resize  +0   +10%
+
+bind h:ctrl;alt;cmd        resize  -10% +0
+bind l:ctrl;alt;cmd        resize  +10% +0
+bind k:ctrl;alt;cmd        resize  +0   -10%
+bind j:ctrl;alt;cmd        resize  +0   +10%

@@ -26,6 +26,9 @@ alias oo="open ."
 alias v="mvim"
 alias vv="mvim ."
 
+# Todo.txt
+# alias td="todo.sh -d ~/.todo/config"
+alias td="todo.sh"
 
 # Rails
 alias bi="bundle install"
@@ -42,7 +45,8 @@ alias linoder="ssh -R 52698:127.0.0.1:52698 ksmiley@66.175.208.254"
 alias u="uname"
 
 # Winthrop
-alias wl="ssh acc.smileyk2@austin.winthrop.edu"
+alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
+# alias wl="ssh acc.smileyk2@austin.winthrop.edu"
 alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 
 
@@ -53,6 +57,7 @@ alias xc="~/Dropbox/Code/Scripts/xcworkspace.rb"
 alias cloudfront="~/Dropbox/Code/Scripts/cloudFront.rb"
 alias ns="~/Dropbox/Code/Scripts/newSite.rb"
 alias methods="~/Dropbox/Code/Scripts/methods.rb"
+alias pf="~/Dropbox/Code/Scripts/processfile.rb"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
