@@ -1,7 +1,48 @@
+" Use vim settings, rather then vi settings (much better!)
+" This must be first, because it changes other options as a side effect.
+" https://github.com/nvie/vimrc/blob/master/vimrc
+set nocompatible
+
+
 set tabstop=2
-set wildmode=list:longest
+set wildmode=longest,list,full
+set wildmenu
 set shiftwidth=2
 set expandtab
+set smarttab
+
+" Needed for Syntax Highlighting and stuff
+filetype on
+filetype indent on            " Enable filetype-specific indenting
+filetype plugin on
+
+syntax enable
+
+set grepprg=grep\ -nH\ $*
+
+" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
+set autoindent
+set smartindent
+
+set scrolloff=5               " keep at least 5 lines above/below
+
+set history=200
+
+set backspace=indent,eol,start
+
+
+set undolevels=200           " 1000 undos
+
+set ttyfast                   " we have a fast terminal
+set noerrorbells              " No error bells please
+set visualbell
+
+
+set autoread                  " watch for file changes
+
+
+set wrap "Wrap lines
+set showmatch                   " set show matching parenthesis
 
 
 set number
@@ -12,10 +53,17 @@ set hlsearch
 
 set wrap
 
-set ignorecase
-set smartcase
+set ignorecase                  " ignore case when searching
+set smartcase                   " ignore case if search pattern is all lowercase,
+                                "    case-sensitive otherwise
+
+set nobackup                    " do not keep backup files, it's 70's style cluttering
+set noswapfile                  " do not write annoying intermediate swap files,
+                                "    who did ever restore from swap files anyway?
 
 map <Leader>t :FuzzyFinderTextMate<Enter>
+
+" set showtabline=2
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>

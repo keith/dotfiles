@@ -1,4 +1,4 @@
-- To stop the display from half dimming before full display 'sleep'  "sudo pmset halfdim 0" [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)
+# To stop the display from half dimming before full display 'sleep'  "sudo pmset halfdim 0" [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)
 
 # Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
@@ -18,7 +18,7 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
 # Shows ethernet connected computers in airdrop
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-# Dock tweeks
+# Dock tweaks
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 defaults write com.apple.dock no-glass -bool true
 defaults write com.apple.dock showhidden -bool true
@@ -43,3 +43,40 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Default to local files instead of iCloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+
+
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Show Path bar in Finder
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Show Status bar in Finder
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+echo "Disable the warning before emptying the Trash"
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+echo "Disable the “reopen windows when logging back in” option"
+# This works, although the checkbox will still appear to be checked.
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
+defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
+echo "Kill affected applications"
+for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done

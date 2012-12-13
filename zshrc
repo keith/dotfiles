@@ -1,12 +1,14 @@
 PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:/usr/local/sbin
 
+export EDITOR=/usr/bin/vim
 
 PROMPT="=> "
 source ~/Dropbox/Application\ Support/dotfiles/aliases
+
+eval "$(rbenv init -)"
 
 HISTSIZE=1000
 if (( ! EUID )); then

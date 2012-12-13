@@ -1,6 +1,9 @@
-###OSX###
- 
+####### OSX #######
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
 
 # Thumbnails
 ._*
@@ -9,5 +12,6 @@
 .Spotlight-V100
 .Trashes
 
-
 ssh.dmg
+.dropbox
+

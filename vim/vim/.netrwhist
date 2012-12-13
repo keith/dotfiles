@@ -1,9 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/ksmiley/Dropbox/Xcoding/InstapaperAPI'
-let g:netrw_dirhist_2='/Users/ksmiley/Desktop/keithsmileyphoto'
-let g:netrw_dirhist_3='/Users/ksmiley/Dropbox/Sites/photosite'
-let g:netrw_dirhist_4='/Users/ksmiley/Dropbox/Sites'
-let g:netrw_dirhist_5='/Users/ksmiley/Dropbox/Sites/photosite'
-let g:netrw_dirhist_6='/Users/ksmiley/Dropbox/Code/Scripts/3rd'
-let g:netrw_dirhist_7='/Users/ksmiley/Dropbox/Code/Scripts'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates'
+let g:netrw_dirhist_2='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates/lib'
+let g:netrw_dirhist_3='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates'
+let g:netrw_dirhist_4='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates/lib'

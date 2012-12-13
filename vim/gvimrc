@@ -6,3 +6,4 @@ else
 	set background=dark
 endif
 colorscheme solarized
+set guifont=Monaco:h12

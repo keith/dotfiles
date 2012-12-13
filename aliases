@@ -23,8 +23,10 @@ alias s="subl"
 alias ss="subl ."
 alias o="open"
 alias oo="open ."
-alias v="mvim"
-alias vv="mvim ."
+alias v="vim"
+alias vv="vim ."
+alias vm="mvim"
+alias vmm="mvim ."
 
 # Todo.txt
 # alias td="todo.sh -d ~/.todo/config"
@@ -32,15 +34,18 @@ alias td="todo.sh"
 
 # Rails
 alias bi="bundle install"
+alias bdgem="gem build *.gemspec; gem install *.gem"
 alias rt="rails server"
+
+alias mr="macirb --simple-prompt"
 
 
 # Archive Stuff
 alias mktar="tar -pvczf"
+alias untar="tar -zxvf"
 
 # SSH configuration
 alias linode="ssh ksmiley@66.175.208.254"
-alias linoder="ssh -R 52698:127.0.0.1:52698 ksmiley@66.175.208.254"
 
 alias u="uname"
 
@@ -55,9 +60,10 @@ alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 # Scripts
 alias xc="~/Dropbox/Code/Scripts/xcworkspace.rb"
 alias cloudfront="~/Dropbox/Code/Scripts/cloudFront.rb"
-alias ns="~/Dropbox/Code/Scripts/newSite.rb"
+alias mksite="~/Dropbox/Code/Scripts/newSite.rb"
 alias methods="~/Dropbox/Code/Scripts/methods.rb"
 alias pf="~/Dropbox/Code/Scripts/processfile.rb"
+alias lc="~/Dropbox/Code/Scripts/license.rb"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -83,7 +89,8 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # alias sudo='sudo '
 
 # Get OS X Software Updates, and update Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; gem update --system; gem update;' # npm update npm -g; npm update -g' #gem update bundler
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; gem update --system; gem update; npm update npm -g; npm update -g; gem update bundler'
+alias updatel='sudo apt-get update; sudo apt-get upgrade; gem update --system; gem update' #; npm update npm -g; npm update -g'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

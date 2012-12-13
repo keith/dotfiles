@@ -30,3 +30,5 @@ bind h:ctrl;alt;cmd        resize  -10% +0
 bind l:ctrl;alt;cmd        resize  +10% +0
 bind k:ctrl;alt;cmd        resize  +0   -10%
 bind j:ctrl;alt;cmd        resize  +0   +10%
+
+# bind tab:ctrl switch
