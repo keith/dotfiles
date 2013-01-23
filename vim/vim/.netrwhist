@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates'
-let g:netrw_dirhist_2='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates/lib'
-let g:netrw_dirhist_3='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates'
-let g:netrw_dirhist_4='/Users/ksmiley/Dropbox/Code/Scripts/gitignore-templates/lib'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/ksmiley/Dropbox/Application Support/dotfiles/vim/vim/bundle'
+let g:netrw_dirhist_2='/Users/ksmiley/Dropbox/Application Support/dotfiles/vim/vim/bundle/nerdtree'
+let g:netrw_dirhist_3='/Users/ksmiley/Dropbox/Application Support/dotfiles/vim/vim/bundle/nerdtree/plugin'
+let g:netrw_dirhist_4='/Users/ksmiley/Desktop'
+let g:netrw_dirhist_5='/Users/ksmiley/Dropbox/shell'
+let g:netrw_dirhist_6='/Users/ksmiley/.cocoapods/master/SSToolkit/1.0.2'

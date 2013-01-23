@@ -1,4 +1,3 @@
-syntax enable
 let hour = strftime("%H")
 if 6 <= hour && hour < 18
 	set background=light

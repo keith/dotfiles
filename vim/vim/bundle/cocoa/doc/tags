@@ -1,0 +1,16 @@
+:BuildMethods	cocoa.txt	/*:BuildMethods*
+:ListMethods	cocoa.txt	/*:ListMethods*
+cocoa	cocoa.txt	/*cocoa*
+cocoa-author	cocoa.txt	/*cocoa-author*
+cocoa-commands	cocoa.txt	/*cocoa-commands*
+cocoa-completion	cocoa.txt	/*cocoa-completion*
+cocoa-contact	cocoa.txt	/*cocoa-contact*
+cocoa-features	cocoa.txt	/*cocoa-features*
+cocoa-installation	cocoa.txt	/*cocoa-installation*
+cocoa-intro	cocoa.txt	/*cocoa-intro*
+cocoa-license	cocoa.txt	/*cocoa-license*
+cocoa-mappings	cocoa.txt	/*cocoa-mappings*
+cocoa-suggested-plugins	cocoa.txt	/*cocoa-suggested-plugins*
+cocoa.txt	cocoa.txt	/*cocoa.txt*
+g:objc_man_key	cocoa.txt	/*g:objc_man_key*
+leopard-security-alert	cocoa.txt	/*leopard-security-alert*
