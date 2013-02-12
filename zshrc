@@ -3,7 +3,9 @@ PATH="/usr/local/bin:/usr/local/sbin:/home/ksmiley/.rbenv/bin:/sbin:/usr/sbin:/u
 export EDITOR=`which vim`
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
-PROMPT="# "
+autoload -U colors && colors
+PS1="%{$fg[black]%}%% %{$reset_color%}"
+
 source ~/Dropbox/dotfiles/aliases
 
 eval "$(rbenv init -)"
