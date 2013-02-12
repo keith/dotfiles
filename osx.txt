@@ -8,7 +8,15 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName "iChabod"
+sudo scutil --set HostName "iChabod"
+sudo scutil --set LocalHostName "iChabod"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "iChabod"
 
+
+echo "Always show scrollbars"
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 echo "To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)"
 sudo pmset halfdim 0
@@ -19,25 +27,45 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo "Disables shutting down inactive applications"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-echo "Allow text selection in QuickLook"
-defaults write com.apple.finder QLEnableTextSelection -bool true
 
-# echo "Finder: show hidden files by default"
-# defaults write com.apple.finder AppleShowAllFiles -bool true
 
-echo "Disk image changes"
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+echo "Set Help Viewer windows to non-floating mode"
+defaults write com.apple.helpviewer DevMode -bool true
 
-echo "Shows ethernet connected computers in airdrop"
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+echo "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
+echo "Restart automatically if the computer freezes"
+systemsetup -setrestartfreeze on
+
+echo "Check for software updates daily, not just once per week"
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+########
+# Dock #
+########
 echo "Dock tweaks"
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
+
+echo "Remove the auto-hiding Dock delay"
+defaults write com.apple.Dock autohide-delay -float 0
+
+echo "Enable the 2D Dock"
 defaults write com.apple.dock no-glass -bool true
+
+echo "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true
+
+echo "Automatically hide and show the Dock"
+defaults write com.apple.dock autohide -bool true
+
+echo "Show indicator lights for open applications in the Dock"
+defaults write com.apple.dock show-process-indicators -bool true
+
+echo "Don’t show Dashboard as a Space"
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+
 
 echo "Change the Safari search to find strings contained in other words"
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
@@ -58,7 +86,8 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 echo "Always show scrollbars"
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-
+echo "Automatically quit printer app once the print jobs complete"
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
@@ -66,23 +95,31 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 echo "Show Path bar in Finder"
 defaults write com.apple.finder ShowPathbar -bool true
 
-echo "Show Status bar in Finder"
-defaults write com.apple.finder ShowStatusBar -bool true
+echo "Set a blazingly fast keyboard repeat rate"
+defaults write NSGlobalDomain KeyRepeat -int 0
 
 echo "Expand save panel by default"
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+### Screen stuff
+echo "Save screenshots to the desktop"
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+echo "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
+defaults write com.apple.screencapture type -string "png"
+
+echo "Enable HiDPI display modes (requires restart)"
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+
+echo "Disable Resume system-wide"
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 echo "Expand print panel by default"
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
 echo "Disable the “Are you sure you want to open this application?” dialog"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-echo "Avoid creating .DS_Store files on network volumes"
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-echo "Disable the warning when changing a file extension"
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo "Disable the warning before emptying the Trash"
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -95,5 +132,74 @@ defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 echo "Enable press and hold in ST2"
 defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false
 
-echo "Kill affected applications"
+################
+# Finder stuff #
+################
+echo "Finder: disable window animations and Get Info animations"
+defaults write com.apple.finder DisableAllAnimations -bool true
+
+echo "Finder: show all filename extensions"
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+echo "Show Status bar in Finder"
+defaults write com.apple.finder ShowStatusBar -bool true
+
+echo "Allow text selection in QuickLook"
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+echo "Display full POSIX path as Finder window title"
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+echo "When performing a search, search the current folder by default"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+echo "Disable the warning when changing a file extension"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+echo "Avoid creating .DS_Store files on network volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+echo "Disk image changes"
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
+
+echo "Automatically open a new Finder window when a volume is mounted"
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+echo "Enable snap-to-grid for icons on the desktop and in other icon views"
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+echo "Use column view in all Finder windows by default"
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`, `Nlsv`
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+echo "Disable the warning before emptying the Trash"
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+echo "Shows ethernet connected computers in airdrop"
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+echo "Show the ~/Library folder"
+chflags nohidden ~/Library
+
+
+##############
+# TextMate 2 #
+##############
+echo "Moving TextMate 2's drawer to the left"
+defaults write com.macromates.TextMate.preview fileBrowserPlacement left
+
+echo "Don't show single tab in TextMate 2"
+defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool NO
+
+
+
+echo "Killing affected applications"
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+echo "Done. Note that some of these changes require a logout/restart to take effect."
