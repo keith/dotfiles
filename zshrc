@@ -3,8 +3,7 @@ PATH="/usr/local/bin:/usr/local/sbin:/home/ksmiley/.rbenv/bin:/sbin:/usr/sbin:/u
 export EDITOR=`which vim`
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
-autoload -U colors && colors
-PS1="%{$fg[black]%}%% %{$reset_color%}"
+PS1="%% "
 
 source ~/Dropbox/dotfiles/aliases
 
