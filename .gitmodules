@@ -1,0 +1,3 @@
+[submodule "vim"]
+	path = vim
+	url = git@github.com:Keithbsmiley/vim.git
