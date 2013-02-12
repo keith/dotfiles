@@ -1,0 +1,43 @@
+####### Linux #######
+.*
+!.gitignore
+*~
+
+
+####### Mercurial #######
+/.hg/*
+*/.hg/*
+.hgignore
+
+
+####### OSX #######
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+####### Tags #######
+# Ignore tags created by etags and ctags
+TAGS
+!TAGS/
+tags
+!tags/
+
+
+####### vim #######
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+
