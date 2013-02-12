@@ -3,19 +3,14 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-# alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias d="cd ~/Dropbox"
-alias p="cd ~/Dropbox/sandbox"
-alias z="cd ~/Dropbox/Xcoding"
-alias a="cd ~/Dropbox/Xcoding/AppNet"
 alias g="git"
 alias gs="git status"
 alias gc="git clone"
 alias gd="git difftool"
-alias gsub="git submodule init; git submodule update;"
+alias gsub="git submodule update --init --recursive"
 
 alias m="mate"
 alias mm="mate ."
