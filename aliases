@@ -30,12 +30,14 @@ alias vm="mvim"
 alias vmm="mvim ."
 
 # Ruby/Rails
+alias ruby="ruby -w"
 alias bi="bundle install"
 alias rg="rake generate"
 alias bdgem="gem build *.gemspec; gem install *.gem --no-ri --no-rdoc; rbenv rehash"
 alias rt="rails server"
 alias rr="rbenv rehash"
-alias mr="macirb --simple-prompt"
+alias macirb="macirb --simple-prompt"
+alias irb="irb --simple-prompt"
 alias rake='noglob rake'
 
 #CocoaPods
@@ -54,6 +56,7 @@ alias fs="stat -f %z"
 
 # SSH configuration
 alias linode="ssh ksmiley@66.175.208.254"
+alias rlinode="ssh -R 52698:localhost:52698 ksmiley@66.175.208.254"
 
 alias u="uname"
 
@@ -101,11 +104,11 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias sudo='sudo '
 
 # Get OS X Software Updates, and update Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; gem update --system; gem update; npm update npm -g; npm update -g'
-alias updatel='sudo apt-get update; sudo apt-get upgrade; gem update --system; gem update' #; npm update npm -g; npm update -g'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; gem update --system; gem update'
+alias updatel='sudo apt-get update; sudo apt-get upgrade; gem update --system; gem update'
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com | pbcopy"
 alias localip="ipconfig getifaddr en1"
 
 # Enhanced WHOIS lookups
@@ -132,8 +135,8 @@ alias cleanup="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.Quarantine
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
-alias secureemptytrash="sudo srm -rfv /Volumes/*/.Trashes; sudo srm -rfv ~/.Trash; sudo srm -rfv /private/var/log/asl/*.asl"
+alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv ~/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
+alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv ~/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
