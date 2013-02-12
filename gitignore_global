@@ -14,10 +14,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-Icon
-Icon$'\r'
-Icon\r
-Icon^M
+Icon
 
 
 # Thumbnails
@@ -42,5 +39,4 @@ tags
 Session.vim
 .netrwhist
 *~
-
 
