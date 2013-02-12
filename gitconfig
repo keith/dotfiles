@@ -5,7 +5,7 @@
 	quotepath = false
 	excludesfile = /Users/ksmiley/.gitignore
 [gui]
-	recentrepo = /Users/ksmiley/Dropbox/Application Support/dotfiles
+	recentrepo = /Users/ksmiley/Dropbox/dotfiles
 [push]
 	default = matching
 [difftool "Kaleidoscope"]
