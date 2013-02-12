@@ -1,4 +1,4 @@
-fontName = "Monaco"
+fontName = "Liberation Mono"
 fontSize = 13
 exclude  = "{*.{o,pyc},Icon\r,CVS,_darcs,_MTN,\{arch\},blib,*~.nib}"
 include  = "{*,.tm_properties,.htaccess}"
@@ -26,3 +26,6 @@ fileType = 'source.ruby'
 [ source.ruby ]
 softTabs = true
 tabSize  = 2
+
+[ source.c ]
+tabSize	 = 4
