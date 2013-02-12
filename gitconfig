@@ -3,7 +3,7 @@
 	email = keithbsmiley@gmail.com
 [core]
 	quotepath = false
-	excludesfile = ~/Dropbox/dotfiles/gitignore_global
+	excludesfile = ~/.gitignore_global
 [gui]
 	recentrepo = /Users/ksmiley/Dropbox/dotfiles
 [push]

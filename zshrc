@@ -5,7 +5,7 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 
 PS1="~> "
 
-source ~/Dropbox/dotfiles/aliases
+source ~/.aliases
 
 eval "$(rbenv init -)"
 
