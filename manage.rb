@@ -23,6 +23,10 @@ def buildCMD(filename)
   "ln -s #{ Dir.pwd }/#{ filename } #{ newPath(filename) }"
 end
 
+def buildRemoveCMD(filename)
+  "rm #{ newPath(filename) }"
+end
+
 def error(filename)
   puts "#{ filename } doesn't exist in #{ Dir.pwd }"
   exit
@@ -38,8 +42,42 @@ def link(filename)
   print %x[#{ buildCMD(filename) }]
 end
 
-$FILES.each { |file| link(file) }
+def remove(filename)
+  file_path = newPath(filename)
+  if file_path
+    print %x[#{ buildRemoveCMD(filename) }]  
+  else
+    puts "#{ filename } doesn't exist in #{ Dir.home }"
+  end
+end
 
-Dir.chdir("vim");
-$VIM_FILES.each { |file| link(file) }
+def die
+  puts "Usage ./manage.rb {install|remove}"
+  exit
+end
+
+def installLinks
+  $FILES.each { |file| link(file) }
+
+  Dir.chdir("vim");
+  $VIM_FILES.each { |file| link(file) }
+end
+
+def removeLinks
+  $FILES.each { |file| remove(file) }
+  $VIM_FILES.each { |file| remove(file) }
+end
+
+
+if ARGV.count < 1 || ARGV.count > 1
+  die
+end
+
+if ARGV.first.casecmp("install") == 0
+  installLinks
+elsif ARGV.first.casecmp("remove") == 0
+  removeLinks
+else
+  die
+end
 
