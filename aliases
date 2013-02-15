@@ -39,7 +39,7 @@ alias rake='noglob rake'
 alias pi="pod install"
 alias psl="pod spec lint"
 alias psla="pod spec lint *.podspec --verbose"
-alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=~/Dropbox/Git/beta/CocoaPods/Gemfile bundle exec ~/Dropbox/Git/beta/CocoaPods/bin/pod"
+alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=~/Git/CocoaPods/Gemfile bundle exec ~/Git/CocoaPods/bin/pod"
 
 
 # Archive Stuff
