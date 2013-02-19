@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # All the files that need to be linked
-$FILES = ["aliases", "default-gems", "gitconfig", "gitignore_global", "hgrc", "slate", "tm_properties", "zshrc"]
+$FILES = ["aliases", "default-gems", "gemrc", "gitconfig", "gitignore_global", "hgrc", "slate", "tm_properties", "zshrc"]
 $PATHS = { "default-gems" => ".rbenv" }
 $NO_DOT = [ "default-gems" ]
 $VIM_FILES = ["gvimrc", "vim", "vimrc"]
