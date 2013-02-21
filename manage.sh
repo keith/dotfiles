@@ -66,9 +66,10 @@ function link ()
 	
 	local path=$(new_path $filename)
 	if [ -f $path ] || [ -d $path ]; then
-		echo "$path already exists"
+		# echo "$path already exists"
+		echo "ln -s $PWD/$filename $path"
 	else
-		echo "$path needs linking"
+		echo "ln -s $PWD/$filename $path"
 	fi
 		
 	# echo $path
@@ -77,6 +78,7 @@ function link ()
 # Loops through and link all files without links
 function install_links ()
 {
+	echo $PWD
 	echo "installing"
 	for FILE in ${FILES[@]}
 	do
