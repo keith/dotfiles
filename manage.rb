@@ -7,13 +7,13 @@ $NO_DOT = [ "default-gems" ]
 $VIM_FILES = ["gvimrc", "vim", "vimrc"]
 
 def newPath(filename)
-  if !$NO_DOT.include? filename
-    filename = ".#{ filename }"
-  end
-
   path = ""
   if $PATHS[filename]
     path = "#{ $PATHS[filename] }/"
+  end
+  
+  if !$NO_DOT.include? filename
+    filename = ".#{ filename }"
   end
 
   "#{ Dir.home }/#{ path }#{ filename }"
