@@ -50,29 +50,79 @@ function new_path ()
 		# echo "no dot $filename"
 	fi
 	
-	echo "$PWD/$path$filename"
+	echo "$HOME/$path$filename"
 }
 
+# Links the passed filename to its new location
+function link ()
+{
+	local filename=$1
+	
+	if [ ! -f $filename ] && [ ! -d $filename ];
+	then
+	    echo "$filename doesn't exist"
+		return
+	fi
+	
+	local path=$(new_path $filename)
+	if [ -f $path ] || [ -d $path ]; then
+		echo "$path already exists"
+	else
+		echo "$path needs linking"
+	fi
+		
+	# echo $path
+}
+
+# Loops through and link all files without links
 function install_links ()
 {
+	echo "installing"
+	for FILE in ${FILES[@]}
+	do
+		# echo $FILE
+		# echo "$HOME/$FILE"
+		# a=$(new_path $FILE)
+		link $FILE
+		# echo $a
+		# if [[ ! -f "$HOME/.$FILE" ]]; then
+		# 	echo "File doesnt exist"
+		# fi
+	done
 
+	cd "vim"
+
+	for FILE in ${VIM_FILES[@]}
+	do
+		link $FILE
+		# a=$(new_path $FILE)
+		# echo $a
+	done
 }
 
-for FILE in ${FILES[@]}
-do
-	# echo $FILE
-	# echo "$HOME/$FILE"
-	a=$(new_path $FILE)
-	echo $a
-	# if [[ ! -f "$HOME/.$FILE" ]]; then
-	# 	echo "File doesnt exist"
-	# fi
-done
+# Function to remove all linked files
+function remove_links ()
+{
+	echo "removing"
+}
 
-cd "vim"
+# Fuction to print the usage and exit when there's bad input
+function die ()
+{
+	echo "Usage ./manage.sh {install|remove}"
+	exit
+}
 
-for FILE in ${VIM_FILES[@]}
-do
-	a=$(new_path $FILE)
-	echo $a
-done
+# Make sure there is 1 command line argument
+if [[ $# != 1 ]]; then
+	die
+fi
+
+# Check whether the user is installing or removing
+if [[ $1 == "install" ]]; then
+	install_links
+elif [[ $1 == "remove" ]]; then
+	remove_links
+else
+	die
+fi
