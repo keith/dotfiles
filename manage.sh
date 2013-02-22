@@ -30,7 +30,6 @@ function no_dot? ()
 		if [[ $FILE == $filename ]]; then
 			return 0
 		fi
-		# echo $FILE
 	done
 	
 	return 1
@@ -47,7 +46,6 @@ function new_path ()
 	
 	if ! no_dot? $filename; then
 		filename=".$filename"
-		# echo "no dot $filename"
 	fi
 	
 	echo "$HOME/$path$filename"
@@ -58,31 +56,28 @@ function link ()
 {
 	local filename=$1
 	
-	if [ ! -f $filename ] && [ ! -d $filename ];
+	if [ ! -e $filename ];
 	then
 	    echo "$filename doesn't exist"
 		return
 	fi
 	
 	local path=$(new_path $filename)
-	if [ -f $path ] || [ -d $path ]; then
-		# echo "$path already exists"
-		echo "ln -s $PWD/$filename $path"
+	if [ -e $path ]; then
+		echo "$path already exists"
 	else
-		echo "ln -s $PWD/$filename $path"
+		ln -s $PWD/$filename $path
 	fi
-		
-	# echo $path
 }
 
 # Delete the linked file path
 function unlink ()
 {
-	filename=$1
-	path=$(new_path $filename)
+	local filename=$1
+	local path=$(new_path $filename)
 	
-	if [ -f $path ] || [ -d $path ]; then
-		echo "rm $(new_path $1)"
+	if [ -e $path ]; then
+		rm $(new_path $1)
 	else
 		echo "$path doesn't exist"
 	fi
@@ -91,18 +86,9 @@ function unlink ()
 # Loops through and link all files without links
 function install_links ()
 {
-	echo $PWD
-	echo "installing"
 	for FILE in ${FILES[@]}
 	do
-		# echo $FILE
-		# echo "$HOME/$FILE"
-		# a=$(new_path $FILE)
 		link $FILE
-		# echo $a
-		# if [[ ! -f "$HOME/.$FILE" ]]; then
-		# 	echo "File doesnt exist"
-		# fi
 	done
 
 	cd "vim"
@@ -110,15 +96,12 @@ function install_links ()
 	for FILE in ${VIM_FILES[@]}
 	do
 		link $FILE
-		# a=$(new_path $FILE)
-		# echo $a
 	done
 }
 
 # Function to remove all linked files
 function remove_links ()
 {
-	echo "removing"
 	for FILE in ${FILES[@]}
 	do
 		unlink $FILE
