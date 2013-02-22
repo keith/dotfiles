@@ -80,4 +80,3 @@ elsif ARGV.first.casecmp("remove") == 0
 else
   die
 end
-

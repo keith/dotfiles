@@ -18,6 +18,8 @@ HISTFILE=~/.zsh_history
 fi
 SAVEHIST=1000
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 bindkey -e
 # bindkey -v
 
