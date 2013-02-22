@@ -75,6 +75,19 @@ function link ()
 	# echo $path
 }
 
+# Delete the linked file path
+function unlink ()
+{
+	filename=$1
+	path=$(new_path $filename)
+	
+	if [ -f $path ] || [ -d $path ]; then
+		echo "rm $(new_path $1)"
+	else
+		echo "$path doesn't exist"
+	fi
+}
+
 # Loops through and link all files without links
 function install_links ()
 {
@@ -106,6 +119,15 @@ function install_links ()
 function remove_links ()
 {
 	echo "removing"
+	for FILE in ${FILES[@]}
+	do
+		unlink $FILE
+	done
+	
+	for FILE in ${VIM_FILES[@]}
+	do
+		unlink $FILE
+	done
 }
 
 # Fuction to print the usage and exit when there's bad input
