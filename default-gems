@@ -2,6 +2,7 @@ bundler
 capistrano
 cocoapods
 colored
+launchy
 middleman
 mkgitignore
 octokit
