@@ -1,4 +1,4 @@
-PATH="/usr/local/bin:/usr/local/sbin:/home/ksmiley/.rbenv/bin:/sbin:/usr/sbin:/usr/local/share/npm/bin:/usr/local/share/python:~/bin:$PATH"
+PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/sbin:/usr/sbin:/usr/local/share/npm/bin:/usr/local/share/python:~/bin:$PATH"
 
 export EDITOR=`which vim`
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
