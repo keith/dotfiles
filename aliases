@@ -98,9 +98,10 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Get OS X Software Updates, and update Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; gem update --system; gem update'
-alias updatel='sudo apt-get update; sudo apt-get upgrade; gem update --system; gem update'
+# Get OS X Software Updates, and update Homebrew, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; $(which gem) update --system; $(which gem) update'
+alias updateu='sudo apt-get update; sudo apt-get upgrade; $(which gem) update --system; $(which gem) update'
+alias updatea='sudo pacman -Syu; $(which gem) update --system; $(which gem) update'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com | pbcopy"
