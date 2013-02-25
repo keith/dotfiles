@@ -10,5 +10,7 @@ pry
 rack
 rails
 rake
+rspec
 sinatra
 thin
+
