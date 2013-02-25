@@ -1,3 +1,4 @@
+brio
 bundler
 capistrano
 cocoapods
@@ -12,5 +13,6 @@ rails
 rake
 rspec
 sinatra
+t
 thin
 
