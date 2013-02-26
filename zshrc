@@ -4,11 +4,7 @@ export EDITOR=`which vim`
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 
-if [[ $(id -u) == "0" ]]; then
-  PS1="# "
-else
-  PS1="~> "
-fi
+PS1='%n@%m %~ %#'
 
 source ~/.aliases
 
@@ -29,4 +25,3 @@ bindkey -e
 
 autoload -Uz compinit
 compinit -i
-
