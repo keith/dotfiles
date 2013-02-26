@@ -9,6 +9,7 @@ colored
 factory_girl
 guard-rspec
 haml
+high_voltage
 launchy
 middleman
 mkgitignore
