@@ -4,7 +4,7 @@ export EDITOR=`which vim`
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 
-PS1='%n@%m %~ %#'
+PS1='%n@%m %~ %# '
 
 source ~/.aliases
 
