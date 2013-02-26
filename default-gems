@@ -1,8 +1,14 @@
+better_errors
+binding_of_caller
 brio
 bundler
 capistrano
+capybara
 cocoapods
 colored
+factory_girl
+guard-rspec
+haml
 launchy
 middleman
 mkgitignore
@@ -11,9 +17,10 @@ pry
 rack
 rails
 rake
+rb-fsevent
 rspec
 sinatra
 t
 thin
-zues
+zeus
 
