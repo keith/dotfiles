@@ -21,7 +21,7 @@ rake
 rb-fsevent
 rspec
 sinatra
+susy
 t
 thin
 zeus
-
