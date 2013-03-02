@@ -12,6 +12,7 @@ haml
 high_voltage
 launchy
 middleman
+middleman-smusher
 mkgitignore
 octokit
 pry
