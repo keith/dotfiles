@@ -1,3 +1,14 @@
+####### Custom #######
+ssh.dmg
+.dropbox
+
+
+####### Linux #######
+.*
+!.gitignore
+*~
+
+
 ####### OSX #######
 .DS_Store
 .AppleDouble
@@ -12,6 +23,12 @@ Icon
 .Spotlight-V100
 .Trashes
 
-ssh.dmg
-.dropbox
+
+####### vim #######
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
 
