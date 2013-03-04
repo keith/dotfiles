@@ -1,7 +1,8 @@
 ####### Custom #######
 ssh.dmg
 .dropbox
-
+vim/vim/bundle
+!vim/vim/bundle/vundle
 
 ####### Linux #######
 .*
