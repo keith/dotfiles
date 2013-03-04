@@ -12,25 +12,27 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
-Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'airblade/vim-rooter'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'scrooloose/nerdtree'
 Bundle 'ervandew/supertab'
+Bundle 'itspriddle/vim-marked'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'mikewest/vimroom'
+Bundle 'msanders/cocoa.vim'
+Bundle 'scrooloose/nerdtree'
 Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
-Bundle 'itspriddle/vim-marked'
-Bundle 'airblade/vim-rooter'
-Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
-Bundle 'mikewest/vimroom'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/cpp.vim--Skvirsky'
 
 filetype plugin indent on " Re-enable after Vundle setup
-
+syntax enable
 
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
@@ -47,12 +49,6 @@ set wildmenu
 set shiftwidth=2
 set expandtab
 set smarttab
-
-syntax enable
-" Needed for Syntax Highlighting and stuff
-filetype on
-filetype indent on            " Enable filetype-specific indenting
-filetype plugin on
 
 let hour = strftime("%H")
 if 7 <= hour && hour < 19
