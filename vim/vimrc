@@ -1,0 +1,140 @@
+" Use vim settings, rather then vi settings (much better!)
+" This must be first, because it changes other options as a side effect.
+" https://github.com/nvie/vimrc/blob/master/vimrc
+set nocompatible
+
+" http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
+" http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
+set backupcopy=yes
+
+
+" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
+set autoindent
+set smartindent " Smart auto-indent when creating a new line
+
+set tabstop=2
+set wildmode=longest,list,full
+set wildmenu
+set shiftwidth=2
+set expandtab
+set smarttab
+
+syntax enable
+" Needed for Syntax Highlighting and stuff
+filetype on
+filetype indent on            " Enable filetype-specific indenting
+filetype plugin on
+
+let hour = strftime("%H")
+if 7 <= hour && hour < 19
+	set background=light
+else
+	set background=dark
+endif
+colorscheme solarized
+
+set grepprg=grep\ -nH\ $*
+
+set scrolloff=5               " keep at least 5 lines above/below
+
+set history=200
+
+set backspace=indent,eol,start
+
+set undolevels=200
+
+set ttyfast                   " we have a fast terminal
+set noerrorbells              " No error bells please
+set visualbell
+
+
+set autoread                  " watch for file changes
+
+
+set wrap "Wrap lines
+set showmatch                   " set show matching parenthesis
+
+
+set number " Shows line numbers
+set ruler " Shows current cursor location
+set nrformats-=octal " Never use octal notation
+
+set incsearch
+set hlsearch
+
+set wrap
+
+set ignorecase                  " ignore case when searching
+set smartcase                   " ignore case if search pattern is all lowercase,
+                              "    case-sensitive otherwise
+
+set nobackup                    " do not keep backup files, it's 70's style cluttering
+set noswapfile                  " do not write annoying intermediate swap files,
+                              "    who did ever restore from swap files anyway?
+
+if has("clipboard")
+set clipboard=unnamed
+endif
+
+" set showtabline=2
+
+" Tab mappings.
+map <leader>tt :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmove
+
+" Remap F4 to turn off search highlights
+" :noremap <F4> :noh<CR>
+" Press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" Ruby syntax checking with F9
+autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
+
+autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType objcpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
+
+autocmd BufNewFile,BufRead *.podspec set filetype=ruby
+autocmd BufNewFile,BufRead Podfile set filetype=ruby
+
+" Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+
+map <leader>nt :NERDTreeToggle<cr>
+
+" autocmd VimEnter * NERDTree
+
+" Show hidden files, too
+let NERDTreeShowFiles=1
+let NERDTreeShowHidden=1
+
+" Quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
+
+" Highlight the selected entry in the tree
+let NERDTreeHighlightCursorline=1
+
+
+" Powerline
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+
+" Vim Git Gutter
+highlight clear SignColumn " Clear the background color of git-gutter
+highlight clear LineNr " Clear the background color of the number bar
+
