@@ -3,6 +3,35 @@
 " https://github.com/nvie/vimrc/blob/master/vimrc
 set nocompatible
 
+filetype off " Required for Vundle setup
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Vundle bundles
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+" Github repos user/repo
+Bundle 'tpope/vim-surround'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'scrooloose/nerdtree'
+Bundle 'ervandew/supertab'
+Bundle 'Townk/vim-autoclose'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-endwise'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'itspriddle/vim-marked'
+Bundle 'airblade/vim-rooter'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-surround'
+Bundle 'mikewest/vimroom'
+
+filetype plugin indent on " Re-enable after Vundle setup
+
+
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
 set backupcopy=yes
