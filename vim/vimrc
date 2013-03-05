@@ -37,38 +37,30 @@ set backupcopy=yes " Allow vim to write crontab files
 
 set autoindent " Indent the next line matching the previous line
 set smartindent " Smart auto-indent when creating a new line
-
 set cursorline " highlight current line
+set tabstop=2 " Number of spaces each tab counts for
+set shiftwidth=2 " The space << and >> moves the lines
+set shiftround " Round << and >> to multiples of shiftwidth
+set wildmenu " Better completion in the vim command line
+set wildmode=longest,list,full " Completion settings
+set expandtab " Insert spaces instead of actually tabs
+set smarttab " Fancy tab settings I don't understand
+set scrolloff=5 " The number of lines above and below
+set history=200 " The number of history items to remember
+set undolevels=200 " The number of undo items to remember
+set backspace=indent,eol,start " Backspace settings
 
-set tabstop=2
-set shiftwidth=2
-set wildmode=longest,list,full
-set wildmenu
-set expandtab
-set smarttab
-
-let hour = strftime("%H")
+let hour = strftime("%H") " Set the background light from 7am to 7pm
 if 7 <= hour && hour < 19
 	set background=light
-else
+else " Set to dark from 7pm to 7am
 	set background=dark
 endif
-colorscheme solarized
+colorscheme solarized " Use the awesome solarized color scheme
 
-set grepprg=grep\ -nH\ $*
-
-set scrolloff=5               " keep at least 5 lines above/below
-
-set history=200
-
-set backspace=indent,eol,start
-
-set undolevels=200
-
-set ttyfast " We have a fast terminal
-set noerrorbells " No error bells please
-set visualbell " No error bells please
-
+set ttyfast " Set that we have a fast terminal
+set noerrorbells " Don't make noise
+set visualbell " Don't show bells
 set autoread " watch for file changes and auto update
 set showmatch " set show matching parenthesis
 set number " Shows line numbers
@@ -124,14 +116,12 @@ autocmd BufNewFile,BufRead Podfile set filetype=ruby
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
-
+" NERDTree
 map <leader>nt :NERDTreeToggle<cr> " Toggle NERDTree command
-
 let NERDTreeShowFiles=1 " Show files along with directories
 let NERDTreeShowHidden=1 " Show hidden files
 let NERDTreeQuitOnOpen=1 " Quit on opening files from the tree
 let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
-
 
 " Powerline
 set laststatus=2 " Always show the statusline
