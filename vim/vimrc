@@ -1,7 +1,4 @@
-" Use vim settings, rather then vi settings (much better!)
-" This must be first, because it changes other options as a side effect.
-" https://github.com/nvie/vimrc/blob/master/vimrc
-set nocompatible
+set nocompatible " This must be first, because it changes other options
 
 filetype off " Required for Vundle setup
 set rtp+=~/.vim/bundle/vundle/
@@ -32,7 +29,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
 
 filetype plugin indent on " Re-enable after Vundle setup
-syntax enable
+syntax enable " Enable vim syntax highlighting as is (enable != on)
 
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
@@ -42,6 +39,8 @@ set backupcopy=yes
 " http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
 set autoindent
 set smartindent " Smart auto-indent when creating a new line
+
+set cul " highlight current line
 
 set tabstop=2
 set wildmode=longest,list,full
@@ -84,26 +83,23 @@ set number " Shows line numbers
 set ruler " Shows current cursor location
 set nrformats-=octal " Never use octal notation
 
-set incsearch
-set hlsearch
+set hlsearch " Highlight search terms
+set incsearch " Show searches as you type
 
-set wrap
+set wrap " Softwrap text
 
-set ignorecase                  " ignore case when searching
-set smartcase                   " ignore case if search pattern is all lowercase,
-                              "    case-sensitive otherwise
+set ignorecase " ignore case when searching
+set smartcase " ignore case if search pattern is all lowercase, otherwise case-sensitive
 
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set noswapfile                  " do not write annoying intermediate swap files,
                               "    who did ever restore from swap files anyway?
 
-if has("clipboard")
-set clipboard=unnamed
+if has("clipboard") " If the feature is available
+	set clipboard=unnamed " copy to the system clipboard
 endif
 
-" set showtabline=2
-
-" Tab mappings.
+" Tab mappings
 map <leader>tt :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
