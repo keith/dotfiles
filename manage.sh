@@ -128,8 +128,10 @@ fi
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
 	install_links
+  vim +BundleInstall +qall
 elif [[ $1 == "remove" ]]; then
 	remove_links
 else
 	die
 fi
+
