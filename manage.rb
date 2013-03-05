@@ -75,6 +75,7 @@ end
 
 if ARGV.first.casecmp("install") == 0
   installLinks
+  puts %x[git submodule update --init --recursive]
   puts %x[vim +BundleInstall +qall]
 elsif ARGV.first.casecmp("remove") == 0
   removeLinks
