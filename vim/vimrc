@@ -33,19 +33,17 @@ syntax enable " Enable vim syntax highlighting as is (enable != on)
 
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
-set backupcopy=yes
+set backupcopy=yes " Allow vim to write crontab files
 
-
-" http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
-set autoindent
+set autoindent " Indent the next line matching the previous line
 set smartindent " Smart auto-indent when creating a new line
 
-set cul " highlight current line
+set cursorline " highlight current line
 
 set tabstop=2
+set shiftwidth=2
 set wildmode=longest,list,full
 set wildmenu
-set shiftwidth=2
 set expandtab
 set smarttab
 
@@ -67,33 +65,26 @@ set backspace=indent,eol,start
 
 set undolevels=200
 
-set ttyfast                   " we have a fast terminal
-set noerrorbells              " No error bells please
-set visualbell
+set ttyfast " We have a fast terminal
+set noerrorbells " No error bells please
+set visualbell " No error bells please
 
-
-set autoread                  " watch for file changes
-
-
-set wrap "Wrap lines
-set showmatch                   " set show matching parenthesis
-
-
+set autoread " watch for file changes and auto update
+set showmatch " set show matching parenthesis
 set number " Shows line numbers
 set ruler " Shows current cursor location
 set nrformats-=octal " Never use octal notation
-
+set nolist " Don't show invisible characters
+set mouse=a " enable using the mouse if terminal emulator
 set hlsearch " Highlight search terms
 set incsearch " Show searches as you type
-
 set wrap " Softwrap text
-
 set ignorecase " ignore case when searching
-set smartcase " ignore case if search pattern is all lowercase, otherwise case-sensitive
+set smartcase " ignore case if search is lowercase, otherwise case-sensitive
+set title " Change the terminal's title
 
-set nobackup                    " do not keep backup files, it's 70's style cluttering
-set noswapfile                  " do not write annoying intermediate swap files,
-                              "    who did ever restore from swap files anyway?
+set nobackup " Don't keep backup files
+set noswapfile " Don't write swap files
 
 if has("clipboard") " If the feature is available
 	set clipboard=unnamed " copy to the system clipboard
@@ -110,14 +101,13 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" Remap F4 to turn off search highlights
-" :noremap <F4> :noh<CR>
 " Press F4 to toggle highlighting on/off, and show current value.
 :noremap <F4> :set hlsearch! hlsearch?<CR>
 
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
+" http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
+nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
+set pastetoggle=<F2> " Toggle paste in insert mode
+set showmode " Display the mode when it changes
 
 " Ruby syntax checking with F9
 autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
@@ -135,27 +125,19 @@ autocmd BufNewFile,BufRead Podfile set filetype=ruby
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
 
-map <leader>nt :NERDTreeToggle<cr>
+map <leader>nt :NERDTreeToggle<cr> " Toggle NERDTree command
 
-" autocmd VimEnter * NERDTree
-
-" Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
-
-" Quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
-
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
+let NERDTreeShowFiles=1 " Show files along with directories
+let NERDTreeShowHidden=1 " Show hidden files
+let NERDTreeQuitOnOpen=1 " Quit on opening files from the tree
+let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
 
 
 " Powerline
-set laststatus=2   " Always show the statusline
+set laststatus=2 " Always show the statusline
 set encoding=utf-8 " Necessary to show Unicode glyphs
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 
 " Vim Git Gutter
 highlight clear SignColumn " Clear the background color of git-gutter
 highlight clear LineNr " Clear the background color of the number bar
-
