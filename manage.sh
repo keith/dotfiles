@@ -128,8 +128,10 @@ fi
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
     install_links
-    git submodule update --init --recursive
-    vim +BundleInstall +qall
+    git submodule update --init --recursive &
+    wait
+    vim +BundleInstall +qall &
+    wait
 elif [[ $1 == "remove" ]]; then
     remove_links
 else
