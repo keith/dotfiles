@@ -27,6 +27,9 @@ alias vv="vim ."
 alias vm="mvim"
 alias vmm="mvim ."
 
+# Vim
+alias vundle="vim +BundleInstall +qall"
+
 # Ruby/Rails
 alias ruby="ruby -w"
 alias bi="bundle install"
@@ -44,7 +47,6 @@ alias psl="pod spec lint"
 alias psla="pod spec lint *.podspec --verbose"
 alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=~/Git/CocoaPods/Gemfile bundle exec ~/Git/CocoaPods/bin/pod"
 
-
 # Archive Stuff
 alias mktar="tar -pvczf"
 alias untar="tar -zxvf"
@@ -60,7 +62,6 @@ alias u="uname"
 
 # Winthrop
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
-# alias wl="ssh acc.smileyk2@austin.winthrop.edu"
 alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 
 
@@ -76,6 +77,7 @@ alias lc="~/Dropbox/Code/Scripts/license.rb"
 alias rename="~/Dropbox/Code/Scripts/imageRenamer.rb"
 alias append="~/Dropbox/Code/Scripts/fileAppend.rb"
 
+# Create a new iTerm window in the same directory
 function spawn { osascript ~/Dropbox/Code/Applescript/Spawn/SpawniTerm.applescript $PWD; }
 
 # Detect which `ls` flavor is in use
