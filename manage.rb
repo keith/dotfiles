@@ -74,8 +74,8 @@ if ARGV.count < 1 || ARGV.count > 1
 end
 
 if ARGV.first.casecmp("install") == 0
-  installLinks
   puts %x[git submodule update --init --recursive]
+  installLinks
   puts %x[vim +BundleInstall +qall]
 elsif ARGV.first.casecmp("remove") == 0
   removeLinks
