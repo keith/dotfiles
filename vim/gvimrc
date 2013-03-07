@@ -7,3 +7,4 @@ endif
 colorscheme solarized
 
 set guifont=Liberation_Mono:h12
+
