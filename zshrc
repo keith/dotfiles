@@ -20,8 +20,8 @@ SAVEHIST=1000
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-bindkey -e
-# bindkey -v
+# bindkey -e
+bindkey -v
 
 autoload -Uz compinit
 compinit -i
