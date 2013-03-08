@@ -21,6 +21,7 @@ rails
 rake
 rb-fsevent
 rspec
+shotgun
 sinatra
 susy
 t
