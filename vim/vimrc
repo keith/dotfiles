@@ -95,6 +95,10 @@ set noswapfile " Don't write swap files
 vnoremap < <gv 
 vnoremap > >gv
 
+" Move as expected on wrapped lines
+nnoremap j gj
+nnoremap k gk
+
 " Force root permission saves
 cmap w!! %!sudo tee > /dev/null %
 
@@ -140,7 +144,7 @@ autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 
-autocmd BufNewFile,BufRead *.podspec set filetype=ruby
+autocmd BufNewFile,BufRead,BufReadPost *.podspec set filetype=ruby
 autocmd BufNewFile,BufRead Podfile set filetype=ruby
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
