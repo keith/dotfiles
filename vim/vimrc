@@ -35,7 +35,6 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
 
 " Vim script repos
-Bundle 'cf.vim'
 Bundle 'Specky'
 
 filetype plugin indent on " Re-enable after Vundle setup
