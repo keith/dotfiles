@@ -36,6 +36,7 @@ Bundle 'vim-scripts/cpp.vim--Skvirsky'
 
 " Vim script repos
 Bundle 'Specky'
+Bundle 'IndexedSearch'
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
