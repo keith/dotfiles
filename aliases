@@ -1,4 +1,4 @@
-# Easier navigation: .., ..., ...., ....., ~ and -
+# Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -45,8 +45,8 @@ alias rake="noglob rake"
 alias pi="pod install"
 alias psl="pod spec lint"
 alias psla="pod spec lint *.podspec --verbose"
-alias pclean="rm -rf ~/Library/Caches/CocoaPods /tmp/CocoaPods"
-alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=~/Git/CocoaPods/Gemfile bundle exec ~/Git/CocoaPods/bin/pod"
+alias pclean="rm -rf $HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
+alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=$HOME/Git/CocoaPods/Gemfile bundle exec $HOME/Git/CocoaPods/bin/pod"
 
 # Archive Stuff
 alias mktar="tar -pvczf"
@@ -70,17 +70,17 @@ alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 # alias ip="curl ifconfig.me | pbcopy; echo 'Copied '`pbpaste`' to clipboard'"
 
 # Scripts
-alias xc="~/Dropbox/Code/Scripts/xcworkspace.rb"
-alias cloudfront="~/Dropbox/Code/Scripts/cloudFront.rb"
-alias mksite="~/Dropbox/Code/Scripts/newSite.rb"
-alias methods="~/Dropbox/Code/Scripts/methods.rb"
-alias pf="~/Dropbox/Code/Scripts/processfile.rb"
-alias lc="~/Dropbox/Code/Scripts/license.rb"
-alias rename="~/Dropbox/Code/Scripts/imageRenamer.rb"
-alias append="~/Dropbox/Code/Scripts/fileAppend.rb"
+alias xc="$HOME/Dropbox/Code/Scripts/xcworkspace.rb"
+alias cloudfront="$HOME/Dropbox/Code/Scripts/cloudFront.rb"
+alias mksite="$HOME/Dropbox/Code/Scripts/newSite.rb"
+alias methods="$HOME/Dropbox/Code/Scripts/methods.rb"
+alias pf="$HOME/Dropbox/Code/Scripts/processfile.rb"
+alias lc="$HOME/Dropbox/Code/Scripts/license.rb"
+alias rename="$HOME/Dropbox/Code/Scripts/imageRenamer.rb"
+alias append="$HOME/Dropbox/Code/Scripts/fileAppend.rb"
 
 # Create a new iTerm window in the same directory
-function spawn { osascript ~/Dropbox/Code/Applescript/Spawn/SpawniTerm.applescript $PWD; }
+function spawn { osascript $HOME/Dropbox/Code/Applescript/Spawn/SpawniTerm.applescript $PWD; }
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -125,7 +125,7 @@ alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/La
 
 # Recursively delete `.DS_Store` files
 # alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-alias cleanup="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+alias cleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # File size
 # if stat -c '' . > /dev/null 2>&1; then
@@ -138,8 +138,8 @@ alias cleanup="sqlite3 ~/Library/Preferences/com.apple.LaunchServices.Quarantine
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv ~/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
-alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv ~/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
+alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv $HOME/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
+alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv $HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
