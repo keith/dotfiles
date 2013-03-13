@@ -41,10 +41,11 @@ alias macirb="macirb --simple-prompt"
 alias irb="irb --simple-prompt"
 alias rake="noglob rake"
 
-#CocoaPods
+# CocoaPods
 alias pi="pod install"
 alias psl="pod spec lint"
 alias psla="pod spec lint *.podspec --verbose"
+alias pclean="rm -rf ~/Library/Caches/CocoaPods /tmp/CocoaPods"
 alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=~/Git/CocoaPods/Gemfile bundle exec ~/Git/CocoaPods/bin/pod"
 
 # Archive Stuff
@@ -58,6 +59,7 @@ alias fs="stat -f %z"
 alias linode="ssh ksmiley@66.175.208.254"
 alias rlinode="ssh -R 52698:localhost:52698 ksmiley@66.175.208.254"
 
+# Various
 alias u="uname"
 
 # Winthrop
