@@ -14,8 +14,10 @@ launchy
 middleman
 middleman-smusher
 mkgitignore
+mongrel
 octokit
 pry
+puma
 rack
 rails
 rake
