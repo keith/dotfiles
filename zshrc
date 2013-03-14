@@ -6,17 +6,18 @@ export PKG_CONFIG_PATH="/opt/X11/lib/pkgconfig"
 
 PS1='%# '
 
-source ~/.aliases
+source $HOME/.aliases
 
 eval "$(rbenv init -)"
 
+setopt APPEND_HISTORY # adds history
+setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_IGNORE_SPACE
+
 HISTSIZE=1000
-if (( ! EUID )); then
-HISTFILE=~/.zsh_history_root
-else
-HISTFILE=~/.zsh_history
-fi
 SAVEHIST=1000
+HISTFILE=$HOME/.zsh_history
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 
@@ -25,4 +26,3 @@ bindkey -v
 
 autoload -Uz compinit
 compinit -i
-
