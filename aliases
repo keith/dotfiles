@@ -38,7 +38,6 @@ alias bdgem="gem build *.gemspec; gem install *.gem --no-ri --no-rdoc; rbenv reh
 alias rt="rails server"
 alias rr="rbenv rehash"
 alias macirb="macirb --simple-prompt"
-alias irb="irb --simple-prompt"
 alias rake="noglob rake"
 
 # CocoaPods
