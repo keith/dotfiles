@@ -126,7 +126,10 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Press F4 to toggle highlighting on/off, and show current value.
-:noremap <F4> :set hlsearch! hlsearch?<CR>
+" :noremap <F4> :set hlsearch! hlsearch?<CR>
+
+" Remove the last search thus clearing the highlight
+:noremap <F4> :let @/ = ""<CR>
 
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
