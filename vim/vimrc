@@ -98,6 +98,10 @@ vnoremap > >gv
 nnoremap j gj
 nnoremap k gk
 
+" Create a newline inbetween bracketed lines
+" Place the cursor on the blank line
+inoremap {<CR> {<CR>}<C-o>O
+
 " Force root permission saves
 cmap w!! %!sudo tee > /dev/null %
 
