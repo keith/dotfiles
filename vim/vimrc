@@ -58,7 +58,7 @@ set wildmode=longest,list,full " Completion settings
 set expandtab " Insert spaces instead of actually tabs
 set smarttab " Fancy tab settings I don't understand
 set scrolloff=5 " The number of lines above and below
-set history=200 " The number of history items to remember
+set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 let &titleold=getcwd() " On quit reset title
