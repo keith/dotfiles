@@ -1,3 +1,4 @@
+awesome_print
 better_errors
 binding_of_caller
 brio
@@ -10,6 +11,7 @@ factory_girl
 guard-rspec
 haml
 high_voltage
+interactive_editor
 launchy
 middleman
 middleman-smusher
