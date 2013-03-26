@@ -6,7 +6,6 @@ require 'irb/completion'
 begin
   require 'interactive_editor'
 rescue LoadError => err
-  warn "Couldn't load interactive_editor: #{err}"
 end
 
 # Awesome print
@@ -14,7 +13,6 @@ begin
   require 'awesome_print'
   AwesomePrint.irb!
 rescue LoadError => err
-  warn "Couldn't load awesome_print: #{err}"
 end
 
 # Use >> as prompt
