@@ -155,6 +155,8 @@ autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd BufNewFile,BufRead,BufReadPost *.podspec set filetype=ruby
 autocmd BufNewFile,BufRead Podfile set filetype=ruby
 
+autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
