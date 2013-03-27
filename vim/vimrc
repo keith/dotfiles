@@ -153,6 +153,21 @@ autocmd BufNewFile,BufRead Podfile set filetype=ruby
 
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 
+" Run rspec tests from the entire file, or under your cursor
+" Source http://blog.santosvelasco.com/2012/07/04/vim-and-rspec-run-the-test-under-the-cursor/
+function! RSpecFile()
+  execute("!clear && rspec " . expand("%p"))
+endfunction
+map <leader>R :call RSpecFile() <CR>
+command! RSpecFile call RSpecFile()
+
+function! RSpecCurrent()
+  execute("!clear && rspec " . expand("%p") . ":" . line("."))
+endfunction
+map <leader>r :call RSpecCurrent() <CR>
+command! RSpecCurrent call RSpecCurrent()
+
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
