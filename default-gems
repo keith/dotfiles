@@ -25,6 +25,7 @@ rails
 rake
 rb-fsevent
 rspec
+rubygems-bundler
 shotgun
 sinatra
 susy
