@@ -39,6 +39,7 @@ alias rt="rails server"
 alias rr="rbenv rehash"
 alias macirb="macirb --simple-prompt"
 alias rake="noglob rake"
+alias binstubs="gem regenerate_binstubs"
 
 # CocoaPods
 alias pi="pod install"
