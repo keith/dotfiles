@@ -22,7 +22,7 @@ function custom_path ()
     return 1
 }
 
-function no_dot? ()
+function no_dot ()
 {
     local filename=$1
     for FILE in ${NO_DOT[@]}
@@ -44,7 +44,7 @@ function new_path ()
         path="${PATHS[$filename]}/"
     fi
     
-    if ! no_dot? $filename; then
+    if ! no_dot $filename; then
         filename=".$filename"
     fi
     
