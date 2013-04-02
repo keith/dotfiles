@@ -171,6 +171,6 @@ set encoding=utf-8 " Necessary to show Unicode glyphs
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 
 " Vim Git Gutter
-highlight clear SignColumn " Clear the background color of git-gutter
-highlight clear LineNr " Clear the background color of the number bar
-nnoremap <F3> :highlight clear SignColumn LineNr<CR> " Press F3 to clear all the background on the left
+" highlight clear SignColumn " Clear the background color of git-gutter
+" highlight clear LineNr " Clear the background color of the number bar
+" nnoremap <F3> :highlight clear SignColumn LineNr<CR> " Press F3 to clear all the background on the left
