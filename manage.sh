@@ -13,7 +13,6 @@ function custom_path ()
 {
     for i in "${!PATHS[@]}"
     do
-        # echo $i
         if [[ $1 == $i ]]; then
             return 0
         fi
@@ -42,6 +41,9 @@ function new_path ()
     local path=""
     if custom_path $filename; then
         path="${PATHS[$filename]}/"
+        if [[ ! -d $HOME/$path ]]; then
+            mkdir $HOME/$path
+        fi
     fi
     
     if ! no_dot $filename; then
@@ -56,16 +58,14 @@ function link ()
 {
     local filename=$1
     
-    if [ ! -e $filename ];
-    then
+    if [[ ! -e $filename ]]; then
         echo "$filename doesn't exist"
         return
     fi
     
     local path=$(new_path $filename)
-    if [ -e $path ]; then
-        echo "$path already exists"
-    else
+    if [[ ! -e $path ]]; then
+        echo "Linking $filename to $path"
         ln -s $PWD/$filename $path
     fi
 }
