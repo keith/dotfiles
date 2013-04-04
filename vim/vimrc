@@ -66,6 +66,7 @@ set scrolloff=5 " The number of lines above and below
 set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
+set nofoldenable " Don't show folds by default
 let &titleold=getcwd() " On quit reset title
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
