@@ -21,7 +21,6 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'mattn/gist-vim'
 Bundle 'mikewest/vimroom'
 Bundle 'msanders/cocoa.vim'
-Bundle 'scrooloose/nerdtree'
 Bundle 'skwp/vim-ruby-conque'
 Bundle 'splaice/vim-conque'
 Bundle 'Townk/vim-autoclose'
@@ -164,11 +163,11 @@ autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
 " NERDTree
-map <leader>nt :NERDTreeToggle<cr> " Toggle NERDTree command
-let NERDTreeShowFiles=1 " Show files along with directories
-let NERDTreeShowHidden=1 " Show hidden files
-let NERDTreeQuitOnOpen=1 " Quit on opening files from the tree
-let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
+" map <leader>nt :NERDTreeToggle<cr> " Toggle NERDTree command
+" let NERDTreeShowFiles=1 " Show files along with directories
+" let NERDTreeShowHidden=1 " Show hidden files
+" let NERDTreeQuitOnOpen=1 " Quit on opening files from the tree
+" let NERDTreeHighlightCursorline=1 " Highlight the selected entry in the tree
 
 " Powerline
 set laststatus=2 " Always show the statusline
