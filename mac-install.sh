@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# This is an ugly script for bootstrapping OS X setup
 
 if ! which xcodebuild &> /dev/null; then
     echo "You need to install the Xcode Command Line Tools before running this script"
@@ -30,7 +31,19 @@ if ! which brew &> /dev/null; then
     exit
 fi
 
-brew install appledoc automake bash bash-completion curl git heroku-toolbelt hub imagemagick llvm lynx macvim make markdown mercurial mogenerator mysql node openssh openssl postgresql rbenv rbenv-default-gems rbenv-gem-rehash rsync ruby-build tree vim wget zsh zsh-completions
+brew install appledoc automake bash bash-completion curl git heroku-toolbelt hub imagemagick llvm lynx macvim make markdown mercurial mogenerator mysql node openssh openssl postgresql rsync tree vim wget zsh zsh-completions
 
+rm -rf $HOME/.rbenv
+./manage.sh install &
+wait
+
+git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
+git clone https://github.com/sstephenson/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
+git clone git://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
+git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
+git clone git://github.com/tpope/rbenv-readline.git $HOME/.rbenv/plugins/rbenv-readline
+
+brew link openssl --force
 rbenv install 1.9.3-p385 2.0.0-p0
+brew unlink openssl
 
