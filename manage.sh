@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(aliases basrc default-gems gemrc gitconfig gitignore_global hgrc irbrc rspec slate tm_properties zshrc)
+FILES=(aliases bashrc default-gems gemrc gitconfig gitignore_global hgrc irbrc rspec slate tm_properties zshrc)
 
 declare -A PATHS
 PATHS=(["default-gems"]=".rbenv")
