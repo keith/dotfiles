@@ -9,7 +9,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Set computer name (as done via System Preferences → Sharing)
-local name="iChabod"
+name="iChabod"
 sudo scutil --set ComputerName $name
 sudo scutil --set HostName $name
 sudo scutil --set LocalHostName $name
@@ -159,6 +159,9 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 echo "Avoid creating .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+echo "Show dotfiles"
+defaults write com.apple.Finder AppleShowAllFiles -bool TRUE
 
 echo "Disk image changes"
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
