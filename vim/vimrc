@@ -38,8 +38,9 @@ Bundle 'vim-scripts/cpp.vim--Skvirsky'
 Bundle 'wannesm/rmvim.vim'
 
 " Vim script repos
-Bundle 'Specky'
+Bundle 'a.vim'
 Bundle 'IndexedSearch'
+Bundle 'Specky'
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
@@ -167,6 +168,17 @@ autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd BufNewFile,BufRead,BufReadPost *.podspec set filetype=ruby
 autocmd BufNewFile,BufRead Podfile set filetype=ruby
 
+" Make sure ObjC header files are treated properly
+autocmd BufNewFile,BufRead,BufReadPost *.h set filetype=objc
+
+" a.vim ObjC settings
+autocmd FileType objc let g:alternateExtensions_h = "m" 
+autocmd FileType objc let g:alternateExtensions_m = "h"
+
+" ObjC curly brace error fix
+let c_no_curly_error = 1
+
+" Cold Fusion correct comment type
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
