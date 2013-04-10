@@ -29,6 +29,7 @@ Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-pathogen'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-repeat'
@@ -41,6 +42,9 @@ Bundle 'wannesm/rmvim.vim'
 Bundle 'a.vim'
 Bundle 'IndexedSearch'
 Bundle 'Specky'
+
+" Enable pathogen for plugin development
+execute pathogen#infect('src/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
