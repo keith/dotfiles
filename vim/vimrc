@@ -1,3 +1,6 @@
+" Keith Smiley's (http://keith.so) vimrc, do with what you will
+"
+
 set nocompatible " This must be first, because it changes other options
 
 filetype off " Required for Vundle setup
@@ -14,6 +17,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'derekwyatt/vim-fswitch'
 Bundle 'ervandew/supertab'
 Bundle 'gregsexton/gitv'
+Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
@@ -65,7 +69,7 @@ set shiftround " Round << and >> to multiples of shiftwidth
 set wildmenu " Better completion in the vim command line
 set wildmode=longest,list,full " Completion settings
 set expandtab " Insert spaces instead of actually tabs
-set smarttab " Fancy tab settings I don't understand
+set smarttab " Delete entire shiftwidth of tabs when they're inserted
 set scrolloff=5 " The number of lines above and below
 set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
@@ -86,6 +90,7 @@ set noerrorbells " Don't make noise
 set visualbell " Don't show bells
 set autoread " watch for file changes and auto update
 set showmatch " set show matching parenthesis
+set matchtime=1 " The amount of time matches flash
 set number " Shows line numbers
 set ruler " Shows current cursor location
 set nrformats-=octal " Never use octal notation
@@ -98,6 +103,7 @@ set ignorecase " ignore case when searching
 set smartcase " ignore case if search is lowercase, otherwise case-sensitive
 set title " Change the terminal's title
 set nobackup " Don't keep backup files
+set nowritebackup " Don't create a backup when overwriting a file
 set noswapfile " Don't write swap files
 
 " Reselect visual blocks after movement
@@ -129,23 +135,26 @@ if has("clipboard") " If the feature is available
 endif
 
 " Tab mappings
-map <leader>tt :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-map <leader>tn :tabnext<cr>
+nmap <leader>tt :tabnew<cr>
+nmap <leader>te :tabedit
+nmap <leader>tc :tabclose<cr>
+nmap <leader>to :tabonly<cr>
+nmap <leader>tn :tabnext<cr>
 nmap <C-tab> :tabnext<cr>
 nmap <C-S-tab> :tabprevious<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
+nmap <leader>tp :tabprevious<cr>
+nmap <leader>tf :tabfirst<cr>
+nmap <leader>tl :tablast<cr>
+nmap <leader>tm :tabmove
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Map 0 to the first non-whitespace character
+nmap 0 ^
 
 " Press F4 to toggle highlighting on/off, and show current value.
 " :noremap <F4> :set hlsearch! hlsearch?<CR>
@@ -169,12 +178,12 @@ autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 
-autocmd BufNewFile,BufRead,BufReadPost *.podspec set filetype=ruby
-autocmd BufNewFile,BufRead Podfile set filetype=ruby
+autocmd BufReadPost,BufWrite *.podspec set filetype=ruby
+autocmd BufReadPost,BufWrite Podfile set filetype=ruby
 
 " Make sure ObjC header files are treated properly
-autocmd BufNewFile,BufRead,BufReadPost *.h set filetype=objc
-autocmd BufNewFile,BufRead,BufReadPost *Test.m set filetype=specta
+autocmd BufReadPost,BufWrite *.h set filetype=objc
+autocmd BufReadPost,BufWrite *Test.m set filetype=specta
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
