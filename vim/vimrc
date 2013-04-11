@@ -74,6 +74,8 @@ set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 set nofoldenable " Don't show folds by default
+set foldmethod=syntax " Decide where to fold based off syntax
+set foldcolumn=2 " The width of the gutter column showing folds by line
 let &titleold=getcwd() " On quit reset title
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
@@ -169,8 +171,6 @@ set showmode " Display the mode when it changes
 " Ruby syntax checking with F9
 autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
 
-autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType objcpp setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
