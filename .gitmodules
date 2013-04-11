@@ -1,3 +1,6 @@
 [submodule "vim/vim/bundle/vundle"]
 	path = vim/vim/bundle/vundle
 	url = git://github.com/gmarik/vundle.git
+[submodule "vim/vim/src/specta.vim"]
+	path = vim/vim/src/specta.vim
+	url = git@github.com:Keithbsmiley/specta.vim.git
