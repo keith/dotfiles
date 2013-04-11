@@ -23,3 +23,5 @@
 	tool = Kaleidoscope
 [color]
 	ui = true
+[credential]
+	helper = osxkeychain
