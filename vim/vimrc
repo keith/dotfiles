@@ -133,7 +133,9 @@ inoremap <Up> <C-o>gk
 cmap w!! %!sudo tee > /dev/null %
 
 " automatically reload vimrc when it's saved
-au BufWritePost .vimrc so ~/.vimrc
+au BufWritePost .vimrc so $MYVIMRC
+" Open vimrc with leader->v
+nmap <leader>v :tabedit $MYVIMRC<cr>
 
 if has("clipboard") " If the feature is available
 	set clipboard=unnamed " copy to the system clipboard
