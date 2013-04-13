@@ -187,6 +187,7 @@ autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 
+" Settings for podspecs
 autocmd BufReadPost,BufWrite *.podspec set filetype=ruby
 autocmd BufReadPost,BufWrite Podfile set filetype=ruby
 
