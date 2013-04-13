@@ -111,6 +111,12 @@ set nobackup " Don't keep backup files
 set nowritebackup " Don't create a backup when overwriting a file
 set noswapfile " Don't write swap files
 
+" Map home and end keys to the correct things
+map <Home> gg
+map <End>  G
+map <PageUp> <C-b>
+map <PageDown> <C-f>
+
 " Reselect visual blocks after movement
 vnoremap < <gv 
 vnoremap > >gv
@@ -132,8 +138,6 @@ inoremap <Up> <C-o>gk
 " Force root permission saves
 cmap w!! %!sudo tee > /dev/null %
 
-" automatically reload vimrc when it's saved
-au BufWritePost .vimrc so $MYVIMRC
 " Open vimrc with leader->v
 nmap <leader>v :tabedit $MYVIMRC<cr>
 
