@@ -27,7 +27,9 @@ Bundle 'msanders/cocoa.vim'
 Bundle 'skwp/vim-ruby-conque'
 Bundle 'splaice/vim-conque'
 Bundle 'Townk/vim-autoclose'
+Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
@@ -73,7 +75,9 @@ set scrolloff=5 " The number of lines above and below
 set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
-set foldlevelstart=99 " Default to all folds open
+set nofoldenable " Have all folds open by default
+" set foldlevelstart=99 " Default to all folds open
+set foldnestmax=3 " Set deepest fold to x levels
 set foldmethod=syntax " Decide where to fold based off syntax
 set foldcolumn=2 " The width of the gutter column showing folds by line
 let &titleold=getcwd() " On quit reset title
@@ -181,7 +185,7 @@ autocmd BufReadPost,BufWrite *.podspec set filetype=ruby
 autocmd BufReadPost,BufWrite Podfile set filetype=ruby
 
 " Make sure ObjC header files are treated properly
-autocmd BufReadPost,BufWrite *.h set filetype=objc
+autocmd BufReadPost,BufWrite *.h,*.m set filetype=objc
 autocmd BufReadPost,BufWrite *Test.m set filetype=specta
 
 " a.vim ObjC settings
