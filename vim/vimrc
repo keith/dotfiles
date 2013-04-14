@@ -77,7 +77,6 @@ set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 set nofoldenable " Have all folds open by default
-" set foldlevelstart=99 " Default to all folds open
 set foldnestmax=3 " Set deepest fold to x levels
 set foldmethod=syntax " Decide where to fold based off syntax
 set foldcolumn=2 " The width of the gutter column showing folds by line
@@ -100,11 +99,12 @@ set matchtime=1 " The amount of time matches flash
 set number " Shows line numbers
 set ruler " Shows current cursor location
 set nrformats-=octal " Never use octal notation
-set nolist " Don't show invisible characters
 set mouse=a " enable using the mouse if terminal emulator
 set hlsearch " Highlight search terms
 set incsearch " Show searches as you type
+set nolist " Don't show invisible characters
 set wrap " Softwrap text
+set linebreak " Don't wrap in the middle of words
 set ignorecase " ignore case when searching
 set smartcase " ignore case if search is lowercase, otherwise case-sensitive
 set title " Change the terminal's title
@@ -121,6 +121,12 @@ map <PageDown> <C-f>
 " Reselect visual blocks after movement
 vnoremap < <gv 
 vnoremap > >gv
+
+" GUI style indent movement
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
 
 " Move as expected on wrapped lines
 nnoremap j gj
@@ -158,6 +164,34 @@ nmap <leader>tp :tabprevious<cr>
 nmap <leader>tf :tabfirst<cr>
 nmap <leader>tl :tablast<cr>
 nmap <leader>tm :tabmove
+
+" Using command shift brackets or command numbers to navigate tabs
+map <D-S-]> gt
+map <D-S-[> gT
+map <D-1> 1gt
+map <D-2> 2gt
+map <D-3> 3gt
+map <D-4> 4gt
+map <D-5> 5gt
+map <D-6> 6gt
+map <D-7> 7gt
+map <D-8> 8gt
+map <D-9> 9gt
+map <D-0> :tablast<CR>
+ 
+" Using control shift brackets or control numbers to navigate tabs
+map <C-S-]> gt
+map <C-S-[> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
