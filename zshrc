@@ -43,6 +43,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Use vim shortcuts within the terminal (defaults to insert mode)
 bindkey -v
 
+# Restore 'normal' search in VI mode
+bindkey '^R' history-incremental-search-backward
+
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
 compinit -i
