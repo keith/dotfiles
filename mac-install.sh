@@ -31,7 +31,7 @@ if ! which brew &> /dev/null; then
     exit
 fi
 
-brew install appledoc automake bash bash-completion curl git heroku-toolbelt hub imagemagick llvm lynx macvim make markdown mercurial mogenerator mysql node openssh openssl postgresql rsync tree vim wget zsh zsh-completions
+brew install ack appledoc automake bash bash-completion curl git heroku-toolbelt hub imagemagick llvm lynx macvim make markdown mercurial mogenerator mysql node openssh openssl postgresql rsync tree vim wget zsh zsh-completions
 
 rm -rf $HOME/.rbenv
 ./manage.sh install &
