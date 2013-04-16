@@ -19,6 +19,8 @@
 	trustExitCode = true
 [mergetool "fugitive"]
 	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool "mfugitive"]
+	cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool]
 	prompt = false
 [merge]
