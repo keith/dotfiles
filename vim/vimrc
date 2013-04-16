@@ -220,8 +220,6 @@ set showmode " Display the mode when it changes
 " Ruby syntax checking with F9
 autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
 
-autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
