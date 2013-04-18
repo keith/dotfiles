@@ -12,17 +12,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
-Bundle 'airblade/vim-rooter'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'derekwyatt/vim-fswitch'
 Bundle 'ervandew/supertab'
 Bundle 'godlygeek/tabular'
 Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'mattn/gist-vim'
-Bundle 'mikewest/vimroom'
 Bundle 'mileszs/ack.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'skwp/vim-ruby-conque'
@@ -255,3 +251,6 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 " Powerline
 set laststatus=2 " Always show the statusline
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
+
+autocmd VimEnter * echo ">^.^<"
+
