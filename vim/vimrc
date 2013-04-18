@@ -229,12 +229,12 @@ autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 
 " Settings for podspecs
-autocmd BufReadPost,BufWrite *.podspec set filetype=ruby
-autocmd BufReadPost,BufWrite Podfile set filetype=ruby
+autocmd BufReadPost,BufWrite *.podspec setlocal filetype=ruby
+autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 
 " Make sure ObjC header files are treated properly
-autocmd BufReadPost,BufWrite *.h,*.m set filetype=objc
-autocmd BufReadPost,BufWrite *Test.m set filetype=specta
+autocmd BufReadPost,BufWrite *.h,*.m setlocal filetype=objc
+autocmd BufReadPost,BufWrite *Test.m setlocal filetype=specta
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
