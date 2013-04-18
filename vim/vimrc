@@ -21,8 +21,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'skwp/vim-ruby-conque'
-Bundle 'splaice/vim-conque'
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-commentary'
@@ -43,7 +42,6 @@ Bundle 'vim-scripts/cpp.vim--Skvirsky'
 " Vim script repos
 Bundle 'a.vim'
 Bundle 'IndexedSearch'
-Bundle 'Specky'
 
 " Enable pathogen for plugin development
 execute pathogen#infect('src/{}')
@@ -51,6 +49,7 @@ execute pathogen#infect('src/{}')
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
+" Use comma as the <leader>
 let mapleader=','
 
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
@@ -260,4 +259,8 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 set laststatus=2 " Always show the statusline
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 
+" Vim-rspec
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
 
