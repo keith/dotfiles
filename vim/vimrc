@@ -150,6 +150,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 " Open vimrc with leader->v
 nmap <leader>v :tabedit $MYVIMRC<cr>
+nmap <leader>sv :source $MYVIMRC<cr>
 
 if has("clipboard") " If the feature is available
 	set clipboard=unnamed " copy to the system clipboard
@@ -247,6 +248,11 @@ autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
 autocmd FileType c setlocal commentstring=//\ %s
 
+" ...you know
+autocmd VimEnter * echo ">^.^<"
+" Automatically Write files on open
+autocmd BufNewFile * :write
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
@@ -254,5 +260,4 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 set laststatus=2 " Always show the statusline
 set t_Co=256 " Explicitly tell Vim that the terminal supports 256 colors
 
-autocmd VimEnter * echo ">^.^<"
 
