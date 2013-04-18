@@ -51,6 +51,8 @@ execute pathogen#infect('src/{}')
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
+let mapleader=','
+
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
 set backupcopy=yes " Allow vim to write crontab files
