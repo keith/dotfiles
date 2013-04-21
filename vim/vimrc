@@ -73,10 +73,15 @@ set scrolloff=5 " The number of lines above and below
 set history=1000 " The number of history items to remember
 set undolevels=200 " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
+
+" Fold settings
 set nofoldenable " Have all folds open by default
 set foldnestmax=3 " Set deepest fold to x levels
 set foldmethod=syntax " Decide where to fold based off syntax
 set foldcolumn=2 " The width of the gutter column showing folds by line
+" Toggle folds with the space bar
+nnoremap <Space> za
+
 let &titleold=getcwd() " On quit reset title
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
