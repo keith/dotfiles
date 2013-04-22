@@ -29,3 +29,5 @@
 	ui = true
 [credential]
 	helper = osxkeychain
+[github]
+	user = keithbsmiley
