@@ -31,5 +31,3 @@
 	helper = osxkeychain
 [github]
 	user = keithbsmiley
-[ghi]
-	repo = cocoapods/specs
