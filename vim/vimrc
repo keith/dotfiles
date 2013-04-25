@@ -218,6 +218,7 @@ nmap 0 ^
 " :noremap <F4> :set hlsearch! hlsearch?<CR>
 
 " Remove the last search thus clearing the highlight
+" This clears the search register denoted by @/
 :noremap <F4> :let @/ = ""<CR>
 
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
