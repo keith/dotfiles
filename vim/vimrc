@@ -56,6 +56,7 @@ let mapleader=','
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
 set backupcopy=yes " Allow vim to write crontab files
 
+set shortmess=I " Disable the startup message
 set shell=zsh " Set the default shell
 set termencoding=utf-8 " Set the default encodings just in case $LANG isn't set
 set encoding=utf-8 " Set the default encodings just in case $LANG isn't set
