@@ -77,7 +77,7 @@ set backspace=indent,eol,start " Backspace settings
 
 " Fold settings
 set nofoldenable " Have all folds open by default
-set foldnestmax=3 " Set deepest fold to x levels
+set foldnestmax=4 " Set deepest fold to x levels
 set foldmethod=indent " Decide where to fold based off syntax
 set foldcolumn=2 " The width of the gutter column showing folds by line
 " Toggle folds with the space bar
