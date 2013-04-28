@@ -227,8 +227,9 @@ nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
 set pastetoggle=<F2> " Toggle paste in insert mode
 set showmode " Display the mode when it changes
 
-" Ruby syntax checking with F9
-autocmd FileType ruby map <F9> :w<CR>:!ruby -c %<CR>
+" Set specific filetypes to fold by syntax
+autocmd Syntax c,cpp,ruby,rspec,vim,xml,html,xhtml setlocal foldmethod=syntax
+autocmd Syntax c,cpp,ruby,rspec,vim,xml,html,xhtml,perl normal zR
 
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
