@@ -1,4 +1,6 @@
+"
 " Keith Smiley's (http://keith.so) vimrc, do with what you will
+"
 "
 
 set nocompatible " This must be first, because it changes other options
@@ -75,7 +77,7 @@ set history=1000               " The number of history items to remember
 set undolevels=200             " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 
-                               " Fold settings
+" Fold settings
 set nofoldenable               " Have all folds open by default
 set foldnestmax=10             " Set deepest fold to x levels
 set foldmethod=indent          " Decide where to fold based off syntax
@@ -154,7 +156,7 @@ inoremap <Up> <C-o>gk
 cmap w!! %!sudo tee > /dev/null %
 
 " Open vimrc with leader->v
-nmap <leader>v :tabedit $MYVIMRC<cr>
+nmap <leader>v  :tabedit $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
@@ -167,8 +169,8 @@ nmap <leader>te :tabedit
 nmap <leader>tc :tabclose<cr>
 nmap <leader>to :tabonly<cr>
 nmap <leader>tn :tabnext<cr>
-nmap <C-tab> :tabnext<cr>
-nmap <C-S-tab> :tabprevious<cr>
+nmap <C-tab>    :tabnext<cr>
+nmap <C-S-tab>  :tabprevious<cr>
 nmap <leader>tp :tabprevious<cr>
 nmap <leader>tf :tabfirst<cr>
 nmap <leader>tl :tablast<cr>
