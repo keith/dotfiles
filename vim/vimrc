@@ -274,3 +274,6 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 
+" CTRL-P
+let g:ctrlp_show_hidden = 1
+
