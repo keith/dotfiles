@@ -43,6 +43,9 @@ alias macirb="macirb --simple-prompt"
 alias rake="noglob rake"
 alias binstubs="gem regenerate_binstubs"
 
+alias coveron="export COVERALLS_RUN_LOCALLY=true"
+alias coveroff="unset COVERALLS_RUN_LOCALLY"
+
 # CocoaPods
 alias pi="pod install"
 alias psl="pod spec lint"
