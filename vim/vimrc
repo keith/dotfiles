@@ -214,9 +214,6 @@ nnoremap <C-l> <C-w>l
 set splitbelow
 set splitright
 
-" Map 0 to the first non-whitespace character
-nmap 0 ^
-
 " Press F4 to toggle highlighting on/off, and show current value.
 " :noremap <F4> :set hlsearch! hlsearch?<CR>
 
