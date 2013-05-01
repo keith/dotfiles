@@ -6,7 +6,6 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 
 # Shortcuts
-alias g="git"
 alias gs="git status"
 alias gc="git clone"
 alias gd="git diff"
