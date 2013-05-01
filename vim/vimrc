@@ -253,6 +253,7 @@ let c_no_curly_error = 1
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
 autocmd FileType c setlocal commentstring=//\ %s
+autocmd FileType objc setlocal commentstring=//\ %s
 
 " ...you know
 autocmd VimEnter * echo ">^.^<"
