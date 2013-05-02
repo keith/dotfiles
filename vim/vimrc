@@ -21,21 +21,18 @@ Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'mileszs/ack.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'thoughtbot/vim-rspec'
+Bundle 'msanders/cocoa.vim'
+Bundle 'rking/ag.vim'
 Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-pathogen'
 Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
@@ -241,6 +238,7 @@ autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 " Make sure ObjC header files are treated properly
 autocmd BufReadPost *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m setlocal filetype=specta
+autocmd BufReadPost *Tests.m setlocal filetype=specta
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
@@ -264,11 +262,6 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 " Powerline
 set laststatus=2 " Always show the statusline
 set t_Co=256     " Explicitly tell Vim that the terminal supports 256 colors
-
-" Vim-rspec
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
