@@ -1,7 +1,0 @@
---type-set=pod=.podspec
-
-# Only do case sensitive searchs when an uppercase letter is given
---smart-case
-
-# Follow symlinks
---follow

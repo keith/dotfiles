@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(ackrc aliases bashrc default-gems gemrc gitconfig gitignore_global hgrc irbrc rspec slate tm_properties tmux.conf zshrc)
+FILES=(aliases bashrc default-gems gemrc gitconfig gitignore_global hgrc irbrc rspec slate tm_properties tmux.conf zshrc)
 
 declare -A PATHS
 PATHS=(["default-gems"]=".rbenv")
