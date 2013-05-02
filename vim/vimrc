@@ -93,7 +93,6 @@ if 7 <= hour && hour < 19
 else " Set to dark from 7pm to 7am
 	set background=dark
 endif
-let g:solarized_termcolors=256
 colorscheme solarized " Use the awesome solarized color scheme
 
 set ttyfast           " Set that we have a fast terminal
