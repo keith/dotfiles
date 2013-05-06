@@ -237,9 +237,8 @@ autocmd BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 
 " Make sure ObjC header files are treated properly
-autocmd BufReadPost *.h,*.m setlocal filetype=objc
-autocmd BufReadPost *Test.m setlocal filetype=specta
-autocmd BufReadPost *Tests.m setlocal filetype=specta
+autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
+autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
