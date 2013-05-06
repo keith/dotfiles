@@ -241,7 +241,7 @@ autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
-autocmd BufReadPost,BufNewFile *.com setlocal filetype=conf
+autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
