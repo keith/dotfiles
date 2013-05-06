@@ -16,6 +16,7 @@ Bundle 'gmarik/vundle'
 " Github repos user/repo
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
+Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
