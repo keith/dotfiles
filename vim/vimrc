@@ -225,8 +225,8 @@ set pastetoggle=<F2> " Toggle paste in insert mode
 set showmode         " Display the mode when it changes
 
 " Set specific filetypes to fold by syntax
-autocmd Syntax c,cpp,ruby,rspec,vim,xml,html,xhtml setlocal foldmethod=syntax
-autocmd Syntax c,cpp,ruby,rspec,vim,xml,html,xhtml,perl normal zR
+autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
+autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
@@ -240,6 +240,8 @@ autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
+autocmd BufReadPost,BufNewFile *.com setlocal filetype=conf
+
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
 autocmd FileType objc let g:alternateExtensions_m = "h"
@@ -252,9 +254,6 @@ autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
 autocmd FileType c setlocal commentstring=//\ %s
 autocmd FileType objc setlocal commentstring=//\ %s
-
-" ...you know
-autocmd VimEnter * echo ">^.^<"
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
