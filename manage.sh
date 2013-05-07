@@ -108,8 +108,6 @@ if [[ $1 == "install" ]]; then
     git submodule update --init --recursive &
     wait
     install_links
-    vim +BundleInstall +qall > /dev/null 2>&1 &
-    wait
 elif [[ $1 == "remove" ]]; then
     remove_links
 else
