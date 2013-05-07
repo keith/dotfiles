@@ -1,9 +1,9 @@
 ####### Custom #######
 ssh.dmg
 .dropbox
-vim/vim/bundle/*
-!vim/vim/bundle/vundle
-!vim/vim/src/.gitkeep
+vim/bundle/*
+!vim/bundle/vundle
+!vim/src/.gitkeep
 \[Vundle\]\ Installer
 
 ####### Linux #######
