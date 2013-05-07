@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-FILES=(aliases bashrc default-gems gemrc gitconfig gitignore_global hgrc irbrc rspec slate tm_properties tmux.conf zshrc)
+FILES=(aliases bashrc default-gems gemrc gitconfig gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc zshrc)
 
 declare -A PATHS
 PATHS=(["default-gems"]=".rbenv")
 
 NO_DOT=(default-gems)
-VIM_FILES=(gvimrc vim vimrc)
 
-
-function custom_path ()
-{
+function custom_path () {
     for i in "${!PATHS[@]}"
     do
         if [[ $1 == $i ]]; then
@@ -21,8 +18,7 @@ function custom_path ()
     return 1
 }
 
-function no_dot ()
-{
+function no_dot () {
     local filename=$1
     for FILE in ${NO_DOT[@]}
     do
@@ -34,8 +30,7 @@ function no_dot ()
     return 1
 }
 
-function new_path ()
-{
+function new_path () {
     local filename=$1
     
     local path=""
@@ -54,8 +49,7 @@ function new_path ()
 }
 
 # Links the passed filename to its new location
-function link ()
-{
+function link () {
     local filename=$1
     
     if [[ ! -e $filename ]]; then
@@ -71,8 +65,7 @@ function link ()
 }
 
 # Delete the linked file path
-function unlink ()
-{
+function unlink () {
     local filename=$1
     local path=$(new_path $filename)
     
@@ -84,38 +77,23 @@ function unlink ()
 }
 
 # Loops through and link all files without links
-function install_links ()
-{
+function install_links () {
     for FILE in ${FILES[@]}
-    do
-        link $FILE
-    done
-
-    cd "vim"
-
-    for FILE in ${VIM_FILES[@]}
     do
         link $FILE
     done
 }
 
 # Function to remove all linked files
-function remove_links ()
-{
+function remove_links () {
     for FILE in ${FILES[@]}
-    do
-        unlink $FILE
-    done
-    
-    for FILE in ${VIM_FILES[@]}
     do
         unlink $FILE
     done
 }
 
 # Fuction to print the usage and exit when there's bad input
-function die ()
-{
+function die () {
     echo "Usage ./manage.sh {install|remove}"
     exit
 }
