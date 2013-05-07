@@ -1,0 +1,9 @@
+[submodule "vim/src/rspec.vim"]
+	path = vim/src/rspec.vim
+	url = https://github.com/Keithbsmiley/rspec.vim.git
+[submodule "vim/src/specta.vim"]
+	path = vim/src/specta.vim
+	url = https://github.com/Keithbsmiley/specta.vim.git
+[submodule "vim/bundle/vundle"]
+	path = vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
