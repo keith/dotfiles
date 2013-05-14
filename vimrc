@@ -215,7 +215,7 @@ set splitright
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
-:noremap <F4> :let @/ = ""<CR>
+nnoremap <F4> :let @/ = ""<CR>
 
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
@@ -240,6 +240,7 @@ autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd FileType markdown setlocal spell
+autocmd FileType text setlocal spell
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
