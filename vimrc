@@ -98,6 +98,7 @@ set visualbell        " Don't show bells
 set autoread          " watch for file changes and auto update
 set showmatch         " set show matching parenthesis
 set matchtime=1       " The amount of time matches flash
+set display=lastline  " Display super long wrapped lines
 set number            " Shows line numbers
 set ruler             " Shows current cursor location
 set nrformats-=octal  " Never use octal notation
