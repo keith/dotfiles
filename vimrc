@@ -92,6 +92,7 @@ endif
 colorscheme solarized " Use the awesome solarized color scheme
 
 set ttyfast           " Set that we have a fast terminal
+set lazyredraw        " Don't redraw vim in all situations
 set noerrorbells      " Don't make noise
 set visualbell        " Don't show bells
 set autoread          " watch for file changes and auto update
