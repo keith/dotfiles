@@ -40,6 +40,26 @@
   </item>
 
   <item>
+    <name>Gaming first 4 function keys</name>
+    <identifier>private.first_four_gaming_function_keys</identifier>
+    <appendix>* Use FN + F1 for brightness down</appendix>
+    <appendix>* Use FN + F2 for brightness up</appendix>
+    <appendix>* Use FN + F3 for mission control</appendix>
+    <appendix>* Use FN + F4 for dashboard</appendix>
+
+    <!-- Use F1 without modifier keys to turn the brightness down -->
+    <autogen>__KeyToConsumer__ KeyCode::F1, ModifierFlag::FN, ConsumerKeyCode::BRIGHTNESS_DOWN</autogen>
+    <!-- Use F2 without modifier keys to turn the brightness up -->
+    <autogen>__KeyToConsumer__ KeyCode::F2, ModifierFlag::FN, ConsumerKeyCode::BRIGHTNESS_UP</autogen>
+
+    <!-- Use F3 without modifier keys to show mission control -->
+    <autogen>__KeyToKey__ KeyCode::F3, ModifierFlag::FN, KeyCode::MISSION_CONTROL</autogen>
+
+    <!-- Use F4 without modifier keys to show the dashboard -->
+    <autogen>__KeyToKey__ KeyCode::F4, ModifierFlag::FN, KeyCode::DASHBOARD</autogen>
+  </item>
+
+  <item>
     <name>Other Function Keys</name>
     <identifier>private.last_function_keys</identifier>
     <appendix>* Use F6-8 without modifier keys as music previous, play/pause, next</appendix>
@@ -63,8 +83,11 @@
 
     <!-- Setup F10-F12 as volume mute, down and up -->
     <autogen>__KeyToConsumer__ KeyCode::F10, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_MUTE</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F10, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_SHIFT, ConsumerKeyCode::VOLUME_MUTE</autogen>
     <autogen>__KeyToConsumer__ KeyCode::F11, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_DOWN</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F11, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_SHIFT, ConsumerKeyCode::VOLUME_DOWN, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToConsumer__ KeyCode::F12, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_UP</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F12, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_SHIFT, ConsumerKeyCode::VOLUME_UP, ModifierFlag::SHIFT_L</autogen>
 
     <!-- Use the furthest right function key (F15) as the eject key -->
     <autogen>__KeyToConsumer__ KeyCode::F15, ModifierFlag::NONE, ConsumerKeyCode::EJECT</autogen>
