@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Common Das Keyboard Ultimate Fixes</name>
+    <identifier>private.das_keyboard_ultimate_fixes</identifier>
+    <appendix>* Change the HELP key to a FN key</appendix>
+    <appendix>* Change the PC Application key to a FN key</appendix>
+
+    <!-- Turn the help key into a function key, like on the full size Apple keyboard -->
+    <autogen>__KeyToKey__ KeyCode::HELP, KeyCode::FN</autogen>
+
+    <!-- Changes the PC Application key (third to the right of the space bar) to a Function Key -->
+    <autogen>__KeyToKey__ KeyCode::PC_APPLICATION, KeyCode::FN</autogen>
+  </item>
+
+  <!--
+    The two groups of function keys are seperated for gamers. Personally I find every
+    game I play uses some amount of F1-F4 but nothing more since it would be harder to reach
+    while keeping your hands on WASD. This way you can easily have two keyboard profiles that
+    use mostly the same settings. You're welcome.
+  -->
+  <item>
+    <name>First 4 function keys as typical Apple keyboard functions</name>
+    <identifier>private.first_four_function_keys</identifier>
+    <appendix>* Use F1 without modifier keys for brightness down</appendix>
+    <appendix>* Use F2 without modifier keys for brightness up</appendix>
+    <appendix>* Use F3 without modifier keys for mission control</appendix>
+    <appendix>* Use F4 without modifier keys for dashboard</appendix>
+
+    <!-- Use F1 without modifier keys to turn the brightness down -->
+    <autogen>__KeyToConsumer__ KeyCode::F1, ModifierFlag::NONE, ConsumerKeyCode::BRIGHTNESS_DOWN</autogen>
+    <!-- Use F2 without modifier keys to turn the brightness up -->
+    <autogen>__KeyToConsumer__ KeyCode::F2, ModifierFlag::NONE, ConsumerKeyCode::BRIGHTNESS_UP</autogen>
+
+    <!-- Use F3 without modifier keys to show mission control -->
+    <autogen>__KeyToKey__ KeyCode::F3, ModifierFlag::NONE, KeyCode::MISSION_CONTROL</autogen>
+
+    <!-- Use F4 without modifier keys to show the dashboard -->
+    <autogen>__KeyToKey__ KeyCode::F4, ModifierFlag::NONE, KeyCode::DASHBOARD</autogen>
+  </item>
+
+  <item>
+    <name>Other Function Keys</name>
+    <identifier>private.last_function_keys</identifier>
+    <appendix>* Use F6-8 without modifier keys as music previous, play/pause, next</appendix>
+    <appendix>* Use F10-12 without modifier keys as volume mute, down, up</appendix>
+    <appendix>* Use F15 (the last function key) without modifier keys as an Eject key</appendix>
+
+    <!--
+      Setup F6-8 as music playback keys
+
+      I know this is not the standard media playback keys from Apple keyboards where they
+      are currently F7-F9. If you hate this feel free to change them, but I have a good reason.
+      On the Das Keyboard Model S Ultimate there is not text on the keys. Along with that the
+      function keys are seperated in sets of 4. For Example F1-F4 are together F5-F8 etc. So
+      if I were to use F7-F9 the 'next' key would stretch into another group seperated from the
+      other two media keys. This does seperate your two spare function keys which are now
+      F5 and F9 instead of just F5 and F6 but I felt that was the lesser of two evils.
+    -->
+    <autogen>__KeyToConsumer__ KeyCode::F6, ModifierFlag::NONE, ConsumerKeyCode::MUSIC_PREV</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F7, ModifierFlag::NONE, ConsumerKeyCode::MUSIC_PLAY</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F8, ModifierFlag::NONE, ConsumerKeyCode::MUSIC_NEXT</autogen>
+
+    <!-- Setup F10-F12 as volume mute, down and up -->
+    <autogen>__KeyToConsumer__ KeyCode::F10, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_MUTE</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F11, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_DOWN</autogen>
+    <autogen>__KeyToConsumer__ KeyCode::F12, ModifierFlag::NONE, ConsumerKeyCode::VOLUME_UP</autogen>
+
+    <!-- Use the furthest right function key (F15) as the eject key -->
+    <autogen>__KeyToConsumer__ KeyCode::F15, ModifierFlag::NONE, ConsumerKeyCode::EJECT</autogen>
+  </item>
+</root>
+
