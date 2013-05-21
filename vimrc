@@ -224,6 +224,9 @@ nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
 set pastetoggle=<F2> " Toggle paste in insert mode
 set showmode         " Display the mode when it changes
 
+" http://stackoverflow.com/a/12141458/902968
+let g:ruby_path = system('echo $HOME/.rbenv/shims')
+
 " Set specific filetypes to fold by syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
