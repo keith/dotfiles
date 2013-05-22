@@ -30,6 +30,11 @@ alias vmm="mvim ."
 
 # Vim
 alias vundle="vim +BundleInstall +qall"
+vundlereinstall() {
+  cd $HOME/.vim/bundle;
+  rm -rf $(ls | grep -v vundle);
+  vundle;
+}
 
 # Ruby/Rails
 alias ruby="ruby -w"
