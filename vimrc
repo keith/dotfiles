@@ -151,7 +151,7 @@ inoremap <Up> <C-o>gk
 
 
 " Force root permission saves
-cmap w!! %!sudo tee > /dev/null %
+cmap w<bang><bang> !sudo tee % >/dev/null
 
 " Open vimrc with leader->v
 nmap <leader>v  :tabedit $MYVIMRC<cr>
