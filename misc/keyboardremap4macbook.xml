@@ -73,6 +73,7 @@
     <appendix>* Use F6-8 without modifier keys as music previous, play/pause, next</appendix>
     <appendix>* Use F10-12 without modifier keys as volume mute, down, up</appendix>
     <appendix>* Use F15 (the last function key) without modifier keys as an Eject key</appendix>
+    <appendix>* Use Control + CMD + Option + Eject (F15) to turn off the computer</appendix>
 
     <!--
       Setup F6-8 as music playback keys
@@ -99,6 +100,8 @@
 
     <!-- Use the furthest right function key (F15) as the eject key -->
     <autogen>__KeyToConsumer__ KeyCode::F15, ModifierFlag::NONE, ConsumerKeyCode::EJECT</autogen>
+    <!-- Make Control+CMD+Option+Eject turn off the computer -->
+    <autogen>__KeyToConsumer__ KeyCode::F15, ModifierFlag::COMMAND_L, ModifierFlag::CONTROL_L, ModifierFlag::OPTION_L, ConsumerKeyCode::EJECT, ModifierFlag::COMMAND_L, ModifierFlag::CONTROL_L, ModifierFlag::OPTION_L</autogen>
   </item>
 </root>
 
