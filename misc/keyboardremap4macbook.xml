@@ -5,12 +5,20 @@
     <identifier>private.das_keyboard_ultimate_fixes</identifier>
     <appendix>* Change the HELP key to a FN key</appendix>
     <appendix>* Change the PC Application key to a FN key</appendix>
+    <appendix>* Swap incorrect option and command keys</appendix>
 
     <!-- Turn the help key into a function key, like on the full size Apple keyboard -->
     <autogen>__KeyToKey__ KeyCode::HELP, KeyCode::FN</autogen>
 
     <!-- Changes the PC Application key (third to the right of the space bar) to a Function Key -->
     <autogen>__KeyToKey__ KeyCode::PC_APPLICATION, KeyCode::FN</autogen>
+
+    <!-- Swap the left and right command and option keys -->
+    <autogen>__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMAND_L, KeyCode::OPTION_L</autogen>
+
+    <autogen>__KeyToKey__ KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
   </item>
 
   <!--
