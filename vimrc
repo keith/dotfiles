@@ -238,8 +238,9 @@ autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 
 " Settings for podspecs
 autocmd BufReadPost,BufWrite *.podspec setlocal filetype=ruby
