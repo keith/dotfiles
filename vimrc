@@ -66,6 +66,7 @@ set termencoding=utf-8         " Set the default encodings just in case $LANG is
 set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
 set autoindent                 " Indent the next line matching the previous line
 set smartindent                " Smart auto-indent when creating a new line
+set shortmess=a                " Avoid pressing enter after saves
 set cursorline                 " highlight current line
 set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
