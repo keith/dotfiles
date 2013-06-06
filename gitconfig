@@ -25,6 +25,7 @@
 	prompt = false
 [merge]
 	tool = Kaleidoscope
+	log = true
 [color]
 	ui = true
 [credential]
