@@ -28,6 +28,9 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo "Disables shutting down inactive applications"
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
+echo "Disabling App Nap"
+defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
+
 
 
 echo "Set Help Viewer windows to non-floating mode"
