@@ -263,9 +263,10 @@ autocmd FileType objc let g:alternateExtensions_m = "h"
 let c_no_curly_error = 1
 
 " Cold Fusion correct comment type
+autocmd FileType c setlocal commentstring=//\ %s
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
-autocmd FileType c setlocal commentstring=//\ %s
+autocmd FileType css setlocal commentstring=//\ %s
 autocmd FileType objc setlocal commentstring=//\ %s
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
