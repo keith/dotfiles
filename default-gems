@@ -31,6 +31,7 @@ rb-fsevent
 rdoc
 rspec
 rubygems-bundler
+sass
 shotgun
 sinatra
 susy
