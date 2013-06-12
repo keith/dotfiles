@@ -9,6 +9,9 @@ PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:/
 # Set my default editor to Vim :)
 export EDITOR=`which vim`
 
+# Homebrew cask install apps to global Applications
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # Set prompt to % for users and # for root
 PS1='%# '
 
