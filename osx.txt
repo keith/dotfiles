@@ -31,6 +31,13 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 echo "Disabling App Nap"
 defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
 
+echo "Hide Spotlight Icon"
+sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+killall SystemUIServer
+
+# echo "Show Spotlight Icon"
+# sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
+# killall SystemUIServer
 
 
 echo "Set Help Viewer windows to non-floating mode"
