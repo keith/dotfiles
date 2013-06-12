@@ -32,6 +32,10 @@ if ! which brew &> /dev/null; then
     exit
 fi
 
+brew tap homebrew/dupes
+brew tap phinze/homebrew-cask
+brew update
+
 brew install ack appledoc automake bash bash-completion curl git heroku-toolbelt hub imagemagick llvm lynx macvim make markdown mercurial mogenerator mysql node openssh openssl postgresql rsync tree vim wget zsh zsh-completions
 
 git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
