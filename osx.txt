@@ -35,6 +35,10 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 echo "Disabling App Nap"
 defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
 
+echo "Disable Spotlight"
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+sudo mdutil -a -i off
+
 echo "Hide Spotlight Icon"
 sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
 killall SystemUIServer
