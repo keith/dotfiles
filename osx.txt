@@ -93,6 +93,9 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+echo "Disable Webkit start page"
+defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
+
 echo "Only take address@example.com when copying email addresses in main"
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
