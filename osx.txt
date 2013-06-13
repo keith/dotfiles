@@ -22,6 +22,10 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 echo "To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)"
 sudo pmset halfdim 0
 
+echo "Disable Sleep image"
+sudo pmset hibernatemode 0
+sudo rm -rf /var/vm/sleepimage
+
 echo "Should remove downloaded from the internet warnings"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
