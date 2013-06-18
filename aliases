@@ -134,6 +134,12 @@ update() {
     sudo pacman -Syu
   fi
 
+  if which npm &> /dev/null;then
+    echo "Updating npm"
+    npm update npm -g
+    npm update -g
+  fi
+
   if which gem &> /dev/null;then
     echo "Running gem update..."
     $(which gem) update --system
