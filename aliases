@@ -193,6 +193,7 @@ updategit() {
       else
           echo "Updating $file..."
           git pull
+          git submodule update --init --recursive
       fi
 
       cd ..
