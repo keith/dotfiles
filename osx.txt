@@ -99,6 +99,9 @@ defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
 echo "Only take address@example.com when copying email addresses in main"
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
+echo "Disable Mail.app animations"
+defaults delete com.apple.mail DisableReplyAnimations -bool true
+
 echo "Disable new disks for time machine warning"
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
