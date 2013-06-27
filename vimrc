@@ -89,6 +89,9 @@ set foldcolumn=2               " The width of the gutter column showing folds by
 " Toggle folds with the space bar
 nnoremap <Space> za
 
+" Load MatchIt for % jumping
+runtime! macros/matchit.vim
+
 let &titleold=getcwd() " On quit reset title
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
@@ -257,7 +260,7 @@ autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd FileType markdown setlocal spell
-autocmd FileType text setlocal spell
+" autocmd FileType text setlocal spell
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
