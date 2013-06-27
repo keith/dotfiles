@@ -272,6 +272,7 @@ autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
 autocmd FileType css setlocal commentstring=//\ %s
 autocmd FileType objc setlocal commentstring=//\ %s
+autocmd FileType crontab setlocal commentstring=#\ %s
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
