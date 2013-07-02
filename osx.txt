@@ -41,7 +41,9 @@ sudo mdutil -a -i off
 
 echo "Hide Spotlight Icon"
 sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
-killall SystemUIServer
+
+echo "Disable menu bar transparency"
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # echo "Show Spotlight Icon"
 # sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
@@ -120,6 +122,9 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 echo "Show Path bar in Finder"
 defaults write com.apple.finder ShowPathbar -bool true
 
+echo "Default sidebar icon size to small"
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
 echo "Set a blazingly fast keyboard repeat rate"
 defaults write NSGlobalDomain KeyRepeat -int 0
 
@@ -133,9 +138,14 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 echo "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
 defaults write com.apple.screencapture type -string "png"
 
+echo "Disable shadow in screenshots"
+defaults write com.apple.screencapture disable-shadow -bool true
+
 echo "Enable HiDPI display modes (requires restart)"
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
+echo "Ask for password for screensaver"
+defaults write com.apple.screensaver askForPassword -int 1
 
 echo "Disable Resume system-wide"
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
@@ -154,12 +164,19 @@ echo "This works, although the checkbox will still appear to be checked."
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 
-echo "Enable press and hold in ST2"
-defaults write com.sublimetext.2 ApplePressAndHoldEnabled -bool false
+# echo "Enable press and hold system wide"
+# defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ################
 # Finder stuff #
 ################
+
+echo "Show all icons on desktop"
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
 echo "Finder: disable window animations and Get Info animations"
 defaults write com.apple.finder DisableAllAnimations -bool true
 
@@ -185,7 +202,7 @@ echo "Avoid creating .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # echo "Show hidden files"
-# defaults write com.apple.finder AppleShowAllFiles -bool TRUE
+# defaults write com.apple.Finder AppleShowAllFiles -bool true
 
 echo "Disk image changes"
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
@@ -231,3 +248,4 @@ defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool NO
 echo "Killing affected applications"
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
+
