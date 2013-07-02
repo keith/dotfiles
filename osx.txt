@@ -185,7 +185,7 @@ echo "Avoid creating .DS_Store files on network volumes"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # echo "Show hidden files"
-# defaults write com.apple.Finder AppleShowAllFiles -bool TRUE
+# defaults write com.apple.finder AppleShowAllFiles -bool TRUE
 
 echo "Disk image changes"
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
