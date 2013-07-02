@@ -46,7 +46,3 @@ git clone git://github.com/tpope/rbenv-readline.git $HOME/.rbenv/plugins/rbenv-r
 ./manage.sh install &
 wait
 
-brew link openssl --force
-rbenv install 1.9.3-p385 2.0.0-p195
-brew unlink openssl
-
