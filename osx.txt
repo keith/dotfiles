@@ -74,9 +74,7 @@ echo "Dock tweaks"
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
 echo "Remove the auto-hiding Dock delay"
-defaults write com.apple.dock autohide-delay -float 0
-echo "Remove the animation when hiding/showing the Dock"
-defaults write com.apple.dock autohide-time-modifier -float 0
+defaults write com.apple.dock autohide-delay -float 0.25
 
 echo "Enable the 2D Dock"
 defaults write com.apple.dock no-glass -bool true
@@ -96,11 +94,11 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 echo "Set the icon size of Dock items to 36 pixels"
 defaults write com.apple.dock tilesize -int 36
 
-echo "Mission control animation speed"
-defaults write com.apple.dock expose-animation-duration -float 0.1
-
 echo "Don’t automatically rearrange Spaces based on most recent use"
 defaults write com.apple.dock mru-spaces -bool false
+
+echo "Put the dock on left side"
+defaults write com.apple.dock orientation -string "left"
 
 # Hot corners
 # Possible values:
