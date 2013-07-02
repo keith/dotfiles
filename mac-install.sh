@@ -34,7 +34,8 @@ brew tap homebrew/dupes
 brew tap phinze/homebrew-cask
 brew update
 
-brew install bash brew-cask cloc git grep heroku-toolbelt hub imagemagick llvm lynx macvim markdown mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace rsync ruby-build sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
+brew install bash cloc git grep heroku-toolbelt hub imagemagick llvm lynx macvim markdown mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace rsync ruby-build sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
+brew install --HEAD brew-cask
 
 git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
 git clone https://github.com/sstephenson/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
