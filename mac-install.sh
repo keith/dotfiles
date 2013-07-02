@@ -31,7 +31,6 @@ if ! which brew &> /dev/null; then
 fi
 
 brew tap homebrew/dupes
-brew tap homebrew/versions
 brew tap phinze/homebrew-cask
 brew update
 
