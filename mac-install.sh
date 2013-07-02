@@ -35,7 +35,7 @@ brew tap homebrew/versions
 brew tap phinze/homebrew-cask
 brew update
 
-brew install apple-gcc42 appledoc autoconf automake bash boost brew-cask bsdmake cabextract class-dump clisp cloc cmake ctags doxygen dsniff flac fontconfig freetype gcc gdbm gettext git glew glib glm gmp gnu-sed gnu-tar gnu-which gnustep-make gnutls gource gptfdisk grep heroku-toolbelt hub icu4c imagemagick jasper jbig2dec jpeg lame libevent libffi libgpg-error libicns libksba libmikmod libmpc libnet libnids libogg libpng libsigsegv libtasn1 libtiff libtool libvorbis little-cms little-cms2 llvm lynx macvim markdown mercurial mogenerator mongodb mpfr mpg123 mysql neon nettle ngrep nmap node openssh openssl ossp-uuid p11-kit pcre pidof pkg-config popt postgresql proctools pyqt python python3 readline reattach-to-user-namespace rsync ruby-build scrub sdl sdl_gfx sdl_image sdl_mixer sdl_ttf sendemail serf sip sqlite the_silver_searcher tmux todo-txt tor tree valgrind vim wget xctool xz zsh zsh-completions  
+brew install bash brew-cask cloc git grep heroku-toolbelt hub imagemagick llvm lynx macvim markdown mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace rsync ruby-build sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
 
 git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
 git clone https://github.com/sstephenson/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
