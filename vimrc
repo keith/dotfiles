@@ -286,5 +286,8 @@ set t_Co=256     " Explicitly tell Vim that the terminal supports 256 colors
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
+if exists('g:ctrlp_user_command')
+  unlet g:ctrlp_user_command
+endif
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 
