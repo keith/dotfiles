@@ -289,5 +289,5 @@ let g:ctrlp_show_hidden = 1
 if exists('g:ctrlp_user_command')
   unlet g:ctrlp_user_command
 endif
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 
