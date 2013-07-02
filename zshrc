@@ -3,8 +3,7 @@
 #  - /usr/local/sbin for Homebrew
 #  - $HOME/.rbenv/bin for local rbenv
 #  - /usr/local/share/npm/bin import node modules
-#  - /usr/local/share/python things installed with pip
-PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:/usr/local/share/python:$PATH"
+PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$PATH"
 
 # Set my default editor to Vim :)
 export EDITOR=`which vim`
