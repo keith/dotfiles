@@ -69,7 +69,9 @@ echo "Dock tweaks"
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
 echo "Remove the auto-hiding Dock delay"
-defaults write com.apple.Dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 0
+echo "Remove the animation when hiding/showing the Dock"
+defaults write com.apple.dock autohide-time-modifier -float 0
 
 echo "Enable the 2D Dock"
 defaults write com.apple.dock no-glass -bool true
@@ -86,7 +88,42 @@ defaults write com.apple.dock show-process-indicators -bool true
 echo "Don’t show Dashboard as a Space"
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
+echo "Set the icon size of Dock items to 36 pixels"
+defaults write com.apple.dock tilesize -int 36
 
+echo "Mission control animation speed"
+defaults write com.apple.dock expose-animation-duration -float 0.1
+
+echo "Don’t automatically rearrange Spaces based on most recent use"
+defaults write com.apple.dock mru-spaces -bool false
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Bottom left screen corner
+defaults write com.apple.dock wvous-bl-corner -int 2
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right screen corner
+defaults write com.apple.dock wvous-br-corner -int 4
+defaults write com.apple.dock wvous-br-modifier -int 0
+# Top left screen corner
+defaults write com.apple.dock wvous-tl-corner -int 10
+defaults write com.apple.dock wvous-tl-modifier -int 0
+# Top right screen corner
+defaults write com.apple.dock wvous-tr-corner -int 12
+defaults write com.apple.dock wvous-tr-modifier -int 0
+
+# Other
 
 echo "Change the Safari search to find strings contained in other words"
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
@@ -118,9 +155,6 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-echo "Show Path bar in Finder"
-defaults write com.apple.finder ShowPathbar -bool true
 
 echo "Default sidebar icon size to small"
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
@@ -186,6 +220,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 echo "Show Status bar in Finder"
 defaults write com.apple.finder ShowStatusBar -bool true
 
+echo "Show Path bar in Finder"
+defaults write com.apple.finder ShowPathbar -bool true
+
 echo "Allow text selection in QuickLook"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -234,15 +271,17 @@ echo "Show the ~/Library folder"
 chflags nohidden ~/Library
 
 
+
+
 ##############
 # TextMate 2 #
 ##############
+
 echo "Moving TextMate 2's drawer to the left"
 defaults write com.macromates.TextMate.preview fileBrowserPlacement left
 
 echo "Don't show single tab in TextMate 2"
 defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool NO
-
 
 
 echo "Killing affected applications"
