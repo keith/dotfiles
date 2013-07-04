@@ -34,7 +34,7 @@ brew tap phinze/homebrew-cask
 brew update &
 wait
 
-brew install bash cloc git grep heroku-toolbelt hub imagemagick llvm lynx macvim markdown mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace rsync sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
+brew install bash cloc git grep heroku-toolbelt hub imagemagick llvm macvim mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
 brew install --HEAD brew-cask
 
 ./rbenv.sh install
