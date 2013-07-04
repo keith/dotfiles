@@ -15,7 +15,6 @@ if [[ ! -e "manage.sh" ]]; then
 fi
 
 ./manage.sh install &
-rm -rf $HOME/.rbenv
 wait
 
 if [[ ! -e "$HOME/.bashrc" ]]; then
@@ -36,15 +35,7 @@ brew update &
 wait
 
 brew install bash cloc git grep heroku-toolbelt hub imagemagick llvm lynx macvim markdown mercurial mogenerator node openssh openssl python python3 readline reattach-to-user-namespace rsync sqlite the_silver_searcher tmux tree valgrind vim wget zsh zsh-completions  
-brew install --HEAD brew-cask &
-wait
+brew install --HEAD brew-cask
 
-./manage.sh install &
-wait
-
-git clone git://github.com/sstephenson/rbenv.git $HOME/.rbenv
-git clone https://github.com/sstephenson/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
-git clone git://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
-git clone https://github.com/sstephenson/rbenv-gem-rehash.git $HOME/.rbenv/plugins/rbenv-gem-rehash
-git clone git://github.com/tpope/rbenv-readline.git $HOME/.rbenv/plugins/rbenv-readline
+./rbenv.sh install
 
