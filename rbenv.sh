@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 function install () {
+    if [[ -d $HOME/.rbenv ]];then
+        echo "$HOME/.rbenv already exists"
+        exit
+    fi
+
     git clone https://github.com/sstephenson/rbenv.git $HOME/.rbenv
     git clone https://github.com/sstephenson/rbenv-default-gems.git $HOME/.rbenv/plugins/rbenv-default-gems
     git clone https://github.com/sstephenson/ruby-build.git $HOME/.rbenv/plugins/ruby-build
