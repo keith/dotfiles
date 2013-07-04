@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-FILES=(aliases bashrc default-gems gemrc gitconfig gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc zshrc)
-
-declare -A PATHS
-PATHS=(["default-gems"]=".rbenv")
-
-NO_DOT=(default-gems)
+FILES=(aliases bashrc gemrc gitconfig gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc zshrc)
+NO_DOT=()
 
 function custom_path () {
     for i in "${!PATHS[@]}"
@@ -33,19 +29,11 @@ function no_dot () {
 function new_path () {
     local filename=$1
     
-    local path=""
-    if custom_path $filename; then
-        path="${PATHS[$filename]}/"
-        if [[ ! -d $HOME/$path ]]; then
-            mkdir $HOME/$path
-        fi
-    fi
-    
     if ! no_dot $filename; then
         filename=".$filename"
     fi
     
-    echo "$HOME/$path$filename"
+    echo "$HOME/$filename"
 }
 
 # Links the passed filename to its new location
