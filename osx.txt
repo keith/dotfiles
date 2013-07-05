@@ -24,12 +24,46 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 echo "Always show scrollbars"
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-echo "To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)"
-sudo pmset halfdim 0
+#
+# Power Settings
+#
 
-echo "Disable Sleep image"
+echo "To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)"
+sudo pmset -a halfdim 0
+
+echo "Sleep options"
+sudo pmset -a displaysleep 5
+sudo pmset -a disksleep 0
+sudo pmset -a sleep 0
+
+echo "Wake for network access"
+sudo pmset -a womp 1
+
+echo "Power button shows shutdown dialog <=10.8"
+sudo pmset -a powerbutton 0
+
+echo "Don't restart after power failure"
+sudo pmset -a autorestart 0
+
+# Wake computer when laptop is opened
+sudo pmset -a lidwake 0
+
+# Don't wake computer when power source changes
+sudo pmset -a acwake 0
+
+# Don't dim brightness on any different source
+sudo pmset -a lessbright 0
+
+# Disable sudden motion sensor
+sudo pmset -a sms 0
+
+# Disable Sleep image
 sudo pmset hibernatemode 0
 sudo rm -rf /var/vm/sleepimage
+
+#
+# End Power Settings
+#
 
 echo "Should remove downloaded from the internet warnings"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
