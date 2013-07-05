@@ -175,6 +175,7 @@ defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.appeared -dict-
 defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.irisopened -dict-add action -int 1
 defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add action -int 1
 
+
 #
 # Displays
 #
@@ -184,6 +185,7 @@ defaults write com.apple.airplay showInMenuBarIfPresent -bool true
 
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
 
 #
 # Power Settings
@@ -222,6 +224,7 @@ sudo pmset -a sms 0
 sudo pmset hibernatemode 0
 sudo rm -rf /var/vm/sleepimage
 
+
 #
 # Keyboard
 #
@@ -231,6 +234,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
+
 
 #
 # Sound
@@ -290,6 +294,9 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 # Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
+# Enable highlight hover effect for the grid view of a stack (Dock)
+defaults write com.apple.dock mouse-over-hilite-stack -bool true
+
 # Show the ~/Library folder
 chflags nohidden $HOME/Library
 
@@ -319,6 +326,12 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Disable Webkit start page
 defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
+
+# Set Safari’s home page to `about:blank` for faster loading
+defaults write com.apple.Safari HomePage -string "about:blank"
+
+# Prevent Safari from opening ‘safe’ files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 
 #
