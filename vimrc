@@ -42,11 +42,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
 
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "honza/vim-snippets"
-Bundle "garbas/vim-snipmate"
-
 " Vim script repos
 Bundle 'a.vim'
 Bundle 'IndexedSearch'
