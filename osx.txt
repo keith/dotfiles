@@ -7,6 +7,8 @@ if [[ $# -ne 1 ]];then
     exit
 fi
 
+killall System\ Preferences
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -44,6 +46,19 @@ defaults write NSGlobalDomain AppleFontSmoothing -int 2
 # End General Settings
 #
 
+#
+# Desktop & Screen Saver
+#
+
+# Disable menu bar transparency
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+
+# Disable the screen saver (System Preferences must be closed)
+defaults -currentHost write com.apple.screensaver idleTime -int 0
+
+#
+# End Desktop & Screen Saver
+#
 
 #
 # Power Settings
@@ -102,8 +117,6 @@ sudo mdutil -a -i off
 # Hide Spotlight Icon
 sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
 
-# Disable menu bar transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Show Spotlight Icon
 # sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
