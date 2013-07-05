@@ -21,28 +21,28 @@ sudo scutil --set LocalHostName $name
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $name
 
 
-echo "Always show scrollbars"
+# Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 #
 # Power Settings
 #
 
-echo "To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)"
+# To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)
 sudo pmset -a halfdim 0
 
-echo "Sleep options"
+# Sleep options
 sudo pmset -a displaysleep 5
 sudo pmset -a disksleep 0
 sudo pmset -a sleep 0
 
-echo "Wake for network access"
+# Wake for network access
 sudo pmset -a womp 1
 
-echo "Power button shows shutdown dialog <=10.8"
+# Power button shows shutdown dialog <=10.8
 sudo pmset -a powerbutton 0
 
-echo "Don't restart after power failure"
+# Don't restart after power failure
 sudo pmset -a autorestart 0
 
 # Wake computer when laptop is opened
@@ -65,73 +65,73 @@ sudo rm -rf /var/vm/sleepimage
 # End Power Settings
 #
 
-echo "Should remove downloaded from the internet warnings"
+# Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-echo "Disables shutting down inactive applications"
+# Disables shutting down inactive applications
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-echo "Disabling App Nap"
+# Disabling App Nap
 defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
 
-echo "Disable Spotlight"
+# Disable Spotlight
 sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
 sudo mdutil -a -i off
 
-echo "Hide Spotlight Icon"
+# Hide Spotlight Icon
 sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
 
-echo "Disable menu bar transparency"
+# Disable menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
-# echo "Show Spotlight Icon"
+# Show Spotlight Icon
 # sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
 # killall SystemUIServer
 
 
-echo "Set Help Viewer windows to non-floating mode"
+# Set Help Viewer windows to non-floating mode
 defaults write com.apple.helpviewer DevMode -bool true
 
-echo "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
-echo "Restart automatically if the computer freezes"
+# Restart automatically if the computer freezes
 systemsetup -setrestartfreeze on
 
-echo "Check for software updates daily, not just once per week"
+# Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 ########
 # Dock #
 ########
-echo "Dock tweaks"
+# Dock tweaks
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
-echo "Remove the auto-hiding Dock delay"
+# Remove the auto-hiding Dock delay
 defaults write com.apple.dock autohide-delay -float 0.25
 
-echo "Enable the 2D Dock"
+# Enable the 2D Dock
 defaults write com.apple.dock no-glass -bool true
 
-echo "Make Dock icons of hidden applications translucent"
+# Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
-echo "Automatically hide and show the Dock"
+# Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 
-echo "Show indicator lights for open applications in the Dock"
+# Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 
-echo "Don’t show Dashboard as a Space"
+# Don’t show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-echo "Set the icon size of Dock items to 36 pixels"
+# Set the icon size of Dock items to 36 pixels
 defaults write com.apple.dock tilesize -int 36
 
-echo "Don’t automatically rearrange Spaces based on most recent use"
+# Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
-echo "Put the dock on left side"
+# Put the dock on left side
 defaults write com.apple.dock orientation -string "left"
 
 # Hot corners
@@ -162,149 +162,149 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # Other
 
-echo "Change the Safari search to find strings contained in other words"
+# Change the Safari search to find strings contained in other words
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
-echo "Disable Webkit start page"
+# Disable Webkit start page
 defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
 
-echo "Only take address@example.com when copying email addresses in main"
+# Only take address@example.com when copying email addresses in main
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
-echo "Disable Mail.app animations"
+# Disable Mail.app animations
 defaults delete com.apple.mail DisableReplyAnimations -bool true
 
-echo "Disable new disks for time machine warning"
+# Disable new disks for time machine warning
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-echo "Default to local files instead of iCloud"
+# Default to local files instead of iCloud
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
-echo "Always show scrollbars"
+# Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-echo "Automatically quit printer app once the print jobs complete"
+# Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-echo "Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-echo "Default sidebar icon size to small"
+# Default sidebar icon size to small
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 
-echo "Set a blazingly fast keyboard repeat rate"
+# Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
-echo "Expand save panel by default"
+# Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 ### Screen stuff
-echo "Save screenshots to the desktop"
+# Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
 
-echo "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
-echo "Disable shadow in screenshots"
+# Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-echo "Enable HiDPI display modes (requires restart)"
+# Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
-echo "Ask for password for screensaver"
+# Ask for password for screensaver
 defaults write com.apple.screensaver askForPassword -int 1
 
-echo "Disable Resume system-wide"
+# Disable Resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
-echo "Expand print panel by default"
+# Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
-echo "Disable the “Are you sure you want to open this application?” dialog"
+# Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
-echo "Disable the warning before emptying the Trash"
+# Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-echo "Disable the “reopen windows when logging back in” option"
-echo "This works, although the checkbox will still appear to be checked."
+# Disable the “reopen windows when logging back in” option
+# This works, although the checkbox will still appear to be checked.
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 
-# echo "Enable press and hold system wide"
+# # Enable press and hold system wide
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ################
 # Finder stuff #
 ################
 
-echo "Show all icons on desktop"
+# Show all icons on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
-echo "Finder: disable window animations and Get Info animations"
+# Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 
-echo "Finder: show all filename extensions"
+# Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
-echo "Show Status bar in Finder"
+# Show Status bar in Finder
 defaults write com.apple.finder ShowStatusBar -bool true
 
-echo "Show Path bar in Finder"
+# Show Path bar in Finder
 defaults write com.apple.finder ShowPathbar -bool true
 
-echo "Allow text selection in QuickLook"
+# Allow text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
-echo "Display full POSIX path as Finder window title"
+# Display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
-echo "When performing a search, search the current folder by default"
+# When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
-echo "Disable the warning when changing a file extension"
+# Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-echo "Avoid creating .DS_Store files on network volumes"
+# Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# echo "Show hidden files"
+# # Show hidden files
 # defaults write com.apple.Finder AppleShowAllFiles -bool true
 
-echo "Disk image changes"
+# Disk image changes
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
 
-echo "Automatically open a new Finder window when a volume is mounted"
+# Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
-echo "Enable snap-to-grid for icons on the desktop and in other icon views"
+# Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
-echo "Use column view in all Finder windows by default"
+# Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`, `Nlsv`
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-echo "Disable the warning before emptying the Trash"
+# Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-echo "Shows ethernet connected computers in airdrop"
+# Shows ethernet connected computers in airdrop
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
-echo "Show the ~/Library folder"
+# Show the ~/Library folder
 chflags nohidden ~/Library
 
 
@@ -314,14 +314,14 @@ chflags nohidden ~/Library
 # TextMate 2 #
 ##############
 
-echo "Moving TextMate 2's drawer to the left"
+# Moving TextMate 2's drawer to the left
 defaults write com.macromates.TextMate.preview fileBrowserPlacement left
 
-echo "Don't show single tab in TextMate 2"
+# Don't show single tab in TextMate 2
 defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool NO
 
 
-echo "Killing affected applications"
+# Killing affected applications
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+# Done. Note that some of these changes require a logout/restart to take effect.
 
