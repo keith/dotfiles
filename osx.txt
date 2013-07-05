@@ -156,6 +156,16 @@ defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.irisopened -dic
 defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add action -int 1
 
 #
+# Displays
+#
+
+# Show displays in menu bar
+defaults write com.apple.airplay showInMenuBarIfPresent -bool true
+
+# Enable HiDPI display modes (requires restart)
+sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+
+#
 # Power Settings
 #
 
@@ -193,8 +203,23 @@ sudo pmset hibernatemode 0
 sudo rm -rf /var/vm/sleepimage
 
 #
-# End Power Settings
+# Keyboard
 #
+
+# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+#
+# Sound
+#
+
+# Change the error sound
+defaults write com.apple.systemsound com.apple.sound.beep.sound -string "/System/Library/Sounds/Morse.aiff"
+
+# Disable volume change feedback
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool false
+
+
 
 # Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
@@ -252,8 +277,6 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
@@ -271,8 +294,6 @@ defaults write com.apple.screencapture type -string "png"
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
-# Enable HiDPI display modes (requires restart)
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 
 
