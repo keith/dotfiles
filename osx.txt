@@ -33,6 +33,17 @@ defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
 # Ask to keep changes on close
 defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -int 1
 
+# Disables shutting down inactive applications
+defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+# Disable the “reopen windows when logging back in” option
+# This works, although the checkbox will still appear to be checked.
+defaults write com.apple.loginwindow TALLogoutSavesState -bool false
+defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+
+# Disabling App Nap
+#defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
+
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
@@ -58,6 +69,12 @@ defaults write com.apple.screensaver askForPassword -int 1
 
 # Set delay before password ask (minutes x 60)
 defaults write com.apple.screensaver askForPasswordDelay -int 900
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Set login window text
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "I'm sorry Dave, I'm afraid I can't do that"
 
 
 #
@@ -90,6 +107,7 @@ defaults write com.apple.dock showhidden -bool true
 
 # Dock tweaks
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
+
 
 #
 # Mission Control
@@ -127,6 +145,7 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock wvous-tr-corner -int 12
 defaults write com.apple.dock wvous-tr-modifier -int 0
 
+
 #
 # Spotlight
 #
@@ -141,6 +160,7 @@ sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/
 # Show Spotlight Icon
 #sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
 #killall SystemUIServer
+
 
 #
 # Media
@@ -209,6 +229,9 @@ sudo rm -rf /var/vm/sleepimage
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 0
+
 #
 # Sound
 #
@@ -220,103 +243,9 @@ defaults write com.apple.systemsound com.apple.sound.beep.sound -string "/System
 defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool false
 
 
-
-# Should remove downloaded from the internet warnings
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Disables shutting down inactive applications
-defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
-
-# Disabling App Nap
-defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
-
-
-
-# Set Help Viewer windows to non-floating mode
-defaults write com.apple.helpviewer DevMode -bool true
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# Check for software updates daily, not just once per week
-defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-
-
-
-
-
-
-
-# Other
-
-# Change the Safari search to find strings contained in other words
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-# Disable Webkit start page
-defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
-
-# Only take address@example.com when copying email addresses in main
-defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
-
-# Disable Mail.app animations
-defaults delete com.apple.mail DisableReplyAnimations -bool true
-
-# Disable new disks for time machine warning
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-# Default to local files instead of iCloud
-defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
-
-# Always show scrollbars
-defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
-
-# Automatically quit printer app once the print jobs complete
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
-
-# Expand save panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
-
-### Screen stuff
-# Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "$HOME/Desktop"
-
-# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-defaults write com.apple.screencapture type -string "png"
-
-# Disable shadow in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
-
-
-
-
-# Expand print panel by default
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
-
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Disable the “reopen windows when logging back in” option
-# This works, although the checkbox will still appear to be checked.
-defaults write com.apple.loginwindow TALLogoutSavesState -bool false
-defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
-
-# # Enable press and hold system wide
-# defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-################
-# Finder stuff #
-################
+#
+# Finder
+#
 
 # Show all icons on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
@@ -336,6 +265,10 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Show Path bar in Finder
 defaults write com.apple.finder ShowPathbar -bool true
 
+# Use column view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`, `Nlsv`
+defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
 # Allow text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
@@ -348,17 +281,17 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Default to local files instead of iCloud
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
-# # Show hidden files
-# defaults write com.apple.Finder AppleShowAllFiles -bool true
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
-# Disk image changes
-defaults write com.apple.frameworks.diskimages skip-verify -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
+# Should remove downloaded from the internet warnings
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Show the ~/Library folder
+chflags nohidden $HOME/Library
 
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
@@ -370,31 +303,87 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 
-# Use column view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`, `Nlsv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
-# Disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+#
+# Safari/WebKit
+#
+
+# Change the Safari search to find strings contained in other words
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+
+# Show developer tools
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Disable Webkit start page
+defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
+
+
+#
+# Mail
+#
+
+# Only take address@example.com when copying email addresses in main
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+# Disable Mail.app animations
+defaults delete com.apple.mail DisableReplyAnimations -bool true
+
+
+#
+# Other Applications
+#
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Disable new disks for time machine warning
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Disk image changes
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
+
+
+#
+# Other Interface changes
+#
+
+# Set Help Viewer windows to non-floating mode
+defaults write com.apple.helpviewer DevMode -bool true
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+
+
+#
+# Other subtle changes
+#
+
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string "png"
+
+# Disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
 # Shows ethernet connected computers in airdrop
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
-# Show the ~/Library folder
-chflags nohidden ~/Library
-
-
-
-
-##############
-# TextMate 2 #
-##############
-
-# Moving TextMate 2's drawer to the left
-defaults write com.macromates.TextMate.preview fileBrowserPlacement left
-
-# Don't show single tab in TextMate 2
-defaults write com.macromates.TextMate.preview disableTabBarCollapsing -bool NO
 
 
 # Killing affected applications
