@@ -53,6 +53,12 @@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 # Disable the screen saver (System Preferences must be closed)
 defaults -currentHost write com.apple.screensaver idleTime -int 0
 
+# Ask for password for screensaver
+defaults write com.apple.screensaver askForPassword -int 1
+
+# Set delay before password ask (minutes x 60)
+defaults write com.apple.screensaver askForPasswordDelay -int 900
+
 
 #
 # Dock
@@ -122,6 +128,34 @@ defaults write com.apple.dock wvous-tr-corner -int 12
 defaults write com.apple.dock wvous-tr-modifier -int 0
 
 #
+# Spotlight
+#
+
+# Disable Spotlight
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+sudo mdutil -a -i off
+
+# Hide Spotlight Icon
+sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+
+# Show Spotlight Icon
+#sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
+#killall SystemUIServer
+
+#
+# Media
+#
+
+# Disable all actions when inserting disks
+defaults write com.apple.digihub com.apple.digihub.blank.bd.appeared -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.blank.cd.appeared -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.blank.dvd.appeared -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.cd.music.appeared -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.appeared -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.irisopened -dict-add action -int 1
+defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add action -int 1
+
+#
 # Power Settings
 #
 
@@ -171,17 +205,6 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 # Disabling App Nap
 defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
 
-# Disable Spotlight
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-sudo mdutil -a -i off
-
-# Hide Spotlight Icon
-sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
-
-
-# Show Spotlight Icon
-# sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
-# killall SystemUIServer
 
 
 # Set Help Viewer windows to non-floating mode
@@ -251,8 +274,6 @@ defaults write com.apple.screencapture disable-shadow -bool true
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
-# Ask for password for screensaver
-defaults write com.apple.screensaver askForPassword -int 1
 
 
 # Expand print panel by default
