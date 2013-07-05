@@ -21,8 +21,29 @@ sudo scutil --set LocalHostName $name
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $name
 
 
+#
+# General Settings
+#
+
+# Default sidebar icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Ask to keep changes on close
+defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -int 1
+
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+# Disable Resume system-wide
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -int 0
+
+# Enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+#
+# End General Settings
+#
+
 
 #
 # Power Settings
@@ -193,9 +214,6 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-# Default sidebar icon size to small
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
-
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
@@ -218,8 +236,6 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 # Ask for password for screensaver
 defaults write com.apple.screensaver askForPassword -int 1
 
-# Disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
