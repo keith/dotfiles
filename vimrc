@@ -254,7 +254,7 @@ autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
-autocmd FileType markdown setlocal spell
+" autocmd FileType markdown setlocal spell
 " autocmd FileType text setlocal spell
 
 " a.vim ObjC settings
