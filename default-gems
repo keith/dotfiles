@@ -20,8 +20,8 @@ pry
 rails
 rake
 rb-fsevent
+rdiscount
 rspec
 sass
 sinatra
 thin
-
