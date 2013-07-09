@@ -244,7 +244,7 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 defaults write com.apple.systemsound com.apple.sound.beep.sound -string "/System/Library/Sounds/Morse.aiff"
 
 # Disable volume change feedback
-defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool false
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 0
 
 
 #
