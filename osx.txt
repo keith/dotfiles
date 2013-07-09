@@ -237,6 +237,35 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 
 
 #
+# Mouse/Trackpad
+#
+
+# Trackpad: enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# Trackpad: disable three finger tap
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerTapGesture -int 0
+
+# Trackpad: disable two finger pinch
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.pinchGesture -int 0
+
+# Trackpad: 'smart zoom' two finger double tap
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerDoubleTapGesture -int 0
+
+# Trackpad: disable trackpad rotate
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.rotateGesture -int 0
+
+# Trackpad: disable swipe from right to show notification center
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture -int 0
+
+
+#
 # Sound
 #
 
