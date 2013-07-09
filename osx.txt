@@ -369,6 +369,16 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
 #
+# iChat
+#
+
+# Setup iChat's global hotkey
+defaults write com.apple.iChat GlobalKeyActive -int 1
+defaults write com.apple.iChat GlobalKeyCode -int 36
+defaults write com.apple.iChat GlobalKeyModifiers -int 768
+
+
+#
 # Other Applications
 #
 
@@ -423,6 +433,6 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 
 # Killing affected applications
-for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in Safari Finder Dock Mail Messages SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 # Done. Note that some of these changes require a logout/restart to take effect.
 
