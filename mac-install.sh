@@ -30,7 +30,7 @@ if ! which brew &> /dev/null; then
 fi
 
 brew tap homebrew/dupes
-brew tap phinze/homebrew-cask
+brew tap Keithbsmiley/homebrew-cask
 brew update &
 wait
 
