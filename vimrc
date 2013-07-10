@@ -236,6 +236,12 @@ set showmode         " Display the mode when it changes
 " http://stackoverflow.com/a/12141458/902968
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
+" Make sure ObjC header files are treated properly
+autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
+autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+
+autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
+
 " Set specific filetypes to fold by syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
@@ -249,13 +255,6 @@ autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
 
-" Make sure ObjC header files are treated properly
-autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
-autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
-
-autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
-" autocmd FileType markdown setlocal spell
-" autocmd FileType text setlocal spell
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
