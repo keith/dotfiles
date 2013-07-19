@@ -1,0 +1,11 @@
+"
+" A configuration file for https://github.com/JugglerShu/XVim
+"
+"
+
+" Comments
+map gcc :xccmd commentAndUncommentCurrentLines<cr>
+
+" Emulate CTRL-P
+map <C-p> :xccmd openQuickly<cr>
+
