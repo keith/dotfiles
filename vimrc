@@ -15,6 +15,7 @@ Bundle 'gmarik/vundle'
 
 " Github repos user/repo
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
@@ -22,7 +23,6 @@ Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'msanders/cocoa.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
@@ -284,4 +284,9 @@ if exists('g:ctrlp_user_command')
   unlet g:ctrlp_user_command
 endif
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+
+" Airline
+let g:airline_theme='solarized'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
