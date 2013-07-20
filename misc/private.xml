@@ -22,9 +22,17 @@
   </item>
 
   <item>
+    <name>F19 Escape</name>
+    <appendix>Turns F19 into just Escape</appendix>
+    <appendix>Use PCKeyboardHack to remap Caps Lock to F19 (80)</appendix>
+    <identifier>private.f19_escape</identifier>
+    <autogen>__KeyToKey__ KeyCode::F19, KeyCode::ESCAPE</autogen>
+  </item>
+
+  <item>
     <name>F19 Escape/Control</name>
     <appendix>Tap F19 for Escape; Hold F19 for Control</appendix>
-    <appendix>Recommendation: Use PCKeyboardHack to remap Caps Lock to F19 (80).</appendix>
+    <appendix>Recommendation: Use PCKeyboardHack to remap Caps Lock to F19 (80)</appendix>
     <identifier>private.f19</identifier>
     <autogen>
       --KeyOverlaidModifier--
