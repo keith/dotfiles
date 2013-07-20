@@ -21,6 +21,19 @@
     <autogen>__KeyToKey__ KeyCode::COMMAND_R, KeyCode::OPTION_R</autogen>
   </item>
 
+  <item>
+    <name>F19 Escape/Control</name>
+    <appendix>Tap F19 for Escape; Hold F19 for Control</appendix>
+    <appendix>Recommendation: Use PCKeyboardHack to remap Caps Lock to F19 (80).</appendix>
+    <identifier>private.f19</identifier>
+    <autogen>
+      --KeyOverlaidModifier--
+      KeyCode::F19,
+      KeyCode::CONTROL_L,
+      KeyCode::ESCAPE
+    </autogen>
+  </item>
+
   <!--
     The two groups of function keys are seperated for gamers. Personally I find every
     game I play uses some amount of F1-F4 but nothing more since it would be harder to reach
