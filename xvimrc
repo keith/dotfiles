@@ -9,3 +9,6 @@ map gcc :xccmd commentAndUncommentCurrentLines<cr>
 " Emulate CTRL-P
 map <C-p> :xccmd openQuickly<cr>
 
+" Duplicate line with typical vim shortcut (hacky)
+map :t. yyp
+
