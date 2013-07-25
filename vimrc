@@ -41,6 +41,7 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
+Bundle 'Yggdroot/indentLine'
 
 " Vim script repos
 Bundle 'a.vim'
