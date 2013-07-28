@@ -7,3 +7,6 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install xclip vim zsh tmux
 
+chsh -s $(which zsh) $USER
+chsh -s $(which zsh) $SUDO_USER
+
