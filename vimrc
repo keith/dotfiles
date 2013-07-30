@@ -255,6 +255,7 @@ autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 
@@ -277,6 +278,7 @@ autocmd FileType cpp setlocal commentstring=//\ %s
 autocmd FileType css setlocal commentstring=//\ %s
 autocmd FileType objc setlocal commentstring=//\ %s
 autocmd FileType crontab setlocal commentstring=#\ %s
+autocmd FileType go setlocal commentstring=//\ %s
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
