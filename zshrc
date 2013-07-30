@@ -14,6 +14,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Setup golang.org variables
 export GOROOT=$(brew --prefix go)
+export GOPATH=$HOME/Go
+PATH="$GOPATH/bin:$PATH"
 
 # Set prompt to % for users and # for root
 PS1='%# '
