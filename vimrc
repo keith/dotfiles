@@ -48,7 +48,13 @@ Bundle 'a.vim'
 Bundle 'IndexedSearch'
 
 " Enable pathogen for plugin development
-execute pathogen#infect('src/{}')
+" Using {} at the end of the path is horrible
+"   because it searches all folders need
+"   pathogen support to specify wrapping folder
+execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
+
+" Setup go highlighting
+" set rtp+=$GOROOT/misc/vim
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
