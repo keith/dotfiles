@@ -4,13 +4,16 @@
 #  - $HOME/.rbenv/bin for local rbenv
 #  - /usr/local/share/npm/bin import node modules
 #  - $HOME/.bin for local tools
-PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/.bin:$PATH"
+typeset -U PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/.bin:$PATH"
 
 # Set my default editor to Vim :)
-export EDITOR=`which vim`
+export EDITOR=$(which vim)
 
 # Homebrew cask install apps to global Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+# Setup golang.org variables
+export GOROOT=$(brew --prefix go)
 
 # Set prompt to % for users and # for root
 PS1='%# '
