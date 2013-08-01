@@ -13,6 +13,9 @@ export EDITOR=$(which vim)
 # Homebrew cask install apps to global Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# Path to script files in dotfiles directory
+export SCRIPT_PATH="$(dirname $(readlink $HOME/.zshrc))/scripts"
+
 # Setup golang.org variables
 export GOROOT=$(brew --prefix go)
 export GOPATH=$HOME/Go
