@@ -4,7 +4,8 @@
 #  - $HOME/.rbenv/bin for local rbenv
 #  - /usr/local/share/npm/bin import node modules
 #  - $HOME/.bin for local tools
-typeset -U PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/.bin:$PATH"
+#  - $HOME/.cabal/bin for Haskall packages
+typeset -U PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/.bin:$HOME/.cabal/bin:$PATH"
 
 # Set my default editor to Vim :)
 export EDITOR=$(which vim)
