@@ -66,10 +66,6 @@ alias fs="stat -f %z"
 
 # SSH configuration
 alias linode="ssh ksmiley@66.175.208.254"
-alias rlinode="ssh -R 52698:localhost:52698 ksmiley@66.175.208.254"
-
-# Various
-alias u="uname"
 
 # Winthrop
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
@@ -79,14 +75,14 @@ alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 # alias ip="curl ifconfig.me | pbcopy; echo 'Copied '`pbpaste`' to clipboard'"
 
 # Scripts
-alias xc="$HOME/Dropbox/Code/Scripts/xcworkspace.rb"
-alias cloudfront="$HOME/Dropbox/Code/Scripts/cloudFront.rb"
-alias mksite="$HOME/Dropbox/Code/Scripts/newSite.rb"
-alias methods="$HOME/Dropbox/Code/Scripts/methods.rb"
-alias pf="$HOME/Dropbox/Code/Scripts/processfile.rb"
-alias lc="$HOME/Dropbox/Code/Scripts/license.rb"
-alias rename="$HOME/Dropbox/Code/Scripts/imageRenamer.rb"
-alias append="$HOME/Dropbox/Code/Scripts/fileAppend.rb"
+alias append="$SCRIPT_PATH/fileAppend.rb"
+alias cloudfront="$SCRIPT_PATH/cloudFront.rb"
+alias lc="$SCRIPT_PATH/license.rb"
+alias methods="$SCRIPT_PATH/methods.rb"
+alias mksite="$SCRIPT_PATH/newSite.rb"
+alias pf="$SCRIPT_PATH/processfile.rb"
+alias rename="$SCRIPT_PATH/imageRenamer.rb"
+alias xc="$SCRIPT_PATH/xcworkspace.rb"
 
 # Create a new iTerm window in the same directory
 function spawn { osascript $HOME/Dropbox/Code/Applescript/Spawn/SpawniTerm.applescript $PWD; }
