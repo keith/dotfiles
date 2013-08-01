@@ -78,7 +78,6 @@ set wildmenu                   " Better completion in the vim command line
 set wildmode=longest,list,full " Completion settings
 set expandtab                  " Insert spaces instead of actually tabs
 set smarttab                   " Delete entire shiftwidth of tabs when they're inserted
-set scrolloff=5                " The number of lines above and below
 set history=1000               " The number of history items to remember
 set undolevels=200             " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
@@ -221,8 +220,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-inoremap <C-l> <ESC>^i[<ESC>
-nnoremap <C-l> ^i[<ESC>
+inoremap <C-n> <ESC>^i[<ESC>
+nnoremap <C-n> ^i[<ESC>
 
 " Change the way splits open by default
 set splitbelow
