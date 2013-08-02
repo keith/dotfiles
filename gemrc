@@ -1,4 +1,5 @@
 :verbose: true
 :update_sources: true
 :sources: 
+- https://rubygems.org
 - http://gems.rubyforge.org
