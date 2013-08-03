@@ -189,7 +189,7 @@ sudo pmset -a powerbutton 0
 sudo pmset -a autorestart 0
 
 # Wake computer when laptop is opened
-sudo pmset -a lidwake 0
+sudo pmset -a lidwake 1
 
 # Don't wake computer when power source changes
 sudo pmset -a acwake 0
