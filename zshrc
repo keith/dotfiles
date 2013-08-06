@@ -27,20 +27,19 @@ export PATH="/usr/local/bin:$HOME/.bin:$PATH"
 typeset -U configs
 configs=($DOTFILES/**/*.zsh)
 
-echo $configs
-
-source $DOTFILES/zsh/config.zsh
-
-# Get zsh aliases
-source $HOME/.aliases
-
-
-
-# Link to zsh-completions files
-fpath=(/usr/local/share/zsh-completions $fpath)
-
+for file in ${configs:#*/completions.zsh}
+do
+  source $file
+done
 
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
 compinit -i
+
+for file in ${(M)configs:#*/completions.zsh}
+do
+  source $file
+done
+
+unset configs
 
