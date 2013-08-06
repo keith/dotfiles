@@ -1,0 +1,59 @@
+# Updates dependent on OS
+update() {
+  if which softwareupdate &> /dev/null;then
+    echo "Running Apple software update..."
+    sudo softwareupdate -ia
+  fi
+
+  if which brew &> /dev/null;then
+    echo "Running homebrew updates..."
+    brew update
+    brew upgrade
+  fi
+
+  if which apt-get &> /dev/null;then
+    echo "Running apt-get update..."
+    sudo apt-get update; sudo apt-get upgrade
+  fi
+
+  if which pacman &> /dev/null;then
+    echo "Running pacman update..."
+    sudo pacman -Syu
+  fi
+
+  if which npm &> /dev/null;then
+    echo "Updating npm"
+    npm update npm -g
+    npm update -g
+  fi
+
+  if which gem &> /dev/null;then
+    echo "Running gem update..."
+    $(which gem) update --system
+    $(which gem) update
+  fi
+
+  if [[ -d $HOME/.rbenv ]];then
+    echo "Updating rbenv..."
+    cd $HOME/.rbenv
+    if [[ -d .git ]];then
+      git pull
+    fi
+
+    if [[ $(ls $HOME/.rbenv/plugins | wc -l) -gt 0 ]];then
+      echo "Updating rbenv plugins..."
+      cd $HOME/.rbenv/plugins
+      for D in *; do
+        if [[ -d "${D}" ]];then
+          cd "${D}"
+          if [[ -d .git ]];then
+            echo "Updating ${D}..."
+            git pull
+          fi
+          cd ../
+        fi
+      done
+    fi
+  fi
+}
+

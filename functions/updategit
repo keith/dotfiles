@@ -1,0 +1,37 @@
+# Pull Git repos
+updategit() {
+  dir=$HOME/Giter
+
+  if [[ ! -d $dir ]];then
+      echo "$dir doesn't exist"
+      return
+  fi
+
+  cd $dir
+
+  if ! which git &>/dev/null;then
+      echo "Git is not installed"
+      return
+  fi
+
+  for file in *
+  do
+      cd $file
+      if [ ! -d .git ];then
+          echo "$file is not a git repo"
+          cd ..
+          continue
+      fi
+
+      if test -n "$(git status --porcelain)";then
+          echo "$file has uncommited changes"
+      else
+          echo "Updating $file..."
+          git pull
+          git submodule update --init --recursive
+      fi
+
+      cd ..
+  done  
+}
+
