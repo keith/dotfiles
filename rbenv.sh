@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rbenvpath=$HOME/.rbenv
+rbenvpath="$HOME/.rbenv"
 
 function install () {
     if [[ -d $rbenvpath ]];then
