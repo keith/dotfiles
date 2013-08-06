@@ -1,6 +1,6 @@
 # Pull Git repos
 updategit() {
-  dir=$HOME/Giter
+  dir=$HOME/Git
 
   if [[ ! -d $dir ]];then
       echo "$dir doesn't exist"
