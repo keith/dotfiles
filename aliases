@@ -39,9 +39,7 @@ vundlereinstall() {
 # Ruby/Rails
 alias ruby="ruby -w"
 alias bi="bundle install"
-alias rg="rake generate"
 alias bdgem="gem build *.gemspec; gem install *.gem --no-ri --no-rdoc; rbenv rehash"
-alias rt="rails server"
 alias rr="rbenv rehash"
 alias macirb="macirb --simple-prompt"
 alias rake="noglob rake"
@@ -52,10 +50,8 @@ alias coveroff="unset COVERALLS_RUN_LOCALLY"
 
 # CocoaPods
 alias pi="pod install"
-alias psl="pod spec lint"
 alias psla="pod spec lint *.podspec --verbose"
 alias pclean="rm -rf $HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
-alias ppod="COCOA_PODS_ENV=development BUNDLE_GEMFILE=$HOME/Git/CocoaPods/Gemfile bundle exec $HOME/Git/CocoaPods/bin/pod"
 
 # Archive Stuff
 alias mktar="tar -pvczf"
@@ -71,8 +67,6 @@ alias linode="ssh ksmiley@66.175.208.254"
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
 alias wa="ssh acc.smileyk2@reno.winthrop.edu"
 
-
-# alias ip="curl ifconfig.me | pbcopy; echo 'Copied '`pbpaste`' to clipboard'"
 
 # Scripts
 alias append="$SCRIPT_PATH/fileAppend.rb"
@@ -197,30 +191,13 @@ updategit() {
 }
 
 # IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com | pbcopy"
-alias localip="ipconfig getifaddr en1"
-
-# Enhanced WHOIS lookups
-alias whois="whois -h whois-servers.net"
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache"
+alias whatip="dig +short myip.opendns.com @resolver1.opendns.com | pbcopy"
 
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
 # Recursively delete `.DS_Store` files
-# alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
 alias cleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-# File size
-# if stat -c '' . > /dev/null 2>&1; then
-# 	# GNU `stat`
-# 	alias fs="stat -c \"%s bytes\""
-# else
-# 	# OS X `stat`
-# 	alias fs="stat -f \"%z bytes\""
-# fi
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
@@ -234,3 +211,4 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Fin
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
