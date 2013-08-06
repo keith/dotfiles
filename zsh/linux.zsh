@@ -3,5 +3,7 @@ if [[ "$OSX" == true ]];then
   return
 fi
 
-alias o="nautilus"
+if which nautilus &> /dev/null;then
+  alias o="nautilus"
+fi
 
