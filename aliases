@@ -1,3 +1,6 @@
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
 # Easier navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -16,17 +19,10 @@ alias gba="git branch -a"
 alias grv="git remote -v"
 alias gsub="git submodule update --init --recursive"
 
-alias m="mate"
-alias mm="mate ."
 alias s="subl"
 alias ss="subl ."
-alias o="open"
-alias oo="open ."
-alias n="nautilus"
 alias v="vim"
 alias vv="vim ."
-alias vm="mvim"
-alias vmm="mvim ."
 
 # Vim
 alias vundle="vim +BundleInstall +qall"
@@ -36,19 +32,7 @@ vundlereinstall() {
   vundle;
 }
 
-# Ruby/Rails
-alias ruby="ruby -w"
-alias bi="bundle install"
-alias bdgem="gem build *.gemspec; gem install *.gem --no-ri --no-rdoc; rbenv rehash"
-alias rr="rbenv rehash"
-alias rake="noglob rake"
-alias binstubs="gem regenerate_binstubs"
-
-alias coveron="export COVERALLS_RUN_LOCALLY=true"
-alias coveroff="unset COVERALLS_RUN_LOCALLY"
-
-
-# Archive Stuff
+# Archives
 alias mktar="tar -pvczf"
 alias untar="tar -zxvf"
 
@@ -61,17 +45,6 @@ alias linode="ssh ksmiley@66.175.208.254"
 # Winthrop
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
 alias wa="ssh acc.smileyk2@reno.winthrop.edu"
-
-
-# Scripts
-alias append="$SCRIPT_PATH/fileAppend.rb"
-alias cloudfront="$SCRIPT_PATH/cloudFront.rb"
-alias lc="$SCRIPT_PATH/license.rb"
-alias methods="$SCRIPT_PATH/methods.rb"
-alias mksite="$SCRIPT_PATH/newSite.rb"
-alias pf="$SCRIPT_PATH/processfile.rb"
-alias rename="$SCRIPT_PATH/imageRenamer.rb"
-alias xc="$SCRIPT_PATH/xcworkspace.rb"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -90,29 +63,6 @@ alias la="ls -la ${colorflag}"
 alias ls="command ls ${colorflag}"
 export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
-
 # IP addresses
-alias whatip="dig +short myip.opendns.com @resolver1.opendns.com | pbcopy"
-
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv $HOME/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
-alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv $HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
-
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
-alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Finder"
-
-# Hide/show all desktop icons (useful when presenting)
-alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 
