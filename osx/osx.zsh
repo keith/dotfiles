@@ -6,6 +6,9 @@ fi
 # Homebrew cask install apps to global Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# Link to zsh-completions files from homebrew
+fpath=($(brew --prefix)/share/zsh-completions $(brew --prefix)/share/zsh/site-functions $fpath)
+
 # Open with finder
 alias o="open"
 alias oo="open ."

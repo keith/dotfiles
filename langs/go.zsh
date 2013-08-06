@@ -6,6 +6,9 @@ else
   export GOROOT
 fi
 
+# Setup path to Go projects
 export GOPATH=$HOME/Go
+
+# Add Go's bin to PATH
 PATH="$GOPATH/bin:$PATH"
 
