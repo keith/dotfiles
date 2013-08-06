@@ -1,59 +1,44 @@
+# Only allow loading once
+#   to reload run 'unset ZSH_LOADED'
+if [[ "$ZSH_LOADED" == true ]];then
+  return
+fi
+export ZSH_LOADED=true
+
+# Path to dotfiles repo
+export DOTFILES="$(dirname $(readlink $HOME/.zshrc))"
+
+# Loads a local settings file for sekrets
+if [[ -e $HOME/.localrc ]]
+then
+  source $HOME/.localrc
+fi
+
+if [[ $OSTYPE == darwin* ]];then
+  export OSX=true
+fi
+
 # Set the path to include:
 #  - /usr/local/bin for Homebrew and others
-#  - /usr/local/sbin for Homebrew
-#  - $HOME/.rbenv/bin for local rbenv
-#  - /usr/local/share/npm/bin import node modules
 #  - $HOME/.bin for local tools
-#  - $HOME/.cabal/bin for Haskall packages
-typeset -U PATH="/usr/local/bin:/usr/local/sbin:$HOME/.rbenv/bin:/usr/local/share/npm/bin:$HOME/.bin:$HOME/.cabal/bin:$PATH"
+export PATH="/usr/local/bin:$HOME/.bin:$PATH"
 
-# Set my default editor to Vim :)
-export EDITOR=$(which vim)
+# Find all zsh files
+typeset -U configs
+configs=($DOTFILES/**/*.zsh)
 
-# Homebrew cask install apps to global Applications
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+echo $configs
 
-# Path to script files in dotfiles directory
-export SCRIPT_PATH="$(dirname $(readlink $HOME/.zshrc))/scripts"
-
-# Setup golang.org variables
-export GOPATH=$HOME/Go
-PATH="$GOPATH/bin:$PATH"
-
-# Set prompt to % for users and # for root
-PS1='%# '
+source $DOTFILES/zsh/config.zsh
 
 # Get zsh aliases
 source $HOME/.aliases
 
-# Load rbenv on launch
-eval "$(rbenv init -)"
 
-# Append history to the zsh_history file
-setopt APPEND_HISTORY
-
-# Ignore duplicates in zsh history
-setopt HIST_IGNORE_ALL_DUPS
-
-# Ignore commands for history that start with a space
-setopt HIST_IGNORE_SPACE
-
-# Save x items to the given history file
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE=$HOME/.zsh_history
 
 # Link to zsh-completions files
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# Use vim shortcuts within the terminal (defaults to insert mode)
-bindkey -v
-
-# Restore 'normal' search in VI mode
-bindkey '^R' history-incremental-search-backward
-
-# Allow alt/option . to insert the argument from the previous command
-bindkey '\e.' insert-last-word
 
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
