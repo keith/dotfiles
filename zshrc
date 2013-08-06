@@ -52,6 +52,9 @@ bindkey -v
 # Restore 'normal' search in VI mode
 bindkey '^R' history-incremental-search-backward
 
+# Allow alt/option . to insert the argument from the previous command
+bindkey '\e.' insert-last-word
+
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
 compinit -i
