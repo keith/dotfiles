@@ -2,7 +2,7 @@
 completions=($GOROOT/share/zsh/site-functions/go $GOROOT/misc/zsh/go)
 for completion in ${completions}
 do
-  if [[ -d $completion ]];then
+  if [[ -e $completion ]];then
     source $completion
   fi
 done
