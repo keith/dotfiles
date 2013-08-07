@@ -13,7 +13,6 @@ export GOPATH=$HOME/Go
 PATH="$GOPATH/bin:$PATH"
 
 if ! which go &> /dev/null;then
-  echo "Doesn't have it"
   PATH="$GOROOT/bin:$PATH"
 fi
 
