@@ -21,10 +21,7 @@ fi
 # Set the path to include:
 #  - /usr/local/bin for Homebrew and others
 #  - $HOME/.bin for local tools
-export PATH="$HOME/.bin:$PATH"
-if [[ ":$PATH:" != *":/usr/local/bin:"* ]];then
-  PATH="/usr/local/bin:$PATH"
-fi
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 
 # Find all zsh files
 typeset -U configs
