@@ -1,5 +1,5 @@
 # Completions for language tools
-completions=($GOROOT/share/zsh/site-functions/go)
+completions=($GOROOT/share/zsh/site-functions/go $GOROOT/misc/zsh/go)
 for completion in ${completions}
 do
   if [[ -d $completion ]];then
