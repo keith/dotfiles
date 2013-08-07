@@ -5,6 +5,7 @@ vim/bundle/*
 !vim/bundle/vundle
 !vim/src/.gitkeep
 \[Vundle\]\ Installer
+bin/yuicompressor*
 
 ####### Linux #######
 !.gitignore
