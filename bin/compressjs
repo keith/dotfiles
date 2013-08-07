@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+die() {
+    echo "Usage $(basename $0) [infile] [outfile]"
+    exit
+}
+
+if [[ $# -lt 1 ]];then
+    die
+fi
+
+infile=$1
+outfile=""
+
+if [[ $# -eq 1 ]];then
+    filename=$(basename "$1")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    outfile="$filename.min.$extension"
+elif [[ $# -eq 2 ]];then
+    outfile=$2
+else
+    die
+fi
+
+java -jar $(dirname $0)/yuicompressor-2.4.8.jar $infile -o $outfile
+
