@@ -28,7 +28,14 @@
 	log = true
 [color]
 	ui = true
+  diff = auto
+  status = auto
+  branch = auto
 [credential]
 	helper = osxkeychain
 [github]
 	user = keithbsmiley
+[help]
+  autocorrect = 1
+[hub]
+  protocol = https
