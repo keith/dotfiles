@@ -5,15 +5,23 @@ die() {
     exit
 }
 
+# Make sure there is at least an infile
 if [[ $# -lt 1 ]];then
     die
+fi
+
+# Make sure java binary is in the same directory
+compressor=yuicompressor-2.4.8.jar
+if [[ ! -e $(dirname $0)/$compressor ]];then
+    echo "You must have $compressor in $(dirname $0)"
+    exit
 fi
 
 infile=$1
 outfile=""
 
 if [[ $# -eq 1 ]];then
-    filename=$(basename "$1")
+    filename=$(basename $infile)
     extension="${filename##*.}"
     filename="${filename%.*}"
     outfile="$filename.min.$extension"
@@ -23,5 +31,10 @@ else
     die
 fi
 
-java -jar $(dirname $0)/yuicompressor-2.4.8.jar $infile -o $outfile
+if [[ ! -e $infile ]];then
+    echo "'$infile' doesn't exist"
+    exit
+fi
+
+java -jar $(dirname $0)/$compressor $infile -o $outfile
 
