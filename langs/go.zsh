@@ -3,7 +3,7 @@ if [[ "$OSX" == true ]];then
   export GOROOT=$(brew --prefix go)
 else
   echo "Need to define \$GOROOT"
-  export GOROOT
+  export GOROOT="/usr/local/src/go"
 fi
 
 # Setup path to Go projects
