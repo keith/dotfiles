@@ -1,9 +1,9 @@
 # Completions for language tools
-paths=($GOROOT/share/zsh/site-functions/go)
-for path in ${paths}
+completions=($GOROOT/share/zsh/site-functions/go)
+for completion in ${completions}
 do
-  if [[ -d $path ]];then
-    source $path
+  if [[ -d $completion ]];then
+    source $completion
   fi
 done
 
