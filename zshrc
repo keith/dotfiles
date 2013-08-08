@@ -1,6 +1,7 @@
 # Only allow loading once
 #   to reload run 'unset ZSH_LOADED'
 if [[ "$ZSH_LOADED" == true ]];then
+  echo "Settings already loaded"
   return
 fi
 export ZSH_LOADED=true
