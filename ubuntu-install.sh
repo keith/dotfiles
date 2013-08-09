@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:gnome-terminator
 
 sudo apt-get update
 sudo -y apt-get upgrade
-sudo -y apt-get install terminator tmux vim zsh 
+sudo -y apt-get install clang gnustep gnustep-devel terminator tmux vim zsh 
 
 chsh -s $(which zsh) $USER
 if [[ ! -z "$SUDO_USER" ]];then
