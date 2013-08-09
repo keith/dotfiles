@@ -113,10 +113,10 @@ defaults write com.apple.dock mouse-over-hilte-stack -bool true
 # Mission Control
 #
 
-# Don’t show Dashboard as a Space
+# Don't show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
-# Don’t automatically rearrange Spaces based on most recent use
+# Don't automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
 # Run hot corners script
@@ -131,11 +131,11 @@ fi
 #
 
 # Disable Spotlight
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-sudo mdutil -a -i off
+# sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+# sudo mdutil -a -i off
 
 # Hide Spotlight Icon
-sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
+# sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
 
 # Show Spotlight Icon
 #sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
@@ -362,10 +362,10 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Disable Webkit start page
 defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
 
-# Set Safari’s home page to 'about:blank' for faster loading
+# Set Safari's home page to 'about:blank' for faster loading
 defaults write com.apple.Safari HomePage -string "about:blank"
 
-# Prevent Safari from opening ‘safe’ files automatically after downloading
+# Prevent Safari from opening 'safe' files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 
