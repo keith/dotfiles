@@ -1,0 +1,31 @@
+[user]
+  name = Keith Smiley
+  email = keithbsmiley@gmail.com
+[core]
+  quotepath = false
+  excludesfile = ~/.gitignore_global
+[push]
+  default = matching
+[diff]
+  tool = vimdiff
+[difftool]
+  prompt = false
+[mergetool "fugitive"]
+  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[mergetool]
+  prompt = false
+[merge]
+  log = true
+[color]
+  ui = true
+  diff = auto
+  status = auto
+  branch = auto
+[credential]
+  helper = 'cache --timeout=3600'
+[github]
+  user = keithbsmiley
+[help]
+  autocorrect = 1
+[hub]
+  protocol = https
