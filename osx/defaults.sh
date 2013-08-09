@@ -3,7 +3,7 @@
 # ~/.osx — http://mths.be/osx
 
 if [[ $# -ne 1 ]];then
-    echo "Usage: ./osx.txt COMPNAME"
+    echo "Usage: ./$(basename $0) COMPNAME"
     exit
 fi
 
@@ -16,7 +16,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Set computer name
-name=$1
+local name=$1
 sudo scutil --set ComputerName $name
 sudo scutil --set HostName $name
 sudo scutil --set LocalHostName $name
