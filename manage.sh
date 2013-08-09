@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(bashrc bin gemrc gitconfig gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc xvimrc zshrc)
+FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {
@@ -80,6 +80,25 @@ function remove_links () {
     done
 }
 
+function is_osx () {
+    if [[ $OSTYPE == darwin* ]];then
+        return 0
+    else
+        return 1
+    fi
+}
+
+function install_gitconfig () {
+    local filename="gitconfig"
+    local prefix="linux"
+    if is_osx;then
+        prefix="osx"
+    fi
+
+    echo "Linking $PWD/$prefix/$filename to $HOME/.$filename"
+    ln -s $PWD/$prefix/$filename $HOME/.$filename
+}
+
 # Fuction to print the usage and exit when there's bad input
 function die () {
     echo "Usage ./manage.sh {install|remove}"
@@ -96,6 +115,7 @@ if [[ $1 == "install" ]]; then
     git submodule update --init --recursive &
     wait
     install_links
+    install_gitconfig
 elif [[ $1 == "remove" ]]; then
     remove_links
 else
