@@ -30,7 +30,7 @@
   status = auto
   branch = auto
 [credential]
-  helper = $GIT_HELPER
+  helper = osxkeychain
 [github]
   user = keithbsmiley
 [help]
