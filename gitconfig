@@ -1,40 +1,38 @@
 [user]
-	name = Keith Smiley
-	email = keithbsmiley@gmail.com
+  name = Keith Smiley
+  email = keithbsmiley@gmail.com
 [core]
-	quotepath = false
-	excludesfile = ~/.gitignore_global
-[gui]
-	recentrepo = /Users/ksmiley/Dropbox/dotfiles
+  quotepath = false
+  excludesfile = ~/.gitignore_global
 [push]
-	default = matching
+  default = matching
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [diff]
-	tool = Kaleidoscope
+  tool = Kaleidoscope
 [difftool]
-	prompt = false
+  prompt = false
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool "mfugitive"]
-	cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = mvim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool]
-	prompt = false
+  prompt = false
 [merge]
-	tool = Kaleidoscope
-	log = true
+  tool = Kaleidoscope
+  log = true
 [color]
-	ui = true
+  ui = true
   diff = auto
   status = auto
   branch = auto
 [credential]
-	helper = osxkeychain
+  helper = $GIT_HELPER
 [github]
-	user = keithbsmiley
+  user = keithbsmiley
 [help]
   autocorrect = 1
 [hub]
