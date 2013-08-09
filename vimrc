@@ -19,7 +19,6 @@ Bundle 'bling/vim-airline'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
-Bundle 'gregsexton/MatchTag'
 Bundle 'itspriddle/vim-marked'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
@@ -105,6 +104,7 @@ colorscheme solarized " Use the awesome solarized color scheme
 
 set ttyfast           " Set that we have a fast terminal
 set lazyredraw        " Don't redraw vim in all situations
+set synmaxcol=123     " The max number of columns to try and highlight
 set noerrorbells      " Don't make noise
 set visualbell        " Don't show bells
 set autoread          " watch for file changes and auto update
