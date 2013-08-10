@@ -7,7 +7,7 @@ sudo add-apt-repository ppa:gnome-terminator
 
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install curl libcurl3 libcurl3-dev php5-curl gconf-editor zlib1g-dev openssl libopenssl-ruby1.9.1 libssl-dev build-essential libruby1.9.1 libreadline-dev git-core git clang gnustep gnustep-devel terminator tmux vim zsh 
+sudo apt-get -y install curl subversion libcurl3 libcurl3-dev php5-curl gconf-editor zlib1g-dev openssl libopenssl-ruby1.9.1 libssl-dev build-essential libruby1.9.1 libreadline-dev git-core git clang gnustep gnustep-devel terminator tmux vim zsh 
 
 chsh -s $(which zsh) $USER
 if [[ ! -z "$SUDO_USER" ]];then
