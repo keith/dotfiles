@@ -6,8 +6,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 sudo add-apt-repository ppa:gnome-terminator
 
 sudo apt-get update
-sudo -y apt-get upgrade
-sudo -y apt-get install clang gnustep gnustep-devel terminator tmux vim zsh 
+sudo apt-get -y upgrade
+sudo apt-get -y install gconf-editor zlib1g-dev openssl libopenssl-ruby1.9.1 libssl-dev build-essential libruby1.9.1 libreadline-dev git-core git clang gnustep gnustep-devel terminator tmux vim zsh 
 
 chsh -s $(which zsh) $USER
 if [[ ! -z "$SUDO_USER" ]];then
