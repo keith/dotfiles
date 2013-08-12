@@ -252,6 +252,15 @@ autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
+" Some file types should wrap their text
+function! s:setupWrapping()
+  set wrap
+  set linebreak
+  set textwidth=72
+  set nolist
+endfunction
+
+autocmd FileType markdown call s:setupWrapping()
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
