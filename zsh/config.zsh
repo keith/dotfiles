@@ -4,9 +4,6 @@ export PS1='%# '
 fpath=($DOTFILES/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
 
-# Attempt to correct spelling
-setopt CORRECT
-
 # Do completions from anywhere in the word
 setopt COMPLETE_IN_WORD
 
