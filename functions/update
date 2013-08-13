@@ -9,6 +9,7 @@ update() {
     echo "Running homebrew updates..."
     brew update
     brew upgrade
+    brew cleanup
   fi
 
   if which apt-get &> /dev/null;then
