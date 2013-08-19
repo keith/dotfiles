@@ -19,13 +19,14 @@ Bundle 'bling/vim-airline'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
-Bundle 'itspriddle/vim-marked'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
 Bundle 'msanders/cocoa.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rking/ag.vim'
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-cucumber'
@@ -145,8 +146,8 @@ vnoremap > >gv
 " GUI style indent movement
 nmap <D-[> <<
 nmap <D-]> >>
-vmap <D-[> <gv
-vmap <D-]> >gv
+vmap <D-[> <
+vmap <D-]> >
 
 " Move as expected on wrapped lines
 nnoremap j gj
@@ -161,9 +162,8 @@ nnoremap <Up> gk
 vnoremap <Up> gk
 inoremap <Up> <C-o>gk
 
-
 " Force root permission saves
-cmap w<bang><bang> !sudo tee % >/dev/null
+cmap w!! !sudo tee % >/dev/null
 
 " Open vimrc with leader->v
 nmap <leader>v  :tabedit $MYVIMRC<cr>
@@ -189,30 +189,10 @@ nmap <leader>tm :tabmove
 " Using command shift brackets or command numbers to navigate tabs
 map <D-S-]> gt
 map <D-S-[> gT
-map <D-1> 1gt
-map <D-2> 2gt
-map <D-3> 3gt
-map <D-4> 4gt
-map <D-5> 5gt
-map <D-6> 6gt
-map <D-7> 7gt
-map <D-8> 8gt
-map <D-9> 9gt
-map <D-0> :tablast<CR>
  
 " Using control shift brackets or control numbers to navigate tabs
 map <C-S-]> gt
 map <C-S-[> gT
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
@@ -261,6 +241,7 @@ function! s:setupWrapping()
 endfunction
 
 autocmd FileType markdown call s:setupWrapping()
+autocmd FileType markdown command! -buffer -bang MarkedOpen :!mark %
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
@@ -268,9 +249,11 @@ autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 
 " Settings for podspecs
-autocmd BufReadPost,BufWrite *.podspec setlocal filetype=ruby
-autocmd BufReadPost,BufWrite Podfile setlocal filetype=ruby
+autocmd BufNewFile,BufReadPost *.podspec setlocal filetype=ruby
+autocmd BufNewFile,BufReadPost Podfile setlocal filetype=ruby
 
+" Format Go files on write
+autocmd FileType go autocmd BufWritePre <buffer>Fmt
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
@@ -306,4 +289,34 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-
 let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" TagBar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
