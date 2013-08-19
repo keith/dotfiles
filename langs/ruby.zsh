@@ -1,8 +1,8 @@
 # The path of rbenv
-export RBENVPATH="$HOME/.rbenv"
+local RBENVPATH="$HOME/.rbenv"
 
 if [[ ! -d $RBENVPATH ]];then
-  echo "rbenv is not installed. Run '$DOTFILES/rbenv.sh install'"
+  echo "rbenv is not installed. Run '$(dirname $0)/rbenv.sh install'"
   return
 fi
 
