@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if which npm &> /dev/null;then
+if ! which npm &> /dev/null;then
     echo "You must install node before installing its packages"
     exit
 fi
