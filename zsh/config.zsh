@@ -17,9 +17,6 @@ HISTFILE=$HOME/.zsh_history
 # Append history to the zsh_history file
 setopt APPEND_HISTORY
 
-# Adds history incrementally and share it across sessions
-setopt INC_APPEND_HISTORY SHARE_HISTORY 
-
 # Ignore duplicates in zsh history
 setopt HIST_IGNORE_ALL_DUPS
 
