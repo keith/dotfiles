@@ -234,21 +234,14 @@ autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
-" Some file types should wrap their text
-function! s:setupWrapping()
-  set wrap
-  set linebreak
-  set textwidth=72
-  set nolist
-endfunction
-
-autocmd FileType markdown call s:setupWrapping()
+autocmd FileType markdown setlocal textwidth=72
 autocmd FileType markdown command! -buffer -bang MarkedOpen :!mark %
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
 
 " Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
