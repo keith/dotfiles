@@ -16,6 +16,7 @@ Bundle 'gmarik/vundle'
 " Github repos user/repo
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
+Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
@@ -81,6 +82,7 @@ set smarttab                   " Delete entire shiftwidth of tabs when they're i
 set history=1000               " The number of history items to remember
 set undolevels=200             " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
+set nostartofline              " Keep cursor in the same place after saves
 
 " Fold settings
 set nofoldenable               " Have all folds open by default
@@ -244,16 +246,13 @@ autocmd FileType markdown call s:setupWrapping()
 autocmd FileType markdown command! -buffer -bang MarkedOpen :!mark %
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType go setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 
 " Settings for podspecs
-autocmd BufNewFile,BufReadPost *.podspec setlocal filetype=ruby
-autocmd BufNewFile,BufReadPost Podfile setlocal filetype=ruby
-
-" Format Go files on write
-autocmd FileType go autocmd BufWritePre <buffer>Fmt
+autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
+autocmd BufNewFile,BufReadPost,BufWrite Podfile setlocal filetype=ruby
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m" 
