@@ -74,6 +74,7 @@ set shortmess=a                " Avoid pressing enter after saves
 set cursorline                 " highlight current line
 set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
+set softtabstop=2              " Number of spaces for some tab operations
 set shiftround                 " Round << and >> to multiples of shiftwidth
 set wildmenu                   " Better completion in the vim command line
 set wildmode=longest,list,full " Completion settings
