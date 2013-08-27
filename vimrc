@@ -100,9 +100,9 @@ let &titleold=getcwd() " On quit reset title
 
 let hour = strftime("%H") " Set the background light from 7am to 7pm
 if 7 <= hour && hour < 19
-	set background=light
+  set background=light
 else " Set to dark from 7pm to 7am
-	set background=dark
+  set background=dark
 endif
 colorscheme solarized " Use the awesome solarized color scheme
 
@@ -143,7 +143,7 @@ map <PageUp> <C-b>
 map <PageDown> <C-f>
 
 " Reselect visual blocks after movement
-vnoremap < <gv 
+vnoremap < <gv
 vnoremap > >gv
 
 " GUI style indent movement
@@ -173,7 +173,7 @@ nmap <leader>v  :tabedit $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
-	set clipboard=unnamed " copy to the system clipboard
+  set clipboard=unnamed " copy to the system clipboard
 endif
 
 " Tab mappings
@@ -192,7 +192,7 @@ nmap <leader>tm :tabmove
 " Using command shift brackets or command numbers to navigate tabs
 map <D-S-]> gt
 map <D-S-[> gT
- 
+
 " Using control shift brackets or control numbers to navigate tabs
 map <C-S-]> gt
 map <C-S-[> gT
@@ -249,7 +249,7 @@ autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufNewFile,BufReadPost,BufWrite Podfile setlocal filetype=ruby
 
 " a.vim ObjC settings
-autocmd FileType objc let g:alternateExtensions_h = "m" 
+autocmd FileType objc let g:alternateExtensions_h = "m"
 autocmd FileType objc let g:alternateExtensions_m = "h"
 
 " ObjC curly brace error fix
