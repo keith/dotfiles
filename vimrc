@@ -236,7 +236,7 @@ autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
 autocmd FileType markdown setlocal textwidth=72
-autocmd FileType markdown command! -buffer -bang MarkedOpen :!mark %
+autocmd FileType markdown command! -buffer -bang Marked :!mark %
 autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
