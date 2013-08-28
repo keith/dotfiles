@@ -12,3 +12,14 @@ map <C-p> :xccmd openQuickly<cr>
 " Duplicate line with typical vim shortcut (hacky)
 map :t.<cr> yyp
 
+" Case-insensitive searching.
+set ignorecase
+" But case-sensitive if expression contains a capital letter.
+set smartcase
+
+" Use the system pasteboard
+set pasteboard
+
+" Map <space>b to toggle a breakpoint at the current line
+nmap <space>b :xccmd toggleBreakpointAtCurrentLine<CR>
+
