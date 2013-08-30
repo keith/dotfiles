@@ -1,0 +1,4 @@
+httpinfo(){
+  curl http://httpcode.info/$1 | less
+}
+
