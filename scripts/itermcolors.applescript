@@ -65,4 +65,5 @@ tell application "iTerm"
 	end tell
 end tell
 
-"Done"
+return
+
