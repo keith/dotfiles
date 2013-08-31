@@ -6,9 +6,22 @@ else
 end if
 
 tell application "iTerm"
+	activate
 	set t to current terminal
+	try
+		get t
+	on error
+		set t to (make new terminal)
+	end try
+	
 	tell t
 		set s to current session
+		try
+			get s
+		on error
+			set s to launch session "Default Session"
+		end try
+		
 		tell s
 			if tint is "light" then
 				set ansiWhiteColor to {6.003730859375E+4, 5.83269609375E+4, 5.2284546875E+4}
