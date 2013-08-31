@@ -1,7 +1,5 @@
-set dateFormat to "%H"
-set hour to do shell script "date +" & (quoted form of dateFormat)
-
-if hour > 7 and hour < 19 then
+set h to hours of (current date)
+if (h > 7) and (h < 19) then
 	set tint to "light"
 else
 	set tint to "dark"
@@ -12,7 +10,7 @@ tell application "iTerm"
 	tell t
 		set s to current session
 		tell s
-			if tint is equal to "light" then
+			if tint is "light" then
 				set ansiWhiteColor to {6.003730859375E+4, 5.83269609375E+4, 5.2284546875E+4}
 				set selected text color to {1.813483984375E+4, 2.337368359375E+4, 2.50989140625E+4}
 				set cursor_text color to {6.003730859375E+4, 5.83269609375E+4, 5.2284546875E+4}
@@ -66,4 +64,3 @@ tell application "iTerm"
 end tell
 
 return
-
