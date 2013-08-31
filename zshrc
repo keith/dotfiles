@@ -48,4 +48,5 @@ do
 done
 
 unset configs
+colorize
 
