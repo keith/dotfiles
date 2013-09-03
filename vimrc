@@ -16,6 +16,7 @@ Bundle 'gmarik/vundle'
 " Github repos user/repo
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
+Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
