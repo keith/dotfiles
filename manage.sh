@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf vim vimrc xvimrc zshrc)
+FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc irbrc rspec slate tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {
@@ -95,8 +95,10 @@ function install_gitconfig () {
         prefix="osx"
     fi
 
-    echo "Linking $PWD/$prefix/$filename to $HOME/.$filename"
-    ln -s $PWD/$prefix/$filename $HOME/.$filename
+    if [ ! -e $HOME/.$filename ];then
+        echo "Linking $PWD/$prefix/$filename to $HOME/.$filename"
+        ln -s $PWD/$prefix/$filename $HOME/.$filename
+    fi
 }
 
 # Fuction to print the usage and exit when there's bad input
