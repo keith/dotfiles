@@ -1,3 +1,5 @@
 colorize(){
-  osascript $DOTFILES/scripts/itermcolors.applescript
+  if which osascript &> /dev/null; then
+    osascript $DOTFILES/scripts/itermcolors.applescript
+  fi
 }
