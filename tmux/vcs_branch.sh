@@ -3,7 +3,6 @@
 # Source lib to get the function get_tmux_pwd
 source "${TMUX_POWERLINE_DIR_LIB}/tmux_adapter.sh"
 
-branch_symbol=""
 git_colour="5"
 svn_colour="220"
 hg_colour="45"
@@ -39,7 +38,7 @@ __parse_git_branch() {
 
 	# Quit if this is not a Git repo.
 	branch=$(git symbolic-ref HEAD 2> /dev/null)
-	if [[ -z $branch ]] ; then
+	if [[ -z $branch ]]; then
 		# attempt to get short-sha-name
 		branch=":$(git rev-parse --short HEAD 2> /dev/null)"
 	fi
@@ -51,7 +50,7 @@ __parse_git_branch() {
 	# Clean off unnecessary information.
 	branch=${branch##*/}
 
-	echo  -n "#[fg=colour${git_colour}]${branch_symbol} #[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
+	echo  -n "#[fg=colour${git_colour}]#[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
 }
 
 # Show SVN branch.
@@ -71,7 +70,7 @@ __parse_svn_branch() {
 	local svn_url=$(echo "${svn_info}" | sed -ne 's#^URL: ##p')
 
 	local branch=$(echo "${svn_url}" | egrep -o '[^/]+$')
-	echo "#[fg=colour${svn_colour}]${branch_symbol} #[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
+	echo "#[fg=colour${svn_colour}]#[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
 }
 
 __parse_hg_branch() {
@@ -86,5 +85,5 @@ __parse_hg_branch() {
 	fi
 
 	local branch=$(echo "$summary" | grep 'branch:' | cut -d ' ' -f2)
-	echo  "#[fg=colour${hg_colour}]${branch_symbol} #[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
+	echo  "#[fg=colour${hg_colour}]#[fg=colour${TMUX_POWERLINE_CUR_SEGMENT_FG}]${branch}"
 }
