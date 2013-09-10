@@ -261,10 +261,11 @@ let c_no_curly_error = 1
 autocmd FileType c setlocal commentstring=//\ %s
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType cpp setlocal commentstring=//\ %s
-autocmd FileType css setlocal commentstring=//\ %s
-autocmd FileType objc setlocal commentstring=//\ %s
 autocmd FileType crontab setlocal commentstring=#\ %s
+autocmd FileType css setlocal commentstring=//\ %s
 autocmd FileType go setlocal commentstring=//\ %s
+autocmd FileType objc setlocal commentstring=//\ %s
+autocmd FileType php setlocal commentstring=//\ %s
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
