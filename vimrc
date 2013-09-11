@@ -66,7 +66,7 @@ syntax enable " Enable vim syntax highlighting as is (enable != on)
 set backupcopy=yes             " Allow vim to write crontab files
 
 set shortmess=I                " Disable the startup message
-set shell=zsh                  " Set the default shell
+set shell=$SHELL               " Set the default shell
 set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
 set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
 set autoindent                 " Indent the next line matching the previous line
