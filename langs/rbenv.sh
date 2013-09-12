@@ -15,10 +15,8 @@ function install () {
     git clone https://github.com/tpope/rbenv-readline.git $rbenvpath/plugins/rbenv-readline
 
     ln -s $DOTFILES/default-gems $rbenvpath
-    
-    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-	echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-	exec $SHELL -l
+
+    exec $SHELL -l
 }
 
 function die () {
