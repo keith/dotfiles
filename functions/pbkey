@@ -1,0 +1,20 @@
+pbkey () {
+  local p="$HOME/.ssh/id_rsa.pub"
+  if [[ ! -e "$p" ]];then
+    echo "No public key exists in $p"
+    return
+  fi
+
+  if which pbcopy &> /dev/null;then
+    cat $p | pbcopy
+    return
+  fi
+
+  if which xclip &> /dev/null;then
+    cat $p | xclip -selection c
+    return
+  fi
+
+  echo "No copy handler"
+}
+
