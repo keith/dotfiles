@@ -12,3 +12,5 @@ if which gvim &> /dev/null;then
   alias vmm="gvim ."
 fi
 
+alias xclip="xclip -selection c"
+
