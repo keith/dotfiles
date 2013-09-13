@@ -13,4 +13,5 @@ if which gvim &> /dev/null;then
 fi
 
 alias xclip="xclip -selection c"
+alias tmux="TERM=screen-256color-bce tmux"
 
