@@ -10,7 +10,7 @@ function custom_path () {
             return 0
         fi
     done
-    
+
     return 1
 }
 
@@ -22,29 +22,29 @@ function no_dot () {
             return 0
         fi
     done
-    
+
     return 1
 }
 
 function new_path () {
     local filename=$1
-    
+
     if ! no_dot $filename; then
         filename=".$filename"
     fi
-    
+
     echo "$HOME/$filename"
 }
 
 # Links the passed filename to its new location
 function link () {
     local filename=$1
-    
+
     if [[ ! -e $filename ]]; then
         echo "$filename doesn't exist"
         return
     fi
-    
+
     local path=$(new_path $filename)
     if [[ ! -e $path ]]; then
         echo "Linking $filename to $path"
@@ -56,7 +56,7 @@ function link () {
 function unlink () {
     local filename=$1
     local path=$(new_path $filename)
-    
+
     if [ -e $path ]; then
         rm $(new_path $1)
     else
