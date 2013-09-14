@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Git diff last commit with head
+
+git diff HEAD^ HEAD
+
