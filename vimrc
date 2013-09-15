@@ -14,6 +14,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
+Bundle 'airblade/vim-gitgutter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -210,9 +211,6 @@ nnoremap <C-n> ^i[<ESC>
 " Change the way splits open by default
 set splitbelow
 set splitright
-
-" Press F4 to toggle highlighting on/off, and show current value.
-" :noremap <F4> :set hlsearch! hlsearch?<CR>
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
