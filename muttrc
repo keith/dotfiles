@@ -20,7 +20,9 @@ set message_cachedir=$HOME/.mutt/cache/bodies
 set certificate_file=$HOME/.mutt/certificates
 set move = no
 set include
-set sort = 'threads'
+set sort=threads
+unset collapse_unread
+folder-hook . 'push <collapse-all>'
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
 set sig_dashes = no
