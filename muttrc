@@ -35,7 +35,7 @@ bind pager j next-line
 bind pager k previous-line
 
 # Don't prompt for stuff when replying
-set fast_reply           
+set fast_reply
 
 # Delete messages without asking when Mutt is quit
 set delete=yes
@@ -48,6 +48,8 @@ set mailcap_path  = $HOME/.mutt/mailcap
 source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
 
 set move = no
+# Automatically delete marked messages when switching boxes
+set delete
 set include
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
