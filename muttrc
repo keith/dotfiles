@@ -37,8 +37,11 @@ bind pager k previous-line
 # Don't prompt for stuff when replying
 set fast_reply
 
+# Reply to the address in the reply to header
+set reply_to
+
 # Delete messages without asking when Mutt is quit
-set delete=yes
+set delete = yes
 
 # File paths, caches, mailcap, theme
 set header_cache=$HOME/.mutt/cache/headers
