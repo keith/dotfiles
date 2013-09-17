@@ -12,7 +12,7 @@ set from = "keithbsmiley@gmail.com"
 set realname = "Keith Smiley"
 set sig_dashes = no
 set sig_on_top = yes
-set signature = $HOME/.signature
+set signature = $HOME/.mutt/signature
 set hostname = gmail.com
 
 # Mailboxes
