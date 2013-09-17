@@ -1,39 +1,61 @@
-# A basic .muttrc for use with Gmail
+# Account info
 set imap_user = "keithbsmiley@gmail.com"
 set imap_pass = $EP
-set smtp_url = "smtp://keithbsmiley@smtp.gmail.com:587/"
-set smtp_pass = $EP
-set from = "keithbsmiley@gmail.com"
-set realname = "Keith Smiley"
-set editor = "vim"
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set imap_check_subscribed
-set hostname = gmail.com
+set imap_keepalive = 300
 set mail_check = 120
 set timeout = 300
-set imap_keepalive = 300
-set postponed = "+[Gmail]/Drafts"
-set record = "+[Gmail]/Sent Mail"
-set header_cache=$HOME/.mutt/cache/headers
-set message_cachedir=$HOME/.mutt/cache/bodies
-set certificate_file=$HOME/.mutt/certificates
-set move = no
-set include
-set sort=threads
-unset collapse_unread
-folder-hook . 'push <collapse-all>'
-set sort_aux = 'reverse-last-date-received'
-set auto_tag = yes
+
+set smtp_url = "smtp://keithbsmiley@smtp.gmail.com:587/"
+set smtp_pass = $EP
+
+set from = "keithbsmiley@gmail.com"
+set realname = "Keith Smiley"
 set sig_dashes = no
 set sig_on_top = yes
 set signature = $HOME/.signature
+set hostname = gmail.com
+
+# Mailboxes
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = "+INBOX"
+set imap_check_subscribed
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+
+# Threading
+set sort=threads
+unset collapse_unread
+folder-hook . 'push <collapse-all>'
+
+# Don't exit message when space is pressed at the end
+set pager_stop
+# Vim like keybinds
+set editor = "vim"
+bind pager j next-line
+bind pager k previous-line
+
+# Don't prompt for stuff when replying
+set fast_reply           
+
+# Delete messages without asking when Mutt is quit
+set delete=yes
+
+# File paths, caches, mailcap, theme
+set header_cache=$HOME/.mutt/cache/headers
+set message_cachedir=$HOME/.mutt/cache/bodies
+set certificate_file=$HOME/.mutt/certificates
+set mailcap_path  = $HOME/.mutt/mailcap
+source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
+
+set move = no
+set include
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
 ignore "DKIM-Signature:"
 hdr_order Date From To Cc
 alternative_order text/plain text/html *
-auto_view text/html
 bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop
