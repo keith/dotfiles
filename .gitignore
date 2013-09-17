@@ -7,8 +7,8 @@ vim/bundle/*
 \[Vundle\]\ Installer
 bin/yuicompressor*
 irssi/config.autosave
-mutt/*
-!mutt/mailcap
+mutt/cache
+mutt/certificates
 
 ####### Linux #######
 !.gitignore
