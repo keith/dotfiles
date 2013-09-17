@@ -1,0 +1,3 @@
+SCRIPT LOAD vim_mode.pl
+SCRIPT LOAD uberprompt.pl
+

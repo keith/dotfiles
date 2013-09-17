@@ -6,6 +6,7 @@ vim/bundle/*
 !vim/src/.gitkeep
 \[Vundle\]\ Installer
 bin/yuicompressor*
+irssi/config.autosave
 
 ####### Linux #######
 !.gitignore
