@@ -62,6 +62,12 @@ bind editor <Tab> complete-query
 bind editor ^T complete
 bind editor <space> noop
 
+# Sidebar patch settings
+set sidebar_delim   = '│'
+set sidebar_visible = yes
+set sidebar_shortpath = yes
+set sidebar_width   = 30
+
 # Gmail-style keyboard shortcuts
 macro index,pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
 macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Trash\"\n <delete-message><exit>" "Gmail delete message"
