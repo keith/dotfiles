@@ -10,3 +10,6 @@
 [submodule "tmux/tmux-powerline"]
 	path = tmux/tmux-powerline
 	url = https://github.com/erikw/tmux-powerline.git
+[submodule "mutt/solarized"]
+	path = mutt/solarized
+	url = https://github.com/altercation/mutt-colors-solarized.git
