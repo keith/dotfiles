@@ -14,7 +14,8 @@ update() {
 
   if which apt-get &> /dev/null;then
     echo "Running apt-get update..."
-    sudo apt-get update; sudo apt-get upgrade
+    sudo apt-get update
+    sudo apt-get -y upgrade
   fi
 
   if which pacman &> /dev/null;then
