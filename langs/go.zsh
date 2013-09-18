@@ -2,7 +2,7 @@
 if [[ "$OSX" == true ]];then
   export GOROOT=$(brew --prefix go)
 else
-  export GOROOT="/usr/local/src/go"
+  export GOROOT="/usr/local/go"
 fi
 
 # Setup path to Go projects
