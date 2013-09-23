@@ -9,16 +9,10 @@ config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
 # Moving Windows using Control+Alt and the Arrow or vim keys
-bind left:ctrl;alt         nudge -5% +0 
+bind left:ctrl;alt         nudge -5% +0
 bind right:ctrl;alt        nudge +5% +0
 bind up:ctrl;alt           nudge +0  -5%
 bind down:ctrl;alt         nudge +0  +5%
-
-bind h:ctrl;alt            nudge -5% +0 
-bind l:ctrl;alt            nudge +5% +0
-bind k:ctrl;alt            nudge +0  -5%
-bind j:ctrl;alt            nudge +0  +5%
-
 
 # Resizing Windows by the bottom right using Control+Alt+Cmd and they arrow or vim keys
 bind left:ctrl;alt;cmd     resize  -10% +0
@@ -26,9 +20,3 @@ bind right:ctrl;alt;cmd    resize  +10% +0
 bind up:ctrl;alt;cmd       resize  +0   -10%
 bind down:ctrl;alt;cmd     resize  +0   +10%
 
-bind h:ctrl;alt;cmd        resize  -10% +0
-bind l:ctrl;alt;cmd        resize  +10% +0
-bind k:ctrl;alt;cmd        resize  +0   -10%
-bind j:ctrl;alt;cmd        resize  +0   +10%
-
-# bind tab:ctrl switch
