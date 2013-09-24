@@ -319,3 +319,8 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 " javascript libraries syntax
 let g:used_javascript_libs = 'angularjs'
 
+" Local vimrc settings
+if filereadable('.vimrc.local')
+  so .vimrc.local
+end
+
