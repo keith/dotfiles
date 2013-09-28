@@ -9,7 +9,7 @@ sudo add-apt-repository ppa:chris-lea/node.js
 
 sudo apt-get update
 sudo apt-get -y upgrade
-sudo apt-get -y install curl subversion libcurl3 libcurl3-dev php5-curl gconf-editor zlib1g-dev openssl libopenssl-ruby1.9.1 libssl-dev build-essential libruby1.9.1 libreadline-dev git-core git clang silversearcher-ag terminator tmux vim vim-gnome zsh xclip exuberant-ctags mutt-patched python-software-properties python g++ make nodejs
+sudo apt-get -y install autoconf automake bison build-essential clang curl exuberant-ctags g++ gconf-editor git git-core libc6-dev libcurl3 libcurl3-dev libopenssl-ruby1.9.1 libreadline-dev libreadline6 libreadline6-dev libruby1.9.1 libsqlite3-dev libssl-dev libtool libxml2-dev libxslt-dev libyaml-dev make mutt-patched ncurses-dev nodejs openssl php5-curl python python-software-properties silversearcher-ag sqlite3 subversion terminator tmux vim vim-gnome xclip zlib1g zlib1g-dev zsh
 
 chsh -s $(which zsh) $USER
 if [[ ! -z "$SUDO_USER" ]];then
