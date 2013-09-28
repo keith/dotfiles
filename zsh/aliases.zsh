@@ -10,6 +10,7 @@ alias -- -="cd -"
 
 # Shortcuts
 alias gs="git status"
+alias Gs="git status"
 alias gc="git clone"
 alias gd="git diff"
 alias gdt="git difftool"
