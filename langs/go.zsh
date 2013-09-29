@@ -5,13 +5,15 @@ else
   export GOROOT="/usr/local/go"
 fi
 
-# Setup path to Go projects
-export GOPATH=$HOME/Go
+if [[ -d $GOROOT ]];then
+  # Setup path to Go projects
+  export GOPATH=$HOME/Go
 
-# Add Go's bin to PATH
-PATH="$GOPATH/bin:$PATH"
+  # Add Go's bin to PATH
+  PATH="$GOPATH/bin:$PATH"
 
-if ! which go &> /dev/null;then
-  PATH="$GOROOT/bin:$PATH"
+  if ! which go &> /dev/null;then
+    PATH="$GOROOT/bin:$PATH"
+  fi
 fi
 
