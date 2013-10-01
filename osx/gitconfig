@@ -37,3 +37,5 @@
   autocorrect = 1
 [hub]
   protocol = https
+[alias]
+  punch = push --force
