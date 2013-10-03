@@ -42,6 +42,7 @@ alias fs="stat -f %z"
 
 # SSH configuration
 alias linode="ssh ksmiley@66.175.208.254"
+alias ocean="ssh ksmiley@162.243.30.79"
 
 # Winthrop
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
