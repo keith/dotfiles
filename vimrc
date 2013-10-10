@@ -268,6 +268,9 @@ autocmd FileType php setlocal commentstring=//\ %s
 " Don't auto insert a comment when using O/o for a newline
 autocmd FileType * setlocal formatoptions-=o
 
+" Fix issue where comments cannot be moved from the first column with >>
+autocmd Filetype python setlocal nosmartindent
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
