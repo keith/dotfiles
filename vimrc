@@ -265,6 +265,9 @@ autocmd FileType go setlocal commentstring=//\ %s
 autocmd FileType objc setlocal commentstring=//\ %s
 autocmd FileType php setlocal commentstring=//\ %s
 
+" Don't auto insert a comment when using O/o for a newline
+autocmd FileType * setlocal formatoptions-=o
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
