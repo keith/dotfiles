@@ -30,6 +30,9 @@ setopt HIST_REDUCE_BLANKS
 # Use vim shortcuts within the terminal (defaults to insert mode)
 bindkey -v
 
+# Reduce the lag switching into Normal mode to 0.1s
+export KEYTIMEOUT=1
+
 # Restore 'normal' search in VI mode
 bindkey '^R' history-incremental-search-backward
 
