@@ -30,12 +30,28 @@ setopt HIST_REDUCE_BLANKS
 # Use vim shortcuts within the terminal (defaults to insert mode)
 bindkey -v
 
-# Reduce the lag switching into Normal mode to 0.1s
-export KEYTIMEOUT=1
-
 # Restore 'normal' search in VI mode
 bindkey '^R' history-incremental-search-backward
+bindkey '^P' up-history
+bindkey '^N' down-history
 
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
+
+# Show vim mode on right
+# http://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
+  zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Reduce the lag switching into Normal mode to 0.1s
+export KEYTIMEOUT=1
+
+# Force update of RPS1 immediately
+RPS1=""
 
