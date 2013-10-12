@@ -17,6 +17,7 @@ linux/configs/fish/fishd*
 vim/flavors
 gnupg/*
 !gnupg/gpg.conf
+vim/*.spl
 
 ####### Linux #######
 !.gitignore

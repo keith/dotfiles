@@ -196,6 +196,8 @@ set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 
+set spellfile=$HOME/.vim/custom-words.utf-8.add
+
 " Set mapping and key timeouts
 set timeout
 set timeoutlen=1000
