@@ -68,13 +68,15 @@ syntax enable " Enable vim syntax highlighting as is (enable != on)
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
 set backupcopy=yes             " Allow vim to write crontab files
 
-set shortmess=I                " Disable the startup message
+" I - Disable the startup message
+" a - Avoid pressing enter after saves
+set shortmess=Ia                
+
 set shell=$SHELL               " Set the default shell
 set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
 set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
 set autoindent                 " Indent the next line matching the previous line
 set smartindent                " Smart auto-indent when creating a new line
-set shortmess=a                " Avoid pressing enter after saves
 set cursorline                 " highlight current line
 set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
