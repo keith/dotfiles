@@ -152,12 +152,6 @@ map <PageDown> <C-f>
 vnoremap < <gv
 vnoremap > >gv
 
-" GUI style indent movement
-nmap <D-[> <<
-nmap <D-]> >>
-vmap <D-[> <
-vmap <D-]> >
-
 " Move as expected on wrapped lines
 nnoremap j gj
 vnoremap j gj
@@ -194,10 +188,6 @@ nmap <leader>tp :tabprevious<cr>
 nmap <leader>tf :tabfirst<cr>
 nmap <leader>tl :tablast<cr>
 nmap <leader>tm :tabmove
-
-" Using command shift brackets or command numbers to navigate tabs
-map <D-S-]> gt
-map <D-S-[> gT
 
 " Using control shift brackets or control numbers to navigate tabs
 map <C-S-]> gt
