@@ -53,5 +53,8 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=1
 
 # Force update of RPS1 immediately
-RPS1=""
+reset_rps1() {
+  RPS1=""
+}
+precmd_functions=(reset_rps1)
 
