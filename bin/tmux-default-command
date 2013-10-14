@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# On OS X set the default command for tmux
+
+if [[ ! -z "$OSX" ]];then
+  reattach-to-user-namespace -l $SHELL
+fi
+

@@ -172,7 +172,7 @@ cmap w!! !sudo tee % >/dev/null
 nmap <leader>v  :tabedit $MYVIMRC<cr>
 nmap <leader>sv :source $MYVIMRC<cr>
 
-if has("clipboard") && $TMUX == ''     " If the feature is available
+if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
 endif
 
