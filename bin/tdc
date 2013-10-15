@@ -3,6 +3,8 @@
 # On OS X set the default command for tmux
 
 if [[ ! -z "$OSX" ]];then
-  reattach-to-user-namespace -l $SHELL
+    reattach-to-user-namespace -l $SHELL
+else
+    exec -l $SHELL
 fi
 
