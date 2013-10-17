@@ -70,7 +70,7 @@ set backupcopy=yes             " Allow vim to write crontab files
 
 " I - Disable the startup message
 " a - Avoid pressing enter after saves
-set shortmess=Ia                
+set shortmess=Ia
 
 set shell=$SHELL               " Set the default shell
 set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
@@ -320,7 +320,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:used_javascript_libs = 'angularjs'
 
 " Supertab
-let g:SuperTabNoCompleteAfter = ['^', '\s', '#']
+let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
