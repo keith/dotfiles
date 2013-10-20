@@ -180,18 +180,12 @@ endif
 nmap <leader>tt :tabnew<cr>
 nmap <leader>te :tabedit
 nmap <leader>tc :tabclose<cr>
-nmap <leader>to :tabonly<cr>
 nmap <leader>tn :tabnext<cr>
-nmap <C-tab>    :tabnext<cr>
-nmap <C-S-tab>  :tabprevious<cr>
 nmap <leader>tp :tabprevious<cr>
 nmap <leader>tf :tabfirst<cr>
 nmap <leader>tl :tablast<cr>
 nmap <leader>tm :tabmove
 
-" Using control shift brackets or control numbers to navigate tabs
-map <C-S-]> gt
-map <C-S-[> gT
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
