@@ -178,14 +178,8 @@ endif
 
 " Tab mappings
 nmap <leader>tt :tabnew<cr>
-nmap <leader>te :tabedit
 nmap <leader>tc :tabclose<cr>
-nmap <leader>tn :tabnext<cr>
-nmap <leader>tp :tabprevious<cr>
-nmap <leader>tf :tabfirst<cr>
-nmap <leader>tl :tablast<cr>
 nmap <leader>tm :tabmove
-
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
