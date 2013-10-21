@@ -30,7 +30,6 @@ Bundle 'msanders/cocoa.vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
-Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-abolish'
@@ -225,6 +224,7 @@ autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType gitcommit setlocal spell
 
 " Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
