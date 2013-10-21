@@ -136,6 +136,7 @@ set title             " Change the terminal's title
 set nobackup          " Don't keep backup files
 set nowritebackup     " Don't create a backup when overwriting a file
 set noswapfile        " Don't write swap files
+set updatetime=4000   " Set the time before plugins assume you're not typing
 
 " Quicker timeouts for tmux + vim + iTerm
 set ttimeout
@@ -252,6 +253,9 @@ autocmd FileType * setlocal formatoptions-=o
 " Fix issue where comments cannot be moved from the first column with >>
 autocmd Filetype python setlocal nosmartindent
 
+" Save files on some focus lost events, like switching splits
+autocmd BufLeave,FocusLost * silent! wall
+
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
@@ -270,6 +274,10 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-
 let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+" GitGutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " TagBar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
