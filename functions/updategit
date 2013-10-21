@@ -23,7 +23,7 @@ updategit() {
           continue
       fi
 
-      if test -n "$(git status --porcelain)";then
+      if test -n "$(git status -u no --porcelain)";then
           echo "$file has uncommited changes"
       else
           echo "Updating $file..."
