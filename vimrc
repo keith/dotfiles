@@ -24,13 +24,13 @@ Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'Keithbsmiley/clever-f.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'msanders/cocoa.vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
+Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-abolish'
@@ -47,7 +47,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
 Bundle 'Yggdroot/indentLine'
-
 " Vim script repos
 Bundle 'a.vim'
 Bundle 'IndexedSearch'
@@ -318,9 +317,6 @@ let g:used_javascript_libs = 'angularjs'
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
-
-" Clever-f
-let g:clever_f_reset_key = ';'
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
