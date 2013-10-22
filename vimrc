@@ -24,6 +24,7 @@ Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'Keithbsmiley/clever-f.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'msanders/cocoa.vim'
@@ -317,6 +318,9 @@ let g:used_javascript_libs = 'angularjs'
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
+
+" Clever-f
+let g:clever_f_reset_key = ';'
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
