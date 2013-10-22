@@ -20,8 +20,24 @@ var halfsize = slate.operation("move", {
   "height" : "windowSizeY / 2"
 });
 
+var lefthalf = slate.operation("move", {
+  "x" : "screenOriginX",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY"
+});
+
+var righthalf = slate.operation("move", {
+  "x" : "screenOriginX + screenSizeX / 2",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY"
+});
+
 S.bind("k:ctrl;cmd", fullscreen);
 S.bind("j:ctrl;cmd", halfsize);
+S.bind("h:ctrl;cmd", lefthalf);
+S.bind("l:ctrl;cmd", righthalf);
 
 S.bnda({
   // Moving Windows using Control+Alt and the Arrow keys
