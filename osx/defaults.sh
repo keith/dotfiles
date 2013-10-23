@@ -16,7 +16,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Set computer name
-local name=$1
+name=$1
 sudo scutil --set ComputerName $name
 sudo scutil --set HostName $name
 sudo scutil --set LocalHostName $name
@@ -120,8 +120,8 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Run hot corners script
-if [[ -f scripts/corners.sh ]]; then
-    scripts/corners.sh enable
+if [[ -f ../scripts/corners.sh ]]; then
+    ../scripts/corners.sh enable
 else
     echo "Failed to setup hot corners, script missing"
 fi
