@@ -33,6 +33,7 @@ update() {
     echo "Running gem update..."
     $(which gem) update --system
     $(which gem) update
+    $(which gem) regenerate_binstubs
   fi
 
   if [[ -d $HOME/.rbenv ]];then
