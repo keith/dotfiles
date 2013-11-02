@@ -29,7 +29,7 @@ alias vv="vim ."
 alias vundle="vim +BundleInstall +qall"
 vundlereinstall() {
   cd $HOME/.vim/bundle;
-  rm -rf $(ls | grep -v vundle);
+  find . -maxdepth 1 ! -name "vundle" ! -name "." | xargs rm -rf
   vundle;
 }
 
