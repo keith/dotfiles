@@ -398,6 +398,9 @@ defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 # Disable new disks for time machine warning
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Don’t display the annoying prompt when quitting iTerm
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
 # Disk image changes
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
@@ -443,6 +446,6 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 
 # Killing affected applications
-for app in Safari Finder Dock Mail Messages SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 # Done. Note that some of these changes require a logout/restart to take effect.
 
