@@ -13,3 +13,6 @@
 [submodule "mutt/solarized"]
 	path = mutt/solarized
 	url = https://github.com/altercation/mutt-colors-solarized.git
+[submodule "scripts/selecta"]
+	path = scripts/selecta
+	url = https://github.com/garybernhardt/selecta.git
