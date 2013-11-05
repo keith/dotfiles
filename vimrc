@@ -347,6 +347,7 @@ let g:tagbar_type_go = {
 
 " Syntastic
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_always_populate_loc_list=1
 
 " javascript libraries syntax
 let g:used_javascript_libs = 'angularjs'
