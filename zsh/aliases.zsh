@@ -68,3 +68,9 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 
+#
+# Scripts
+#
+
+alias t="python $DOTFILES/scripts/t/t.py --task-dir $HOME/Dropbox/tasks --list tasks"
+

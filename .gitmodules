@@ -16,3 +16,6 @@
 [submodule "scripts/selecta"]
 	path = scripts/selecta
 	url = https://github.com/garybernhardt/selecta.git
+[submodule "scripts/t"]
+	path = scripts/t
+	url = https://github.com/sjl/t.git
