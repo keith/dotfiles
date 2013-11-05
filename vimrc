@@ -24,6 +24,7 @@ Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'msanders/cocoa.vim'
 Bundle 'othree/javascript-libraries-syntax.vim'
@@ -83,14 +84,19 @@ set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
 set softtabstop=2              " Number of spaces for some tab operations
 set shiftround                 " Round << and >> to multiples of shiftwidth
-set wildmenu                   " Better completion in the vim command line
-set wildmode=longest,list,full " Completion settings
 set expandtab                  " Insert spaces instead of actually tabs
 set smarttab                   " Delete entire shiftwidth of tabs when they're inserted
 set history=1000               " The number of history items to remember
 set undolevels=200             " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 set nostartofline              " Keep cursor in the same place after saves
+
+set wildmenu                   " Better completion in the vim command line
+set wildmode=longest,list,full " Completion settings
+" Ignore these folders for completions
+set wildignore+=.hg,.git,.svn  " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 
 " Fold settings
 set nofoldenable               " Have all folds open by default
@@ -138,11 +144,20 @@ set nobackup          " Don't keep backup files
 set nowritebackup     " Don't create a backup when overwriting a file
 set noswapfile        " Don't write swap files
 set updatetime=4000   " Set the time before plugins assume you're not typing
+set list              " Show hidden characters
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Quicker timeouts for tmux + vim + iTerm
-set ttimeout
-set timeoutlen=20
 set notimeout
+set ttimeout
+set ttimeoutlen=20
+
+" iTerm2 is currently slow as ball at rendering the nice unicode lines, so for
+" now I'll just use ascii pipes.  They're ugly but at least I won't want to kill
+" myself when trying to move around a file.
+" https://bitbucket.org/sjl/dotfiles/src/d25535222d295d72ee46bae6598080344667083d/vim/vimrc?at=default#cl-69
+set fillchars=diff:⣿,vert:│
+set fillchars=diff:⣿,vert:\|
 
 " Map home and end keys to the correct things
 map <Home> gg
@@ -338,6 +353,9 @@ let g:used_javascript_libs = 'angularjs'
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
+
+" Rainbow Parens
+autocmd VimEnter * RainbowParenthesesToggle
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
