@@ -152,12 +152,6 @@ set notimeout
 set ttimeout
 set ttimeoutlen=20
 
-" Map home and end keys to the correct things
-map <Home> gg
-map <End>  G
-map <PageUp> <C-b>
-map <PageDown> <C-f>
-
 " Reselect visual blocks after movement
 vnoremap < <gv
 vnoremap > >gv
@@ -176,20 +170,20 @@ vnoremap <Up> gk
 inoremap <Up> <C-o>gk
 
 " Force root permission saves
-cmap w!! !sudo tee % >/dev/null
+cnoremap w!! !sudo tee % >/dev/null
 
 " Open vimrc with leader->v
-nmap <leader>v  :tabedit $MYVIMRC<cr>
-nmap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>v  :tabedit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
 endif
 
 " Tab mappings
-nmap <leader>tt :tabnew<cr>
-nmap <leader>tc :tabclose<cr>
-nmap <leader>tm :tabmove
+nnoremap <leader>tt :tabnew<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tm :tabmove
 
 " Split window navigation
 nnoremap <C-h> <C-w>h

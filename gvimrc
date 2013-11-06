@@ -5,10 +5,16 @@ elseif has("gui_gtk2")
 end
 
 " Using control shift brackets or control numbers to navigate tabs
-map <C-S-]> :tabnext<cr>
-map <C-S-[> :tabprevious<cr>
+noremap <C-S-]> :tabnext<cr>
+noremap <C-S-[> :tabprevious<cr>
 
 " Tab commands
-nmap <C-tab>    :tabnext<cr>
-nmap <C-S-tab>  :tabprevious<cr>
+nnoremap <C-tab>    :tabnext<cr>
+nnoremap <C-S-tab>  :tabprevious<cr>
+
+" Map home and end keys to the correct things
+noremap <Home> gg
+noremap <End>  G
+noremap <PageUp> <C-b>
+noremap <PageDown> <C-f>
 
