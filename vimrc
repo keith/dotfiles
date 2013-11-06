@@ -23,7 +23,6 @@ Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'msanders/cocoa.vim'
@@ -34,9 +33,8 @@ Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/clam.vim'
-Bundle 'tpope/vim-abolish'
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-fugitive'
@@ -174,7 +172,6 @@ cnoremap w!! !sudo tee % >/dev/null
 
 " Open vimrc with leader->v
 nnoremap <leader>v  :tabedit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
@@ -191,15 +188,16 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-inoremap <C-n> <ESC>^i[<ESC>
-nnoremap <C-n> ^i[<ESC>
-
 " Change the way splits open by default
 set splitbelow
 set splitright
 
 " Even out splits when vim is resized
 autocmd VimResized * :wincmd =
+
+" Objective-C matching bracket shortcuts
+inoremap <C-n> <ESC>^i[<ESC>
+nnoremap <C-n> ^i[<ESC>
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
@@ -223,19 +221,19 @@ autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
-autocmd FileType markdown setlocal textwidth=72
 autocmd FileType markdown command! -buffer -bang Marked :!mark %
-autocmd FileType make setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType go setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType php setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType sh setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType python setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType markdown  setlocal textwidth=72
+autocmd FileType make      setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType go        setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType php       setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType sh        setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType python    setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent " Fix issue where comments cannot be moved from the first column with >>
+autocmd FileType objc      setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType gitcommit setlocal spell
 
 " Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
-autocmd BufNewFile,BufReadPost,BufWrite Podfile setlocal filetype=ruby
+autocmd BufNewFile,BufReadPost,BufWrite Podfile   setlocal filetype=ruby
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m"
@@ -245,20 +243,17 @@ autocmd FileType objc let g:alternateExtensions_m = "h"
 let c_no_curly_error = 1
 
 " Cold Fusion correct comment type
-autocmd FileType c setlocal commentstring=//\ %s
-autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
-autocmd FileType cpp setlocal commentstring=//\ %s
+autocmd FileType c       setlocal commentstring=//\ %s
+autocmd FileType cf      setlocal commentstring=<!---\ %s\ --->
+autocmd FileType cpp     setlocal commentstring=//\ %s
 autocmd FileType crontab setlocal commentstring=#\ %s
-autocmd FileType css setlocal commentstring=//\ %s
-autocmd FileType go setlocal commentstring=//\ %s
-autocmd FileType objc setlocal commentstring=//\ %s
-autocmd FileType php setlocal commentstring=//\ %s
+autocmd FileType css     setlocal commentstring=//\ %s
+autocmd FileType go      setlocal commentstring=//\ %s
+autocmd FileType objc    setlocal commentstring=//\ %s
+autocmd FileType php     setlocal commentstring=//\ %s
 
 " Don't auto insert a comment when using O/o for a newline
 autocmd FileType * setlocal formatoptions-=o
-
-" Fix issue where comments cannot be moved from the first column with >>
-autocmd Filetype python setlocal nosmartindent
 
 " Save files on some focus lost events, like switching splits
 autocmd BufLeave,FocusLost * silent! wall
@@ -300,10 +295,6 @@ nnoremap <C-p> :call SelectaCommand("git ls-files . --cached --exclude-standard 
 let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-
-" GitGutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_eager = 0
 
 " TagBar
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
@@ -351,6 +342,6 @@ autocmd VimEnter * RainbowParenthesesToggle
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
-  so .vimrc.local
+  source .vimrc.local
 end
 
