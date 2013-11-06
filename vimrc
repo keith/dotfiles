@@ -340,6 +340,13 @@ let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
 " Rainbow Parens
 autocmd VimEnter * RainbowParenthesesToggle
 
+" vim-rspec
+let g:rspec_command = "Dispatch rspec {spec}"
+nnoremap <Leader>f :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+" nnoremap <Leader>l :call RunLastSpec()<CR>
+" nnoremap <Leader>a :call RunAllSpecs()<CR>
+
 " Local vimrc settings
 if filereadable('.vimrc.local')
   source .vimrc.local
