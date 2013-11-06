@@ -198,6 +198,9 @@ nnoremap <C-n> ^i[<ESC>
 set splitbelow
 set splitright
 
+" Even out splits when vim is resized
+autocmd VimResized * :wincmd =
+
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
 nnoremap <F4> :let @/ = ""<CR>
