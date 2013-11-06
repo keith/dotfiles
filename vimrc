@@ -152,13 +152,6 @@ set notimeout
 set ttimeout
 set ttimeoutlen=20
 
-" iTerm2 is currently slow as ball at rendering the nice unicode lines, so for
-" now I'll just use ascii pipes.  They're ugly but at least I won't want to kill
-" myself when trying to move around a file.
-" https://bitbucket.org/sjl/dotfiles/src/d25535222d295d72ee46bae6598080344667083d/vim/vimrc?at=default#cl-69
-set fillchars=diff:⣿,vert:│
-set fillchars=diff:⣿,vert:\|
-
 " Map home and end keys to the correct things
 map <Home> gg
 map <End>  G
@@ -348,6 +341,7 @@ let g:tagbar_type_go = {
 " Syntastic
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list=1
+nnoremap <leader>e :Errors<cr>
 
 " javascript libraries syntax
 let g:used_javascript_libs = 'angularjs'
