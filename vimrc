@@ -132,7 +132,6 @@ set nrformats-=octal  " Never use octal notation
 set mouse=a           " enable using the mouse if terminal emulator
 set hlsearch          " Highlight search terms
 set incsearch         " Show searches as you type
-set nolist            " Don't show invisible characters
 set wrap              " Softwrap text
 set linebreak         " Don't wrap in the middle of words
 set ignorecase        " ignore case when searching
