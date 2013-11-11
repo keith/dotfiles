@@ -230,6 +230,7 @@ autocmd FileType sh        setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python    setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent " Fix issue where comments cannot be moved from the first column with >>
 autocmd FileType objc      setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType gitcommit setlocal spell
+autocmd FileType vim       setlocal foldmethod=marker
 
 " Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
