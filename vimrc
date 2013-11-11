@@ -127,7 +127,6 @@ set showmatch         " set show matching parenthesis
 set matchtime=1       " The amount of time matches flash
 set display=lastline  " Display super long wrapped lines
 set number            " Shows line numbers
-set relativenumber    " Show relative numbers besides current line
 set ruler             " Shows current cursor location
 set nrformats-=octal  " Never use octal notation
 set mouse=a           " enable using the mouse if terminal emulator
