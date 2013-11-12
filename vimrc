@@ -329,7 +329,21 @@ let g:tagbar_type_go = {
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_flake8_args="--ignore=E501"
-nnoremap <leader>e :Errors<cr>
+
+" Allow toggling of syntastic errors list
+" http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
+function! ToggleErrors()
+  " Check the total number of open windows
+  let old_last_winnr = winnr('$')
+  " Attempt to close the location list
+  lclose
+  " If there are still the same number of windows
+  " Open the errors list
+  if old_last_winnr == winnr('$')
+    Errors
+  endif
+endfunction
+nnoremap <leader>e :call ToggleErrors()<cr>
 
 " javascript libraries syntax
 let g:used_javascript_libs = 'angularjs'
