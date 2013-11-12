@@ -2,6 +2,7 @@
 
 [MESSAGES CONTROL]
 
-# Ignore line length warning of 80 characters
-disable=line-too-long
+# line-too-long: Ignore line length warning of 80 characters
+# C0111: Ignore method missing docstring
+disable=line-too-long, C0111
 
