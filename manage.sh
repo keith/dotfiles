@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
+FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec pylintrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {

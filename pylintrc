@@ -1,0 +1,7 @@
+# Settings for pylint
+
+[MESSAGES CONTROL]
+
+# Ignore line length warning of 80 characters
+disable=line-too-long
+
