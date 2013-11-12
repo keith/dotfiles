@@ -5,6 +5,7 @@
 
 set nocompatible " This must be first, because it changes other options
 
+" Plugin setup ----------------------------- {{{
 filetype off " Required for Vundle setup
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -20,18 +21,13 @@ Bundle 'b4winckler/vim-objc'
 Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'editorconfig/editorconfig-vim'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'msanders/cocoa.vim'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'pangloss/vim-javascript'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
-Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/clam.vim'
 Bundle 'thoughtbot/vim-rspec'
@@ -64,6 +60,8 @@ execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
+
+" }}}
 
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
