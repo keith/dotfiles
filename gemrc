@@ -6,4 +6,5 @@
 - http://rubygems.org
 :update_sources: true
 :verbose: true
+:ssl_verify_mode: 0
 gem: --no-ri --no-rdoc
