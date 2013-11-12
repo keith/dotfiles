@@ -339,6 +339,9 @@ let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
 
 " Rainbow Parens
 autocmd VimEnter * RainbowParenthesesToggle
+autocmd Syntax * RainbowParenthesesLoadRound
+autocmd Syntax * RainbowParenthesesLoadSquare
+autocmd Syntax * RainbowParenthesesLoadBraces
 
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
