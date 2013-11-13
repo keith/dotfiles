@@ -24,7 +24,6 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
-Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
@@ -363,12 +362,6 @@ let g:used_javascript_libs = 'angularjs'
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
-
-" Rainbow Parens
-autocmd VimEnter * RainbowParenthesesToggle
-autocmd Syntax * RainbowParenthesesLoadRound
-autocmd Syntax * RainbowParenthesesLoadSquare
-autocmd Syntax * RainbowParenthesesLoadBraces
 
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
