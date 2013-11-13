@@ -271,6 +271,19 @@ if exists('g:ctrlp_user_command')
 endif
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 
+" Command for searching folders even if they
+" aren't versioned with git
+function! SearchCommand()
+  let l:command = [
+    \ 'if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1;then',
+    \   'git ls-files . --cached --exclude-standard --others',
+    \ 'else',
+    \   'find * -type f',
+    \ 'fi'
+    \ ]
+  return join(l:command, "\n")
+endfunction
+
 " Run a given vim command on the results of fuzzy selecting from a given shell
 " command. See usage below.
 function! SelectaCommand(choice_command, selecta_args, vim_command)
@@ -288,7 +301,7 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <C-p> :call SelectaCommand("git ls-files . --cached --exclude-standard --others", "", ":e")<cr>
+nnoremap <C-p> :call SelectaCommand(SearchCommand(), "", ":e")<cr>
 
 " Airline
 let g:airline_theme='solarized'
