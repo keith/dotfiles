@@ -10,8 +10,7 @@
 export DOTFILES="$(dirname $(readlink $HOME/.zshrc))"
 
 # Loads a local settings file for sekrets
-if [[ -e $HOME/.localrc ]]
-then
+if [[ -e $HOME/.localrc ]];then
   source $HOME/.localrc
 fi
 
@@ -48,5 +47,9 @@ do
 done
 
 unset configs
-colorize
+if [[ -e $HOME/.coloroverride ]];then
+  colorize $(cat $HOME/.coloroverride)
+else
+  colorize
+fi
 
