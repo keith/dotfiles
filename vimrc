@@ -301,6 +301,7 @@ endfunction
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <C-p> :call SelectaCommand(SearchCommand(), "", ":e")<cr>
+nnoremap <C-t> :call SelectaCommand(SearchCommand(), "", ":tabnew")<cr>
 
 " Airline
 let g:airline_theme='solarized'
