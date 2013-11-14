@@ -374,6 +374,9 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 " delimitMate don't match " in vim script
 autocmd FileType vim let delimitMate_quotes = "' `"
 
+" investigate.vim
+nnoremap <S-k> :call OpenHelp()<cr>
+
 " Local vimrc settings
 if filereadable('.vimrc.local')
   source .vimrc.local
