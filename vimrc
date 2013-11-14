@@ -218,7 +218,12 @@ autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
-autocmd FileType markdown command! -buffer -bang Marked :!mark %
+function! Marked()
+  silent !mark %
+  redraw!
+endfunction
+
+autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
 autocmd FileType markdown  setlocal textwidth=72
 autocmd FileType make      setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType go        setlocal tabstop=4 shiftwidth=4 noexpandtab
