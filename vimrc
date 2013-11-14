@@ -380,7 +380,7 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 autocmd FileType vim let delimitMate_quotes = "' `"
 
 " investigate.vim
-nnoremap <S-k> :call OpenHelp()<cr>
+nnoremap <S-k> :call Investigate()<cr>
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
