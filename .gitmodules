@@ -19,3 +19,6 @@
 [submodule "scripts/t"]
 	path = scripts/t
 	url = https://github.com/sjl/t.git
+[submodule "vim/src/investigate.vim"]
+	path = vim/src/investigate.vim
+	url = https://github.com/Keithbsmiley/investigate.vim.git
