@@ -107,11 +107,18 @@ runtime! macros/matchit.vim
 
 let &titleold=getcwd() " On quit reset title
 
-let hour = strftime("%H") " Set the background light from 7am to 7pm
-if 7 <= hour && hour < 19
-  set background=light
-else " Set to dark from 7pm to 7am
-  set background=dark
+" Make sure the override file exists
+let s:filename = glob("$HOME/.coloroverride")
+if s:filename != ""
+  " Set the background to the contents of the override file
+  exec 'set background=' . readfile(s:filename)[0]
+else
+  let hour = strftime("%H") " Set the background light from 7am to 7pm
+  if 7 <= hour && hour < 19
+    set background=light
+  else " Set to dark from 7pm to 7am
+    set background=dark
+  endif
 endif
 colorscheme solarized " Use the awesome solarized color scheme
 
