@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec pylintrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
+FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {
@@ -114,8 +114,6 @@ fi
 
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
-    git submodule update --init --recursive &
-    wait
     install_links
     install_gitconfig
 elif [[ $1 == "remove" ]]; then

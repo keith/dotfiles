@@ -244,6 +244,7 @@ autocmd FileType vim       setlocal foldmethod=marker
 " Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufNewFile,BufReadPost,BufWrite Podfile   setlocal filetype=ruby
+autocmd BufReadPost *shellrc setlocal filetype=sh
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m"

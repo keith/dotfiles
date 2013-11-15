@@ -1,0 +1,22 @@
+# Path to dotfiles repo
+export DOTFILES="$(dirname $(readlink $HOME/.shellrc))"
+
+# Loads a local settings file for sekrets
+if [[ -e $HOME/.localrc ]];then
+  source $HOME/.localrc
+fi
+
+if [[ $OSTYPE == darwin* ]];then
+  export OSX=true
+fi
+
+# Set the path to include:
+#  - /usr/local/bin  for Homebrew
+#  - /usr/local/sbin
+#  - /usr/bin        for system executable
+#  - /bin
+#  - /usr/sbin
+#  - /sbin
+#  - $HOME/.bin      for local tools
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
+
