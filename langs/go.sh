@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if ! which go &> /dev/null; then
-    echo "You must install go before install it's modules"
+    echo "You must install Go (or add it to your \$PATH) before install modules"
     exit
 fi
 
