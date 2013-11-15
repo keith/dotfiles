@@ -1,5 +1,0 @@
-reload() {
-  unset ZSH_LOADED
-  source $HOME/.zshrc
-}
-
