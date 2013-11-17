@@ -1,13 +1,15 @@
-local RBENVPATH="$HOME/.rbenv"
-local RVMPATH="$HOME/.rvm"
+#!/usr/bin/env bash
+
+RBENVPATH="$HOME/.rbenv"
+RVMPATH="$HOME/.rvm"
 
 if [[ -d $RBENVPATH ]];then
-  PATH="$RBENVPATH/bin:$PATH"
-  eval "$(rbenv init -)"
+    PATH="$RBENVPATH/bin:$PATH"
+    eval "$(rbenv init -)"
 elif [[ -d $RVMPATH ]];then
-  PATH="$RVMPATH/bin:$PATH"
+    PATH="$RVMPATH/bin:$PATH"
 else
-  return
+    return
 fi
 
 alias bi="bundle install"
