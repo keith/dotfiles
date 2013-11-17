@@ -3,7 +3,7 @@
 source $HOME/.shellrc
 
 configs=($DOTFILES/**/*.bash)
-for file in ${configs}
+for file in ${configs[@]}
 do
   source $file
 done
