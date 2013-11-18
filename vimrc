@@ -91,11 +91,13 @@ set wildignore+=.hg,.git,.svn  " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 
-set undolevels=2000            " The number of undo items to remember
-set undofile                   " Save undo history to files locally
-set undodir=$HOME/.vimundo     " Set the directory of the undofile
-if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), "p")
+if has("persistent_undo")
+  set undolevels=2000            " The number of undo items to remember
+  set undofile                   " Save undo history to files locally
+  set undodir=$HOME/.vimundo     " Set the directory of the undofile
+  if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+  endif
 endif
 
 " Fuck you, help key.
