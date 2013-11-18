@@ -232,6 +232,22 @@ nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
 set pastetoggle=<F2> " Toggle paste in insert mode
 set showmode         " Display the mode when it changes
 
+" Automatic paste setup for newlines taken from:
+" https://github.com/tpope/vim-unimpaired/blob/a029dc28ebc1ba5953cd5b0ef9a50bd0ffba3aa4/plugin/unimpaired.vim#L214-L237
+function! s:setup_paste() abort
+  let s:paste = &paste
+  set paste
+endfunction
+nnoremap <silent> yo  :call <SID>setup_paste()<CR>o
+nnoremap <silent> yO  :call <SID>setup_paste()<CR>O
+augroup unimpaired_paste
+  autocmd InsertLeave *
+    \ if exists('s:paste') |
+    \   let &paste = s:paste |
+    \   unlet s:paste |
+    \ endif
+augroup END
+
 " http://stackoverflow.com/a/12141458/902968
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
