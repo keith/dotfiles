@@ -15,7 +15,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
-Bundle 'airblade/vim-gitgutter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'b4winckler/vim-objc'
 Bundle 'bling/vim-airline'
@@ -28,7 +27,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'scrooloose/syntastic'
-Bundle 'sjl/clam.vim'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-dispatch'
@@ -46,7 +44,6 @@ Bundle 'Yggdroot/indentLine'
 
 " Vim script repos
 Bundle 'a.vim'
-Bundle 'IndexedSearch'
 
 " Enable pathogen for plugin development
 " Using {} at the end of the path is horrible
@@ -83,9 +80,9 @@ set shiftround                 " Round << and >> to multiples of shiftwidth
 set expandtab                  " Insert spaces instead of actually tabs
 set smarttab                   " Delete entire shiftwidth of tabs when they're inserted
 set history=1000               " The number of history items to remember
-set undolevels=200             " The number of undo items to remember
 set backspace=indent,eol,start " Backspace settings
 set nostartofline              " Keep cursor in the same place after saves
+set showcmd                    " Show command information on the right side of the command line
 
 set wildmenu                   " Better completion in the vim command line
 set wildmode=longest,list,full " Completion settings
@@ -93,6 +90,17 @@ set wildmode=longest,list,full " Completion settings
 set wildignore+=.hg,.git,.svn  " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+
+set undolevels=2000            " The number of undo items to remember
+set undofile                   " Save undo history to files locally
+set undodir=$HOME/.vimundo     " Set the directory of the undofile
+if !isdirectory(expand(&undodir))
+  call mkdir(expand(&undodir), "p")
+endif
+
+" Fuck you, help key.
+noremap  <F1> <nop>
+inoremap <F1> <nop>
 
 " Fold settings
 set nofoldenable               " Have all folds open by default
@@ -103,7 +111,8 @@ set foldcolumn=2               " The width of the gutter column showing folds by
 nnoremap <Space> za
 
 " Load MatchIt for % jumping
-runtime! macros/matchit.vim
+runtime macros/matchit.vim
+noremap <tab> %
 
 let &titleold=getcwd() " On quit reset title
 
@@ -129,7 +138,7 @@ set noerrorbells      " Don't make noise
 set visualbell        " Don't show bells
 set autoread          " watch for file changes and auto update
 set showmatch         " set show matching parenthesis
-set matchtime=1       " The amount of time matches flash
+set matchtime=2       " The amount of time matches flash
 set display=lastline  " Display super long wrapped lines
 set number            " Shows line numbers
 set ruler             " Shows current cursor location
@@ -148,6 +157,12 @@ set noswapfile        " Don't write swap files
 set updatetime=4000   " Set the time before plugins assume you're not typing
 set list              " Show hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
+set formatoptions-=o  " Don't auto insert a comment when using O/o for a newline
+set scrolloff=5       " Number of lines the cursor is to the edge before scrolling
+
+" Completion options
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
 
 " Quicker timeouts for tmux + vim + iTerm
 set notimeout
@@ -159,20 +174,25 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Move as expected on wrapped lines
-nnoremap j gj
-vnoremap j gj
-nnoremap <Down> gj
-vnoremap <Down> gj
+noremap j gj
+noremap <Down> gj
 inoremap <Down> <C-o>gj
 
-nnoremap k gk
-vnoremap k gk
-nnoremap <Up> gk
-vnoremap <Up> gk
+noremap k gk
+noremap <Up> gk
 inoremap <Up> <C-o>gk
 
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Use sane regexes.
+nnoremap / /\v
+vnoremap / /\v
+set gdefault " Adds g at the end of substitutions by default
+
 " Force root permission saves
-cnoremap w!! !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Open vimrc with leader->v
 nnoremap <leader>v  :tabedit $MYVIMRC<cr>
@@ -219,7 +239,15 @@ let g:ruby_path = system('echo $HOME/.rbenv/shims')
 autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
-autocmd BufReadPost,BufNewFile *.com setlocal filetype=nginx
+" Nginx ------ {{{
+augroup ft_nginx
+  autocmd BufRead,BufNewFile /etc/nginx/conf/*            set ft=nginx
+  autocmd BufRead,BufNewFile /opt/nginx/conf/*            set ft=nginx
+  autocmd BufRead,BufNewFile /etc/nginx/sites-available/* set ft=nginx
+  autocmd BufRead,BufNewFile /opt/nginx/sites-available/* set ft=nginx
+  autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
+augroup END
+" }}}
 
 " Set specific filetypes to fold by syntax
 autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
@@ -262,9 +290,6 @@ autocmd FileType css     setlocal commentstring=//\ %s
 autocmd FileType go      setlocal commentstring=//\ %s
 autocmd FileType objc    setlocal commentstring=//\ %s
 autocmd FileType php     setlocal commentstring=//\ %s
-
-" Don't auto insert a comment when using O/o for a newline
-autocmd FileType * setlocal formatoptions-=o
 
 " Save files on some focus lost events, like switching splits
 autocmd BufLeave,FocusLost * silent! wall
