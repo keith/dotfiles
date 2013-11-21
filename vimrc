@@ -457,11 +457,11 @@ function! ToggleErrors()
 endfunction
 nnoremap <leader>e :call ToggleErrors()<cr>
 
-" javascript libraries syntax
-let g:used_javascript_libs = 'angularjs'
-
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\']
+
+" Clever-f
+let g:clever_f_across_no_line=1
 
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
