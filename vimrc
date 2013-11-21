@@ -157,10 +157,9 @@ set nobackup          " Don't keep backup files
 set nowritebackup     " Don't create a backup when overwriting a file
 set noswapfile        " Don't write swap files
 set updatetime=4000   " Set the time before plugins assume you're not typing
+set scrolloff=5       " Number of lines the cursor is to the edge before scrolling
 set list              " Show hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
-set formatoptions-=o  " Don't auto insert a comment when using O/o for a newline
-set scrolloff=5       " Number of lines the cursor is to the edge before scrolling
 
 " Completion options
 set complete=.,w,b,u,t
@@ -287,10 +286,12 @@ autocmd FileType objc      setlocal tabstop=4 shiftwidth=4 expandtab
 autocmd FileType gitcommit setlocal spell
 autocmd FileType vim       setlocal foldmethod=marker
 
-" Settings for podspecs
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufNewFile,BufReadPost,BufWrite Podfile   setlocal filetype=ruby
 autocmd BufReadPost *shellrc setlocal filetype=sh
+
+" Don't auto insert a comment when using O/o for a newline
+autocmd BufReadPost * setlocal formatoptions-=o
 
 " a.vim ObjC settings
 autocmd FileType objc let g:alternateExtensions_h = "m"
@@ -319,7 +320,7 @@ cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W')
 set laststatus=2 " Always show the statusline
 set t_Co=256     " Explicitly tell Vim that the terminal supports 256 colors
 
-" CTRL-P
+" CtRL-P
 let g:ctrlp_show_hidden = 1
 if exists('g:ctrlp_user_command')
   unlet g:ctrlp_user_command
