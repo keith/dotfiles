@@ -104,13 +104,15 @@ endif
 noremap  <F1> <nop>
 inoremap <F1> <nop>
 
-" Fold settings
-set nofoldenable               " Have all folds open by default
-set foldnestmax=10             " Set deepest fold to x levels
-set foldmethod=indent          " Decide where to fold based off syntax
-set foldcolumn=2               " The width of the gutter column showing folds by line
+" Fold settings ------ {{{
+set foldnestmax=10          " Set deepest fold to x levels
+set foldmethod=indent       " Decide where to fold based off syntax
+set foldcolumn=2            " The width of the gutter column showing folds by line
+set foldlevelstart=99       " Set the default level of open folds
+
 " Toggle folds with the space bar
 nnoremap <Space> za
+" }}}
 
 " Load MatchIt for % jumping
 runtime macros/matchit.vim
@@ -265,10 +267,6 @@ augroup ft_nginx
   autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
 augroup END
 " }}}
-
-" Set specific filetypes to fold by syntax
-autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml setlocal foldmethod=syntax
-autocmd Syntax c,cpp,ruby,rspec,vim,xml,xhtml,perl normal zR
 
 function! Marked()
   silent !mark %
