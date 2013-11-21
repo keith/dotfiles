@@ -42,9 +42,6 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/cpp.vim--Skvirsky'
 Bundle 'Yggdroot/indentLine'
 
-" Vim script repos
-Bundle 'a.vim'
-
 " Enable pathogen for plugin development
 " Using {} at the end of the path is horrible
 "   because it searches all folders need
@@ -291,9 +288,40 @@ autocmd BufReadPost *shellrc setlocal filetype=sh
 " Don't auto insert a comment when using O/o for a newline
 autocmd BufReadPost * setlocal formatoptions-=o
 
-" a.vim ObjC settings
-autocmd FileType objc let g:alternateExtensions_h = "m"
-autocmd FileType objc let g:alternateExtensions_m = "h"
+" Custom alternate header/implementation files functions ------ {{{
+function! Alternate()
+  if &modified
+    echomsg "Save buffer before alternating"
+    return 0
+  endif
+
+  let l:filename = expand("%:r") . "."
+  let l:extension = expand("%:e")
+  let l:alternates = ["h"]
+  if l:extension == "h"
+    let l:alternates = ["m", "c", "cpp", "mm"]
+  endif
+  let l:alternate = AlternateFor(l:filename, l:alternates)
+  if l:alternate == ""
+    echomsg "No alternate file for " . expand("%")
+  else
+    execute ":silent edit " . l:alternate
+  endif
+endfunction
+
+function! AlternateFor(filename, extensions)
+  let l:alternate = ""
+  for l:extension in a:extensions
+    let l:possible = a:filename . l:extension
+    if filereadable(l:possible)
+      return l:possible
+    endif
+  endfor
+
+  return l:alternate
+endfunction
+autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
+" }}}
 
 " ObjC curly brace error fix
 let c_no_curly_error = 1
