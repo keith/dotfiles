@@ -164,8 +164,8 @@ set list              " Show hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
-set complete=.,w,b,u,t
-set completeopt=longest,menuone,preview
+set complete=.,w,b,u,t,i
+set completeopt=menu,preview
 
 " Quicker timeouts for tmux + vim + iTerm
 set notimeout
@@ -433,7 +433,7 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 let g:used_javascript_libs = 'angularjs'
 
 " Supertab
-let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/']
+let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\']
 
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
