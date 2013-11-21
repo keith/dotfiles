@@ -132,32 +132,34 @@ else
 endif
 colorscheme solarized " Use the awesome solarized color scheme
 
-set ttyfast           " Set that we have a fast terminal
-set lazyredraw        " Don't redraw vim in all situations
-set synmaxcol=300     " The max number of columns to try and highlight
-set noerrorbells      " Don't make noise
-set visualbell        " Don't show bells
-set autoread          " watch for file changes and auto update
-set showmatch         " set show matching parenthesis
-set matchtime=2       " The amount of time matches flash
-set display=lastline  " Display super long wrapped lines
-set number            " Shows line numbers
-set ruler             " Shows current cursor location
-set nrformats-=octal  " Never use octal notation
-set mouse=a           " enable using the mouse if terminal emulator
-set hlsearch          " Highlight search terms
-set incsearch         " Show searches as you type
-set wrap              " Softwrap text
-set linebreak         " Don't wrap in the middle of words
-set ignorecase        " ignore case when searching
-set smartcase         " ignore case if search is lowercase, otherwise case-sensitive
-set title             " Change the terminal's title
-set nobackup          " Don't keep backup files
-set nowritebackup     " Don't create a backup when overwriting a file
-set noswapfile        " Don't write swap files
-set updatetime=4000   " Set the time before plugins assume you're not typing
-set scrolloff=5       " Number of lines the cursor is to the edge before scrolling
-set list              " Show hidden characters
+set ttyfast          " Set that we have a fast terminal
+set laststatus=2     " Always show the statusline
+set t_Co=256         " Explicitly tell Vim that the terminal supports 256 colors
+set lazyredraw       " Don't redraw vim in all situations
+set synmaxcol=300    " The max number of columns to try and highlight
+set noerrorbells     " Don't make noise
+set visualbell       " Don't show bells
+set autoread         " watch for file changes and auto update
+set showmatch        " set show matching parenthesis
+set matchtime=2      " The amount of time matches flash
+set display=lastline " Display super long wrapped lines
+set number           " Shows line numbers
+set ruler            " Shows current cursor location
+set nrformats-=octal " Never use octal notation
+set mouse=a          " enable using the mouse if terminal emulator
+set hlsearch         " Highlight search terms
+set incsearch        " Show searches as you type
+set wrap             " Softwrap text
+set linebreak        " Don't wrap in the middle of words
+set ignorecase       " ignore case when searching
+set smartcase        " ignore case if search is lowercase, otherwise case-sensitive
+set title            " Change the terminal's title
+set nobackup         " Don't keep backup files
+set nowritebackup    " Don't create a backup when overwriting a file
+set noswapfile       " Don't write swap files
+set updatetime=4000  " Set the time before plugins assume you're not typing
+set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
+set list             " Show hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
@@ -341,10 +343,6 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-
-" Powerline
-set laststatus=2 " Always show the statusline
-set t_Co=256     " Explicitly tell Vim that the terminal supports 256 colors
 
 " CtRL-P
 let g:ctrlp_show_hidden = 1
