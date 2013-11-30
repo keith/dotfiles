@@ -22,3 +22,6 @@
 [submodule "vim/src/investigate.vim"]
 	path = vim/src/investigate.vim
 	url = https://github.com/Keithbsmiley/investigate.vim.git
+[submodule "vim/src/tmux.vim"]
+	path = vim/src/tmux.vim
+	url = https://github.com/Keithbsmiley/tmux.vim.git
