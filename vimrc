@@ -331,6 +331,7 @@ let c_no_curly_error = 1
 " Cold Fusion correct comment type
 autocmd FileType c       setlocal commentstring=//\ %s
 autocmd FileType cf      setlocal commentstring=<!---\ %s\ --->
+autocmd FileType conkyrc setlocal commentstring=#\ %s
 autocmd FileType cpp     setlocal commentstring=//\ %s
 autocmd FileType crontab setlocal commentstring=#\ %s
 autocmd FileType css     setlocal commentstring=//\ %s
