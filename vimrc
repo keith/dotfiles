@@ -272,7 +272,9 @@ function! Marked()
   redraw!
 endfunction
 
-autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
+if has("mac")
+  autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
+endif
 autocmd FileType markdown  setlocal textwidth=72
 autocmd FileType make      setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType go        setlocal tabstop=4 shiftwidth=4 noexpandtab
