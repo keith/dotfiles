@@ -248,11 +248,17 @@ autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 " Nginx ------ {{{
 augroup ft_nginx
-  autocmd BufRead,BufNewFile /etc/nginx/conf/*            set ft=nginx
-  autocmd BufRead,BufNewFile /opt/nginx/conf/*            set ft=nginx
-  autocmd BufRead,BufNewFile /etc/nginx/sites-available/* set ft=nginx
-  autocmd BufRead,BufNewFile /opt/nginx/sites-available/* set ft=nginx
+  autocmd BufRead,BufNewFile /*/nginx/conf/*            setlocal filetype=nginx
+  autocmd BufRead,BufNewFile /*/nginx/sites-available/* setlocal filetype=nginx
   autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
+augroup END
+" }}}
+
+" Vim Help Files ------ {{{
+augroup ft_help
+  autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
+  autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
+  autocmd FileType help setlocal spell autoindent formatoptions+=2n
 augroup END
 " }}}
 
@@ -319,16 +325,10 @@ autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
 " ObjC curly brace error fix
 let c_no_curly_error = 1
 
-" Cold Fusion correct comment type
-autocmd FileType c       setlocal commentstring=//\ %s
-autocmd FileType cf      setlocal commentstring=<!---\ %s\ --->
-autocmd FileType conkyrc setlocal commentstring=#\ %s
-autocmd FileType cpp     setlocal commentstring=//\ %s
-autocmd FileType crontab setlocal commentstring=#\ %s
-autocmd FileType css     setlocal commentstring=//\ %s
-autocmd FileType go      setlocal commentstring=//\ %s
-autocmd FileType objc    setlocal commentstring=//\ %s
-autocmd FileType php     setlocal commentstring=//\ %s
+autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
+autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
+autocmd FileType c,cpp,css,go,objc,php setlocal commentstring=//\ %s
+setlocal commentstring=#\ %s
 
 " Save files on some focus lost events, like switching splits
 autocmd BufLeave,FocusLost * silent! wall
@@ -336,7 +336,7 @@ autocmd BufLeave,FocusLost * silent! wall
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
-" CtRL-P
+" CTRL-P
 let g:ctrlp_show_hidden = 1
 if exists('g:ctrlp_user_command')
   unlet g:ctrlp_user_command
@@ -397,7 +397,7 @@ let g:airline_theme='solarized'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" TagBar
+" TagBar ------ {{{
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 let g:tagbar_type_go = {
   \ 'ctagstype' : 'go',
@@ -426,8 +426,9 @@ let g:tagbar_type_go = {
   \ 'ctagsbin'  : 'gotags',
   \ 'ctagsargs' : '-sort -silent'
 \ }
+" }}}
 
-" Syntastic
+" Syntastic ------ {{{
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_flake8_args="--ignore=E501"
@@ -446,6 +447,7 @@ function! ToggleErrors()
   endif
 endfunction
 nnoremap <leader>e :call ToggleErrors()<cr>
+" }}}
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\']
