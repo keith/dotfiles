@@ -19,6 +19,19 @@ alias gdtf="git difftool -t fugitive"
 alias gba="git branch -a"
 alias grv="git remote -v"
 alias gsub="git submodule update --init --recursive"
+gl() {
+    local count=5
+    if [[ $# -gt 0 ]];then
+        local count=$1
+    fi
+
+    local format="format:%Cgreen%h%Creset %s%Cred%d%Creset"
+    if [[ $# -gt 1 ]];then
+        local format="$format %C(black bold)(by %an)%Creset"
+    fi
+
+    git --no-pager log -$count --topo-order --pretty=$format
+}
 
 alias s="subl"
 alias ss="subl ."
