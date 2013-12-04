@@ -103,7 +103,7 @@ noremap  <F1> <nop>
 inoremap <F1> <nop>
 
 " Fold settings ------ {{{
-set foldnestmax=10          " Set deepest fold to x levels
+set foldnestmax=2           " Set deepest fold to x levels
 set foldmethod=indent       " Decide where to fold based off syntax
 set foldcolumn=2            " The width of the gutter column showing folds by line
 set foldlevelstart=99       " Set the default level of open folds
@@ -114,7 +114,6 @@ nnoremap <Space> za
 
 " Load MatchIt for % jumping
 runtime macros/matchit.vim
-noremap <tab> %
 
 let &titleold=getcwd() " On quit reset title
 
@@ -213,6 +212,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Mappings for split resizing
+nnoremap + :resize +5<CR>
+nnoremap - :resize -5<CR>
+nnoremap ( :vertical resize -5<CR>
+nnoremap ) :vertical resize +5<CR>
 
 " Change the way splits open by default
 set splitbelow
