@@ -159,8 +159,8 @@ set nowritebackup    " Don't create a backup when overwriting a file
 set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
-set list             " Show hidden characters
 set gdefault         " Adds g at the end of substitutions by default
+set nolist           " Show hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
@@ -259,6 +259,8 @@ augroup ft_help
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
   autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
   autocmd FileType help setlocal spell autoindent formatoptions+=2n
+  autocmd FileType help setlocal iskeyword+=-
+  autocmd FileType help autocmd FileWritePost,BufWritePost <buffer> call pathogen#helptags()
 augroup END
 " }}}
 
@@ -451,7 +453,7 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " Supertab
-let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\']
+let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\', '*']
 
 " Clever-f
 let g:clever_f_across_no_line=1
