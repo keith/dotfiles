@@ -8,29 +8,25 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Shortcuts
-alias gs="git status"
-alias Gs="git status"
+alias gs="git status -sb"
+alias gss="git status"
+alias Gs="gs"
 alias gc="git clone"
+alias gp="git push"
 alias gd="git diff"
 alias gdt="git difftool"
 alias gdtf="git difftool -t fugitive"
-alias gdtm="git difftool -t mfugitive"
 alias gba="git branch -a"
 alias grv="git remote -v"
 alias gsub="git submodule update --init --recursive"
 
 alias s="subl"
 alias ss="subl ."
-alias v="vim"
-alias vv="vim ."
 
 # Vim
-alias vundle="vim +BundleInstall +qall"
-vundlereinstall() {
-  cd $HOME/.vim/bundle;
-  find . -maxdepth 1 ! -name "vundle" ! -name "." | xargs rm -rf
-  vundle;
-}
+alias vundle="vim +BundleClean +BundleInstall +qall"
+alias v="vim"
+alias vv="vim ."
 
 # Archives
 alias mktar="tar -pvczf"
@@ -66,9 +62,6 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
-#
 # Scripts
-#
-
 alias t="python $DOTFILES/scripts/t/t.py --task-dir $HOME/Dropbox/tasks --list tasks"
 
