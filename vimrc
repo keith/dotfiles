@@ -161,6 +161,7 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set list             " Show hidden characters
+set gdefault         " Adds g at the end of substitutions by default
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
@@ -189,16 +190,14 @@ inoremap <Up> <C-o>gk
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Use sane regexes.
-nnoremap / /\v
-vnoremap / /\v
-set gdefault " Adds g at the end of substitutions by default
+" Remap capital y to act more like other capital letters
+nnoremap Y y$
 
 " Force root permission saves
 cnoremap w!! w !sudo tee % >/dev/null
 
-" Open vimrc with leader->v
-nnoremap <leader>v  :tabedit $MYVIMRC<cr>
+" Edit vimrc with mapping
+nnoremap <leader>v :tabedit $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
@@ -460,7 +459,7 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 autocmd FileType vim let delimitMate_quotes = "' `"
 
 " investigate.vim
-nnoremap <S-k> :call investigate#Investigate()<cr>
+nnoremap K :call investigate#Investigate()<cr>
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
