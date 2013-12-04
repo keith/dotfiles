@@ -1,5 +1,6 @@
 # Source the major default settings shared
 # between zsh and bash
+
 if [[ ! -f $HOME/.shellrc ]];then
   echo "$HOME/.shellrc doesn't exist. Run ./manage.sh install again"
   return
@@ -25,9 +26,11 @@ do
 done
 
 unset configs
-if [[ -e $HOME/.coloroverride ]];then
-  colorize $(cat $HOME/.coloroverride)
-else
-  colorize
+if [[ -z "$SSH_CLIENT" ]];then
+  if [[ -e $HOME/.coloroverride ]];then
+    colorize $(cat $HOME/.coloroverride)
+  else
+    colorize
+  fi
 fi
 
