@@ -6,6 +6,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+alias :q="exit"
 
 # Shortcuts
 alias gs="git status -sb"
