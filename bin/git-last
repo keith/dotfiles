@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-#
-# Git diff last commit with head
-
-git diff HEAD^ HEAD
-

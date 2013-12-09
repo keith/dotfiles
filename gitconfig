@@ -34,8 +34,10 @@
   a     = add --all
   ap    = add -p
   d     = diff
+  last  = diff HEAD^ HEAD
   dt    = difftool
   dc    = diff --cached
+  undo  = reset --soft HEAD^
   ba    = branch -a
   rv    = remote -v
   sub   = submodule update --init --recursive
