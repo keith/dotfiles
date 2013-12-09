@@ -206,6 +206,7 @@ endif
 nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>tm :tabmove
+set showtabline=2       " Always show the tab bar
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
