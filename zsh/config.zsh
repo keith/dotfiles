@@ -1,5 +1,27 @@
 # Set prompt to % for users and # for root
-export PS1='%# '
+export PS1="%# "
+
+# Not sold on Git info in your prompt, but if I used it
+#  it would probably look a lot like this:
+# autoload -Uz vcs_info
+# # Colors:
+# # 9: Orange
+# # 6: Teal
+# # 5: Pink
+# # 4: Blue
+# # 3: Yellow
+# # 2: Green
+# # 1: Red
+# # 0: Black
+# zstyle ':vcs_info:*' unstagedstr '!'
+# zstyle ':vcs_info:*' stagedstr '?'
+# zstyle ':vcs_info:*' check-for-changes true
+# zstyle ':vcs_info:*' formats "(%F{2}%b%F{1}%u%F{2}%c%f)"
+# zstyle ':vcs_info:*' actionformats "(%F{2}%b%F{1}%u%F{2}%c%f) %F{4}%a%f"
+# zstyle ':vcs_info:*' enable git
+# setopt prompt_subst
+# export PS1='${vcs_info_msg_0_} %# '
+# precmd_functions=($precmd_functions vcs_info)
 
 fpath=($DOTFILES/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
@@ -56,5 +78,5 @@ export KEYTIMEOUT=1
 reset_rps1() {
   RPS1=""
 }
-precmd_functions=(reset_rps1)
+precmd_functions=($precmd_functions reset_rps1)
 
