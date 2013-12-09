@@ -6,29 +6,15 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias :q="exit"
 
-# Shortcuts
+# Git
 alias g="git"
-alias gs="g s"
-alias Gs="g s"
-alias gp="g p"
-alias gc="g c"
-alias gcl="g cl"
-alias ga="g a"
-alias gap="g ap"
-alias gd="g d"
-alias gdt="g dt"
-alias gdc="g dc"
-alias gba="g ba"
-alias grv="g rv"
-alias gsub="g sub"
-alias gl="g l"
 
 # Vim
 alias vundle="vim +BundleClean +BundleInstall +qall"
 alias v="vim"
 alias vv="vim ."
+alias :q="exit"
 
 # Archives
 alias mktar="tar -pvczf"
