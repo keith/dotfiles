@@ -12,3 +12,5 @@ do
   source $file
 done
 
+export PS1="\$ "
+
