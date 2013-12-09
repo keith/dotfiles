@@ -2,7 +2,6 @@
   name = Keith Smiley
   email = keithbsmiley@gmail.com
 [core]
-  quotepath = false
   excludesfile = ~/.gitignore_global
   editor = vim
 [push]
@@ -16,14 +15,10 @@
 [mergetool]
   prompt = false
 [merge]
+  tool = vimdiff
   log = true
 [color]
-  ui = true
-  diff = auto
-  status = auto
-  branch = auto
-[credential]
-  helper = cache --timeout=3600
+  ui = auto
 [github]
   user = keithbsmiley
 [help]

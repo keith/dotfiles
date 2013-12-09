@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(bashrc bin gemrc gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
+FILES=(bashrc bin gemrc gitconfig gitignore_global gvimrc hgrc inputrc irbrc irssi mutt muttrc npmrc rspec psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {
@@ -88,19 +88,6 @@ function is_osx () {
     fi
 }
 
-function install_gitconfig () {
-    local filename="gitconfig"
-    local prefix="linux"
-    if is_osx;then
-        prefix="osx"
-    fi
-
-    if [ ! -e $HOME/.$filename ];then
-        echo "Linking $PWD/$prefix/$filename to $HOME/.$filename"
-        ln -s $PWD/$prefix/$filename $HOME/.$filename
-    fi
-}
-
 # Fuction to print the usage and exit when there's bad input
 function die () {
     echo "Usage ./manage.sh {install|remove}"
@@ -115,7 +102,6 @@ fi
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
     install_links
-    install_gitconfig
 elif [[ $1 == "remove" ]]; then
     remove_links
 else
