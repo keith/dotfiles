@@ -15,6 +15,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
+Bundle 'airblade/vim-gitgutter'
+Bundle 'airblade/vim-rooter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'b4winckler/vim-objc'
 Bundle 'bling/vim-airline'
@@ -521,5 +523,4 @@ nnoremap K :call investigate#Investigate()<cr>
 if filereadable('.vimrc.local')
   source .vimrc.local
 end
-
 
