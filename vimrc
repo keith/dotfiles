@@ -57,6 +57,9 @@ syntax enable " Enable vim syntax highlighting as is (enable != on)
 
 " }}}
 
+" Remap the leader from \ to ,
+let mapleader=","
+
 " http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
 " http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
 set backupcopy=yes             " Allow vim to write crontab files
@@ -145,6 +148,7 @@ set matchtime=2      " The amount of time matches flash
 set display=lastline " Display super long wrapped lines
 set number           " Shows line numbers
 set ruler            " Shows current cursor location
+set cursorline       " Highlight the line the cursor is on
 set nrformats-=octal " Never use octal notation
 set mouse=a          " enable using the mouse if terminal emulator
 set hlsearch         " Highlight search terms
@@ -167,10 +171,13 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters f
 set complete=.,w,b,u,t,i
 set completeopt=menu,preview
 
-" Quicker timeouts for tmux + vim + iTerm
-set notimeout
-set ttimeout
-set ttimeoutlen=20
+set timeout
+set timeoutlen=1000
+set ttimeoutlen=100
+
+" Check for file specific vim settings in the last 3 lines of the file
+set modeline
+set modelines=3
 
 " Reselect visual blocks after movement
 vnoremap < <gv
@@ -213,6 +220,13 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+set winwidth=80         " Set the minimum window width for splits
+" Setup the height of vertical splits
+" https://www.destroyallsoftware.com/file-navigation-in-vim.html
+" Order is key
+set winheight=7
+set winminheight=7
+set winheight=999
 
 " Mappings for split resizing
 nnoremap + :resize +5<CR>
