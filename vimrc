@@ -209,11 +209,38 @@ if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
 endif
 
-" Tab mappings
+" Tab mappings ------ {{{
 nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>tm :tabmove
-set showtabline=2       " Always show the tab bar
+
+" Setup the format for the tab line syntax
+function! Tabline()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    let tab = i + 1
+    let winnr = tabpagewinnr(tab)
+    let buflist = tabpagebuflist(tab)
+    let bufnr = buflist[winnr - 1]
+    let bufname = bufname(bufnr)
+    let bufmodified = getbufvar(bufnr, "&mod")
+
+    let s .= '%' . tab . 'T'
+    let s .= (tab == tabpagenr() ? '%#TabLineSel#' : '%#TabLine#')
+    let s .= ' [' . tab .':'
+    let s .= len(buflist) . ']:'
+    let s .= (bufname != '' ? fnamemodify(bufname, ':t') . ' ' : '[No Name] ')
+
+    if bufmodified
+      let s .= '[+] '
+    endif
+  endfor
+
+  let s .= '%#TabLineFill#'
+  return s
+endfunction
+set tabline=%!Tabline()
+" }}}
 
 " Split window navigation
 nnoremap <C-h> <C-w>h
@@ -490,4 +517,5 @@ nnoremap K :call investigate#Investigate()<cr>
 if filereadable('.vimrc.local')
   source .vimrc.local
 end
+
 
