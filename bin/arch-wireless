@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sudo rmmod b43
+sudo rmmod ssb
+sudo modeprobe wl
+
+sudo lsmod | grep wl
+sudo lsmod | grep lib80211
+sudo depmod -a
