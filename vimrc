@@ -26,6 +26,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
+Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-commentary'
@@ -267,6 +268,9 @@ set splitright
 
 " Even out splits when vim is resized
 autocmd VimResized * :wincmd =
+
+" Switch to the last file
+nnoremap <leader><leader> <C-^>
 
 " Objective-C matching bracket shortcuts
 inoremap <C-n> <ESC>^i[<ESC>
