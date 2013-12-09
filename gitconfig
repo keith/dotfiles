@@ -27,3 +27,16 @@
   protocol = https
 [alias]
   punch = push --force
+  s     = status -sb
+  cl    = clone
+  c     = commit
+  p     = push
+  a     = add --all
+  ap    = add -p
+  d     = diff
+  dt    = difftool
+  dc    = diff --cached
+  ba    = branch -a
+  rv    = remote -v
+  sub   = submodule update --init --recursive
+  l     = log -5 --topo-order --pretty        = 'format:%Cgreen%h%Creset %s%Cred%d%Creset'
