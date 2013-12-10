@@ -137,6 +137,8 @@ else
   endif
 endif
 colorscheme solarized " Use the awesome solarized color scheme
+" Set the color of the selected item in the autocomplete menu
+highlight PmenuSel ctermfg=DarkYellow
 
 set ttyfast          " Set that we have a fast terminal
 set laststatus=2     " Always show the statusline
