@@ -22,7 +22,6 @@ Bundle 'b4winckler/vim-objc'
 Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'ervandew/supertab'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
@@ -515,7 +514,7 @@ function! ToggleErrors()
     Errors
   endif
 endfunction
-nnoremap <leader>e :call ToggleErrors()<cr>
+nnoremap <silent> <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " Supertab
@@ -535,7 +534,7 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 autocmd FileType vim let delimitMate_quotes = "' `"
 
 " investigate.vim
-nnoremap K :call investigate#Investigate()<cr>
+nnoremap <silent> K :call investigate#Investigate()<cr>
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
