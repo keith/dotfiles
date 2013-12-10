@@ -28,9 +28,8 @@
 [alias]
   punch = push --force
   s     = status -sb
-  cl    = clone
-  c     = commit
-  p     = push
+  c     = clone
+  com   = commit
   a     = add --all
   ap    = add -p
   d     = diff
@@ -41,5 +40,5 @@
   ba    = branch -a
   rv    = remote -v
   r     = reflog -5
-  sub   = submodule update --init --recursive
   l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset'
+  sub   = submodule update --init --recursive
