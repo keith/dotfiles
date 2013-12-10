@@ -301,6 +301,9 @@ autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 if &diff
   set modifiable
   set noreadonly
+  if tabpagenr('$') == 1
+    nnoremap ZZ :wqall<cr>
+  endif
 endif
 " }}}
 
