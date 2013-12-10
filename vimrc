@@ -245,11 +245,13 @@ endfunction
 set tabline=%!Tabline()
 " }}}
 
-" Split window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Split window navigation ------ {{{
+if !exists('$TMUX')
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+endif
 set winwidth=80         " Set the minimum window width for splits
 " Setup the height of vertical splits
 " https://www.destroyallsoftware.com/file-navigation-in-vim.html
@@ -257,6 +259,7 @@ set winwidth=80         " Set the minimum window width for splits
 set winheight=7
 set winminheight=7
 set winheight=999
+" }}}
 
 " Mappings for split resizing
 nnoremap + :resize +5<CR>
@@ -293,6 +296,13 @@ let g:ruby_path = system('echo $HOME/.rbenv/shims')
 " Make sure ObjC header files are treated properly
 autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
 autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+
+" Running as diff ------ {{{
+if &diff
+  set modifiable
+  set noreadonly
+endif
+" }}}
 
 " Nginx ------ {{{
 augroup ft_nginx
