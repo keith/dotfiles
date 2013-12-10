@@ -259,7 +259,6 @@ set winwidth=80         " Set the minimum window width for splits
 set winheight=7
 set winminheight=7
 set winheight=999
-" }}}
 
 " Mappings for split resizing
 nnoremap + :resize +5<CR>
@@ -273,6 +272,7 @@ set splitright
 
 " Even out splits when vim is resized
 autocmd VimResized * :wincmd =
+" }}}
 
 " Switch to the last file
 nnoremap <leader><leader> <C-^>
@@ -322,24 +322,27 @@ augroup ft_help
 augroup END
 " }}}
 
+" Markdown files ------ {{{
 function! Marked()
   silent !mark %
   redraw!
 endfunction
 
-if has("mac")
-  autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
-endif
-autocmd FileType markdown  setlocal textwidth=72
-autocmd FileType make      setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType go        setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType php       setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType sh        setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType python    setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent " Fix issue where comments cannot be moved from the first column with >>
-autocmd FileType objc      setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType gitcommit setlocal spell
+augroup ft_markdown
+  if has("mac")
+    autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
+  endif
+  autocmd FileType markdown    setlocal textwidth=72
+augroup END
+" }}}
+
+autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
+" Fix issue where comments cannot be moved from the first column with >>
+autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
+autocmd FileType gitcommit     setlocal spell
 autocmd BufReadPost *gitconfig setlocal filetype=gitconfig
-autocmd FileType vim       setlocal foldmethod=marker
+autocmd FileType vim           setlocal foldmethod=marker
 
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
 autocmd BufNewFile,BufReadPost,BufWrite Podfile   setlocal filetype=ruby
