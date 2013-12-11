@@ -313,6 +313,7 @@ augroup ft_nginx
   autocmd BufRead,BufNewFile /*/nginx/conf/*            setlocal filetype=nginx
   autocmd BufRead,BufNewFile /*/nginx/sites-available/* setlocal filetype=nginx
   autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
+  autocmd FileType nginx setlocal commentstring=#\ %s
 augroup END
 " }}}
 
