@@ -5,7 +5,7 @@
 
 set nocompatible " This must be first, because it changes other options
 
-" Plugin setup ----------------------------- {{{
+" Plugin setup ------ {{{
 filetype off " Required for Vundle setup
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -56,7 +56,6 @@ execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
-
 " }}}
 
 " Remap the leader from \ to ,
@@ -284,7 +283,7 @@ nnoremap <C-o> ^i[<ESC>
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
-nnoremap <F4> :let @/ = ""<CR>
+nnoremap <leader>4 :let @/ = ""<CR>
 
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
@@ -403,6 +402,11 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+
+
+" Disable netrw
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
