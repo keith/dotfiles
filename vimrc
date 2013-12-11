@@ -279,8 +279,8 @@ autocmd VimResized * :wincmd =
 nnoremap <leader><leader> <C-^>
 
 " Objective-C matching bracket shortcuts
-inoremap <C-o> <ESC>^i[<ESC>
-nnoremap <C-o> ^i[<ESC>
+" inoremap <leader>o <ESC>^i[<ESC>
+nnoremap <leader>o ^i[<ESC>
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
