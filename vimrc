@@ -317,6 +317,14 @@ augroup ft_nginx
 augroup END
 " }}}
 
+" Git ------ {{{
+augroup ft_git
+  autocmd BufReadPost COMMIT_EDITMSG setlocal filetype=gitcommit
+  autocmd BufReadPost *gitconfig setlocal filetype=gitconfig
+  autocmd FileType gitcommit     setlocal spell
+augroup END
+" }}}
+
 " Vim Help Files ------ {{{
 augroup ft_help
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
@@ -346,8 +354,6 @@ autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
 " Fix issue where comments cannot be moved from the first column with >>
 autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
-autocmd FileType gitcommit     setlocal spell
-autocmd BufReadPost *gitconfig setlocal filetype=gitconfig
 autocmd FileType vim           setlocal foldmethod=marker
 
 autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
