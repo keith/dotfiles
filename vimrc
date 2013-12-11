@@ -87,13 +87,7 @@ set backspace=indent,eol,start " Backspace settings
 set nostartofline              " Keep cursor in the same place after saves
 set showcmd                    " Show command information on the right side of the command line
 
-set wildmenu                   " Better completion in the vim command line
-set wildmode=longest,list,full " Completion settings
-" Ignore these folders for completions
-set wildignore+=.hg,.git,.svn  " Version control
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
-set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
-
+" Write undo tree to a file to resume from next time the file is opened
 if has("persistent_undo")
   set undolevels=2000            " The number of undo items to remember
   set undofile                   " Save undo history to files locally
@@ -118,15 +112,17 @@ nnoremap <Space> za
 " }}}
 
 " Load MatchIt for % jumping
-runtime macros/matchit.vim
+runtime! macros/matchit.vim
 
-let &titleold=getcwd() " On quit reset title
+" On quit reset title
+let &titleold=getcwd()
 
+" Setup colorscheme ------ {{{
 " Make sure the override file exists
 let s:filename = glob("$HOME/.coloroverride")
 if s:filename != ""
   " Set the background to the contents of the override file
-  exec 'set background=' . readfile(s:filename)[0]
+  execute 'set background=' . readfile(s:filename)[0]
 else
   let hour = strftime("%H") " Set the background light from 7am to 7pm
   if 7 <= hour && hour < 19
@@ -138,6 +134,7 @@ endif
 colorscheme solarized " Use the awesome solarized color scheme
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
+" }}}
 
 set ttyfast          " Set that we have a fast terminal
 set laststatus=2     " Always show the statusline
@@ -168,13 +165,20 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
-set nolist           " Show hidden characters
+set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
 set complete=.,w,b,u,t,i
 set completeopt=menu,preview
+set wildmenu                                     " Better completion in the vim command line
+set wildmode=longest,list,full                   " Completion settings
+" Ignore these folders for completions
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 
+" Set mapping and key timeouts
 set timeout
 set timeoutlen=1000
 set ttimeoutlen=100
@@ -286,6 +290,7 @@ nnoremap <leader>o ^i[<ESC>
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
 
+" Paste mode settings, not necessary with vim-unimpared
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
 set pastetoggle=<F2> " Toggle paste in insert mode
@@ -412,7 +417,6 @@ autocmd BufLeave,FocusLost * silent! wall
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
-
 " Disable netrw
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
@@ -458,7 +462,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
   try
     silent let selection = system(a:choice_command . " | selecta " . a:selecta_args)
   catch /Vim:Interrupt/
-    " Swallow the ^C so that the redraw below happens; otherwise there will be
+    " Catch the ^C so that the redraw below happens; otherwise there will be
     " leftovers from selecta on the screen
     redraw!
     return
@@ -476,9 +480,9 @@ nnoremap <leader>t :call SelectaCommand(SearchCommand(), "", ":split")<cr>
 " }}}
 
 " Airline
-let g:airline_theme='solarized'
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline_theme = 'solarized'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
 " TagBar ------ {{{
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
@@ -512,9 +516,9 @@ let g:tagbar_type_go = {
 " }}}
 
 " Syntastic ------ {{{
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_python_flake8_args="--ignore=E501"
+let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_python_flake8_args = "--ignore = E501"
 
 " Allow toggling of syntastic errors list
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
@@ -529,14 +533,14 @@ function! ToggleErrors()
     Errors
   endif
 endfunction
-nnoremap <silent> <leader>e :call ToggleErrors()<cr>
+nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " Supertab
 let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\', '*']
 
 " Clever-f
-let g:clever_f_across_no_line=1
+let g:clever_f_across_no_line = 1
 
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
