@@ -22,6 +22,7 @@ Bundle 'b4winckler/vim-objc'
 Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'majutsushi/tagbar'
@@ -339,6 +340,7 @@ augroup ft_markdown
 augroup END
 " }}}
 
+autocmd FileType json          setlocal foldmethod=syntax
 autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
 autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
 " Fix issue where comments cannot be moved from the first column with >>
@@ -462,6 +464,8 @@ endfunction
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <C-p> :call SelectaCommand(SearchCommand(), "", ":e")<cr>
 nnoremap <C-t> :call SelectaCommand(SearchCommand(), "", ":tabnew")<cr>
+nnoremap <leader>p :call SelectaCommand(SearchCommand(), "", ":vsplit")<cr>
+nnoremap <leader>t :call SelectaCommand(SearchCommand(), "", ":split")<cr>
 " }}}
 
 " Airline
