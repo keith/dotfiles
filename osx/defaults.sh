@@ -94,8 +94,8 @@ defaults write com.apple.dock orientation -string "left"
 defaults write com.apple.dock autohide -bool true
 
 # Change the auto-hiding Dock delay
-defaults write com.apple.dock autohide-delay -float 0.15
-defaults write com.apple.dock autohide-time-modifier -float 0.15
+defaults write com.apple.dock autohide-delay -float 0.05
+defaults write com.apple.dock autohide-time-modifier -float 0.05
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
