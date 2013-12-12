@@ -113,6 +113,8 @@ nnoremap <Space> za
 
 " Load MatchIt for % jumping
 runtime! macros/matchit.vim
+" Load man page plugin for :Man command
+runtime ftplugin/man.vim
 
 " On quit reset title
 let &titleold=getcwd()
