@@ -184,7 +184,8 @@ sudo pmset -a sleep 0
 sudo pmset -a womp 1
 
 # Power button shows shutdown dialog <=10.8
-sudo pmset -a powerbutton 0
+# Removed *intentionally* in Mavericks
+# sudo pmset -a powerbutton 0
 
 # Don't restart after power failure
 sudo pmset -a autorestart 0
