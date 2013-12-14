@@ -406,17 +406,17 @@ autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
 " }}}
 
 " Tab function ------ {{{
-let g:invalid_tab_chars = ['^', '\s', '#', '/', '\\', '*']
-function! TabWrapper()
-  let l:col = col('.') - 1
-  let l:lastchar = getline('.')[l:col - 1]
-  if !l:col || (getline('.')[l:col - 1] =~ '\k' && index(g:invalid_tab_chars, l:lastchar) < 0)
-    return "\<C-p>"
-  else
-    return "\<tab>"
-  endif
-endfunction
-inoremap <tab> <C-r>=TabWrapper()<CR>
+" let g:invalid_tab_chars = ['^', '\s', '#', '/', '\\', '*']
+" function! TabWrapper()
+"   let l:col = col('.') - 1
+"   let l:lastchar = getline('.')[l:col - 1]
+"   if l:col > 0 && (getline('.')[l:col - 1] =~ '\k' && index(g:invalid_tab_chars, l:lastchar) < 0)
+"     return "\<C-p>"
+"   else
+"     return "\<tab>"
+"   endif
+" endfunction
+" inoremap <tab> <C-r>=TabWrapper()<CR>
 " }}}
 
 " ObjC curly brace error fix
