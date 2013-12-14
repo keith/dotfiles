@@ -408,9 +408,10 @@ autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
 " ObjC curly brace error fix
 let c_no_curly_error = 1
 
+autocmd FileType css setlocal commentstring=/*\ %s\ */
 autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
 autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
-autocmd FileType c,cpp,css,go,objc,php setlocal commentstring=//\ %s
+autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
 setlocal commentstring=#\ %s
 
 " Save files on some focus lost events, like switching splits
