@@ -278,7 +278,10 @@ set splitbelow
 set splitright
 
 " Even out splits when vim is resized
-autocmd VimResized * :wincmd =
+augroup vim_splits
+  autocmd!
+  autocmd VimResized * :wincmd =
+augroup END
 " }}}
 
 " Switch to the last file
@@ -302,8 +305,6 @@ set showmode         " Display the mode when it changes
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Make sure ObjC header files are treated properly
-autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
-autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
 " Running as diff ------ {{{
 if &diff
@@ -317,6 +318,7 @@ endif
 
 " Nginx ------ {{{
 augroup ft_nginx
+  autocmd!
   autocmd BufRead,BufNewFile /*/nginx/conf/*            setlocal filetype=nginx
   autocmd BufRead,BufNewFile /*/nginx/sites-available/* setlocal filetype=nginx
   autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
@@ -326,14 +328,16 @@ augroup END
 
 " Git ------ {{{
 augroup ft_git
+  autocmd!
   autocmd BufReadPost COMMIT_EDITMSG setlocal filetype=gitcommit
-  autocmd BufReadPost *gitconfig setlocal filetype=gitconfig
-  autocmd FileType gitcommit     setlocal spell
+  autocmd BufReadPost *gitconfig     setlocal filetype=gitconfig
+  autocmd FileType    gitcommit      setlocal spell
 augroup END
 " }}}
 
 " Vim Help Files ------ {{{
 augroup ft_help
+  autocmd!
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
   autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
   autocmd FileType help setlocal spell autoindent formatoptions+=2n
@@ -349,6 +353,7 @@ function! Marked()
 endfunction
 
 augroup ft_markdown
+  autocmd!
   if has("mac")
     autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
   endif
@@ -356,19 +361,39 @@ augroup ft_markdown
 augroup END
 " }}}
 
-autocmd FileType json          setlocal foldmethod=syntax
-autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
-autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
-" Fix issue where comments cannot be moved from the first column with >>
-autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
-autocmd FileType vim           setlocal foldmethod=marker
+" Various filetype settings ------ {{{
+augroup ft_settings
+  autocmd!
+  autocmd FileType json          setlocal foldmethod=syntax
+  autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
+  autocmd FileType vim           setlocal foldmethod=marker
 
-autocmd BufNewFile,BufReadPost,BufWrite *.podspec setlocal filetype=ruby
-autocmd BufNewFile,BufReadPost,BufWrite Podfile   setlocal filetype=ruby
-autocmd BufReadPost *shellrc setlocal filetype=sh
+  " Fix issue where comments cannot be moved from the first column with >>
+  autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
-" Don't auto insert a comment when using O/o for a newline
-autocmd BufReadPost * setlocal formatoptions-=o
+  autocmd BufNewFile,BufReadPost *.podspec setlocal filetype=ruby
+  autocmd BufNewFile,BufReadPost Podfile   setlocal filetype=ruby
+  autocmd BufReadPost *shellrc setlocal filetype=sh
+
+  " ObjC and specta settings
+  autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
+  autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
+  autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+
+  " Comment string settings
+  setlocal commentstring=#\ %s
+  autocmd FileType css setlocal commentstring=/*\ %s\ */
+  autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
+  autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
+  autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
+
+  " Save files on some focus lost events, like switching splits
+  autocmd BufLeave,FocusLost * silent! wall
+
+  " Don't auto insert a comment when using O/o for a newline
+  autocmd BufReadPost * setlocal formatoptions-=o
+augroup END
+" }}}
 
 " Custom alternate header/implementation files functions ------ {{{
 function! Alternate()
@@ -402,7 +427,11 @@ function! AlternateFor(filename, extensions)
 
   return l:alternate
 endfunction
-autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
+
+augroup alternate_headers
+  autocmd!
+  autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
+augroup END
 " }}}
 
 " Tab function ------ {{{
@@ -422,14 +451,6 @@ autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
 " ObjC curly brace error fix
 let c_no_curly_error = 1
 
-autocmd FileType css setlocal commentstring=/*\ %s\ */
-autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
-autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
-autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
-setlocal commentstring=#\ %s
-
-" Save files on some focus lost events, like switching splits
-autocmd BufLeave,FocusLost * silent! wall
 
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
@@ -566,8 +587,12 @@ nnoremap <Leader>s :call RunNearestSpec()<CR>
 " nnoremap <Leader>l :call RunLastSpec()<CR>
 " nnoremap <Leader>a :call RunAllSpecs()<CR>
 
-" delimitMate don't match " in vim script
-autocmd FileType vim let delimitMate_quotes = "' `"
+" delimitMate ------ {{{
+augroup delimate_settings
+  autocmd!
+  autocmd FileType vim let delimitMate_quotes = "' `"
+augroup END
+" }}}
 
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
