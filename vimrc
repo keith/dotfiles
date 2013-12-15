@@ -134,6 +134,7 @@ else
   endif
 endif
 colorscheme solarized " Use the awesome solarized color scheme
+call togglebg#map("") " Make sure the :ToggleBG function exists
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
 " }}}
