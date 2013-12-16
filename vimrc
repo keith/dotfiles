@@ -336,7 +336,7 @@ endif
 augroup ft_css_sass
   autocmd!
   autocmd FileType css setlocal commentstring=/*\ %s\ */
-  autocmd FileType css,scss.css autocmd setlocal foldmethod=marker foldmarker={,}
+  autocmd FileType css,scss.css setlocal foldmethod=marker foldmarker={,}
   autocmd FileType css,scss.css autocmd BufReadPost *
         \ inoremap <buffer> {<CR> {<CR><CR>}<ESC>ki<tab>
 augroup END
