@@ -102,8 +102,8 @@ noremap  <F1> <nop>
 inoremap <F1> <nop>
 
 " Fold settings ------ {{{
-set foldnestmax=2           " Set deepest fold to x levels
-set foldmethod=indent       " Decide where to fold based off syntax
+set foldnestmax=5           " Set deepest fold to x levels
+set foldmethod=indent       " Decide where to fold based
 set foldcolumn=2            " The width of the gutter column showing folds by line
 set foldlevelstart=99       " Set the default level of open folds
 
@@ -385,6 +385,13 @@ augroup ft_markdown
     autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
   endif
   autocmd FileType markdown    setlocal textwidth=72
+augroup END
+" }}}
+
+" Clojure files ------ {{{
+augroup ft_clojure
+  autocmd!
+  autocmd FileType clojure setlocal foldmethod=marker foldmarker=(,)
 augroup END
 " }}}
 
