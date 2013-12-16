@@ -214,7 +214,7 @@ nnoremap Y y$
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Edit vimrc with mapping
-nnoremap <leader>v :tabedit $MYVIMRC<cr>
+nnoremap <leader>ev :tabedit $MYVIMRC<cr>
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
@@ -285,8 +285,14 @@ augroup vim_splits
 augroup END
 " }}}
 
+" Better movement
+nnoremap H ^
+
 " Switch to the last file
 nnoremap <leader><leader> <C-^>
+
+" Move to last edit location and put it in the center of the screen
+nnoremap <C-o> <C-o>zz
 
 " Objective-C matching bracket shortcuts
 " inoremap <leader>o <ESC>^i[<ESC>
@@ -298,6 +304,9 @@ nnoremap <leader>4 :let @/ = ""<CR>
 
 " Clean trailing whitespace
 nnoremap <leader>w mi:%s/\s\+$//<CR>:let @/=''<CR>`i
+
+" Unfuck my screen
+nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
 " Paste mode settings, not necessary with vim-unimpared
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
@@ -396,6 +405,12 @@ augroup ft_settings
 
   " Don't auto insert a comment when using O/o for a newline
   autocmd BufReadPost * setlocal formatoptions-=o
+
+  " Return to the same position you left the file in
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   execute "normal g`\"zz" |
+    \ endif
 augroup END
 " }}}
 
