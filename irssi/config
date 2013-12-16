@@ -194,3 +194,7 @@ settings = {
     reuse_unused_windows = "yes";
   };
 };
+ignores = (
+  { mask = "JOINS"; level = "ALL"; },
+  { level = "ALL"; channels = ( "#vim" ); }
+);
