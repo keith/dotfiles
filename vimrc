@@ -289,6 +289,7 @@ augroup END
 
 " Better movement
 nnoremap H ^
+nnoremap L g_
 
 " Switch to the last file
 nnoremap <leader><leader> <C-^>

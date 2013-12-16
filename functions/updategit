@@ -32,6 +32,6 @@ updategit() {
       fi
 
       cd ..
-  done  
+  done
 }
 
