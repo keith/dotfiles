@@ -334,6 +334,8 @@ endif
 " CSS ------ {{{
 augroup ft_css_sass
   autocmd!
+  autocmd FileType css setlocal commentstring=/*\ %s\ */
+  autocmd FileType css,scss.css autocmd setlocal foldmethod=marker foldmarker={,}
   autocmd FileType css,scss.css autocmd BufReadPost *
         \ inoremap <buffer> {<CR> {<CR><CR>}<ESC>ki<tab>
 augroup END
@@ -405,7 +407,6 @@ augroup ft_settings
 
   " Comment string settings
   setlocal commentstring=#\ %s
-  autocmd FileType css setlocal commentstring=/*\ %s\ */
   autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
   autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
