@@ -195,5 +195,6 @@ settings = {
   };
 };
 ignores = (
-  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vim" ); }
+  { level = "JOINS PARTS QUITS NICKS"; channels = ( "#vim" ); },
+  { level = "JOINS PARTS QUITS NICKS"; }
 );

@@ -25,6 +25,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
+Bundle 'guns/vim-clojure-static'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
@@ -168,7 +170,7 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
-set list             " Show/Hide hidden characters
+set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
 " Completion options
@@ -290,6 +292,7 @@ augroup END
 " Better movement
 nnoremap H ^
 nnoremap L g_
+nnoremap <tab> %
 
 " Switch to the last file
 nnoremap <leader><leader> <C-^>
@@ -391,6 +394,9 @@ augroup END
 augroup ft_clojure
   autocmd!
   autocmd FileType clojure setlocal foldmethod=marker foldmarker=(,)
+  autocmd FileType clojure RainbowParenthesesActivate
+  autocmd syntax clojure RainbowParenthesesLoadRound
+  autocmd syntax clojure RainbowParenthesesLoadSquare
 augroup END
 " }}}
 
@@ -423,7 +429,7 @@ augroup ft_settings
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
-  autocmd BufReadPost * setlocal formatoptions-=o
+  autocmd VimEnter * setlocal formatoptions-=o
 
   " Return to the same position you left the file in
   autocmd BufReadPost *
