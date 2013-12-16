@@ -133,7 +133,6 @@ else
     set background=dark
   endif
 endif
-let g:solarized_visibility="low"
 colorscheme solarized " Use the awesome solarized color scheme
 call togglebg#map("") " Make sure the :ToggleBG function exists
 " Set the color of the selected item in the autocomplete menu
@@ -384,7 +383,7 @@ augroup ft_markdown
   if has("mac")
     autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
   endif
-  autocmd FileType markdown    setlocal textwidth=72
+  autocmd FileType markdown setlocal textwidth=72 spell
 augroup END
 " }}}
 
@@ -635,6 +634,7 @@ augroup END
 
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
+
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
