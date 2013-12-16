@@ -296,6 +296,9 @@ nnoremap <leader>o ^i[<ESC>
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
 
+" Clean trailing whitespace
+nnoremap <leader>w mi:%s/\s\+$//<CR>:let @/=''<CR>`i
+
 " Paste mode settings, not necessary with vim-unimpared
 " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
