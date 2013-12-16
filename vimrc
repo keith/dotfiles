@@ -196,10 +196,12 @@ vnoremap > >gv
 
 " Move as expected on wrapped lines
 noremap j gj
+noremap gj j
 noremap <Down> gj
 inoremap <Down> <C-o>gj
 
 noremap k gk
+noremap gk k
 noremap <Up> gk
 inoremap <Up> <C-o>gk
 
@@ -327,6 +329,14 @@ if &diff
     nnoremap ZZ :wqall<cr>
   endif
 endif
+" }}}
+
+" CSS ------ {{{
+augroup ft_css_sass
+  autocmd!
+  autocmd FileType css,scss.css autocmd BufReadPost *
+        \ inoremap <buffer> {<CR> {<CR><CR>}<ESC>ki<tab>
+augroup END
 " }}}
 
 " Nginx ------ {{{
