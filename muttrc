@@ -63,13 +63,13 @@ hdr_order Date From To Cc
 alternative_order text/plain text/html *
 
 # Sidebar patch settings
-set sidebar_delim   = '│'
-set sidebar_visible = yes
-set sidebar_shortpath = yes
-set sidebar_width   = 30
-bind index,pager <down>   sidebar-next
-bind index,pager <up>     sidebar-prev
-bind index,pager <right>  sidebar-open
+# set sidebar_delim   = '│'
+# set sidebar_visible = yes
+# set sidebar_shortpath = yes
+# set sidebar_width   = 30
+# bind index,pager <down>   sidebar-next
+# bind index,pager <up>     sidebar-prev
+# bind index,pager <right>  sidebar-open
 
 # Keybindings
 bind index gg first-entry
