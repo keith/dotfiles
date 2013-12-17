@@ -24,10 +24,10 @@ Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'godlygeek/tabular'
 Bundle 'guns/vim-clojure-static'
 Bundle 'junegunn/vim-easy-align'
 Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
@@ -358,7 +358,6 @@ augroup END
 " Git ------ {{{
 augroup ft_git
   autocmd!
-  autocmd BufReadPost COMMIT_EDITMSG setlocal filetype=gitcommit
   autocmd BufReadPost *gitconfig     setlocal filetype=gitconfig
   autocmd FileType    gitcommit      setlocal spell
 augroup END
