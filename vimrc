@@ -428,7 +428,7 @@ augroup ft_settings
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
-  autocmd VimEnter * setlocal formatoptions-=o
+  autocmd BufReadPost,VimEnter * setlocal formatoptions-=o
 
   " Return to the same position you left the file in
   autocmd BufReadPost *
