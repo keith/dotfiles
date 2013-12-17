@@ -26,8 +26,8 @@ Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/vim-clojure-static'
+Bundle 'junegunn/vim-easy-align'
 Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
@@ -45,7 +45,6 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-scripts/cpp.vim--Skvirsky'
 Bundle 'Yggdroot/indentLine'
 
 " Enable pathogen for plugin development
@@ -410,8 +409,8 @@ augroup ft_settings
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
-  autocmd BufNewFile,BufReadPost *.podspec setlocal filetype=ruby
-  autocmd BufNewFile,BufReadPost Podfile   setlocal filetype=ruby
+  autocmd BufNewFile,BufReadPost,BufWritePost *.podspec setlocal filetype=ruby
+  autocmd BufNewFile,BufReadPost,BufWritePost Podfile   setlocal filetype=ruby
   autocmd BufReadPost *shellrc setlocal filetype=sh
 
   " ObjC and specta settings
