@@ -641,6 +641,9 @@ augroup END
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
 
+" vim-easy-align
+" Doesn't work with `vnoremap`
+vmap <Enter> <Plug>(EasyAlign)
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
