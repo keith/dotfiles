@@ -428,7 +428,9 @@ augroup ft_settings
   autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
 
   " Comment string settings
-  setlocal commentstring=#\ %s
+  if empty(&commentstring)
+    setlocal commentstring=#\ %s
+  endif
   autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
   autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
@@ -508,8 +510,8 @@ let c_no_curly_error = 1
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
 " Disable netrw
-let g:loaded_netrw       = 1
-let g:loaded_netrwPlugin = 1
+" let g:loaded_netrw       = 1
+" let g:loaded_netrwPlugin = 1
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
