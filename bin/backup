@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+PROG=$0
+
+function show_help() {
+    echo "Usage $PROG [{DEST} {SRC} {EXCLUDE}]"
+    return
+}
+
+function log() {
+    echo $1
+    logger -t $PROG $1
+}
+
+shopt -s nocasematch
+if [[ $1 == "help" || $# -gt 3 ]];then
+    show_help
+    exit
+fi
+shopt -u nocasematch
+
+DEST="/Volumes/Backup/"
+SRC="/"
+EXCLUDE="$HOME/.backupignore"
+
+if [[ ! -z $1 ]];then
+    DEST=$1
+fi
+
+if [[ ! -z $2 ]];then
+    SRC=$2
+fi
+
+if [[ ! -z $3 ]];then
+    EXCLUDE=$3
+fi
+
+if [[ ! -w $DEST ]];then
+    log "Cannot write to $DEST"
+    exit
+fi
+
+if [[ ! -r $SRC ]];then
+    log "Cannot read $SRC"
+    exit
+fi
+
+log "Starting backup"
+
+sudo rsync  --acls \
+            --archive \
+            --delete \
+            --delete-excluded \
+            --exclude-from=$EXCLUDE \
+            --hard-links \
+            --ignore-errors \
+            --one-file-system \
+            --sparse \
+            --stats \
+            --verbose \
+            --xattrs \
+            "$SRC" "$DEST"
+
+log "Finished backup"
+
