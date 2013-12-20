@@ -656,6 +656,9 @@ nnoremap <silent> K :call investigate#Investigate()<cr>
 " Doesn't work with `vnoremap`
 vmap <Enter> <Plug>(EasyAlign)
 
+" vim-rooter
+let g:rooter_manual_only = 1
+
 " Local vimrc settings
 if filereadable('.vimrc.local')
   source .vimrc.local
