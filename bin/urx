@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ 7 -le $(date +%H) && $(date +%H) -lt 19 ]];then
+    urxvt --background \#fdf6e3 --foreground \#657b83
+else
+    urxvt --background \#002b36 --foreground \#eee8d5
+fi
+
