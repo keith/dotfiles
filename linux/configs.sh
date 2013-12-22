@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(terminator)
+FILES=(terminator awesome)
 p=$HOME/.config
 dir=$DOTFILES/linux/configs
 
@@ -25,8 +25,7 @@ function new_path() {
 }
 
 function install_links() {
-    for FILE in ${FILES[@]}
-    do
+    for FILE in ${FILES[@]};do
         link $FILE
     done
 }
