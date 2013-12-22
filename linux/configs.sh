@@ -36,5 +36,4 @@ if [[ ! -d "$p" ]];then
 fi
 
 install_links
-echo "Done linking configs"
 
