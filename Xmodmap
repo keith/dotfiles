@@ -1,0 +1,4 @@
+pointer = 1 2 3 5 4 7 6 8 9 10 11 12
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
