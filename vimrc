@@ -511,6 +511,7 @@ let c_no_curly_error = 1
 " Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 cnoreabbrev ` ~
+cnoreabbrev `` `
 
 " Disable netrw
 " let g:loaded_netrw       = 1
