@@ -1,1 +1,10 @@
-text/html; lynx -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+# HTML
+text/html; lynx -display_charset=utf-8 -width=78 -nolist -dump %s; nametemplate=%s.html; copiousoutput
+
+# Images
+image/gif; feh %s
+image/jpeg; feh %s
+image/jpg; feh %s
+image/pjpeg; feh %s
+image/png; feh %s
+

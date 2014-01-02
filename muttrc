@@ -29,10 +29,9 @@ folder-hook . 'push <collapse-all>'
 
 # Don't exit message when space is pressed at the end
 set pager_stop
+
 # Vim like keybinds
 set editor = "vim"
-bind pager j next-line
-bind pager k previous-line
 
 # Don't prompt for stuff when replying
 set fast_reply
@@ -90,13 +89,12 @@ set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/enriched text/html
-bind pager k  previous-line
-bind pager j  next-line
+auto_view text/x-vcard text/html text/enriched
+bind pager j next-line
+bind pager k previous-line
 bind pager gg top
 bind pager G  bottom
 bind pager R  group-reply
-set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-alternative_order text/plain text/enriched text/html
 
 # Gmail-style keyboard shortcuts
 macro pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
