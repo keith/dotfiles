@@ -401,6 +401,14 @@ augroup ft_markdown
 augroup END
 " }}}
 
+" Mail files ------ {{{
+augroup ft_mail
+  autocmd BufRead,BufNewFile *mutt-* setfiletype mail
+  autocmd FileType mail setlocal textwidth=78
+  autocmd FileType mail setlocal spell
+augroup END
+" }}}
+
 " Clojure files ------ {{{
 augroup ft_clojure
   autocmd!
