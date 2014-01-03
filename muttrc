@@ -14,6 +14,13 @@ set sig_dashes = no
 set sig_on_top = yes
 set signature = $HOME/.mutt/signature
 set hostname = gmail.com
+set forward_format = "Fwd: %s" # format of subject when forwarding
+set pager_stop                 # Don't exit message when space is pressed at the end
+set editor = "vim"             # Vim like keybinds
+set fast_reply                 # Don't prompt for stuff when replying
+set reply_to                   # Reply to the address in the reply to header
+set delete = yes               # Delete messages without asking when Mutt is quit
+set include                    # include message in replies
 
 # Mailboxes
 set folder = "imaps://imap.gmail.com:993"
@@ -27,21 +34,6 @@ set sort=threads
 unset collapse_unread
 folder-hook . 'push <collapse-all>'
 
-# Don't exit message when space is pressed at the end
-set pager_stop
-
-# Vim like keybinds
-set editor = "vim"
-
-# Don't prompt for stuff when replying
-set fast_reply
-
-# Reply to the address in the reply to header
-set reply_to
-
-# Delete messages without asking when Mutt is quit
-set delete = yes
-
 # File paths, caches, mailcap, theme
 set header_cache=$HOME/.mutt/cache/headers
 set message_cachedir=$HOME/.mutt/cache/bodies
@@ -52,7 +44,6 @@ source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
 set move = no
 # Automatically delete marked messages when switching boxes
 set delete
-set include
 set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
 ignore "Authentication-Results:"
@@ -95,6 +86,7 @@ bind pager k previous-line
 bind pager gg top
 bind pager G  bottom
 bind pager R  group-reply
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 # Gmail-style keyboard shortcuts
 macro pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
