@@ -24,9 +24,9 @@ Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'godlygeek/tabular'
 Bundle 'guns/vim-clojure-static'
 Bundle 'junegunn/goyo.vim'
-Bundle 'junegunn/vim-easy-align'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
@@ -406,6 +406,7 @@ augroup ft_mail
   autocmd BufRead,BufNewFile *mutt-* setfiletype mail
   autocmd FileType mail setlocal textwidth=78
   autocmd FileType mail setlocal spell
+  autocmd FileType mail autocmd BufReadPost * let g:airline#extensions#whitespace#enabled = 0
 augroup END
 " }}}
 
