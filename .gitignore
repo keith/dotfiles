@@ -9,6 +9,7 @@ bin/yuicompressor*
 irssi/config.autosave
 mutt/cache
 mutt/certificates
+mutt/offlineimaphelpers.pyc
 
 ####### Linux #######
 !.gitignore

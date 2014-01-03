@@ -1,0 +1,38 @@
+[general]
+ui         = TTY.TTYUI
+accounts   = KeithBSmiley
+pythonfile =~/.mutt/offlineimaphelpers.py
+fsync      = False
+
+[Account KeithBSmiley]
+localrepository  = KeithBSmiley-Local
+remoterepository = KeithBSmiley-Remote
+status_backend   = sqlite
+# postsynchook     = notmuch new
+
+[Repository KeithBSmiley-Local]
+type = Maildir
+localfolders = ~/.mail/keithbsmiley-gmail.com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository KeithBSmiley-Remote]
+maxconnections = 1
+type = Gmail
+remoteuser = keithbsmiley@gmail.com
+remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com", server="imap.gmail.com")
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             ]
