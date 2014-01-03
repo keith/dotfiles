@@ -2,7 +2,7 @@ servers = (
   {
     address = "66.175.208.254";
     port = "6667";
-    autoconnect = "yes";
+    autoconnect = "no";
     chatnet = "Linode";
   },
   {
@@ -11,7 +11,7 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
-    autoconnect = "no";
+    autoconnect = "yes";
   }
 );
 
