@@ -42,3 +42,4 @@
   r     = reflog -5
   l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset'
   sub   = submodule update --init --recursive
+  pul   = pull
