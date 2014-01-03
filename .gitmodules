@@ -25,3 +25,6 @@
 [submodule "vim/src/tmux.vim"]
 	path = vim/src/tmux.vim
 	url = https://github.com/Keithbsmiley/tmux.vim.git
+[submodule "scripts/mutt-notmuch"]
+	path = scripts/mutt-notmuch
+	url = https://github.com/honza/mutt-notmuch-py.git
