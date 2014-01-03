@@ -1,19 +1,17 @@
-# Account info
-set imap_user = "keithbsmiley@gmail.com"
-set imap_pass = $EP
-set imap_keepalive = 300
-set mail_check = 120
-set timeout = 300
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
 
-set smtp_url = "smtp://keithbsmiley@smtp.gmail.com:587/"
-set smtp_pass = $EP
+set from     = "keithbsmiley@gmail.com"
+set sendmail = "/usr/local/bin/msmtp -a keithbsmiley"
+set sendmail_wait = 0 # Wait until the email is sent successfully
+unset record # Don't save sent email since it will be sync'd next time
 
+set folder           = ~/.mail               # mailbox location
 set from = "keithbsmiley@gmail.com"
 set realname = "Keith Smiley"
 set sig_dashes = no
 set sig_on_top = yes
-set signature = $HOME/.mutt/signature
-set hostname = gmail.com
 set forward_format = "Fwd: %s" # format of subject when forwarding
 set pager_stop                 # Don't exit message when space is pressed at the end
 set editor = "vim"             # Vim like keybinds
@@ -22,29 +20,41 @@ set reply_to                   # Reply to the address in the reply to header
 set delete = yes               # Delete messages without asking when Mutt is quit
 set include                    # include message in replies
 
-# Mailboxes
-set folder = "imaps://imap.gmail.com:993"
-set spoolfile = "+INBOX"
-set imap_check_subscribed
-set postponed = "+[Gmail]/Drafts"
-set record = "+[Gmail]/Sent Mail"
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+set beep_new             # bell on new mails
+set pipe_decode          # strip headers and eval mimes when piping
+set thorough_search      # strip headers and eval mimes before searching
 
 # Threading
-set sort=threads
+set date_format = "%m/%d"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+set sort = threads                         # like gmail
+set sort_aux = reverse-last-date-received  # like gmail
 unset collapse_unread
+set uncollapse_jump                        # don't collapse on an unread message
 folder-hook . 'push <collapse-all>'
+set sort_re                                # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
 # File paths, caches, mailcap, theme
-set header_cache=$HOME/.mutt/cache/headers
-set message_cachedir=$HOME/.mutt/cache/bodies
-set certificate_file=$HOME/.mutt/certificates
-set mailcap_path  = $HOME/.mutt/mailcap
+set alias_file       = $HOME/.mutt/aliases
+set certificate_file = $HOME/.mutt/certificates
+set header_cache     = $HOME/.mutt/cache/headers
+set mailcap_path     = $HOME/.mutt/mailcap
+set message_cachedir = $HOME/.mutt/cache/bodies
+set signature        = $HOME/.mutt/signature
+set tmpdir           = $HOME/.mutt/temp
 source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
 
-set move = no
 # Automatically delete marked messages when switching boxes
-set delete
-set sort_aux = 'reverse-last-date-received'
 set auto_tag = yes
 ignore "Authentication-Results:"
 ignore "DomainKey-Signature:"
@@ -52,24 +62,17 @@ ignore "DKIM-Signature:"
 hdr_order Date From To Cc
 alternative_order text/plain text/html *
 
-# Sidebar patch settings
-# set sidebar_delim   = '│'
-# set sidebar_visible = yes
-# set sidebar_shortpath = yes
-# set sidebar_width   = 30
-# bind index,pager <down>   sidebar-next
-# bind index,pager <up>     sidebar-prev
-# bind index,pager <right>  sidebar-open
-
 # Keybindings
-bind index gg first-entry
-bind index G last-entry
-bind index R group-reply
-bind index <tab> sync-mailbox
-bind index <space> collapse-thread
+bind editor <space> noop
 bind editor <Tab> complete-query
 bind editor ^T complete
-bind editor <space> noop
+bind index <space> collapse-thread
+bind index <tab> sync-mailbox
+bind index G last-entry
+bind index gg first-entry
+bind index R group-reply
+bind index N search-opposite
+bind pager N search-opposite
 
 # Pager inline configuration
 set pager_index_lines = 10 # number of index lines to show
@@ -86,18 +89,32 @@ bind pager k previous-line
 bind pager gg top
 bind pager G  bottom
 bind pager R  group-reply
+# View attachments properly.
+bind attach <return> view-mailcap
 macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 # Gmail-style keyboard shortcuts
-macro pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
-macro index e "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
-macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Trash\"\n <delete-message><exit>" "Gmail delete message"
-macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
-macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
-macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+# macro pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
+# macro index e "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
+# macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Trash\"\n <delete-message><exit>" "Gmail delete message"
+# macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
+# macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+# macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 
 # Goobook contacts settings
 set query_command="goobook query '%s'"
 macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
 bind editor <Tab> complete-query
+
+# Not much full text searching
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
+
+# Sidebar patch settings
+# set sidebar_delim   = '│'
+# set sidebar_visible = yes
+# set sidebar_shortpath = yes
+# set sidebar_width   = 30
+# bind index,pager <down>   sidebar-next
+# bind index,pager <up>     sidebar-prev
+# bind index,pager <right>  sidebar-open
 
