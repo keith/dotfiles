@@ -7,6 +7,9 @@ set sendmail = "/usr/local/bin/msmtp -a keithbsmiley"
 set sendmail_wait = 0 # Wait until the email is sent successfully
 unset record # Don't save sent email since it will be sync'd next time
 
+# Default inbox.
+set spoolfile = "+INBOX"
+
 set folder           = ~/.mail               # mailbox location
 set from = "keithbsmiley@gmail.com"
 set realname = "Keith Smiley"
