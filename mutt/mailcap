@@ -1,10 +1,9 @@
-# HTML
 text/html; lynx -display_charset=utf-8 -width=78 -nolist -dump %s; nametemplate=%s.html; copiousoutput
 
-# Images
-image/gif; feh %s
-image/jpeg; feh %s
-image/jpg; feh %s
-image/pjpeg; feh %s
-image/png; feh %s
+image/gif; $HOME/.mutt/view_attachment.sh %s jpg
+image/*j*; $HOME/.mutt/view_attachment.sh %s jpg
+image/png; $HOME/.mutt/view_attachment.sh %s jpg
+
+application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
+application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
 
