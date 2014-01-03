@@ -32,7 +32,7 @@ fi
 brew tap homebrew/dupes
 brew update
 
-formulas=(bash cloc ctags git grc grep heroku-toolbelt hub imagemagick less llvm macvim mercurial mogenerator mutt node notmuch openssh openssl python readline reattach-to-user-namespace sqlite the_silver_searcher tmux tree urlview vim wget zsh zsh-completions)
+formulas=(bash cloc ctags git grc grep heroku-toolbelt hub imagemagick less llvm macvim mercurial mogenerator msmtp mutt node notmuch openssh openssl python readline reattach-to-user-namespace sqlite the_silver_searcher tmux tree urlview vim wget zsh zsh-completions)
 
 for f in ${formulas[@]}
 do
