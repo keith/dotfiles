@@ -10,6 +10,8 @@ irssi/config.autosave
 mutt/cache
 mutt/certificates
 mutt/offlineimaphelpers.pyc
+mutt/postponed
+mutt/temp
 
 ####### Linux #######
 !.gitignore
