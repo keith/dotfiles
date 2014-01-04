@@ -409,7 +409,7 @@ augroup ft_mail
   autocmd BufRead,BufNewFile *mutt-* setfiletype mail
   autocmd FileType mail setlocal textwidth=78
   autocmd FileType mail setlocal spell
-  autocmd FileType mail autocmd BufReadPost * let g:airline#extensions#whitespace#enabled = 0
+  autocmd FileType mail autocmd BufReadPost * let g:airline#extensions#whitespace#checks = []
 augroup END
 " }}}
 
