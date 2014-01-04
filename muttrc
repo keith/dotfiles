@@ -2,17 +2,14 @@
 macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
 macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
 
+set folder           = $HOME/.mail/keithbsmiley-gmail.com               # mailbox location
+set spoolfile = "+INBOX"
+set realname = "Keith Smiley"
 set from     = "keithbsmiley@gmail.com"
-set sendmail = "/usr/local/bin/msmtp -a keithbsmiley"
+set sendmail = /usr/local/bin/msmtp\ -C\ $HOME/.mutt/msmtprc
+bind index p recall-message
 set sendmail_wait = 0 # Wait until the email is sent successfully
 unset record # Don't save sent email since it will be sync'd next time
-
-# Default inbox.
-set spoolfile = "+keithbsmiley-gmail.com/INBOX"
-
-set folder           = ~/.mail               # mailbox location
-set from = "keithbsmiley@gmail.com"
-set realname = "Keith Smiley"
 set sig_dashes = no
 set sig_on_top = yes
 set forward_format = "Fwd: %s" # format of subject when forwarding
@@ -55,6 +52,7 @@ set mailcap_path     = $HOME/.mutt/mailcap
 set message_cachedir = $HOME/.mutt/cache/bodies
 set signature        = $HOME/.mutt/signature
 set tmpdir           = $HOME/.mutt/temp
+set postponed        = $HOME/.mutt/postponed
 source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
 
 # Automatically delete marked messages when switching boxes
@@ -74,8 +72,8 @@ bind index <tab> sync-mailbox
 bind index G last-entry
 bind index gg first-entry
 bind index R group-reply
-bind index N search-opposite
-bind pager N search-opposite
+# bind index N search-opposite
+# bind pager N search-opposite
 
 # Pager inline configuration
 set pager_index_lines = 10 # number of index lines to show
@@ -97,6 +95,7 @@ bind attach <return> view-mailcap
 macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 # Gmail-style keyboard shortcuts
+macro pager e "<save-message>+archive<enter><mark-as-new>" "Archive message"
 # macro pager e "<enter-command>unset trash\n <delete-message><exit>" "Gmail archive message"
 # macro index e "<enter-command>unset trash\n <delete-message>" "Gmail archive message"
 # macro index,pager d "<enter-command>set trash=\"imaps://imap.googlemail.com/[Gmail]/Trash\"\n <delete-message><exit>" "Gmail delete message"
