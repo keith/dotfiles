@@ -217,6 +217,9 @@ nnoremap N Nzzzv
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
 
+" Disable ex mode
+nnoremap Q <Nop>
+
 " Force root permission saves
 cnoremap w!! w !sudo tee % >/dev/null
 
