@@ -8,7 +8,7 @@ fsync      = False
 localrepository  = KeithBSmiley-Local
 remoterepository = KeithBSmiley-Remote
 status_backend   = sqlite
-# postsynchook     = notmuch new
+postsynchook     = notmuch new
 
 [Repository KeithBSmiley-Local]
 type = Maildir
