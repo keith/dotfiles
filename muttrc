@@ -47,3 +47,8 @@ hdr_order Date From To Cc
 alternative_order text/plain text/enriched text/html
 auto_view text/x-vcard text/html text/enriched
 
+source $HOME/.mutt/folders
+source $HOME/.mutt/bindings
+source $HOME/.mutt/external
+source $HOME/.mutt/macros
+
