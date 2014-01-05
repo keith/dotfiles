@@ -40,10 +40,8 @@ unset collapse_unread
 unset markers                                                         # no ugly plus signs
   set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 
-ignore "Authentication-Results:"
-ignore "DomainKey-Signature:"
-ignore "DKIM-Signature:"
-hdr_order Date From To Cc
+ignore *
+unignore Date From To Cc Subject
 alternative_order text/plain text/enriched text/html
 auto_view text/x-vcard text/html text/enriched
 
