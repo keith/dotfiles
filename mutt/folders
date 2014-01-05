@@ -1,0 +1,18 @@
+set realname         = "Keith Smiley"
+set from             = "keithbsmiley@gmail.com"
+set folder           = $HOME/.mail/keithbsmiley-gmail.com
+set spoolfile        = "+INBOX"
+set alias_file       = $HOME/.mutt/aliases
+set certificate_file = $HOME/.mutt/certificates
+set header_cache     = $HOME/.mutt/cache/headers
+set mailcap_path     = $HOME/.mutt/mailcap
+set message_cachedir = $HOME/.mutt/cache/bodies
+set signature        = $HOME/.mutt/signature
+set tmpdir           = $HOME/.mutt/temp
+set postponed        = "+drafts"
+set mbox             = "+archive"
+set sendmail         = /usr/local/bin/msmtp\ -C\ $HOME/.mutt/msmtprc
+source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
+
+# vim: ft=muttrc
+

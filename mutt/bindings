@@ -1,0 +1,25 @@
+# Keybindings
+bind attach <return> view-mailcap
+
+bind editor <space> noop
+bind editor <Tab> complete-query
+bind editor ^T complete
+
+bind index <space> collapse-thread
+bind index <tab> sync-mailbox
+bind index c mail
+bind index d noop
+bind index G last-entry
+bind index gg first-entry
+bind index N search-opposite
+bind index p recall-message
+bind index R group-reply
+
+bind pager G  bottom
+bind pager gg top
+bind pager j next-line
+bind pager k previous-line
+bind pager R  group-reply
+
+# vim: ft=muttrc
+

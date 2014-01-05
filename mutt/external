@@ -1,0 +1,22 @@
+# urlview
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+# Goobook contacts settings
+set query_command="goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+bind editor <Tab> complete-query
+
+# Not much full text searching
+macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.mail/temporary/search<enter><change-folder-readonly>+../temporary/search<enter>" "search mail (using notmuch)"
+
+# Sidebar patch settings
+# set sidebar_delim   = '│'
+# set sidebar_visible = yes
+# set sidebar_shortpath = yes
+# set sidebar_width   = 30
+# bind index,pager <down>   sidebar-next
+# bind index,pager <up>     sidebar-prev
+# bind index,pager <right>  sidebar-open
+
+# vim: ft=muttrc
+
