@@ -5,6 +5,8 @@ macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to s
 # Gmail-style keyboard shortcuts
 macro pager e "<save-message>+archive<enter><exit>" "Archive message"
 macro index e "<save-message>+archive<enter>" "Archive message"
+macro pager d "<save-message>+trash<enter><exit>" "Delete message"
+macro index d "<save-message>+trash<enter>" "Archive message"
 macro index,pager gi "<change-folder>+INBOX<enter>" "Go to inbox"
 macro index,pager ga "<change-folder>+archive<enter>" "Go to all mail"
 

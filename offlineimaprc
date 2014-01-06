@@ -32,7 +32,7 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Trash':     'trash',
                             '[Gmail]/All Mail':  'archive',
                             }.get(folder, folder)
-folderfilter = lambda folder: folder not in ['[Gmail]/Trash',
+folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Important',
                                              '[Gmail]/Spam',
                                              ]

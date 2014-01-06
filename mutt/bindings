@@ -8,7 +8,7 @@ bind editor ^T complete
 bind index <space> collapse-thread
 bind index <tab> sync-mailbox
 bind index c mail
-bind index d noop
+bind index m change-folder
 bind index G last-entry
 bind index gg first-entry
 bind index N search-opposite
