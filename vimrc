@@ -58,7 +58,7 @@ Bundle 'Yggdroot/indentLine'
 "
 " src/ contains personal local vim plugins
 " $GOROOT/misc/ contains vim Go configuration
-execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
+silent! execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
@@ -138,8 +138,12 @@ else
     set background=dark
   endif
 endif
-colorscheme solarized " Use the awesome solarized color scheme
-call togglebg#map("") " Make sure the :ToggleBG function exists
+
+try
+  colorscheme solarized " Use the awesome solarized color scheme
+catch /^Vim\%((\a\+)\)\=:E185/
+endtry
+silent! call togglebg#map("") " Make sure the :ToggleBG function exists
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
 " }}}
