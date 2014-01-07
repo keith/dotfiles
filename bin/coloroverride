@@ -9,3 +9,7 @@ fi
 
 echo $1 > $HOME/.coloroverride
 
+if [[ $TERM_PROGRAM == "iTerm.app" ]];then
+    colorize $1
+fi
+
