@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ $# -ne 1 ]];then
+    echo "Usage: coloroverride [light|dark]"
+    exit
+fi
+
+echo $1 > $HOME/.coloroverride
+
