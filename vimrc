@@ -322,13 +322,13 @@ nnoremap <leader>4 :let @/ = ""<CR>
 " Clean trailing whitespace
 nnoremap <silent> <leader>w :call ClearWhitespace()<CR>
 function! ClearWhitespace()
-  execute 'normal mi'
+  normal mi
   try
     %s/\s\+$//
   catch /^Vim\%((\a\+)\)\=:E486/
   endtry
   let @/=""
-  execute 'normal `i'
+  normal `i
 endfunction
 
 " Unfuck my screen
