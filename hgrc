@@ -6,6 +6,6 @@ verbose = True
 [extensions]
 hgext.extdiff =
 
-[defualts]
+[defaults]
 revert = --no-backup
 
