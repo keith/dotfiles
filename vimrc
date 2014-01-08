@@ -280,7 +280,7 @@ set winwidth=80         " Set the minimum window width for splits
 " https://www.destroyallsoftware.com/file-navigation-in-vim.html
 " Order is key
 set winheight=7
-set winminheight=7
+silent! set winminheight=7
 set winheight=999
 
 " Mappings for split resizing
