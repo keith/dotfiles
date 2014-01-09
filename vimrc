@@ -345,6 +345,10 @@ set showmode         " Display the mode when it changes
 " http://stackoverflow.com/a/12141458/902968
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
+" Find TODO and FIXME comments
+" https://coderwall.com/p/prfnnw
+command Todo noautocmd vimgrep /TODO\|FIXME/j ** | cw | nnoremap <silent> <buffer> q :cclose<CR>
+
 " Running as diff ------ {{{
 if &diff
   set modifiable
