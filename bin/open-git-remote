@@ -3,8 +3,8 @@
 set -e
 
 branch="origin"
-if [[ $# == 1 ]];then
-    branch=$1
+if [[ $# == 2 ]];then
+    branch=$2
 fi
 
 remotes=($(git remote -v | awk "{ print \$1, \$2; }" | uniq))
@@ -15,9 +15,10 @@ do
     fi
 done
 
+url="${url:0:${#url}-4}"
 if [[ $url == "" ]];then
     echo "No remotes found for $branch"
 else
-    open $url
+    open "$url/$1"
 fi
 
