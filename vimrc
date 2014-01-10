@@ -346,7 +346,14 @@ set showmode         " Display the mode when it changes
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Find TODO and FIXME comments
-command Todo Ag 'TODO|FIXME'
+command Todo call TODOSearch()
+function! TODOSearch()
+  if exists(":Ag") > 0
+    Ag 'TODO|FIXME'
+  else
+    noautocmd vimgrep /TODO\|FIXME/j ** | cw | nnoremap <silent> <buffer> q :cclose<CR>
+  endif
+endfunction
 
 " Running as diff ------ {{{
 if &diff
