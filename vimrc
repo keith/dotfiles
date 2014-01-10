@@ -23,6 +23,7 @@ Bundle 'bling/vim-airline'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'DasIch/vim-mercurial'
+Bundle 'editorconfig/editorconfig-vim'
 Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
@@ -180,6 +181,7 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
+set colorcolumn=80   " Highlight column x
 set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 
@@ -449,8 +451,7 @@ augroup ft_settings
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
-  autocmd BufNewFile,BufReadPost,BufWritePost *.podspec setlocal filetype=ruby
-  autocmd BufNewFile,BufReadPost,BufWritePost Podfile   setlocal filetype=ruby
+  autocmd BufNewFile,BufReadPost,BufWritePost *.podspec,Podspec setlocal filetype=ruby
   autocmd BufReadPost *shellrc setlocal filetype=sh
 
   " ObjC and specta settings
