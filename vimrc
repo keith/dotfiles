@@ -348,7 +348,7 @@ let g:ruby_path = system('echo $HOME/.rbenv/shims')
 " Find TODO and FIXME comments
 command Todo call TODOSearch()
 function! TODOSearch()
-  if exists(":Ag") > 0
+  if executable("ag") && exists(":Ag") > 0
     Ag 'TODO|FIXME'
   else
     noautocmd vimgrep /TODO\|FIXME/j ** | cw | nnoremap <silent> <buffer> q :cclose<CR>
