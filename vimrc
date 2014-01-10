@@ -438,6 +438,7 @@ augroup ft_settings
   autocmd FileType json          setlocal foldmethod=syntax
   autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
   autocmd FileType vim           setlocal foldmethod=marker
+  autocmd FileType dcl           setlocal filetype=apache
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
@@ -466,11 +467,20 @@ augroup ft_settings
   autocmd BufRead,BufReadPost,Syntax,VimEnter * setlocal formatoptions-=o
 
   " Return to the same position you left the file in
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   execute "normal g`\"zz" |
-    \ endif
+  autocmd BufReadPost * call PositionRecall()
 augroup END
+" }}}
+
+" Position resume ------ {{{
+function! PositionRecall()
+  if &ft =~ 'gitcommit'
+    return
+  endif
+
+  if line("'\"") > 0 && line("'\"") <= line("$") |
+    execute "normal g`\"zz" |
+  endif
+endfunction
 " }}}
 
 " Custom alternate header/implementation files functions ------ {{{
