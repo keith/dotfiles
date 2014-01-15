@@ -34,10 +34,42 @@ var righthalf = slate.operation("move", {
   "height" : "screenSizeY"
 });
 
+var topleft = slate.operation("move", {
+  "x" : "screenOriginX",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY / 2"
+});
+
+var bottomleft = slate.operation("move", {
+  "x" : "screenOriginX",
+  "y" : "screenOriginY + (screenSizeY / 2)",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY / 2"
+});
+
+var topright = slate.operation("move", {
+  "x" : "screenOriginX + (screenSizeX / 2)",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY / 2"
+});
+
+var bottomright = slate.operation("move", {
+  "x" : "screenOriginX + (screenSizeX / 2)",
+  "y" : "screenOriginY + (screenSizeY / 2)",
+  "width" : "screenSizeX / 2",
+  "height" : "screenSizeY / 2"
+});
+
 S.bind("k:ctrl;cmd", fullscreen);
 S.bind("j:ctrl;cmd", halfsize);
 S.bind("h:ctrl;cmd", lefthalf);
 S.bind("l:ctrl;cmd", righthalf);
+S.bind("n:ctrl;cmd", topleft);
+S.bind("m:ctrl;cmd", bottomleft);
+S.bind(",:ctrl;cmd", topright);
+S.bind(".:ctrl;cmd", bottomright);
 
 S.bnda({
   // Moving Windows using Control+Alt and the Arrow keys
