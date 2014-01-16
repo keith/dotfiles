@@ -6,6 +6,7 @@ S.cfga({
   "defaultToCurrentScreen" : true
 });
 
+var border = "2";
 var fullscreen = slate.operation("move", {
   "x" : "screenOriginX",
   "y" : "screenOriginY",
@@ -23,43 +24,43 @@ var halfsize = slate.operation("move", {
 var lefthalf = slate.operation("move", {
   "x" : "screenOriginX",
   "y" : "screenOriginY",
-  "width" : "screenSizeX / 2",
+  "width" : "screenSizeX / 2 - " + border,
   "height" : "screenSizeY"
 });
 
 var righthalf = slate.operation("move", {
-  "x" : "screenOriginX + screenSizeX / 2",
+  "x" : "screenOriginX + (screenSizeX / 2) + " + border,
   "y" : "screenOriginY",
-  "width" : "screenSizeX / 2",
+  "width" : "screenSizeX / 2 - " + border,
   "height" : "screenSizeY"
 });
 
 var topleft = slate.operation("move", {
   "x" : "screenOriginX",
   "y" : "screenOriginY",
-  "width" : "screenSizeX / 2",
-  "height" : "screenSizeY / 2"
+  "width" : "screenSizeX / 2 - " + border,
+  "height" : "screenSizeY / 2 - " + border
 });
 
 var bottomleft = slate.operation("move", {
   "x" : "screenOriginX",
-  "y" : "screenOriginY + (screenSizeY / 2)",
-  "width" : "screenSizeX / 2",
-  "height" : "screenSizeY / 2"
+  "y" : "screenOriginY + (screenSizeY / 2) + " + border,
+  "width" : "screenSizeX / 2 - " + border,
+  "height" : "screenSizeY / 2 - " + border
 });
 
 var topright = slate.operation("move", {
-  "x" : "screenOriginX + (screenSizeX / 2)",
+  "x" : "screenOriginX + (screenSizeX / 2) + " + border,
   "y" : "screenOriginY",
-  "width" : "screenSizeX / 2",
-  "height" : "screenSizeY / 2"
+  "width" : "screenSizeX / 2 - " + border,
+  "height" : "screenSizeY / 2 - " + border
 });
 
 var bottomright = slate.operation("move", {
-  "x" : "screenOriginX + (screenSizeX / 2)",
-  "y" : "screenOriginY + (screenSizeY / 2)",
-  "width" : "screenSizeX / 2",
-  "height" : "screenSizeY / 2"
+  "x" : "screenOriginX + (screenSizeX / 2) + " + border,
+  "y" : "screenOriginY + (screenSizeY / 2) + " + border,
+  "width" : "screenSizeX / 2 - " + border,
+  "height" : "screenSizeY / 2 - " + border
 });
 
 S.bind("k:ctrl;cmd", fullscreen);
