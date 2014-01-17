@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+name=$(ls | grep -e "\.hs" | awk '{ split($1,a,"."); print a[1]; }')
+rm $name ${name}.o ${name}.hi
+
