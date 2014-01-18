@@ -28,6 +28,7 @@ Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/vim-clojure-static'
 Bundle 'itchyny/calendar.vim'
+Bundle 'jnwhiteh/vim-golang'
 Bundle 'junegunn/goyo.vim'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'kchmck/vim-coffee-script'
@@ -61,8 +62,7 @@ Bundle 'Yggdroot/indentLine'
 "   pathogen support to specify wrapping folder
 "
 " src/ contains personal local vim plugins
-" $GOROOT/misc/ contains vim Go configuration
-silent! execute pathogen#infect('src/{}', $GOROOT . '/misc/{}')
+silent! execute pathogen#infect('src/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
