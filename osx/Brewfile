@@ -1,0 +1,36 @@
+tap homebrew/dupes
+update
+
+install bash
+install cloc
+install ctags
+install git
+install grc
+install grep
+install heroku-toolbelt
+install hub
+install imagemagick
+install less
+install llvm
+install macvim
+install mercurial
+install mogenerator
+install msmtp
+install mutt
+install node
+install notmuch
+install openssh
+install openssl
+install python
+install readline
+install reattach-to-user-namespace
+install sqlite
+install the_silver_searcher
+install tmux
+install tree
+install urlview
+install vim
+install wget
+install zsh
+install zsh-completions
+
