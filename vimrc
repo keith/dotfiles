@@ -714,6 +714,7 @@ augroup END
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
 let g:investigate_use_dash = 1
+let g:investigate_use_url_for_haskell = 1
 
 " vim-easy-align
 " Doesn't work with `vnoremap`
