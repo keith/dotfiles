@@ -34,3 +34,6 @@ install wget
 install zsh
 install zsh-completions
 
+# rsync
+install https://raw.github.com/Homebrew/homebrew-dupes/109dca908c6499116e07483d7afe8a1c3ef63ad6/rsync.rb
+
