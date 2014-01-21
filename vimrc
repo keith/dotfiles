@@ -685,6 +685,9 @@ let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\', '*']
 " Clever-f
 let g:clever_f_across_no_line = 1
 
+" Dispatch.vim
+nnoremap <leader>d :Dispatch<CR>
+
 " vim-rspec
 let g:rspec_command = "Dispatch rspec {spec}"
 nnoremap <Leader>f :call RunCurrentSpecFile()<CR>
