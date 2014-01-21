@@ -447,6 +447,13 @@ augroup ft_clojure
 augroup END
 " }}}
 
+" Haskell files ------ {{{
+augroup ft_haskell
+  autocmd!
+  autocmd FileType haskell setlocal makeprg=runhaskell\ %
+augroup END
+" }}}
+
 " Various filetype settings ------ {{{
 augroup ft_settings
   autocmd!
@@ -662,6 +669,8 @@ let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_flake8_args = "--ignore = E501"
 let g:syntastic_check_on_open = 1
+let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
+let g:hdevtools_options = '-g -Wall'
 
 " Allow toggling of syntastic errors list
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
