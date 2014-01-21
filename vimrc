@@ -323,6 +323,13 @@ nnoremap <leader>o ^i[<ESC>
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
 
+" Close the quickfix and location lists simultaneously
+nnoremap <leader>q :call CloseLists()<CR>
+function! CloseLists()
+  lclose
+  cclose
+endfunction
+
 " Clean trailing whitespace
 nnoremap <silent> <leader>w :call ClearWhitespace()<CR>
 function! ClearWhitespace()
