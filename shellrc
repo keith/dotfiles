@@ -29,3 +29,8 @@ fi
 #  - $HOME/.bin      for local tools
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 
+if [[ -s $(brew --prefix)/etc/autojump.sh ]];then
+  source $(brew --prefix)/etc/autojump.sh
+fi
+
+# vim: ft=sh:tw=2:sw=2:ts=2
