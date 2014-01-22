@@ -28,3 +28,6 @@
 [submodule "scripts/mutt-notmuch"]
 	path = scripts/mutt-notmuch
 	url = https://github.com/honza/mutt-notmuch-py.git
+[submodule "scripts/z"]
+	path = scripts/z
+	url = https://github.com/rupa/z.git
