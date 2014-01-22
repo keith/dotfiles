@@ -466,7 +466,6 @@ augroup ft_settings
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
   autocmd BufNewFile,BufReadPost,BufWritePost *.podspec,Podspec setlocal filetype=ruby
-  autocmd BufReadPost *shellrc setlocal filetype=sh
 
   " ObjC and specta settings
   autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
