@@ -11,3 +11,4 @@ alias pf="$SCRIPT_PATH/processfile.rb"
 alias rename="$SCRIPT_PATH/imageRenamer.rb"
 alias xc="$SCRIPT_PATH/xcworkspace.rb"
 
+source "$SCRIPT_PATH/z/z.sh"
