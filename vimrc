@@ -181,9 +181,9 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
-set colorcolumn=80   " Highlight column x
 set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
+silent! set colorcolumn=80   " Highlight column x
 
 " Completion options
 set complete=.,w,b,u,t,i
@@ -238,9 +238,9 @@ nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 " Sort entire file unique
 nnoremap <leader>sf :call SortFile()<CR>
 function! SortFile()
-  normal! ggvG
+  normal! mzggvG
   :sort ui
-  normal! v
+  normal! v`z
 endfunction
 
 if has("clipboard")     " If the feature is available
