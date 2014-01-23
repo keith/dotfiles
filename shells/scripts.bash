@@ -11,4 +11,7 @@ alias pf="$SCRIPT_PATH/processfile.rb"
 alias rename="$SCRIPT_PATH/imageRenamer.rb"
 alias xc="$SCRIPT_PATH/xcworkspace.rb"
 
-source "$SCRIPT_PATH/z/z.sh"
+if [[ -e "$SCRIPT_PATH/z/z.sh" ]];then
+    export _Z_EXCLUDE_DIRS="/Volumes"
+    source "$SCRIPT_PATH/z/z.sh"
+fi
