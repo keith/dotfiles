@@ -233,7 +233,14 @@ nnoremap Q <Nop>
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Edit vimrc with mapping
-nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+
+" Sort entire file unique
+nnoremap <leader>sf :call SortFile()<CR>
+function! SortFile()
+  normal! ggvG
+  :sort ui
+endfunction
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
