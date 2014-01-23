@@ -240,6 +240,7 @@ nnoremap <leader>sf :call SortFile()<CR>
 function! SortFile()
   normal! ggvG
   :sort ui
+  normal! v
 endfunction
 
 if has("clipboard")     " If the feature is available
