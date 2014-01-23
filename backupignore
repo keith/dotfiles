@@ -6,6 +6,7 @@
 /.journal
 /.journal_info_block
 /.MobileBackups
+/.Spotlight-*
 /.vol/*
 /afs/*
 /automount
@@ -34,4 +35,5 @@
 /proc/*
 /System/Library/Caches/*
 /tmp/*
+/Users/*/.*_history
 /Volumes/*
