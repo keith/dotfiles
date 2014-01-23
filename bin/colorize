@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-if which osascript &> /dev/null; then
-    osascript $DOTFILES/scripts/itermcolors.applescript $1
+if [[ $TERM_PROGRAM == "iTerm.app" ]];then
+  osascript $DOTFILES/scripts/itermcolors.applescript $1
 fi
-

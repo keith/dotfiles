@@ -33,4 +33,3 @@ if [[ -z "$SSH_CLIENT" ]];then
     colorize
   fi
 fi
-
