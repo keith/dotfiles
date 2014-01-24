@@ -455,6 +455,7 @@ augroup END
 augroup ft_ruby
   autocmd!
   autocmd FileType ruby setlocal makeprg=rspec\ %
+  autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
 augroup END
 " }}}
 
