@@ -1,9 +1,3 @@
-[submodule "vim/src/rspec.vim"]
-	path = vim/src/rspec.vim
-	url = https://github.com/Keithbsmiley/rspec.vim.git
-[submodule "vim/src/specta.vim"]
-	path = vim/src/specta.vim
-	url = https://github.com/Keithbsmiley/specta.vim.git
 [submodule "vim/bundle/vundle"]
 	path = vim/bundle/vundle
 	url = https://github.com/gmarik/vundle.git
@@ -19,12 +13,6 @@
 [submodule "scripts/t"]
 	path = scripts/t
 	url = https://github.com/sjl/t.git
-[submodule "vim/src/investigate.vim"]
-	path = vim/src/investigate.vim
-	url = https://github.com/Keithbsmiley/investigate.vim.git
-[submodule "vim/src/tmux.vim"]
-	path = vim/src/tmux.vim
-	url = https://github.com/Keithbsmiley/tmux.vim.git
 [submodule "scripts/mutt-notmuch"]
 	path = scripts/mutt-notmuch
 	url = https://github.com/honza/mutt-notmuch-py.git
