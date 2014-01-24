@@ -1,5 +1,11 @@
 # Set prompt to % for users and # for root
-export PS1="%# "
+# export PS1="%# "
+
+# Show 2 top $PWD components
+# Show bg jobs >= 1 in yellow
+# % for users and # for root
+autoload -U colors && colors
+export PS1="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}) %# "
 
 # Not sold on Git info in your prompt, but if I used it
 #  it would probably look a lot like this:
@@ -63,7 +69,7 @@ bindkey '\e.' insert-last-word
 # Show vim mode on right
 # http://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
-  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+  VIM_PROMPT="[% NORMAL]%"
   RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
   zle reset-prompt
 }
@@ -79,4 +85,3 @@ reset_rps1() {
   RPS1=""
 }
 precmd_functions=($precmd_functions reset_rps1)
-
