@@ -40,7 +40,6 @@ Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/clam.vim'
-Bundle 'thoughtbot/vim-rspec'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
@@ -59,6 +58,11 @@ Bundle 'Yggdroot/indentLine'
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 " }}}
+
+" Load MatchIt for % jumping
+runtime macros/matchit.vim
+" Load man page plugin for :Man command
+runtime ftplugin/man.vim
 
 " Remap the leader from \ to ,
 let mapleader=","
@@ -98,10 +102,6 @@ if has("persistent_undo")
   endif
 endif
 
-" Fuck you, help key.
-noremap  <F1> <nop>
-inoremap <F1> <nop>
-
 " Fold settings ------ {{{
 set foldnestmax=5           " Set deepest fold to x levels
 set foldmethod=indent       " Decide where to fold based
@@ -111,11 +111,6 @@ set foldlevelstart=99       " Set the default level of open folds
 " Toggle folds with the space bar
 nnoremap <Space> za
 " }}}
-
-" Load MatchIt for % jumping
-runtime! macros/matchit.vim
-" Load man page plugin for :Man command
-runtime ftplugin/man.vim
 
 " On quit reset title
 let &titleold=getcwd()
@@ -196,6 +191,20 @@ set ttimeoutlen=100
 set modeline
 set modelines=3
 
+if has("clipboard")     " If the feature is available
+  set clipboard=unnamed " copy to the system clipboard
+endif
+
+" Fuck you, help key.
+noremap  <F1> <nop>
+inoremap <F1> <nop>
+
+" Disable ex mode
+nnoremap Q <Nop>
+
+" Disable K
+vnoremap K <Nop>
+
 " Reselect visual blocks after movement
 vnoremap < <gv
 vnoremap > >gv
@@ -205,7 +214,6 @@ noremap j gj
 noremap gj j
 noremap <Down> gj
 inoremap <Down> <C-o>gj
-
 noremap k gk
 noremap gk k
 noremap <Up> gk
@@ -218,11 +226,13 @@ nnoremap N Nzzzv
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
 
-" Disable ex mode
-nnoremap Q <Nop>
-
 " Force root permission saves
 cnoremap w!! w !sudo tee % >/dev/null
+
+" Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
+cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
+cnoreabbrev ` ~
+cnoreabbrev `` `
 
 " Edit vimrc with mapping
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
@@ -234,10 +244,6 @@ function! SortFile()
   :sort ui
   normal! v`z
 endfunction
-
-if has("clipboard")     " If the feature is available
-  set clipboard=unnamed " copy to the system clipboard
-endif
 
 " Tab mappings ------ {{{
 nnoremap <leader>tt :tabnew<cr>
@@ -447,6 +453,13 @@ augroup ft_clojure
 augroup END
 " }}}
 
+" Ruby files ------ {{{
+augroup ft_ruby
+  autocmd!
+  autocmd FileType ruby setlocal makeprg=rspec\ %
+augroup END
+" }}}
+
 " Haskell files ------ {{{
 augroup ft_haskell
   autocmd!
@@ -465,7 +478,7 @@ augroup ft_settings
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
-  autocmd BufNewFile,BufReadPost,BufWritePost *.podspec,Podspec setlocal filetype=ruby
+  autocmd BufNewFile,BufRead,BufWrite *.podspec,Podspec setlocal filetype=ruby
 
   " ObjC and specta settings
   autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
@@ -558,16 +571,6 @@ augroup END
 
 " ObjC curly brace error fix
 let c_no_curly_error = 1
-
-
-" Remap W to w http://stackoverflow.com/questions/3878692/aliasing-a-command-in-vim
-cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-cnoreabbrev ` ~
-cnoreabbrev `` `
-
-" Disable netrw
-" let g:loaded_netrw       = 1
-" let g:loaded_netrwPlugin = 1
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
@@ -687,21 +690,11 @@ endfunction
 nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
-" Supertab
-let g:SuperTabNoCompleteAfter = ['^', '\s', '#', '/', '\\', '*']
-
 " Clever-f
 let g:clever_f_across_no_line = 1
 
 " Dispatch.vim
 nnoremap <leader>d :Dispatch<CR>
-
-" vim-rspec
-let g:rspec_command = "Dispatch rspec {spec}"
-nnoremap <Leader>f :call RunCurrentSpecFile()<CR>
-nnoremap <Leader>s :call RunNearestSpec()<CR>
-" nnoremap <Leader>l :call RunLastSpec()<CR>
-" nnoremap <Leader>a :call RunAllSpecs()<CR>
 
 " delimitMate ------ {{{
 augroup delimate_settings
@@ -714,10 +707,6 @@ augroup END
 nnoremap <silent> K :call investigate#Investigate()<cr>
 let g:investigate_use_dash = 1
 let g:investigate_use_url_for_haskell = 1
-
-" vim-easy-align
-" Doesn't work with `vnoremap`
-vmap <Enter> <Plug>(EasyAlign)
 
 " vim-rooter
 let g:rooter_manual_only = 1
