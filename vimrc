@@ -30,6 +30,10 @@ Bundle 'guns/vim-clojure-static'
 Bundle 'junegunn/goyo.vim'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'Keithbsmiley/investigate.vim'
+Bundle 'Keithbsmiley/rspec.vim'
+Bundle 'Keithbsmiley/specta.vim'
+Bundle 'Keithbsmiley/tmux.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
@@ -44,7 +48,6 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-liquid'
 Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-pathogen'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -52,14 +55,6 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-vinegar'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'Yggdroot/indentLine'
-
-" Enable pathogen for plugin development
-" Using {} at the end of the path is horrible
-"   because it searches all folders need
-"   pathogen support to specify wrapping folder
-"
-" src/ contains personal local vim plugins
-silent! execute pathogen#infect('src/{}')
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
