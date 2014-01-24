@@ -27,12 +27,9 @@ Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'guns/vim-clojure-static'
-Bundle 'itchyny/calendar.vim'
-Bundle 'jnwhiteh/vim-golang'
 Bundle 'junegunn/goyo.vim'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
@@ -730,12 +727,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " vim-rooter
 let g:rooter_manual_only = 1
 
-" calendar.vim
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 " Local vimrc settings
 if filereadable('.vimrc.local')
   source .vimrc.local
 end
-
