@@ -70,7 +70,8 @@ bindkey '\e.' insert-last-word
 # http://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
   VIM_PROMPT="[% NORMAL]%"
-  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $RPS1"
+  # Apparently EPS1 is not a typo
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
   zle reset-prompt
 }
 
