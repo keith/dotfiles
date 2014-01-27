@@ -8,5 +8,7 @@ macro index,pager e "<save-message>+archive<enter>" "Archive message"
 macro index,pager ga "<change-folder>+archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+INBOX<enter>" "Go to inbox"
 
+macro index .n "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
+
 # vim: ft=muttrc
 
