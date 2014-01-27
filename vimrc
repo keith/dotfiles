@@ -15,7 +15,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos user/repo
-Bundle 'airblade/vim-gitgutter'
 Bundle 'airblade/vim-rooter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'b4winckler/vim-objc'
@@ -27,7 +26,6 @@ Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'justinmk/vim-gtfo'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'Keithbsmiley/investigate.vim'
 Bundle 'Keithbsmiley/rspec.vim'
 Bundle 'Keithbsmiley/specta.vim'
@@ -51,7 +49,6 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-vinegar'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'Yggdroot/indentLine'
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
