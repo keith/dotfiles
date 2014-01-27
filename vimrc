@@ -129,7 +129,17 @@ try
   colorscheme solarized " Use the awesome solarized color scheme
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
-silent! call togglebg#map("") " Make sure the :ToggleBG function exists
+
+" A functional equivalent to solarized background swap function
+function! s:ToggleBackground()
+  if &background ==# "light"
+    set background=dark
+  else
+    set background=light
+  endif
+endfunction
+command ToggleBG call s:ToggleBackground()
+
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
 " }}}
