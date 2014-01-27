@@ -3,9 +3,9 @@
 
 if [[ ! -f $HOME/.shellrc ]];then
   echo "$HOME/.shellrc doesn't exist. Run ./manage.sh install again"
-  return
+else
+  source $HOME/.shellrc
 fi
-source $HOME/.shellrc
 
 # Find all zsh files
 typeset -U configs
@@ -26,10 +26,3 @@ do
 done
 
 unset configs
-if [[ -z "$SSH_CLIENT" ]];then
-  if [[ -e $HOME/.coloroverride ]];then
-    colorize $(cat $HOME/.coloroverride)
-  else
-    colorize
-  fi
-fi

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
-if [[ $TERM_PROGRAM == "iTerm.app" ]];then
-  osascript $DOTFILES/scripts/itermcolors.applescript $1
+if [[ -z "$SSH_CLIENT" && $TERM_PROGRAM == "iTerm.app" ]];then
+  value=$1
+  if [[ -z "$value" && -e $HOME/.coloroverride ]];then
+    value=$(cat $HOME/.coloroverride)
+  fi
+
+  osascript $DOTFILES/scripts/itermcolors.applescript $value
 fi
