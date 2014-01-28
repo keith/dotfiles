@@ -23,9 +23,6 @@ alias untar="tar -zxvf"
 # File size
 alias fs="stat -f %z"
 
-# SSH configuration
-alias linode="ssh ksmiley@66.175.208.254"
-
 # Winthrop
 alias wl="ssh acc.smileyk2@tampa.winthrop.edu"
 alias wa="ssh acc.smileyk2@reno.winthrop.edu"
