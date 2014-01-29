@@ -491,6 +491,13 @@ augroup ft_markdown
 augroup END
 " }}}
 
+" Liquid files ------ {{{
+augroup ft_liquid
+  autocmd!
+  autocmd FileType liquid setlocal textwidth=72 spell
+augroup END
+" }}}
+
 " Mail files ------ {{{
 augroup ft_mail
   autocmd BufRead,BufNewFile *mutt-* setfiletype mail
