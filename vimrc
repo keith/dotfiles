@@ -26,12 +26,12 @@ Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
 Bundle 'justinmk/vim-gtfo'
+Bundle 'kana/vim-smartinput'
 Bundle 'Keithbsmiley/investigate.vim'
 Bundle 'Keithbsmiley/rspec.vim'
 Bundle 'Keithbsmiley/specta.vim'
 Bundle 'Keithbsmiley/tmux.vim'
 Bundle 'majutsushi/tagbar'
-Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
@@ -760,13 +760,6 @@ let g:clever_f_across_no_line = 1
 
 " Dispatch.vim
 nnoremap <leader>d :Dispatch<CR>
-
-" delimitMate ------ {{{
-augroup delimate_settings
-  autocmd!
-  autocmd FileType vim let delimitMate_quotes = "' `"
-augroup END
-" }}}
 
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
