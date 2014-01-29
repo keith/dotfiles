@@ -1,7 +1,13 @@
+*.savedState
+*/.*_history
+*/.netrc
 */.Trash
+*/.viminfo
+*/.z
+*/Cookies
 /.bzvol
 /.com.apple.NetBootX
-/.fseventsd
+/.fseventsd/*
 /.hotfiles.btree
 /.journal
 /.journal_info_block
@@ -35,5 +41,13 @@
 /proc/*
 /System/Library/Caches/*
 /tmp/*
-/Users/*/.*_history
+/Users/*/Downloads/*
+/Users/*/Library/Containers/*/Data/Library/Caches
+/Users/*/Library/Containers/*/Data/Library/Saved\ Application\ State/*
+/Users/*/Library/Containers/com.Growl.GrowlHelperApp
+/Users/*/Library/Containers/com.tapbots.TweetbotMac
+/Users/*/Library/Cookies/*
+/usr/local/*
 /Volumes/*
+/Users/*/Library/Calendars/*
+/Users/*/Library/Caches/*

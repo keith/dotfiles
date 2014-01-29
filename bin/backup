@@ -49,12 +49,16 @@ log "Starting backup"
 
 sudo rsync  --acls \
             --archive \
+            --crtimes \
             --delete \
             --delete-excluded \
             --exclude-from=$EXCLUDE \
+            --fileflags \
             --hard-links \
             --ignore-errors \
+            --log-file=$HOME/Desktop/rsync.txt \
             --one-file-system \
+            --protect-args \
             --sparse \
             --stats \
             --verbose \
