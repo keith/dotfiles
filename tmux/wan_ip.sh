@@ -1,6 +1,5 @@
 # Prints the WAN IP address. The result is cached and updated according to $update_period.
 
-
 run_segment() {
     local tmp_file="${TMUX_POWERLINE_DIR_TEMPORARY}/wan_ip.txt"
     local wan_ip

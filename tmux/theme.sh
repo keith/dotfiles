@@ -35,7 +35,7 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
         #"earthquake 3 0" \
         #"pwd 89 211" \
         #"mailcount 9 255" \
-        "newmail 9 255" \
+        "newmail 236 250" \
         #"now_playing 234 37" \
         #"cpu 240 136" \
         #"load 237 167" \

@@ -146,5 +146,4 @@ __battery_osx() {
 
     __freebsd_get_bat() {
         echo "$(sysctl -n hw.acpi.battery.life)"
-
     }
