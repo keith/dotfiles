@@ -18,7 +18,6 @@ unset move                                                            # gmail do
 unset confirmappend                                                   # don't ask, just do!
   set quit                                                            # don't ask, just do!!
 unset mark_old                                                        # read/new is good enough for me
-  set beep_new                                                        # bell on new mails
   set pipe_decode                                                     # strip headers and eval mimes when piping
   set thorough_search                                                 # strip headers and eval mimes before searching
   set auto_tag = yes                                                  # Automatically delete marked messages when switching boxes
