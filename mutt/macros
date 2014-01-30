@@ -11,4 +11,3 @@ macro index,pager gi "<change-folder>+INBOX<enter>" "Go to inbox"
 macro index .n "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 
 # vim: ft=muttrc
-
