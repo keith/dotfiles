@@ -35,6 +35,20 @@ var righthalf = slate.operation("move", {
   "height" : "screenSizeY"
 });
 
+var tophalf = slate.operation("move", {
+  "x" : "screenOriginX",
+  "y" : "screenOriginY",
+  "width" : "screenSizeX",
+  "height" : "screenSizeY / 2 - " + border
+});
+
+var bottomhalf = slate.operation("move", {
+  "x" : "screenOriginX",
+  "y" : "screenOriginY + (screenSizeY / 2) + " + border,
+  "width" : "screenSizeX",
+  "height" : "screenSizeY / 2"
+});
+
 var topleft = slate.operation("move", {
   "x" : "screenOriginX",
   "y" : "screenOriginY",
@@ -65,8 +79,12 @@ var bottomright = slate.operation("move", {
 
 S.bind("k:ctrl;cmd", fullscreen);
 S.bind("j:ctrl;cmd", halfsize);
+
 S.bind("h:ctrl;cmd", lefthalf);
 S.bind("l:ctrl;cmd", righthalf);
+S.bind("i:ctrl;cmd", tophalf);
+S.bind("u:ctrl;cmd", bottomhalf);
+
 S.bind("n:ctrl;cmd", topleft);
 S.bind("m:ctrl;cmd", bottomleft);
 S.bind(",:ctrl;cmd", topright);
