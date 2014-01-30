@@ -533,6 +533,17 @@ augroup ft_haskell
 augroup END
 " }}}
 
+" Podspecs ------ {{{
+augroup ft_podspec
+  autocmd!
+  autocmd BufNewFile,BufRead,BufWrite *.podspec setlocal filetype=podspec
+  autocmd BufNewFile,BufRead Podfile setlocal filetype=podfile
+  autocmd FileType podspec,podfile set syntax=ruby
+  autocmd FileType podspec set makeprg=pod\ spec\ lint\ %
+  autocmd FileType podfile set makeprg=pod\ install
+augroup END
+" }}}
+
 " Various filetype settings ------ {{{
 augroup ft_settings
   autocmd!
@@ -543,8 +554,6 @@ augroup ft_settings
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
-
-  autocmd BufNewFile,BufRead,BufWrite *.podspec,Podfile setlocal filetype=ruby
 
   " ObjC and specta settings
   autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
