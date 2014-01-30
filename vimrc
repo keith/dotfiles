@@ -544,7 +544,7 @@ augroup ft_settings
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
 
-  autocmd BufNewFile,BufRead,BufWrite *.podspec,Podspec setlocal filetype=ruby
+  autocmd BufNewFile,BufRead,BufWrite *.podspec,Podfile setlocal filetype=ruby
 
   " ObjC and specta settings
   autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
