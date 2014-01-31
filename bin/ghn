@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+import netrc
+import os
+import requests
+
+
+def creds():
+    n = netrc.netrc()
+    auth = n.authenticators("api.github.com")
+    if auth is None:
+        print("Add api.github.com to your ~/.netrc")
+        return
+
+    user = auth[0]
+    if user is None:
+        user = auth[1]
+
+    password = auth[2]
+    if user is None or password is None:
+        print("Invalid netrc entry for api.github.com")
+        return
+
+    return (user, password)
+
+
+
+def open_pulls():
+    cred = creds()
+    user = cred[0]
+    password = cred[1]
+
+    r = requests.get("https://api.github.com/notifications", auth=(user, password))
+    json = r.json()
+    count = 0
+
+    for blob in json:
+        kind = blob["subject"]["type"]
+        if kind != "PullRequest":
+            continue
+
+        url = blob["subject"]["url"]
+        r2 = requests.get(url, auth=(user, password))
+        url2 = r2.json()["html_url"]
+        os.system("open " + url2)
+        count += 1
+
+    if count < 1:
+        print("No Unread Pull Requests")
+
+
+open_pulls()
