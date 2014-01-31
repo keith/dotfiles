@@ -1,6 +1,6 @@
 # Setup golang.org variables
 if [[ "$OSX" == true ]];then
-  export GOROOT=$(brew --prefix go)
+  export GOROOT=$(brew --prefix go)/libexec
 else
   export GOROOT="/usr/local/go"
 fi
