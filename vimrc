@@ -140,7 +140,7 @@ function! s:ToggleBackground()
     set background=light
   endif
 endfunction
-command ToggleBG call s:ToggleBackground()
+silent! command ToggleBG call s:ToggleBackground()
 
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
@@ -420,7 +420,7 @@ set showmode         " Display the mode when it changes
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
 " Find TODO and FIXME comments
-command Todo call TODOSearch()
+silent! command Todo call TODOSearch()
 function! TODOSearch()
   if executable("ag") && exists(":Ag") > 0
     Ag 'TODO|FIXME'
@@ -545,6 +545,21 @@ augroup ft_podspec
 augroup END
 " }}}
 
+" ObjC stuff ------ {{{
+augroup ft_objc
+  autocmd!
+  autocmd BufReadPost,BufNewFile *.h,*.m,*.pch setlocal filetype=objc
+  autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
+
+  " TODO: Fix this and specta.vim to use syntax for specta
+  autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+
+  " Don't force lines starting with # to column 0 in pch files
+  autocmd BufReadPost *.pch setlocal syntax=pch
+  autocmd Syntax pch setlocal indentkeys-=0#
+augroup END
+" }}}
+
 " Various filetype settings ------ {{{
 augroup ft_settings
   autocmd!
@@ -555,11 +570,7 @@ augroup ft_settings
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
-
-  " ObjC and specta settings
-  autocmd FileType objc,sh       setlocal tabstop=4 shiftwidth=4 expandtab
-  autocmd BufReadPost,BufNewFile *.h,*.m setlocal filetype=objc
-  autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+  autocmd FileType sh            setlocal tabstop=4 shiftwidth=4 expandtab
 
   " Comment string settings
   if empty(&commentstring)
@@ -592,6 +603,10 @@ function! PositionRecall()
 endfunction
 " }}}
 
+function! EscapeFilePath(path)
+  return substitute(a:path, ' ', '\\ ', 'g')
+endfunction
+
 " Custom alternate header/implementation files functions ------ {{{
 function! Alternate()
   if &modified
@@ -609,7 +624,7 @@ function! Alternate()
   if l:alternate == ""
     echomsg "No alternate file for " . expand("%")
   else
-    execute ":silent edit " . l:alternate
+    execute ":silent edit " . EscapeFilePath(l:alternate)
   endif
 endfunction
 
@@ -695,7 +710,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     return
   endtry
   redraw!
-  exec a:vim_command . " " . selection
+  exec a:vim_command . " " . EscapeFilePath(selection)
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
