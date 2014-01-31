@@ -746,6 +746,7 @@ let g:tagbar_type_go = {
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_flake8_args = "--ignore = E501"
+let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_check_on_open = 1
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
