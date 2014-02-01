@@ -9,7 +9,6 @@ alias methods="$SCRIPT_PATH/methods.rb"
 alias mksite="$SCRIPT_PATH/newSite.rb"
 alias pf="$SCRIPT_PATH/processfile.rb"
 alias rename="$SCRIPT_PATH/imageRenamer.rb"
-alias xc="$SCRIPT_PATH/xcworkspace.rb"
 
 if [[ -e "$SCRIPT_PATH/z/z.sh" ]];then
     export _Z_EXCLUDE_DIRS="/Volumes"
