@@ -2,6 +2,7 @@
 import netrc
 import os
 import requests
+import sys
 
 
 def creds():
@@ -9,7 +10,7 @@ def creds():
     auth = n.authenticators("api.github.com")
     if auth is None:
         print("Add api.github.com to your ~/.netrc")
-        return
+        sys.exit()
 
     user = auth[0]
     if user is None:
@@ -18,17 +19,14 @@ def creds():
     password = auth[2]
     if user is None or password is None:
         print("Invalid netrc entry for api.github.com")
-        return
+        sys.exit()
 
-    return (user, password)
+    return user, password
 
 
 
 def open_pulls():
-    cred = creds()
-    user = cred[0]
-    password = cred[1]
-
+    user, password = creds()
     r = requests.get("https://api.github.com/notifications", auth=(user, password))
     json = r.json()
     count = 0
@@ -39,9 +37,9 @@ def open_pulls():
             continue
 
         url = blob["subject"]["url"]
-        r2 = requests.get(url, auth=(user, password))
-        url2 = r2.json()["html_url"]
-        os.system("open " + url2)
+        r = requests.get(url, auth=(user, password))
+        url = r.json()["html_url"]
+        os.system("open " + url)
         count += 1
 
     if count < 1:
