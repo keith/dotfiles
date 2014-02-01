@@ -9,8 +9,7 @@ def creds():
     n = netrc.netrc()
     auth = n.authenticators("api.github.com")
     if auth is None:
-        print("Add api.github.com to your ~/.netrc")
-        sys.exit()
+        sys.exit("Add api.github.com to your ~/.netrc")
 
     user = auth[0]
     if user is None:
@@ -18,8 +17,7 @@ def creds():
 
     password = auth[2]
     if user is None or password is None:
-        print("Invalid netrc entry for api.github.com")
-        sys.exit()
+        sys.exit("Invalid netrc entry for api.github.com")
 
     return user, password
 
