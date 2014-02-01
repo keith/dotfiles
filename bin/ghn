@@ -31,7 +31,7 @@ def open_pulls():
     user, password = creds()
     r = requests.get(URL, auth=(user, password))
     json = r.json()
-    count = 0
+    opened = False
 
     for blob in json:
         kind = blob["subject"]["type"]
@@ -42,9 +42,9 @@ def open_pulls():
         r = requests.get(url, auth=(user, password))
         url = r.json()["html_url"]
         os.system("open " + url)
-        count += 1
+        opened = True
 
-    if count < 1:
+    if not opened:
         sys.exit("No Unread Pull Requests")
 
 
