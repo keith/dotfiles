@@ -12,7 +12,7 @@ URL = "https://api.github.com/notifications"
 NETRC = "api.github.com"
 
 
-def creds():
+def credentials():
     n = netrc.netrc()
     auth = n.authenticators(NETRC)
     if auth is None:
@@ -27,8 +27,8 @@ def creds():
     return user, password
 
 
-def open_pulls():
-    user, password = creds()
+def open_pull_requests():
+    user, password = credentials()
     r = requests.get(URL, auth=(user, password))
     json = r.json()
     opened = False
@@ -38,14 +38,14 @@ def open_pulls():
         if kind != "PullRequest":
             continue
 
-        url = blob["subject"]["url"]
-        r = requests.get(url, auth=(user, password))
-        url = r.json()["html_url"]
-        os.system("open " + url)
+        pr_url = blob["subject"]["url"]
+        r = requests.get(pr_url, auth=(user, password))
+        html_url = r.json()["html_url"]
+        os.system("open " + html_url)
         opened = True
 
     if not opened:
         sys.exit("No Unread Pull Requests")
 
 
-open_pulls()
+open_pull_requests()
