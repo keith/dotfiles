@@ -9,12 +9,12 @@ import requests
 import sys
 
 URL = "https://api.github.com/notifications"
-NETRC = "api.github.com"
+NETRC_MACHINE = "api.github.com"
 
 
 def credentials():
     n = netrc.netrc()
-    auth = n.authenticators(NETRC)
+    auth = n.authenticators(NETRC_MACHINE)
     if auth is None:
         sys.exit("Add api.github.com to your ~/.netrc")
 
