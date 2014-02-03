@@ -52,6 +52,8 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-vinegar'
 Bundle 'vim-ruby/vim-ruby'
 
+Bundle 'msanders/cocoa.vim'
+
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 " }}}
@@ -161,6 +163,7 @@ set number           " Shows line numbers
 set ruler            " Shows current cursor location
 set cursorline       " Highlight the line the cursor is on
 set nrformats-=octal " Never use octal notation
+set nojoinspaces     " Don't add 2 spaces when using J
 set mouse=a          " enable using the mouse if terminal emulator
 set hlsearch         " Highlight search terms
 set incsearch        " Show searches as you type
