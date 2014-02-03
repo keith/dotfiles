@@ -767,6 +767,7 @@ let g:syntastic_python_flake8_args = "--ignore = E501"
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_check_on_open = 1
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
+let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:hdevtools_options = '-g -Wall'
 
 " Allow toggling of syntastic errors list
