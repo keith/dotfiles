@@ -1,4 +1,5 @@
 tap homebrew/dupes
+tap linode/cli
 update
 
 install bash
@@ -11,6 +12,7 @@ install heroku-toolbelt
 install hub
 install imagemagick
 install less
+install linode-cli
 install llvm
 install macvim
 install mercurial
