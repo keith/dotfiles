@@ -408,6 +408,14 @@ function! ClearWhitespace()
   normal `i
 endfunction
 
+command HashConvert call HashConvert()
+function! HashConvert()
+  normal mi
+  %s/:\(\w*\)\(\s*\)=> /\1:\2/
+  let @/=""
+  normal `i
+endfunction
+
 " Unfuck my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
@@ -523,8 +531,9 @@ augroup END
 " Ruby files ------ {{{
 augroup ft_ruby
   autocmd!
-  autocmd FileType ruby setlocal makeprg=rspec\ %
+  autocmd FileType ruby set isk+=?
   autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
+  autocmd Syntax rspec let b:dispatch="rspec\ %"
 augroup END
 " }}}
 
