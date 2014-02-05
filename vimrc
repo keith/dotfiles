@@ -172,6 +172,7 @@ set smartcase        " ignore case if search is lowercase, otherwise case-sensit
 set title            " Change the terminal's title
 set nobackup         " Don't keep backup files
 set nowritebackup    " Don't create a backup when overwriting a file
+set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
@@ -419,12 +420,6 @@ endfunction
 " Unfuck my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
-" Paste mode settings, not necessary with vim-unimpared
-" http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
-nnoremap <F2> :set invpaste paste?<CR> " Toggle paste in normal mode
-set pastetoggle=<F2> " Toggle paste in insert mode
-set showmode         " Display the mode when it changes
-
 " http://stackoverflow.com/a/12141458/902968
 let g:ruby_path = system('echo $HOME/.rbenv/shims')
 
@@ -531,7 +526,7 @@ augroup END
 " Ruby files ------ {{{
 augroup ft_ruby
   autocmd!
-  autocmd FileType ruby set isk+=?
+  autocmd FileType ruby set iskeyword+=?
   autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
   autocmd Syntax rspec let b:dispatch="rspec\ %"
 augroup END
