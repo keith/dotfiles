@@ -192,7 +192,6 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 
 " Set mapping and key timeouts
-set noesckeys
 set timeout
 set timeoutlen=1000
 set ttimeoutlen=100
