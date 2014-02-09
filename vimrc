@@ -763,14 +763,22 @@ let g:tagbar_type_go = {
 " }}}
 
 " Syntastic ------ {{{
-let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
+let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
+
+let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
 let g:syntastic_python_flake8_args = "--ignore = E501"
 let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_check_on_open = 1
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
-let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:hdevtools_options = '-g -Wall'
+
+let g:syntastic_objc_compiler = 'clang'
+let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
+let g:syntastic_objc_check_header = 1
+let s:pch_path = '*/*.pch'
+if !empty(glob(s:pch_path))
+  let b:syntastic_objc_cflags = '-include ' . s:pch_path
+endif
 
 " Allow toggling of syntastic errors list
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
