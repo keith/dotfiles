@@ -613,9 +613,9 @@ function! EscapeFilePath(path)
 endfunction
 
 " Custom alternate header/implementation files functions ------ {{{
-function! Alternate()
+function! Alternate(cmd)
   if &modified
-    echomsg "Save buffer before alternating"
+    echoerr "Save buffer before alternating"
     return 0
   endif
 
@@ -629,7 +629,7 @@ function! Alternate()
   if l:alternate == ""
     echomsg "No alternate file for " . expand("%")
   else
-    execute ":silent edit " . EscapeFilePath(l:alternate)
+    execute ":silent " . a:cmd . " " . EscapeFilePath(l:alternate)
   endif
 endfunction
 
@@ -647,7 +647,10 @@ endfunction
 
 augroup alternate_headers
   autocmd!
-  autocmd FileType objc,c,cpp command! -buffer -bang A :call Alternate()
+  autocmd FileType objc,c,cpp command! -buffer A :call Alternate("edit")
+  autocmd FileType objc,c,cpp command! -buffer AS :call Alternate("split")
+  autocmd FileType objc,c,cpp command! -buffer AV :call Alternate("vsplit")
+  autocmd FileType objc,c,cpp command! -buffer AT :call Alternate("tabnew")
 augroup END
 " }}}
 
