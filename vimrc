@@ -777,6 +777,11 @@ let g:hdevtools_options = '-g -Wall'
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:syntastic_objc_check_header = 1
+let g:syntastic_objc_compiler_options = '-std=gnu99 -fobjc-arc -fmodules'
+let s:module_cache = expand('$HOME') . '/Library/Developer/Xcode/DerivedData/ModuleCache'
+if isdirectory(s:module_cache)
+  let g:syntastic_objc_compiler_options .= ' -fmodules-cache-path=' . s:module_cache
+endif
 let s:pch_path = '*/*.pch'
 if !empty(glob(s:pch_path))
   let b:syntastic_objc_cflags = '-include ' . s:pch_path
