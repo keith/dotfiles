@@ -43,7 +43,8 @@
   l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(black bold)(%an)%Creset'
   sub   = submodule update --init --recursive
   pul   = pull
-
+[gitsh]
+  defaultCommand = s
 [merge "railsschema"]
   name = newer Rails schema version
     driver = "ruby -e '\n\
