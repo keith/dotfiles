@@ -34,6 +34,7 @@ Bundle 'Keithbsmiley/tmux.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
+Bundle 'Rip-Rip/clang_complete'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjl/clam.vim'
@@ -394,6 +395,7 @@ nnoremap <leader>q :call CloseLists()<CR>
 function! CloseLists()
   lclose
   cclose
+  pclose
 endfunction
 
 " Clean trailing whitespace
@@ -774,10 +776,11 @@ let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
 
+let s:compiler_options = '-std=gnu99 -fobjc-arc -fmodules'
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:syntastic_objc_check_header = 1
-let g:syntastic_objc_compiler_options = '-std=gnu99 -fobjc-arc -fmodules'
+let g:syntastic_objc_compiler_options = s:compiler_options
 let s:module_cache = expand('$HOME') . '/Library/Developer/Xcode/DerivedData/ModuleCache'
 if isdirectory(s:module_cache)
   let g:syntastic_objc_compiler_options .= ' -fmodules-cache-path=' . s:module_cache
@@ -802,6 +805,13 @@ function! ToggleErrors()
 endfunction
 nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
+
+" clang_complete
+let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
+let g:clang_user_options = s:compiler_options
+let g:clang_snippets = 1
+let g:clang_complete_copen = 1
+let g:clang_close_preview = 1
 
 " Clever-f
 let g:clever_f_across_no_line = 1
