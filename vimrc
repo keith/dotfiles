@@ -818,6 +818,8 @@ let g:clang_snippets = 1
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 1
 let g:clang_auto_select = 2
+let g:clang_jumpto_back_key = "<C-5>"
+let g:clang_complete_auto = 0
 
 " Clever-f
 let g:clever_f_across_no_line = 1
