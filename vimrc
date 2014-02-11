@@ -812,6 +812,11 @@ let g:clang_user_options = s:compiler_options
 let g:clang_snippets = 1
 let g:clang_complete_copen = 1
 let g:clang_close_preview = 1
+let g:clang_periodic_quickfix = 1
+let g:clang_snippets = 1
+let g:clang_complete_macros = 1
+let g:clang_complete_patterns = 1
+let g:clang_auto_select = 2
 
 " Clever-f
 let g:clever_f_across_no_line = 1
