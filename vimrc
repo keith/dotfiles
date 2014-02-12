@@ -177,7 +177,6 @@ set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
-set scroll=10        " Number of lines for CTRL-u/d jumps
 set gdefault         " Adds g at the end of substitutions by default
 set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
@@ -229,6 +228,11 @@ noremap k gk
 noremap gk k
 noremap <Up> gk
 inoremap <Up> <C-o>gk
+
+" Computers are dumb
+" scroll gets reset every time the window is resized
+nnoremap <C-u> 10<C-u>
+nnoremap <C-d> 10<C-d>
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
