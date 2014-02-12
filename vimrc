@@ -548,7 +548,7 @@ augroup ft_podspec
   autocmd BufNewFile,BufRead Podfile setlocal filetype=podfile
   autocmd FileType podspec,podfile set syntax=ruby
   autocmd FileType podspec set makeprg=pod\ spec\ lint\ %
-  autocmd FileType podfile set makeprg=pod\ install
+  autocmd FileType podfile set makeprg=pod\ install\ >/dev/null
 augroup END
 " }}}
 
@@ -811,15 +811,16 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
 let g:clang_user_options = s:compiler_options
 let g:clang_snippets = 1
-let g:clang_complete_copen = 1
 let g:clang_close_preview = 1
-let g:clang_periodic_quickfix = 1
 let g:clang_snippets = 1
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 1
 let g:clang_auto_select = 2
 let g:clang_jumpto_back_key = "<C-5>"
 let g:clang_complete_auto = 0
+let g:clang_hl_errors = 0
+let g:clang_complete_copen = 0
+let g:clang_periodic_quickfix = 0
 
 " Clever-f
 let g:clever_f_across_no_line = 1
