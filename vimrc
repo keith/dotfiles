@@ -484,7 +484,6 @@ augroup ft_help
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
   autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
   autocmd FileType help setlocal iskeyword+=-
-  autocmd FileType help autocmd FileWritePost,BufWritePost <buffer> call pathogen#helptags()
   autocmd FileType help if !&readonly | setlocal spell autoindent formatoptions+=2n | endif
 augroup END
 " }}}
