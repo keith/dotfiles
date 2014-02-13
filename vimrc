@@ -535,7 +535,7 @@ augroup ft_ruby
   autocmd!
   autocmd FileType ruby set iskeyword+=?
   autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
-  autocmd Syntax rspec let b:dispatch="rspec\ %"
+  autocmd Syntax rspec setlocal makeprg=rspec\ %
 augroup END
 " }}}
 
@@ -552,8 +552,8 @@ augroup ft_podspec
   autocmd BufNewFile,BufRead,BufWrite *.podspec setlocal filetype=podspec
   autocmd BufNewFile,BufRead Podfile setlocal filetype=podfile
   autocmd FileType podspec,podfile set syntax=ruby
-  autocmd FileType podspec set makeprg=pod\ spec\ lint\ %
-  autocmd FileType podfile set makeprg=pod\ install\ >/dev/null
+  autocmd FileType podspec setlocal makeprg=pod\ spec\ lint\ %
+  autocmd FileType podfile setlocal makeprg=pod\ install\ >/dev/null
 augroup END
 " }}}
 
