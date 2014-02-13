@@ -28,6 +28,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'Keithbsmiley/investigate.vim'
+Bundle 'Keithbsmiley/kiwi.vim'
 Bundle 'Keithbsmiley/rspec.vim'
 Bundle 'Keithbsmiley/specta.vim'
 Bundle 'Keithbsmiley/tmux.vim'
@@ -559,14 +560,14 @@ augroup END
 " ObjC stuff ------ {{{
 augroup ft_objc
   autocmd!
-  autocmd BufReadPost,BufNewFile *.h,*.m,*.pch setlocal filetype=objc
+  autocmd BufNewFile,BufRead *.h,*.m,*.pch setlocal filetype=objc
   autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
 
-  " TODO: Fix this and specta.vim to use syntax for specta
-  autocmd BufReadPost *Test.m,*Tests.m setlocal filetype=specta
+  autocmd BufRead *Test.m,*Tests.m setlocal syntax=specta foldmethod=syntax
+  autocmd BufRead *Spec.m,*Specs.m setlocal syntax=kiwi foldmethod=syntax
 
   " Don't force lines starting with # to column 0 in pch files
-  autocmd BufReadPost *.pch setlocal syntax=pch
+  autocmd BufRead *.pch setlocal syntax=pch
   autocmd Syntax pch setlocal indentkeys-=0#
 augroup END
 " }}}
@@ -679,9 +680,7 @@ let c_no_curly_error = 1
 
 " CTRL-P
 let g:ctrlp_show_hidden = 1
-if exists('g:ctrlp_user_command')
-  unlet g:ctrlp_user_command
-endif
+unlet! g:ctrlp_user_command
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
 
 " Selecta Git commands configuration ------ {{{
