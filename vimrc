@@ -795,7 +795,7 @@ let g:tagbar_type_objc = {
     \ 'p:property',
     \ 'M:method',
     \ 't:typedef',
-    \ 'v:variable',
+    \ 'c:constant',
   \ ],
 \ }
 " }}}
