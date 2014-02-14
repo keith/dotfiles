@@ -745,6 +745,8 @@ let g:airline_right_sep = ''
 
 " TagBar ------ {{{
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
+" Order tags by their appearence in the file
+let g:tagbar_sort = 0
 let g:tagbar_type_go = {
   \ 'ctagstype' : 'go',
   \ 'kinds'     : [
@@ -771,6 +773,30 @@ let g:tagbar_type_go = {
   \ },
   \ 'ctagsbin'  : 'gotags',
   \ 'ctagsargs' : '-sort -silent'
+\ }
+
+let g:tagbar_type_objc = {
+  \ 'ctagstype': 'objc',
+  \ 'ctagsargs': [
+    \ '-f',
+    \ '-',
+    \ '--excmd=pattern',
+    \ '--extra=',
+    \ '--format=2',
+    \ '--fields=nksaSmt',
+    \ '--options=' . expand('~/.vim/objctags'),
+    \ '--objc-kinds=-N',
+  \ ],
+  \ 'sro': ' ',
+  \ 'kinds': [
+    \ 'i:interface',
+    \ 'I:implementation',
+    \ 'P:protocol',
+    \ 'p:property',
+    \ 'M:method',
+    \ 't:typedef',
+    \ 'v:variable',
+  \ ],
 \ }
 " }}}
 
