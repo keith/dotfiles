@@ -12,6 +12,8 @@ mutt/certificates
 mutt/offlineimaphelpers.pyc
 mutt/postponed
 mutt/temp
+linux/configs/fish/fish_history
+linux/configs/fish/fishd*
 
 ####### Linux #######
 !.gitignore
