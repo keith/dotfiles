@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-FILES=(terminator awesome)
-p=$HOME/.config
 dir=$DOTFILES/linux/configs
+FILES=$(ls $dir)
+p=$HOME/.config
 
 function link() {
     local folder=$1
