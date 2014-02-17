@@ -789,13 +789,14 @@ let g:tagbar_type_objc = {
   \ ],
   \ 'sro': ' ',
   \ 'kinds': [
+    \ 'c:constant',
+    \ 'e:enum',
+    \ 't:typedef',
     \ 'i:interface',
-    \ 'I:implementation',
     \ 'P:protocol',
     \ 'p:property',
+    \ 'I:implementation',
     \ 'M:method',
-    \ 't:typedef',
-    \ 'c:constant',
   \ ],
 \ }
 " }}}
