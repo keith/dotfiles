@@ -797,6 +797,7 @@ let g:tagbar_type_objc = {
     \ 'p:property',
     \ 'I:implementation',
     \ 'M:method',
+    \ 'g:pragma',
   \ ],
 \ }
 " }}}
