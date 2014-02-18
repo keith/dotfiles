@@ -535,6 +535,8 @@ augroup ft_ruby
   autocmd FileType ruby set iskeyword+=?
   autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
   autocmd Syntax rspec setlocal makeprg=rspec\ %
+  " Force Dispatch to run :Dispatch over :Make for better output
+  autocmd Syntax rspec let b:dispatch=&makeprg
 augroup END
 " }}}
 
