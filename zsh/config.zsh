@@ -8,7 +8,7 @@ autoload -U colors && colors
 export PS1="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}) %# "
 
 # Show the hostname over SSH
-if [[ ! -z $SSH_CLIENT ]];then
+if [[ -n $SSH_CLIENT ]];then
   export PS1="%m $PS1"
 fi
 
