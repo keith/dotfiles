@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-[ -n "$SSH_CLIENT" ] && return
+[ -n "$SSH_CLIENT" ] || return
 
-cat | nc -c localhost 2224
+cat | nc localhost 2224
