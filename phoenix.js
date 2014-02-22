@@ -168,3 +168,5 @@ api.bind('left', resizeModifiers, function() { resize(-10, 0) });
 api.bind('right', resizeModifiers, function() { resize(+10, 0) });
 api.bind('up', resizeModifiers, function() { resize(0, -10) });
 api.bind('down', resizeModifiers, function() { resize(0, +10) });
+
+api.bind('t', moveModifiers, function () { api.launch("iTerm"); });
