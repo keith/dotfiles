@@ -48,4 +48,4 @@ source $HOME/.mutt/folders
 source $HOME/.mutt/bindings
 source $HOME/.mutt/external
 source $HOME/.mutt/macros
-
+source $HOME/.mutt/crypto
