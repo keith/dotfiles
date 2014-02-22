@@ -566,11 +566,6 @@ augroup ft_objc
   autocmd!
   autocmd BufNewFile,BufRead *.h,*.m,*.pch setlocal filetype=objc
   autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
-  autocmd FileType objc
-        \ let b:endwise_addition = '@end' |
-        \ let b:endwise_words = '@interface,@implementation' |
-        \ let b:endwise_pattern = '^\s*@\%(interface\|implementation\)\s\+.\+$' |
-        \ let b:endwise_syngroups = 'objcObjDef'
 
   autocmd BufRead *Test.m,*Tests.m setlocal syntax=specta foldmethod=syntax
   autocmd BufRead *Spec.m,*Specs.m setlocal syntax=kiwi foldmethod=syntax
