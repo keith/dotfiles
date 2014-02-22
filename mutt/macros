@@ -10,5 +10,6 @@ macro index,pager gi "<change-folder>+INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+sent<enter>" "Go to sent mail"
 
 macro index .n "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
+macro pager <tab> "<exit><sync-mailbox>" "Sync mailbox"
 
 # vim: ft=muttrc
