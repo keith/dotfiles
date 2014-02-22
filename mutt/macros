@@ -7,6 +7,7 @@ macro index,pager d "<save-message>+trash<enter>" "Archive message"
 macro index,pager e "<save-message>+archive<enter>" "Archive message"
 macro index,pager ga "<change-folder>+archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+INBOX<enter>" "Go to inbox"
+macro index,pager gs "<change-folder>+sent<enter>" "Go to sent mail"
 
 macro index .n "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<clear-flag>*" "Catchup all new messages"
 
