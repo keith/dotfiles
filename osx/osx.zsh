@@ -4,5 +4,4 @@ if [[ "$OSX" != true ]];then
 fi
 
 # Link to zsh-completions files from homebrew
-fpath=($(brew --prefix)/share/zsh-completions $(brew --prefix)/share/zsh/site-functions $fpath)
-
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)

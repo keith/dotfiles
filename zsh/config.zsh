@@ -34,6 +34,7 @@ fi
 # export PS1='${vcs_info_msg_0_} %# '
 # precmd_functions=($precmd_functions vcs_info)
 
+fpath=($DOTFILES/scripts/zsh-completions/src $fpath)
 fpath=($DOTFILES/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
 
