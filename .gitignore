@@ -14,6 +14,9 @@ mutt/postponed
 mutt/temp
 linux/configs/fish/fish_history
 linux/configs/fish/fishd*
+vim/flavors
+gnupg/*
+!gnupg/gpg.conf
 
 ####### Linux #######
 !.gitignore
@@ -41,6 +44,4 @@ Icon
 Session.vim
 .netrwhist
 *~
-
-vim/flavors
 
