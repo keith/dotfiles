@@ -40,7 +40,7 @@ unset markers                                                         # no ugly 
   set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 
 ignore *
-unignore Date From To Cc Subject
+unignore Date From To Cc Subject X-PGP-Key
 alternative_order text/plain text/enriched text/html
 auto_view text/x-vcard text/html text/enriched
 

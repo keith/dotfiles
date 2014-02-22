@@ -1,3 +1,4 @@
+my_hdr X-PGP-Key: fp=\"652D 5C4E 2F78 7055 2B94  5256 35AC 2EDD 0C76 4406\"\; id=\"0x0C764406\"\; get=<https://keith.so/pubkey.asc>\; get=<hkp://pgp.mit.edu/pks/lookup?search=0x35AC2EDD0C764406&op=get>\;
 set pgp_autosign=no
 set pgp_sign_as=0x0C764406
 set pgp_replyencrypt=yes
