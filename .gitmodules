@@ -22,3 +22,6 @@
 [submodule "scripts/nvm"]
 	path = scripts/nvm
 	url = https://github.com/creationix/nvm.git
+[submodule "scripts/zsh-completions"]
+	path = scripts/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
