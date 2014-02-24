@@ -711,7 +711,7 @@ function! SearchCommand()
     if strlen(l:output) > 0
       let l:command = GitListCommand(l:output)
     else
-      let l:command = "find * -type f"
+      let l:command = "find * -type f -o -type l"
     endif
   endif
 
