@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+kill -9 $(ps ax | grep offlineimap | head -1 | awk '{ print $1; }');offlineimap
