@@ -15,10 +15,12 @@ do
     fi
 done
 
-url="${url:0:${#url}-4}"
+if [[ "$url" =~ \\*.git$ ]];then
+    url="${url:0:${#url}-4}"
+fi
+
 if [[ $url == "" ]];then
     echo "No remotes found for $branch"
 else
     open "$url/$1"
 fi
-
