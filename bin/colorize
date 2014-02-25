@@ -6,5 +6,5 @@ if [[ -z "$SSH_CLIENT" && $TERM_PROGRAM == "iTerm.app" ]];then
     value=$(cat $HOME/.coloroverride)
   fi
 
-  osascript $DOTFILES/scripts/itermcolors.applescript $value
+  osascript $DOTFILES/scripts/itermcolors.applescript $value 2>/dev/null
 fi
