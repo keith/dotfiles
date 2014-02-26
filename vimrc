@@ -247,10 +247,6 @@ nnoremap N Nzzzv
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
 
-" Don't pollute the system clipboard with single chars
-nnoremap x "_x
-nnoremap X "_X
-
 " Force root permission saves
 cnoremap w!! w !sudo tee % >/dev/null
 
