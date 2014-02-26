@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(backupignore bashrc bin curlrc gemrc ghci gitconfig gitignore_global gnupg goobookrc gvimrc hgrc inputrc irbrc irssi mutt muttrc notmuch-config npmrc offlineimaprc rspec phoenix.js psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc urlview Xdefaults Xmodmap xvimrc zshrc)
+FILES=(backupignore bashrc bin curlrc gemrc ghci gitconfig gitignore_global gnupg goobookrc gvimrc hgrc hushlogin inputrc irbrc irssi mutt muttrc notmuch-config npmrc offlineimaprc rspec phoenix.js psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc urlview Xdefaults Xmodmap xvimrc zshrc)
 NO_DOT=()
 
 function custom_path () {
