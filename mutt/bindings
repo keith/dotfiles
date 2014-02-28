@@ -2,19 +2,21 @@
 bind attach <return> view-mailcap
 
 bind editor <space> noop
-bind editor <Tab> complete-query
-bind editor ^T complete
 
 bind index <space> collapse-thread
 bind index <tab> sync-mailbox
 bind index c mail
 bind index G last-entry
 bind index gg first-entry
+bind index j next-entry
+bind index k previous-entry
 bind index m change-folder
 bind index N search-opposite
 bind index p recall-message
 bind index R group-reply
 
+bind pager \Cd next-page
+bind pager \Cu previous-page
 bind pager c mail
 bind pager G bottom
 bind pager gg top
@@ -24,4 +26,3 @@ bind pager m change-folder
 bind pager R group-reply
 
 # vim: ft=muttrc
-

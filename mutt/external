@@ -1,5 +1,5 @@
 # urlview
-macro pager \Cu "|urlview<enter>" "call urlview to open links"
+macro pager <Return> "<pipe-entry>urlview<enter>" "follow links with urlview"
 
 # Goobook contacts settings
 set query_command="goobook query '%s'"
