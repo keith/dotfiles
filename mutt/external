@@ -19,4 +19,3 @@ macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py
 # bind index,pager <right>  sidebar-open
 
 # vim: ft=muttrc
-

@@ -13,6 +13,6 @@ set postponed        = "+drafts"
 set mbox             = "+archive"
 set sendmail         = /usr/local/bin/msmtp\ -C\ $HOME/.mutt/msmtprc
 
-source $HOME/.mutt/solarized/mutt-colors-solarized-dark-16.muttrc
+source $HOME/.mutt/solarized-dark.muttrc
 
 # vim: ft=muttrc
