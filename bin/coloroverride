@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 if [[ $# -ne 1 ]];then
-    echo "Usage: coloroverride [light|dark]"
+    echo "Usage: coloroverride [light|dark|clear]"
     exit
 fi
 
-echo $1 > $HOME/.coloroverride
-colorize $1
+file=$HOME/.coloroverride
+if [[ $1 == "clear" ]];then
+    rm $file
+    colorize
+else
+    echo $1 > $file
+    colorize $1
+fi
