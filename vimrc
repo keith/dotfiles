@@ -25,6 +25,7 @@ Bundle 'DasIch/vim-mercurial'
 Bundle 'elzr/vim-json'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'godlygeek/tabular'
+Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'justinmk/vim-gtfo'
 Bundle 'Keithbsmiley/investigate.vim'
@@ -32,7 +33,9 @@ Bundle 'Keithbsmiley/kiwi.vim'
 Bundle 'Keithbsmiley/rspec.vim'
 Bundle 'Keithbsmiley/specta.vim'
 Bundle 'Keithbsmiley/tmux.vim'
+Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
+Bundle 'mattn/gist-vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'Rip-Rip/clang_complete'
@@ -157,8 +160,8 @@ set lazyredraw       " Don't redraw vim in all situations
 set synmaxcol=300    " The max number of columns to try and highlight
 set noerrorbells     " Don't make noise
 set visualbell       " Don't show bells
-set autoread         " watch for file changes and auto update
-set showmatch        " set show matching parenthesis
+set autoread         " Watch for file changes and auto update
+set showmatch        " Set show matching parenthesis
 set matchtime=2      " The amount of time matches flash
 set display=lastline " Display super long wrapped lines
 set number           " Shows line numbers
@@ -166,13 +169,14 @@ set ruler            " Shows current cursor location
 set cursorline       " Highlight the line the cursor is on
 set nrformats-=octal " Never use octal notation
 set nojoinspaces     " Don't add 2 spaces when using J
-set mouse=a          " enable using the mouse if terminal emulator
+set mouse=a          " Enable using the mouse if terminal emulator
+set mousehide        " Hide the mouse on typing
 set hlsearch         " Highlight search terms
 set incsearch        " Show searches as you type
 set wrap             " Softwrap text
 set linebreak        " Don't wrap in the middle of words
-set ignorecase       " ignore case when searching
-set smartcase        " ignore case if search is lowercase, otherwise case-sensitive
+set ignorecase       " Ignore case when searching
+set smartcase        " Ignore case if search is lowercase, otherwise case-sensitive
 set title            " Change the terminal's title
 set nobackup         " Don't keep backup files
 set nowritebackup    " Don't create a backup when overwriting a file
@@ -181,6 +185,7 @@ set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
+set report=0         " Report any number of line changes
 set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
 silent! set colorcolumn=80   " Highlight column x
@@ -873,6 +878,9 @@ let g:investigate_command_for_python = "^i!pydoc ^s"
 
 " vim-rooter
 let g:rooter_manual_only = 1
+
+" python-mode
+let g:pymode_indent = 0
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
