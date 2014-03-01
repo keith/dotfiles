@@ -746,7 +746,7 @@ nnoremap <leader>t :call SelectaCommand(SearchCommand(), "", ":split")<cr>
 " }}}
 
 " Airline
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'custom'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
