@@ -5,7 +5,11 @@ verbose = True
 
 [extensions]
 hgext.extdiff =
+color =
+pager =
 
 [defaults]
 revert = --no-backup
 
+[pager]
+pager = less
