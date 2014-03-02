@@ -7,7 +7,7 @@ fi
 
 file=$HOME/.coloroverride
 if [[ $1 == "clear" ]];then
-    rm $file
+    rm -f $file
     colorize
 else
     echo $1 > $file
