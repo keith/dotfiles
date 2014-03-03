@@ -1,1 +1,10 @@
-alias -s py=python
+exec_python () {
+  name=$1
+  if [[ $name == "django-admin.py" ]];then
+    $name
+    return
+  fi
+
+  python $name
+}
+alias -s py=exec_python
