@@ -12,6 +12,6 @@ cd_to_most_recently_opened_directory() {
   fi
 }
 
-if [[ -z $TMUX ]];then
+if [[ -z "$TMUX" && -z "$SSH_CLIENT" ]];then
   cd_to_most_recently_opened_directory
 fi
