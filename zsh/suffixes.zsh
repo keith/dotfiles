@@ -6,6 +6,6 @@ exec_python () {
     return
   fi
 
-  python $name
+  python $name "$@"
 }
 alias -s py=exec_python
