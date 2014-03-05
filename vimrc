@@ -231,6 +231,10 @@ endif
 noremap  <F1> <nop>
 inoremap <F1> <nop>
 
+" Paging keys
+inoremap <PageDown> <nop>
+inoremap <PageUp> <nop>
+
 " Disable ex mode
 nnoremap Q <Nop>
 
@@ -603,6 +607,7 @@ augroup ft_settings
   autocmd FileType vim           setlocal foldmethod=marker
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
+  autocmd FileType htmldjango    setlocal commentstring={#\ %s\ #}
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
