@@ -3,9 +3,10 @@
 [MESSAGES CONTROL]
 
 # line-too-long: Ignore line length warning of 80 characters
+# too-many-public-methods: Ignore public method count django
 # C0111: Ignore method missing docstring
 # C0103: Too short of variable names
 # W0614, W0401: Ignore wildcard import settings
 # W0142: * or ** 'magic'
-disable=line-too-long, C0111, C0103, W0614, W0401, W0142
+disable=line-too-long, too-many-public-methods, C0111, C0103, W0614, W0401, W0142
 
