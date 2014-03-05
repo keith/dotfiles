@@ -195,8 +195,12 @@ if &textwidth == 0
 endif
 " Highlight the columns after the textwidth
 silent! let &colorcolumn='+'.join(range(1,255), ',+')
-highlight ColorColumn ctermbg=Black
 autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
+if &background ==# "dark"
+  highlight ColorColumn ctermbg=Black
+else
+  highlight ColorColumn ctermbg=LightGray
+endif
 
 " Completion options
 set complete=.,w,b,u,t,i
