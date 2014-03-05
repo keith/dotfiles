@@ -204,7 +204,7 @@ endif
 
 " Completion options
 set complete=.,w,b,u,t,i
-set completeopt=menu,preview
+set completeopt=menu
 set wildmenu                                     " Better completion in the CLI
 set wildmode=longest,list,full                   " Completion settings
 " Ignore these folders for completions
