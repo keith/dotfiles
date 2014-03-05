@@ -480,8 +480,6 @@ augroup ft_css_sass
   autocmd!
   autocmd FileType css setlocal commentstring=/*\ %s\ */
   autocmd FileType css,scss.css setlocal foldmethod=marker foldmarker={,}
-  autocmd FileType css,scss.css autocmd BufReadPost *
-        \ inoremap <buffer> {<CR> {<CR><CR>}<ESC>ki<tab>
 augroup END
 " }}}
 
@@ -897,6 +895,9 @@ let g:rooter_manual_only = 1
 
 " python-mode
 let g:pymode_indent = 0
+
+" delimitMate
+let delimitMate_expand_cr = 1
 
 " Local vimrc settings
 if filereadable('.vimrc.local')
