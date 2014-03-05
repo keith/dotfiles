@@ -183,17 +183,25 @@ set nowritebackup    " Don't create a backup when overwriting a file
 set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
 set updatetime=4000  " Set the time before plugins assume you're not typing
-set scrolloff=5      " Number of lines the cursor is to the edge before scrolling
+set scrolloff=5      " Lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
 set report=0         " Report any number of line changes
 set nolist           " Show/Hide hidden characters
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Use these characters for typically hidden chars
-silent! set colorcolumn=80   " Highlight column x
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Typically hidden chars
+
+" Default text width to 80
+if &textwidth == 0
+  set textwidth=80
+endif
+" Highlight the columns after the textwidth
+silent! let &colorcolumn='+'.join(range(1,255), ',+')
+highlight ColorColumn ctermbg=Black
+autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
 
 " Completion options
 set complete=.,w,b,u,t,i
 set completeopt=menu,preview
-set wildmenu                                     " Better completion in the vim command line
+set wildmenu                                     " Better completion in the CLI
 set wildmode=longest,list,full                   " Completion settings
 " Ignore these folders for completions
 set wildignore+=.hg,.git,.svn                    " Version control
@@ -482,7 +490,7 @@ augroup END
 " Git ------ {{{
 augroup ft_git
   autocmd!
-  autocmd BufReadPost *gitconfig     setlocal filetype=gitconfig
+  autocmd BufRead     *gitconfig     setlocal filetype=gitconfig
   autocmd FileType    gitcommit      setlocal spell
 augroup END
 " }}}
@@ -572,14 +580,14 @@ augroup ft_objc
   autocmd!
   autocmd BufNewFile,BufRead *.h,*.m,*.pch setlocal filetype=objc
   autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab
-  autocmd FileType objc let g:surround_64 = "@\"\r\""
+  autocmd FileType objc let g:surround_{char2nr('@')} = "@\"\r\""
 
   autocmd BufRead *Test.m,*Tests.m setlocal syntax=specta foldmethod=syntax
-  autocmd BufRead *Spec.m,*Specs.m setlocal syntax=kiwi foldmethod=syntax
+  autocmd BufRead *Spec.m,*Specs.m setlocal syntax=kiwi   foldmethod=syntax
 
   " Don't force lines starting with # to column 0 in pch files
   autocmd BufRead *.pch setlocal syntax=pch
-  autocmd Syntax pch setlocal indentkeys-=0#
+  autocmd Syntax    pch setlocal indentkeys-=0#
 augroup END
 " }}}
 
@@ -590,15 +598,14 @@ augroup ft_settings
   autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
   autocmd FileType vim           setlocal foldmethod=marker
   autocmd FileType dcl           setlocal filetype=apache
+  autocmd FileType apache        setlocal commentstring=#\ %s
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
   autocmd FileType sh            setlocal tabstop=4 shiftwidth=4 expandtab
 
   " Comment string settings
-  if empty(&commentstring)
-    setlocal commentstring=#\ %s
-  endif
+  if empty(&commentstring) | setlocal commentstring=#\ %s | endif
   autocmd FileType cf setlocal commentstring=<!---\ %s\ --->
   autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
