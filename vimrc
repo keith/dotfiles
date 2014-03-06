@@ -605,6 +605,10 @@ augroup ft_settings
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
   autocmd FileType htmldjango    setlocal commentstring={#\ %s\ #}
+  autocmd FileType htmldjango
+    \ let b:surround_{char2nr("v")} = "{{ \r }}" |
+    \ let b:surround_{char2nr("%")} = "{% \r %}"
+
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
