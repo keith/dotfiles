@@ -133,11 +133,7 @@ else
     set background=dark
   endif
 endif
-
-try
-  colorscheme solarized " Use the awesome solarized color scheme
-catch /^Vim\%((\a\+)\)\=:E185/
-endtry
+silent! colorscheme solarized
 
 " A functional equivalent to solarized background swap function
 function! s:ToggleBackground()
@@ -377,7 +373,10 @@ if !exists('$TMUX')
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
 endif
-set winwidth=80         " Set the minimum window width for splits
+
+" Set the minimum window width for splits
+set winwidth=80
+set winminwidth=20
 " Setup the height of vertical splits
 " https://www.destroyallsoftware.com/file-navigation-in-vim.html
 " Order is key
@@ -621,7 +620,7 @@ augroup ft_settings
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
-  autocmd BufRead,BufReadPost,Syntax,VimEnter * setlocal formatoptions-=o
+  autocmd BufRead,BufReadPost,Syntax,VimEnter * set formatoptions-=o
 
   " Return to the same position you left the file in
   autocmd BufReadPost * call PositionRecall()
@@ -634,8 +633,8 @@ function! PositionRecall()
     return
   endif
 
-  if line("'\"") > 0 && line("'\"") <= line("$") |
-    execute "normal g`\"zz" |
+  if line("'\"") > 0 && line("'\"") <= line("$")
+    execute "normal g`\"zz"
   endif
 endfunction
 " }}}
