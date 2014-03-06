@@ -51,14 +51,36 @@ HISTFILE=$HOME/.zsh_history
 # Append history to the zsh_history file
 setopt APPEND_HISTORY
 
+# Write to history after each command
+setopt INC_APPEND_HISTORY
+
+# Share history between shells
+setopt SHARE_HISTORY
+
+# Don't store the history command
+setopt HIST_NO_STORE
+
 # Ignore duplicates in zsh history
 setopt HIST_IGNORE_ALL_DUPS
 
 # Ignore commands for history that start with a space
 setopt HIST_IGNORE_SPACE
 
-# Remove superfluous blanks from each command line being added to the history list
+# Remove superfluous blanks from each line being added to the history list
 setopt HIST_REDUCE_BLANKS
+
+# pushd for cd commands
+setopt AUTO_PUSHD
+# Don't push duplicates
+setopt PUSHD_IGNORE_DUPS
+
+# No beep
+unsetopt BEEP
+unsetopt HIST_BEEP
+unsetopt LIST_BEEP
+
+# Warn before quitting with background jobs
+setopt CHECK_JOBS
 
 
 # Use vim shortcuts within the terminal (defaults to insert mode)
