@@ -7,13 +7,12 @@ install bash
 install cloc
 install ctags
 install git
-install gitsh
 install grc
 install grep
-install heroku-toolbelt
 install hub
 install imagemagick
 install less
+install liftoff
 install linode-cli
 install llvm
 install macvim
@@ -36,7 +35,6 @@ install urlview
 install vim
 install wget
 install zsh
-install zsh-completions
 
 # rsync
 # install https://raw.github.com/Homebrew/homebrew-dupes/109dca908c6499116e07483d7afe8a1c3ef63ad6/rsync.rb
