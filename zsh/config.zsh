@@ -54,9 +54,6 @@ setopt APPEND_HISTORY
 # Write to history after each command
 setopt INC_APPEND_HISTORY
 
-# Share history between shells
-setopt SHARE_HISTORY
-
 # Don't store the history command
 setopt HIST_NO_STORE
 
@@ -81,6 +78,9 @@ unsetopt LIST_BEEP
 
 # Warn before quitting with background jobs
 setopt CHECK_JOBS
+
+# Don't ask before running a rm *
+setopt RM_STAR_SILENT
 
 
 # Use vim shortcuts within the terminal (defaults to insert mode)
