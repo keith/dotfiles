@@ -128,6 +128,7 @@ augroup ft_settings
   autocmd FileType vim           setlocal foldmethod=marker
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
+  autocmd FileType text          setlocal formatoptions+=t2n
   autocmd FileType htmldjango    setlocal commentstring={#\ %s\ #}
   autocmd FileType htmldjango
     \ let b:surround_{char2nr("v")} = "{{ \r }}" |
