@@ -272,7 +272,7 @@ cnoreabbrev ` ~
 cnoreabbrev `` `
 
 " Edit vimrc with mapping
-nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <leader>ov :tabedit $MYVIMRC<CR>
 
 " Sort entire file unique
 nnoremap <leader>sf :call SortFile()<CR>
