@@ -40,7 +40,7 @@
   ba    = branch -a
   rv    = remote -v
   r     = reflog -5
-  l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(black bold)(%an)%Creset'
+  l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
   sub   = submodule update --init --recursive
   pul   = pull
 [gitsh]
