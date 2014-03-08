@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+port=$1
+if [[ "$port" -eq "" ]];then
+  echo "Usage: onport PORTNUMBER"
+  return
+fi
+
+case $OSTYPE in
+darwin*)
+  lsof -i tcp:$port
+  ;;
+*)
+  netstat -tulpn | grep :$port
+  ;;
+esac
