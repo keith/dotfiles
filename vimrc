@@ -194,9 +194,22 @@ silent! let &colorcolumn='+'.join(range(1,255), ',+')
 autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
 if &background ==# "dark"
   highlight ColorColumn ctermbg=Black
+  highlight StatusLine ctermbg=DarkGray ctermfg=Black
 else
   highlight ColorColumn ctermbg=LightGray
+  highlight StatusLine ctermbg=DarkGrey ctermfg=White
 endif
+
+" Status line setup (without airline)
+" Left Side
+set statusline=\ \ %F
+set statusline+=\ %r
+" Right Side
+set statusline+=%=
+set statusline+=%Y
+set statusline+=\ \ \ \ \ \ %P
+set statusline+=\ :%l:
+set statusline+=\ %c
 
 " Completion options
 set complete=.,w,b,u,t,i
