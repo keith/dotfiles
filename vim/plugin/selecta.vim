@@ -45,6 +45,6 @@ endfunction
 " Fuzzy select one of those. Open the selected file with :e.
 nnoremap <C-p> :call SelectaCommand(SearchCommand(), "", ":e")<cr>
 nnoremap <C-t> :call SelectaCommand(SearchCommand(), "", ":tabnew")<cr>
-nnoremap <leader>p :call SelectaCommand(SearchCommand(), "", ":vsplit")<cr>
-nnoremap <leader>t :call SelectaCommand(SearchCommand(), "", ":split")<cr>
+nnoremap <C-v> :call SelectaCommand(SearchCommand(), "", ":vsplit")<cr>
+nnoremap <C-f> :call SelectaCommand(SearchCommand(), "", ":split")<cr>
 " }}}
