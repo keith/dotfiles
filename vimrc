@@ -14,7 +14,6 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-" Github repos user/repo
 Bundle 'airblade/vim-rooter'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'b4winckler/vim-objc'
@@ -45,6 +44,7 @@ Bundle 'sjl/clam.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-jdaddy'
