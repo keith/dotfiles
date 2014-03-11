@@ -62,6 +62,7 @@ augroup ft_mail
   autocmd FileType mail setlocal textwidth=78
   autocmd FileType mail setlocal spell
   autocmd FileType mail let g:airline#extensions#whitespace#enabled = 0
+  autocmd FileType mail let g:airline#extensions#whitespace#checks = []
 augroup END
 " }}}
 
