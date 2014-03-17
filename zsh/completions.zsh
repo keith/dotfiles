@@ -8,7 +8,7 @@ zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*:*:(v|vim):*:*files' ignored-patterns '*.(a|dylib|so|o|pyc)'
 
 # Ignore pyc files for python
-zstyle ':completion:*:*:(python*):*:*files' ignored-patterns '*.(pyc)'
+zstyle ':completion:*:*:(python*|pytest):*:*files' ignored-patterns '*.(pyc)'
 
 # Don't complete stuff already being used
 zstyle ':completion::*:(v|vim|rm|srm):*' ignore-line true
