@@ -285,7 +285,11 @@ cnoreabbrev ` ~
 cnoreabbrev `` `
 
 " Edit vimrc with mapping
-nnoremap <leader>ov :tabedit $MYVIMRC<CR>
+nnoremap <leader>ov :call VimConf()<CR>
+function! VimConf()
+  silent! tabedit $MYVIMRC
+  silent! vsplit ~/.vim/plugin
+endfunction
 
 " Sort entire file unique
 nnoremap <leader>sf :call SortFile()<CR>
