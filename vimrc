@@ -289,6 +289,7 @@ nnoremap <leader>ov :call VimConf()<CR>
 function! VimConf()
   silent! tabedit $MYVIMRC
   silent! vsplit ~/.vim/plugin
+  wincmd h
 endfunction
 
 " Sort entire file unique
