@@ -136,7 +136,7 @@ augroup ft_settings
     \ let b:surround_{char2nr("%")} = "{% \r %}"
 
   " Fix issue where comments cannot be moved from the first column with >>
-  autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent
+  autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent foldmethod=indent
   autocmd FileType sh            setlocal tabstop=4 shiftwidth=4 expandtab
 
   " Comment string settings
