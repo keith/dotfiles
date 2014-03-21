@@ -438,6 +438,9 @@ nnoremap <leader>o ^i[<ESC>
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
 
+" Search for the word under the cursor with Ag
+nnoremap sag :Ag <cword><CR>
+
 " Close the quickfix and location lists simultaneously
 nnoremap <leader>q :call CloseLists()<CR>
 function! CloseLists()
