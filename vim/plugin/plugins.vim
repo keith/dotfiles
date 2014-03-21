@@ -133,6 +133,7 @@ nnoremap <silent> K :call investigate#Investigate()<cr>
 let g:investigate_use_dash = 1
 let g:investigate_use_url_for_haskell = 1
 let g:investigate_command_for_python = "^i!pydoc ^s"
+let g:investigate_dash_for_eruby="rails"
 
 " vim-rooter
 let g:rooter_manual_only = 1

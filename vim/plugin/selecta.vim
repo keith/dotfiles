@@ -43,8 +43,8 @@ endfunction
 
 " Find all files in all non-dot directories starting in the working directory.
 " Fuzzy select one of those. Open the selected file with :e.
-nnoremap <C-p> :call SelectaCommand(SearchCommand(), "", ":e")<cr>
-nnoremap <C-t> :call SelectaCommand(SearchCommand(), "", ":tabnew")<cr>
-nnoremap <C-b> :call SelectaCommand(SearchCommand(), "", ":vsplit")<cr>
-nnoremap <C-f> :call SelectaCommand(SearchCommand(), "", ":split")<cr>
+nnoremap <C-p>e :call SelectaCommand(SearchCommand(), "", ":e")<cr>
+nnoremap <C-p>t :call SelectaCommand(SearchCommand(), "", ":tabnew")<cr>
+nnoremap <C-p>v :call SelectaCommand(SearchCommand(), "", ":vsplit")<cr>
+nnoremap <C-p>s :call SelectaCommand(SearchCommand(), "", ":split")<cr>
 " }}}
