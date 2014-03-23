@@ -79,6 +79,7 @@ let g:hdevtools_options = '-g -Wall'
 
 let s:compiler_options = '-std=gnu99 -fobjc-arc -fmodules'
 let g:syntastic_objc_compiler = 'clang'
+let g:syntastic_objcpp_compiler = 'clang'
 let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:syntastic_objc_check_header = 1
 let g:syntastic_objc_compiler_options = s:compiler_options
