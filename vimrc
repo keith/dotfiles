@@ -447,6 +447,7 @@ function! CloseLists()
   lclose
   cclose
   pclose
+  silent! TagbarClose
 endfunction
 
 " Clean trailing whitespace
@@ -506,10 +507,6 @@ function! PositionRecall()
   endif
 endfunction
 " }}}
-
-function! EscapeFilePath(path)
-  return substitute(a:path, ' ', '\\ ', 'g')
-endfunction
 
 " Tab function ------ {{{
 " let g:invalid_tab_chars = ['^', '\s', '#', '/', '\\', '*']
