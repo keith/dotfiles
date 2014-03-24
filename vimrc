@@ -301,6 +301,7 @@ function! SortFile()
 endfunction
 
 " Next and Last ------ {{{
+" https://gist.github.com/sjl/3762227
 " Motion for 'next/last object'.  'Last' here means 'previous', not 'final'.
 " Unfortunately the 'p' motion was already taken for paragraphs.
 "
