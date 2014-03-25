@@ -440,7 +440,7 @@ nnoremap <leader>o ^i[<ESC>
 nnoremap <leader>4 :let @/ = ""<CR>
 
 " Search for the word under the cursor with Ag
-nnoremap sag :Ag <cword><CR>
+nnoremap sag :Ag! <cword><CR>
 
 " Close the quickfix and location lists simultaneously
 nnoremap <leader>q :call CloseLists()<CR>
@@ -481,7 +481,7 @@ let g:ruby_path = system('echo $HOME/.rbenv/shims')
 silent! command Todo call TODOSearch()
 function! TODOSearch()
   if executable("ag") && exists(":Ag") > 0
-    Ag 'TODO|FIXME'
+    Ag! 'TODO|FIXME'
   else
     noautocmd vimgrep /TODO\|FIXME/j ** | cw | nnoremap <silent> <buffer> q :cclose<CR>
   endif
