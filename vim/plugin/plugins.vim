@@ -141,6 +141,7 @@ let g:rooter_manual_only = 1
 
 " python-mode
 let g:pymode_indent = 0
+let g:pymode_breakpoint = 0
 
 " delimitMate
 let delimitMate_expand_cr = 1
