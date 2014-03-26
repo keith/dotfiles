@@ -145,6 +145,11 @@ augroup ft_settings
   autocmd FileType conkyrc,crontab setlocal commentstring=#\ %s
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
 
+  " Put the cursor on a blank line with brackets
+  " Using execute to not break highlighting for open brackets
+  autocmd FileType c,cpp,go,objc,php,css,sass.css autocmd BufRead *
+        \ execute "inoremap {<CR> {<CR>}<ESC>O"
+
   " Save files on some focus lost events, like switching splits
   autocmd BufLeave,FocusLost * silent! wall
 

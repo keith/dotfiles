@@ -144,4 +144,6 @@ let g:pymode_indent = 0
 let g:pymode_breakpoint = 0
 
 " delimitMate
+" Currently doesn't work with vim-endwise
+" https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
 let delimitMate_expand_cr = 1
