@@ -234,6 +234,17 @@ function! Ulti_ExpandOrJump_and_getRes()
   endif
 endfunction
 
+" Disable NeoComplete sometimes
+autocmd BufRead * call EnableNeoComplete()
+function! EnableNeoComplete()
+  if &ft =~ 'gitcommit\|mail'
+    NeoCompleteLock
+    return
+  end
+
+  NeoCompleteEnable
+endfunction
+
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
 function! Should_tab()
