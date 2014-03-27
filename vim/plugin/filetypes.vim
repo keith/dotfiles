@@ -126,7 +126,7 @@ augroup ft_settings
   autocmd!
   autocmd FileType json          setlocal foldmethod=syntax
   autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
-  autocmd FileType vim           setlocal foldmethod=marker
+  autocmd FileType vim           setlocal foldmethod=marker isk+=:
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
   autocmd FileType text          setlocal formatoptions+=t2n
@@ -134,6 +134,14 @@ augroup ft_settings
   autocmd FileType htmldjango
     \ let b:surround_{char2nr("v")} = "{{ \r }}" |
     \ let b:surround_{char2nr("%")} = "{% \r %}"
+
+  " Set normal completion functions
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent foldmethod=indent
