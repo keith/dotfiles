@@ -41,6 +41,8 @@ Bundle 'rhysd/clever-f.vim'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'rking/ag.vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'Shougo/neocomplete.vim'
+Bundle 'SirVer/ultisnips'
 Bundle 'sjl/clam.vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-dispatch'
@@ -58,6 +60,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-vinegar'
 Bundle 'vim-ruby/vim-ruby'
+
+Bundle 'honza/vim-snippets'
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)

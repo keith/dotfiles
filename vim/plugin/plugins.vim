@@ -109,19 +109,20 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " clang_complete
-let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
-let g:clang_user_options = s:compiler_options
-let g:clang_snippets = 1
+let g:clang_auto_select = 2
 let g:clang_close_preview = 1
-let g:clang_snippets = 1
+let g:clang_complete_auto = 0
+let g:clang_complete_copen = 0
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 1
-let g:clang_auto_select = 2
-let g:clang_jumpto_back_key = "<C-5>"
-let g:clang_complete_auto = 0
+let g:clang_conceal_snippets = 1
 let g:clang_hl_errors = 0
-let g:clang_complete_copen = 0
+let g:clang_jumpto_back_key = "<C-5>"
+let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
 let g:clang_periodic_quickfix = 0
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'ultisnips'
+let g:clang_user_options = s:compiler_options
 
 " Clever-f
 let g:clever_f_across_no_line = 1
@@ -146,4 +147,66 @@ let g:pymode_breakpoint = 0
 " delimitMate
 " Currently doesn't work with vim-endwise
 " https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
-let delimitMate_expand_cr = 1
+" let delimitMate_expand_cr = 1
+
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+" clang_complete compatibility from :h neocomplete
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+" Tab usage ------ {{{
+" If the popup menu is open go back with shift-tab
+inoremap <S-Tab> <C-R>=BackwardsTab()<CR>
+function! BackwardsTab()
+  if pumvisible()
+    return "\<C-p>"
+  endif
+
+  return ""
+endfunction
+
+" neocomplete + ultisnips + clangcomplete + normal tab usage...
+inoremap <Tab> <C-R>=Ulti_ExpandOrJump_and_getRes()<CR>
+" Hierarchy
+" If the popup menu is visible, iterate through it
+" Otherwise attempt to expand or jump with ultisnips
+" If that fails check if you should complete or tab at the cursor
+let g:ulti_expand_or_jump_res = 0
+function! Ulti_ExpandOrJump_and_getRes()
+  if pumvisible()
+    return "\<C-n>"
+  else
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+      return ""
+    else
+      if Should_tab()
+        return "\<Tab>"
+      else
+        return "\<C-x>\<C-o>"
+      endif
+    endif
+  endif
+endfunction
+
+" All of supertab in one function. #trolol
+let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
+function! Should_tab()
+  let l:col = col('.') - 1
+  let l:lastchar = getline('.')[l:col - 1]
+  return !(l:col > 0 && (getline('.')[l:col - 1] =~ '\k'
+        \ && index(g:invalid_tab_chars, l:lastchar) < 0))
+endfunction
+" }}}
