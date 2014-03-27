@@ -190,6 +190,11 @@ function! TTWrap()
   return ""
 endfunction
 
+" Ignore UltiSnips mappings, deal with it manually
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<nop>"
+let g:UltiSnipsJumpBackwardTrigger="<nop>"
+
 " neocomplete + ultisnips + clangcomplete + normal tab usage...
 " inoremap <Tab> <C-R>=Ulti_ExpandOrJump_and_getRes()<CR>
 " Hierarchy
@@ -202,11 +207,15 @@ function! TestEnter()
   if pumvisible()
     call neocomplete#close_popup()
     call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res == 0
+      return "\<CR>"
+    endif
   else
-    return "\n"
+    return "\<CR>"
   endif
   return ""
 endfunction
+
 let g:ulti_expand_or_jump_res = 0
 function! Ulti_ExpandOrJump_and_getRes()
   if pumvisible()
