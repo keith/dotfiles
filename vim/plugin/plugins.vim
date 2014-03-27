@@ -152,6 +152,7 @@ let g:pymode_breakpoint = 0
 " neocomplete
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#data_directory = '~/.cache/neocomplete'
 " clang_complete compatibility from :h neocomplete
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
@@ -177,12 +178,35 @@ function! BackwardsTab()
   return ""
 endfunction
 
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <Tab> <C-R>=TTWrap()<CR>
+function! TTWrap()
+  if pumvisible()
+    return "\<C-n>"
+  else
+    call UltiSnips#ExpandSnippetOrJump()
+  endif
+
+  return ""
+endfunction
+
 " neocomplete + ultisnips + clangcomplete + normal tab usage...
-inoremap <Tab> <C-R>=Ulti_ExpandOrJump_and_getRes()<CR>
+" inoremap <Tab> <C-R>=Ulti_ExpandOrJump_and_getRes()<CR>
 " Hierarchy
 " If the popup menu is visible, iterate through it
 " Otherwise attempt to expand or jump with ultisnips
 " If that fails check if you should complete or tab at the cursor
+" TODO: join the enwise mapping
+inoremap <CR> <C-R>=TestEnter()<CR>
+function! TestEnter()
+  if pumvisible()
+    call neocomplete#close_popup()
+    call UltiSnips#ExpandSnippetOrJump()
+  else
+    return "\n"
+  endif
+  return ""
+endfunction
 let g:ulti_expand_or_jump_res = 0
 function! Ulti_ExpandOrJump_and_getRes()
   if pumvisible()

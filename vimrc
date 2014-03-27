@@ -9,6 +9,7 @@ set nocompatible " This must be first, because it changes other options
 filetype off " Required for Vundle setup
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+let g:neocomplete#enable_at_startup = 1
 
 " Vundle bundles
 " let Vundle manage Vundle
