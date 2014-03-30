@@ -109,8 +109,9 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " clang_complete
-let g:clang_auto_select = 2
+let g:clang_auto_select = 0
 let g:clang_close_preview = 1
+let g:clang_compilation_database = ""
 let g:clang_complete_auto = 0
 let g:clang_complete_copen = 0
 let g:clang_complete_macros = 1
@@ -122,7 +123,9 @@ let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
 let g:clang_periodic_quickfix = 0
 let g:clang_snippets = 1
 let g:clang_snippets_engine = 'ultisnips'
+let g:clang_use_library = 1
 let g:clang_user_options = s:compiler_options
+let g:clang_make_default_keymappings = 0
 
 " Clever-f
 let g:clever_f_across_no_line = 1
@@ -150,22 +153,17 @@ let g:pymode_breakpoint = 0
 " let delimitMate_expand_cr = 1
 
 " neocomplete
-let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#data_directory = '~/.cache/neocomplete'
+
 " clang_complete compatibility from :h neocomplete
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 let g:neocomplete#force_omni_input_patterns.objc =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.objcpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+      \ '\v(\.|->|\s|\[|:|,)*\w*[^\.\.]'
+      " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 
 " Tab usage ------ {{{
 " If the popup menu is open go back with shift-tab
@@ -178,53 +176,13 @@ function! BackwardsTab()
   return ""
 endfunction
 
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <Tab> <C-R>=TTWrap()<CR>
 function! TTWrap()
   if pumvisible()
     return "\<C-n>"
   else
     call UltiSnips#ExpandSnippetOrJump()
-  endif
-
-  return ""
-endfunction
-
-" Ignore UltiSnips mappings, deal with it manually
-let g:UltiSnipsExpandTrigger="<nop>"
-let g:UltiSnipsJumpForwardTrigger="<nop>"
-let g:UltiSnipsJumpBackwardTrigger="<nop>"
-
-" neocomplete + ultisnips + clangcomplete + normal tab usage...
-" inoremap <Tab> <C-R>=Ulti_ExpandOrJump_and_getRes()<CR>
-" Hierarchy
-" If the popup menu is visible, iterate through it
-" Otherwise attempt to expand or jump with ultisnips
-" If that fails check if you should complete or tab at the cursor
-" TODO: join the enwise mapping
-inoremap <CR> <C-R>=TestEnter()<CR>
-function! TestEnter()
-  if pumvisible()
-    call neocomplete#close_popup()
-    call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res == 0
-      return "\<CR>"
-    endif
-  else
-    return "\<CR>"
-  endif
-  return ""
-endfunction
-
-let g:ulti_expand_or_jump_res = 0
-function! Ulti_ExpandOrJump_and_getRes()
-  if pumvisible()
-    return "\<C-n>"
-  else
-    call UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-      return ""
-    else
       if Should_tab()
         return "\<Tab>"
       else
@@ -232,12 +190,40 @@ function! Ulti_ExpandOrJump_and_getRes()
       endif
     endif
   endif
+
+  return "\<Tab>"
+endfunction
+
+" Ignore UltiSnips mappings, deal with it manually
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<nop>"
+let g:UltiSnipsJumpBackwardTrigger="<nop>"
+let g:ulti_expand_or_jump_res = 0
+
+let stuff = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
+execute 'imap <CR> <C-R>=TestEnter()<CR>'.stuff
+function! TestEnter()
+  if pumvisible()
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res == 0
+      return "\<CR>"
+    else
+      return "\<C-y>"
+    endif
+  endif
+
+  call UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return "\<CR>"
+  endif
+
+  return "\<CR>"
 endfunction
 
 " Disable NeoComplete sometimes
-autocmd BufRead * call EnableNeoComplete()
+autocmd BufNewFile,BufRead * call EnableNeoComplete()
 function! EnableNeoComplete()
-  if &ft =~ 'gitcommit\|mail'
+  if &ft =~ 'gitcommit\|mail\|objc\|python'
     NeoCompleteLock
     return
   end
