@@ -14,9 +14,8 @@ function! SearchCommand()
 
   if strlen(l:command) < 1
     let l:output = system("git rev-parse --show-toplevel")
-    let l:output = substitute(l:output, "fatal: Not a git repository (or any of the parent directories): .git", "", "")
-    let l:output = substitute(l:output, "\\n", "", "")
-    if strlen(l:output) > 0
+    if v:shell_error == 0
+      let l:output = substitute(l:output, "\\n", "", "")
       let l:command = GitListCommand(l:output)
     else
       let l:command = "find * -type f -o -type l"
