@@ -242,6 +242,10 @@ set modelines=3
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
+
+  if has("unnamedplus")
+    set clipboard+=unnamedplus
+  endif
 endif
 
 " Fuck you, help key.
