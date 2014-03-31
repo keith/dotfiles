@@ -11,7 +11,7 @@ alias .....="cd ../../../.."
 alias g="git"
 
 # Vim
-alias vundle="vim +VundleClean! +VundleInstall +qall"
+alias vundle="vim +PluginClean! +PluginInstall +qall"
 alias v="vim"
 alias vv="vim ."
 alias :q="exit"
