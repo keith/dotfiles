@@ -446,7 +446,28 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 
-# Killing affected applications
-for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer; do killall "$app" >/dev/null 2>&1; done
-# Done. Note that some of these changes require a logout/restart to take effect.
+#
+# X11
+#
 
+# Clipboard syncing
+defaults write org.macosforge.xquartz.X11 sync_clipboard_to_pasteboard -boolean true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard -boolean true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_clipboard -boolean true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_primary -boolean true
+defaults write org.macosforge.xquartz.X11 sync_primary_on_select -boolean false
+
+# Run xterm by default (without this vim's clipboard doesn't work)
+defaults write org.macosforge.xquartz.X11 app_to_run -string "/opt/X11/bin/xterm"
+
+# Set default shell
+defaults write org.macosforge.xquartz.X11 login_shell -string "/usr/local/bin/zsh"
+
+
+# Killing affected applications
+for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer Xquartz
+do
+    killall "$app" >/dev/null 2>&1
+done
+
+# Done. Note that some of these changes require a logout/restart to take effect.
