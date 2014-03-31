@@ -44,8 +44,8 @@ setopt COMPLETE_IN_WORD
 
 # History settings
 # Save x items to the given history file
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=5000
+SAVEHIST=5000
 HISTFILE=$HOME/.zsh_history
 
 # Append history to the zsh_history file
