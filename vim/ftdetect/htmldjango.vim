@@ -12,6 +12,8 @@ function! DjangoHTML()
       setlocal filetype=htmldjango
       return
     endif
+
+    let n += 1
   endwhile
 
   setfiletype html
