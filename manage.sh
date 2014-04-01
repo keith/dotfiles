@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 FILES=(backupignore bashrc bin curlrc gemrc ghci gitconfig gitignore_global gnupg goobookrc gvimrc hgrc hushlogin inputrc irbrc irssi mutt muttrc notmuch-config npmrc offlineimaprc rspec phoenix.js psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc urlview Xdefaults Xmodmap xvimrc zshrc)
+LINUX=(Xdefaults Xmodmap)
 NO_DOT=()
 
 function custom_path () {
@@ -45,6 +46,15 @@ function link () {
         return
     fi
 
+    if is_osx; then
+        for FILE in ${LINUX[@]}
+        do
+            if [[ $FILE == $filename ]]; then
+                return
+            fi
+        done
+    fi
+
     local path=$(new_path $filename)
     if [[ ! -e $path ]]; then
         echo "Linking $filename to $path"
@@ -59,8 +69,7 @@ function unlink () {
 
     if [ -e $path ]; then
         rm $(new_path $1)
-    else
-        echo "$path doesn't exist"
+        echo "Removing $(new_path $1)"
     fi
 }
 
