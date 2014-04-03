@@ -152,19 +152,6 @@ let g:pymode_breakpoint = 0
 " https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
 " let delimitMate_expand_cr = 1
 
-" neocomplete
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#data_directory = '~/.cache/neocomplete'
-
-" clang_complete compatibility from :h neocomplete
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.objc =
-      \ '\v(\.|->|\s|\[|:|,)*\w*[^\.\.]'
-      " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-
 " Tab usage ------ {{{
 " If the popup menu is open go back with shift-tab
 inoremap <S-Tab> <C-R>=BackwardsTab()<CR>
@@ -220,16 +207,28 @@ function! TestEnter()
   return "\<CR>"
 endfunction
 
-" Disable NeoComplete sometimes
-autocmd BufNewFile,BufRead * call EnableNeoComplete()
-function! EnableNeoComplete()
-  if &ft =~ 'gitcommit\|mail\|objc\|python'
-    NeoCompleteLock
-    return
-  end
+" neocomplete
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#data_directory = '~/.cache/neocomplete'
 
-  NeoCompleteEnable
-endfunction
+" clang_complete compatibility from :h neocomplete
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"   let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_overwrite_completefunc = 1
+" let g:neocomplete#force_omni_input_patterns.objc =
+"       \ '\v(\.|->|\s|\[|:|,)*\w*[^\.\.]'
+      " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+" Disable NeoComplete sometimes
+" autocmd BufNewFile,BufRead * call EnableNeoComplete()
+" function! EnableNeoComplete()
+"   if &ft =~ 'gitcommit\|mail\|objc\|python'
+"     NeoCompleteLock
+"     return
+"   end
+
+"   NeoCompleteEnable
+" endfunction
 
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
