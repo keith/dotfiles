@@ -5,7 +5,8 @@
 # Show bg jobs >= 1 in yellow
 # % for users and # for root
 autoload -U colors && colors
-export PS1="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}) %# "
+base_prompt="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})"
+export PS1="$base_prompt %# "
 
 # Show the hostname over SSH
 if [[ -n $SSH_CLIENT ]];then
@@ -14,7 +15,8 @@ fi
 
 # Not sold on Git info in your prompt, but if I used it
 #  it would probably look a lot like this:
-# autoload -Uz vcs_info
+autoload -U add-zsh-hook
+autoload -Uz vcs_info
 # # Colors:
 # # 9: Orange
 # # 6: Teal
@@ -24,15 +26,42 @@ fi
 # # 2: Green
 # # 1: Red
 # # 0: Black
-# zstyle ':vcs_info:*' unstagedstr '!'
-# zstyle ':vcs_info:*' stagedstr '?'
-# zstyle ':vcs_info:*' check-for-changes true
-# zstyle ':vcs_info:*' formats "(%F{2}%b%F{1}%u%F{2}%c%f)"
-# zstyle ':vcs_info:*' actionformats "(%F{2}%b%F{1}%u%F{2}%c%f) %F{4}%a%f"
-# zstyle ':vcs_info:*' enable git
-# setopt prompt_subst
-# export PS1='${vcs_info_msg_0_} %# '
-# precmd_functions=($precmd_functions vcs_info)
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' unstagedstr '%F{1}M%f'
+zstyle ':vcs_info:*' stagedstr '%F{2}M%f'
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' formats "[%b%u%c]"
+zstyle ':vcs_info:*' actionformats "(%F{2}%b%F{1}%u%F{2}%c%f) %F{4}%a%f"
+# zstyle ':vcs_info:git*+set-message:*' hooks git-st
+setopt prompt_subst
+export PS1='$base_prompt${vcs_info_msg_0_} %# '
+add-zsh-hook precmd vcs_info
+
+# Show remote ref name and number of commits ahead-of or behind
+# function +vi-git-st() {
+#   local ahead behind remote
+#   local -a gitstatus
+
+#   # Are we on a remote-tracking branch?
+#   remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
+#   --symbolic-full-name --abbrev-ref 2>/dev/null)}
+
+#   if [[ -n ${remote} ]] ; then
+#     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null \
+#     | wc -l | tr -d ' ')
+#     # (( $ahead )) && gitstatus+=( "${green}+${ahead}${gray}" )
+#     # (($ahead))
+
+#     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null \
+#     | wc -l | tr -d ' ')
+#     # (( $behind )) && gitstatus+=( "${red}-${behind}${gray}" )
+
+#     # user_data[gitstatus]=${gitstatus}
+#     if [[ $ahead -gt 1 || $behind -gt 1 ]]; then
+#       hook_com[branch]="${hook_com[branch]}[$ahead:$behind]"
+#     fi
+#   fi
+# }
 
 fpath=($DOTFILES/scripts/zsh-completions/src $fpath)
 fpath=($DOTFILES/functions $fpath)
@@ -113,4 +142,4 @@ export KEYTIMEOUT=1
 reset_rps1() {
   RPS1=""
 }
-precmd_functions=($precmd_functions reset_rps1)
+add-zsh-hook precmd reset_rps1
