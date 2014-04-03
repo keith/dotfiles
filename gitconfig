@@ -55,3 +55,8 @@
       end\n\
       File.open(%(%A), %(w)) {|f| f.write(b)}\n\
       exit 1 if b.include?(%(<)*%L)'"
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
