@@ -291,8 +291,8 @@ nnoremap Y y$
 " Force root permission saves
 cnoremap w!! w !sudo tee % >/dev/null
 
-command! Q q
-command! W w
+command! -bang Q q<bang>
+command! -bang W w<bang>
 cnoreabbrev ` ~
 cnoreabbrev `` `
 
