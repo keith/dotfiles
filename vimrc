@@ -67,6 +67,8 @@ Plugin 'vim-scripts/Match-Bracket-for-Objective-C'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'honza/vim-snippets'
 
+Plugin 'tpope/timl'
+
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 " }}}
