@@ -1,17 +1,9 @@
-# Set prompt to % for users and # for root
-# export PS1="%# "
-
 # Show 2 top $PWD components
 # Show bg jobs >= 1 in yellow
 # % for users and # for root
 autoload -U colors && colors
 base_prompt="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})"
 export PS1="$base_prompt %# "
-
-# Show the hostname over SSH
-if [[ -n $SSH_CLIENT ]];then
-  export PS1="%m $PS1"
-fi
 
 # Not sold on Git info in your prompt, but if I used it
 #  it would probably look a lot like this:
@@ -62,6 +54,11 @@ add-zsh-hook precmd vcs_info
 #     fi
 #   fi
 # }
+
+# Show the hostname over SSH
+if [[ -n $SSH_CLIENT ]];then
+  export PS1="%m $PS1"
+fi
 
 fpath=($DOTFILES/scripts/zsh-completions/src $fpath)
 fpath=($DOTFILES/functions $fpath)
