@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 branch="origin"
 if [[ $# == 2 ]];then
     branch=$2
@@ -22,5 +20,12 @@ fi
 if [[ $url == "" ]];then
     echo "No remotes found for $branch"
 else
-    open "$url/$1"
+    string=$(git rev-parse $1 2>/dev/null)
+    if [[ $? == 0 ]]; then
+        string="commit/$string"
+    else
+        string="$1"
+    fi
+
+    open "$url/$string"
 fi
