@@ -7,7 +7,13 @@ set nocompatible " This must be first, because it changes other options
 
 " Plugin setup ------ {{{
 filetype off " Required for Vundle setup
-set rtp+=~/.vim/bundle/vundle/
+
+" Load vundle
+let dir = expand("~/.vim/bundle/vundle")
+if !isdirectory(dir)
+  execute '!git clone https://github.com/gmarik/vundle.git '. dir
+endif
+let &rtp .= (empty(&rtp) ? '' : ',' ) . dir
 call vundle#rc()
 
 " Vundle bundles
