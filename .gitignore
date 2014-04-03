@@ -2,9 +2,6 @@
 ssh.dmg
 .dropbox
 vim/bundle/*
-!vim/bundle/vundle
-!vim/src/.gitkeep
-\[Vundle\]\ Installer
 bin/yuicompressor*
 irssi/config.autosave
 mutt/cache
