@@ -236,6 +236,7 @@ set wildmode=longest,list,full                   " Completion settings
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
+set wildignore+=tags,.tags
 
 set spellfile=$HOME/.vim/custom-words.utf-8.add
 
