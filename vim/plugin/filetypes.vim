@@ -30,7 +30,11 @@ augroup ft_help
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
   autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
   autocmd FileType help setlocal iskeyword+=-
-  autocmd FileType help if !&readonly | setlocal spell autoindent formatoptions+=2n | endif
+  autocmd FileType help
+        \ if !&readonly |
+        \   setlocal spell autoindent formatoptions+=2n |
+        \   execute "autocmd BufWrite * execute 'helptags ' . expand('%:h')" |
+        \ endif
 augroup END
 " }}}
 
