@@ -9,6 +9,7 @@ alias .....="cd ../../../.."
 
 # Git
 alias g="git"
+alias G="git"
 
 # Vim
 alias vundle="vim +PluginClean! +PluginInstall +qall"
