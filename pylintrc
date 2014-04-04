@@ -3,6 +3,7 @@
 [MESSAGES CONTROL]
 
 # line-too-long: Ignore line length warning of 80 characters
+# no-name-in-module: Ignore issues related to PYTHON_PATH
 # too-many-public-methods: Ignore public method count django
 # too-few-public-methods: Ignore public method count when it's a small class
 # too-man-return-statements: Ignore having more than 6 return statements
@@ -11,7 +12,7 @@
 # C0103: Too short of variable names
 # W0614, W0401: Ignore wildcard import settings
 # W0142: * or ** 'magic'
-disable=line-too-long, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, C0111, C0103, W0614, W0401, W0142
+disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, C0111, C0103, W0614, W0401, W0142
 
 
 [TYPECHECK]
