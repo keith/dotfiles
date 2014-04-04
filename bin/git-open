@@ -21,7 +21,7 @@ if [[ $url == "" ]];then
     echo "No remotes found for $branch"
 else
     string=$(git rev-parse $1 2>/dev/null)
-    if [[ $? == 0 ]]; then
+    if [[ $? == 0 && -n $1 ]]; then
         string="commit/$string"
     else
         string="$1"
