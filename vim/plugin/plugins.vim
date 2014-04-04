@@ -170,7 +170,7 @@ function! TTWrap()
   else
     call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res == 0
-      if Should_tab()
+      if Should_tab() || empty(&omnifunc)
         return "\<Tab>"
       else
         return "\<C-x>\<C-o>"
