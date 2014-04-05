@@ -83,7 +83,7 @@ augroup END
 " Ruby files ------ {{{
 augroup ft_ruby
   autocmd!
-  autocmd FileType ruby set iskeyword+=?
+  autocmd FileType eruby,ruby set iskeyword+=?
   autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
   autocmd Syntax rspec setlocal makeprg=rspec\ %
   " Force Dispatch to run :Dispatch over :Make for better output
