@@ -23,7 +23,7 @@ zstyle ':vcs_info:*' unstagedstr '%F{1}M%f'
 zstyle ':vcs_info:*' stagedstr '%F{2}M%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' formats "[%b%u%c]"
-zstyle ':vcs_info:*' actionformats "(%F{2}%b%F{1}%u%F{2}%c%f) %F{4}%a%f"
+zstyle ':vcs_info:*' actionformats "[%b%u%c] %F{4}%a%f"
 # zstyle ':vcs_info:git*+set-message:*' hooks git-st
 setopt prompt_subst
 export PS1='$base_prompt${vcs_info_msg_0_} %# '
