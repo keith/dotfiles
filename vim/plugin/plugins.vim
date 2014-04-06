@@ -176,6 +176,8 @@ function! TTWrap()
       else
         return "\<C-x>\<C-o>"
       endif
+    else
+      return ""
     endif
   endif
 
