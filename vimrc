@@ -42,6 +42,7 @@ Plugin 'Keithbsmiley/rspec.vim'
 Plugin 'Keithbsmiley/specta.vim'
 Plugin 'Keithbsmiley/tmux.vim'
 Plugin 'Keithbsmiley/travis.vim'
+Plugin 'Keithbsmiley/vim-snippets'
 Plugin 'klen/python-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'Raimondi/delimitMate'
@@ -67,11 +68,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vim-ruby/vim-ruby'
-
 Plugin 'vim-scripts/Match-Bracket-for-Objective-C'
-
-Plugin 'Shougo/vimproc.vim'
-Plugin 'honza/vim-snippets'
 
 Plugin 'tpope/timl'
 
