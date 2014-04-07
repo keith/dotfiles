@@ -9,9 +9,9 @@ jekyll
 launchy
 mkgitignore
 pinup
-pry
 rails
 rdiscount
 rspec
 rubygems-bundler
 sass
+specific_install
