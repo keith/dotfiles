@@ -1,3 +1,5 @@
+gem-ctags
+
 bundler
 cocoapods
 colored
