@@ -13,6 +13,7 @@ function install () {
     git clone https://github.com/sstephenson/ruby-build.git $rbenvpath/plugins/ruby-build
     git clone https://github.com/sstephenson/rbenv-gem-rehash.git $rbenvpath/plugins/rbenv-gem-rehash
     git clone https://github.com/tpope/rbenv-readline.git $rbenvpath/plugins/rbenv-readline
+    git clone https://github.com/tpope/rbenv-ctags.git $rbenvpath/plugins/rbenv-ctags
 
     ln -s $DOTFILES/default-gems $rbenvpath
 
@@ -35,4 +36,3 @@ elif [[ $1 == "remove" ]]; then
 else
     die
 fi
-
