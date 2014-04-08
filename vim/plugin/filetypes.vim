@@ -74,9 +74,11 @@ augroup END
 augroup ft_clojure
   autocmd!
   autocmd FileType clojure setlocal foldmethod=marker foldmarker=(,)
-  autocmd FileType clojure RainbowParenthesesActivate
-  autocmd syntax clojure RainbowParenthesesLoadRound
-  autocmd syntax clojure RainbowParenthesesLoadSquare
+  if exists(":RainbowParenthesesActivate") == 2
+    autocmd FileType clojure RainbowParenthesesActivate
+    autocmd syntax clojure RainbowParenthesesLoadRound
+    autocmd syntax clojure RainbowParenthesesLoadSquare
+  endif
 augroup END
 " }}}
 
