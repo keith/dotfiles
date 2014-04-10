@@ -242,3 +242,6 @@ function! Should_tab()
         \ && index(g:invalid_tab_chars, l:lastchar) < 0))
 endfunction
 " }}}
+
+" vim-slime
+let g:slime_target = "tmux"
