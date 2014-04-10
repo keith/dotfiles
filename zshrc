@@ -9,7 +9,7 @@ fi
 
 # Find all zsh files
 typeset -U configs
-configs=($DOTFILES/**/*.zsh $DOTFILES/**/*.bash)
+configs=($DOTFILES/*/*.zsh $DOTFILES/*/*.bash)
 
 for file in ${configs:#*/completions.zsh}
 do
