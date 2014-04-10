@@ -5,6 +5,10 @@
 
 set nocompatible " This must be first, because it changes other options
 
+" vitality.vim
+" If I need more before settings I will source another file
+let g:vitality_fix_cursor = 0
+
 " Plugin setup ------ {{{
 filetype off " Required for Vundle setup
 
@@ -52,6 +56,7 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'sjl/clam.vim'
+Plugin 'sjl/vitality.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
@@ -161,6 +166,8 @@ silent! command ToggleBG call s:ToggleBackground()
 
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
+" Set the color of the sign column
+highlight SignColumn ctermbg=Black
 " }}}
 
 set ttyfast          " Set that we have a fast terminal
