@@ -24,6 +24,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 Plugin 'gmarik/vundle'
 
+Plugin 'airblade/vim-gitgutter'
 Plugin 'airblade/vim-rooter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'b4winckler/vim-objc'
