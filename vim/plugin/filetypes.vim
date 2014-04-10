@@ -114,7 +114,7 @@ augroup END
 " ObjC stuff ------ {{{
 augroup ft_objc
   autocmd!
-  autocmd BufNewFile,BufRead *.h,*.m,*.pch setlocal filetype=objc
+  autocmd BufNewFile,BufRead *.{h,m,pch} setlocal filetype=objc
   autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab completeopt=menu,longest
   autocmd FileType objc let g:surround_{char2nr('@')} = "@\"\r\""
 
