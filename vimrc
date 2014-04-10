@@ -167,8 +167,6 @@ silent! command ToggleBG call s:ToggleBackground()
 
 " Set the color of the selected item in the autocomplete menu
 highlight PmenuSel ctermfg=DarkYellow
-" Set the color of the sign column
-highlight SignColumn ctermbg=Black
 " }}}
 
 set ttyfast          " Set that we have a fast terminal
@@ -217,9 +215,11 @@ autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
 if &background ==# "dark"
   highlight ColorColumn ctermbg=Black
   highlight StatusLine ctermbg=DarkGray ctermfg=Black
+  highlight SignColumn ctermbg=Black
 else
   highlight ColorColumn ctermbg=LightGray
   highlight StatusLine ctermbg=DarkGrey ctermfg=White
+  highlight SignColumn ctermbg=LightGray
 endif
 
 " Status line setup (without airline)
