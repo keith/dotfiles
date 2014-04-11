@@ -165,6 +165,8 @@ function! BackwardsTab()
 endfunction
 
 inoremap <Tab> <C-R>=TTWrap()<CR>
+snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
+
 function! TTWrap()
   if pumvisible()
     return "\<C-n>"
