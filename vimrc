@@ -210,8 +210,8 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Typically hidden chars
 if &textwidth == 0
   set textwidth=80
 endif
-" Highlight the columns after the textwidth
-silent! let &colorcolumn='+'.join(range(1,255), ',+')
+
+set colorcolumn=+1
 autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
 if &background ==# "dark"
   highlight ColorColumn ctermbg=Black
