@@ -32,7 +32,7 @@ install the_silver_searcher
 install tmux
 install tree
 install urlview
-install vim
+install vim --HEAD
 install wget
 install zsh
 
