@@ -9,6 +9,7 @@ install ctags
 install git
 install grc
 install grep
+install haskell-platform
 install hub
 install imagemagick
 install less
