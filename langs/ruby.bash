@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 RBENVPATH="$HOME/.rbenv"
 RVMPATH="$HOME/.rvm"
 
