@@ -12,6 +12,7 @@ install grep
 install haskell-platform
 install hub
 install imagemagick
+install irssi
 install less
 install liftoff
 install linode-cli
