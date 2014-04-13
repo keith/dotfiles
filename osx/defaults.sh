@@ -206,6 +206,9 @@ sudo pmset -a sms 0
 sudo pmset hibernatemode 0
 sudo rm -rf /var/vm/sleepimage
 
+# Power button behavior
+defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool NO
+
 
 #
 # Keyboard
