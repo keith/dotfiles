@@ -15,6 +15,7 @@ install irssi
 install less
 install liftoff
 install llvm
+install lynx
 install macvim
 install mercurial
 install mogenerator
