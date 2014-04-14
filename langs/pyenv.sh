@@ -10,6 +10,7 @@ function install () {
 
     git clone git://github.com/yyuu/pyenv.git $pyenvpath
     git clone https://github.com/yyuu/pyenv-pip-rehash.git $pyenvpath/plugins/pyenv-pip-rehash
+    git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
 
     exec $SHELL -l
 }
