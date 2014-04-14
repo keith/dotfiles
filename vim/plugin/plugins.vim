@@ -153,7 +153,7 @@ let g:pymode_doc = 0
 " https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
 " let delimitMate_expand_cr = 1
 
-" Tab usage ------ {{{
+" Tab/Enter usage ------ {{{
 " If the popup menu is open go back with shift-tab
 inoremap <S-Tab> <C-R>=BackwardsTab()<CR>
 function! BackwardsTab()
@@ -164,10 +164,10 @@ function! BackwardsTab()
   return ""
 endfunction
 
-inoremap <Tab> <C-R>=TTWrap()<CR>
+inoremap <Tab> <C-R>=TabWrapper()<CR>
 snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
 
-function! TTWrap()
+function! TabWrapper()
   if pumvisible()
     return "\<C-n>"
   else
@@ -192,9 +192,9 @@ let g:UltiSnipsJumpForwardTrigger="<nop>"
 let g:UltiSnipsJumpBackwardTrigger="<nop>"
 let g:ulti_expand_or_jump_res = 0
 
-let stuff = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
-execute 'imap <CR> <C-R>=TestEnter()<CR>'.stuff
-function! TestEnter()
+let mappings = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
+execute 'imap <CR> <C-R>=EnterWrapper()<CR>' . mappings
+function! EnterWrapper()
   if pumvisible()
     call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res == 0
@@ -247,3 +247,6 @@ endfunction
 
 " vim-slime
 let g:slime_target = "tmux"
+
+" vim-arpeggio
+call arpeggio#map('i', '', 0, 'jk', '<Esc>')
