@@ -13,6 +13,7 @@ install hub
 install imagemagick
 install irssi
 install less
+install libyaml
 install liftoff
 install llvm
 install lynx
