@@ -20,6 +20,7 @@ install llvm
 install lynx
 install macvim
 install mercurial
+install mobile-shell
 install mogenerator
 install msmtp
 install mutt
