@@ -14,6 +14,7 @@ function install () {
     git clone https://github.com/sstephenson/rbenv-gem-rehash.git $rbenvpath/plugins/rbenv-gem-rehash
     git clone https://github.com/tpope/rbenv-readline.git $rbenvpath/plugins/rbenv-readline
     git clone https://github.com/tpope/rbenv-ctags.git $rbenvpath/plugins/rbenv-ctags
+    git clone https://github.com/rkh/rbenv-update.git $rbenvpath/plugins/rbenv-update
 
     ln -s $DOTFILES/default-gems $rbenvpath
 

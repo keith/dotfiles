@@ -38,23 +38,5 @@ fi
 
 if [[ -d $HOME/.rbenv ]];then
   echo "Updating rbenv..."
-  cd $HOME/.rbenv
-  if [[ -d .git ]];then
-    git pull
-  fi
-
-  if [[ $(ls $HOME/.rbenv/plugins | wc -l) -gt 0 ]];then
-    echo "Updating rbenv plugins..."
-    cd $HOME/.rbenv/plugins
-    for D in *; do
-      if [[ -d "${D}" ]];then
-        cd "${D}"
-        if [[ -d .git ]];then
-          echo "Updating ${D}..."
-          git pull
-        fi
-        cd ../
-      fi
-    done
-  fi
+  rbenv update
 fi
