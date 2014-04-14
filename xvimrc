@@ -23,3 +23,6 @@ set pasteboard
 " Map <space>b to toggle a breakpoint at the current line
 nmap <space>b :xccmd toggleBreakpointAtCurrentLine<CR>
 
+" Better navigation
+nmap H ^
+nmap L $
