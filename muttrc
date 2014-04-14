@@ -29,6 +29,7 @@ unset collapse_unread
   set uncollapse_jump                                                 # don't collapse on an unread message
   set sort_re                                                         # thread based on regex
   set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+  set abort_unmodified = no                                           # Don't abort when the message hasn't been changed
 
 # Pager inline configuration
   set pager_index_lines = 10                                          # number of index lines to show
