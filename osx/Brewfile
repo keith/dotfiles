@@ -8,6 +8,7 @@ install cloc
 install ctags
 install git
 install gnupg
+install go
 install grc
 install grep
 install hub
