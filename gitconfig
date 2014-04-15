@@ -5,7 +5,7 @@
   excludesfile = ~/.gitignore_global
   editor = vim
 [push]
-  default = matching
+  default = current
 [diff]
   tool = vimdiff
 [difftool]
