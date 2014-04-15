@@ -25,6 +25,7 @@ install mobile-shell
 install mogenerator
 install msmtp
 install mutt
+install mysql
 install notmuch
 install openssh
 install openssl
