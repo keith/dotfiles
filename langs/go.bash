@@ -1,4 +1,10 @@
-# Setup golang.org variables
+# Setup golang variables
+export GVM_ROOT=~/.gvm
+if [[ -d $GVM_ROOT ]]; then
+    source $GVM_ROOT/scripts/gvm-default
+    return
+fi
+
 if [[ "$OSX" == true ]];then
   export GOROOT=$(brew --prefix go)/libexec
 else
@@ -16,4 +22,3 @@ if [[ -d $GOROOT ]];then
     PATH="$GOROOT/bin:$PATH"
   fi
 fi
-
