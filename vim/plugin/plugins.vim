@@ -187,9 +187,9 @@ function! TabWrapper()
 endfunction
 
 " Ignore UltiSnips mappings, deal with it manually
-let g:UltiSnipsExpandTrigger="<nop>"
-let g:UltiSnipsJumpForwardTrigger="<nop>"
-let g:UltiSnipsJumpBackwardTrigger="<nop>"
+let g:UltiSnipsExpandTrigger="\\<nop>"
+let g:UltiSnipsJumpForwardTrigger="\\<nop>"
+let g:UltiSnipsJumpBackwardTrigger="\\<nop>"
 let g:ulti_expand_or_jump_res = 0
 
 let mappings = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
