@@ -1,24 +1,35 @@
-# Setup golang variables
-export GVM_ROOT=~/.gvm
-if [[ -d $GVM_ROOT ]]; then
-    source $GVM_ROOT/scripts/gvm-default
-    return
-fi
+# Setup path to Go projects
+export GOPATH=$HOME/gophers
+# Add Go projects bin to PATH
+PATH="$GOPATH/bin:$PATH"
 
-if [[ "$OSX" == true ]];then
-  export GOROOT=$(brew --prefix go)/libexec
-else
-  export GOROOT="/usr/local/go"
-fi
+# Go version manager configs, for the future
+# goenv=$HOME/.goenv
+# if [[ -d $goenv ]]; then
+#     export PATH="$goenv/bin:$PATH"
+#     eval "$(goenv init -)"
+#     unset goenv
+#     return
+# fi
 
-if [[ -d $GOROOT ]];then
-  # Setup path to Go projects
-  export GOPATH=$HOME/Go
+# export GVM_ROOT=$HOME/.gvm
+# if [[ -d $GVM_ROOT ]]; then
+#     source $GVM_ROOT/scripts/gvm-default
+#     return
+# else
+#     unset GVM_ROOT
+# fi
 
-  # Add Go's bin to PATH
-  PATH="$GOPATH/bin:$PATH"
+if ! which go &> /dev/null; then
+    if [[ "$OSX" == true ]]; then
+        export GOROOT=$(brew --prefix go)/libexec
+    else
+        export GOROOT="/usr/local/go"
+    fi
 
-  if ! which go &> /dev/null;then
-    PATH="$GOROOT/bin:$PATH"
-  fi
+    if [[ -d $GOROOT ]]; then
+        PATH="$GOROOT/bin:$PATH"
+    else
+        unset GOROOT
+    fi
 fi
