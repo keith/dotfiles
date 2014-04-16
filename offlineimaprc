@@ -1,5 +1,5 @@
 [general]
-ui         = TTY.TTYUI
+ui         = ttyui
 accounts   = KeithBSmiley
 pythonfile =~/.mutt/offlineimaphelpers.py
 fsync      = False
