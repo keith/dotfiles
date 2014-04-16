@@ -125,4 +125,3 @@ if [ -z $open_with ]; then
 else
     open -a "$open_with" $newfile
 fi
-

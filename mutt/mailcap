@@ -7,4 +7,4 @@ image/png; $HOME/.mutt/view_attachment.sh %s png
 
 application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
 application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
-
+application/msword; ~/.mutt/view_attachment.sh %s "-"
