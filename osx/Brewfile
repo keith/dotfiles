@@ -42,5 +42,6 @@ install zsh
 
 # rsync
 # install https://raw.github.com/Homebrew/homebrew-dupes/109dca908c6499116e07483d7afe8a1c3ef63ad6/rsync.rb
+# install graphviz --with-bindings --with-freetype --with-librsvg --with-pangocairo
 
 install keithbsmiley/formulae/tmux
