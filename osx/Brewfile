@@ -1,4 +1,5 @@
 tap homebrew/dupes
+tap Keithbsmiley/formulae
 tap linode/cli
 tap thoughtbot/formulae
 update
@@ -33,7 +34,6 @@ install readline
 install reattach-to-user-namespace
 install sqlite
 install the_silver_searcher
-install tmux
 install tree
 install urlview
 install vim --HEAD
@@ -42,3 +42,5 @@ install zsh
 
 # rsync
 # install https://raw.github.com/Homebrew/homebrew-dupes/109dca908c6499116e07483d7afe8a1c3ef63ad6/rsync.rb
+
+install keithbsmiley/formulae/tmux
