@@ -13,6 +13,7 @@
 [submodule "scripts/z"]
 	path = scripts/z
 	url = https://github.com/rupa/z.git
+  ignore = dirty
 [submodule "scripts/nvm"]
 	path = scripts/nvm
 	url = https://github.com/creationix/nvm.git
