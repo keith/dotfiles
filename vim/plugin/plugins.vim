@@ -249,4 +249,4 @@ endfunction
 let g:slime_target = "tmux"
 
 " vim-arpeggio
-call arpeggio#map('i', '', 0, 'jk', '<Esc>')
+silent! call arpeggio#map('i', '', 0, 'jk', '<Esc>')

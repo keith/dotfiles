@@ -5,9 +5,8 @@
 
 set nocompatible " This must be first, because it changes other options
 
-" vitality.vim
-" If I need more before settings I will source another file
-let g:vitality_fix_cursor = 0
+" Source files before plugins
+source ~/.vim/before/*.vim
 
 " Plugin setup ------ {{{
 filetype off " Required for Vundle setup
