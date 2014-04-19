@@ -317,6 +317,7 @@ nnoremap <leader>ov :call VimConf()<CR>
 function! VimConf()
   silent! tabedit $MYVIMRC
   silent! vsplit ~/.vim/plugin
+  silent! split  ~/.vim/before
   wincmd h
 endfunction
 
