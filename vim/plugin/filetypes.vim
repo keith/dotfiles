@@ -25,9 +25,11 @@ augroup ft_git
 augroup END
 " }}}
 
-" Vim Help Files ------ {{{
+" Vim ------ {{{
 augroup ft_help
   autocmd!
+  autocmd FileType vim setlocal foldmethod=marker isk+=:
+  autocmd FileType vim setlocal makeprg=source\ %
   autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
   autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
   autocmd FileType help setlocal iskeyword+=-
@@ -133,7 +135,6 @@ augroup ft_settings
   autocmd!
   autocmd FileType json          setlocal foldmethod=syntax
   autocmd FileType make,go,php   setlocal tabstop=4 shiftwidth=4 noexpandtab
-  autocmd FileType vim           setlocal foldmethod=marker isk+=:
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
   autocmd FileType text          setlocal formatoptions+=t2n
