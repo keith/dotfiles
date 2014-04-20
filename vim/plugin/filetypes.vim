@@ -21,6 +21,7 @@ augroup ft_git
   autocmd!
   autocmd BufRead     *gitconfig     setlocal filetype=gitconfig
   autocmd FileType    gitcommit      setlocal spell
+  autocmd FileType    gitcommit      setlocal completeopt+=preview
 augroup END
 " }}}
 

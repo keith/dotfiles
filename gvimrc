@@ -17,4 +17,3 @@ noremap <Home> gg
 noremap <End>  G
 noremap <PageUp> <C-b>
 noremap <PageDown> <C-f>
-

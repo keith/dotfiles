@@ -67,9 +67,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-liquid'
+Plugin 'tpope/vim-obsession'
 Plugin 'tpope/vim-projectile'
+Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-speeddating'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
@@ -245,7 +248,11 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
 set wildignore+=tags,.tags
 
+" Dictionary for custom words
 set spellfile=$HOME/.vim/custom-words.utf-8.add
+
+" Setup stuff for mksession
+set sessionoptions+=resize,localoptions,help
 
 " Set mapping and key timeouts
 set timeout
@@ -422,16 +429,6 @@ if !exists('$TMUX')
   nnoremap <C-l> <C-w>l
 endif
 
-" Set the minimum window width for splits
-set winwidth=80
-set winminwidth=20
-" Setup the height of vertical splits
-" https://www.destroyallsoftware.com/file-navigation-in-vim.html
-" Order is key
-set winheight=7
-silent! set winminheight=7
-set winheight=999
-
 " Mappings for split resizing
 nnoremap + :resize +5<CR>
 nnoremap - :resize -5<CR>
@@ -536,6 +533,22 @@ function! PositionRecall()
     execute "normal g`\"zz"
   endif
 endfunction
+" }}}
+
+" Window sizes ------ {{{
+augroup window_sizes
+  autocmd!
+
+  " Set the minimum window width for splits
+  autocmd VimEnter * silent! set winwidth=80
+  autocmd VimEnter * silent! set winminwidth=20
+  " Setup the height of vertical splits
+  " https://www.destroyallsoftware.com/file-navigation-in-vim.html
+  " Order is key
+  autocmd VimEnter * silent! set winheight=7
+  autocmd VimEnter * silent! set winminheight=7
+  autocmd VimEnter * silent! set winheight=999
+augroup END
 " }}}
 
 " Tab function ------ {{{
