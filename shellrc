@@ -29,6 +29,9 @@ fi
 #  - $HOME/.bin      for local tools
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
 
+# Disable ^-S in the terminal
+stty -ixon -ixoff
+
 colorize
 
 # vim: ft=sh:sts=2:sw=2:ts=2
