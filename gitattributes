@@ -1,0 +1,2 @@
+Gemfile.lock merge=bundler
+db/schema merge=railsschema
