@@ -6,7 +6,9 @@ colored
 colorize
 coveralls
 factory_girl
+gem-browse
 guard-rspec
+hookup
 jekyll
 launchy
 mkgitignore
