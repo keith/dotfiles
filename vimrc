@@ -49,6 +49,7 @@ Plugin 'Keithbsmiley/specta.vim'
 Plugin 'Keithbsmiley/tmux.vim'
 Plugin 'Keithbsmiley/travis.vim'
 Plugin 'Keithbsmiley/vim-snippets'
+Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'klen/python-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'Raimondi/delimitMate'
@@ -82,8 +83,6 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'vim-scripts/Match-Bracket-for-Objective-C'
-
-Plugin 'tpope/timl'
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
