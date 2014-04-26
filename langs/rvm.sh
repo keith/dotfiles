@@ -14,9 +14,9 @@ function install () {
 }
 
 function link () {
-    local path=$rvmpath/gemsets/default.gems
-    rm $path
-    ln -s $DOTFILES/default-gems $path
+    local defaultpath=$rvmpath/gemsets/default.gems
+    rm $defaultpath
+    ln -s $DOTFILES/default-gems $defaultpath
 }
 
 function die () {
