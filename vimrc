@@ -153,7 +153,7 @@ if s:filename != ""
   execute 'set background=' . readfile(s:filename)[0]
 else
   let hour = strftime("%H") " Set the background light from 7am to 7pm
-  if 7 <= hour && hour < 19
+  if hour >= 7 && hour < 19
     set background=light
   else " Set to dark from 7pm to 7am
     set background=dark
