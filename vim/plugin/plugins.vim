@@ -250,3 +250,6 @@ let g:slime_target = "tmux"
 
 " vim-arpeggio
 silent! call arpeggio#map('i', '', 0, 'jk', '<Esc>')
+
+" javascript-libraries-syntax.vim
+let g:used_javascript_libs = 'angularjs,jasmine'
