@@ -52,8 +52,8 @@
           (format-time-string "%H"))))
   (if
     (and
-      (<= time 7)
-      (> time 19))
+      (>= time 7)
+      (< time 19))
         (load-theme 'solarized-light t)
     (load-theme 'solarized-dark t)))
 
