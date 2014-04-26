@@ -27,6 +27,17 @@
 (require 'evil)
 (evil-mode 1)
 
+; Force C-u and C-d number of lines
+(define-key evil-motion-state-map (kbd "C-u")
+   (lambda ()
+     (interactive)
+     (evil-scroll-up 10)))
+
+(define-key evil-motion-state-map (kbd "C-d")
+  (lambda ()
+    (interactive)
+    (evil-scroll-down 10)))
+
 ; Remember your position in files
 (require 'saveplace)
 (setq-default save-place t)
