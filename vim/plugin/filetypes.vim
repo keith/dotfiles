@@ -103,17 +103,6 @@ augroup ft_haskell
 augroup END
 " }}}
 
-" Podspecs ------ {{{
-augroup ft_podspec
-  autocmd!
-  autocmd BufNewFile,BufRead,BufWrite *.podspec setlocal filetype=podspec
-  autocmd BufNewFile,BufRead Podfile setlocal filetype=podfile
-  autocmd FileType podspec,podfile set syntax=ruby
-  autocmd FileType podspec setlocal makeprg=pod\ spec\ lint\ %
-  autocmd FileType podfile setlocal makeprg=pod\ install\ >/dev/null
-augroup END
-" }}}
-
 " ObjC stuff ------ {{{
 augroup ft_objc
   autocmd!
