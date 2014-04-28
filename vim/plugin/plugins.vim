@@ -253,3 +253,8 @@ silent! call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 " javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'angularjs,jasmine'
+
+" Don't hide quotes in elzr/vim-json
+" IMO this is way too confusing, it makes me forget quotes
+" On lines after others
+let g:vim_json_syntax_conceal = 0
