@@ -474,6 +474,10 @@ nnoremap <leader>4 :let @/ = ""<CR>
 " Search for the word under the cursor with Ag
 nnoremap sag :Ag! <cword><CR>
 
+" Don't automatically jump on search
+nnoremap * :keepjumps normal! mi*`i<CR>
+nnoremap # :keepjumps normal! mi#`i<CR>
+
 " Close the quickfix and location lists simultaneously
 nnoremap <leader>q :call CloseLists()<CR>
 function! CloseLists()
