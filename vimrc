@@ -17,7 +17,7 @@ if !isdirectory(dir)
   execute '!git clone https://github.com/gmarik/vundle.git '. dir
 endif
 let &rtp .= (empty(&rtp) ? '' : ',' ) . dir
-call vundle#rc()
+call vundle#begin()
 
 " Vundle bundles
 " let Vundle manage Vundle
@@ -75,7 +75,7 @@ Plugin 'tpope/vim-git'
 Plugin 'tpope/vim-jdaddy'
 Plugin 'tpope/vim-liquid'
 Plugin 'tpope/vim-obsession'
-Plugin 'tpope/vim-projectile'
+Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-ragtag'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
@@ -89,6 +89,7 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'vim-scripts/Match-Bracket-for-Objective-C'
 
+call vundle#end()
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 " }}}
