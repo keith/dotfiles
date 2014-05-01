@@ -32,11 +32,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'DasIch/vim-mercurial'
 Plugin 'elzr/vim-json'
 Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'godlygeek/tabular'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'jamessan/vim-gnupg'
 Plugin 'jnwhiteh/vim-golang'
-Plugin 'jpalardy/vim-slime'
 Plugin 'Keithbsmiley/cocoapods.vim'
 Plugin 'Keithbsmiley/gist.vim'
 Plugin 'Keithbsmiley/investigate.vim'
@@ -59,7 +56,6 @@ Plugin 'Rip-Rip/clang_complete'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
-Plugin 'sjl/clam.vim'
 Plugin 'sjl/vitality.vim'
 Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-bundler'
@@ -564,20 +560,6 @@ augroup window_sizes
   autocmd VimEnter * silent! set winminheight=7
   autocmd VimEnter * silent! set winheight=999
 augroup END
-" }}}
-
-" Tab function ------ {{{
-" let g:invalid_tab_chars = ['^', '\s', '#', '/', '\\', '*']
-" function! TabWrapper()
-"   let l:col = col('.') - 1
-"   let l:lastchar = getline('.')[l:col - 1]
-"   if l:col > 0 && (getline('.')[l:col - 1] =~ '\k' && index(g:invalid_tab_chars, l:lastchar) < 0)
-"     return "\<C-p>"
-"   else
-"     return "\<tab>"
-"   endif
-" endfunction
-" inoremap <tab> <C-r>=TabWrapper()<CR>
 " }}}
 
 " ObjC curly brace error fix
