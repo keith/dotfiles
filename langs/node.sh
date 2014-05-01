@@ -7,6 +7,8 @@ function install () {
     do
         npm install -g $n
     done
+
+    npm completion > /usr/local/etc/bash_completion.d/npm
 }
 
 function die () {
@@ -28,4 +30,3 @@ if [[ $1 == "install" ]]; then
 else
     die
 fi
-
