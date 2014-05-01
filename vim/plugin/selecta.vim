@@ -37,7 +37,7 @@ function! SelectaCommand(choice_command, selecta_args, vim_command)
     return
   endtry
   redraw!
-  exec a:vim_command . " " . EscapeFilePath(selection)
+  exec a:vim_command . " " . alternate#EscapeFilePath(selection)
 endfunction
 
 " Find all files in all non-dot directories starting in the working directory.

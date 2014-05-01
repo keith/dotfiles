@@ -24,7 +24,7 @@ function! alternate#Alternate(cmd)
       let l:cmd = "let " . s:SaveStringForFilename(l:fullname) . "='" . l:alternate . "'"
       execute l:cmd
     endif
-    execute ":silent " . a:cmd . " " . s:EscapeFilePath(l:alternate)
+    execute ":silent " . a:cmd . " " . alternate#EscapeFilePath(l:alternate)
   endif
 endfunction
 
@@ -47,7 +47,7 @@ function! s:EscapeForVar(filename)
   return l:fname
 endfunction
 
-function! s:EscapeFilePath(path)
+function! alternate#EscapeFilePath(path)
   return substitute(a:path, ' ', '\\ ', 'g')
 endfunction
 
