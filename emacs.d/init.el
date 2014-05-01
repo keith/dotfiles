@@ -53,15 +53,31 @@
 (show-paren-mode 1)
 
 ; Load solarized based on the time of day
-(let ((time
-        (string-to-number
-          (format-time-string "%H"))))
-  (if
-    (and
-      (>= time 7)
-      (< time 19))
-        (load-theme 'solarized-light t)
-    (load-theme 'solarized-dark t)))
+(defun set-theme-on-time ()
+    (let ((time
+	    (string-to-number
+	      (format-time-string "%H"))))
+      (if
+	(and
+	  (>= time 7)
+	  (< time 19))
+	    (load-theme 'solarized-light t)
+	(load-theme 'solarized-dark t))))
+
+(defun strip-string-from-file (file)
+  (with-temp-buffer
+    (insert-file-contents file)
+    (replace-regexp-in-string "\n" "" (buffer-string))))
+
+(defun set-theme-on-file (file)
+  (load-theme
+   (read (concat "solarized-"
+	   (strip-string-from-file file)))
+   t))
+
+(if (file-readable-p "~/.coloroverride")
+    (set-theme-on-file "~/.coloroverride")
+    (set-theme-on-time))
 
 ; Show line numbers with the given format
 (global-linum-mode t)
