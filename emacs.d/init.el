@@ -54,15 +54,15 @@
 
 ; Load solarized based on the time of day
 (defun set-theme-on-time ()
-    (let ((time
-	    (string-to-number
-	      (format-time-string "%H"))))
-      (if
-	(and
-	  (>= time 7)
-	  (< time 19))
-	    (load-theme 'solarized-light t)
-	(load-theme 'solarized-dark t))))
+  (let ((time
+    (string-to-number
+      (format-time-string "%H"))))
+    (if
+      (and
+        (>= time 7)
+        (< time 19))
+          (load-theme 'solarized-light t)
+      (load-theme 'solarized-dark t))))
 
 (defun strip-string-from-file (file)
   (with-temp-buffer
@@ -72,8 +72,7 @@
 (defun set-theme-on-file (file)
   (load-theme
    (read (concat "solarized-"
-	   (strip-string-from-file file)))
-   t))
+     (strip-string-from-file file))) t))
 
 (if (file-readable-p "~/.coloroverride")
     (set-theme-on-file "~/.coloroverride")
@@ -85,6 +84,20 @@
 
 ; Load evil-tmux-navigator
 (require 'navigate)
+
+; Mouse stuff
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] '(lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] '(lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
 
 ; Translate ansi characters in shell mode
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
