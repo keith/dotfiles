@@ -194,8 +194,9 @@ let g:UltiSnipsJumpBackwardTrigger = "<F30>"
 let g:snips_author = "Keith Smiley"
 let g:ulti_expand_or_jump_res = 0
 
+" ...
 let mappings = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
-execute 'imap <CR> <C-R>=EnterWrapper()<CR>' . mappings
+execute 'imap <CR> <C-R>=EnterWrapper()' . mappings . '<CR><CR>'
 function! EnterWrapper()
   if pumvisible()
     call UltiSnips#ExpandSnippetOrJump()
@@ -211,7 +212,7 @@ function! EnterWrapper()
     return "\<CR>"
   endif
 
-  return "\<CR>"
+  return "\<C-R>=delimitMate#ExpandReturn()"
 endfunction
 
 " neocomplete
