@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 
-open $1 -g
-
+open -g $1

@@ -7,4 +7,3 @@ for lang in ${langs[@]}
 do
     ./$lang install
 done
-

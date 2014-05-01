@@ -259,3 +259,6 @@ let g:used_javascript_libs = 'angularjs,jasmine'
 " IMO this is way too confusing, it makes me forget quotes
 " On lines after others
 let g:vim_json_syntax_conceal = 0
+
+" vim-markdown
+let g:markdown_fenced_languages = ['ruby', 'sh', 'objc']
