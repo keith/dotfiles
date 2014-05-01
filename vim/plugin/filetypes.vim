@@ -151,15 +151,17 @@ augroup ft_settings
 
   " Put the cursor on a blank line with brackets
   " Using execute to not break highlighting for open brackets
-  " TODO: This doesn't work in objective c
-  autocmd FileType c,cpp,go,objc,php,css,sass.css autocmd BufRead *
-        \ execute "inoremap {<CR> {<CR>}<ESC>O"
+  " autocmd FileType c,cpp,go,objc,php,css,sass.css autocmd BufRead *
+  "       \ execute "inoremap {<CR> {<CR>}<ESC>O"
 
   " Save files on some focus lost events, like switching splits
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
   autocmd BufRead,BufReadPost,Syntax,VimEnter * set formatoptions-=o
+
+  " If multiple files exist
+  autocmd VimEnter * tab all
 
   " Return to the same position you left the file in
   autocmd BufReadPost * call PositionRecall()
