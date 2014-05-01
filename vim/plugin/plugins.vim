@@ -174,7 +174,7 @@ function! TabWrapper()
   else
     call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res == 0
-      if Should_tab() || empty(&omnifunc)
+      if ForceTab() || empty(&omnifunc)
         return "\<Tab>"
       else
         return "\<C-x>\<C-o>"
@@ -239,11 +239,12 @@ endfunction
 
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
-function! Should_tab()
-  let l:col = col('.') - 1
-  let l:lastchar = getline('.')[l:col - 1]
-  return !(l:col > 0 && (getline('.')[l:col - 1] =~ '\k'
-        \ && index(g:invalid_tab_chars, l:lastchar) < 0))
+function! ForceTab()
+  let column = col('.') - 1
+  let lastchar = getline('.')[column - 1]
+  let iskeychar = lastchar =~ '\k' || lastchar == '.'
+  let invalidchar = index(g:invalid_tab_chars, lastchar) < 0
+  return !(column > 0 && (iskeychar && invalidchar))
 endfunction
 " }}}
 
