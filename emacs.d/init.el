@@ -46,6 +46,12 @@
 (require 'surround)
 (global-surround-mode 1)
 
+(require 'paren)
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-foreground 'show-paren-match "#def")
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(show-paren-mode 1)
+
 ; Load solarized based on the time of day
 (let ((time
         (string-to-number
