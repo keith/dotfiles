@@ -263,3 +263,6 @@ let g:vim_json_syntax_conceal = 0
 
 " vim-markdown
 let g:markdown_fenced_languages = ['ruby', 'sh', 'objc']
+
+" tern
+let g:tern_map_prefix = '<Leader>'
