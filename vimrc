@@ -323,8 +323,6 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 command! -bang Q q<bang>
 command! -bang W w<bang>
-cnoreabbrev ` ~
-cnoreabbrev `` `
 
 " Edit vimrc with mapping
 nnoremap <leader>ov :call VimConf()<CR>
