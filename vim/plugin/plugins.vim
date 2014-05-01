@@ -1,8 +1,3 @@
-" CTRL-P
-let g:ctrlp_show_hidden = 1
-unlet! g:ctrlp_user_command
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-
 " Airline
 let g:airline_theme = 'custom'
 let g:airline_left_sep = ''
@@ -140,9 +135,6 @@ let g:investigate_use_url_for_haskell = 1
 " let g:investigate_command_for_python = "^i!pydoc ^s"
 let g:investigate_dash_for_eruby="rails"
 
-" vim-rooter
-let g:rooter_manual_only = 1
-
 " python-mode
 let g:pymode_indent = 0
 let g:pymode_breakpoint = 0
@@ -215,29 +207,6 @@ function! EnterWrapper()
   return "\<C-R>=delimitMate#ExpandReturn()"
 endfunction
 
-" neocomplete
-" let g:neocomplete#enable_smart_case = 1
-" let g:neocomplete#data_directory = '~/.cache/neocomplete'
-
-" clang_complete compatibility from :h neocomplete
-" if !exists('g:neocomplete#force_omni_input_patterns')
-"   let g:neocomplete#force_omni_input_patterns = {}
-" endif
-" let g:neocomplete#force_overwrite_completefunc = 1
-" let g:neocomplete#force_omni_input_patterns.objc =
-"       \ '\v(\.|->|\s|\[|:|,)*\w*[^\.\.]'
-      " \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-" Disable NeoComplete sometimes
-" autocmd BufNewFile,BufRead * call EnableNeoComplete()
-" function! EnableNeoComplete()
-"   if &ft =~ 'gitcommit\|mail\|objc\|python'
-"     NeoCompleteLock
-"     return
-"   end
-
-"   NeoCompleteEnable
-" endfunction
-
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
 function! ForceTab()
@@ -248,12 +217,6 @@ function! ForceTab()
   return !(column > 0 && (iskeychar && invalidchar))
 endfunction
 " }}}
-
-" vim-slime
-let g:slime_target = "tmux"
-
-" vim-arpeggio
-silent! call arpeggio#map('i', '', 0, 'jk', '<Esc>')
 
 " javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'angularjs,jasmine'
