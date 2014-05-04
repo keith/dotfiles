@@ -391,7 +391,6 @@ endfunction
 nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>tm :tabmove
-nnoremap <C-x> <C-w>c
 
 " Setup the format for the tab line syntax
 function! Tabline()
@@ -459,7 +458,7 @@ nnoremap <C-o> <C-o>zz
 
 " Objective-C matching bracket shortcuts
 " inoremap <leader>o <ESC>^i[<ESC>
-nnoremap <leader>o ^i[<ESC>
+" nnoremap <leader>o ^i[<ESC>
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
