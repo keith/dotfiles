@@ -126,7 +126,7 @@ let g:clang_make_default_keymappings = 0
 let g:clever_f_across_no_line = 1
 
 " Dispatch.vim
-nnoremap <leader>d :Dispatch<CR>
+nnoremap <leader>d :w<CR>:Dispatch<CR>
 
 " investigate.vim
 nnoremap <silent> K :call investigate#Investigate()<cr>
