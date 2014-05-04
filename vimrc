@@ -391,6 +391,7 @@ endfunction
 nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>tm :tabmove
+nnoremap <C-x> <C-w>c
 
 " Setup the format for the tab line syntax
 function! Tabline()
@@ -466,6 +467,10 @@ nnoremap <leader>4 :let @/ = ""<CR>
 
 " Search for the word under the cursor with Ag
 nnoremap sag :Ag! <cword><CR>
+
+" Save mappings
+nnoremap <C-s> <ESC>:w<CR>
+inoremap <C-s> <ESC>:w<CR>
 
 " Don't automatically jump on search
 nnoremap * :keepjumps normal! mi*`i<CR>
