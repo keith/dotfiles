@@ -1,11 +1,11 @@
 autocmd VimEnter * call s:GenerateCtags()
 function! s:GenerateCtags()
-  let tagfile = 'tags'
+  let tagfile = '.tags'
   if exists("g:ctags_default_file")
     let tagfile = g:ctags_default_file
   else
-    if filereadable('.tags')
-      let tagfile = '.tags'
+    if filereadable('tags')
+      let tagfile = 'tags'
     endif
   endif
 
