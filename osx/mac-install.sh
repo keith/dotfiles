@@ -25,8 +25,8 @@ fi
 source "$HOME/.bashrc"
 
 if ! which brew &> /dev/null; then
-    echo "Homebrew is not installed in your \$PATH"
-    exit
+    echo "Installing homebrew"
+    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
 brew bundle $DOTFILES/osx/Brewfile
@@ -36,4 +36,3 @@ chmod u+x git-credential-osxkeychain
 sudo mv git-credential-osxkeychain "$(dirname $(which git))/git-credential-osxkeychain"
 
 ./install-langs.sh install
-
