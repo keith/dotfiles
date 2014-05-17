@@ -8,7 +8,8 @@ mutt/cache
 mutt/certificates
 mutt/offlineimaphelpers.pyc
 mutt/postponed
-mutt/temp
+mutt/temp/*
+!mutt/temp/.gitkeep
 linux/configs/fish/fish_history
 linux/configs/fish/fishd*
 vim/flavors
