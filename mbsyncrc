@@ -1,0 +1,9 @@
+IMAPAccount keithbsmiley-gmail.com
+Host imap.gmail.com
+User keithbsmiley@gmail.com
+PassCMD "~/keychain.py keithbsmiley@gmail.com imap.gmail.com"
+UseIMAPS yes
+IMAPStore KeithBSmiley-Remote
+MaildirStore KeithBSmiley-Local
+Path ~/.mail/keithbsmiley-gmail.com
+Inbox ~/.mail/keithbsmiley-gmail.com/INBOX
