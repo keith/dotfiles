@@ -6,5 +6,5 @@ agents=(*.plist)
 for agent in ${agents[@]}
 do
     ln -s $PWD/$agent ~/Library/LaunchAgents
-    launchctl loads ~/Library/LaunchAgents/$agent
+    launchctl load ~/Library/LaunchAgents/$agent
 done
