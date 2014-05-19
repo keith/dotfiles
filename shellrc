@@ -27,7 +27,8 @@ fi
 #  - /usr/sbin
 #  - /sbin
 #  - $HOME/.bin      for local tools
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin"
+#  - .git/safe/../../bin  mkdir .git/safe in the root of repositories you trust
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin:.git/safe/../../bin"
 
 # Disable ^-S in the terminal
 stty -ixon -ixoff
