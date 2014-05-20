@@ -12,6 +12,7 @@ install gnupg
 install go
 install grc
 install grep
+install heroku-toolbelt
 install hub
 install imagemagick
 install irssi
@@ -30,13 +31,17 @@ install mysql
 install notmuch
 install openssh
 install openssl
+install postgresql
+install qt
 install readline
 install reattach-to-user-namespace
+install redis
 install sqlite
 install the_silver_searcher
 install tree
 install urlview
 install vim --HEAD
+install watch
 install wget
 install zsh
 
@@ -45,3 +50,5 @@ install zsh
 # install graphviz --with-bindings --with-freetype --with-librsvg --with-pangocairo
 
 install keithbsmiley/formulae/tmux
+
+link openssl --force
