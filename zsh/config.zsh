@@ -64,7 +64,11 @@ bindkey '^N' history-search-forward
 # quickly edit your error
 autoload edit-command-line
 zle -N edit-command-line
-bindkey '^E' edit-command-line
+bindkey '^X' edit-command-line
+
+# You know.
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
