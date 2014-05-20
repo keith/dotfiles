@@ -31,9 +31,14 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_REDUCE_BLANKS
 
 # pushd for cd commands
-setopt AUTO_PUSHD
+setopt autopushd pushdminus pushdsilent pushdtohome cdablevars
+DIRSTACKSIZE=8
+
 # Don't push duplicates
-setopt PUSHD_IGNORE_DUPS
+setopt pushd_ignore_dups
+
+# Don't require dots before files for globs
+setopt globdots
 
 # No beep
 unsetopt BEEP
@@ -51,8 +56,15 @@ bindkey -v
 
 # Restore 'normal' search in VI mode
 bindkey '^R' history-incremental-search-backward
-bindkey '^P' up-history
-bindkey '^N' down-history
+bindkey '^P' history-search-backward
+bindkey '^N' history-search-forward
+
+# You can hit C-X C-E to open your $EDITOR
+# with the command typed in the buffer and
+# quickly edit your error
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^E' edit-command-line
 
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
