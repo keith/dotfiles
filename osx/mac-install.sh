@@ -8,8 +8,8 @@ fi
 
 ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
-if [[ ! -e "manage.sh" ]]; then
-    echo "Make sure you have the manage script in the same directory!"
+if [[ ! -e "../manage.sh" ]]; then
+    echo "Make sure you have the manage script nearby"
     exit
 fi
 
@@ -30,9 +30,5 @@ if ! which brew &> /dev/null; then
 fi
 
 brew bundle $DOTFILES/osx/Brewfile
-
-curl -s -O http://github-media-downloads.s3.amazonaws.com/osx/git-credential-osxkeychain
-chmod u+x git-credential-osxkeychain
-sudo mv git-credential-osxkeychain "$(dirname $(which git))/git-credential-osxkeychain"
 
 ./install-langs.sh install
