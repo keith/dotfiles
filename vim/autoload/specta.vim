@@ -1,16 +1,11 @@
-autocmd BufNewFile,BufRead *.m call SpectaKiwi()
-function! SpectaKiwi()
-  echom "here"
+function! specta#TestSyntaxSetup()
   let n = 1
-  while n < 20 && n < line('$')
+  while n < 15 && n < line('$')
     if getline(n) =~ 'SpecBegin'
-      echom "spec"
-      set ft=objc
-      set syntax=specta
+      setlocal syntax=specta
       setlocal foldmethod=syntax
       return
     elseif getline(n) =~ 'SPEC_BEGIN'
-      echom "kiwi"
       setlocal syntax=kiwi
       setlocal foldmethod=syntax
       return
