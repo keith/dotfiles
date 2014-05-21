@@ -33,23 +33,24 @@
 [hub]
   protocol = https
 [alias]
-  punch = push --force
-  s     = status -sb
-  c     = clone
-  com   = commit
   a     = add --all
   ap    = add -p
-  d     = diff
-  last  = diff HEAD^ HEAD
-  dt    = difftool
-  dc    = diff --cached
-  undo  = reset --soft HEAD^
   ba    = branch -a
-  rv    = remote -v
-  r     = reflog -5
+  c     = clone
+  cb    = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  com   = commit
+  d     = diff
+  dc    = diff --cached
+  dt    = difftool
   l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
-  sub   = submodule update --init --recursive
+  last  = diff HEAD^ HEAD
   pul   = pull
+  punch = push --force
+  r     = reflog -5
+  rv    = remote -v
+  s     = status -sb
+  sub   = submodule update --init --recursive
+  undo  = reset --soft HEAD^
 [gitsh]
   defaultCommand = s
 [difftool "Kaleidoscope"]
