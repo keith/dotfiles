@@ -26,3 +26,13 @@ nmap <space>b :xccmd toggleBreakpointAtCurrentLine<CR>
 " Better navigation
 nmap H ^
 nmap L $
+
+" Window navigation
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+
+" Tab mappings
+nmap ,tt :xccmd newTab<CR>
+nmap ,tc :tabclose<CR>
