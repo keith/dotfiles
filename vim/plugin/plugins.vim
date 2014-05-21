@@ -231,3 +231,10 @@ let g:markdown_fenced_languages = ['ruby', 'sh', 'objc']
 
 " tern
 let g:tern_map_prefix = '<Leader>'
+
+" rails.vim
+let g:rails_projections = {
+      \ "config/routes.rb": {"command": "routes"},
+      \ "spec/factories.rb": {"command": "factories"},
+      \ "spec/factories/*.rb": {"command": "factories"}
+    \ }
