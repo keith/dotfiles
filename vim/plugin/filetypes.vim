@@ -107,11 +107,9 @@ augroup END
 augroup ft_objc
   autocmd!
   autocmd BufNewFile,BufRead *.{h,m,pch} setlocal filetype=objc
+  autocmd BufRead *{Test,Spec}.m call specta#TestSyntaxSetup()
   autocmd FileType objc setlocal tabstop=4 shiftwidth=4 expandtab completeopt=menu,longest
   autocmd FileType objc let g:surround_{char2nr('@')} = "@\"\r\""
-
-  autocmd BufRead *Test.m,*Tests.m setlocal syntax=specta foldmethod=syntax
-  autocmd BufRead *Spec.m,*Specs.m setlocal syntax=kiwi   foldmethod=syntax
 
   " Don't force lines starting with # to column 0 in pch files
   autocmd BufRead *.pch setlocal syntax=pch
