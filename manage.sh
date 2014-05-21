@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-FILES=(amethyst backupignore bashrc bin curlrc emacs.d gemrc ghci gitattributes gitconfig gitignore_global gnupg goobookrc gvimrc hgrc hushlogin inputrc irbrc irssi mbsyncrc mutt muttrc notmuch-config npmrc offlineimaprc rspec phoenix.js psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc urlview Xdefaults Xmodmap xvimrc zshrc)
+FILES=(agignore amethyst backupignore bashrc bin curlrc emacs.d gemrc ghci gitattributes gitconfig gitignore_global gnupg goobookrc gvimrc hgrc hushlogin inputrc irbrc irssi mbsyncrc mutt muttrc notmuch-config npmrc offlineimaprc rspec phoenix.js psqlrc pylintrc shellrc slate.js tm_properties tmux.conf tmux-powerlinerc vim vimrc urlview Xdefaults Xmodmap xvimrc zshrc)
 LINUX=(Xdefaults Xmodmap)
 NO_DOT=()
 
