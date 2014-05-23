@@ -44,6 +44,7 @@ function! s:EscapeForVar(filename)
   let l:fname = a:filename
   let l:fname = substitute(l:fname, '/', '_', 'g')
   let l:fname = substitute(l:fname, '\.', '_', 'g')
+  let l:fname = substitute(l:fname, '-', '_', 'g')
   return l:fname
 endfunction
 
