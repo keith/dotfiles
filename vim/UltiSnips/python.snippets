@@ -1,0 +1,29 @@
+priority -50
+
+snippet context "context block"
+class ${1:name}(object):
+	def __enter__(self):
+		${2:pass}
+
+	def __exit__(self, exc_type, exc_value, traceback):
+		${3:pass}
+endsnippet
+
+snippet testclass "pyunit testclass"
+class Test${1:Class}(unittest.TestCase):
+	def setUp(self):
+		${2:pass}
+
+	def tearDown(self):
+		${3:pass}
+
+	def test_${4:name}(self):
+		${5:pass}
+endsnippet
+
+snippet ifname "__name__ == __main__"
+if __name__ == '__main__':
+	${1:main()}$0
+endsnippet
+
+# vim:ft=snippets:
