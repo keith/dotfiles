@@ -10,6 +10,8 @@
     <string>-u</string>
     <string>quiet</string>
   </array>
+  <key>RunAtLoad</key>
+  <true/>
   <key>StartInterval</key>
   <integer>180</integer>
 </dict>
