@@ -72,7 +72,7 @@ function +vi-git-stash() {
 function +vi-git-untracked() {
   untracked=$(git ls-files --other --exclude-standard | wc -l | tr -d ' ')
   if [[ $untracked -gt 0 ]]; then
-    hook_com[misc]+="%F{1}U%f"
+    hook_com[misc]+="%F{1}?%f"
   fi
 }
 
