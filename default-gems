@@ -1,19 +1,17 @@
 gem-ctags
 
+awesome_print
 bundler
 cocoapods
 colored
 colorize
-coveralls
-factory_girl
 gem-browse
-guard-rspec
 hookup
+interactive_editor
 jekyll
 launchy
 mkgitignore
 pinup
-rails
 rdiscount
 rspec
 rubygems-bundler
