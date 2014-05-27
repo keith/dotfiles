@@ -1,6 +1,7 @@
 Create Slave
 Expunge Slave
 SyncState *
+FSync no
 
 IMAPAccount keithbsmiley-gmail.com
 Host imap.gmail.com
