@@ -8,6 +8,7 @@ Host imap.gmail.com
 User keithbsmiley@gmail.com
 PassCMD "~/keychain.py keithbsmiley@gmail.com imap.gmail.com"
 UseIMAPS yes
+CertificateFile ~/.mutt/Equifax_Secure_CA.cert
 
 IMAPStore KeithBSmiley-Remote
 Account keithbsmiley-gmail.com
