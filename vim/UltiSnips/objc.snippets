@@ -59,4 +59,16 @@ dispatch_${1:async}(${2:dispatch_get_global_queue}(${3:DISPATCH_QUEUE_PRIORITY_D
 $0
 endsnippet
 
+snippet describe "specta describe block"
+describe(@"$1", ^{
+	$2
+});
+endsnippet
+
+snippet it "specta it block"
+it(@"$1", ^{
+	$2
+});
+endsnippet
+
 # vim:ft=snippets:
