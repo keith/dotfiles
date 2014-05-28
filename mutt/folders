@@ -1,17 +1,18 @@
 set realname         = "Keith Smiley"
-set from             = "keithbsmiley@gmail.com"
-set folder           = $HOME/.mail/keithbsmiley-gmail.com
-set spoolfile        = "+INBOX"
+set folder           = $HOME/.mail
+source ~/.mutt/temp/mailboxes
+set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
+
+mailboxes +keith-thoughtbot.com/INBOX +keithbsmiley-gmail.com/INBOX
+folder-hook keith-thoughtbot.com/* source ~/.mutt/accounts/thoughtbot.account
+folder-hook keithbsmiley-gmail.com/* source ~/.mutt/accounts/gmail.account
+
 set alias_file       = $HOME/.mutt/aliases
 set certificate_file = $HOME/.mutt/certificates
 set header_cache     = $HOME/.mutt/cache/headers
 set mailcap_path     = $HOME/.mutt/mailcap
 set message_cachedir = $HOME/.mutt/cache/bodies
-set signature        = $HOME/.mutt/signature
 set tmpdir           = $HOME/.mutt/temp
-set postponed        = "+drafts"
-set mbox             = "+archive"
-set sendmail         = /usr/local/bin/msmtp\ -C\ $HOME/.mutt/msmtprc
 
 source $HOME/.mutt/solarized-dark.muttrc
 
