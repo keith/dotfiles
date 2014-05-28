@@ -22,7 +22,6 @@ FILES=(\
     inputrc \
     irbrc \
     irssi \
-    mbsyncrc \
     mutt \
     muttrc \
     notmuch-config \
