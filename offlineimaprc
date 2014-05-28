@@ -1,16 +1,16 @@
 [general]
 ui         = ttyui
-accounts   = KeithBSmiley
+accounts   = gmail
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
-[Account KeithBSmiley]
-localrepository  = KeithBSmiley-Local
-remoterepository = KeithBSmiley-Remote
+[Account gmail]
+localrepository  = gmail-local
+remoterepository = gmail-remote
 status_backend   = sqlite
 postsynchook     = notmuch new
 
-[Repository KeithBSmiley-Local]
+[Repository gmail-local]
 type = Maildir
 localfolders = ~/.mail/keithbsmiley-gmail.com
 nametrans = lambda folder: {
@@ -21,7 +21,7 @@ nametrans = lambda folder: {
                             'trash':   '[Gmail]/Trash',
                             }.get(folder, folder)
 
-[Repository KeithBSmiley-Remote]
+[Repository gmail-remote]
 maxconnections = 1
 type = Gmail
 remoteuser = keithbsmiley@gmail.com
