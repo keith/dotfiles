@@ -24,8 +24,10 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
 maxconnections = 1
 type = Gmail
 remoteuser = keithbsmiley@gmail.com
-remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com", server="imap.gmail.com")
+remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com",
+                                   server="imap.gmail.com")
 realdelete = no
+sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
                             '[Gmail]/Starred':   'flagged',
