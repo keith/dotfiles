@@ -1,0 +1,16 @@
+# Account specific settings
+set from             = "keith@thoughtbot.com"
+set mbox             = "+keith-thoughtbot.com/archive"
+set postponed        = "+keith-thoughtbot.com/drafts"
+set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a thoughtbot"
+set signature        = $HOME/.mutt/accounts/thoughtbot.signature
+set spoolfile        = "+keith-thoughtbot.com/INBOX"
+
+# Gmail-style keyboard shortcuts
+macro index,pager d "<save-message>+keith-thoughtbot.com/trash<enter>" "Archive message"
+macro index,pager e "<save-message>+keith-thoughtbot.com/archive<enter>" "Archive message"
+macro index,pager ga "<change-folder>+keith-thoughtbot.com/archive<enter>" "Go to all mail"
+macro index,pager gi "<change-folder>+keith-thoughtbot.com/INBOX<enter>" "Go to inbox"
+macro index,pager gs "<change-folder>+keith-thoughtbot.com/sent<enter>" "Go to sent mail"
+
+# vim: ft=muttrc
