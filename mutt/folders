@@ -1,7 +1,7 @@
 set realname         = "Keith Smiley"
 set folder           = $HOME/.mail
-source ~/.mutt/temp/mailboxes
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
+source ~/.mutt/temp/mailboxes
 
 mailboxes +keith-thoughtbot.com/INBOX +keithbsmiley-gmail.com/INBOX
 folder-hook keith-thoughtbot.com/* source ~/.mutt/accounts/thoughtbot.account
