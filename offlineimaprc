@@ -4,6 +4,14 @@ accounts   = gmail, thoughtbot
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
+[mbnames]
+enabled = yes
+filename = ~/.mutt/temp/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+
 [Account gmail]
 localrepository  = gmail-local
 remoterepository = gmail-remote
