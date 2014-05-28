@@ -1,6 +1,6 @@
 [general]
 ui         = ttyui
-accounts   = gmail
+accounts   = gmail, thoughtbot
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
@@ -26,6 +26,44 @@ maxconnections = 1
 type = Gmail
 remoteuser = keithbsmiley@gmail.com
 remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com",
+                                   server ="imap.gmail.com")
+realdelete = no
+sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
+nametrans = lambda folder: {
+                            '[Gmail]/All Mail':  'archive',
+                            '[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            }.get(folder, folder)
+folderfilter = lambda folder: folder not in [
+                                             '[Gmail]/Important',
+                                             '[Gmail]/Spam',
+                                             ]
+
+
+[Account thoughtbot]
+localrepository  = thoughtbot-local
+remoterepository = thoughtbot-remote
+status_backend   = sqlite
+postsynchook     = notmuch new
+
+[Repository thoughtbot-local]
+type = Maildir
+localfolders = ~/.mail/keith-thoughtbot.com
+nametrans = lambda folder: {
+                            'archive': '[Gmail]/All Mail',
+                            'drafts':  '[Gmail]/Drafts',
+                            'flagged': '[Gmail]/Starred',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'trash':   '[Gmail]/Trash',
+                            }.get(folder, folder)
+
+[Repository thoughtbot-remote]
+maxconnections = 1
+type = Gmail
+remoteuser = keith@thoughtbot.com
+remotepasseval = get_keychain_pass(account="keith@thoughtbot.com",
                                    server ="imap.gmail.com")
 realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
