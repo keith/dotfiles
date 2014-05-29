@@ -238,3 +238,6 @@ let g:rails_projections = {
       \ "spec/factories.rb": {"command": "factories"},
       \ "spec/factories/*.rb": {"command": "factories"}
     \ }
+
+" vim-surround
+let g:surround_{char2nr('@')} = "@\"\r\""
