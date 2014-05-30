@@ -59,9 +59,8 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 
-# You can hit C-X C-E to open your $EDITOR
-# with the command typed in the buffer and
-# quickly edit your error
+# You can hit C-X to open your $EDITOR
+# with the command typed in the buffer
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^X' edit-command-line
