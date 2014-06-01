@@ -1,5 +1,9 @@
 priority -50
 
+global !p
+from snippet_helpers import *
+endglobal
+
 snippet log "NSLog"
 NSLog(@"$1"${1/[^%]*(%)?.*/(?1:, :\);)/}$2${1/[^%]*(%)?.*/(?1:\);)/}
 endsnippet
@@ -69,6 +73,10 @@ snippet it "specta it block"
 it(@"$1", ^{
 	$2
 });
+endsnippet
+
+snippet /// "python comment"
+`!p snip.rv = objc_comment_block()`
 endsnippet
 
 # vim:ft=snippets:
