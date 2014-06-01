@@ -6,7 +6,6 @@ bin/yuicompressor*
 irssi/config.autosave
 mutt/cache
 mutt/certificates
-mutt/offlineimaphelpers.pyc
 mutt/postponed
 mutt/temp/*
 !mutt/temp/.gitkeep
@@ -19,6 +18,8 @@ vim/*.spl
 linux/configs/fish/generated_completions
 emacs.d/*
 !emacs.d/init.el
+**/.ropeproject
+**/*.pyc
 
 ####### Linux #######
 !.gitignore
