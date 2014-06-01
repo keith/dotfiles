@@ -2,11 +2,9 @@
 # This is a script for bootstrapping OS X setup
 
 if ! which xcodebuild &> /dev/null; then
-    echo "You need to install the Xcode Command Line Tools before running this script"
-    exit
+    echo "Attempting to install the Xcode developer tools"
+    $(xcode-select --install)
 fi
-
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
 if [[ ! -e "../manage.sh" ]]; then
     echo "Make sure you have the manage script nearby"
@@ -26,6 +24,8 @@ source "$HOME/.bashrc"
 
 if ! which brew &> /dev/null; then
     echo "Installing homebrew"
+    mkdir -p /usr/local
+    sudo chown -R $(whoami) /usr/local
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 fi
 
