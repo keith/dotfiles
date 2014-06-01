@@ -38,7 +38,16 @@ DIRSTACKSIZE=8
 setopt pushd_ignore_dups
 
 # Don't require dots before files for globs
-setopt globdots
+setopt GLOB_DOTS
+
+# Special chars as file globs
+setopt EXTENDED_GLOB
+
+# Jump to end after completion
+setopt ALWAYS_TO_END
+
+# Show menu after multiple tabs
+setopt AUTO_MENU
 
 # No beep
 unsetopt BEEP
