@@ -66,4 +66,3 @@ sudo rsync  --acls \
             "$SRC" "$DEST"
 
 log "Finished backup"
-
