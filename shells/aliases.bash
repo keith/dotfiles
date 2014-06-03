@@ -51,3 +51,6 @@ alias todo="python $DOTFILES/scripts/t/t.py --task-dir $HOME/Dropbox/tasks --lis
 
 # Ssh for rcopy
 alias sshr="ssh -R 2224:localhost:2224"
+
+# Swift you know
+alias swift="/Applications/Xcode6-Beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
