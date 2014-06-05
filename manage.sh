@@ -154,9 +154,10 @@ fi
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
     install_links
+    # It's required for this to have these permissions
+    chmod 0600 ~/.mutt/msmtprc
 elif [[ $1 == "remove" ]]; then
     remove_links
 else
     die
 fi
-
