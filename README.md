@@ -28,3 +28,4 @@ Or checkout the scripts in `langs` and install them individually.
 - Run `loginfix.sh` to disable all resume features of OS X
 - Run `launchd.sh` to symlink the launchd plists
 - Run `defaults.sh` to change tons of default settings
+- Run `langs/rbenv.sh` to setup rbenv
