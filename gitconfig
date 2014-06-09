@@ -41,6 +41,7 @@
   c     = clone
   cb    = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
   com   = commit
+  ctags = !.git/hooks/ctags
   d     = diff
   dc    = diff --cached
   dt    = difftool
