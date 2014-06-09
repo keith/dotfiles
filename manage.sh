@@ -13,6 +13,7 @@ FILES=(\
     gitattributes \
     gitconfig \
     gitignore_global \
+    git_template \
     gnupg \
     goobookrc \
     gvimrc \

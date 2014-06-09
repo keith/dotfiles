@@ -5,6 +5,8 @@
   excludesfile = ~/.gitignore_global
   attributesfile = ~/.gitattributes
   editor = vim
+[init]
+  templatedir = ~/.git_template
 [push]
   default = upstream
 [diff]
