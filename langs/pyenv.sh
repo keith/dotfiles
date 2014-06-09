@@ -2,6 +2,11 @@
 
 pyenvpath="$HOME/.pyenv"
 
+packages=(\
+    httpie \
+    speedtest-cli \
+)
+
 function install () {
     if [[ -d $pyenvpath ]];then
         echo "$pyenvpath already exists"
@@ -13,6 +18,14 @@ function install () {
     git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
 
     exec $SHELL -l
+    version=2.7.6
+    pyenv install $version
+    pyenv global $version
+
+    for PKG in ${packages[@]}
+    do
+        pip install $PKG
+    done
 }
 
 function die () {
