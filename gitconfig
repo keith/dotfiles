@@ -16,7 +16,7 @@
 [mergetool]
   prompt = false
 [merge]
-  tool = vimdiff
+  tool = fugitive
   log = true
 [merge "bundler"]
   name = bundler
