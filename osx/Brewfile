@@ -42,6 +42,7 @@ install tree
 install urlview
 install vim --HEAD
 install watch
+install weechat --with-aspell --with-python --with-perl
 install wget
 install zsh
 
