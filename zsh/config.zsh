@@ -81,6 +81,10 @@ bindkey "^E" end-of-line
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
 
+# Auto insert quotes on typed URLs
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
 # Show vim mode on right
 # http://dougblack.io/words/zsh-vi-mode.html
 function zle-line-init zle-keymap-select {
