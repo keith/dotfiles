@@ -48,7 +48,7 @@ defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
 # Disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -int 0
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
@@ -68,7 +68,7 @@ defaults -currentHost write com.apple.screensaver idleTime -int 0
 defaults write com.apple.screensaver askForPassword -int 1
 
 # Set delay before password ask (minutes x 60)
-defaults write com.apple.screensaver askForPasswordDelay -int 900
+defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
@@ -217,6 +217,9 @@ defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool NO
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
 
@@ -307,6 +310,11 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
+# Finder: new window location set to $HOME. Same as Finder > Preferences > New Finder Windows show
+# For other path use "PfLo" and "file:///foo/bar/"
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
@@ -316,6 +324,9 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
 # Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
@@ -323,7 +334,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Show the ~/Library folder
-chflags nohidden $HOME/Library
+chflags nohidden ~/Library
 
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
