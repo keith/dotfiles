@@ -478,6 +478,30 @@ defaults write org.macosforge.xquartz.X11 app_to_run -string "/opt/X11/bin/xterm
 defaults write org.macosforge.xquartz.X11 login_shell -string "/usr/local/bin/zsh"
 
 
+#
+# Xcode
+#
+
+# Trim trailing whitespace
+defaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool true
+
+# Trim whitespace only lines
+defaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool true
+
+# Show invisible characters
+defaults write com.apple.dt.Xcode DVTTextShowInvisibleCharacters -bool true
+
+# Show line numbers
+defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
+
+# Show ruler at 80 chars
+defaults write com.apple.dt.Xcode DVTTextShowPageGuide -bool true
+defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 80
+
+# Enable internal debug menu
+defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
+
+
 # Killing affected applications
 for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer Xquartz
 do
