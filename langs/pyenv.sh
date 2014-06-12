@@ -4,6 +4,7 @@ pyenvpath="$HOME/.pyenv"
 
 packages=(\
     httpie \
+    goobook \
     speedtest-cli \
 )
 
