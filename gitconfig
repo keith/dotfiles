@@ -5,6 +5,7 @@
   excludesfile = ~/.gitignore_global
   attributesfile = ~/.gitattributes
   editor = vim
+  whitespace = trailing-space,space-before-tab
 [init]
   templatedir = ~/.git_template
 [push]
