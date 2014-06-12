@@ -20,6 +20,7 @@
 [merge]
   tool = fugitive
   log = true
+  ff = only
 [merge "bundler"]
   name = bundler
   driver = bundle
