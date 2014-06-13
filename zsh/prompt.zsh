@@ -27,7 +27,10 @@ zstyle ':vcs_info:*' actionformats "[%b%u%c] %F{4}%a%f"
 zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
 setopt prompt_subst
 export PS1='$base_prompt${vcs_info_msg_0_} %# '
-add-zsh-hook precmd vcs_info
+vcs_quiet() {
+  vcs_info 2>/dev/null
+}
+add-zsh-hook precmd vcs_quiet
 
 # Show number of commits ahead or behind of the remote
 function +vi-git-st() {
