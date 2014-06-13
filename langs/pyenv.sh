@@ -18,7 +18,7 @@ function install () {
     git clone https://github.com/yyuu/pyenv-pip-rehash.git $pyenvpath/plugins/pyenv-pip-rehash
     git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
 
-    exec $SHELL -l
+    source $DOTFILES/langs/python.bash
     version=2.7.6
     pyenv install $version
     pyenv global $version
@@ -27,6 +27,8 @@ function install () {
     do
         pip install $PKG
     done
+
+    exec $SHELL -l
 }
 
 function die () {
