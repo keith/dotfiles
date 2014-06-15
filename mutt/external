@@ -7,7 +7,9 @@ macro index,pager a "<pipe-message>goobook add<return>" "add sender to google co
 bind editor <Tab> complete-query
 
 # Not much full text searching
-macro index S "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" "search mail (using notmuch)"
+macro index S \
+  "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.mail/temporary/search<enter><change-folder-readonly>+temporary/search<enter>" \
+  "search mail (using notmuch)"
 
 # Sidebar patch settings
 # set sidebar_delim   = '│'
