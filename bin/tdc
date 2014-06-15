@@ -3,6 +3,10 @@
 # On OS X set the default command for tmux
 
 if [[ ! -z "$OSX" ]];then
+    if ! which reattach-to-user-namespace &>/dev/null; then
+        echo "reattach-to-user-namespace is required"
+        exit 1
+    fi
     reattach-to-user-namespace -l $SHELL
 else
     exec -l $SHELL
