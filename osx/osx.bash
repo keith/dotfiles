@@ -16,6 +16,7 @@ alias vmm="mvim ."
 
 # CocoaPods
 alias pi="pod install"
+alias psl="pod spec lint *.podspec"
 alias psla="pod spec lint *.podspec --verbose"
 alias pclean="rm -rf $HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
 
