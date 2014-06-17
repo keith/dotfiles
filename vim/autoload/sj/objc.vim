@@ -13,7 +13,7 @@ function! sj#objc#JoinIfClause()
 endfunction
 
 function! sj#objc#SplitIfClause()
-  let pattern = '\v\s*^(if\s*\([^\)]*\)\s*)(return.*)$'
+  let pattern = '\v^\s*(if\s*\([^\)]*\)\s*)(return.*)$'
   if sj#SearchUnderCursor(pattern) <= 0
     return 0
   endif
