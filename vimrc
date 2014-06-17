@@ -25,6 +25,7 @@ Plugin 'gmarik/vundle'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'b4winckler/vim-objc'
 Plugin 'bling/vim-airline'
 Plugin 'cakebaker/scss-syntax.vim'
