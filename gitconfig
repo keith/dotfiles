@@ -12,6 +12,8 @@
   default = upstream
 [diff]
   tool = vimdiff
+  renames = copies
+  mnemonicprefix = true
 [difftool]
   prompt = false
 [mergetool "fugitive"]
@@ -22,6 +24,7 @@
   tool = fugitive
   log = true
   ff = only
+  stat = true
 [merge "bundler"]
   name = bundler
   driver = bundle
@@ -68,3 +71,7 @@
   trustExitCode = true
 [fetch]
   prune = true
+[branch]
+  autosetupmerge = true
+[rerere]
+  enabled = true
