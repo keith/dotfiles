@@ -8,7 +8,7 @@ bind editor <Tab> complete-query
 
 # Not much full text searching
 macro index S \
-  "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.cache/notmuch/mutt/search<enter><change-folder-readonly>+temporary/search<enter>" \
+  "<enter-command>unset wait_key<enter><shell-escape>mutt-notmuch-py $HOME/.cache/notmuch/mutt/search<enter><change-folder-readonly>~/.cache/notmuch/mutt/search<enter>" \
   "search mail (using notmuch)"
 
 # Sidebar patch settings
