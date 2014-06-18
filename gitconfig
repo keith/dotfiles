@@ -75,5 +75,3 @@
   autosetupmerge = true
 [rerere]
   enabled = true
-[url "git@github.com:Keithbsmiley/"]
-  insteadOf = https://github.com/Keithbsmiley
