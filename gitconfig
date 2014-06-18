@@ -47,6 +47,9 @@
   d     = diff
   dc    = diff --cached
   dt    = difftool
+  dtc   = difftool --cached
+  dtk   = difftool --tool=Kaleidoscope
+  dtkc  = difftool --tool=Kaleidoscope --cached
   l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
   last  = diff HEAD^ HEAD
   pul   = pull
