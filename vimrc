@@ -540,7 +540,7 @@ endif
 
 " Position resume ------ {{{
 function! PositionRecall()
-  if &ft =~ 'gitcommit|gitrebase'
+  if &ft =~ 'gitcommit\|gitrebase'
     return
   endif
 
