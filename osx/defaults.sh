@@ -509,7 +509,13 @@ defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 # Third Party
 #
 
+# Screeny don't record audio
 defaults write com.drewwilson.screeny RecordAudio -bool false
+
+# Tweetbot
+defaults write com.tapbots.TweetbotMac openURLInBackground -bool true
+defaults write com.tapbots.TweetbotMac showStatusItem -bool false
+defaults write com.tapbots.TweetbotMac soundType -int 1
 
 
 # Killing affected applications
