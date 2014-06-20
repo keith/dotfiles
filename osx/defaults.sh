@@ -505,6 +505,13 @@ defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 80
 defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 
 
+#
+# Third Party
+#
+
+defaults write com.drewwilson.screeny RecordAudio -bool false
+
+
 # Killing affected applications
 for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer Xquartz
 do
