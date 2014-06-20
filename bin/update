@@ -36,6 +36,11 @@ if which gem &> /dev/null;then
   $(which gem) update
 fi
 
+if which cabal &> /dev/null;then
+  echo "Updating cabal"
+  cabal update
+fi
+
 if [[ -d $HOME/.rbenv ]];then
   echo "Updating rbenv..."
   rbenv update
