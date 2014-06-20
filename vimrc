@@ -186,6 +186,7 @@ set showmatch        " Set show matching parenthesis
 set matchtime=2      " The amount of time matches flash
 set display=lastline " Display super long wrapped lines
 set number           " Shows line numbers
+set relativenumber
 set ruler            " Shows current cursor location
 set cursorline       " Highlight the line the cursor is on
 set nrformats-=octal " Never use octal notation
