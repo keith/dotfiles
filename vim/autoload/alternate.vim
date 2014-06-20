@@ -1,9 +1,6 @@
 " Custom alternate header/implementation files functions
 function! alternate#Alternate(cmd)
-  if &modified
-    echoerr "Save buffer before alternating"
-    return 0
-  endif
+  update
 
   let l:fullname = expand("%")
   let l:alternate = s:SavedAlternateForFilename(l:fullname)
@@ -45,6 +42,7 @@ function! s:EscapeForVar(filename)
   let l:fname = substitute(l:fname, '/', '_', 'g')
   let l:fname = substitute(l:fname, '\.', '_', 'g')
   let l:fname = substitute(l:fname, '-', '_', 'g')
+  let l:fname = substitute(l:fname, '+', '_', 'g')
   return l:fname
 endfunction
 
