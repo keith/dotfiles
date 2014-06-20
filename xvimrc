@@ -17,6 +17,9 @@ set ignorecase
 " But case-sensitive if expression contains a capital letter.
 set smartcase
 
+set number
+set relativenumber
+
 " Use the system pasteboard
 set pasteboard
 
