@@ -162,7 +162,7 @@ snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
 
 function! TabWrapper()
   if pumvisible()
-    return "\<C-n>"
+    return "\<C-y>"
   else
     call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res == 0
