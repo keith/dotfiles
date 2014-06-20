@@ -24,3 +24,33 @@ function! sj#objc#SplitIfClause()
 
   return 1
 endfunction
+
+function! sj#objc#JoinSetProperty()
+  let pattern = '\v^.*\.\w+\s*\=.*$'
+  if sj#SearchUnderCursor(pattern) <= 0
+    return 0
+  endif
+
+  call sj#PushCursor()
+  normal! 0f.w~f;x
+  call sj#ReplaceMotion('V', substitute(getline('.'), '\v\.(\w+)\s*\=\s*', ' set\1:', ''))
+  call sj#ReplaceMotion('V', substitute(getline('.'), '\v^(.*)$', '[\1];', ''))
+  call sj#PopCursor()
+
+  return 1
+endfunction
+
+function! sj#objc#SplitSetProperty()
+  let pattern = '\v^.*set\w+:.*$'
+  if sj#SearchUnderCursor(pattern) <= 0
+    return 0
+  endif
+
+  call sj#PushCursor()
+  normal! ^wwXxxr.l~
+  call sj#ReplaceMotion('V', substitute(getline('.'), '\v:', ' = ', ''))
+  normal! f]xF[x
+  call sj#PopCursor()
+
+  return 1
+endfunction
