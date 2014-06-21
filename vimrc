@@ -243,7 +243,7 @@ set statusline+=\ %c
 set complete=.,w,b,u,t,i
 set completeopt=menu
 set wildmenu                                     " Better completion in the CLI
-set wildmode=longest,list,full                   " Completion settings
+set wildmode=longest:full,full                   " Completion settings
 " Ignore these folders for completions
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
