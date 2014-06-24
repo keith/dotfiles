@@ -1,5 +1,5 @@
 function! sj#objc#JoinIfClause()
-  let pattern = '\v^\w+\s*\(([^\)]*)\)\s*\{?'
+  let pattern = '\v^\s*\w+\s*\(([^\)]*)\)\s*\{?'
   if sj#SearchUnderCursor(pattern) <=  0
     return 0
   endif
