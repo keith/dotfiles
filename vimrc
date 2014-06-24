@@ -80,7 +80,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-vinegar'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'vim-scripts/AnsiEsc.vim'
 Plugin 'vim-scripts/Match-Bracket-for-Objective-C'
 
 call vundle#end()
