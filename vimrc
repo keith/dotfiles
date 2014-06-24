@@ -287,6 +287,9 @@ nnoremap Q <Nop>
 " Disable K
 vnoremap K <Nop>
 
+" Sort in visual mode and update
+vnoremap s :sort ui \| update <CR>
+
 " Reselect visual blocks after movement
 vnoremap < <gv
 vnoremap > >gv
@@ -489,11 +492,9 @@ endfunction
 nnoremap <silent> <leader>w :call ClearWhitespace()<CR>
 function! ClearWhitespace()
   normal mi
-  try
-    %s/\s\+$//
-  catch /^Vim\%((\a\+)\)\=:E486/
-  endtry
+  silent! %s/\s\+$//
   let @/=""
+  update
   normal `i
 endfunction
 
