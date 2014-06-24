@@ -453,7 +453,9 @@ augroup END
 
 " Better movement
 nnoremap H ^
+vnoremap H ^
 nnoremap L g_
+vnoremap L g_
 nnoremap <tab> %
 
 " Switch to the last file
