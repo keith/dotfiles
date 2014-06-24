@@ -18,6 +18,7 @@ FILES=(\
     goobookrc \
     gvimrc \
     hgrc \
+    haskeline \
     hushlogin \
     ideavimrc \
     inputrc \
