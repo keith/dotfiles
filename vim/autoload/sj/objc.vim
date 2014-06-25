@@ -55,3 +55,16 @@ function! sj#objc#SplitSetProperty()
 
   return 1
 endfunction
+
+function! sj#objc#JoinNSNumber()
+  let pattern = '\v^(\s*.*)\[NSNumber\snumberWith\w+:([^\]]*)\](.*)$'
+  if sj#SearchUnderCursor(pattern) <= 0
+    return 0
+  endif
+
+  call sj#PushCursor()
+  call sj#ReplaceMotion('V', substitute(getline('.'), pattern, '\1@(\2)\3', ''))
+  call sj#PopCursor()
+
+  return 1
+endfunction

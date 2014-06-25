@@ -9,5 +9,6 @@ if !exists('b:splitjoin_join_callbacks')
   let b:splitjoin_join_callbacks = [
         \ 'sj#objc#JoinIfClause',
         \ 'sj#objc#JoinSetProperty',
+        \ 'sj#objc#JoinNSNumber',
         \ ]
 endif
