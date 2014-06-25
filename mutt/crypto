@@ -1,6 +1,4 @@
-my_hdr X-PGP-Key: fp=\"652D 5C4E 2F78 7055 2B94  5256 35AC 2EDD 0C76 4406\"\; id=\"0x0C764406\"\; get=<https://keith.so/pubkey.asc>\; get=<hkp://pgp.mit.edu/pks/lookup?search=0x35AC2EDD0C764406&op=get>\;
 set pgp_autosign=no
-set pgp_sign_as=0x0C764406
 set pgp_replyencrypt=yes
 set pgp_replysign=yes
 set pgp_replysignencrypted=yes
@@ -11,9 +9,6 @@ set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
 set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
 set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
 set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
-
-set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x0C764406 -- -r %r -- %f"
-set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x0C764406 -- -r %r -- %f"
 
 set pgp_import_command="gpg --no-verbose --import -v %f"
 set pgp_export_command="gpg --no-verbose --export --armor %r"

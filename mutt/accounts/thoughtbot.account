@@ -13,4 +13,9 @@ macro index,pager ga "<change-folder>+keith-thoughtbot.com/archive<enter>" "Go t
 macro index,pager gi "<change-folder>+keith-thoughtbot.com/INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+keith-thoughtbot.com/sent<enter>" "Go to sent mail"
 
+set pgp_sign_as=0x9FB9C859
+my_hdr X-PGP-Key: fp=\"13D9 E206 C9FE DC45 0641  BE45 58FE 46F4 9FB9 C859\"\; id=\"0x9FB9C859\"\; get=<http://pgp.mit.edu/pks/lookup?op=get&search=0x58FE46F49FB9C859>\;
+
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x9FB9C859 -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x9FB9C859 -- -r %r -- %f"
 # vim: ft=muttrc
