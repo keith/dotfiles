@@ -157,22 +157,31 @@ function! BackwardsTab()
   return ""
 endfunction
 
+let s:loaded_ultisnips = 0
+if exists("did_UltiSnips_plugin") && did_UltiSnips_plugin
+  let s:loaded_ultisnips = 1
+endif
+
 inoremap <Tab> <C-R>=TabWrapper()<CR>
-snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
+if s:loaded_ultisnips
+  snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
+endif
 
 function! TabWrapper()
   if pumvisible()
     return "\<C-y>"
   else
-    call UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res == 0
-      if ForceTab() || empty(&omnifunc)
-        return "\<Tab>"
-      else
-        return "\<C-x>\<C-o>"
+    if s:loaded_ultisnips
+      call UltiSnips#ExpandSnippetOrJump()
+      if g:ulti_expand_or_jump_res != 0
+        return ""
       endif
+    endif
+
+    if ForceTab() || empty(&omnifunc)
+      return "\<Tab>"
     else
-      return ""
+      return "\<C-x>\<C-o>"
     endif
   endif
 
@@ -191,17 +200,23 @@ let mappings = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
 execute 'imap <CR> <C-R>=EnterWrapper()' . mappings . '<CR><CR>'
 function! EnterWrapper()
   if pumvisible()
-    call UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res == 0
-      return "\<CR>"
+    if s:loaded_ultisnips
+      call UltiSnips#ExpandSnippetOrJump()
+      if g:ulti_expand_or_jump_res == 0
+        return "\<CR>"
+      else
+        return "\<C-y>"
+      endif
     else
       return "\<C-y>"
     endif
   endif
 
-  call UltiSnips#ExpandSnippetOrJump()
-  if g:ulti_expand_or_jump_res > 0
-    return "\<CR>"
+  if s:loaded_ultisnips
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+      return "\<CR>"
+    endif
   endif
 
   return "\<C-R>=delimitMate#ExpandReturn()"
