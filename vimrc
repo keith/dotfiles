@@ -483,6 +483,10 @@ inoremap <C-s> <ESC>:w<CR>
 nnoremap * :keepjumps normal! mi*`i<CR>
 nnoremap # :keepjumps normal! mi#`i<CR>
 
+" Map colon stuff
+nnoremap ; :
+nnoremap q; q:
+
 " Close the quickfix and location lists simultaneously
 nnoremap <leader>q :call CloseLists()<CR>
 function! CloseLists()
