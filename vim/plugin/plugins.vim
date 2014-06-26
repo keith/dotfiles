@@ -117,7 +117,6 @@ let g:clang_jumpto_back_key = "<C-5>"
 let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
 let g:clang_periodic_quickfix = 0
 let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
 let g:clang_use_library = 1
 let g:clang_user_options = s:compiler_options
 let g:clang_make_default_keymappings = 0
@@ -165,6 +164,7 @@ endif
 inoremap <Tab> <C-R>=TabWrapper()<CR>
 if s:loaded_ultisnips
   snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
+  let g:clang_snippets_engine = 'ultisnips'
 endif
 
 function! TabWrapper()
