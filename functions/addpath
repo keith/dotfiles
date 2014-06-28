@@ -1,0 +1,11 @@
+addpath() {
+  dir=$1
+
+  if [[ -z "$dir" ]]; then
+    dir=$(pwd)
+  fi
+
+  export PATH="$dir:$PATH"
+}
+
+addpath "$@"
