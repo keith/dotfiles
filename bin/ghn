@@ -16,13 +16,13 @@ def credentials():
     n = netrc.netrc()
     auth = n.authenticators(NETRC_MACHINE)
     if auth is None:
-        sys.exit("Add api.github.com to your ~/.netrc")
+        sys.exit("Add %s to your ~/.netrc" % NETRC_MACHINE)
 
     user = auth[0] or auth[1]
     password = auth[2]
 
     if user is None or password is None:
-        sys.exit("Invalid netrc entry for api.github.com")
+        sys.exit("Invalid netrc entry for %s" % NETRC_MACHINE)
 
     return user, password
 
