@@ -137,7 +137,7 @@ _ghc_compiler_flags ()
         {no-,}'warn-incomplete-record-updates:Warn when a record update could fail'
         {no-,}'warn-missing-fields:Warn when fields of a record are uninitialised'
         {no-,}'warn-missing-methods:Warn when class methods are undefined'
-        {no-,}'warn-missing-signatures:Warn about top-level functions without signatures'        
+        {no-,}'warn-missing-signatures:Warn about top-level functions without signatures'
         )
     _describe -t flags 'ghc' _ghc_compiler_flags_list || compadd "$@"
 }
@@ -258,7 +258,7 @@ _ghc_pkg ()
     _arguments '*:command:_ghc_pkg_command'
 }
 
-_ghc_pkg_command() 
+_ghc_pkg_command()
 {
     local -a _ghc_pkg_cmds
     _ghc_pkg_cmds=(
@@ -277,9 +277,9 @@ _ghc_pkg_command()
     )
 
     if (( $#WORDS == 1 )); then
-	_describe -t commands 'command' _ghc_pkg_cmds || compadd "$@"
+  _describe -t commands 'command' _ghc_pkg_cmds || compadd "$@"
     else
-    	local curcontext="$curcontext"
+      local curcontext="$curcontext"
         cmd="${${_ghc_pkg_cmds[(r)$WORDS[2]:*]%%:*}}"
         if (( $#cmd )); then
             _arguments \
@@ -337,11 +337,11 @@ _ghc_pkg_update () { _files }
 
 _ghc_pkg_list () { _ghc_pkg_list_packages }
 
-_ghc_pkg_find-module () 
+_ghc_pkg_find-module ()
 {
     if (( $#WORDS == 2)); then
         if ( [[ ${+_ghc_modules} -eq 0 ]] || _cache_invalid GHC_MODULES ) &&
-	    ! _retrieve_cache GHC_MODULES;
+      ! _retrieve_cache GHC_MODULES;
         then
             _ghc_modules=( $(ghc-pkg dump | sed -n '/^exposed-modules:/{s/^exposed-modules:[ ]\+\(.*\)$/\1/;s/ /\n/;p;be};b;:e;n;/^ /{s/^[ ]\+\(.*\)$/\1/;s/ /\n/;p;be}') )
             _store_cache GHC_MODULES _ghc_modules
@@ -357,7 +357,7 @@ _ghc_pkg_check () {}
 _ghc_pkg_available_packages ()
 {
     if ( [[ ${+_ghc_pkg_packages_pkgs} -eq 0 ]] || _cache_invalid GHC_PACKAGES ) &&
-	! _retrieve_cache GHC_PACKAGES;
+  ! _retrieve_cache GHC_PACKAGES;
     then
         _ghc_pkg_packages=( $(ghc-pkg list --simple-output --names-only) )
         _store_cache GHC_PACKAGES _ghc_pkg_packages
@@ -377,7 +377,7 @@ _ghc_pkg_list_packages ()
 
 case $service in
     ghc)
-        _ghc_compiler 
+        _ghc_compiler
         ;;
     ghci)
         _ghc_ghci
