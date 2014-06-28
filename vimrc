@@ -390,7 +390,9 @@ function! s:NextTextObject(motion, dir)
     let c = "["
   endif
 
-  execute "normal! " . a:dir . c . "v" . a:motion . c
+  let cmd = a:dir . c . "v" . a:motion . c
+  call repeat#set(cmd . "c")
+  execute "normal! " . cmd
 endfunction
 " }}}
 
