@@ -139,7 +139,6 @@ augroup ft_settings
 
   " Fix issue where comments cannot be moved from the first column with >>
   autocmd FileType python        setlocal tabstop=4 shiftwidth=4 expandtab nosmartindent foldmethod=indent
-  autocmd FileType sh            setlocal tabstop=4 shiftwidth=4 expandtab
 
   " Comment string settings
   if empty(&commentstring) | setlocal commentstring=#\ %s | endif
