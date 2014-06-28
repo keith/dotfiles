@@ -46,8 +46,7 @@ install weechat --with-aspell --with-python --with-perl --with-ruby
 install wget
 install zsh
 
-# install graphviz --with-bindings --with-freetype --with-librsvg --with-pangocairo
-
 install keithbsmiley/formulae/tmux
+install keithbsmiley/formulae/gh --HEAD
 
 link openssl --force
