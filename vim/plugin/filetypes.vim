@@ -162,5 +162,7 @@ augroup ft_settings
 
   " Return to the same position you left the file in
   autocmd BufReadPost * call PositionRecall()
+
+  autocmd CursorHold * checktime
 augroup END
 " }}}

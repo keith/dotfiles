@@ -204,7 +204,7 @@ set nobackup         " Don't keep backup files
 set nowritebackup    " Don't create a backup when overwriting a file
 set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
-set updatetime=4000  " Set the time before plugins assume you're not typing
+set updatetime=2000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Lines the cursor is to the edge before scrolling
 set gdefault         " Adds g at the end of substitutions by default
 set report=0         " Report any number of line changes
