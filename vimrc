@@ -316,10 +316,6 @@ inoremap <Up> <C-o>gk
 nnoremap <C-u> 10<C-u>
 nnoremap <C-d> 10<C-d>
 
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
 
