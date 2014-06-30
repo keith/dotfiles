@@ -133,6 +133,7 @@ let g:investigate_use_dash = 1
 let g:investigate_use_url_for_haskell = 1
 " let g:investigate_command_for_python = "^i!pydoc ^s"
 let g:investigate_dash_for_eruby="rails"
+let g:investigate_command_for_markdown = "dict://^s"
 
 " python-mode
 let g:pymode_indent = 0
