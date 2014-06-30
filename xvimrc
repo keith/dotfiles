@@ -4,13 +4,13 @@
 "
 
 " Comments
-map gcc :xccmd commentAndUncommentCurrentLines<cr>
+map gcc :xccmd commentAndUncommentCurrentLines<CR>
 
 " Emulate CTRL-P
-map <C-p> :xccmd openQuickly<cr>
+map <C-p> :xccmd openQuickly<CR>
 
 " Duplicate line with typical vim shortcut (hacky)
-map :t.<cr> yyp
+map :t.<CR> yyp
 
 " Case-insensitive searching.
 set ignorecase
@@ -39,3 +39,5 @@ nmap <C-l> <C-w>l
 " Tab mappings
 nmap ,tt :xccmd newTab<CR>
 nmap ,tc :tabclose<CR>
+
+nmap Y y$
