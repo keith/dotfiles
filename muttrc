@@ -30,8 +30,6 @@ unset collapse_unread
   set sort_re                                                         # thread based on regex
   set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
   set abort_unmodified = no                                           # Don't abort when the message hasn't been changed
-  set mime_forward=yes                                                # Forward attachments
-  set mime_forward_rest=yes
 
 # Pager inline configuration
   set pager_index_lines = 10                                          # number of index lines to show
