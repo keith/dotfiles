@@ -43,7 +43,7 @@
   a     = add --all
   ap    = add -p
   ba    = branch -a
-  c     = clone
+  c     = clone --recursive --depth 50
   cb    = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
   com   = commit --verbose
   ctags = !.git/hooks/ctags
