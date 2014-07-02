@@ -292,8 +292,8 @@ nnoremap Q <Nop>
 vnoremap K <Nop>
 
 " Don't select the last line in visual mode when jumping by block
-vnoremap } }k
-vnoremap { {j
+vnoremap } j}k
+vnoremap { k{j
 " Sort in visual mode and update
 vnoremap s :sort ui \| update <CR>
 
