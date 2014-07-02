@@ -81,6 +81,10 @@ bindkey "^E" end-of-line
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
 
+# Page up and down since I accidentally hit those sometimes
+bindkey '^[[5~' up-line-or-history
+bindkey '^[[6~' down-line-or-history
+
 # Auto insert quotes on typed URLs
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
