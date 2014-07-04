@@ -20,6 +20,7 @@ FILES=(\
     hgrc \
     haskeline \
     hushlogin \
+    hydra \
     ideavimrc \
     inputrc \
     irbrc \
@@ -29,7 +30,6 @@ FILES=(\
     notmuch-config \
     npmrc \
     offlineimaprc \
-    phoenix.js \
     psqlrc \
     pylintrc \
     rspec \
