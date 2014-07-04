@@ -53,6 +53,12 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
+# Disable 'smart' quotes
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable smart dashes
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
 
 #
 # Desktop & Screen Saver
