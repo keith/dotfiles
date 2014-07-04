@@ -7,7 +7,8 @@ if [[ -z "$SSH_CLIENT" && "$TERM_PROGRAM" == "iTerm.app" ]]; then
   fi
 
   if [[ -z "$value" ]]; then
-    if [[ "$hour" -gt "7" && "$hour" -lt "19" ]]; then
+    hour=$(date +"%H")
+    if [[ "$hour" -ge "7" && "$hour" -lt "19" ]]; then
       value="light"
     else
       value="dark"
@@ -17,7 +18,6 @@ if [[ -z "$SSH_CLIENT" && "$TERM_PROGRAM" == "iTerm.app" ]]; then
   # The old script for colorizing. Leaving this here for now
   # osascript $DOTFILES/scripts/itermcolors.applescript $value 2>/dev/null
 
-  hour=$(date +"%H")
   if [[ -z "$TMUX" ]]; then
     echo -en "\033]50;SetProfile=$value\a"
   else
