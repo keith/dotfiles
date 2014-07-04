@@ -157,9 +157,6 @@ augroup ft_settings
   " Don't auto insert a comment when using O/o for a newline
   autocmd BufRead,BufReadPost,Syntax,VimEnter * set formatoptions-=o
 
-  " If multiple files exist
-  autocmd VimEnter * tab all
-
   " Return to the same position you left the file in
   autocmd BufReadPost * call PositionRecall()
 
