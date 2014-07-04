@@ -14,6 +14,7 @@ for PLUGIN in ${PLUGINS[@]}
 do
   filename=$(ghb download-release -f -r $PLUGIN)
   extract "$filename"
+  rm "$filename"
 done
 
 qlgenerators=(*.qlgenerator)
@@ -22,5 +23,3 @@ do
   rm -rf "$qldirectory/$qlgenerator"
   mv "$qlgenerator" "$qldirectory"
 done
-
-rm release.*
