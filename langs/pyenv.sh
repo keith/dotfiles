@@ -6,6 +6,7 @@ packages=(\
     httpie \
     goobook \
     pylint \
+    requests \
     speedtest-cli \
 )
 
