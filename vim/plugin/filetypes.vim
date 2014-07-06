@@ -100,6 +100,7 @@ augroup END
 augroup ft_haskell
   autocmd!
   autocmd FileType haskell setlocal makeprg=runhaskell\ %
+  autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 augroup END
 " }}}
 
