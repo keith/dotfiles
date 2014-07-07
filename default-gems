@@ -19,3 +19,4 @@ rspec
 rubygems-bundler
 sass
 specific_install
+xcpretty
