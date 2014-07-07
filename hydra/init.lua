@@ -21,3 +21,6 @@ hotkey.bind(ctrlcmd, '.', ext.grid.bottomright)
 
 hotkey.bind({"ctrl", "alt"}, 'T', function() application.launchorfocus("iTerm") end)
 hotkey.bind(ctrlaltcmd, 'R', function() repl.open(); logger.show() end)
+
+hotkey.bind({}, 'F1', function() brightness.set(brightness.get() - 6.25) end)
+hotkey.bind({}, 'F2', function() brightness.set(brightness.get() + 6.25) end)
