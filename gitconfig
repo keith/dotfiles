@@ -41,7 +41,7 @@
 [hub]
   protocol = https
 [alias]
-  a     = add --all
+  a     = add
   ap    = add -p
   ba    = branch -a
   c     = clone --recursive --depth 50
