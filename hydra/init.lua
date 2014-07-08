@@ -1,5 +1,5 @@
 require "grid"
-hydra.douserfile("menuconfig")
+dofile(package.searchpath("menuconfig", package.path))
 
 hydra.alert("Hydra config loaded", 0.5)
 

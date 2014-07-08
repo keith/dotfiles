@@ -1,4 +1,4 @@
-hydra.douserfile("updateconfig")
+dofile(package.searchpath("updateconfig", package.path))
 
 -- show a helpful menu
 menu.show(function()
