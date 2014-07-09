@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # Updates dependent on OS
 if which softwareupdate &> /dev/null;then
   echo "Running Apple software update..."
