@@ -37,6 +37,7 @@ install readline
 install reattach-to-user-namespace
 install redis
 install sqlite
+install terminal-notifier
 install the_silver_searcher
 install tree
 install urlview
