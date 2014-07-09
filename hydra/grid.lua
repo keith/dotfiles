@@ -3,7 +3,6 @@ ext.grid.BORDER = 2
 
 function ext.grid.fullscreen()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   win:setframe(screenframe)
@@ -11,7 +10,6 @@ end
 
 function ext.grid.lefthalf()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -26,7 +24,6 @@ end
 
 function ext.grid.righthalf()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -41,7 +38,6 @@ end
 
 function ext.grid.topleft()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -56,7 +52,6 @@ end
 
 function ext.grid.bottomleft()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -71,7 +66,6 @@ end
 
 function ext.grid.topright()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -86,7 +80,6 @@ end
 
 function ext.grid.bottomright()
   local win = window.focusedwindow()
-  if not win then return end
 
   local screenframe = ext.grid.screenframe(win)
   local newframe = {
@@ -101,7 +94,6 @@ end
 
 function ext.grid.pushwindow()
   local win = window.focusedwindow()
-  if not win then return end
 
   local winframe = win:frame()
   local nextscreen = win:screen():next()
