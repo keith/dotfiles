@@ -108,6 +108,21 @@ function ext.grid.pushwindow()
   win:setframe(newframe)
 end
 
+function ext.grid.center()
+  local win = window.focusedwindow()
+
+  local winframe = win:frame()
+  local screenframe = ext.grid.screenframe(win)
+  local newframe = {
+    x = screenframe.w / 2 - winframe.w / 2,
+    y = screenframe.h / 2 - winframe.h / 2,
+    w = winframe.w,
+    h = winframe.h,
+  }
+
+  win:setframe(newframe)
+end
+
 function ext.grid.screenframe(win)
   return win:screen():frame_without_dock_or_menu()
 end

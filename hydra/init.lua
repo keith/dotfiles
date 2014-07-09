@@ -1,4 +1,4 @@
-require "grid"
+dofile(package.searchpath("grid", package.path))
 dofile(package.searchpath("menuconfig", package.path))
 
 hydra.alert("Hydra config loaded", 0.5)
@@ -13,6 +13,7 @@ hotkey.bind(ctrlcmd, 'K', ext.grid.fullscreen)
 hotkey.bind(ctrlcmd, 'H', ext.grid.lefthalf)
 hotkey.bind(ctrlcmd, 'L', ext.grid.righthalf)
 hotkey.bind(ctrlcmd, 'P', ext.grid.pushwindow)
+hotkey.bind(ctrlcmd, 'U', ext.grid.center)
 
 hotkey.bind(ctrlcmd, 'N', ext.grid.topleft)
 hotkey.bind(ctrlcmd, 'M', ext.grid.bottomleft)
