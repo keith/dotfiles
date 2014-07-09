@@ -19,7 +19,7 @@ hotkey.bind(ctrlcmd, 'M', ext.grid.bottomleft)
 hotkey.bind(ctrlcmd, ',', ext.grid.topright)
 hotkey.bind(ctrlcmd, '.', ext.grid.bottomright)
 
-hotkey.bind({"ctrl", "alt"}, 'T', function() application.launchorfocus("iTerm") end)
+hotkey.bind({"ctrl", "alt"}, 'Y', function() application.launchorfocus("iTerm") end)
 hotkey.bind(ctrlaltcmd, 'R', function() repl.open(); logger.show() end)
 
 hotkey.bind({}, 'F1', function() brightness.set(brightness.get() - 6.25) end)
