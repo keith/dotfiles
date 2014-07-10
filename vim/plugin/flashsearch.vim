@@ -1,6 +1,6 @@
 " Custom mappings to flash searchs as you go to them
-nnoremap <silent> n   nzzzv:call HighlightNext(0.4)<CR>
-nnoremap <silent> N   Nzzzv:call HighlightNext(0.4)<CR>
+nnoremap <silent> n   n:call HighlightNext(0.4)<CR>
+nnoremap <silent> N   N:call HighlightNext(0.4)<CR>
 highlight SpecialSearchFlash guibg=DarkCyan ctermbg=DarkCyan
 
 function! HighlightNext (blinktime)
