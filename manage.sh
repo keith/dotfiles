@@ -26,7 +26,6 @@ FILES=(\
     irbrc \
     irssi \
     mutt \
-    muttrc \
     notmuch-config \
     npmrc \
     offlineimaprc \
