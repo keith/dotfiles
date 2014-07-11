@@ -12,7 +12,7 @@ PLUGINS=( \
 mkdir -p "$qldirectory"
 for PLUGIN in ${PLUGINS[@]}
 do
-  filename=$(ghb download-release -f -r $PLUGIN)
+  filename=$(ghb download-release -f $PLUGIN)
   extract "$filename"
   rm "$filename"
 done
