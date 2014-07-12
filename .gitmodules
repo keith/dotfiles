@@ -1,6 +1,3 @@
-[submodule "tmux/tmux-powerline"]
-	path = tmux/tmux-powerline
-	url = https://github.com/erikw/tmux-powerline.git
 [submodule "scripts/selecta"]
 	path = scripts/selecta
 	url = https://github.com/garybernhardt/selecta.git
