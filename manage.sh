@@ -35,7 +35,6 @@ FILES=(\
     shellrc \
     slate.js \
     tm_properties \
-    tmux-powerlinerc \
     tmux.conf \
     urlview \
     vim \
