@@ -145,35 +145,12 @@ nnoremap <Space> za
 " On quit reset title
 let &titleold=getcwd()
 
-" Setup colorscheme ------ {{{
-" Make sure the override file exists
-let s:filename = glob("$HOME/.coloroverride")
-if s:filename != ""
-  " Set the background to the contents of the override file
-  execute 'set background=' . readfile(s:filename)[0]
-else
-  let hour = strftime("%H") " Set the background light from 7am to 7pm
-  if hour >= 7 && hour < 19
-    set background=light
-  else " Set to dark from 7pm to 7am
-    set background=dark
-  endif
-endif
-silent! colorscheme solarized
-
-" A functional equivalent to solarized background swap function
-function! s:ToggleBackground()
-  if &background ==# "light"
-    set background=dark
-  else
-    set background=light
-  endif
-endfunction
-silent! command ToggleBG call s:ToggleBackground()
-
-" Set the color of the selected item in the autocomplete menu
-highlight PmenuSel ctermfg=DarkYellow
-" }}}
+set background=dark
+try
+  colorscheme tomorrow-solarized
+catch
+  silent! colorscheme solarized
+endtry
 
 set ttyfast          " Set that we have a fast terminal
 set laststatus=2     " Always show the statusline
@@ -219,15 +196,6 @@ endif
 
 set colorcolumn=+1
 autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
-if &background ==# "dark"
-  highlight ColorColumn ctermbg=Black
-  highlight StatusLine ctermbg=DarkGray ctermfg=Black
-  highlight SignColumn ctermbg=Black
-else
-  highlight ColorColumn ctermbg=LightGray
-  highlight StatusLine ctermbg=DarkGrey ctermfg=White
-  highlight SignColumn ctermbg=LightGray
-endif
 
 " Status line setup (without airline)
 " Left Side
