@@ -1,21 +1,18 @@
 -- save the time when updates are checked
 function checkforupdates()
-  updates.check()
+  updates.check(function(available)
+    if available then
+      notify.show("Hydra update available", "", "Click here to see the changelog and maybe even install it", "showupdate")
+    else
+      hydra.alert("No update available.")
+    end
+  end)
   settings.set('lastcheckedupdates', os.time())
 end
 
 -- show available updates
 local function showupdate()
   os.execute('open https://github.com/sdegutis/Hydra/releases')
-end
-
--- what to do when an udpate is checked
-function updates.available(available)
-  if available then
-    notify.show("Hydra update available", "", "Click here to see the changelog and maybe even install it", "showupdate")
-  else
-    hydra.alert("No update available.")
-  end
 end
 
 -- check for updates every week
