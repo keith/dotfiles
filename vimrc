@@ -40,6 +40,7 @@ Plugin 'Keithbsmiley/cocoapods.vim'
 Plugin 'Keithbsmiley/gist.vim'
 Plugin 'Keithbsmiley/investigate.vim'
 Plugin 'Keithbsmiley/kiwi.vim'
+Plugin 'Keithbsmiley/parsec.vim'
 Plugin 'Keithbsmiley/rspec.vim'
 Plugin 'Keithbsmiley/specta.vim'
 Plugin 'Keithbsmiley/swift.vim'
@@ -147,7 +148,7 @@ let &titleold=getcwd()
 
 set background=dark
 try
-  colorscheme tomorrow-solarized
+  colorscheme parsec
 catch
   silent! colorscheme solarized
 endtry
