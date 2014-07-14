@@ -5,5 +5,5 @@ dirs="$HOME/.mail/*/INBOX/new/"
 
 new=$(find $dirs -type f | wc -l | xargs)
 if [[ $new -gt 0 ]];then
-  echo $new
+  echo "#[bg=colour9,fg=colour0] $new #[default] "
 fi
