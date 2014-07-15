@@ -110,17 +110,11 @@ end
 
 function ext.grid.center()
   local win = window.focusedwindow()
-
-  local winframe = win:frame()
   local screenframe = ext.grid.screenframe(win)
-  local newframe = {
-    x = screenframe.w / 2 - winframe.w / 2,
-    y = screenframe.h / 2 - winframe.h / 2,
-    w = winframe.w,
-    h = winframe.h,
-  }
-
-  win:setframe(newframe)
+  local f = win:frame()
+  f.x = screenframe.x + ((screenframe.w / 2) - (f.w / 2))
+  f.y = screenframe.y + ((screenframe.h / 2) - (f.h / 2))
+  win:setframe(f)
 end
 
 function ext.grid.screenframe(win)
