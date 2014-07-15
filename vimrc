@@ -248,12 +248,12 @@ if has("clipboard")     " If the feature is available
 endif
 
 " Fuck you, help key.
-noremap  <F1> <nop>
-inoremap <F1> <nop>
+noremap  <F1> <Nop>
+inoremap <F1> <Nop>
 
 " Paging keys
-inoremap <PageDown> <nop>
-inoremap <PageUp> <nop>
+inoremap <PageDown> <Nop>
+inoremap <PageUp> <Nop>
 
 " Disable ex mode
 nnoremap Q <Nop>
