@@ -519,6 +519,10 @@ defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool t
 defaults write com.apple.dt.Xcode DVTTextShowPageGuide -bool true
 defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 80
 
+# Max number of lines
+defaults write com.apple.dt.Xcode IDEIssueNavigatorDetailLevel = 10;
+defaults write com.apple.dt.Xcode IDESearchNavigatorDetailLevel = 10;
+
 # Enable internal debug menu
 defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 
