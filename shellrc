@@ -33,6 +33,6 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/
 # Disable ^-S in the terminal
 stty -ixon -ixoff
 
-colorize
+# colorize
 
 # vim: ft=sh:sts=2:sw=2:ts=2
