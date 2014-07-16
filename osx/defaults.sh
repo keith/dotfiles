@@ -168,7 +168,7 @@ defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add 
 #
 
 # Show displays in menu bar
-defaults write com.apple.airplay showInMenuBarIfPresent -bool true
+defaults write com.apple.airplay showInMenuBarIfPresent -bool false
 
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
@@ -281,7 +281,14 @@ defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 0
 defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
 
 # Flash the : in the menu bar
-defaults write com.apple.menuextra.clock FlashDateSeparators -int 1
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+
+
+#
+# Battery Percentage
+#
+
+defaults write com.apple.menuextra.battery ShowPercent -bool true
 
 
 #
