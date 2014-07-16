@@ -497,11 +497,23 @@ defaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool true
 # Trim whitespace only lines
 defaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool true
 
-# Show invisible characters
-defaults write com.apple.dt.Xcode DVTTextShowInvisibleCharacters -bool true
+# Don't show completion on escape
+defaults write com.apple.dt.Xcode DVTTextShowCompletionsOnEsc -bool false
 
 # Show line numbers
 defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
+
+# Hide the code folding ribbon
+defaults write com.apple.dt.Xcode DVTTextShowFoldingSidebar -bool false
+
+# Enable automatic updates
+defaults write com.apple.dt.Xcode DVTDownloadableAutomaticUpdate -bool true
+
+# Live issues
+defaults write com.apple.dt.Xcode IDEEnableLiveIssues -bool true
+
+# Continue building after errors
+defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool true
 
 # Show ruler at 80 chars
 defaults write com.apple.dt.Xcode DVTTextShowPageGuide -bool true
