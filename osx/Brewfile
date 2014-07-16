@@ -48,6 +48,6 @@ install wget
 install zsh
 
 install keithbsmiley/formulae/tmux
-install keithbsmiley/formulae/gh --HEAD
+install keithbsmiley/formulae/ghb --HEAD
 
 link openssl --force
