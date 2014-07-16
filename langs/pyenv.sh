@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 pyenvpath="$HOME/.pyenv"
 
 packages=(\
@@ -20,10 +22,17 @@ function install () {
     git clone https://github.com/yyuu/pyenv-pip-rehash.git $pyenvpath/plugins/pyenv-pip-rehash
     git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
 
+    brew link zlib --force
+    brew link sqlite --force
+
     source $DOTFILES/langs/python.bash
-    version=2.7.6
+    version=2.7.8
     pyenv install $version
     pyenv global $version
+    pyenv rehash
+
+    brew unlink zlib
+    brew unlink sqlite
 
     for PKG in ${packages[@]}
     do
