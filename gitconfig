@@ -63,8 +63,6 @@
   s     = status -sb
   sub   = submodule update --init --recursive
   undo  = reset --soft HEAD^
-[gitsh]
-  defaultCommand = s
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
