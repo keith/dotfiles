@@ -24,7 +24,6 @@ FILES=(\
     ideavimrc \
     inputrc \
     irbrc \
-    irssi \
     mutt \
     notmuch-config \
     npmrc \
