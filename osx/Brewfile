@@ -21,7 +21,7 @@ install libyaml
 install liftoff
 install llvm
 install lynx
-install macvim
+install macvim --HEAD
 install mercurial
 install mobile-shell
 install mogenerator
