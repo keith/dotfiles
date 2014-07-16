@@ -50,4 +50,4 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 alias todo="python $DOTFILES/scripts/t/t.py --task-dir $HOME/Dropbox/tasks --list tasks"
 
 # Swift you know
-alias swift="/Applications/Xcode6-Beta2.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
+alias swift="/Applications/Xcode6-Beta3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
