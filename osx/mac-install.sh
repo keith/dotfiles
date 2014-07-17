@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # This is a script for bootstrapping OS X setup
 
+set -e
+
 if [[ ! -e "../manage.sh" ]]; then
     echo "Make sure you have the manage script nearby"
     exit
