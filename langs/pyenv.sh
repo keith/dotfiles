@@ -5,56 +5,50 @@ set -e
 pyenvpath="$HOME/.pyenv"
 
 packages=(\
-    httpie \
-    goobook \
-    pylint \
-    requests \
-    speedtest-cli \
+  httpie \
+  goobook \
+  pylint \
+  requests \
+  speedtest-cli \
 )
 
 function install () {
-    if [[ -d $pyenvpath ]];then
-        echo "$pyenvpath already exists"
-        exit
-    fi
+  if [[ -d $pyenvpath ]];then
+    echo "$pyenvpath already exists"
+    exit
+  fi
 
-    git clone git://github.com/yyuu/pyenv.git $pyenvpath
-    git clone https://github.com/yyuu/pyenv-pip-rehash.git $pyenvpath/plugins/pyenv-pip-rehash
-    git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
+  git clone git://github.com/yyuu/pyenv.git $pyenvpath
+  git clone https://github.com/yyuu/pyenv-pip-rehash.git $pyenvpath/plugins/pyenv-pip-rehash
+  git clone git://github.com/yyuu/pyenv-update.git $pyenvpath/plugins/pyenv-update
 
-    brew link zlib --force
-    brew link sqlite --force
+  source $DOTFILES/langs/python.bash
+  version=2.7.8
+  pyenv install $version
+  pyenv global $version
+  pyenv rehash
 
-    source $DOTFILES/langs/python.bash
-    version=2.7.8
-    pyenv install $version
-    pyenv global $version
-    pyenv rehash
+  for PKG in ${packages[@]}
+  do
+    pip install $PKG
+  done
 
-    brew unlink zlib
-    brew unlink sqlite
-
-    for PKG in ${packages[@]}
-    do
-        pip install $PKG
-    done
-
-    exec $SHELL -l
+  exec $SHELL -l
 }
 
 function die () {
-    echo "Usage ./$(basename $0) {install|remove}"
-    exit
+  echo "Usage ./$(basename $0) {install|remove}"
+  exit
 }
 
 if [[ $# != 1 ]]; then
-    die
+  die
 fi
 
 if [[ $1 == "install" ]]; then
-    install
+  install
 elif [[ $1 == "remove" ]]; then
-    rm -rf $pyenvpath
+  rm -rf $pyenvpath
 else
-    die
+  die
 fi
