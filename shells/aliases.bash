@@ -51,3 +51,6 @@ alias todo="python $DOTFILES/scripts/t/t.py --task-dir $HOME/Dropbox/tasks --lis
 
 # Swift you know
 alias swift="/Applications/Xcode6-Beta3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift"
+
+# Remove all items from the dock
+alias cleardock="defaults write com.apple.dock persistent-apps -array \"\""
