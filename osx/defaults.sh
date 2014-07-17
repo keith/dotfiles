@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # ~/.osx — http://mths.be/osx
+# Watch for changes in files with `sudo fs_usage | grep plist`
 
 if [[ $# -ne 1 ]];then
     echo "Usage: ./$(basename $0) COMPNAME"
@@ -382,6 +383,11 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 /usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ Browser:TB\ Item\ Identifiers array" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ Browser:TB\ Item\ Identifiers:0 string com.apple.finder.BACK" ~/Library/Preferences/com.apple.finder.plist
 
+# Remove all tags from contextual menu
+/usr/libexec/PlistBuddy -c "Delete :FavoriteTagNames" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Add :FavoriteTagNames array" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Add :FavoriteTagNames:0 string" ~/Library/Preferences/com.apple.finder.plist
+
 
 #
 # Safari/WebKit
@@ -415,13 +421,16 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
 #
-# iChat
+# iChat/Messages
 #
 
 # Setup iChat's global hotkey
 defaults write com.apple.iChat GlobalKeyActive -int 1
 defaults write com.apple.iChat GlobalKeyCode -int 36
 defaults write com.apple.iChat GlobalKeyModifiers -int 768
+
+# Set to available when you come back from idle
+defaults write com.apple.iChat WelcomeBackMode -int 1
 
 
 #
@@ -436,6 +445,9 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# Sort contacts by first name
+defaults write com.apple.AddressBook ABNameSortingFormat -string "sortingFirstName sortingLastName"
 
 # Disk image changes
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
@@ -559,3 +571,4 @@ do
 done
 
 # Done. Note that some of these changes require a logout/restart to take effect.
+# vim:tw=0
