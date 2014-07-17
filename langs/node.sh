@@ -1,32 +1,36 @@
 #!/usr/bin/env bash
 
 function install () {
-    nodes=(bower coffee-script grunt-cli)
+  version=0.10.29
+  nvm install $version
+  nvm alias default $version
 
-    for n in ${nodes[@]}
-    do
-        npm install -g $n
-    done
+  nodes=(bower coffee-script grunt-cli)
 
-    npm completion > /usr/local/etc/bash_completion.d/npm
+  for n in ${nodes[@]}
+  do
+    npm install -g $n
+  done
+
+  npm completion > /usr/local/etc/bash_completion.d/npm
 }
 
 function die () {
-    echo "Usage ./$(basename $0) install"
-    exit
+  echo "Usage ./$(basename $0) install"
+  exit
 }
 
 if ! which npm &> /dev/null;then
-    echo "You must install node before installing its packages"
-    exit
+  echo "You must install node before installing its packages"
+  exit
 fi
 
 if [[ $# != 1 ]]; then
-    die
+  die
 fi
 
 if [[ $1 == "install" ]]; then
-    install
+  install
 else
-    die
+  die
 fi
