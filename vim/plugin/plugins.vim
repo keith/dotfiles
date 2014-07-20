@@ -114,12 +114,15 @@ let g:clang_complete_patterns = 1
 let g:clang_conceal_snippets = 1
 let g:clang_hl_errors = 0
 let g:clang_jumpto_back_key = "<C-5>"
-let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
+let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 let g:clang_periodic_quickfix = 0
 let g:clang_snippets = 1
 let g:clang_use_library = 1
 let g:clang_user_options = s:compiler_options
 let g:clang_make_default_keymappings = 0
+
+" Clighter
+let g:clighter_libclang_file = g:clang_library_path . '/libclang.dylib'
 
 " Clever-f
 let g:clever_f_across_no_line = 1
