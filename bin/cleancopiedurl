@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+python -c "import urllib, sys; print urllib.unquote(sys.argv[1])" "$1" | pbcopy
