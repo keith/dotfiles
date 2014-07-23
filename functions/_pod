@@ -478,6 +478,7 @@ case "$words[2]" in
               "--subspec=NAME:Lint validates only the given subspec"
               "--verbose:Show more debugging information"
             )
+            _files -g "*.podspec" && return 0
             _describe -t options "pod spec lint options" _options
           ;;
         esac
@@ -571,6 +572,7 @@ case "$words[2]" in
               "--silent:Show nothing"
               "--verbose:Show more debugging information"
             )
+            _files -g "*.podspec" && return 0
             _describe -t options "pod trunk push options" _options
           ;;
         esac
