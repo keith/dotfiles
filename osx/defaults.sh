@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # ~/.osx — http://mths.be/osx
-# Watch for changes in files with `sudo fs_usage | grep plist`
+# Watch for changes in files with either of
+#  sudo fs_usage | grep plist
+#  sudo opensnoop | grep plist
 
 if [[ $# -ne 1 ]];then
     echo "Usage: ./$(basename $0) COMPNAME"
