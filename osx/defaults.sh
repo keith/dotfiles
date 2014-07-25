@@ -552,6 +552,13 @@ defaults write com.apple.dt.Xcode IDESearchNavigatorDetailLevel -int 10
 # Enable internal debug menu
 defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 
+# Source control local revision side
+defaults write com.apple.dt.Xcode DVTComparisonOrientationDefaultsKey -int 0
+
+# Disable source control
+defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_0 -bool false
+defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_1 -bool false
+
 
 #
 # Third Party
