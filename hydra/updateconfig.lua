@@ -1,12 +1,6 @@
 -- save the time when updates are checked
 function checkforupdates()
-  hydra.updates.check(function(available)
-    if available then
-      notify.show("Hydra update available", "", "Click here to see the changelog and maybe even install it", "showupdate")
-    else
-      hydra.alert("No update available.")
-    end
-  end)
+  hydra.updates.check()
   hydra.settings.set('lastcheckedupdates', os.time())
 end
 
