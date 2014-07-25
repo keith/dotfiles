@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+volume="$1"
+
+set_mute() {
+  local mute="$1"
+  osascript -e "set volume output muted $mute"
+}
+
+if [[ "$volume" == "mute" ]]
+then
+  set_mute "true"
+elif [[ "$volume" == "unmute" ]]
+then
+  set_mute "false"
+elif [[ "$volume" -ge "0" && "$volume" -le "100" ]]
+then
+  osascript -e "set volume output volume $volume"
+else
+  echo "Valid arguments are 0-100, mute and unmute"
+fi
