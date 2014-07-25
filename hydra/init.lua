@@ -4,7 +4,7 @@ dofile(package.searchpath("menuconfig", package.path))
 hydra.alert("Hydra config loaded", 0.5)
 
 pathwatcher.new(os.getenv("HOME") .. "/.hydra/", hydra.reload):start()
-autolaunch.set(true)
+hydra.autolaunch.set(true)
 
 local ctrlaltcmd = {"ctrl", "alt", "cmd"}
 local ctrlcmd = {"ctrl", "cmd"}
