@@ -1,16 +1,19 @@
 ; List of packages for install on launch
 (setq package-list '(
-    color-theme-solarized
-    evil
-    navigate
-    surround
-  ))
+  color-theme-solarized
+  evil
+  navigate
+  surround
+  flycheck
+  evil-leader
+))
 
 ; Setup the package system
 (require 'package)
 (add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
+  '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
 
 ; Refresh the package system if it hasn't ever been before
@@ -22,16 +25,49 @@
   (unless (package-installed-p plug)
     (package-install plug)))
 
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+
+(defun close-windows ()
+  (interactive)
+  (mapc 'delete-buffer-window
+    '(
+    "*Flycheck errors*"
+    "*scratch*"
+    )))
+
+(defun delete-buffer-window (name)
+  (defvar thing (get-buffer-window name))
+  (if thing
+    (delete-window thing)))
+
+(evil-leader/set-key "q" 'close-windows)
+(evil-leader/set-key "w" 'delete-trailing-whitespace)
+
 ; Load evil with C-u
+(define-key evil-normal-state-map (kbd "TAB") "%")
+(define-key evil-visual-state-map (kbd "TAB") "%")
 (setq evil-want-C-u-scroll t)
 (require 'evil)
 (evil-mode 1)
+(evil-set-toggle-key "C-`")
+
+(require 'flycheck)
+(setq flycheck-highlight-mode 'lines)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(defun komitee/flycheck-hook ()
+  (if (eq (length flycheck-current-errors) 0)
+    (if (get-buffer flycheck-error-list-buffer)
+        (delete-windows-on flycheck-error-list-buffer))
+      (flycheck-list-errors)))
+(add-hook 'flycheck-after-syntax-check-hook 'komitee/flycheck-hook)
 
 ; Force C-u and C-d number of lines
 (define-key evil-motion-state-map (kbd "C-u")
-   (lambda ()
-     (interactive)
-     (evil-scroll-up 10)))
+  (lambda ()
+    (interactive)
+    (evil-scroll-up 10)))
 
 (define-key evil-motion-state-map (kbd "C-d")
   (lambda ()
@@ -52,35 +88,14 @@
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 (show-paren-mode 1)
 
-; Load solarized based on the time of day
-(defun set-theme-on-time ()
-  (let ((time
-    (string-to-number
-      (format-time-string "%H"))))
-    (if
-      (and
-        (>= time 7)
-        (< time 19))
-          (load-theme 'solarized-light t)
-      (load-theme 'solarized-dark t))))
-
-(defun strip-string-from-file (file)
-  (with-temp-buffer
-    (insert-file-contents file)
-    (replace-regexp-in-string "\n" "" (buffer-string))))
-
-(defun set-theme-on-file (file)
-  (load-theme
-   (read (concat "solarized-"
-     (strip-string-from-file file))) t))
-
-(if (file-readable-p "~/.coloroverride")
-    (set-theme-on-file "~/.coloroverride")
-    (set-theme-on-time))
+(load-theme 'solarized-dark t)
 
 ; Show line numbers with the given format
 (global-linum-mode t)
 (setq linum-format "%d ")
+
+; Cursor line
+(global-hl-line-mode 1)
 
 ; Load evil-tmux-navigator
 (require 'navigate)
@@ -107,9 +122,10 @@
 
 ; Set some options
 (setq
-    auto-save-default nil      ; Don't autosave
-    inhibit-startup-message t  ; Don't show the startup stuff
-    make-backup-files nil      ; Don't make backups
-    vc-follow-symlinks t       ; Auto follow symlinks
-    require-final-newline t    ; http://robots.thoughtbot.com/no-newline-at-end-of-file
-  )
+  auto-save-default nil      ; Don't autosave
+  inhibit-startup-message t  ; Don't show the startup stuff
+  make-backup-files nil      ; Don't make backups
+  vc-follow-symlinks t       ; Auto follow symlinks
+  require-final-newline t    ; http://robots.thoughtbot.com/no-newline-at-end-of-file
+  indent-tabs-mode nil
+)
