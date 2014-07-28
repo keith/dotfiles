@@ -37,10 +37,10 @@
 (menu-bar-mode -1)
 
 ; Set some options
+(setq make-backup-files nil)      ; Don't make backups
 (setq
   auto-save-default nil      ; Don't autosave
   inhibit-startup-message t  ; Don't show the startup stuff
-  make-backup-files nil      ; Don't make backups
   vc-follow-symlinks t       ; Auto follow symlinks
   require-final-newline t    ; http://robots.thoughtbot.com/no-newline-at-end-of-file
   indent-tabs-mode nil
