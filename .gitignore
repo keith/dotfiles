@@ -17,6 +17,7 @@ gnupg/*
 vim/*.spl
 linux/configs/fish/generated_completions
 emacs.d/*
+!emacs.d/etc/
 !emacs.d/init.el
 **/.ropeproject
 **/*.pyc
