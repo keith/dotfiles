@@ -7,7 +7,6 @@
   flycheck
   evil-leader
   init-loader
-  linum-relative
 ))
 
 ; Setup the package system
