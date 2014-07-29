@@ -7,6 +7,7 @@
   flycheck
   evil-leader
   init-loader
+  markdown-mode
 ))
 
 ; Setup the package system
