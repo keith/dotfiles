@@ -20,6 +20,7 @@ linux/configs/fish/generated_completions
 **/*.pyc
 flycheck_*
 emacs.d/elpa
+*.eld
 
 ####### Linux #######
 !.gitignore

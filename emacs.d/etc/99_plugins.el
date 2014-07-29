@@ -27,3 +27,7 @@
 
 (require 'evil-operator-comment)
 (global-evil-operator-comment-mode 1)
+
+(setq projectile-enable-caching nil)
+(projectile-global-mode)
+(define-key evil-normal-state-map (kbd "C-p") 'helm-projectile)

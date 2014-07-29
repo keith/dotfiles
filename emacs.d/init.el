@@ -2,12 +2,15 @@
 (setq package-list '(
   color-theme-solarized
   evil
-  navigate
-  surround
-  flycheck
   evil-leader
+  flycheck
+  helm
+  helm-projectile
   init-loader
   markdown-mode
+  navigate
+  projectile
+  surround
 ))
 
 ; Setup the package system
