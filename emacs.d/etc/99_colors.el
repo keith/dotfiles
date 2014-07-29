@@ -1,1 +1,1 @@
-(load-theme 'solarized-dark t)
+;; (load-theme 'solarized-dark t)
