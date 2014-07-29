@@ -16,11 +16,10 @@ gnupg/*
 !gnupg/gpg.conf
 vim/*.spl
 linux/configs/fish/generated_completions
-emacs.d/*
-!emacs.d/etc/
-!emacs.d/init.el
 **/.ropeproject
 **/*.pyc
+flycheck_*
+emacs.d/elpa
 
 ####### Linux #######
 !.gitignore
