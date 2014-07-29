@@ -19,9 +19,11 @@
 ; (evil-relative-linum-activate)
 (require 'linum-relative)
 
-
 (require 'paren)
 (set-face-background 'show-paren-match (face-background 'default))
 (set-face-foreground 'show-paren-match "#def")
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 (show-paren-mode 1)
+
+(require 'evil-operator-comment)
+(global-evil-operator-comment-mode 1)
