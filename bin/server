@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+port=$1
+
+if [[ -z $port ]]
+then
+  port=8080
+fi
+
+python -m SimpleHTTPServer $port
