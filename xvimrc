@@ -4,40 +4,55 @@
 "
 
 " Comments
-map gcc :xccmd commentAndUncommentCurrentLines<CR>
+nnoremap gcc :xccmd commentAndUncommentCurrentLines<CR>
+vnoremap gc  :xccmd commentAndUncommentCurrentLines<CR>
 
 " Emulate CTRL-P
-map <C-p> :xccmd openQuickly<CR>
-
-" Duplicate line with typical vim shortcut (hacky)
-map :t.<CR> yyp
+noremap <C-p> :xccmd openQuickly<CR>
 
 " Case-insensitive searching.
 set ignorecase
 " But case-sensitive if expression contains a capital letter.
 set smartcase
 
+" Setup the number line
 set number
 set relativenumber
 
 " Use the system pasteboard
-set pasteboard
+set clipboard=unnamed
 
-" Map <space>b to toggle a breakpoint at the current line
-nmap <space>b :xccmd toggleBreakpointAtCurrentLine<CR>
+" noremap <space>b to toggle a breakpoint at the current line
+nnoremap ,b :xccmd toggleBreakpointAtCurrentLine<CR>
 
 " Better navigation
-nmap H ^
-nmap L $
+nnoremap H ^
+nnoremap L $
 
 " Window navigation
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
-" Tab mappings
-nmap ,tt :xccmd newTab<CR>
-nmap ,tc :tabclose<CR>
+" Tab noremappings
+nnoremap ,tt :xccmd newTab<CR>
+nnoremap ,tc :tabclose<CR>
 
-nmap Y y$
+" Make computers make sense
+nnoremap Y y$
+
+" Use : way more so this makes sense
+" Now if only clever-f worked in XVim
+nnoremap ; :
+
+" Sorting stuff in visual mode
+vnoremap } j}k
+vnoremap { k{j
+" I'd like the following command to save too
+" it doesn't seem like xvim supports this: \| update<CR>
+vnoremap s :sort ui
+
+" vim-unimpared knock off
+nnoremap ]e "udd"up
+nnoremap [e "uddk"uP
