@@ -463,6 +463,7 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 
 " Map colon stuff
 nnoremap ; :
+nnoremap : ;
 nnoremap q; q:
 
 " Close the quickfix and location lists simultaneously
