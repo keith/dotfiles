@@ -3,4 +3,12 @@
 
 set -e
 
-curl -sL -w "%{http_code} %{url_effective}\\n" "http://rubygems.org/gems/$1 " -o /dev/null
+code=$(curl -sL -w "%{http_code}" "http://rubygems.org/gems/$1 " -o /dev/null)
+
+if [[ "$code" -eq "200" ]]; then
+  echo "Taken :("
+elif [[ "$code" -eq "404" ]]; then
+  echo "Not taken!"
+else
+  echo "Unsure: $code"
+fi
