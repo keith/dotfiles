@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# https://twitter.com/imathis/status/484741998554132481
+
+set -e
+
+curl -sL -w "%{http_code} %{url_effective}\\n" "http://rubygems.org/gems/$1 " -o /dev/null
