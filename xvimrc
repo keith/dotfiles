@@ -47,7 +47,7 @@ vnoremap } j}k
 vnoremap { k{j
 " I'd like the following command to save too
 " it doesn't seem like xvim supports this: \| update<CR>
-vnoremap s :sort ui
+vnoremap s :sort ui<CR>
 
 " vim-unimpared knock off
 nnoremap ]e "udd"up
