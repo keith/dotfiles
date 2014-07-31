@@ -42,10 +42,6 @@ nnoremap ,tc :tabclose<CR>
 " Make computers make sense
 nnoremap Y y$
 
-" Use : way more so this makes sense
-" Now if only clever-f worked in XVim
-nnoremap ; :
-
 " Sorting stuff in visual mode
 vnoremap } j}k
 vnoremap { k{j
