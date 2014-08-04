@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ "$#" -ne "1" ]]
+then
+  echo "Usage: newkey [EMAIL]"
+  exit 1
+fi
+
+email=$1
+
+if [[ ! "$email" =~ "@" ]]
+then
+  echo "'$email' doesn't look like an email address"
+  exit 1
+fi
+
+ssh-keygen -t rsa -C "$email"
