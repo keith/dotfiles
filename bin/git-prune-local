@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# From:
+# https://github.com/jspahrsummers/shell-scripts/blob/master/git-prune-local
+
+git branch --merged | while read line
+do
+  # If the line is in the format '* master' (indicating the current branch),
+  # this will be effectively empty, so we don't somehow delete the current
+  # branch
+  BRANCH=`echo "$line" | awk -F '*' '{ print $1 }'`
+
+  if [ -z "$BRANCH" ]
+  then
+    continue
+  fi
+
+  if [ "$BRANCH" == "master" ]
+  then
+    continue
+  fi
+
+  git branch -d "$BRANCH"
+done
