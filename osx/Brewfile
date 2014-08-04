@@ -47,7 +47,7 @@ install weechat --with-aspell --with-python --with-perl --with-ruby
 install wget
 install zsh
 
-install keithbsmiley/formulae/tmux
+install keithbsmiley/formulae/tmux-move-patch
 install keithbsmiley/formulae/ghb --HEAD
 
 link openssl --force
