@@ -186,6 +186,7 @@ set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
 set updatetime=2000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Lines the cursor is to the edge before scrolling
+set sidescrolloff=5  " Same as scrolloff but horizontal
 set gdefault         " Adds g at the end of substitutions by default
 set report=0         " Report any number of line changes
 set nolist           " Show/Hide hidden characters
