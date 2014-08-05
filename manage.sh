@@ -31,7 +31,6 @@ FILES=(\
     pylintrc \
     rspec \
     shellrc \
-    slate.js \
     tm_properties \
     tmux.conf \
     urlview \
