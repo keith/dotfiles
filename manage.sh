@@ -15,7 +15,6 @@ FILES=(\
     git_template \
     gnupg \
     goobookrc \
-    gvimrc \
     hgrc \
     haskeline \
     hushlogin \
