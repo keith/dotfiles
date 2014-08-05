@@ -130,8 +130,8 @@ defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Run hot corners script
-if [[ -f ../scripts/corners.sh ]]; then
-    ../scripts/corners.sh enable
+if [[ -f ../bin/corners ]]; then
+    ../bin/corners enable
 else
     echo "Failed to setup hot corners, script missing"
 fi
