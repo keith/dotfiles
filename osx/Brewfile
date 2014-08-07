@@ -5,6 +5,7 @@ tap thoughtbot/formulae
 update
 
 install bash
+install chisel
 install cloc
 install ctags
 install git

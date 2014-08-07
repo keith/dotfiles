@@ -9,19 +9,20 @@ FILES=(\
     emacs.d \
     gemrc \
     ghci \
+    git_template \
     gitattributes \
     gitconfig \
     gitignore_global \
-    git_template \
     gnupg \
     goobookrc \
-    hgrc \
     haskeline \
+    hgrc \
     hushlogin \
     hydra \
     ideavimrc \
     inputrc \
     irbrc \
+    lldbinit \
     mutt \
     notmuch-config \
     npmrc \
