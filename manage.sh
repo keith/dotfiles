@@ -22,6 +22,7 @@ FILES=(\
     ideavimrc \
     inputrc \
     irbrc \
+    js \
     lldbinit \
     mutt \
     notmuch-config \
