@@ -18,6 +18,7 @@ function install () {
   ln -s $DOTFILES/default-gems $rbenvpath
 
   source $DOTFILES/langs/ruby.bash
+  bundler-cores.sh
 }
 
 function die () {
