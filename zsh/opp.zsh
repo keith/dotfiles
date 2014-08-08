@@ -5,3 +5,5 @@ for file in ${configs:#*/test*.zsh}
 do
   source $file
 done
+
+bindkey -M vicmd '~' vi-swap-case
