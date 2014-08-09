@@ -1,0 +1,42 @@
+#compdef launchctl
+# setopt XTRACE VERBOSE
+# vim: ft=zsh sw=2 ts=2 et
+
+local -a _subcommands
+
+case "$words[2]" in
+  load)
+    _files -g "*.plist" && return 0
+  ;;
+  unload)
+    _files -g "*.plist" && return 0
+  ;;
+  *) # launchctl
+    _subcommands=(
+      "bsexec"
+      "bslist"
+      "bstree"
+      "export"
+      "getenv"
+      "getrusage"
+      "help"
+      "limit"
+      "list"
+      "load"
+      "log"
+      "managername"
+      "managerpid"
+      "manageruid"
+      "remove"
+      "setenv"
+      "shutdown"
+      "start"
+      "stop"
+      "submit"
+      "umask"
+      "unload"
+      "unsetenv"
+    )
+    _describe -t commands "launchctl subcommands" _subcommands
+  ;;
+esac
