@@ -30,6 +30,9 @@ setopt HIST_IGNORE_SPACE
 # Remove superfluous blanks from each line being added to the history list
 setopt HIST_REDUCE_BLANKS
 
+# After !! previous command don't execute, allow editing
+setopt HIST_VERIFY
+
 # pushd for cd commands
 setopt autopushd pushdminus pushdsilent pushdtohome cdablevars
 DIRSTACKSIZE=8
