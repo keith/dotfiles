@@ -3,3 +3,4 @@ tags
 .tags
 temp
 tmp
+*.pem
