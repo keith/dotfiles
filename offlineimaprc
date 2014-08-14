@@ -24,7 +24,6 @@ localfolders = ~/.mail/keithbsmiley-gmail.com
 nametrans = lambda folder: {
                             'archive': '[Gmail]/All Mail',
                             'drafts':  '[Gmail]/Drafts',
-                            'flagged': '[Gmail]/Starred',
                             'sent':    '[Gmail]/Sent Mail',
                             'trash':   '[Gmail]/Trash',
                             }.get(folder, folder)
@@ -41,12 +40,12 @@ nametrans = lambda folder: {
                             '[Gmail]/All Mail':  'archive',
                             '[Gmail]/Drafts':    'drafts',
                             '[Gmail]/Sent Mail': 'sent',
-                            '[Gmail]/Starred':   'flagged',
                             '[Gmail]/Trash':     'trash',
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Important',
                                              '[Gmail]/Spam',
+                                             '[Gmail]/Starred',
                                              ]
 
 
