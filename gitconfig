@@ -45,7 +45,7 @@
   ap    = add -p
   ba    = branch -a
   c     = clone --recursive
-  cb    = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
+  cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
   com   = commit --verbose
   ctags = !.git/hooks/ctags
   d     = diff
