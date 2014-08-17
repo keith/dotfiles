@@ -11,10 +11,6 @@ function alternate(URL) {
   }
 };
 
-String.prototype.endsWith = function(suffix) {
-  return this.indexOf(suffix, this.length - suffix.length) !== -1;
-};
-
 String.prototype.replaceLast = function(character) {
   return this.substr(0, this.length - 1) + character;
 };
