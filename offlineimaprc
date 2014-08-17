@@ -27,6 +27,9 @@ nametrans = lambda folder: {
                             'sent':    '[Gmail]/Sent Mail',
                             'trash':   '[Gmail]/Trash',
                             }.get(folder, folder)
+folderfilter = lambda folder: folder not in [
+                                             'flagged',
+                                             ]
 
 [Repository gmail-remote]
 maxconnections = 1
