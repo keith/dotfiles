@@ -29,6 +29,7 @@ nametrans = lambda folder: {
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in [
                                              'flagged',
+                                             'Notes',
                                              ]
 
 [Repository gmail-remote]
@@ -49,6 +50,7 @@ folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Important',
                                              '[Gmail]/Spam',
                                              '[Gmail]/Starred',
+                                             'Notes',
                                              ]
 
 
