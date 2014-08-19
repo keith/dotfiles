@@ -1,1 +1,14 @@
 COMMAND ~/.mutt/urlhandler.sh %s
+
+# Match either http(s) or www
+# Match characters, numbers, dot, dash
+# Match a list of characters that can be in URLs
+# Match those same characters in parens
+# Match those characters afterwards
+# Exclude some characters from the end
+
+# Not working in parens yet. Don't care that much at the moment
+# REGEXP (https?:///?|www.)[a-zA-Z0-9.-]+[=%&?#a-zA-Z0-9/._-]+(\([=%&?#a-zA-Z0-9/._-]\))?[=%&?#a-zA-Z0-9/._-]+[=%&?#a-zA-Z0-9/_-]
+REGEXP (https?:///?|www.)[a-zA-Z0-9.-]+[=%&?#a-zA-Z0-9/._-]+[=%&?#a-zA-Z0-9/_-]
+
+# vim:tw=0
