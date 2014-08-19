@@ -30,6 +30,11 @@ nametrans = lambda folder: {
 folderfilter = lambda folder: folder not in [
                                              'flagged',
                                              'Notes',
+                                             '[Mailbox]',
+                                             '[Mailbox]/Later',
+                                             '[Mailbox]/To Buy',
+                                             '[Mailbox]/To Read',
+                                             '[Mailbox]/To Watch',
                                              ]
 
 [Repository gmail-remote]
@@ -51,6 +56,11 @@ folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Spam',
                                              '[Gmail]/Starred',
                                              'Notes',
+                                             '[Mailbox]',
+                                             '[Mailbox]/Later',
+                                             '[Mailbox]/To Buy',
+                                             '[Mailbox]/To Read',
+                                             '[Mailbox]/To Watch',
                                              ]
 
 
