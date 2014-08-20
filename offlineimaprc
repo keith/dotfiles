@@ -28,13 +28,13 @@ nametrans = lambda folder: {
                             'trash':   '[Gmail]/Trash',
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in [
-                                             'flagged',
-                                             'Notes',
                                              '[Mailbox]',
                                              '[Mailbox]/Later',
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             'flagged',
+                                             'Notes',
                                              ]
 
 [Repository gmail-remote]
@@ -55,12 +55,12 @@ folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Important',
                                              '[Gmail]/Spam',
                                              '[Gmail]/Starred',
-                                             'Notes',
                                              '[Mailbox]',
                                              '[Mailbox]/Later',
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             'Notes',
                                              ]
 
 
@@ -81,13 +81,13 @@ nametrans = lambda folder: {
                             'trash':   '[Gmail]/Trash',
                             }.get(folder, folder)
 folderfilter = lambda folder: folder not in [
-                                             'flagged',
-                                             'Notes',
                                              '[Mailbox]',
                                              '[Mailbox]/Later',
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             'flagged',
+                                             'Notes',
                                              ]
 
 [Repository thoughtbot-remote]
@@ -108,10 +108,10 @@ folderfilter = lambda folder: folder not in [
                                              '[Gmail]/Important',
                                              '[Gmail]/Spam',
                                              '[Gmail]/Starred',
-                                             'Notes',
                                              '[Mailbox]',
                                              '[Mailbox]/Later',
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             'Notes',
                                              ]
