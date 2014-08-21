@@ -141,11 +141,7 @@ nnoremap <Space> za
 let &titleold=getcwd()
 
 set background=dark
-try
-  colorscheme parsec
-catch
-  silent! colorscheme solarized
-endtry
+silent! colorscheme parsec
 
 set ttyfast          " Set that we have a fast terminal
 set laststatus=2     " Always show the statusline
