@@ -22,6 +22,15 @@ $(document).keypress(function(e) {
   }
 });
 
+function selectElements() {
+  this.actions = commentForm.querySelector('.form-actions');
+  this.bubblesContent = document.querySelectorAll('.timeline-new-comment.js-comment-container');
+  this.bubble = this.bubblesContent[this.bubblesContent.length - 1];
+  this.close = this.actions.querySelector('.js-comment-and-button');
+  this.comment = this.actions.querySelector('.primary');
+  return this.textarea = commentForm.querySelector('textarea');
+};
+
 function button(text, innerHTML, closable) {
   if (closable == null) {
     closable = true;
@@ -79,16 +88,6 @@ function insertButtons(elem) {
   }
 
   var mutationObserver, observer, selectElements;
-  selectElements = (function(_this) {
-    return function() {
-      _this.actions = commentForm.querySelector('.form-actions');
-      _this.bubblesContent = document.querySelectorAll('.timeline-new-comment.js-comment-container');
-      _this.bubble = _this.bubblesContent[_this.bubblesContent.length - 1];
-      _this.close = _this.actions.querySelector('.js-comment-and-button');
-      _this.comment = _this.actions.querySelector('.primary');
-      return _this.textarea = commentForm.querySelector('textarea');
-    };
-  })(this);
 
   selectElements();
   mutationObserver = typeof WebKitMutationObserver !== "undefined" && WebKitMutationObserver !== null ? WebKitMutationObserver : MutationObserver;
