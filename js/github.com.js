@@ -22,13 +22,13 @@ $(document).keypress(function(e) {
   }
 });
 
-function selectElements() {
+function selectElements(commentForm) {
   this.actions = commentForm.querySelector('.form-actions');
   this.bubblesContent = document.querySelectorAll('.timeline-new-comment.js-comment-container');
   this.bubble = this.bubblesContent[this.bubblesContent.length - 1];
   this.close = this.actions.querySelector('.js-comment-and-button');
   this.comment = this.actions.querySelector('.primary');
-  return this.textarea = commentForm.querySelector('textarea');
+  this.textarea = commentForm.querySelector('textarea');
 };
 
 function button(text, innerHTML, closable) {
@@ -81,21 +81,21 @@ function insertButtons(elem) {
   elem.appendChild(openButtonGroup);
 };
 
-(function(e) {
+function keithVSOSS() {
   var commentForm = document.querySelector('.js-new-comment-form');
   if (!commentForm) {
     return;
   }
 
-  var mutationObserver, observer, selectElements;
-
-  selectElements();
+  var mutationObserver, observer;
+  selectElements(commentForm);
   mutationObserver = typeof WebKitMutationObserver !== "undefined" && WebKitMutationObserver !== null ? WebKitMutationObserver : MutationObserver;
   observer = new mutationObserver(function(mutations) {
     return mutations.forEach(function(mutation) {
-      return selectElements();
+      return selectElements(commentForm);
     });
   });
+
   observer.observe(this.actions, {
     childList: true
   });
@@ -103,4 +103,6 @@ function insertButtons(elem) {
   if (commentForm && this.close) {
     insertButtons(this.bubble);
   }
-}).call(this);
+};
+
+keithVSOSS();
