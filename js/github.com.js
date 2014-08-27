@@ -22,13 +22,17 @@ $(document).keypress(function(e) {
   }
 });
 
-function selectElements(commentForm) {
-  this.actions = commentForm.querySelector('.form-actions');
-  this.bubblesContent = document.querySelectorAll('.timeline-new-comment.js-comment-container');
-  this.bubble = this.bubblesContent[this.bubblesContent.length - 1];
-  this.close = this.actions.querySelector('.js-comment-and-button');
-  this.comment = this.actions.querySelector('.primary');
-  this.textarea = commentForm.querySelector('textarea');
+function selectElements(_this) {
+  _this.actions = commentForm().querySelector('.form-actions');
+  _this.bubblesContent = document.querySelectorAll('.timeline-new-comment.js-comment-container');
+  _this.bubble = _this.bubblesContent[_this.bubblesContent.length - 1];
+  _this.close = _this.actions.querySelector('.js-comment-and-button');
+  _this.comment = _this.actions.querySelector('.primary');
+  return _this.textarea = commentForm().querySelector('textarea');
+};
+
+function commentForm() {
+  return document.querySelector('.js-new-comment-form');
 };
 
 function button(text, innerHTML, closable) {
@@ -45,7 +49,8 @@ function button(text, innerHTML, closable) {
   btn.setAttribute('title', innerHTML);
   btn.addEventListener('click', function(event) {
     event.preventDefault();
-    this.textarea.value += " " + innerHtml;
+    selectElements(this);
+    this.textarea.value += " " + innerHTML;
     if (closable) {
       this.close.click();
     } else {
@@ -81,18 +86,17 @@ function insertButtons(elem) {
   elem.appendChild(openButtonGroup);
 };
 
-function keithVSOSS() {
-  var commentForm = document.querySelector('.js-new-comment-form');
-  if (!commentForm) {
+(function() {
+  if (!commentForm()) {
     return;
   }
 
   var mutationObserver, observer;
-  selectElements(commentForm);
+  selectElements(this);
   mutationObserver = typeof WebKitMutationObserver !== "undefined" && WebKitMutationObserver !== null ? WebKitMutationObserver : MutationObserver;
   observer = new mutationObserver(function(mutations) {
     return mutations.forEach(function(mutation) {
-      return selectElements(commentForm);
+      return selectElements(this);
     });
   });
 
@@ -100,9 +104,7 @@ function keithVSOSS() {
     childList: true
   });
 
-  if (commentForm && this.close) {
+  if (this.close) {
     insertButtons(this.bubble);
   }
-};
-
-keithVSOSS();
+}).call();
