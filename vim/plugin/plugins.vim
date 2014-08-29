@@ -259,7 +259,7 @@ let g:used_javascript_libs = 'angularjs,jasmine'
 let g:vim_json_syntax_conceal = 0
 
 " vim-markdown
-let g:markdown_fenced_languages = ['ruby', 'sh', 'objc']
+let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
 
 " tern
 let g:tern_map_prefix = '<Leader>'
