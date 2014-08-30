@@ -11,10 +11,10 @@ fi
 
 if [[ "$1" == "on" ]]
 then
-  corners enable
+  corners disable
   defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 elif [[ "$1" == "off" ]]
 then
-  corners disable
+  corners enable
   defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
 fi
