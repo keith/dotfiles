@@ -2,9 +2,9 @@
 
 set -e
 
-ghc_version="7.8.2"
+ghc_version="7.8.3"
 filename="ghc.tar.xz"
-cabal_version="1.20.0.2"
+cabal_version="1.20.0.3"
 cabal_filename="cabal.tar.gz"
 
 wget "http://www.haskell.org/ghc/dist/$ghc_version/ghc-$ghc_version-x86_64-apple-darwin-mavericks.tar.xz" -O "$filename"
