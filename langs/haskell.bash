@@ -1,5 +1,5 @@
 # Check that cabal has been setup
-if [[ -d "$HOME/.cabal" ]]; then
+if [[ -d "$HOME/.cabal/bin" ]]; then
   # Add cabal installed packages to PATH
   PATH="$HOME/.cabal/bin:$PATH"
 fi
