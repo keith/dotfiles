@@ -28,6 +28,7 @@ FILES=(\
     notmuch-config \
     npmrc \
     offlineimaprc \
+    phoenix.js \
     psqlrc \
     pylintrc \
     rspec \
