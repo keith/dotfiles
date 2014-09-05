@@ -154,4 +154,7 @@ api.bind('m', modifiers, function() { bottomLeft() });
 api.bind(',', modifiers, function() { topRight() });
 api.bind('.', modifiers, function() { bottomRight() });
 
+api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
+api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
+
 api.bind('y', modifiers, function () { api.launch("iTerm"); });
