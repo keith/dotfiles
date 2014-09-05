@@ -43,7 +43,7 @@ function rightHalf() {
   var win = Window.focusedWindow();
   var sframe = win.screen().frameIncludingDockAndMenu();
   win.setFrame({
-    x: sframe.width / 2 + border,
+    x: sframe.x + (sframe.width / 2 + border),
     y: sframe.y,
     width: sframe.width / 2,
     height: sframe.height
