@@ -1,4 +1,4 @@
-// Keith's [Phoenix](https://github.com/sdegutis/Phoenix) config
+// Keith's [Phoenix](https://github.com/Keithbsmiley/phoenix) config
 
 var modifiers = ["ctrl", "cmd"];
 var border = 2;
@@ -62,16 +62,16 @@ function topHalf() {
   });
 }
 
-function bottomHalf() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameIncludingDockAndMenu();
-  win.setFrame({
-    x: sframe.x,
-    y: sframe.height / 2,
-    width: sframe.width,
-    height: sframe.height / 2 - border
-  });
-}
+// function bottomHalf() {
+//   var win = Window.focusedWindow();
+//   var sframe = win.screen().frameIncludingDockAndMenu();
+//   win.setFrame({
+//     x: sframe.x,
+//     y: sframe.height / 2,
+//     width: sframe.width,
+//     height: sframe.height / 2 - border
+//   });
+// }
 
 function topLeft() {
   var win = Window.focusedWindow();
@@ -117,56 +117,41 @@ function bottomRight() {
   });
 }
 
+function center() {
+  var win = Window.focusedWindow();
+  var sframe = win.screen().frameWithoutDockOrMenu();
+  var frame = win.frame();
+  frame.x = sframe.x + ((sframe.width / 2) - (frame.width / 2));
+  frame.x = sframe.x + ((sframe.width / 2) - (frame.width / 2));
+  win.setFrame(frame);
+}
+
+function push() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  var nextScreen = win.screen().nextScreen();
+  var screenFrame = nextScreen.frameWithoutDockOrMenu();
+  win.setFrame({
+    x: screenFrame.x,
+    y: screenFrame.y,
+    width: frame.width,
+    height: frame.height
+  });
+}
+
+api.bind('u', modifiers, function() { center() });
+api.bind('p', modifiers, function() { push() });
+
 api.bind('k', modifiers, function() { fullScreen() });
 api.bind('j', modifiers, function() { halfSize() });
 
 api.bind('h', modifiers, function() { leftHalf() });
 api.bind('l', modifiers, function() { rightHalf() });
 api.bind('i', modifiers, function() { topHalf() });
-api.bind('u', modifiers, function() { bottomHalf() });
 
 api.bind('n', modifiers, function() { topLeft() });
 api.bind('m', modifiers, function() { bottomLeft() });
 api.bind(',', modifiers, function() { topRight() });
 api.bind('.', modifiers, function() { bottomRight() });
 
-var moveModifiers = ["ctrl", "alt"];
-var resizeModifiers = ["ctrl", "alt", "cmd"];
-
-function nudge(x, y) {
-  var win = Window.focusedWindow();
-  var wframe = win.frame();
-  var xPercent = wframe.width * (x / 100);
-  var yPercent = wframe.height * (y / 100);
-  win.setFrame({
-    x: wframe.x + xPercent,
-    y: wframe.y + yPercent,
-    width: wframe.width,
-    height: wframe.height
-  });
-}
-
-function resize(w, h) {
-  var win = Window.focusedWindow();
-  var wframe = win.frame();
-  var wPercent = wframe.width * (w / 100);
-  var hPercent = wframe.height * (h / 100);
-  win.setFrame({
-    x: wframe.x,
-    y: wframe.y,
-    width: wframe.width + wPercent,
-    height: wframe.height + hPercent
-  });
-}
-
-api.bind('left', moveModifiers, function() { nudge(-5, 0) });
-api.bind('right', moveModifiers, function() { nudge(+5, 0) });
-api.bind('up', moveModifiers, function() { nudge(0, -5) });
-api.bind('down', moveModifiers, function() { nudge(0, +5) });
-
-api.bind('left', resizeModifiers, function() { resize(-10, 0) });
-api.bind('right', resizeModifiers, function() { resize(+10, 0) });
-api.bind('up', resizeModifiers, function() { resize(0, -10) });
-api.bind('down', resizeModifiers, function() { resize(0, +10) });
-
-api.bind('t', moveModifiers, function () { api.launch("iTerm"); });
+api.bind('y', modifiers, function () { api.launch("iTerm"); });
