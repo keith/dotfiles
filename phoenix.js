@@ -122,7 +122,7 @@ function center() {
   var sframe = win.screen().frameWithoutDockOrMenu();
   var frame = win.frame();
   frame.x = sframe.x + ((sframe.width / 2) - (frame.width / 2));
-  frame.x = sframe.x + ((sframe.width / 2) - (frame.width / 2));
+  frame.y = sframe.y + ((sframe.height / 2) - (frame.height / 2));
   win.setFrame(frame);
 }
 
