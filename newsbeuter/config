@@ -42,6 +42,10 @@ oldreader-login "keithbsmiley@gmail.com"
 # oldreader-password "sekret"
 include "~/.oldreaderrc"
 
+# urls-source "newsblur"
+# newsblur-login "SmileyKeith"
+# include "~/.newsblurrc"
+
 # Top and bottom colors
 color info color10 color0
 # Highlighted row color
