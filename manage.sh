@@ -25,6 +25,7 @@ FILES=(\
     js \
     lldbinit \
     mutt \
+    newsbeuter \
     notmuch-config \
     npmrc \
     offlineimaprc \
