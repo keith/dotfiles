@@ -15,7 +15,7 @@ alias vm="mvim"
 alias vmm="mvim ."
 
 # CocoaPods
-alias pi="pod install"
+alias pi="pod install --no-repo-update"
 alias psl="pod spec lint *.podspec"
 alias psla="pod spec lint *.podspec --verbose"
 alias pclean="rm -rf $HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
@@ -44,4 +44,3 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Fin
 # Hide/show all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
-
