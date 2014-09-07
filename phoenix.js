@@ -1,120 +1,48 @@
 // Keith's [Phoenix](https://github.com/Keithbsmiley/phoenix) config
-
 var modifiers = ["ctrl", "cmd"];
-var border = 2;
+var padding = 2;
 
-function fullScreen() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameIncludingDockAndMenu();
+function windowToGrid(win, x, y, width, height) {
+  var screen = win.screen().frameIncludingDockAndMenu();
+
   win.setFrame({
-    x: sframe.x,
-    y: sframe.y,
-    width: sframe.width,
-    height: sframe.height
+    x: Math.round(x * screen.width) + padding + screen.x,
+    y: Math.round(y * screen.height) + padding + screen.y,
+    width: Math.round(width * screen.width) - (2 * padding),
+    height: Math.round(height * screen.height) - (2 * padding)
   });
 }
 
-function halfSize() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameIncludingDockAndMenu();
-  var wframe = win.frame();
-  var originY = sframe.y + (sframe.height - (wframe.height / 2)) / 2;
-  win.setFrame({
-    x: sframe.x,
-    y: originY,
-    width: wframe.width / 2,
-    height: wframe.height / 2
-  });
+function toGrid(x, y, width, height) {
+  windowToGrid(Window.focusedWindow(), x, y, width, height);
 }
 
-function leftHalf() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameIncludingDockAndMenu();
-  var width =
-  win.setFrame({
-    x: sframe.x,
-    y: sframe.y,
-    width: sframe.width / 2 - border,
-    height: sframe.height
-  });
+Window.fullScreen = function() {
+  toGrid(0, 0, 1, 1);
 }
 
-function rightHalf() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameIncludingDockAndMenu();
-  win.setFrame({
-    x: sframe.x + (sframe.width / 2 + border),
-    y: sframe.y,
-    width: sframe.width / 2,
-    height: sframe.height
-  });
+Window.leftHalf = function() {
+  toGrid(0, 0, 0.5, 1);
 }
 
-function topHalf() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameWithoutDockOrMenu();
-  win.setFrame({
-    x: sframe.x,
-    y: sframe.y,
-    width: sframe.width,
-    // 18 seems to correct issues with the height because of the given frame?
-    height: sframe.height / 2 - 18
-  });
+Window.rightHalf = function() {
+  toGrid(0.5, 0, 0.5, 1);
 }
 
-// function bottomHalf() {
-//   var win = Window.focusedWindow();
-//   var sframe = win.screen().frameIncludingDockAndMenu();
-//   win.setFrame({
-//     x: sframe.x,
-//     y: sframe.height / 2,
-//     width: sframe.width,
-//     height: sframe.height / 2 - border
-//   });
-// }
-
-function topLeft() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameWithoutDockOrMenu();
-  win.setFrame({
-    x: sframe.x,
-    y: sframe.y,
-    width: sframe.width / 2 - border,
-    height: sframe.height / 2 - border
-  });
+Window.topLeft = function() {
+  toGrid(0, 0, 0.5, 0.5);
 }
 
-function bottomLeft() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameWithoutDockOrMenu();
-  win.setFrame({
-    x: sframe.x,
-    y: sframe.y + sframe.height / 2 + border,
-    width: sframe.width / 2 - border,
-    height: sframe.height / 2 - border
-  });
+Window.bottomLeft = function() {
+  toGrid(0, 0.5, 0.5, 0.5);
 }
 
-function topRight() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameWithoutDockOrMenu();
-  win.setFrame({
-    x: sframe.x + sframe.width / 2 + border,
-    y: sframe.y,
-    width: sframe.width / 2 - border,
-    height: sframe.height / 2 - border
-  });
+Window.topRight = function() {
+  toGrid(0.5, 0, 0.5, 0.5);
 }
 
-function bottomRight() {
-  var win = Window.focusedWindow();
-  var sframe = win.screen().frameWithoutDockOrMenu();
-  win.setFrame({
-    x: sframe.x + sframe.width / 2 + border,
-    y: sframe.y + sframe.height / 2,
-    width: sframe.width / 2 - border,
-    height: sframe.height / 2 - border
-  });
+Window.bottomRight = function() {
+  toGrid(0.5, 0.5, 0.5, 0.5);
 }
 
 function center() {
@@ -142,17 +70,14 @@ function push() {
 api.bind('u', modifiers, function() { center() });
 api.bind('p', modifiers, function() { push() });
 
-api.bind('k', modifiers, function() { fullScreen() });
-api.bind('j', modifiers, function() { halfSize() });
+api.bind('k', modifiers, function() { Window.fullScreen() });
+api.bind('h', modifiers, function() { Window.leftHalf() });
+api.bind('l', modifiers, function() { Window.rightHalf() });
 
-api.bind('h', modifiers, function() { leftHalf() });
-api.bind('l', modifiers, function() { rightHalf() });
-api.bind('i', modifiers, function() { topHalf() });
-
-api.bind('n', modifiers, function() { topLeft() });
-api.bind('m', modifiers, function() { bottomLeft() });
-api.bind(',', modifiers, function() { topRight() });
-api.bind('.', modifiers, function() { bottomRight() });
+api.bind('n', modifiers, function() { Window.topLeft() });
+api.bind('m', modifiers, function() { Window.bottomLeft() });
+api.bind(',', modifiers, function() { Window.topRight() });
+api.bind('.', modifiers, function() { Window.bottomRight() });
 
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
