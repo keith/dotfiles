@@ -4,7 +4,7 @@ reload-time 30
 notify-beep yes
 reload-threads 20
 
-error-log "error.log"
+error-log "~/.newsbeuter/error.log"
 
 # Hide read stuff
 show-read-feeds no
