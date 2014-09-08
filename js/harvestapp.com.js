@@ -5,4 +5,11 @@ $(document).ready(function() {
       button.click();
     }
   }, 500);
+
+  setTimeout(function() {
+    var link = $("a.js-copy-over-rows-from-most-recent-timesheet")[0];
+    if (link) {
+      link.click();
+    }
+  }, 500);
 });
