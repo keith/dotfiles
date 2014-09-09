@@ -12,4 +12,14 @@ $(document).ready(function() {
       link.click();
     }
   }, 500);
+
+  // setTimeout(function() {
+  //   var rowChildren = $("div.task:contains('Development')").closest("tr").children()
+  //   var days = rowChildren.filter("td.day");
+  //   var weekDays = days.slice(0, -3);
+  //   weekDays.each(function(index, value) {
+  //     var child = value.children[0];
+  //     child.value = "8:00";
+  //   });
+  // }, 500);
 });
