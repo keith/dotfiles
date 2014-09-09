@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
 function install () {
-  version=0.10.29
-  nvm install $version
-  nvm alias default $version
-
   nodes=(bower coffee-script grunt-cli)
 
   for n in ${nodes[@]}
@@ -12,7 +8,7 @@ function install () {
     npm install -g $n
   done
 
-  npm completion > /usr/local/etc/bash_completion.d/npm
+  # npm completion > /usr/local/etc/bash_completion.d/npm
 }
 
 function die () {
