@@ -17,7 +17,7 @@ function die () {
 }
 
 if ! which npm &> /dev/null;then
-  echo "You must install node before installing its packages"
+  echo "You must install npm before installing its packages"
   exit
 fi
 
