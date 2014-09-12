@@ -17,3 +17,6 @@
 [submodule "scripts/opp"]
 	path = scripts/opp
 	url = https://github.com/hchbaw/opp.zsh.git
+[submodule "scripts/ghu"]
+	path = scripts/ghu
+	url = https://github.com/pbrisbin/ghu.git
