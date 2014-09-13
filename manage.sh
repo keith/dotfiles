@@ -18,7 +18,6 @@ FILES=(\
     haskeline \
     hgrc \
     hushlogin \
-    hydra \
     ideavimrc \
     inputrc \
     irbrc \
