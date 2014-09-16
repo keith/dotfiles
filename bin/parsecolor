@@ -36,5 +36,3 @@ toFloat x = fromIntegral x
 main = do
   let str = "rgb(141,194,61)"
   mapM_ putStrLn $ map (++ "/255.0f") $ parseColor str
-
--- vim:ft=haskell
