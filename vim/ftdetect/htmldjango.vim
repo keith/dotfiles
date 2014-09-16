@@ -1,6 +1,6 @@
 " Detect htmldjango files
-autocmd BufNewFile,BufRead *.html call DjangoHTML()
-function! DjangoHTML()
+autocmd BufNewFile,BufRead *.html call s:DjangoHTML()
+function! s:DjangoHTML()
   " Don't override already set non-html filetypes
   if !empty(&filetype) && &filetype !=# "html"
     return
