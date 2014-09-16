@@ -63,6 +63,7 @@
   s     = status -sb
   sub   = submodule update --init --recursive
   undo  = reset --soft HEAD^
+  adeleted = !sh -c 'git rm `git ls-files --deleted`'
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
