@@ -189,17 +189,6 @@ endif
 set colorcolumn=+1
 autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
 
-" Status line setup (without airline)
-" Left Side
-set statusline=\ \ %F
-set statusline+=\ %r
-" Right Side
-set statusline+=%=
-set statusline+=%Y
-set statusline+=\ \ \ \ \ \ %P
-set statusline+=\ :%l:
-set statusline+=\ %c
-
 " Completion options
 set complete=.,w,b,u,t,i
 set completeopt=menu
