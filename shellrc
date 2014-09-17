@@ -1,14 +1,13 @@
 # Path to dotfiles repo
 export DOTFILES="$(dirname $(readlink $HOME/.shellrc))"
 
-# F - quit if it's a single screen
 # i - Vim's smart case
 # j.5 - Center search results
 # K - Quit on CTRL-C
 # M - Longer prompt
 # R - output colors correctly
 # X - Don't send clear screen signal
-export LESS="Fij.5KMRX"
+export LESS="ij.5KMRX"
 
 # Loads a local settings file for sekrets
 if [[ -e $HOME/.localrc ]];then
