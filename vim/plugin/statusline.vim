@@ -58,7 +58,7 @@ function! ModeString(mode)
 endfunction
 
 function! Spacing()
-  if mode() != "n"
+  if mode() != "n" && exists("s:lastOutput")
     return s:lastOutput
   endif
 
