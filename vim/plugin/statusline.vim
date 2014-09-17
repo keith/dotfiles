@@ -1,7 +1,7 @@
 function! ModifiedString()
-  if &modified 
+  if &modified
     return ' [+]'
-  else 
+  else
     return ''
   endif
 endfunction
@@ -58,6 +58,10 @@ function! ModeString(mode)
 endfunction
 
 function! Spacing()
+  if mode() != "n"
+    return s:lastOutput
+  endif
+
   let trailing = search('\s$', 'nw')
   let mixed = s:CheckMixedIndent()
   let output = ''
@@ -67,6 +71,7 @@ function! Spacing()
     let output = '  ' . printf('mixed-indent[%s]', trailing) . ' '
   endif
 
+  let s:lastOutput = output
   return output
 endfunction
 
