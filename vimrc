@@ -21,7 +21,6 @@ call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'b4winckler/vim-objc'
-Plug 'bling/vim-airline'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'DasIch/vim-mercurial'
