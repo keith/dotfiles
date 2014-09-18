@@ -42,7 +42,9 @@
   protocol = https
 [alias]
   a     = add
+  adeleted = !sh -c 'git rm `git ls-files --deleted`'
   ap    = add -p
+  auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
   ba    = branch -a
   c     = clone --recursive
   cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
@@ -59,12 +61,11 @@
   pul   = pull
   punch = push --force
   r     = reflog -5
+  rc    = rebase --continue
   rv    = remote -v
   s     = status -sb
   sub   = submodule update --init --recursive
   undo  = reset --soft HEAD^
-  adeleted = !sh -c 'git rm `git ls-files --deleted`'
-  auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
