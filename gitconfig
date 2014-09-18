@@ -48,6 +48,7 @@
   ba    = branch -a
   c     = clone --recursive
   cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
+  co    = checkout
   com   = commit --verbose
   ctags = !.git/hooks/ctags
   d     = diff
