@@ -1,4 +1,4 @@
-export PYTHONPATH=.:$(which python):$PYTHONPATH
+export PYTHONPATH=".:/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 export PYTHONSTARTUP=$DOTFILES/langs/pystartup
 
 PYENV_ROOT="$HOME/.pyenv"
