@@ -235,7 +235,13 @@ inoremap <PageDown> <Nop>
 inoremap <PageUp> <Nop>
 
 " Disable ex mode
-nnoremap Q <Nop>
+nnoremap Q :q<CR>
+
+" Easier save mapping
+nnoremap W :update<CR>
+
+" Go backwards words
+nnoremap E ge
 
 " Disable K
 vnoremap K <Nop>
