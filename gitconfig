@@ -6,6 +6,7 @@
   attributesfile = ~/.gitattributes
   editor = vim
   whitespace = trailing-space,space-before-tab
+  pager = pager
 [init]
   templatedir = ~/.git_template
 [push]
