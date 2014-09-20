@@ -1,3 +1,8 @@
+let s:colorPrefix = "cterm"
+if has("gui_running")
+  let s:colorPrefix = "gui"
+endif
+
 function! ModifiedString()
   if &modified
     return ' [+]'
@@ -53,7 +58,7 @@ function! ModeString(mode)
     let type = "Todo"
   endif
   let color = s:ColorForGroup(type)
-  execute 'hi User1 cterm=bold ctermbg=' . color
+  execute 'hi User1 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'bg=' . color
   return '  ' . toupper(g:currentmode[a:mode]) . PasteString() . ' '
 endfunction
 
@@ -75,8 +80,17 @@ function! Spacing()
   return output
 endfunction
 
-execute 'hi User2 cterm=bold ctermbg=' . s:ColorForGroup('StatusLine')
-execute 'hi User3 cterm=bold ctermbg=' . s:ColorForGroup('PreProc')
+" This gets around gui vim's colors not being setup with the script is sourced
+augroup StatusLine
+  autocmd!
+  autocmd VimEnter * call s:SetupColors()
+augroup END
+
+function! s:SetupColors()
+  execute 'hi User2 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'bg=' . s:ColorForGroup('StatusLine')
+  execute 'hi User3 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'bg=' . s:ColorForGroup('PreProc')
+endfunction
+
 
 " Status line setup (without plugins)
 " Left Side
