@@ -12,9 +12,9 @@ function! ModifiedString()
 endfunction
 
 function! s:CheckMixedIndent()
-  let t_s_t = '(^\t* +\t\s*\S)'
-  let t_l_s = '(^\t+ {' . &ts . ',}' . '\S)'
-  return search('\v' . t_s_t . '|' . t_l_s, 'nw')
+  let hasSpaces = search("^\\s\\+", "nw")
+  let hasTabs = search("^\\t\\+", "nw")
+  return hasSpaces && hasTabs
 endfunction
 
 let g:currentmode = {
@@ -73,7 +73,7 @@ function! Spacing()
   if trailing
     let output = '  ' . printf('trailing[%s]', trailing) . ' '
   elseif mixed
-    let output = '  ' . printf('mixed-indent[%s]', trailing) . ' '
+    let output = '  mixed-indent '
   endif
 
   let s:lastOutput = output
