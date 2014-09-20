@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+content=$(cat)
+if [[ -z $content ]]; then
+  exit
+fi
+
+echo "$content" | diff-highlight | less
