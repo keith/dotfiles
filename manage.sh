@@ -27,6 +27,8 @@ FILES=(\
     newsbeuter \
     notmuch-config \
     npmrc \
+    nvim \
+    nvimrc \
     offlineimaprc \
     phoenix.js \
     psqlrc \
