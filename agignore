@@ -1,6 +1,11 @@
-log
-tags
+*.pem
 .tags
+bower_components
+coverage
+doc
+log
+node_modules
+tags
 temp
 tmp
-*.pem
+vendor
