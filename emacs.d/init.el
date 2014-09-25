@@ -1,5 +1,6 @@
 ; List of packages for install on launch
 (setq package-list '(
+  ag
   color-theme-solarized
   evil
   evil-leader
