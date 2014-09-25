@@ -93,6 +93,7 @@ augroup END
 function! s:SetupColors()
   execute 'hi User2 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'bg=' . s:ColorForGroup('StatusLine')
   execute 'hi User3 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'bg=' . s:ColorForGroup('PreProc')
+  execute 'hi User4 ' . s:colorPrefix . '=bold ' . s:colorPrefix . 'fg=' . s:ColorForGroup('Comment') . ' ' . s:colorPrefix . 'bg=' . s:ColorForGroup('StatusLine')
 endfunction
 
 
@@ -105,8 +106,9 @@ set statusline+=%{ModifiedString()}
 set statusline+=\ %r
 " Right Side
 set statusline+=%=
-set statusline+=%{&ft}
-set statusline+=%2*\ \ \ %P
+set statusline+=%4*%{tagbar#currenttag('%s\ <\ ','','')}
+set statusline+=%{&ft}%*
+set statusline+=%2*\ \ %P
 set statusline+=\ :\ %l:
 set statusline+=\ %c\ %*
 set statusline+=%3*%{Spacing()}%*
