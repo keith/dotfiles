@@ -4,5 +4,6 @@
     "com.apple.systempreferences",
     "com.adiumX.adiumX",
     "com.natestedman.Wedge"
-  ]
+  ],
+  "float-small-windows": true
 }
