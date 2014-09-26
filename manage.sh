@@ -2,6 +2,7 @@
 
 FILES=(\
     agignore \
+    amethyst \
     backupignore \
     bashrc \
     bin \
