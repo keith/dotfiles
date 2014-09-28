@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+PORT=1234
+open "http://localhost:$PORT"
+python -m SimpleHTTPServer $PORT
