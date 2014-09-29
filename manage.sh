@@ -6,6 +6,7 @@ FILES=(\
     backupignore \
     bashrc \
     bin \
+    ctags \
     curlrc \
     emacs.d \
     gemrc \
