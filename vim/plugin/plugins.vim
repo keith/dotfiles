@@ -44,7 +44,6 @@ let g:tagbar_type_objc = {
     \ '--extra=',
     \ '--format=2',
     \ '--fields=nksaSmt',
-    \ '--options=' . expand('~/.vim/objctags'),
     \ '--objc-kinds=-N',
   \ ],
   \ 'sro': ' ',
