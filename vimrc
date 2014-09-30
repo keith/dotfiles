@@ -184,6 +184,7 @@ set gdefault         " Adds g at the end of substitutions by default
 set report=0         " Report any number of line changes
 set nolist           " Show/Hide hidden characters
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Typically hidden chars
+set virtualedit=block   " Allow the cursor to move off the side in visual block
 
 " Default text width to 80
 if &textwidth == 0
