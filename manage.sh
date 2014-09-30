@@ -36,7 +36,6 @@ FILES=(\
     psqlrc \
     pylintrc \
     rspec \
-    shellrc \
     tm_properties \
     tmux.conf \
     urlview \
