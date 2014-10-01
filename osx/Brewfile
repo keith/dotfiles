@@ -1,6 +1,5 @@
 tap homebrew/dupes
 tap Keithbsmiley/formulae
-tap linode/cli
 tap thoughtbot/formulae
 update
 
@@ -14,9 +13,6 @@ install go
 install grc
 install grep
 install heroku-toolbelt
-install hub
-install imagemagick
-install irssi
 install less
 install libyaml
 install liftoff
@@ -24,19 +20,15 @@ install llvm
 install lynx
 install macvim --HEAD
 install mercurial
-install mobile-shell
-install mogenerator
 install msmtp
 install mutt
-install mysql
 install notmuch
 install openssh
 install openssl
 install postgresql
-install qt
+install python
 install readline
 install reattach-to-user-namespace
-install redis
 install sqlite
 install terminal-notifier
 install the_silver_searcher
