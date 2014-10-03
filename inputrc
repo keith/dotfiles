@@ -9,3 +9,6 @@ set keymap vi
 set blink-matching-paren on
 
 set convert-meta on
+
+"\C-a": beginning-of-line
+"\C-e": end-of-line
