@@ -49,7 +49,6 @@ tpope/vim-jdaddy
 tpope/vim-leiningen
 tpope/vim-liquid
 tpope/vim-markdown
-tpope/vim-pathogen
 tpope/vim-projectionist
 tpope/vim-ragtag
 tpope/vim-rails
