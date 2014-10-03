@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-file=~/.vim/bundles.txt
+file=~/.vim/plugins
 target=~/.vim/bundle
 if [[ ! -e "$file" ]]; then
   echo "$file doesn't exist"
