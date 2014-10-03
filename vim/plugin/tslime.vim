@@ -16,6 +16,10 @@ if !exists("g:tslime_visual_map")
   let g:tslime_visual_map = "\<C-c><C-c>"
 endif
 
+function! s:SetTmuxBuffer(text)
+  call system("tmux set-buffer -- '" . substitute(a:text, "'", "'\\\\''", 'g') . "'")
+endfunction
+
 function! s:SetPaneNumber()
   call system("tmux display-panes")
   let pane = input("Pane number: ")
@@ -39,8 +43,11 @@ function! SendToTmux(text)
     endtry
   endif
 
-  let cmd = "tmux send-keys -t " . g:tslime_pane_number . " " . shellescape(a:text)
-  call system(cmd)
+  for line in split(a:text, '\n\zs' )
+    call <SID>SetTmuxBuffer(line)
+    call system("tmux paste-buffer -t " . g:tslime_pane_number)
+    sleep 2m
+  endfor
 endfunction
 
 execute 'nnoremap ' . g:tslime_normal_map . ' vip"ry:call SendToTmux(@r)<CR>'
