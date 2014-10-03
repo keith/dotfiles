@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+file=~/.vim/bundles.txt
+target=~/.vim/bundle
+if [[ ! -e "$file" ]]; then
+  echo "$file doesn't exist"
+  exit 1
+fi
+
+containsElement () {
+  local e
+  for e in "${@:2}"
+  do
+    [[ "$e" == "$1" ]] && return 0
+  done
+  return 1
+}
+
+readarray -t repos < $file
+names=()
+
+for repo in ${repos[@]}
+do
+  parts=(${repo//\// })
+  name=${parts[1]}
+  if [[ "$name" == "" ]]; then
+    continue
+  fi
+
+  names[${#names[@]}]=$name
+  path="$target/$name"
+  if [[ -d $path ]];then
+    pushd $path > /dev/null
+    git pull &
+    popd > /dev/null
+  else
+    git clone https://github.com/$repo.git $target/$name &
+  fi
+done
+
+wait
+
+existing=($(ls $target))
+for dir in ${existing[@]}
+do
+  containsElement "$dir" in "${names[@]}"
+  if [[ "$?" -eq "0" ]]; then
+    continue
+  fi
+
+  path="$target/$dir"
+  echo "Removing $path"
+  rm -rf $path &
+done
+
+wait
