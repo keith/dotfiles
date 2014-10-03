@@ -2,7 +2,7 @@
 ssh.dmg
 .dropbox
 vim/bundle/*
-vim/autoload/plug.vim*
+vim/autoload/pathogen.vim
 bin/yuicompressor*
 irssi/config.autosave
 mutt/cache

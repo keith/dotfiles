@@ -11,78 +11,11 @@ source ~/.vim/before/*.vim
 " Plugin setup ------ {{{
 filetype off " Required for Vundle setup
 
-" Load vim-plug
-if empty(glob("~/.vim/autoload/plug.vim"))
-  execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob("~/.vim/autoload/pathogen.vim"))
+  execute "!curl -fLo ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
 endif
 
-call plug#begin('~/.vim/bundle')
-
-Plug 'airblade/vim-gitgutter'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'b4winckler/vim-objc'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'DasIch/vim-mercurial'
-Plug 'elixir-lang/vim-elixir'
-Plug 'elzr/vim-json'
-Plug 'evanmiller/nginx-vim-syntax'
-Plug 'guns/vim-clojure-highlight'
-Plug 'guns/vim-clojure-static'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'jnwhiteh/vim-golang'
-Plug 'junegunn/goyo.vim'
-Plug 'Keithbsmiley/clighter'
-Plug 'Keithbsmiley/cocoapods.vim'
-Plug 'Keithbsmiley/gist.vim'
-Plug 'Keithbsmiley/investigate.vim'
-Plug 'Keithbsmiley/kiwi.vim'
-Plug 'Keithbsmiley/parsec.vim'
-Plug 'Keithbsmiley/rspec.vim'
-Plug 'Keithbsmiley/specta.vim'
-Plug 'Keithbsmiley/swift.vim'
-Plug 'Keithbsmiley/tmux.vim'
-Plug 'Keithbsmiley/travis.vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'klen/python-mode'
-Plug 'majutsushi/tagbar'
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'Raimondi/delimitMate'
-Plug 'rhysd/clever-f.vim'
-Plug 'Rip-Rip/clang_complete'
-Plug 'rking/ag.vim'
-Plug 'scrooloose/syntastic'
-Plug 'SirVer/ultisnips'
-Plug 'sjl/vitality.vim'
-Plug 'slim-template/vim-slim'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
-Plug 'tpope/vim-jdaddy'
-Plug 'tpope/vim-leiningen'
-Plug 'tpope/vim-liquid'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-scriptease'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/Match-Bracket-for-Objective-C'
-
-call plug#end()
+execute pathogen#infect()
 
 filetype plugin indent on " Re-enable after Vundle setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
