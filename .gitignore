@@ -22,8 +22,6 @@ linux/configs/fish/generated_completions
 flycheck_*
 emacs.d/elpa
 *.eld
-newsbeuter/*
-!newsbeuter/config
 
 ####### Linux #######
 !.gitignore
