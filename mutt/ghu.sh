@@ -4,7 +4,6 @@
 # https://github.com/pbrisbin/ghu.git
 #
 ###
-share="$(dirname "$0")"/../share/ghu
 unsubscribe=$(sed "/^List-Unsubscribe: /,/^[A-Z].*: /!d
   #
   # Result:
