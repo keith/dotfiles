@@ -3,6 +3,7 @@ tap Keithbsmiley/formulae
 tap thoughtbot/formulae
 update
 
+install ag --HEAD
 install bash
 install chisel
 install cloc
@@ -31,7 +32,6 @@ install readline
 install reattach-to-user-namespace
 install sqlite
 install terminal-notifier
-install the_silver_searcher
 install tree
 install urlview
 install vim --HEAD
