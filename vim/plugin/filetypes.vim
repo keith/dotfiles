@@ -118,6 +118,14 @@ augroup ft_haskell
 augroup END
 " }}}
 
+" Quickfix ------ {{{
+augroup ft_quickfix
+  autocmd!
+  autocmd BufReadPost quickfix nnoremap <silent> <buffer> q :cclose<CR>
+  autocmd BufReadPost quickfix setlocal nocursorline
+augroup END
+" }}}
+
 " ObjC stuff ------ {{{
 augroup ft_objc
   autocmd!

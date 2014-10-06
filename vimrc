@@ -373,9 +373,6 @@ nnoremap <C-o> <C-o>zz
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
 
-" Search for the word under the cursor with Ag
-nnoremap sag :Ag! <cword><CR>
-
 " Save mappings
 nnoremap <C-s> <ESC>:w<CR>
 inoremap <C-s> <ESC>:w<CR>
@@ -424,16 +421,6 @@ else
     let g:ruby_path = s:output
   endif
 end
-
-" Find TODO and FIXME comments
-silent! command Todo call TODOSearch()
-function! TODOSearch()
-  if executable("ag") && exists(":Ag") > 0
-    Ag! 'TODO|FIXME'
-  else
-    noautocmd vimgrep /TODO\|FIXME/j ** | cw | nnoremap <silent> <buffer> q :cclose<CR>
-  endif
-endfunction
 
 " Running as diff ------ {{{
 if &diff

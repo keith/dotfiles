@@ -31,7 +31,6 @@ pangloss/vim-javascript
 Raimondi/delimitMate
 rhysd/clever-f.vim
 Rip-Rip/clang_complete
-rking/ag.vim
 scrooloose/syntastic
 SirVer/ultisnips
 sjl/vitality.vim
