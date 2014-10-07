@@ -337,7 +337,7 @@ endif
 
 " Mappings for split resizing
 nnoremap + :resize +5<CR>
-nnoremap - :resize -5<CR>
+nnoremap _ :resize -5<CR>
 nnoremap ( :vertical resize -5<CR>
 nnoremap ) :vertical resize +5<CR>
 
