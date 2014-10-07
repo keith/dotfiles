@@ -43,7 +43,7 @@ unset markers                                                         # no ugly 
 ignore *
 unignore Date From To Reply-To Cc Subject X-PGP-Key
 hdr_order Date From To Reply-To Cc Subject X-PGP-Key
-alternative_order text/plain text/enriched text/html
+message-hook . "unalternative_order *; alternative_order text/plain text/enriched text/html"
 auto_view text/x-vcard text/html text/enriched
 
 source $HOME/.mutt/folders

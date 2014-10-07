@@ -9,7 +9,6 @@ bind index c mail
 bind index G last-entry
 bind index gg first-entry
 bind index m change-folder
-bind index N search-opposite
 bind index p recall-message
 bind index R group-reply
 
