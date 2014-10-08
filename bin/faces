@@ -1,0 +1,18 @@
+#!/bin/zsh
+# Lifted from https://github.com/lukaszkorecki/DotFiles/blob/master/bins/faces
+# https://github.com/pengwynn/dotfile://github.com/pengwynn/dotfiles
+
+faces=('ಠ_ಠ' 'ಠ_ರೃ' '﴾͡๏̯͡๏﴿' '๏_๏' 'ಠ▃ಠ' '(•‿•)' 'Ծ_Ծ' '¯\(°_o)/¯' '(✌ﾟ∀ﾟ)☞' '╚(•⌂•)╝' 't(-_-t)t' '¯\_(ツ)_/¯' '◔_◔' '◎⃝ _◎⃝' ';ლ(ಠ_ಠლ)' '(╯°□°）╯︵ ┻━┻' 'ᶘ ᵒᴥᵒᶅ')
+
+
+if [[ -z $1 ]]; then
+  echo 'Choose a face and | it to pbcopy'
+  i=1
+  for f in ${faces[@]}
+  do
+    echo $i $f
+    i=`expr $i + 1`
+  done
+else
+  echo ${faces[$1]} | pbcopy
+fi
