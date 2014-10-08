@@ -19,10 +19,10 @@ message-hook '~f noreply@activebuilding\.com' \
 
 # Github notifications
 message-hook '(~N|~O) ~f notifications@github\.com' \
-  "push ':set my_old_pipe_decode=\$pipe_decode<enter> \
-  :set nopipe_decode<enter> \
-  <pipe-message>$DOTFILES/mutt/ghnotification.sh\n \
-  :set pipe_decode=\$my_old_pipe_decode<enter>'"
+  "push '<enter-command>set my_old_pipe_decode=\$pipe_decode \
+  nopipe_decode<enter> \
+  <pipe-message>$DOTFILES/mutt/ghnotification.sh<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>'"
 
 # Sidebar patch settings
 # set sidebar_delim   = '│'
