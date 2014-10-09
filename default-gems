@@ -15,7 +15,4 @@ mkgitignore
 pinup
 rdiscount
 rspec
-rubygems-bundler
-sass
-specific_install
 xcpretty
