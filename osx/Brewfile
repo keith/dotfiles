@@ -42,5 +42,7 @@ install zsh
 
 install keithbsmiley/formulae/tmux-move-patch
 install keithbsmiley/formulae/ghb --HEAD
+install marooned
+install cocoapods
 
 link openssl --force
