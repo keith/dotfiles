@@ -6,7 +6,7 @@ if ! command -v jq >/dev/null; then
 fi
 
 if [[ "$#" -ne 1 ]]; then
-  echo "Usage: owners [POD]"
+  echo "Usage: $(basename $0) [POD]"
   exit 1
 fi
 
