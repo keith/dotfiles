@@ -67,7 +67,6 @@ endif
 " Fold settings ------ {{{
 set foldnestmax=5           " Set deepest fold to x levels
 set foldmethod=indent       " Decide where to fold based
-set foldcolumn=2            " The width of the gutter column showing folds by line
 set foldlevelstart=99       " Set the default level of open folds
 
 " Toggle folds with the space bar
