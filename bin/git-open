@@ -20,11 +20,16 @@ fi
 if [[ $url == "" ]];then
     echo "No remotes found for $branch"
 else
-    string=$(git rev-parse $1 2>/dev/null)
-    if [[ $? == 0 && -n $1 ]]; then
-        string="commit/$string"
+    string=""
+    if [[ -f $1 || -d $1 ]]; then
+        string="blob/$(git symbolic-ref --short HEAD)/$1"
     else
-        string="$1"
+        string=$(git rev-parse $1 2>/dev/null)
+        if [[ $? == 0 && -n $1 ]]; then
+            string="commit/$string"
+        else
+            string="$1"
+        fi
     fi
 
     open "$url/$string"
