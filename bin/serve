@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
-PORT=1234
+if [[ "$#" -gt 0 ]]; then
+  PORT="$1"
+else
+  PORT=1234
+fi
 open "http://localhost:$PORT"
 python -m SimpleHTTPServer $PORT
