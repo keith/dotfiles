@@ -173,7 +173,6 @@ inoremap <F1> <Nop>
 inoremap <PageDown> <Nop>
 inoremap <PageUp> <Nop>
 
-" Disable ex mode
 nnoremap Q :q<CR>
 
 " Easier save mapping
@@ -227,8 +226,7 @@ command! -bang W w<bang>
 nnoremap <leader>ov :call VimConf()<CR>
 function! VimConf()
   silent! tabedit $MYVIMRC
-  silent! vsplit ~/.vim/plugin
-  silent! split  ~/.vim/before
+  silent! vsplit ~/.vim
   wincmd h
 endfunction
 
@@ -372,10 +370,6 @@ nnoremap <C-o> <C-o>zz
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
-
-" Save mappings
-nnoremap <C-s> <ESC>:w<CR>
-inoremap <C-s> <ESC>:w<CR>
 
 " Don't automatically jump on search
 nnoremap * :keepjumps normal! mi*`i<CR>
