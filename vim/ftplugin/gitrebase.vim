@@ -1,6 +1,6 @@
 function! Rebase()
   normal! mi
-  2,$s/^pick/squash/
+  silent! 2,$s/^pick/squash/
   let @/=""
   normal! `i
 endfunction
