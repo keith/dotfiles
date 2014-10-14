@@ -25,38 +25,6 @@ augroup ft_git
 augroup END
 " }}}
 
-" Vim ------ {{{
-augroup ft_help
-  autocmd!
-  autocmd FileType vim setlocal foldmethod=marker isk+=:
-  autocmd FileType vim setlocal makeprg=source\ %
-  autocmd BufRead,BufNewFile *.vim/doc/*.txt setlocal filetype=help
-  autocmd BufRead,BufNewFile vim-*/doc/*.txt setlocal filetype=help
-  autocmd FileType help setlocal iskeyword+=-
-  autocmd FileType help nnoremap q :q<CR>
-  autocmd FileType help
-        \ if !&readonly |
-        \   setlocal spell autoindent formatoptions+=2n |
-        \   execute "autocmd BufWrite * execute 'helptags ' . expand('%:h')" |
-        \ endif
-augroup END
-" }}}
-
-" Markdown files ------ {{{
-function! Marked()
-  silent !mark %
-  redraw!
-endfunction
-
-augroup ft_markdown
-  autocmd!
-  if has("mac")
-    autocmd FileType markdown  command! -buffer -bang Marked :call Marked()
-  endif
-  autocmd FileType markdown setlocal textwidth=72 spell
-augroup END
-" }}}
-
 " Liquid files ------ {{{
 augroup ft_liquid
   autocmd!
