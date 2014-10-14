@@ -47,7 +47,7 @@ set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
 set softtabstop=2              " Number of spaces for some tab operations
 set shiftround                 " Round << and >> to multiples of shiftwidth
-set expandtab                  " Insert spaces instead of actually tabs
+set expandtab                  " Insert spaces instead of actual tabs
 set smarttab                   " Delete entire shiftwidth of tabs when they're inserted
 set history=1000               " The number of history items to remember
 set backspace=indent,eol,start " Backspace settings
@@ -86,7 +86,6 @@ set t_Co=256         " Explicitly tell Vim that the terminal supports 256 colors
 set lazyredraw       " Don't redraw vim in all situations
 set synmaxcol=300    " The max number of columns to try and highlight
 set noerrorbells     " Don't make noise
-set visualbell       " Don't show bells
 set autoread         " Watch for file changes and auto update
 set showmatch        " Set show matching parenthesis
 set matchtime=2      " The amount of time matches flash
@@ -121,7 +120,9 @@ if &textwidth == 0
 endif
 
 set colorcolumn=+1
-autocmd BufRead * if &readonly | silent! set colorcolumn= | endif
+if &readonly
+  silent! set colorcolumn=
+endif
 
 " Completion options
 set complete=.,w,b,u,t,i
@@ -362,7 +363,7 @@ augroup ft_settings
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
-  autocmd BufRead,BufReadPost,Syntax,VimEnter * set formatoptions-=o
+  autocmd BufRead,Syntax,VimEnter * set formatoptions-=o
 
   " Return to the same position you left the file in
   autocmd BufReadPost * call PositionRecall()
