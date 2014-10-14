@@ -350,6 +350,27 @@ augroup window_sizes
 augroup END
 " }}}
 
+" Various filetype settings ------ {{{
+augroup ft_settings
+  autocmd!
+
+  " Comment string settings
+  if empty(&commentstring) | setlocal commentstring=#\ %s | endif
+  autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
+
+  " Save files on some focus lost events, like switching splits
+  autocmd BufLeave,FocusLost * silent! wall
+
+  " Don't auto insert a comment when using O/o for a newline
+  autocmd BufRead,BufReadPost,Syntax,VimEnter * set formatoptions-=o
+
+  " Return to the same position you left the file in
+  autocmd BufReadPost * call PositionRecall()
+
+  autocmd CursorHold * checktime
+augroup END
+" }}}
+
 " ObjC curly brace error fix
 let c_no_curly_error = 1
 

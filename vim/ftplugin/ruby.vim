@@ -1,4 +1,5 @@
-set iskeyword+=?
+setlocal iskeyword+=?
+setlocal omnifunc=
 
 command HashConvert call HashConvert()
 function! HashConvert()

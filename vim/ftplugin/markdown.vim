@@ -1,5 +1,6 @@
-setlocal textwidth=72
+setlocal omnifunc=htmlcomplete#CompleteTags
 setlocal spell
+setlocal textwidth=72
 
 function! Marked()
   if !executable("mark")
