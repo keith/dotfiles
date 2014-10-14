@@ -53,6 +53,7 @@ set history=1000               " The number of history items to remember
 set backspace=indent,eol,start " Backspace settings
 set nostartofline              " Keep cursor in the same place after saves
 set showcmd                    " Show command information on the right side of the command line
+set isfname-==                 " Remove characters from filenames for gf
 
 " Write undo tree to a file to resume from next time the file is opened
 if has("persistent_undo")
@@ -269,7 +270,7 @@ nnoremap H ^
 vnoremap H ^
 nnoremap L g_
 vnoremap L g_
-nnoremap <tab> %
+nmap <tab> %
 
 " Switch to the last file
 nnoremap <leader><leader> <C-^>
@@ -310,17 +311,6 @@ endfunction
 
 " Unfuck my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
-
-" http://stackoverflow.com/a/12141458/902968
-let s:location = expand('$HOME/.rbenv/shims')
-if filereadable(s:location)
-  let g:ruby_path = s:location
-else
-  let s:output = system('rvm current')
-  if v:shell_error == 0
-    let g:ruby_path = s:output
-  endif
-end
 
 " Running as diff ------ {{{
 if &diff
