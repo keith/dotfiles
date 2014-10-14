@@ -1,11 +1,3 @@
-" CSS ------ {{{
-augroup ft_css_sass
-  autocmd!
-  autocmd FileType css setlocal commentstring=/*\ %s\ */
-  autocmd FileType css,scss.css setlocal foldmethod=marker foldmarker={,}
-augroup END
-" }}}
-
 " Nginx ------ {{{
 augroup ft_nginx
   autocmd!
@@ -13,85 +5,6 @@ augroup ft_nginx
   autocmd BufRead,BufNewFile /*/nginx/sites-available/* setlocal filetype=nginx
   autocmd FileType nginx setlocal foldmethod=marker foldmarker={,}
   autocmd FileType nginx setlocal commentstring=#\ %s
-augroup END
-" }}}
-
-" Git ------ {{{
-augroup ft_git
-  autocmd!
-  autocmd BufRead     *gitconfig     setlocal filetype=gitconfig
-  autocmd FileType    gitcommit      setlocal spell textwidth=72
-  autocmd FileType    gitcommit      setlocal completeopt+=preview
-augroup END
-" }}}
-
-" Liquid files ------ {{{
-augroup ft_liquid
-  autocmd!
-  autocmd FileType liquid setlocal textwidth=72 spell
-augroup END
-" }}}
-
-" Mail files ------ {{{
-augroup ft_mail
-  autocmd BufRead,BufNewFile *mutt-* setfiletype mail
-  autocmd FileType mail setlocal textwidth=78
-  autocmd FileType mail setlocal spell
-  autocmd FileType mail let g:airline#extensions#whitespace#enabled = 0
-  autocmd FileType mail let g:airline#extensions#whitespace#checks = []
-augroup END
-" }}}
-
-" Clojure files ------ {{{
-augroup ft_clojure
-  autocmd!
-  autocmd FileType clojure setlocal foldmethod=marker foldmarker=(,)
-  autocmd FileType clojure RainbowParenthesesActivate
-  let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-  \ ]
-  autocmd syntax clojure RainbowParenthesesLoadRound
-  autocmd syntax clojure RainbowParenthesesLoadSquare
-augroup END
-" }}}
-
-" Ruby files ------ {{{
-augroup ft_ruby
-  autocmd!
-  autocmd FileType eruby,ruby set iskeyword+=?
-  autocmd BufRead,BufNewFile *_spec.rb set syntax=rspec
-  autocmd Syntax rspec setlocal makeprg=rspec\ %
-  " Force Dispatch to run :Dispatch over :Make for better output
-  autocmd Syntax rspec let b:dispatch=&makeprg
-augroup END
-" }}}
-
-" Haskell files ------ {{{
-augroup ft_haskell
-  autocmd!
-  autocmd FileType haskell setlocal makeprg=runhaskell\ %
-augroup END
-" }}}
-
-" Quickfix ------ {{{
-augroup ft_quickfix
-  autocmd!
-  autocmd BufReadPost quickfix nnoremap <silent> <buffer> q :cclose<CR>
-  autocmd BufReadPost quickfix setlocal nocursorline
 augroup END
 " }}}
 
@@ -117,10 +30,6 @@ augroup ft_settings
   autocmd FileType dcl           setlocal filetype=apache
   autocmd FileType apache        setlocal commentstring=#\ %s
   autocmd FileType text          setlocal formatoptions+=t2n
-  autocmd FileType htmldjango    setlocal commentstring={#\ %s\ #}
-  autocmd FileType htmldjango
-    \ let b:surround_{char2nr("v")} = "{{ \r }}" |
-    \ let b:surround_{char2nr("%")} = "{% \r %}"
 
   " Set normal completion functions
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS

@@ -1,3 +1,5 @@
+set iskeyword+=?
+
 command HashConvert call HashConvert()
 function! HashConvert()
   normal mi
