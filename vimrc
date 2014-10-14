@@ -107,15 +107,11 @@ set smartcase        " Ignore case if search is lowercase, otherwise case-sensit
 set title            " Change the terminal's title
 set nobackup         " Don't keep backup files
 set nowritebackup    " Don't create a backup when overwriting a file
-set showmode         " Display the paste setting when it changes
 set noswapfile       " Don't write swap files
 set updatetime=2000  " Set the time before plugins assume you're not typing
 set scrolloff=5      " Lines the cursor is to the edge before scrolling
 set sidescrolloff=5  " Same as scrolloff but horizontal
 set gdefault         " Adds g at the end of substitutions by default
-set report=0         " Report any number of line changes
-set nolist           " Show/Hide hidden characters
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮ " Typically hidden chars
 set virtualedit=block   " Allow the cursor to move off the side in visual block
 
 " Default text width to 80
@@ -154,7 +150,7 @@ silent! set breakindentopt=shift:2
 
 " Check for file specific vim settings in the last 3 lines of the file
 set modeline
-set modelines=3
+set modelines=2
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
@@ -232,64 +228,10 @@ endfunction
 " Sort entire file unique
 nnoremap <leader>sf :call SortFile()<CR>
 function! SortFile()
-  normal! mzggvG
-  :sort ui
-  normal! v`z
+  normal! miggvG
+  sort ui
+  normal! v`i
 endfunction
-
-" Next and Last ------ {{{
-" https://gist.github.com/sjl/3762227
-" Motion for 'next/last object'.  'Last' here means 'previous', not 'final'.
-" Unfortunately the 'p' motion was already taken for paragraphs.
-"
-" Next acts on the next object of the given type in the current line, last acts
-" on the previous object of the given type in the current line.
-"
-" Currently only works for (, [, {, b, r, B, ', and ".
-"
-" Some examples (C marks cursor positions, V means visually selected):
-"
-" din'  -> delete in next single quotes                foo = bar('spam')
-"                                                      C
-"                                                      foo = bar('')
-"                                                                C
-"
-" canb  -> change around next parens                   foo = bar('spam')
-"                                                      C
-"                                                      foo = bar
-"                                                               C
-"
-" vil"  -> select inside last double quotes            print "hello ", name
-"                                                                        C
-"                                                      print "hello ", name
-"                                                             VVVVVV
-
-onoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-xnoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
-onoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-xnoremap in :<c-u>call <SID>NextTextObject('i', 'f')<cr>
-
-onoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-xnoremap al :<c-u>call <SID>NextTextObject('a', 'F')<cr>
-onoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-xnoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
-
-function! s:NextTextObject(motion, dir)
-  let c = nr2char(getchar())
-
-  if c ==# "b"
-    let c = "("
-  elseif c ==# "B"
-    let c = "{"
-  elseif c ==# "r"
-    let c = "["
-  endif
-
-  let cmd = a:dir . c . "v" . a:motion . c
-  call repeat#set(cmd . "c")
-  execute "normal! " . cmd
-endfunction
-" }}}
 
 " Tab mappings ------ {{{
 nnoremap <leader>tt :tabnew<cr>
@@ -363,14 +305,6 @@ function! ClearWhitespace()
   silent! %s/\s\+$//
   let @/=""
   update
-  normal `i
-endfunction
-
-command HashConvert call HashConvert()
-function! HashConvert()
-  normal mi
-  %s/:\(\w*\)\(\s*\)=> /\1:\2/
-  let @/=""
   normal `i
 endfunction
 
