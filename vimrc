@@ -258,12 +258,6 @@ nnoremap ) :vertical resize +5<CR>
 " Change the way splits open by default
 set splitbelow
 set splitright
-
-" Even out splits when vim is resized
-augroup vim_splits
-  autocmd!
-  autocmd VimResized * :wincmd =
-augroup END
 " }}}
 
 " Better movement
@@ -354,6 +348,9 @@ augroup END
 " Various filetype settings ------ {{{
 augroup ft_settings
   autocmd!
+
+  " Resize on window resize
+  autocmd VimResized * :wincmd =
 
   " Comment string settings
   if empty(&commentstring) | setlocal commentstring=#\ %s | endif
