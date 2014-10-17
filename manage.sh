@@ -35,7 +35,6 @@ FILES=(\
     psqlrc \
     pylintrc \
     rspec \
-    tm_properties \
     tmux.conf \
     urlview \
     vim \
