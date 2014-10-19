@@ -50,6 +50,9 @@ defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
+# Dark UI
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
 # Disable Resume system-wide
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 
