@@ -491,6 +491,10 @@ defaults write com.apple.screencapture type -string "png"
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
+# Enable automatic update & download
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
+
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
