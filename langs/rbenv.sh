@@ -11,7 +11,6 @@ function install () {
   git clone https://github.com/sstephenson/rbenv.git $rbenvpath
   git clone https://github.com/sstephenson/rbenv-default-gems.git $rbenvpath/plugins/rbenv-default-gems
   git clone https://github.com/sstephenson/ruby-build.git $rbenvpath/plugins/ruby-build
-  git clone https://github.com/sstephenson/rbenv-gem-rehash.git $rbenvpath/plugins/rbenv-gem-rehash
   git clone https://github.com/tpope/rbenv-ctags.git $rbenvpath/plugins/rbenv-ctags
   git clone https://github.com/rkh/rbenv-update.git $rbenvpath/plugins/rbenv-update
 
