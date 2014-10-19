@@ -24,6 +24,7 @@ install macvim --HEAD
 install mercurial
 install msmtp
 install mutt
+install node
 install notmuch
 install openssh
 install openssl
