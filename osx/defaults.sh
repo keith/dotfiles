@@ -419,6 +419,9 @@ defaults write com.apple.Safari HomePage -string "about:blank"
 # Prevent Safari from opening 'safe' files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
+# Show full URL in Safari
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
 
 #
 # Mail
