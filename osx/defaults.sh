@@ -54,7 +54,7 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 
 # Disable Resume system-wide
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 
 # Enable subpixel font rendering on non-Apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
@@ -69,9 +69,6 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 #
 # Desktop & Screen Saver
 #
-
-# Disable menu bar transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
 # Disable the screen saver (System Preferences must be closed)
 defaults -currentHost write com.apple.screensaver idleTime -int 0
@@ -111,9 +108,6 @@ defaults write com.apple.dock autohide-time-modifier -float 0.0
 
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
-
-# 2D Dock
-defaults write com.apple.dock no-glass -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
