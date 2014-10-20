@@ -15,6 +15,7 @@ install grc
 install grep
 install heroku-toolbelt
 install jq
+install leiningen
 install less
 install libyaml
 install liftoff
@@ -42,9 +43,9 @@ install weechat --with-aspell --with-python --with-perl --with-ruby
 install wget
 install zsh
 
-install keithbsmiley/formulae/tmux-move-patch
-install keithbsmiley/formulae/ghb --HEAD
-install marooned
 install cocoapods
+install ghb --HEAD
+install keithbsmiley/formulae/tmux-move-patch
+install marooned
 
 link openssl --force
