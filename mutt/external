@@ -1,9 +1,8 @@
 # urlview
 macro pager <Return> "<pipe-entry>urlview<enter>" "follow links with urlview"
 
-# Goobook contacts settings
-set query_command="goobook query '%s'"
-macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+# Contacts settings
+set query_command="contacts '%s'"
 bind editor <Tab> complete-query
 
 # Not much full text searching
