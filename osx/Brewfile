@@ -35,6 +35,7 @@ install readline
 install reattach-to-user-namespace
 install sqlite
 install terminal-notifier
+install todo-txt
 install tree
 install urlview
 install vim --HEAD
