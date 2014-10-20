@@ -13,11 +13,11 @@ function install () {
   git clone https://github.com/sstephenson/ruby-build.git $rbenvpath/plugins/ruby-build
   git clone https://github.com/tpope/rbenv-ctags.git $rbenvpath/plugins/rbenv-ctags
   git clone https://github.com/rkh/rbenv-update.git $rbenvpath/plugins/rbenv-update
+  git clone https://github.com/Keithbsmiley/rbenv-bundler-cores.git $rbenvpath/plugins/rbenv-bundler-cores
 
   ln -s $DOTFILES/default-gems $rbenvpath
 
   source $DOTFILES/langs/ruby.bash
-  bundler-cores.sh
 }
 
 function die () {
