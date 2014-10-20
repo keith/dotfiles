@@ -6,7 +6,7 @@ faces=('ಠ_ಠ' 'ಠ_ರೃ' '﴾͡๏̯͡๏﴿' '๏_๏' 'ಠ▃ಠ' '(•�
 
 
 if [[ -z $1 ]]; then
-  echo 'Choose a face and | it to pbcopy'
+  echo 'Usage: faces [NUM]'
   i=1
   for f in ${faces[@]}
   do
