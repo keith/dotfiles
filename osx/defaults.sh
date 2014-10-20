@@ -429,11 +429,6 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # iChat/Messages
 #
 
-# Setup iChat's global hotkey
-defaults write com.apple.iChat GlobalKeyActive -int 1
-defaults write com.apple.iChat GlobalKeyCode -int 36
-defaults write com.apple.iChat GlobalKeyModifiers -int 768
-
 # Set to available when you come back from idle
 defaults write com.apple.iChat WelcomeBackMode -int 1
 
