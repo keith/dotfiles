@@ -22,17 +22,17 @@ let firstNameSearch = ABPerson.searchElementForProperty(kABFirstNameProperty,
                                                         label: nil,
                                                         key: nil,
                                                         value: searchString,
-                                                        comparison: comparison);
+                                                        comparison: comparison)
 let lastNameSearch = ABPerson.searchElementForProperty(kABLastNameProperty,
                                                        label: nil,
                                                        key: nil,
                                                        value: searchString,
-                                                       comparison: comparison);
+                                                       comparison: comparison)
 let emailSearch = ABPerson.searchElementForProperty(kABEmailProperty,
                                                     label: nil,
                                                     key: nil,
                                                     value: searchString,
-                                                    comparison: comparison);
+                                                    comparison: comparison)
 let comparisons = [firstNameSearch, lastNameSearch, emailSearch]
 let orComparison = ABSearchElement(forConjunction: CFIndex(kABSearchOr.value), children: comparisons)
 let found = addressBook.recordsMatchingSearchElement(orComparison) as [ABRecord]
