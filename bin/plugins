@@ -34,7 +34,7 @@ do
     git pull &
     popd > /dev/null
   else
-    git clone https://github.com/$repo.git $target/$name &
+    git clone --recursive https://github.com/$repo.git $target/$name &
   fi
 done
 
