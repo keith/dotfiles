@@ -24,6 +24,7 @@ Keithbsmiley/travis.vim
 kien/rainbow_parentheses.vim
 klen/python-mode
 majutsushi/tagbar
+nelstrom/vim-qargs
 othree/html5.vim
 pangloss/vim-javascript
 Raimondi/delimitMate
