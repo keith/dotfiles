@@ -71,20 +71,18 @@ let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
 
-let s:compiler_options = '-std=gnu99 -fobjc-arc -fmodules'
 let g:syntastic_objc_compiler = 'clang'
 let g:syntastic_objcpp_compiler = 'clang'
-let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
+" let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
 let g:syntastic_objc_check_header = 1
-let g:syntastic_objc_compiler_options = s:compiler_options
-let s:module_cache = expand('$HOME') . '/Library/Developer/Xcode/DerivedData/ModuleCache'
-if isdirectory(s:module_cache)
-  let g:syntastic_objc_compiler_options .= ' -fmodules-cache-path=' . s:module_cache
-endif
-let s:pch_path = '*/*.pch'
-if !empty(glob(s:pch_path))
-  let b:syntastic_objc_cflags = '-include ' . s:pch_path
-endif
+
+let s:pch_paths = ['*/*.pch', 'Resources/*/*.pch']
+for path in s:pch_paths
+  if !empty(glob(path))
+    let b:syntastic_objc_cflags = '-include ' . expand(path)
+    break
+  endif
+endfor
 
 " Allow toggling of syntastic errors list
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
@@ -103,25 +101,15 @@ nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
 
 " clang_complete
-let g:clang_auto_select = 0
 let g:clang_close_preview = 1
-let g:clang_compilation_database = ""
-let g:clang_complete_auto = 0
-let g:clang_complete_copen = 0
 let g:clang_complete_macros = 1
 let g:clang_complete_patterns = 1
-let g:clang_conceal_snippets = 1
-let g:clang_hl_errors = 0
-let g:clang_jumpto_back_key = "<C-5>"
-let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-let g:clang_periodic_quickfix = 0
+let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 let g:clang_snippets = 1
+let g:clang_snippets_engine = 'ultisnips'
 let g:clang_use_library = 1
-let g:clang_user_options = s:compiler_options
+let g:clang_auto_user_options = "compile_commands.json"
 let g:clang_make_default_keymappings = 0
-
-" Clighter
-let g:clighter_libclang_file = g:clang_library_path . '/libclang.dylib'
 
 " Clever-f
 let g:clever_f_across_no_line = 1

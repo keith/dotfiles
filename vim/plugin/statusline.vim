@@ -67,6 +67,10 @@ function! Spacing()
     return ''
   endif
 
+  if !empty(SyntasticStatuslineFlag())
+    return ' ' . SyntasticStatuslineFlag() . ' '
+  endif
+
   if mode() != "n" && exists("s:lastOutput")
     return s:lastOutput
   endif
