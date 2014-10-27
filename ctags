@@ -4,6 +4,7 @@
 --exclude=node_modules
 --exclude=vendor
 --exclude=Vendor
+--langmap=Lisp:+.clj
 --langdef=objc
 --langmap=objc:.m..mm..h
 --regex-objc=/\@interface[[:space:]]+([[:alnum:]_]+)/\1/i,interface/
