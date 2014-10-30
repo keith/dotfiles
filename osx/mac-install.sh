@@ -17,8 +17,6 @@ if [[ ! -e "$HOME/.bashrc" ]]; then
   exit
 fi
 
-source "$HOME/.bashrc"
-
 if ! which brew &> /dev/null; then
   echo "Installing homebrew"
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
