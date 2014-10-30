@@ -119,9 +119,8 @@ fi
 
 # If there's no 'open with' then we can let preview do it's thing.
 # Otherwise we've been told what to use.  So do an open -a.
-
 if [ -z $open_with ]; then
-    open $newfile
+    open -g $newfile
 else
-    open -a "$open_with" $newfile
+    open -ag "$open_with" $newfile
 fi
