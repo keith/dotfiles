@@ -582,7 +582,7 @@ defaults write com.tapbots.TweetbotMac soundType -int 1
 
 
 # Killing affected applications
-for app in Safari Finder Dock iTerm2 Mail Messages SystemUIServer Xquartz
+for app in Safari Finder Dock Mail Messages SystemUIServer Xquartz
 do
     killall "$app" >/dev/null 2>&1
 done
