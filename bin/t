@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+arguments="$@"
+if [[ "$#" -eq 0 ]]; then
+  arguments="list"
+fi
+
+todo.sh -d $DOTFILES/todo.cfg $arguments
