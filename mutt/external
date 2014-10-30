@@ -23,8 +23,6 @@ message-hook '(~N|~O) ~f notifications@github\.com' \
   <pipe-message>$DOTFILES/mutt/ghnotification.sh<enter> \
   <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>'"
 
-message-hook . "unset display_filter"
-message-hook '~f do-not-reply@trello\.com' \
-  "set display_filter=trelloparse"
+set display_filter=$DOTFILES/mutt/display_filter.sh
 
 # vim: ft=muttrc
