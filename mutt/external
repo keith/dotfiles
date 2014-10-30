@@ -27,13 +27,4 @@ message-hook . "unset display_filter"
 message-hook '~f do-not-reply@trello\.com' \
   "set display_filter=trelloparse"
 
-# Sidebar patch settings
-# set sidebar_delim   = '│'
-# set sidebar_visible = yes
-# set sidebar_shortpath = yes
-# set sidebar_width   = 30
-# bind index,pager <down>   sidebar-next
-# bind index,pager <up>     sidebar-prev
-# bind index,pager <right>  sidebar-open
-
 # vim: ft=muttrc
