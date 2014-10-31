@@ -7,6 +7,7 @@ DasIch/vim-mercurial
 elzr/vim-json
 guns/vim-clojure-highlight
 guns/vim-clojure-static
+guns/vim-sexp
 hynek/vim-python-pep8-indent
 jnwhiteh/vim-golang
 junegunn/goyo.vim
@@ -52,6 +53,7 @@ tpope/vim-rails
 tpope/vim-repeat
 tpope/vim-rhubarb
 tpope/vim-scriptease
+tpope/vim-sexp-mappings-for-regular-people
 tpope/vim-speeddating
 tpope/vim-surround
 tpope/vim-unimpaired
