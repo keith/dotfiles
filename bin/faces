@@ -2,7 +2,7 @@
 # Lifted from https://github.com/lukaszkorecki/DotFiles/blob/master/bins/faces
 # https://github.com/pengwynn/dotfile://github.com/pengwynn/dotfiles
 
-faces=('ಠ_ಠ' 'ಠ_ರೃ' '﴾͡๏̯͡๏﴿' '๏_๏' 'ಠ▃ಠ' '(•‿•)' 'Ծ_Ծ' '¯\(°_o)/¯' '(✌ﾟ∀ﾟ)☞' '╚(•⌂•)╝' 't(-_-t)t' '¯\_(ツ)_/¯' '◔_◔' '◎⃝ _◎⃝' ';ლ(ಠ_ಠლ)' '(╯°□°）╯︵ ┻━┻' 'ᶘ ᵒᴥᵒᶅ')
+faces=('ಠ_ಠ' 'ಠ_ರೃ' '﴾͡๏̯͡๏﴿' '๏_๏' 'ಠ▃ಠ' '(•‿•)' 'Ծ_Ծ' '¯\(°_o)/¯' '(✌ﾟ∀ﾟ)☞' '╚(•⌂•)╝' 't(-_-t)t' '¯\_(ツ)_/¯' '◔_◔' '◎⃝ _◎⃝'  '༼ つ ◕_◕ ༽つ' ';ლ(ಠ_ಠლ)' '(╯°□°）╯︵ ┻━┻' 'ᶘ ᵒᴥᵒᶅ')
 
 
 if [[ -z $1 ]]; then
