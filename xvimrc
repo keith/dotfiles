@@ -42,9 +42,6 @@ nnoremap ,tc :tabclose<CR>
 " Make computers make sense
 nnoremap Y y$
 
-" Sorting stuff in visual mode
-vnoremap } j}k
-vnoremap { k{j
 " I'd like the following command to save too
 " it doesn't seem like xvim supports this: \| update<CR>
 vnoremap s :sort ui<CR>
