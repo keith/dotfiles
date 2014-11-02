@@ -14,7 +14,7 @@ FILES=(\
     git_template \
     gitattributes \
     gitconfig \
-    gitignore_global \
+    gitignore \
     gnupg \
     goobookrc \
     haskeline \

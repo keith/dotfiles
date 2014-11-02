@@ -2,7 +2,7 @@
   name = Keith Smiley
   email = keithbsmiley@gmail.com
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
   editor = vim
   whitespace = trailing-space,space-before-tab
