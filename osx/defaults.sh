@@ -397,13 +397,19 @@ defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.Web
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Disable Webkit start page
-defaults write org.webkit.nightly.WebKit StartPageDisabled -bool YES
+defaults write org.webkit.nightly.WebKit StartPageDisabled -bool true
 
 # Set Safari's home page to 'about:blank' for faster loading
 defaults write com.apple.Safari HomePage -string "about:blank"
 
 # Prevent Safari from opening 'safe' files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+
+# Auto clear downloads
+defaults write com.apple.Safari DownloadsClearingPolicy -int 2
+
+# Don't fill passwords
+defaults write com.apple.Safari AutoFillPasswords -bool false
 
 # Show full URL in Safari
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
