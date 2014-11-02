@@ -579,6 +579,11 @@ defaults write com.drewwilson.screeny RecordAudio -bool false
 defaults write com.tapbots.TweetbotMac openURLInBackground -bool true
 defaults write com.tapbots.TweetbotMac showStatusItem -bool false
 defaults write com.tapbots.TweetbotMac soundType -int 1
+defaults write com.tapbots.TweetbotMac statusViewImageType -int 2
+defaults write com.tapbots.TweetbotMac globalHideShowHotKey -dict \
+  chars -string "c" \
+  keyCode -int 8 \
+  modifierFlags -int 1310985
 
 
 # Killing affected applications
