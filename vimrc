@@ -3,7 +3,10 @@
 "
 "
 
-set nocompatible " This must be first, because it changes other options
+" This must be first, because it changes other options
+if &compatible
+  set nocompatible
+endif
 
 " Source files before plugins
 source ~/.vim/before/*.vim
