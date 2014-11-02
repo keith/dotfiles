@@ -23,3 +23,5 @@ do
   rm -rf "$qldirectory/$qlgenerator"
   mv "$qlgenerator" "$qldirectory"
 done
+
+qlmanage -r
