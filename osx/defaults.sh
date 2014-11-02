@@ -77,7 +77,7 @@ defaults -currentHost write com.apple.screensaver idleTime -int 0
 defaults write com.apple.screensaver askForPassword -int 1
 
 # Set delay before password ask (minutes x 60)
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+defaults write com.apple.screensaver askForPasswordDelay -int 5
 
 # Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
@@ -584,6 +584,9 @@ defaults write com.tapbots.TweetbotMac globalHideShowHotKey -dict \
   chars -string "c" \
   keyCode -int 8 \
   modifierFlags -int 1310985
+
+# Caffeine
+defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool 1
 
 
 # Killing affected applications
