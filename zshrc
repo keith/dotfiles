@@ -1,14 +1,9 @@
-# Source the major default settings shared
-# between zsh and bash
-if [[ ! -f $HOME/.bashrc ]];then
-  echo "$HOME/.bashrc doesn't exist. Run ./manage.sh install again"
-else
-  source $HOME/.bashrc
-fi
+# Path to dotfiles repo
+export DOTFILES="$(dirname $(readlink $HOME/.zshrc))"
 
 # Find all zsh files
 typeset -U configs
-configs=($DOTFILES/*/*.zsh)
+configs=($DOTFILES/*/*.bash $DOTFILES/*/*.zsh)
 for file in ${configs:#*/completions.zsh}
 do
   source $file
