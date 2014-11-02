@@ -13,9 +13,8 @@ do
   fi
 done
 
-if [[ "$url" =~ \\*.git$ ]];then
-  url="${url:0:${#url}-4}"
-fi
+url=`echo $url | sed s/^git:/http:/`
+url=${url%".git"}
 
 if [[ $url == "" ]];then
   echo "No remotes found for $branch"
