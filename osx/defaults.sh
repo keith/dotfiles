@@ -577,6 +577,11 @@ defaults write com.tapbots.TweetbotMac globalHideShowHotKey -dict \
   keyCode -int 8 \
   modifierFlags -int 1310985
 
+# Seil
+defaults write org.pqrs.Seil sysctl -dict \
+  enable_capslock -bool true \
+  keycode_capslock -int 53
+
 # Caffeine
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool 1
 
