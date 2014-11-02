@@ -12,6 +12,10 @@ done
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
 compinit -i
-source $DOTFILES/zsh/completions.zsh
+
+for file in ${(M)configs:#*/completions.zsh}
+do
+  source $file
+done
 
 unset configs
