@@ -414,6 +414,10 @@ defaults write com.apple.Safari AutoFillPasswords -bool false
 # Show full URL in Safari
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
 
+# Show status bar
+defaults write com.apple.Safari ShowStatusBar -bool true
+defaults write com.apple.Safari ShowStatusBarInFullScreen -bool true
+
 # Toolbar setup
 /usr/libexec/PlistBuddy -c "Delete :NSToolbar\ Configuration\ BrowserToolbarIdentifier-v2:TB\ Item\ Identifiers" ~/Library/Preferences/com.apple.Safari.plist &>/dev/null
 /usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ BrowserToolbarIdentifier-v2:TB\ Item\ Identifiers array" ~/Library/Preferences/com.apple.Safari.plist
