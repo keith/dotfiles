@@ -242,6 +242,9 @@ sudo pmset -a sms 0
 sudo pmset hibernatemode 0
 sudo rm -rf /var/vm/sleepimage
 
+# Disable startup sound
+sudo nvram SystemAudioVolume=0
+
 # Power button behavior
 defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool NO
 
