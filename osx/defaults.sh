@@ -162,6 +162,24 @@ fi
 
 
 #
+# Firewall
+#
+
+# Enable Firewall. Possible values:
+# 0 = off
+# 1 = on for specific services
+# 2 = on for essential services
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+# Enable Stealth mode.
+sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
+# Enable Firewall logging.
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1
+
+# Disable IR remote control.
+sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
+
+
+#
 # Media
 #
 
@@ -275,6 +293,9 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerFromRight
 
 # Mouse: TwoButton mouse
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseButtonMode -string "TwoButton"
+
+# Turn Bluetooth off.
+sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
 
 
 #
@@ -422,6 +443,7 @@ defaults write com.apple.Safari DownloadsClearingPolicy -int 2
 
 # Don't fill passwords
 defaults write com.apple.Safari AutoFillPasswords -bool false
+defaults write com.apple.Safari AutoFillCreditCardData -int 0
 
 # Show full URL in Safari
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
