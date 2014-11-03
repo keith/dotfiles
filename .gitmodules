@@ -17,3 +17,6 @@
 [submodule "scripts/opp"]
 	path = scripts/opp
 	url = https://github.com/hchbaw/opp.zsh.git
+[submodule "scripts/dockutil"]
+	path = scripts/dockutil
+	url = https://github.com/kcrawford/dockutil.git
