@@ -129,8 +129,9 @@ defaults write com.apple.dock mru-spaces -bool false
 # Dock setup
 dockutil --remove all
 
-dockutil --add /Applications/Safari.app
+dockutil --add /Applications/Google\ Chrome.app
 dockutil --add /Applications/Tweetbot.app
+dockutil --add /Applications/Messages.app
 dockutil --add /Applications/Xcode.app
 dockutil --add /Applications/iTerm.app
 
