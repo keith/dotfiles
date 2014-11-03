@@ -1,5 +1,5 @@
 # Path to dotfiles repo
-export DOTFILES="$(dirname $(readlink $HOME/$(basename $0)))"
+export DOTFILES="$(dirname $(readlink $HOME/.bashrc))"
 
 configs=($DOTFILES/*/*.bash)
 for file in ${configs[@]}
