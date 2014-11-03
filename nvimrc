@@ -1,4 +1,4 @@
 set nocompatible
-runtime! plugin/python_setup.vim
+runtime! python_setup.vim
 
 source ~/.vimrc
