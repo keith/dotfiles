@@ -133,6 +133,7 @@ dockutil --add /Applications/Google\ Chrome.app
 dockutil --add /Applications/Tweetbot.app
 dockutil --add /Applications/Messages.app
 dockutil --add /Applications/Xcode.app
+dockutil --add /Applications/Dash.app
 dockutil --add /Applications/iTerm.app
 
 dockutil --add '/Applications' --view list --display folder --sort name
