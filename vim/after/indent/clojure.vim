@@ -1,1 +1,0 @@
-setlocal lispwords+=->,->>,do,match
