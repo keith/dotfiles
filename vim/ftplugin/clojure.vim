@@ -28,3 +28,5 @@ nnoremap <buffer> >(  <Plug>(sexp_emit_head_element)
 nnoremap <buffer> <)  <Plug>(sexp_emit_tail_element)
 nnoremap <buffer> <(  <Plug>(sexp_capture_prev_element)
 nnoremap <buffer> >)  <Plug>(sexp_capture_next_element)
+
+nnoremap <buffer> <leader>d :%Eval<CR>
