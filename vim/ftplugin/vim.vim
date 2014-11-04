@@ -1,5 +1,6 @@
 setlocal foldmethod=marker
 setlocal makeprg=source\ %
+setlocal iskeyword+=:
 
 augroup reload_vimrc
   autocmd!
