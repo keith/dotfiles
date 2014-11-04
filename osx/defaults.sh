@@ -180,6 +180,9 @@ sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1
 # Disable IR remote control.
 sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
 
+# Disable auto-adjust brightness
+sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
+
 
 #
 # Media
