@@ -10,7 +10,6 @@ guns/vim-clojure-static
 guns/vim-sexp
 hynek/vim-python-pep8-indent
 jnwhiteh/vim-golang
-junegunn/goyo.vim
 Keithbsmiley/cocoapods.vim
 Keithbsmiley/gist.vim
 Keithbsmiley/investigate.vim
