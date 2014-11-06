@@ -5,6 +5,7 @@ cakebaker/scss-syntax.vim
 christoomey/vim-tmux-navigator
 DasIch/vim-mercurial
 elzr/vim-json
+exu/pgsql.vim
 guns/vim-clojure-highlight
 guns/vim-clojure-static
 guns/vim-sexp
