@@ -10,6 +10,7 @@
 .hgignore
 .LSOverride
 .netrwhist
+.ropeproject
 .Spotlight-V100
 .tags
 .Trashes
