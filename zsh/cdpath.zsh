@@ -1,1 +1,1 @@
-cdpath=(~ ~/Git)
+cdpath=(~/Git)
