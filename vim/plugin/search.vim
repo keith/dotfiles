@@ -1,6 +1,8 @@
 " Setup ag options for grepping
-set grepprg=ag\ --vimgrep\ $*
-set grepformat=%f:%l:%c:%m
+if executable("ag")
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+endif
 
 " Custom Ag command
 command! -nargs=+ -bang Ag execute 'silent grep<bang> <args>' | copen | redraw!
