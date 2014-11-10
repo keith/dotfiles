@@ -1,10 +1,12 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
-action="$1"
-shift
-arguments="$@"
 if [[ "$#" -eq 0 ]]; then
+  action=""
   arguments="list"
+else
+  action="$1"
+  shift
+  arguments="$@"
 fi
 
 todo.sh -d $DOTFILES/todo.cfg $action $arguments
