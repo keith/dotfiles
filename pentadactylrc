@@ -4,3 +4,5 @@ set hlfind
 " faster please
 nmap -builtin -silent j 3j
 nmap -builtin -silent k 3k
+
+set passkeys+=trello.com:<Esc>bwjklhm?
