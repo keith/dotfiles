@@ -1,2 +1,6 @@
 set guioptions+=mTB
 set hlfind
+
+" faster please
+nmap -builtin -silent j 3j
+nmap -builtin -silent k 3k
