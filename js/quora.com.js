@@ -9,7 +9,7 @@ function appendParameter(param) {
 
 $(document).ready(function() {
   var URL = window.location.href;
-  var param = "share=1"
+  var param = "share=1";
   if (!URL.contains(param)) {
     appendParameter(param);
   }
