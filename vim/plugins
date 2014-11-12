@@ -25,6 +25,7 @@ Rip-Rip/clang_complete
 scrooloose/syntastic
 SirVer/ultisnips
 sjl/vitality.vim
+tommcdo/vim-lion
 tpope/vim-abolish
 tpope/vim-bundler
 tpope/vim-commentary
