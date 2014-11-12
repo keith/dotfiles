@@ -83,38 +83,38 @@ let &titleold=getcwd()
 set background=dark
 silent! colorscheme parsec
 
-set ttyfast          " Set that we have a fast terminal
-set laststatus=2     " Always show the statusline
-set t_Co=256         " Explicitly tell Vim that the terminal supports 256 colors
-set lazyredraw       " Don't redraw vim in all situations
-set synmaxcol=300    " The max number of columns to try and highlight
-set noerrorbells     " Don't make noise
-set autoread         " Watch for file changes and auto update
-set showmatch        " Set show matching parenthesis
-set matchtime=2      " The amount of time matches flash
-set display=lastline " Display super long wrapped lines
-set number           " Shows line numbers
+set ttyfast             " Set that we have a fast terminal
+set laststatus=2        " Always show the statusline
+set t_Co=256            " Explicitly tell Vim that the terminal supports 256 colors
+set lazyredraw          " Don't redraw vim in all situations
+set synmaxcol=300       " The max number of columns to try and highlight
+set noerrorbells        " Don't make noise
+set autoread            " Watch for file changes and auto update
+set showmatch           " Set show matching parenthesis
+set matchtime=2         " The amount of time matches flash
+set display=lastline    " Display super long wrapped lines
+set number              " Shows line numbers
 set relativenumber
-set ruler            " Shows current cursor location
-set cursorline       " Highlight the line the cursor is on
-set nrformats-=octal " Never use octal notation
-set nojoinspaces     " Don't add 2 spaces when using J
-set mouse=a          " Enable using the mouse if terminal emulator
-set mousehide        " Hide the mouse on typing
-set hlsearch         " Highlight search terms
-set incsearch        " Show searches as you type
-set wrap             " Softwrap text
-set linebreak        " Don't wrap in the middle of words
-set ignorecase       " Ignore case when searching
-set smartcase        " Ignore case if search is lowercase, otherwise case-sensitive
-set title            " Change the terminal's title
-set nobackup         " Don't keep backup files
-set nowritebackup    " Don't create a backup when overwriting a file
-set noswapfile       " Don't write swap files
-set updatetime=2000  " Set the time before plugins assume you're not typing
-set scrolloff=5      " Lines the cursor is to the edge before scrolling
-set sidescrolloff=5  " Same as scrolloff but horizontal
-set gdefault         " Adds g at the end of substitutions by default
+set ruler               " Shows current cursor location
+set cursorline          " Highlight the line the cursor is on
+set nrformats-=octal    " Never use octal notation
+set nojoinspaces        " Don't add 2 spaces when using J
+set mouse=a             " Enable using the mouse if terminal emulator
+set mousehide           " Hide the mouse on typing
+set hlsearch            " Highlight search terms
+set incsearch           " Show searches as you type
+set wrap                " Softwrap text
+set linebreak           " Don't wrap in the middle of words
+set ignorecase          " Ignore case when searching
+set smartcase           " Ignore case if search is lowercase, otherwise case-sensitive
+set title               " Change the terminal's title
+set nobackup            " Don't keep backup files
+set nowritebackup       " Don't create a backup when overwriting a file
+set noswapfile          " Don't write swap files
+set updatetime=2000     " Set the time before plugins assume you're not typing
+set scrolloff=5         " Lines the cursor is to the edge before scrolling
+set sidescrolloff=5     " Same as scrolloff but horizontal
+set gdefault            " Adds g at the end of substitutions by default
 set virtualedit=block   " Allow the cursor to move off the side in visual block
 
 " Default text width to 80
