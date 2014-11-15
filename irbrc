@@ -1,5 +1,3 @@
-# Ruby 1.8.7 compatible
-require 'rubygems'
 require 'irb/completion'
 
 # Interactive editor: use vim from within irb
