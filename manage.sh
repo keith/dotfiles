@@ -2,7 +2,6 @@
 
 FILES=(\
     agignore \
-    backupignore \
     bashrc \
     bin \
     ctags \
