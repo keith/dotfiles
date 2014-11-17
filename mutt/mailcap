@@ -1,10 +1,10 @@
 text/html; lynx -display_charset=utf-8 -width=78 -nolist -dump %s; nametemplate=%s.html; copiousoutput
 
-image/gif; $HOME/.mutt/view_attachment.sh %s gif
-image/jpg; $HOME/.mutt/view_attachment.sh %s jpg
+image/gif;   $HOME/.mutt/view_attachment.sh %s gif
 image/jpeg;  $HOME/.mutt/view_attachment.sh %s jpg
-image/png; $HOME/.mutt/view_attachment.sh %s png
+image/jpg;   $HOME/.mutt/view_attachment.sh %s jpg
+image/png;   $HOME/.mutt/view_attachment.sh %s png
 
-application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
-application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
 application/msword; ~/.mutt/view_attachment.sh %s "-"
+application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
+application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
