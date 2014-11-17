@@ -16,6 +16,7 @@ String.prototype.replaceLast = function(character) {
 };
 
 $(document).keypress(function(e) {
+  // The letter 'a'
   var aPressed = (e.which == 97 ? true : false);
   if (aPressed) {
     alternate(window.location.href);
