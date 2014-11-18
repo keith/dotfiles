@@ -1,1 +1,1 @@
-setlocal lispwords+=->,->>,do,match,describe,context,it
+setlocal lispwords+=->,->>,do,match,describe,context,it,around
