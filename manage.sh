@@ -13,7 +13,6 @@ FILES=(\
     gitattributes \
     gitconfig \
     gitignore \
-    gnupg \
     goobookrc \
     haskeline \
     hgrc \
