@@ -45,8 +45,3 @@ if [[ -d $HOME/.rbenv ]];then
   echo "Updating rbenv..."
   rbenv update
 fi
-
-if [[ -d $HOME/.pyenv ]];then
-  echo "Updating pyenv..."
-  pyenv update
-fi
