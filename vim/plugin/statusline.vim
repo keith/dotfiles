@@ -11,12 +11,6 @@ function! ModifiedString()
   endif
 endfunction
 
-function! s:CheckMixedIndent()
-  let hasSpaces = search("^\\s\\+", "nw")
-  let hasTabs = search("^\\t\\+", "nw")
-  return hasSpaces && hasTabs
-endfunction
-
 let g:currentmode = {
   \ '' : 'S-Block',
   \ '' : 'V-Block',
@@ -76,12 +70,9 @@ function! Spacing()
   endif
 
   let trailing = search('\s$', 'nw')
-  let mixed = s:CheckMixedIndent()
   let output = ''
   if trailing
     let output = '  ' . printf('trailing[%s]', trailing) . ' '
-  elseif mixed
-    let output = '  mixed-indent '
   endif
 
   let s:lastOutput = output
