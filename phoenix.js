@@ -54,6 +54,21 @@ function center() {
   win.setFrame(frame);
 }
 
+function left() {
+  var win = Window.focusedWindow();
+  var frame = win.frame();
+  frame.x = 0;
+  win.setFrame(frame);
+}
+
+function right() {
+  var win = Window.focusedWindow();
+  var sframe = win.screen().frameWithoutDockOrMenu();
+  var frame = win.frame();
+  frame.x = sframe.width - frame.width;
+  win.setFrame(frame);
+}
+
 function push() {
   var win = Window.focusedWindow();
   var frame = win.frame();
@@ -68,6 +83,8 @@ function push() {
 }
 
 api.bind('u', modifiers, function() { center() });
+api.bind('i', modifiers, function() { left() });
+api.bind('o', modifiers, function() { right() });
 api.bind('p', modifiers, function() { push() });
 
 api.bind('k', modifiers, function() { Window.fullScreen() });
