@@ -37,11 +37,13 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 
 # pushd for cd commands
-setopt autopushd pushdminus pushdsilent pushdtohome cdablevars
-DIRSTACKSIZE=8
-
-# Don't push duplicates
-setopt pushd_ignore_dups
+setopt AUTO_PUSHD
+setopt CDABLE_VARS
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_MINUS
+setopt PUSHD_SILENT
+setopt PUSHD_TO_HOME
+DIRSTACKSIZE=16
 
 # Don't require dots before files for globs
 setopt GLOB_DOTS
