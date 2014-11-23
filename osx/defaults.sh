@@ -486,6 +486,13 @@ defaults write com.apple.iChat WelcomeBackMode -int 1
 
 
 #
+# iCal
+#
+
+defaults write com.apple.iCal "number of hours displayed" -int 16
+
+
+#
 # Other Applications
 #
 
