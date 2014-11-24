@@ -12,10 +12,11 @@ endif
 source ~/.vim/before/*.vim
 
 " Plugin setup ------ {{{
-filetype off " Required for Vundle setup
+filetype off
 
 if empty(glob("~/.vim/autoload/pathogen.vim"))
-  execute "!curl -fLo ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+  let url = "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
+  execute "!curl -fLo ~/.vim/autoload/pathogen.vim " . url
 endif
 
 execute pathogen#infect()
@@ -32,9 +33,8 @@ runtime ftplugin/man.vim
 " Remap the leader from \ to ,
 let mapleader=","
 
-" http://stackoverflow.com/questions/10507344/get-vim-to-modify-the-file-instead-of-moving-the-new-version-on-it
-" http://www.jamison.org/2009/10/03/how-to-fix-the-crontab-no-changes-made-to-crontab-error-using-vim-in-linux/
-set backupcopy=yes             " Allow vim to write crontab files
+" Allow vim to write crontab files
+set backupcopy=yes
 
 " I - Disable the startup message
 " a - Avoid pressing enter after saves
@@ -130,11 +130,12 @@ endif
 " Completion options
 set complete=.,w,b,u,t,i
 set completeopt=menu
-set wildmenu                                     " Better completion in the CLI
-set wildmode=longest:full,full                   " Completion settings
+set wildmenu                                           " Better completion in the CLI
+set wildmode=longest:full,full                         " Completion settings
+
 " Ignore these folders for completions
-set wildignore+=.hg,.git,.svn                    " Version control
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=.hg,.git,.svn                          " Version control
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg         " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
 set wildignore+=tags,.tags
 
@@ -167,7 +168,6 @@ endif
 
 " Fuck you, help key.
 noremap  <F1> <Nop>
-inoremap <F1> <Nop>
 
 " Paging keys
 inoremap <PageDown> <Nop>
@@ -183,9 +183,6 @@ nnoremap E ge
 
 " Disable K
 vnoremap K <Nop>
-
-" Sort in visual mode and update
-vnoremap s :sort ui \| update <CR>
 
 " Reselect visual blocks after movement
 vnoremap < <gv
@@ -219,27 +216,9 @@ cnoremap w!! w !sudo tee % >/dev/null
 command! -bang Q q<bang>
 command! -bang W w<bang>
 
-" Edit vimrc with mapping
-nnoremap <leader>ov :call VimConf()<CR>
-function! VimConf()
-  silent! tabedit $MYVIMRC
-  silent! vsplit ~/.vim
-  wincmd h
-endfunction
-
-" Sort entire file unique
-nnoremap <leader>sf :call SortFile()<CR>
-function! SortFile()
-  normal! miggvG
-  sort ui
-  normal! v`i
-endfunction
-
-" Tab mappings ------ {{{
+" Tab mappings
 nnoremap <leader>tt :tabnew<cr>
 nnoremap <leader>tc :tabclose<cr>
-nnoremap <leader>tm :tabmove
-" }}}
 
 " Split window navigation ------ {{{
 if !exists('$TMUX')
@@ -273,10 +252,6 @@ nnoremap <leader><leader> <C-^>
 " Move to last edit location and put it in the center of the screen
 nnoremap <C-o> <C-o>zz
 
-" Objective-C matching bracket shortcuts
-" inoremap <leader>o <ESC>^i[<ESC>
-" nnoremap <leader>o ^i[<ESC>
-
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
 nnoremap <leader>4 :let @/ = ""<CR>
@@ -288,7 +263,7 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" Close the quickfix and location lists simultaneously
+" Close all the lists
 nnoremap <leader>q :call CloseLists()<CR>
 function! CloseLists()
   lclose
@@ -298,12 +273,10 @@ function! CloseLists()
 endfunction
 
 " Clean trailing whitespace
-nnoremap <silent> <leader>w :call ClearWhitespace()<CR>
+nnoremap <silent> <leader>w :call ClearWhitespace()\|update<CR>
 function! ClearWhitespace()
   normal mi
-  silent! %s/\s\+$//
-  let @/=""
-  update
+  silent! %s/\s\+$//e
   normal `i
 endfunction
 
@@ -363,10 +336,13 @@ augroup ft_settings
   autocmd BufLeave,FocusLost * silent! wall
 
   " Don't auto insert a comment when using O/o for a newline
-  autocmd BufRead,Syntax,VimEnter * set formatoptions-=o
+  autocmd VimEnter,BufRead * set formatoptions-=o
 
   " Return to the same position you left the file in
-  autocmd BufReadPost * call PositionRecall()
+  autocmd BufRead * call PositionRecall()
+
+  " Clear whitespace on save
+  autocmd BufWritePre * call ClearWhitespace()
 
   autocmd CursorHold <buffer> checktime
 augroup END
