@@ -1,6 +1,7 @@
 AndrewRadev/splitjoin.vim
 b4winckler/vim-objc
 cakebaker/scss-syntax.vim
+christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 elzr/vim-json
 hynek/vim-python-pep8-indent

@@ -260,3 +260,6 @@ let g:rails_projections = {
 
 " vim-surround
 let g:surround_{char2nr('@')} = "@\"\r\""
+
+" vim-sort-motion
+let g:sort_motion_flags = "ui"
