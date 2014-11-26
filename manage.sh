@@ -27,7 +27,6 @@ FILES=(\
     nvim \
     nvimrc \
     offlineimaprc \
-    pentadactylrc \
     phoenix.js \
     psqlrc \
     pylintrc \
