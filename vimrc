@@ -65,6 +65,11 @@ if has("persistent_undo")
   endif
 endif
 
+set directory=$HOME/.tmp/vim
+if !isdirectory(expand(&directory))
+  call mkdir(expand(&directory), "p")
+endif
+
 " On quit reset title
 let &titleold=getcwd()
 
