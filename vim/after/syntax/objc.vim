@@ -4,7 +4,7 @@
 syn keyword objcTypeModifier
       \ __autoreleasing
       \ __block
-      \ __bridge 
+      \ __bridge
       \ __bridge_retained
       \ __bridge_transfer
       \ __strong
