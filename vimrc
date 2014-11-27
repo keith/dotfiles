@@ -330,9 +330,6 @@ augroup END
 augroup ft_settings
   autocmd!
 
-  " Resize on window resize
-  autocmd VimResized * :wincmd =
-
   " Comment string settings
   if empty(&commentstring) | setlocal commentstring=#\ %s | endif
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
