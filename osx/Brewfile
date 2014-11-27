@@ -16,7 +16,6 @@ install grep
 install heroku-toolbelt
 install httpie
 install jq
-install leiningen
 install less
 install libyaml
 install liftoff
@@ -36,7 +35,6 @@ install readline
 install reattach-to-user-namespace
 install sqlite
 install terminal-notifier
-install todo-txt
 install tree
 install urlview
 install vim --HEAD
@@ -47,7 +45,8 @@ install zsh
 
 install cocoapods
 install ghb --HEAD
-install keithbsmiley/formulae/tmux-move-patch
+install tmux-move-patch
 install marooned
+install xcpretty
 
 link openssl --force
