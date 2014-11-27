@@ -3,14 +3,14 @@ require 'irb/completion'
 # Interactive editor: use vim from within irb
 begin
   require 'interactive_editor'
-rescue LoadError => err
+rescue LoadError
 end
 
 # Awesome print
 begin
   require 'awesome_print'
   AwesomePrint.irb!
-rescue LoadError => err
+rescue LoadError
 end
 
 # Use >> as prompt
@@ -26,5 +26,5 @@ IRB.conf[:HISTORY_FILE] = File::expand_path("~/.irbhistory")
 begin
   require 'factory_girl_rails'
   require 'faker'
-rescue LoadError => err
+rescue LoadError
 end
