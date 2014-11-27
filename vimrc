@@ -77,7 +77,6 @@ set background=dark
 silent! colorscheme parsec
 
 set ttyfast                 " Set that we have a fast terminal
-set laststatus=2            " Always show the statusline
 set t_Co=256                " Explicitly tell Vim that the terminal supports 256 colors
 set lazyredraw              " Don't redraw vim in all situations
 set synmaxcol=300           " The max number of columns to try and highlight
@@ -150,6 +149,23 @@ silent! set breakindentopt=shift:2
 " Check for file specific vim settings in the last 3 lines of the file
 set modeline
 set modelines=2
+
+" Status line setup (without plugins)
+set laststatus=2 " Always show the statusline
+" Left Side
+set statusline=
+set statusline+=%#IncSearch#%{&paste?'\ \ PASTE\ ':''}%*
+set statusline+=\ %f
+set statusline+=\ %m
+set statusline+=\ %r
+set statusline+=%=
+" Right Side
+set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
+set statusline+=%y
+set statusline+=\ %P
+set statusline+=:%l:
+set statusline+=%c
+set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
