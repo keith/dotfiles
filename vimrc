@@ -161,9 +161,9 @@ set statusline+=%=
 " Right Side
 set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
 set statusline+=%y
-set statusline+=\ %P
-set statusline+=:%l:
-set statusline+=%c
+set statusline+=\ \ %P
+set statusline+=-%l
+set statusline+=-%c
 set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
 
 if has("clipboard")     " If the feature is available
