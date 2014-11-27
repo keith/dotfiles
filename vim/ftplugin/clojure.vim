@@ -18,9 +18,12 @@ let g:rbpt_colorpairs = [
       \ ['red',         'firebrick3'],
     \ ]
 
-autocmd Syntax * RainbowParenthesesActivate
-autocmd Syntax * RainbowParenthesesLoadRound
-autocmd Syntax * RainbowParenthesesLoadSquare
+
+if exists(":RainbowParenthesesActivate") == 2
+  autocmd Syntax * RainbowParenthesesActivate
+  autocmd Syntax * RainbowParenthesesLoadRound
+  autocmd Syntax * RainbowParenthesesLoadSquare
+endif
 
 " Taken from
 " https://github.com/tpope/vim-sexp-mappings-for-regular-people/blob/master/plugin/sexp_mappings_for_regular_people.vim#L49-L52
