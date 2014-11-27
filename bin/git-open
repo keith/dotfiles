@@ -13,7 +13,8 @@ do
   fi
 done
 
-url=`echo $url | sed s/^git:/http:/`
+url=`echo $url | sed -E s+^git\(:\|\@\)\(//\)?+http://+`
+url=`echo $url | sed s+\.org:+.org/+`
 url=${url%".git"}
 
 if [[ $url == "" ]];then
