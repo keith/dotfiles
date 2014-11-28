@@ -131,6 +131,7 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
 set wildignore+=tags,.tags
 
 " Dictionary for custom words
+set dictionary+=/usr/share/dict/words
 set spellfile=$HOME/.vim/custom-words.utf-8.add
 
 " Setup stuff for mksession
