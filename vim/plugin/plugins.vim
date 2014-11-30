@@ -136,7 +136,7 @@ let g:pymode_doc = 0
 " let delimitMate_expand_cr = 1
 let delimitMate_quotes = "\" '"
 
-" Tab/Enter usage ------ {{{
+" Tab/Enter usage
 " If the popup menu is open go back with shift-tab
 inoremap <S-Tab> <C-R>=BackwardsTab()<CR>
 function! BackwardsTab()
@@ -170,7 +170,7 @@ function! LoadedUltiSnips()
   endif
 endfunction
 
-inoremap <Tab> <C-R>=TabWrapper()<CR>
+inoremap <silent> <Tab> <C-R>=TabWrapper()<CR>
 function! TabWrapper()
   if pumvisible()
     return "\<C-y>"
@@ -199,33 +199,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<F30>"
 let g:snips_author = "Keith Smiley"
 let g:ulti_expand_or_jump_res = 0
 
-" ...
-let mappings = substitute(maparg("<CR>", 'i'), '<CR>', '', '')
-execute 'imap <CR> <C-R>=EnterWrapper()' . mappings . '<CR><CR>'
-function! EnterWrapper()
-  if pumvisible()
-    if LoadedUltiSnips()
-      call UltiSnips#ExpandSnippetOrJump()
-      if g:ulti_expand_or_jump_res == 0
-        return "\<CR>"
-      else
-        return "\<C-y>"
-      endif
-    else
-      return "\<C-y>"
-    endif
-  endif
-
-  if LoadedUltiSnips()
-    call UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-      return "\<CR>"
-    endif
-  endif
-
-  return "\<C-R>=delimitMate#ExpandReturn()"
-endfunction
-
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
 function! ForceTab()
@@ -235,14 +208,9 @@ function! ForceTab()
   let invalidchar = index(g:invalid_tab_chars, lastchar) < 0
   return !(column > 0 && (iskeychar && invalidchar))
 endfunction
-" }}}
-
-" javascript-libraries-syntax.vim
-let g:used_javascript_libs = 'angularjs,jasmine'
 
 " Don't hide quotes in elzr/vim-json
-" IMO this is way too confusing, it makes me forget quotes
-" On lines after others
+" This is way too confusing, it makes me forget quotes on lines after others
 let g:vim_json_syntax_conceal = 0
 
 " vim-markdown
