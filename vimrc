@@ -319,12 +319,6 @@ augroup window_sizes
   " Set the minimum window width for vertical splits
   autocmd VimEnter * silent! set winwidth=80
   autocmd VimEnter * silent! set winminwidth=20
-  " Setup the height of vertical splits
-  " https://www.destroyallsoftware.com/file-navigation-in-vim.html
-  " Order is key
-  " autocmd VimEnter * silent! set winheight=7
-  " autocmd VimEnter * silent! set winminheight=7
-  " autocmd VimEnter * silent! set winheight=999
 augroup END
 
 " Various filetype settings
