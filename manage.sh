@@ -6,7 +6,6 @@ FILES=(\
     bin \
     ctags \
     curlrc \
-    emacs.d \
     gemrc \
     ghci \
     git_template \
