@@ -263,7 +263,7 @@ nnoremap <C-o> <C-o>zz
 
 " Remove the last search thus clearing the highlight
 " This clears the search register denoted by @/
-nnoremap <leader>4 :let @/ = ""<CR>
+nnoremap <silent> <leader>4 :let @/=""<CR>
 
 " Don't automatically jump on search
 nnoremap * :keepjumps normal! mi*`i<CR>
