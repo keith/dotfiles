@@ -42,7 +42,6 @@ set termencoding=utf-8         " Set the default encodings just in case $LANG is
 set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
 set autoindent                 " Indent the next line matching the previous line
 set smartindent                " Smart auto-indent when creating a new line
-set cursorline                 " highlight current line
 set tabstop=2                  " Number of spaces each tab counts for
 set shiftwidth=2               " The space << and >> moves the lines
 set softtabstop=2              " Number of spaces for some tab operations
@@ -342,6 +341,12 @@ augroup ft_settings
   autocmd BufWritePre * call ClearWhitespace()
 
   autocmd CursorHold <buffer> checktime
+augroup END
+
+augroup cursorline
+  autocmd!
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
 augroup END
 
 " ObjC curly brace error fix
