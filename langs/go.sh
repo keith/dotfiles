@@ -10,7 +10,7 @@ function install () {
 }
 
 function die () {
-  echo "Usage ./$(basename $0) install"
+  echo "Usage ./$(basename "$0") install"
   exit
 }
 

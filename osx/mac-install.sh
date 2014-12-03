@@ -8,7 +8,7 @@ if [[ ! -e "../manage.sh" ]]; then
   exit
 fi
 
-cd $(dirname $0)
+cd "$(dirname "$0")"
 cd ..
 ./manage.sh install
 
@@ -22,6 +22,6 @@ if ! which brew &> /dev/null; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-brew bundle $DOTFILES/osx/Brewfile
+brew bundle "$DOTFILES/osx/Brewfile"
 
 ./install-langs.sh install

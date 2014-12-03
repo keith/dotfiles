@@ -44,7 +44,7 @@ LINUX=(Xdefaults Xmodmap)
 function custom_path () {
     for i in "${!PATHS[@]}"
     do
-        if [[ $1 == $i ]]; then
+        if [[ $1 == "$i" ]]; then
             return 0
         fi
     done
@@ -66,35 +66,35 @@ function link () {
     fi
 
     if is_osx; then
-        for FILE in ${LINUX[@]}
+        for FILE in "${LINUX[@]}"
         do
-            if [[ $FILE == $filename ]]; then
+            if [[ $FILE == "$filename" ]]; then
                 return
             fi
         done
     fi
 
-    local path=$(new_path $filename)
-    if [[ ! -e $path ]]; then
+    local path=$(new_path "$filename")
+    if [[ ! -e "$path" ]]; then
         echo "Linking $filename to $path"
-        ln -s $PWD/$filename $path
+        ln -s "$PWD/$filename" "$path"
     fi
 }
 
 # Delete the linked file path
 function unlink () {
     local filename=$1
-    local path=$(new_path $filename)
+    local path=$(new_path "$filename")
 
-    if [ -e $path ]; then
-        rm $(new_path $1)
-        echo "Removing $(new_path $1)"
+    if [ -e "$path" ]; then
+        rm "$(new_path "$1")"
+        echo "Removing $(new_path "$1")"
     fi
 }
 
 # Loops through and link all files without links
 function install_links () {
-    for FILE in ${FILES[@]}
+    for FILE in "${FILES[@]}"
     do
         link $FILE
     done
@@ -102,7 +102,7 @@ function install_links () {
 
 # Function to remove all linked files
 function remove_links () {
-    for FILE in ${FILES[@]}
+    for FILE in "${FILES[@]}"
     do
         unlink $FILE
     done

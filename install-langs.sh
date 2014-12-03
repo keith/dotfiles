@@ -3,7 +3,7 @@
 cd langs
 langs=(*.sh)
 
-for lang in ${langs[@]}
+for lang in "${langs[@]}"
 do
     ./$lang install
 done

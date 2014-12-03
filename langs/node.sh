@@ -3,7 +3,7 @@
 function install () {
   nodes=(bower coffee-script grunt-cli)
 
-  for n in ${nodes[@]}
+  for n in "${nodes[@]}"
   do
     npm install -g $n
   done
@@ -12,7 +12,7 @@ function install () {
 }
 
 function die () {
-  echo "Usage ./$(basename $0) install"
+  echo "Usage ./$(basename "$0") install"
   exit
 }
 

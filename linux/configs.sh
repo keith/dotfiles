@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dir=$DOTFILES/linux/configs
-FILES=$(ls $dir)
+FILES=$(ls "$dir")
 p=$HOME/.config
 
 function link() {
@@ -15,7 +15,7 @@ function link() {
   local path=$p
   if [[ ! -d $path/$folder ]];then
     echo "Linking $dir/$folder to $path"
-    ln -s $dir/$folder $path
+    ln -s "$dir/$folder" "$path"
   fi
 }
 
@@ -25,13 +25,14 @@ function new_path() {
   }
 
   function install_links() {
-  for FILE in ${FILES[@]};do
-    link $FILE
+  for FILE in "${FILES[@]}"
+  do
+    link "$FILE"
   done
 }
 
 if [[ ! -d "$p" ]];then
-  mkdir -p $p
+  mkdir -p "$p"
 fi
 
 install_links

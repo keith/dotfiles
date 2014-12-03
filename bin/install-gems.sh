@@ -6,7 +6,7 @@ function ctrl_c() {
 }
 
 gems=$(cat ~/.rbenv/default-gems)
-for gem in ${gems[@]}
+for gem in "${gems[@]}"
 do
-  gem install $gem
+  gem install "$gem"
 done
