@@ -9,7 +9,7 @@ function alternate(URL) {
   if (newURL) {
     window.location.href = newURL;
   }
-};
+}
 
 String.prototype.replaceLast = function(character) {
   return this.substr(0, this.length - 1) + character;
@@ -30,14 +30,14 @@ function selectElements(_this) {
   _this.close = _this.actions.querySelector('.js-comment-and-button');
   _this.comment = _this.actions.querySelector('.primary');
   return _this.textarea = commentForm().querySelector('textarea');
-};
+}
 
 function commentForm() {
   return document.querySelector('.js-new-comment-form');
-};
+}
 
 function button(text, innerHTML, closable) {
-  if (closable == null) {
+  if (closable === null) {
     closable = true;
   }
 
@@ -61,7 +61,7 @@ function button(text, innerHTML, closable) {
   });
 
   return btn;
-};
+}
 
 function insertButtons(elem) {
   var btn, closeButtonGroup, openButtonGroup;
@@ -85,7 +85,7 @@ function insertButtons(elem) {
   openButtonGroup.appendChild(btn);
   elem.appendChild(closeButtonGroup);
   elem.appendChild(openButtonGroup);
-};
+}
 
 (function() {
   if (!commentForm()) {

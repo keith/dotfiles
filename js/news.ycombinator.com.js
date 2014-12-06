@@ -31,7 +31,7 @@ for(var i = 0; i < defaults.length; i++) {
           break;
         }
       }
-    }
+    };
   })(collapse, defaults[i].getElementsByClassName("comment")[0],
     defaults[i].parentNode.getElementsByTagName("img")[0].width);
 

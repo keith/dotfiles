@@ -1,6 +1,6 @@
 function jump(anchor) {
   var url = location.href;
-  location.href = "#" + anchor
+  location.href = "#" + anchor;
 }
 
 $(document).keypress(function(e) {
