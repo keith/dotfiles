@@ -6,7 +6,6 @@ christoomey/vim-tmux-navigator
 elzr/vim-json
 hynek/vim-python-pep8-indent
 Keithbsmiley/gist.vim
-Keithbsmiley/investigate.vim
 Keithbsmiley/parsec.vim
 Keithbsmiley/swift.vim
 Keithbsmiley/tmux.vim

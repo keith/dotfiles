@@ -117,18 +117,9 @@ let g:clever_f_across_no_line = 1
 " Dispatch.vim
 nnoremap <leader>d :w<CR>:Dispatch<CR>
 
-" investigate.vim
-nnoremap <silent> K :call investigate#Investigate()<cr>
-let g:investigate_use_dash = 1
-let g:investigate_use_url_for_haskell = 1
-" let g:investigate_command_for_python = "^i!pydoc ^s"
-let g:investigate_dash_for_eruby="rails"
-let g:investigate_command_for_markdown = "dict://^s"
-
 " python-mode
 let g:pymode_indent = 0
 let g:pymode_breakpoint = 0
-let g:pymode_doc = 0
 
 " delimitMate
 " Currently doesn't work with vim-endwise
