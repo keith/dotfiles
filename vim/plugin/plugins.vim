@@ -207,18 +207,12 @@ let g:vim_json_syntax_conceal = 0
 " vim-markdown
 let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
 
-" tern
-let g:tern_map_prefix = '<Leader>'
-
 " rails.vim
 let g:rails_projections = {
       \ "config/routes.rb": {"command": "routes"},
       \ "spec/factories.rb": {"command": "factories"},
       \ "spec/factories/*.rb": {"command": "factories"}
     \ }
-
-" vim-surround
-let g:surround_{char2nr('@')} = "@\"\r\""
 
 " vim-sort-motion
 let g:sort_motion_flags = "ui"
