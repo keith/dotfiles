@@ -80,6 +80,6 @@ function +vi-git-untracked() {
 }
 
 # Show the hostname over SSH
-if [[ -n $SSH_CLIENT ]];then
+if [[ -n $SSH_CONNECTION ]];then
   export PS1="%m $PS1"
 fi
