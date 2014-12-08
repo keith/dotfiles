@@ -29,6 +29,7 @@ FILES=(\
     phoenix.js \
     psqlrc \
     pylintrc \
+    rbenv \
     rspec \
     tmux.conf \
     urlview \

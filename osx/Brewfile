@@ -31,8 +31,12 @@ install openssh
 install openssl
 install postgresql
 install python
+install rbenv
+install rbenv-ctags
+install rbenv-default-gems
 install readline
 install reattach-to-user-namespace
+install ruby-build
 install sqlite
 install terminal-notifier
 install tree

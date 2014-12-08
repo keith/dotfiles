@@ -22,6 +22,8 @@ linux/configs/fish/generated_completions
 flycheck_*
 emacs.d/elpa
 *.eld
+rbenv/*
+!rbenv/default-gems
 
 ####### Linux #######
 !.gitignore
