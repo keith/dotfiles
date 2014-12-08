@@ -3,12 +3,9 @@
 # A tiny script to check available domain names
 # Uses the Domai.nr API http://domai.nr/api/docs/json
 # A blatent ripoff of http://blog.jerodsanto.net/2012/11/a-domainr-cli-in-less-than-15-lines-of-ruby/
-
 require 'rubygems'
 require 'open-uri'
-
-# `[sudo] install colorize json`
-require 'colorize'
+require 'colored'
 require 'json'
 
 if ARGV.count != 1

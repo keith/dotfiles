@@ -2,9 +2,7 @@ gem-ctags
 
 awesome_print
 bundler
-camper_van
 colored
-colorize
 gem-browse
 hookup
 interactive_editor
@@ -14,4 +12,3 @@ mkgitignore
 pinup
 rdiscount
 rspec
-xcpretty
