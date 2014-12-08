@@ -49,8 +49,9 @@ install zsh
 
 install cocoapods
 install ghb --HEAD
-install tmux-move-patch
 install marooned
+install pinup
+install tmux-move-patch
 install xcpretty
 
 link openssl --force
