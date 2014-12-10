@@ -29,6 +29,7 @@ install node
 install notmuch
 install openssh
 install openssl
+install parallel
 install postgresql
 install python
 install rbenv

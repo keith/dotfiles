@@ -18,6 +18,8 @@ containsElement () {
 
 readarray -t repos < $file
 names=()
+existing=()
+new=()
 
 for repo in ${repos[@]}
 do
@@ -27,18 +29,38 @@ do
     continue
   fi
 
-  names[${#names[@]}]=$name
   path="$target/$name"
+  names[${#names[@]}]=$name
   if [[ -d $path ]];then
-    pushd $path > /dev/null
-    git pull &
-    popd > /dev/null
+    existing[${#existing[@]}]=$path
   else
-    git clone --recursive https://github.com/$repo.git $target/$name &
+    new[${#new[@]}]="git clone --recursive https://github.com/$repo.git $target/$name"
   fi
 done
 
-wait
+if command -v parallel &> /dev/null;then
+  if [[ "${#existing[@]}" -gt "0" ]];then
+    parallel -j0 cd {}\; pwd\; git pull ::: "${existing[@]}"
+  fi
+
+  if [[ "${#new[@]}" -gt "0" ]];then
+    parallel -j0 ::: "${new[@]}"
+  fi
+else
+  for dir in ${existing[@]}
+  do
+    pushd $dir > /dev/null
+    git pull &
+    popd > /dev/null
+  done
+
+  for ((i = 0; i < ${#new[@]}; i++))
+  do
+    eval "${new[$i]} &"
+  done
+
+  wait
+fi
 
 existing=($(ls $target))
 for dir in ${existing[@]}
