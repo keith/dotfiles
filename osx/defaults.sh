@@ -327,6 +327,14 @@ defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
 # Flash the : in the menu bar
 defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
 
+# 24 hour time
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
+defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
+  1 -string "H:mm" \
+  2 -string "H:mm:ss" \
+  3 -string "H:mm:ss z" \
+  4 -string "H:mm:ss zzzz" \
+
 
 #
 # Battery Percentage
