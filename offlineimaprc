@@ -16,7 +16,7 @@ footer = "\n"
 localrepository  = gmail-local
 remoterepository = gmail-remote
 status_backend   = sqlite
-postsynchook     = notmuch new
+postsynchook     = notmuch new &
 
 [Repository gmail-local]
 type = Maildir
@@ -68,7 +68,7 @@ folderfilter = lambda folder: folder not in [
 localrepository  = thoughtbot-local
 remoterepository = thoughtbot-remote
 status_backend   = sqlite
-postsynchook     = notmuch new
+postsynchook     = notmuch new &
 
 [Repository thoughtbot-local]
 type = Maildir
