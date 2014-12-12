@@ -333,7 +333,7 @@ defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
   1 -string "H:mm" \
   2 -string "H:mm:ss" \
   3 -string "H:mm:ss z" \
-  4 -string "H:mm:ss zzzz" \
+  4 -string "H:mm:ss zzzz"
 
 
 #
