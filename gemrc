@@ -1,9 +1,6 @@
 ---
 :backtrace: false
 :bulk_threshold: 1000
-:sources:
-- https://rubygems.org/
-- http://rubygems.org
 :update_sources: true
 :verbose: true
 :ssl_verify_mode: 0
