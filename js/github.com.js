@@ -16,6 +16,12 @@ String.prototype.replaceLast = function(character) {
 };
 
 $(document).keypress(function(e) {
+  // Exit early if we're in an input field
+  // This wasn't needed in Chrome but is in Safari
+  if (document.activeElement.nodeName === "INPUT") {
+    return;
+  }
+
   // The letter 'a'
   var aPressed = (e.which == 97 ? true : false);
   if (aPressed) {
