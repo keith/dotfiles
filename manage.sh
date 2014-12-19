@@ -35,8 +35,6 @@ FILES=(\
     urlview \
     vim \
     vimrc \
-    Xdefaults \
-    Xmodmap \
     xvimrc \
     zshrc \
 )
@@ -64,15 +62,6 @@ function link () {
     if [[ ! -e $filename ]]; then
         echo "$filename doesn't exist"
         return
-    fi
-
-    if is_osx; then
-        for FILE in "${LINUX[@]}"
-        do
-            if [[ $FILE == "$filename" ]]; then
-                return
-            fi
-        done
     fi
 
     local path=$(new_path "$filename")
@@ -107,14 +96,6 @@ function remove_links () {
     do
         unlink $FILE
     done
-}
-
-function is_osx () {
-    if [[ $OSTYPE == darwin* ]];then
-        return 0
-    else
-        return 1
-    fi
 }
 
 # Fuction to print the usage and exit when there's bad input
