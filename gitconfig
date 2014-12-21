@@ -27,6 +27,9 @@
   log = true
   ff = only
   stat = true
+[merge "cocoapods"]
+  name = CocoaPods
+  driver = pod install
 [merge "bundler"]
   name = bundler
   driver = bundle
