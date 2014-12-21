@@ -38,7 +38,6 @@ FILES=(\
     xvimrc \
     zshrc \
 )
-LINUX=(Xdefaults Xmodmap)
 
 function custom_path () {
     for i in "${!PATHS[@]}"
