@@ -15,6 +15,15 @@ String.prototype.replaceLast = function(character) {
   return this.substr(0, this.length - 1) + character;
 };
 
+$(document).ready(function() {
+  $(".file > .meta > .actions").each(function() {
+    $(this).prepend("<a href=\"#\" class=\"minibutton\">Remove</a>");
+    $(this).on("click", function() {
+      $(this).closest("div.file").remove();
+    });
+  });
+});
+
 $(document).keypress(function(e) {
   // Exit early if we're in an input field
   // This wasn't needed in Chrome but is in Safari
