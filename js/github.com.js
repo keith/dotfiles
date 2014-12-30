@@ -17,8 +17,9 @@ String.prototype.replaceLast = function(character) {
 
 $(document).ready(function() {
   $(".file > .meta > .actions").each(function() {
-    $(this).prepend("<a href=\"#\" class=\"minibutton\">Remove</a>");
-    $(this).on("click", function() {
+    var link = $("<a href=\"#\" class=\"minibutton\">Remove</a>");
+    $(this).prepend(link);
+    link.click(function() {
       $(this).closest("div.file").remove();
       return false;
     });
