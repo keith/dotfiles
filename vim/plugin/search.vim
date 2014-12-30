@@ -18,6 +18,7 @@ function! TODOSearch()
 endfunction
 
 " Custom search motions
+" From http://www.vimbits.com/bits/153
 nnoremap <silent> s :set operatorfunc=<SID>GrepMotion<CR>g@
 nmap <silent> S s$
 xnoremap <silent> s :<C-U>call <SID>GrepMotion(visualmode())<CR>
