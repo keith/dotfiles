@@ -20,6 +20,7 @@ $(document).ready(function() {
     $(this).prepend("<a href=\"#\" class=\"minibutton\">Remove</a>");
     $(this).on("click", function() {
       $(this).closest("div.file").remove();
+      return false;
     });
   });
 });
