@@ -8,7 +8,7 @@ endif
 command! -nargs=+ -bang Ag execute 'silent grep<bang> <args>' | copen | redraw!
 
 " Find TODO and FIXME comments
-silent! command Todo call TODOSearch()
+command Todo call TODOSearch()
 function! TODOSearch()
   if executable("ag") && exists(":Ag") > 0
     Ag! "TODO\|FIXME"
