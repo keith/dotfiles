@@ -14,7 +14,7 @@ nnoremap sag :Ag! <cword><CR>
 silent! command Todo call TODOSearch()
 function! TODOSearch()
   if executable("ag") && exists(":Ag") > 0
-    Ag! 'TODO|FIXME'
+    Ag! "TODO\|FIXME"
   else
     noautocmd vimgrep /TODO\|FIXME/j ** | copen
   endif
