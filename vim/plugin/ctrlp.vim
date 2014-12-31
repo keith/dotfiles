@@ -24,6 +24,10 @@ function! SearchCommand()
   return l:command
 endfunction
 
+function! s:EscapeFilePath(path)
+  return substitute(a:path, ' ', '\\ ', 'g')
+endfunction
+
 function! FuzzyFindCommand(vimCommand)
   try
     let selection = system(SearchCommand() . " | selecta")
@@ -33,7 +37,7 @@ function! FuzzyFindCommand(vimCommand)
     return
   endtry
   redraw!
-  exec ":" . a:vimCommand . " " . alternate#EscapeFilePath(selection)
+  exec ":" . a:vimCommand . " " . s:EscapeFilePath(selection)
 endfunction
 
 nnoremap <C-p>  :call FuzzyFindCommand("e")<cr>
