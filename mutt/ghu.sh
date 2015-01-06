@@ -1,42 +1,48 @@
 #!/bin/sh
 #
 # pbrisbin 2014
-# https://github.com/pbrisbin/ghu.git
 #
 ###
-unsubscribe=$(sed "/^List-Unsubscribe: /,/^[A-Z].*: /!d
-  #
-  # Result:
-  #
-  #   List-Unsubscribe: <mailto:...>,
-  #    <https://...>
-  #   X-Whatever: ...
-  #
+err_usage() {
+  cat >&2 <<EOF
+Usage: ghu [options] < file
 
-s/^[A-Z].*: //g
-  #
-  # Result:
-  #
-  #   <mailto:...>,
-  #    <https://...>
-  #   ...
-  #
+Parse stdin as an email for any List-Unsubscribe header containing a URL. Visit
+that URL using curl, thereby unsubscribing you from the thread.
 
-/http/!d
-  #
-  # Result:
-  #
-  #    <https://...>
-  #
+Options:
+  -o, --open    Open the unsubscribe link with \$BROWSER, not curl
+  -p, --print   Print the unsubscribe link, do not visit it
 
-s/^ *<\([^>]*\)> *$/\1/g
-  #
-  # Result:
-  #
-  #   https:...
-  #
-")
+EOF
 
-[ -n "$unsubscribe" ] || exit 1
+  exit 64
+}
 
-curl -# "$unsubscribe" >/dev/null && printf "OK\n"
+parseheader="$(dirname "$0")"/parse-header
+
+get() {
+  curl --silent "$@" | sed "
+    /^.*\(You've been unsubscribed from the thread\).*$/!d
+    s//\1/g"
+}
+
+parse() {
+  local url_re='https?://[^[:space:]>]+'
+
+  "$parseheader" "List-Unsubscribe" | grep -ioE "$url_re"
+}
+
+if [ -n "$1" ]; then
+  case "$1" in
+    -o|--open)  get() { ${BROWSER:-open} "$@"; } ;;
+    -p|--print) get() { printf "%s\n" "$*"; } ;;
+    *) err_usage ;;
+  esac
+fi
+
+if unsubscribe="$(parse)" && [ -n "$unsubscribe" ]; then
+  get "$unsubscribe"
+else
+  exit 1
+fi
