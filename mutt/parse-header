@@ -6,8 +6,11 @@
 # - Prints a single newline if the header's not found
 #
 ###
-sed "/^$1: /,/^\([A-Z].*: \| *$\)/!d" | head -1 |\
-  sed "s/^$1: \(.*\)/\1/g" | sed "s/<\([^>]*\)>.*/\1/g" |\
-  xargs printf -- "%s " | sed "s/  *$//g"
+sed "/^$1: /,/^\([A-Z].*: \| *$\)/!d" |\
+  head -1 |\
+  sed "s/^$1: \(.*\)/\1/g" |\
+  sed "s/.*<\(http[^>]*\)>.*/\1/g" |\
+  xargs printf -- "%s "|\
+  sed "s/  *$//g"
 
 printf "\n"
