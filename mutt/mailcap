@@ -1,4 +1,4 @@
-text/html; lynx -display_charset=utf-8 -width=78 -nolist -dump %s; nametemplate=%s.html; copiousoutput
+text/html; lynx -display_charset=utf-8 -width=100 -nolist -dump %s; nametemplate=%s.html; copiousoutput
 
 image/gif;   $HOME/.mutt/view_attachment.sh %s gif
 image/jpeg;  $HOME/.mutt/view_attachment.sh %s jpg
