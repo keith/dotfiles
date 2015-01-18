@@ -17,6 +17,7 @@ install heroku-toolbelt
 install httpie
 install jq
 install less
+install libxml2
 install libyaml
 install liftoff
 install llvm
