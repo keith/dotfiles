@@ -301,23 +301,21 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>665 268 445 103 0 0 1280 777 </string>
+	<string>1257 99 689 292 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>159 228 796 475 0 0 1280 777 </string>
+	<string>273 857 796 475 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>332 288 620 392 0 0 1280 777 </string>
+	<string>972 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>80 193 592 584 0 0 1280 777 </string>
+	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2 0 1273 777 0 0 1280 777 </string>
+	<string>1282 10 1273 1407 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>5 375 665 402 0 0 1280 777 </string>
+	<string>2562 263 1425 867 2560 253 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>5 375 665 402 0 0 1280 777 </string>
+	<string>2562 263 1433 867 2560 253 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>236 366 665 402 0 0 1280 777 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>215 344 665 402 0 0 1280 777 </string>
+	<string>265 368 665 402 0 0 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_28E552BA-33EC-4C94-80D5-CE22671F6732</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_28E552BA-33EC-4C94-80D5-CE22671F6732_selection</key>
@@ -934,7 +932,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>LiberationMono-Regular 13</string>
+			<string>LiberationMono 13</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1733,13 +1731,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-01-20T05:03:54Z</date>
+	<date>2015-01-19T17:44:48Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
 	<true/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1414903040</real>
+	<real>1417910272</real>
 	<key>URLHandlersByGuid</key>
 	<dict>
 		<key>mailto</key>
