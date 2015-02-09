@@ -1,13 +1,7 @@
-# Show 2 top $PWD components
-# Show bg jobs >= 1 in yellow
-# % for users and # for root
 autoload -U add-zsh-hook
 autoload -U colors && colors
-setopt prompt_subst
-PROMPT="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}) %# "
-RPROMPT=""
-
 autoload -Uz vcs_info
+setopt prompt_subst
 # # Colors:
 # # 9: Orange
 # # 6: Teal
@@ -81,6 +75,8 @@ function RCMD() {
   echo "${vcs_info_msg_0_}"
 }
 
+PROMPT="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})[      ] %# "
+
 # http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/
 # https://github.com/anishathalye/dotfiles
 ASYNC_PROC=0
@@ -92,8 +88,6 @@ function right-prompt() {
     # signal parent
     kill -s USR1 $$
   }
-
-  RPROMPT=""
 
   # kill child if necessary
   if [[ "${ASYNC_PROC}" != 0 ]]; then
@@ -108,7 +102,8 @@ add-zsh-hook precmd right-prompt
 
 function TRAPUSR1() {
   # read from temp file
-  RPROMPT="$(cat $HOME/.zsh_tmp_prompt)"
+  # PROMPT="$(cat $HOME/.zsh_tmp_prompt)"
+  PROMPT="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$(cat $HOME/.zsh_tmp_prompt) %# "
 
   # reset proc number
   ASYNC_PROC=0
