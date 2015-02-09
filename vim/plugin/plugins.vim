@@ -216,12 +216,3 @@ let g:rails_projections = {
 
 " vim-sort-motion
 let g:sort_motion_flags = "ui"
-
-" vim-fugitive until https://github.com/tpope/vim-fugitive/issues/594
-if has("patch-7.4.567")
-  function! s:Browse(args)
-    execute 'call netrw#BrowseX('.string(a:args).', 0)'
-  endfunction
-
-  command! -nargs=* Browse call <SID>Browse(<q-args>)
-endif
