@@ -99,19 +99,19 @@ export KEYTIMEOUT=1
 
 # Show vim mode on right
 # http://dougblack.io/words/zsh-vi-mode.html
-# function zle-line-init zle-keymap-select {
-#   VIM_PROMPT="[% NORMAL]%"
-#   # Apparently EPS1 is not a typo
-#   RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/} $EPS1"
-#   zle reset-prompt
-# }
+function zle-line-init zle-keymap-select {
+  VIM_PROMPT="[% NORMAL]%"
+  # Apparently EPS1 is not a typo
+  RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/} $EPS1"
+  zle reset-prompt
+}
 
-# zle -N zle-line-init
-# zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Force update of RPS1 immediately
-# reset_rps1() {
-#   RPS1=""
-# }
-# autoload -U add-zsh-hook
-# add-zsh-hook precmd reset_rps1
+reset_rps1() {
+  RPS1=""
+}
+autoload -U add-zsh-hook
+add-zsh-hook precmd reset_rps1
