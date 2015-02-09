@@ -65,17 +65,24 @@ function +vi-git-untracked() {
   fi
 }
 
-# Show the hostname over SSH
-if [[ -n $SSH_CONNECTION ]]; then
-  PROMPT="%m $PS1"
-fi
 
 function RCMD() {
   vcs_info 2>/dev/null
   echo "${vcs_info_msg_0_}"
 }
 
-PROMPT="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})[      ] %# "
+function setup-prompt() {
+  git_info=$1
+  ssh=""
+
+  # Show the hostname over SSH
+  if [[ -n $SSH_CONNECTION ]]; then
+    ssh="%m "
+  fi
+
+  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$git_info %# "
+}
+setup-prompt ""
 
 # http://www.anishathalye.com/2015/02/07/an-asynchronous-shell-prompt/
 # https://github.com/anishathalye/dotfiles
@@ -102,8 +109,7 @@ add-zsh-hook precmd right-prompt
 
 function TRAPUSR1() {
   # read from temp file
-  # PROMPT="$(cat $HOME/.zsh_tmp_prompt)"
-  PROMPT="(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$(cat $HOME/.zsh_tmp_prompt) %# "
+  setup-prompt "$(cat $HOME/.zsh_tmp_prompt)"
 
   # reset proc number
   ASYNC_PROC=0
