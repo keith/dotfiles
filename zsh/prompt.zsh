@@ -65,7 +65,6 @@ function +vi-git-untracked() {
   fi
 }
 
-
 function RCMD() {
   vcs_info 2>/dev/null
   echo "${vcs_info_msg_0_}"
