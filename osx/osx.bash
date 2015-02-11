@@ -26,11 +26,12 @@ alias macirb="macirb --simple-prompt"
 # Open iOS Simulator
 alias ios="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
 
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
+# Clean up LaunchServices to remove duplicates in the "Open With" menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias lslist="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -dump"
 
 # Clear the Quarantine database
-alias cleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+alias qcleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
@@ -44,3 +45,5 @@ alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Fin
 # Hide/show all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+
+# vim:tw=0
