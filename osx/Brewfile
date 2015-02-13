@@ -1,59 +1,54 @@
-tap homebrew/dupes
-tap Keithbsmiley/formulae
-tap thoughtbot/formulae
-update
+tap 'homebrew/brewdler'
+tap 'keithbsmiley/formulae'
+tap 'neovim/neovim'
+tap 'thoughtbot/formulae'
 
-install ag --HEAD
-install bash
-install chisel
-install cloc
-install ctags
-install git
-install gnupg
-install go
-install grc
-install grep
-install heroku-toolbelt
-install httpie
-install jq
-install less
-install libxml2
-install libyaml
-install liftoff
-install llvm
-install lynx
-install macvim --HEAD
-install mercurial
-install msmtp
-install mutt
-install node
-install notmuch
-install openssh
-install openssl
-install parallel
-install postgresql
-install python
-install rbenv
-install rbenv-ctags
-install rbenv-default-gems
-install readline
-install reattach-to-user-namespace
-install ruby-build
-install sqlite
-install terminal-notifier
-install tree
-install urlview
-install vim --HEAD
-install watch
-install weechat --with-aspell --with-python --with-perl --with-ruby
-install wget
-install zsh
-
-install cocoapods
-install ghb --HEAD
-install marooned
-install pinup
-install tmux-move-patch
-install xcpretty
-
-link openssl --force
+brew 'ag', args: ['HEAD']
+brew 'bash'
+brew 'carthage'
+brew 'chisel'
+brew 'class-dump'
+brew 'cloc'
+brew 'cocoapods'
+brew 'ctags'
+brew 'ghb', args: ['HEAD']
+brew 'git'
+brew 'grc'
+brew 'grep'
+brew 'heroku-toolbelt'
+brew 'httpie'
+brew 'jq'
+brew 'less'
+brew 'libyaml'
+brew 'liftoff'
+brew 'llvm'
+brew 'lynx'
+brew 'macvim', args: ['HEAD']
+brew 'msmtp'
+brew 'mutt'
+brew 'neovim', args: ['HEAD']
+brew 'node'
+brew 'notmuch'
+brew 'openssh'
+brew 'openssl'
+brew 'pinup'
+brew 'python'
+brew 'rbenv'
+brew 'rbenv-ctags'
+brew 'rbenv-default-gems'
+brew 'readline'
+brew 'reattach-to-user-namespace'
+brew 'ruby-build'
+brew 'shellcheck'
+brew 'speedtest_cli'
+brew 'sqlite'
+brew 'terminal-notifier'
+brew 'tmux-move-patch'
+brew 'tree'
+brew 'urlview'
+brew 'vim', args: ['HEAD']
+brew 'weechat', args: ['with-aspell', 'with-python', 'with-perl', 'with-ruby']
+brew 'wget'
+brew 'xcpretty'
+brew 'xcproj'
+brew 'zsh'
