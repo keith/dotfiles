@@ -33,6 +33,10 @@ folderfilter = lambda folder: folder not in [
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             '[Airmail]',
+                                             '[Airmail]/Done',
+                                             '[Airmail]/Memo',
+                                             '[Airmail]/To Do',
                                              'flagged',
                                              'Notes',
                                              ]
@@ -60,6 +64,10 @@ folderfilter = lambda folder: folder not in [
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             '[Airmail]',
+                                             '[Airmail]/Done',
+                                             '[Airmail]/Memo',
+                                             '[Airmail]/To Do',
                                              'Notes',
                                              ]
 
@@ -86,6 +94,10 @@ folderfilter = lambda folder: folder not in [
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             '[Airmail]',
+                                             '[Airmail]/Done',
+                                             '[Airmail]/Memo',
+                                             '[Airmail]/To Do',
                                              'flagged',
                                              'Notes',
                                              ]
@@ -113,5 +125,9 @@ folderfilter = lambda folder: folder not in [
                                              '[Mailbox]/To Buy',
                                              '[Mailbox]/To Read',
                                              '[Mailbox]/To Watch',
+                                             '[Airmail]',
+                                             '[Airmail]/Done',
+                                             '[Airmail]/Memo',
+                                             '[Airmail]/To Do',
                                              'Notes',
                                              ]
