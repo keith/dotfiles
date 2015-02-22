@@ -9,6 +9,9 @@ macro pager <tab> "<exit><sync-mailbox>" "Sync mailbox"
 macro index,pager gt "<change-folder>+keith-thoughtbot.com/INBOX<enter>" "Go to thoughtbot inbox"
 macro index,pager gk "<change-folder>+keithbsmiley-gmail.com/INBOX<enter>" "Go to gmail inbox"
 
+macro index \Cd <pagedown>
+macro index \Cu <pageup>
+
 macro pager ,u \
   "<enter-command>set my_old_pipe_decode=\$pipe_decode nopipe_decode<enter> \
   <pipe-message>$DOTFILES/mutt/ghu.sh<enter> \
