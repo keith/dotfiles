@@ -67,5 +67,6 @@ def folder_filter(folder):
         '[Mailbox]/To Read',
         '[Mailbox]/To Watch',
         'flagged',
+        'Github',
         'Notes',
     }
