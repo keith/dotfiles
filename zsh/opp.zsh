@@ -1,5 +1,5 @@
 typeset -U opp_configs
-opp_configs=($DOTFILES/scripts/opp/*.zsh $DOTFILES/scripts/opp/*/*.zsh)
+opp_configs=($DOTFILES/scripts/opp/opp.zsh)
 
 for file in ${opp_configs:#*/test*.zsh}
 do
