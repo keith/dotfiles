@@ -303,19 +303,21 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1257 99 689 292 0 0 2560 1417 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>273 857 796 475 0 0 2560 1417 </string>
+	<string>191 304 916 512 0 0 1440 877 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>722 514 400 129 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>972 768 620 392 0 0 2560 1417 </string>
+	<string>412 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1282 10 1273 1407 0 0 2560 1417 </string>
+	<string>79 142 1305 732 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2562 263 1425 867 2560 253 1440 877 </string>
+	<string>722 475 665 402 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2562 263 1433 867 2560 253 1440 877 </string>
+	<string>658 306 665 402 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>265 368 665 402 0 0 1440 877 </string>
+	<string>479 775 665 402 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_28E552BA-33EC-4C94-80D5-CE22671F6732</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_28E552BA-33EC-4C94-80D5-CE22671F6732_selection</key>
@@ -504,7 +506,7 @@
 				<real>0.97647058823529409</real>
 			</dict>
 			<key>BM Growl</key>
-			<true/>
+			<false/>
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -972,7 +974,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -994,7 +996,7 @@
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
-			<true/>
+			<false/>
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
@@ -1731,7 +1733,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-01-19T17:44:48Z</date>
+	<date>2015-02-24T15:51:25Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1748,6 +1750,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150108-nightly</string>
+	<string>2.9.20150211-nightly</string>
 </dict>
 </plist>
