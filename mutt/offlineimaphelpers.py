@@ -66,7 +66,9 @@ def folder_filter(folder):
         '[Mailbox]/To Buy',
         '[Mailbox]/To Read',
         '[Mailbox]/To Watch',
+        'Dev',
         'flagged',
         'Github',
         'Notes',
+        'sudoers',
     }
