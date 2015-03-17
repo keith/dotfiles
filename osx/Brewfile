@@ -49,6 +49,5 @@ brew 'urlview'
 brew 'vim', args: ['HEAD']
 brew 'weechat', args: ['with-aspell', 'with-python', 'with-perl', 'with-ruby']
 brew 'wget'
-brew 'xcpretty'
 brew 'xcproj'
 brew 'zsh'
