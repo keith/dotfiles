@@ -1,3 +1,4 @@
+setlocal complete+=kspell
 setlocal omnifunc=htmlcomplete#CompleteTags
 setlocal spell
 setlocal textwidth=72
