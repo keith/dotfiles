@@ -64,7 +64,7 @@ function button(text, innerHTML, closable) {
   var btn;
   btn = document.createElement('button');
   btn.innerHTML = text;
-  btn.className = 'button';
+  btn.className = 'btn';
   btn.setAttribute('tabindex', '1');
   btn.setAttribute('type', 'submit');
   btn.setAttribute('title', innerHTML);
@@ -84,27 +84,23 @@ function button(text, innerHTML, closable) {
 }
 
 function insertButtons(elem) {
-  var btn, closeButtonGroup, openButtonGroup;
-  closeButtonGroup = document.createElement('div');
-  closeButtonGroup.className = 'button-group';
-  closeButtonGroup.setAttribute('style', 'margin: 10px 0 0 0;');
-  openButtonGroup = document.createElement('div');
-  openButtonGroup.className = 'button-group';
-  openButtonGroup.setAttribute('style', 'margin: 10px 0 0 25px;');
+  var btn, buttonGroup;
+  buttonGroup = document.createElement('div');
+  buttonGroup.className = 'button-group';
+  buttonGroup.setAttribute('style', 'margin: 10px 0 0 0;');
   btn = button("Unver", "We cannot update unversioned specs (specs that point to a commit). If you'd like to add a new version the repository would have to be tagged. If you would like to use a different commit in your own project you can use some flags in your `Podfile` documented [here](http://guides.cocoapods.org/syntax/podfile.html#pod)");
-  closeButtonGroup.appendChild(btn);
+  buttonGroup.appendChild(btn);
   btn = button("Trunk", "We have just launched 'Trunk', which is the new way for you to submit your Pods. For more information on this have a read through the post at http://blog.cocoapods.org/CocoaPods-Trunk/ If you have previously had your Pod merged into the master repository, please ensure you claim your Pod http://blog.cocoapods.org/Claim-Your-Pods/");
-  closeButtonGroup.appendChild(btn);
+  buttonGroup.appendChild(btn);
   btn = button("Structure", "The folder structure of this spec should be `name/version/name.podspec` where `name` is the same as `s.name` in the spec file.", false);
-  openButtonGroup.appendChild(btn);
+  buttonGroup.appendChild(btn);
   btn = button("Tags", "`git push --tags`", false);
-  openButtonGroup.appendChild(btn);
+  buttonGroup.appendChild(btn);
   btn = button("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/beers.png' width='14' height='14'>", ":beers:", false);
-  openButtonGroup.appendChild(btn);
+  buttonGroup.appendChild(btn);
   btn = button("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png' width='14' height='14'>", ":+1:", false);
-  openButtonGroup.appendChild(btn);
-  elem.appendChild(closeButtonGroup);
-  elem.appendChild(openButtonGroup);
+  buttonGroup.appendChild(btn);
+  elem.appendChild(buttonGroup);
 }
 
 (function() {
