@@ -30,8 +30,8 @@ runtime macros/matchit.vim
 " Load man page plugin for :Man command
 runtime ftplugin/man.vim
 
-" Remap the leader from \ to ,
-let mapleader=","
+" Use space as leader!
+let mapleader="\<Space>"
 
 " I - Disable the startup message
 " a - Avoid pressing enter after saves
