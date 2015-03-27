@@ -118,7 +118,7 @@ if &readonly
 endif
 
 " Completion options
-set complete=.,w,b,u,t,i
+set complete=.,w,b,u,t,i,kspell
 set completeopt=menu
 set wildmenu                                           " Better completion in the CLI
 set wildmode=longest:full,full                         " Completion settings
