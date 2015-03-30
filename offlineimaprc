@@ -1,6 +1,7 @@
 [general]
 ui         = ttyui
-accounts   = gmail, thoughtbot
+accounts   = gmail
+#, thoughtbot
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
@@ -35,25 +36,25 @@ sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
 nametrans = remote_nametrans
 folderfilter = folder_filter
 
-[Account thoughtbot]
-localrepository  = thoughtbot-local
-remoterepository = thoughtbot-remote
-status_backend   = sqlite
-postsynchook     = notmuch new
+# [Account thoughtbot]
+# localrepository  = thoughtbot-local
+# remoterepository = thoughtbot-remote
+# status_backend   = sqlite
+# postsynchook     = notmuch new
 
-[Repository thoughtbot-local]
-type = Maildir
-localfolders = ~/.mail/keith-thoughtbot.com
-nametrans = local_nametrans
-folderfilter = folder_filter
+# [Repository thoughtbot-local]
+# type = Maildir
+# localfolders = ~/.mail/keith-thoughtbot.com
+# nametrans = local_nametrans
+# folderfilter = folder_filter
 
-[Repository thoughtbot-remote]
-maxconnections = 1
-type = Gmail
-remoteuser = keith@thoughtbot.com
-remotepasseval = get_keychain_pass(account="keith@thoughtbot.com",
-                                   server ="imap.gmail.com")
-realdelete = no
-sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
-nametrans = remote_nametrans
-folderfilter = folder_filter
+# [Repository thoughtbot-remote]
+# maxconnections = 1
+# type = Gmail
+# remoteuser = keith@thoughtbot.com
+# remotepasseval = get_keychain_pass(account="keith@thoughtbot.com",
+#                                    server ="imap.gmail.com")
+# realdelete = no
+# sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
+# nametrans = remote_nametrans
+# folderfilter = folder_filter
