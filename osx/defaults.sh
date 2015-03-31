@@ -658,7 +658,7 @@ defaults write org.pqrs.Seil sysctl -dict \
   keycode_capslock -int 53
 
 # Caffeine
-defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool 1
+defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 
 
 # Killing affected applications
