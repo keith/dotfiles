@@ -3,8 +3,8 @@ set folder           = $HOME/.mail
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
 source ~/.mutt/temp/mailboxes
 
-mailboxes +keith-thoughtbot.com/INBOX +keithbsmiley-gmail.com/INBOX
-folder-hook keith-thoughtbot.com/* source ~/.mutt/accounts/thoughtbot.account
+mailboxes +keith-lyft.com/INBOX +keithbsmiley-gmail.com/INBOX
+folder-hook keith-lyft.com/* source ~/.mutt/accounts/lyft.account
 folder-hook keithbsmiley-gmail.com/* source ~/.mutt/accounts/gmail.account
 
 set alias_file       = $HOME/.mutt/aliases

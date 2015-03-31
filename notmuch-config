@@ -4,7 +4,7 @@ path=/Users/ksmiley/.mail
 [user]
 name=Keith Smiley
 primary_email=keithbsmiley@gmail.com
-other_email=keith@thoughtbot.com
+other_email=keith@lyft.com
 
 [new]
 tags=unread;inbox;
