@@ -12,16 +12,6 @@ You can also remove the symlinks with:
 ./manage.sh remove
 ```
 
-There are also tons of other things you can do:
-
-Install each of the language scripts:
-
-```sh
-./install-langs.sh
-```
-
-Or checkout the scripts in `langs` and install them individually.
-
 ### OS X
 
 - Bootstrap OS X by running `mac-install.sh` in `osx`

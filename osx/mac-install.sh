@@ -25,5 +25,3 @@ fi
 brew tap Homebrew/brewdler
 brew update
 brew brewdle --file="$DOTFILES/osx/Brewfile"
-
-./install-langs.sh install
