@@ -1,0 +1,9 @@
+# ~/.tmuxinator/devbox.yml
+
+name: devbox
+root: ~/dev/devbox
+
+windows:
+  - devbox:
+      panes:
+        - ./service start api ats courier green local lyftqueue ngrok

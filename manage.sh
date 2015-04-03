@@ -32,6 +32,7 @@ FILES=(\
     rbenv \
     rspec \
     tmux.conf \
+    tmuxinator \
     urlview \
     vim \
     vimrc \
