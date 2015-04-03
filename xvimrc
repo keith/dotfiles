@@ -15,6 +15,10 @@ set ignorecase
 " But case-sensitive if expression contains a capital letter.
 set smartcase
 
+set hlsearch
+
+nnoremap <Space>4 /""<CR>
+
 " Setup the number line
 set number
 set relativenumber
