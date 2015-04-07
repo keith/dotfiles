@@ -6,4 +6,4 @@ root: ~/dev/devbox
 windows:
   - devbox:
       panes:
-        - ./service start api ats courier green local lyftqueue ngrok
+        - git pull && ./service start api ats courier green local lyftqueue ngrok
