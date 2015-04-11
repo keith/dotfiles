@@ -17,7 +17,7 @@ set smartcase
 
 set hlsearch
 
-nnoremap <Space>4 /flakjsdfkldsjfkladsjfkl<CR>
+nnoremap <Space>4 /~<CR>
 
 " Setup the number line
 set number
