@@ -2,6 +2,7 @@
 
 FILES=(\
     agignore \
+    atom-packages \
     bashrc \
     bin \
     ctags \
@@ -101,7 +102,7 @@ function remove_links () {
 # Fuction to print the usage and exit when there's bad input
 function die () {
     echo "Usage ./manage.sh {install|remove}"
-    exit
+    exit 1
 }
 
 # Make sure there is 1 command line argument

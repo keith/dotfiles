@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+function die ()
+{
+  echo "Usage aplugins {install|backup|list}"
+  exit 1
+}
+
+file=~/.atom-packages
+
+function packages ()
+{
+  apm list --installed --bare | cut -d '@' -f 1
+}
+
+function remove-old-packages ()
+{
+  current_packages="$(packages)"
+  packages="$(cat $file)"
+
+  while read -r installed_package; do
+    match=0
+    while read -r package
+    do
+      if [[ "$installed_package" == "$package" ]]; then
+        match=1
+      fi
+    done <<< "$packages"
+
+    if [[ $match -eq 0 ]]; then
+      apm uninstall "$installed_package"
+    fi
+  done <<< "$current_packages"
+}
+
+if [[ $1 == "install" ]]; then
+  remove-old-packages
+  apm install --packages-file "$file"
+elif [[ $1 == "backup" ]]; then
+  packages > "$file" || echo "Failed"
+elif [[ $1 == "list" ]]; then
+  packages
+else
+  die
+fi
