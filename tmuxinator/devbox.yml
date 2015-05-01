@@ -6,4 +6,4 @@ root: ~/dev/devbox
 windows:
   - devbox:
       panes:
-        - git pull && ./service start api ats courier green local lyftqueue ngrok tripestimator fare eta dispatch
+        - git pull && ./service start api ats courier green local lyftqueue ngrok tripestimator fare eta dispatch runtime
