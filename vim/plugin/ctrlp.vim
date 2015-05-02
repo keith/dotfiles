@@ -30,14 +30,12 @@ endfunction
 
 function! FuzzyFindCommand(vimCommand)
   try
-    let selection = system(SearchCommand() . " | selecta")
+    execute ':call fzf#run({"sink": "' . a:vimCommand . '", "source": "' . SearchCommand() . '"})'
   catch /Vim:Interrupt/
     " Catch the ^C so that the redraw happens
     redraw!
     return
   endtry
-  redraw!
-  exec ":" . a:vimCommand . " " . s:EscapeFilePath(selection)
 endfunction
 
 nnoremap <C-p>  :call FuzzyFindCommand("e")<cr>
