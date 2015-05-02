@@ -46,6 +46,7 @@
   protocol = https
 [alias]
   a     = add
+  af    = !sh -c 'git status --porcelain | cut -c4- | fzf --query=$1 | xargs git add' -
   adeleted = !sh -c 'git rm `git ls-files --deleted`'
   ap    = add -p
   auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
