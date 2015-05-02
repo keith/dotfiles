@@ -11,6 +11,7 @@ brew 'class-dump'
 brew 'cloc'
 brew 'cocoapods'
 brew 'ctags'
+brew 'fzf', args: ['HEAD']
 brew 'ghb', args: ['HEAD']
 brew 'git'
 brew 'grc'
