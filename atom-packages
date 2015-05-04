@@ -1,5 +1,5 @@
-language-viml
-unity-ui
+ex-mode
+linter
+relative-line-numbers
 vim-mode
-vim-surround
 
