@@ -1,5 +1,5 @@
 tap 'homebrew/brewdler'
-tap 'keithbsmiley/formulae'
+tap 'keith/formulae'
 tap 'neovim/neovim'
 tap 'thoughtbot/formulae'
 

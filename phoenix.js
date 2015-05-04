@@ -1,4 +1,4 @@
-// Keith's [Phoenix](https://github.com/Keithbsmiley/phoenix) config
+// Keith's [Phoenix](https://github.com/keith/phoenix) config
 var modifiers = ["ctrl", "cmd"];
 var padding = 2;
 
