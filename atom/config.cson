@@ -1,0 +1,28 @@
+"*":
+  "exception-reporting":
+    userId: "b5f4f4d0-436e-509e-ea71-b8bbc2d94210"
+  welcome:
+    showOnStartup: false
+  core:
+    projectHome: "~/dev"
+    disabledPackages: [
+      "encoding-selector"
+      "feedback"
+      "image-view"
+      "language-clojure"
+      "language-csharp"
+      "language-go"
+      "language-java"
+      "metrics"
+      "package-generator"
+      "tree-view"
+    ]
+  editor:
+    invisibles: {}
+  linter:
+    lintDebug: true
+    showInfoMessages: true
+  "fuzzy-finder": {}
+  tabs: {}
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
