@@ -6,7 +6,7 @@ qldirectory=~/Library/QuickLook
 
 PLUGINS=( \
   whomwah/qlstephen \
-  Keithbsmiley/PlaygroundQuickLook \
+  keith/PlaygroundQuickLook \
 )
 
 mkdir -p "$qldirectory"

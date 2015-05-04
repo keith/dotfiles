@@ -4,10 +4,10 @@ christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 elzr/vim-json
 hynek/vim-python-pep8-indent
-Keithbsmiley/gist.vim
-Keithbsmiley/parsec.vim
-Keithbsmiley/swift.vim
-Keithbsmiley/tmux.vim
+keith/gist.vim
+keith/parsec.vim
+keith/swift.vim
+keith/tmux.vim
 klen/python-mode
 majutsushi/tagbar
 nelstrom/vim-qargs
