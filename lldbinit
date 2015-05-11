@@ -1,1 +1,4 @@
 command script import /usr/local/opt/chisel/libexec/fblldb.py
+
+command alias uikit expr @import UIKit
+command alias foundation expr @import Foundation
