@@ -18,11 +18,16 @@
       "tree-view"
     ]
   editor:
-    invisibles: {}
+    invisibles:
+      {}
   linter:
     lintDebug: true
     showInfoMessages: true
-  "fuzzy-finder": {}
-  tabs: {}
+  "fuzzy-finder":
+    {}
+  tabs:
+    {}
   "vim-mode":
     useClipboardAsDefaultRegister: true
+  "relative-line-numbers":
+    showNormalLineNumbers: false
