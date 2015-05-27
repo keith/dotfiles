@@ -3,7 +3,6 @@
   email = keithbsmiley@gmail.com
 [core]
   excludesfile = ~/.gitignore
-  attributesfile = ~/.gitattributes
   editor = vim
   whitespace = trailing-space,space-before-tab
   pager = pager
@@ -27,15 +26,6 @@
   log = true
   ff = only
   stat = true
-[merge "cocoapods"]
-  name = CocoaPods
-  driver = pod install
-[merge "bundler"]
-  name = bundler
-  driver = bundle
-[merge "railsschema"]
-  name = newer Rails schema version
-  driver = hookup resolve-schema %A %O %B %L
 [color]
   ui = auto
 [github]

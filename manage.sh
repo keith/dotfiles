@@ -11,7 +11,6 @@ FILES=(\
     gemrc \
     ghci \
     git_template \
-    gitattributes \
     gitconfig \
     gitignore \
     haskeline \

@@ -1,3 +1,0 @@
-Gemfile.lock merge=bundler
-db/schema merge=railsschema
-Podfile.lock merge=cocoapods
