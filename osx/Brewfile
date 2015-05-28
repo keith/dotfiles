@@ -1,3 +1,4 @@
+tap 'caskroom/cask'
 tap 'homebrew/brewdler'
 tap 'keith/formulae'
 tap 'neovim/neovim'
@@ -19,6 +20,7 @@ brew 'grep'
 brew 'heroku-toolbelt'
 brew 'httpie'
 brew 'jq'
+brew 'keith/formulae/cask', args: ['HEAD']
 brew 'less'
 brew 'libyaml'
 brew 'liftoff'
