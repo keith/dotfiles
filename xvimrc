@@ -53,3 +53,7 @@ vnoremap s :sort ui<CR>
 " vim-unimpared knock off
 nnoremap ]e "udd"up
 nnoremap [e "uddk"uP
+
+" Center after find
+nnoremap n nzz
+nnoremap N Nzz
