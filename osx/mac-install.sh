@@ -24,4 +24,4 @@ fi
 
 brew tap Homebrew/brewdler
 brew update
-brew brewdle --file="$DOTFILES/osx/Brewfile"
+brew bundle --file="$DOTFILES/osx/Brewfile"
