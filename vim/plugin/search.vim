@@ -1,6 +1,6 @@
 " Setup ag options for grepping
 if executable("ag")
-  set grepprg=ag\ --vimgrep\ $*
+  set grepprg=ag\ --vimgrep\ -U\ $*
   set grepformat=%f:%l:%c:%m
 endif
 
