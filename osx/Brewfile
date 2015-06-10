@@ -19,6 +19,7 @@ brew 'grc'
 brew 'grep'
 brew 'heroku-toolbelt'
 brew 'httpie'
+brew 'ideviceinstaller'
 brew 'jq'
 brew 'keith/formulae/cask', args: ['HEAD']
 brew 'less'
