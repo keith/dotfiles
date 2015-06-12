@@ -5,9 +5,10 @@
 if [[ ! -z "$OSX" ]];then
   if ! command -v reattach-to-user-namespace >/dev/null; then
     echo "Missing reattach-to-user-namespace"
+    exec -l "$SHELL"
+  else
+    reattach-to-user-namespace -l "$SHELL"
   fi
-
-  reattach-to-user-namespace -l $SHELL
 else
-  exec -l $SHELL
+  exec -l "$SHELL"
 fi
