@@ -16,9 +16,7 @@ __fzfcmd() {
 }
 
 __fselgit() {
-  command git status --porcelain | cut -c4- \
-    | $(__fzfcmd) -m | while read item; do printf '%q ' "$item"
-  done
+  command git status --porcelain | cut -c4- | $(__fzfcmd) -m
   echo
 }
 
