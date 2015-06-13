@@ -1,35 +1,15 @@
-#!/usr/bin/env ruby
+#!/bin/sh
 
-#
-# A simple script for quickly adding preformatted licenses to projects
-#
+NAME="Keith Smiley"
+WEBSITE="http://keith.so"
 
-# Your name to go into the license
-$NAME = "Keith Smiley"
+usage() {
+  echo "usage: $(basename "$0") [-mw]"
+  exit 1
+}
 
-# Your website for the license
-$WEBSITE = "http://keith.so"
-
-# The filename to be written to. NO FILE EXTENSION
-$FILE_NAME = "LICENSE"
-
-require 'optparse'
-
-# `[sudo] gem install colored`
-require 'colored'
-
-def wtf
-"DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\nVersion 2, December
-2004\n\nCopyright (C) #{ Time.now.year } #{ $NAME } <#{ $WEBSITE
-}>\n\nEveryone is permitted to copy and distribute verbatim or modified copies
-of this license document, and changing it is allowed as long as the name is
-changed.\n\nDO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\nTERMS AND CONDITIONS
-FOR COPYING, DISTRIBUTION AND MODIFICATION\n\n0. You just DO WHAT THE FUCK YOU
-WANT TO.\n"
-end
-
-def mit
-"Copyright (c) #{ Time.now.year } #{ $NAME } (#{ $WEBSITE })
+mit() {
+printf "%s" "Copyright (c) $(date +"%Y") $NAME ($WEBSITE)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the 'Software'), to deal in
@@ -46,44 +26,42 @@ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
-end
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"
+}
 
-def writeLicense(text)
-  out_filename = $FILE_NAME
-  if File.exists?(out_filename)
-    puts "#{ out_filename } already exists".red
-    exit
-  end
+wtf() {
+printf "%s" "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+Version 2, December 2004
 
-  File.open(out_filename, "w") do |f|
-    if f.write(text) > 0
-      puts "Wrote the license to #{ out_filename }".green
-    else
-      puts "Couldn't write to: #{ out_filename }".red
-    end
-  end
-end
+Copyright (C) $(date +"%Y") $NAME <$WEBSITE>
 
-options = {}
-opt_parse = OptionParser.new do |opts|
-  opts.banner = "Usage: license.rb [options]"
+Everyone is permitted to copy and distribute verbatim or modified copies changed.
 
-  opts.on("-m", "--mit", "Use MIT License") do |v|
-    writeLicense(mit)
-    options[:mit] = v
-  end
+DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  opts.on("-w", "--wtf", "Use WTF License") do |v|
-    writeLicense(wtf)
-    options[:wtf] = v
-  end
-end
+0. You just DO WHAT THE FUCK YOU of this license document, and changing it is
+allowed as long as the name is WANT TO.
+"
+}
 
-begin
-  opt_parse.parse!
-  puts "#{ opt_parse }" if options.length < 1
-rescue OptionParser::InvalidOption, OptionParser::MissingArgument
-  puts $!.to_s.red
-  puts opt_parse
-end
+write() {
+  "$1" > LICENSE
+}
+
+if [ $# -ne 1 ]; then
+  usage
+fi
+
+case $1 in
+  -m)
+    write mit
+    ;;
+  -w)
+    write wtf
+    ;;
+  *)
+    usage
+    ;;
+esac
