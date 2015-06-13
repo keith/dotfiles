@@ -21,15 +21,16 @@ PATH="$GOPATH/bin:$PATH"
 # fi
 
 if ! which go &> /dev/null; then
-    if [[ "$OSX" == true ]]; then
-        export GOROOT=$(brew --prefix go)/libexec
-    else
-        export GOROOT="/usr/local/go"
-    fi
+  if [[ "$OSX" == true ]]; then
+    go_root=$(brew --prefix go)
+    export GOROOT=$go_root/libexec
+  else
+    export GOROOT="/usr/local/go"
+  fi
 
-    if [[ -d $GOROOT ]]; then
-        PATH="$GOROOT/bin:$PATH"
-    else
-        unset GOROOT
-    fi
+  if [[ -d $GOROOT ]]; then
+    PATH="$GOROOT/bin:$PATH"
+  else
+    unset GOROOT
+  fi
 fi

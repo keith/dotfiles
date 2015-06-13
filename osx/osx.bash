@@ -18,7 +18,7 @@ alias vmm="mvim ."
 alias pi="pod install --no-repo-update"
 alias psl="pod spec lint *.podspec"
 alias psla="pod spec lint *.podspec --verbose"
-alias pclean="rm -rf $HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
+alias pclean="rm -rf \$HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
 
 # MacRuby
 alias macirb="macirb --simple-prompt"
@@ -31,12 +31,12 @@ alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/La
 alias lslist="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -dump"
 
 # Clear the Quarantine database
-alias qcleanup="sqlite3 $HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+alias qcleanup="sqlite3 \$HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # Empty the Trash on all mounted volumes and the main HDD
 # Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv $HOME/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
-alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv $HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
+alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv \$HOME/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
+alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv \$HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
 
 # Show/hide hidden files in Finder
 alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
