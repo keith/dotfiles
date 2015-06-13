@@ -35,7 +35,7 @@ let emailSearch = ABPerson.searchElementForProperty(kABEmailProperty,
                                                     comparison: comparison)
 let comparisons = [firstNameSearch, lastNameSearch, emailSearch]
 let orComparison = ABSearchElement(forConjunction: CFIndex(kABSearchOr.value), children: comparisons)
-let found = addressBook.recordsMatchingSearchElement(orComparison) as [ABRecord]
+let found = addressBook.recordsMatchingSearchElement(orComparison) as? [ABRecord] ?? []
 
 if found.count == 0 {
   exit(0)
@@ -43,12 +43,12 @@ if found.count == 0 {
 
 println("NAME\tEMAIL")
 for person in found {
-  let firstName = person.valueForProperty(kABFirstNameProperty) as String? ?? ""
-  let lastName = person.valueForProperty(kABLastNameProperty) as String? ?? ""
-  let emailsProperty = person.valueForProperty(kABEmailProperty) as ABMultiValue?
+  let firstName = person.valueForProperty(kABFirstNameProperty) as? String ?? ""
+  let lastName = person.valueForProperty(kABLastNameProperty) as? String ?? ""
+  let emailsProperty = person.valueForProperty(kABEmailProperty) as? ABMultiValue
   if let emails = emailsProperty {
     for i in 0..<emails.count() {
-      let email = emails.valueAtIndex(i) as String
+      let email = emails.valueAtIndex(i) as? String ?? ""
       println("\(email)\t\(firstName) \(lastName)")
     }
   }
