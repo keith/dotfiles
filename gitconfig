@@ -35,40 +35,40 @@
 [hub]
   protocol = https
 [alias]
-  a     = add
-  adeleted = !sh -c 'git rm `git ls-files --deleted`'
-  af    = !sh -c 'git status --porcelain | cut -c4- | fzf --query=$1 | xargs git add' -
-  ap    = add -p
-  auntracked = !sh -c 'git add `git ls-files --others --exclude-standard`'
-  ba    = branch -a
-  branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
-  c     = clone --recursive
-  cb    = !sh -c 'git checkout -b $1 && git push -u origin $1' -
-  co    = checkout
-  com   = commit --verbose
-  cop   = !sh -c 'git branch | cut -c 3- | fzf --query=$1 | xargs git checkout' -
-  ctags = !.git/hooks/ctags
-  d     = diff
-  dc    = diff --cached
-  dt    = difftool
-  dtc   = difftool --cached
-  dtk   = difftool --tool=Kaleidoscope
-  dtkc  = difftool --tool=Kaleidoscope --cached
-  l     = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
-  last  = diff HEAD^ HEAD
+  a           = add
+  adeleted    = !sh -c 'git rm `git ls-files --deleted`'
+  af          = !sh -c 'git status --porcelain | cut -c4- | fzf --query=$1 | xargs git add' -
+  ap          = add -p
+  auntracked  = !sh -c 'git add `git ls-files --others --exclude-standard`'
+  ba          = branch -a
+  branches    = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+  c           = clone --recursive
+  cb          = !sh -c 'git checkout -b $1 && git push -u origin $1' -
+  co          = checkout
+  com         = commit --verbose
+  cop         = !sh -c 'git branch | cut -c 3- | fzf --query=$1 | xargs git checkout' -
+  ctags       = !.git/hooks/ctags
+  d           = diff
+  dc          = diff --cached
+  dt          = difftool
+  dtc         = difftool --cached
+  dtk         = difftool --tool=Kaleidoscope
+  dtkc        = difftool --tool=Kaleidoscope --cached
+  l           = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+  last        = diff HEAD^ HEAD
   prune-local = !sh -c 'git branch --merged | grep -v "\\*" | grep -v "master" | xargs -n 1 git branch -d'
-  pul   = pull
-  punch = push --force
-  r     = reflog -5
-  ra    = rebase --abort
-  rc    = rebase --continue
-  rma   = rebase master
-  rmi   = rebase master -i
-  rv    = remote -v
-  s     = status -sb
-  sub   = submodule update --init --recursive
-  subu  = submodule foreach git pull origin master
-  undo  = reset --soft HEAD^
+  pul         = pull
+  punch       = push --force
+  r           = reflog -5
+  ra          = rebase --abort
+  rc          = rebase --continue
+  rma         = rebase master
+  rmi         = rebase master -i
+  rv          = remote -v
+  s           = status -sb
+  sub         = submodule update --init --recursive
+  subu        = submodule foreach git pull origin master
+  undo        = reset --soft HEAD^
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
