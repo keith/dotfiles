@@ -80,3 +80,5 @@
   autosetupmerge = true
 [rerere]
   enabled = true
+[rebase]
+  autosquash = true
