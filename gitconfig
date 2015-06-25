@@ -58,7 +58,7 @@
   last        = diff HEAD^ HEAD
   prune-local = !sh -c 'git branch --merged | grep -v "\\*" | grep -v "master" | xargs -n 1 git branch -d'
   pul         = pull
-  punch       = push --force
+  punch       = push --force-with-lease
   r           = reflog -5
   ra          = rebase --abort
   rc          = rebase --continue
