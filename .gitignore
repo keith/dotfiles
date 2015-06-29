@@ -51,8 +51,3 @@ Icon
 Session.vim
 .netrwhist
 *~
-
-atom/.*
-atom/comiple-cache
-atom/packages
-atom/storage

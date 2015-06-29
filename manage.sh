@@ -2,8 +2,6 @@
 
 FILES=(\
     agignore \
-    atom \
-    atom-packages \
     bashrc \
     bin \
     conductor.js \
