@@ -6,6 +6,7 @@ FILES=(\
     atom-packages \
     bashrc \
     bin \
+    conductor.js \
     ctags \
     curlrc \
     gemrc \
@@ -27,7 +28,6 @@ FILES=(\
     nvim \
     nvimrc \
     offlineimaprc \
-    phoenix.js \
     psqlrc \
     pylintrc \
     rbenv \
