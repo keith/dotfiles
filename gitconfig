@@ -50,6 +50,7 @@
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
+  dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   dt          = difftool
   dtc         = difftool --cached
   dtk         = difftool --tool=Kaleidoscope
