@@ -6,16 +6,16 @@ if [[ $# == 2 ]];then
 fi
 
 remotes=($(git remote -v | awk "{ print \$1, \$2; }" | uniq))
-for i in ${!remotes[@]}
+for i in "${!remotes[@]}"
 do
-  if [[ $branch == ${remotes[$i]} ]];then
+  if [[ $branch == "${remotes[$i]}" ]];then
     url=${remotes[$i + 1]}
   fi
 done
 
-url=`echo $url | sed -E s+^git\(:\|\@\)\(//\)?+http://+`
-url=`echo $url | sed s+\.org:+.org/+`
-url=`echo $url | sed s+\.com:+.com/+`
+url=$(echo "$url" | sed -E s+^git\(:\|\@\)\(//\)?+http://+)
+url=$(echo "$url" | sed s+\.org:+.org/+)
+url=$(echo "$url" | sed s+\.com:+.com/+)
 url=${url%".git"}
 
 if [[ $url == "" ]];then
@@ -25,7 +25,7 @@ else
   if [[ -f $1 || -d $1 ]]; then
     string="blob/$(git symbolic-ref --short HEAD)/$1"
   else
-    string=$(git rev-parse $1 2>/dev/null)
+    string=$(git rev-parse "$1" 2>/dev/null)
     if [[ $? == 0 && -n $1 ]]; then
       string="commit/$string"
     else
