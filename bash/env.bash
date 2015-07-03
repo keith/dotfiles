@@ -30,5 +30,7 @@ fi
 # X - Don't send clear screen signal
 export LESS="ij.5KMRX"
 
+export GREP_OPTIONS="--color"
+
 # Disable ^-S in the terminal
 stty -ixon -ixoff
