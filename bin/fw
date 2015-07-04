@@ -1,0 +1,54 @@
+#!/bin/sh
+
+source_path=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library
+
+accessibility_path() {
+  echo "$source_path/AccessibilityBundles/$1.axbundle/$1"
+}
+
+framework_path() {
+  for path in Frameworks PrivateFrameworks
+  do
+    executable="$source_path/$path/$1.framework/$1"
+    if [ -f "$executable" ]; then
+      echo "$executable"
+      break
+    fi
+  done
+}
+
+inspect() {
+  echo "Opening '$1'"
+  hopper -e "$1"
+}
+
+usage() {
+  echo "usage: $(basename "$0") [-a] FRAMEWORK"
+  exit 1
+}
+
+[ $# -eq 1 ] || [ $# -eq 2 ] || usage
+
+path=""
+framework=$1
+case $1 in
+  -a)
+    framework=$2
+    [ -n "$framework" ] || usage
+    path=$(accessibility_path "$framework")
+    ;;
+  *)
+    [ -z "$2" ] || usage
+    path=$(framework_path "$framework")
+    ;;
+esac
+
+if [ -z "$path" ]; then
+  echo "'$framework' not found"
+  exit 1
+elif [ ! -f "$path" ]; then
+  echo "'$path' doesn't exist"
+  exit 1
+fi
+
+inspect "$path"
