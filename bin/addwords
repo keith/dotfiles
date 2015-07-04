@@ -1,20 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # A script to add words to the custom OS X dictionary
 
 usage() {
-    echo "Usage: addwords [WORDS...]"
-    exit 1
+  echo "Usage: addwords [WORDS...]"
+  exit 1
 }
 
-if [[ "$#" == "0" ]]; then
-    usage
+if [ "$#" -eq 0 ]; then
+  usage
 fi
 
 dictionary=~/Library/Spelling/en
 
 for word in "$@"
 do
-    echo $word | awk '{ print tolower($0); }' >> $dictionary
+  echo "$word" | awk '{ print tolower($0); }' >> $dictionary
 done
 
 killall AppleSpell

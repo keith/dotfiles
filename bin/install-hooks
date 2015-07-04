@@ -7,9 +7,9 @@ if [[ ! -d .git ]]; then
     exit 1
 fi
 
-for hook in ${hooks[@]}
+for hook in "${hooks[@]}"
 do
-    cp $hook $(pwd)/.git/hooks
+    cp "$hook" "$(pwd)"/.git/hooks
 done
 
 echo "Done"

@@ -1,15 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 PROG=$0
 
-function show_help() {
-    echo "Usage $PROG [{DEST} {SRC} {EXCLUDE}]"
-    return
+show_help() {
+  echo "Usage $PROG [{DEST} {SRC} {EXCLUDE}]"
+  return
 }
 
-function log() {
-    echo $1
-    logger -t $PROG $1
+log() {
+  echo "$1"
+  logger -t "$PROG" "$1"
 }
 
 shopt -s nocasematch

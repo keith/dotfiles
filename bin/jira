@@ -1,2 +1,4 @@
-#!/bin/bash
-git rev-parse --abbrev-ref HEAD | grep -io "lyft\-[0-9]*" | xargs -I {} open "https://lyftme.atlassian.net/browse/{}"
+#!/bin/sh
+
+git rev-parse --abbrev-ref HEAD | grep -io "lyft\-[0-9]*" \
+  | xargs -I {} open "https://lyftme.atlassian.net/browse/{}"

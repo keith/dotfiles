@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-kill -9 $(ps ax | grep offlineimap | head -1 | awk '{ print $1; }');offlineimap
+kill -9 "$(pgrep -f offlineimap | head -1 | awk '{ print $1; }')"
+offlineimap

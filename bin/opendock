@@ -1,4 +1,5 @@
 #!/bin/sh
+
 for app in $(defaults read com.apple.dock persistent-apps | grep "\"_CFURLString\" =" | awk '{ print $3 }' | tr -d '";'); do
-	open $app
+	open "$app"
 done

@@ -1,13 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # https://twitter.com/imathis/status/484741998554132481
 
 set -e
 
 code=$(curl -sL -w "%{http_code}" "http://rubygems.org/gems/$1 " -o /dev/null)
 
-if [[ "$code" -eq "200" ]]; then
+if [ "$code" -eq 200 ]; then
   echo "Taken :("
-elif [[ "$code" -eq "404" ]]; then
+elif [ "$code" -eq 404 ]; then
   echo "Not taken!"
 else
   echo "Unsure: $code"

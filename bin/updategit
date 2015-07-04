@@ -1,23 +1,23 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Pull Git repos
-dir=$HOME/Git
+dir="$HOME/dev"
 
-if [[ ! -d $dir ]];then
+if [ ! -d "$dir" ];then
   echo "$dir doesn't exist"
-  return
+  exit 1
 fi
 
-cd $dir
+cd "$dir"
 
-if ! which git &>/dev/null;then
-  echo "Git is not installed"
-  return
+if ! command -v git >/dev/null; then
+  echo "git is not installed"
+  exit 1
 fi
 
 for file in *
 do
-  cd $file
+  cd "$file"
   if [ ! -d .git ];then
     echo "$file is not a git repo"
     cd ..

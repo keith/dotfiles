@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-if [[ "$#" -gt 0 ]]; then
+if [ "$#" -gt 0 ]; then
   PORT="$1"
 else
   PORT=1234
 fi
+
 open "http://localhost:$PORT"
-python -m SimpleHTTPServer $PORT
+python -m SimpleHTTPServer "$PORT"

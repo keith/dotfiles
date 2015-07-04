@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # Written by Corey Haines
 # Scriptified by Gary Bernhardt

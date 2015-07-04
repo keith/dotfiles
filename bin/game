@@ -1,20 +1,18 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-function die () {
-  echo "Usage ./$(basename $0) {on|off}"
+die() {
+  echo "Usage ./$(basename "$0") {on|off}"
   exit
 }
 
-if [[ $# != 1 ]]; then
+if [ $# != 1 ]; then
   die
 fi
 
-if [[ "$1" == "on" ]]
-then
+if [ "$1" = "on" ]; then
   corners disable
   defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
-elif [[ "$1" == "off" ]]
-then
+elif [ "$1" = "off" ]; then
   corners enable
   defaults write NSGlobalDomain com.apple.keyboard.fnState -bool false
 fi
