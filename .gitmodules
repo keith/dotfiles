@@ -4,6 +4,3 @@
 [submodule "scripts/offlineimap"]
 	path = scripts/offlineimap
 	url = https://github.com/OfflineIMAP/offlineimap.git
-[submodule "scripts/opp"]
-	path = scripts/opp
-	url = https://github.com/hchbaw/opp.zsh.git

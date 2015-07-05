@@ -1,11 +1,4 @@
-typeset -U opp_configs
-opp_configs=($DOTFILES/scripts/opp/opp.zsh)
-
-for file in ${opp_configs:#*/test*.zsh}
-do
-  source $file
-done
+opp=$(brew --prefix opp)
+source "$opp/opp.zsh"
 
 bindkey -M vicmd '~' vi-swap-case
-
-unset opp_configs
