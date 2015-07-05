@@ -1,22 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-pbkey () {
-  local p="$HOME/.ssh/id_rsa.pub"
-  if [[ ! -e "$p" ]];then
-    echo "No public key exists in $p"
-    return
-  fi
+key="$HOME/.ssh/id_rsa.pub"
+if [ ! -e "$key" ]; then
+  echo "No public key exists in $key"
+  exit 1
+fi
 
-  if which pbcopy &> /dev/null;then
-    cat $p | pbcopy
-    return
-  fi
+if which pbcopy > /dev/null; then
+  pbcopy < "$key"
+  exit 0
+fi
 
-  if which xclip &> /dev/null;then
-    cat $p | xclip -selection c
-    return
-  fi
+if which xclip > /dev/null; then
+  xclip -selection c < "$key"
+  exit 0
+fi
 
-  echo "No copy handler"
-}
-pbkey
+echo "No copy handler"
+exit 1
