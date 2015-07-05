@@ -1,9 +1,6 @@
 [submodule "scripts/mutt-notmuch"]
 	path = scripts/mutt-notmuch
 	url = https://github.com/honza/mutt-notmuch-py.git
-[submodule "scripts/zsh-completions"]
-	path = scripts/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "scripts/offlineimap"]
 	path = scripts/offlineimap
 	url = https://github.com/OfflineIMAP/offlineimap.git
