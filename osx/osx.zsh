@@ -1,7 +1,7 @@
-# Make sure we're running OS X
-if [[ "$OSX" != true ]];then
+if [ -z $OSX ]; then
   return
 fi
 
-# Link to zsh-completions files from homebrew
+# Link zsh completion files from homebrew
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+fpath=($(brew --prefix)/share/zsh-completions $fpath)

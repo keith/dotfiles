@@ -1,13 +1,5 @@
-# Load zsh stuff
-fpath=($DOTFILES/scripts/zsh-completions/src $fpath)
 fpath=($DOTFILES/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
-
-# Do completions from anywhere in the word
-setopt COMPLETE_IN_WORD
-
-# Automatically cd into dirs
-# setopt AUTO_CD
 
 # History settings
 # Save x items to the given history file

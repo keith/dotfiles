@@ -57,6 +57,7 @@ brew 'weechat', args: ['with-aspell', 'with-python', 'with-perl', 'with-ruby']
 brew 'wget'
 brew 'xcproj'
 brew 'zsh'
+brew 'zsh-completions'
 
 cask '1password'
 cask 'alfred'
