@@ -18,7 +18,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/
 vim=$(which vim)
 export EDITOR=$vim
 
-if command -v clang &> /dev/null;then
+if which clang > /dev/null; then
   export CC=clang
 fi
 

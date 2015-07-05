@@ -12,7 +12,6 @@ alias g="git"
 alias G="git"
 
 # Vim
-# alias vundle="vim +PlugUpgrade +PlugClean! +PlugUpdate +qall"
 alias v="vim"
 alias vv="vim ."
 alias :q="exit"
