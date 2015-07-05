@@ -1,0 +1,29 @@
+body,
+#banner {
+  background: #212121 !important;
+}
+
+#top_menu a, #footer a {
+  color: #999;
+  text-decoration: underline;
+}
+
+a.bookmark_title {
+  color: #789;
+}
+
+a.bookmark_title.unread {
+  color: #b41;
+}
+
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="text"],
+textarea {
+  background: #bbb !important;
+}
+
+.bookmark.private {
+  background: #111 !important;
+}

@@ -5,6 +5,7 @@ FILES=(\
     bashrc \
     bin \
     conductor.js \
+    css \
     ctags \
     curlrc \
     gemrc \
