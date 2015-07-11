@@ -4,3 +4,6 @@
 [submodule "scripts/offlineimap"]
 	path = scripts/offlineimap
 	url = https://github.com/OfflineIMAP/offlineimap.git
+[submodule "css"]
+	path = css
+	url = https://github.com/keith/dotcss-styles.git
