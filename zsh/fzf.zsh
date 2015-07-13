@@ -25,7 +25,7 @@ fzf-git-status-widget() {
   zle redisplay
 }
 zle     -N   fzf-git-status-widget
-bindkey '^E' fzf-git-status-widget
+bindkey '^F' fzf-git-status-widget
 
 fzf-file-widget() {
   LBUFFER="${LBUFFER}$(__fsel)"
