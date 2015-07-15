@@ -24,7 +24,6 @@
 [merge]
   tool = fugitive
   log = true
-  ff = only
   stat = true
 [color]
   ui = auto
