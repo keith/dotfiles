@@ -47,6 +47,7 @@
   co          = checkout
   com         = commit --verbose
   cop         = !sh -c 'git branch | cut -c 3- | fzf --query=$1 | xargs git checkout' -
+  copr        = !sh -c 'git branch -r | cut -c 3- | grep -v HEAD | cut -d "/" -f 2 | fzf --query=$1 | xargs git checkout' -
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
