@@ -11,7 +11,6 @@ keith/tmux.vim
 klen/python-mode
 majutsushi/tagbar
 michaeljsmith/vim-indent-object
-nelstrom/vim-qargs
 othree/html5.vim
 Raimondi/delimitMate
 scrooloose/syntastic
@@ -29,7 +28,6 @@ tpope/vim-liquid
 tpope/vim-markdown
 tpope/vim-projectionist
 tpope/vim-ragtag
-tpope/vim-rails
 tpope/vim-repeat
 tpope/vim-rhubarb
 tpope/vim-scriptease
