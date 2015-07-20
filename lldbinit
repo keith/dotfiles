@@ -1,3 +1,6 @@
 command script import /usr/local/opt/chisel/libexec/fblldb.py
 
 command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'
+
+# breakpoint set -E objc
+# breakpoint set -E swift
