@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+pods_project="Pods/Pods.xcodeproj"
+shared_schemes="xcshareddata/xcschemes"
+user_schemes="xcuserdata/${USER}.xcuserdatad/xcschemes"
+
+if [ ! -d "$pods_project" ]; then
+  echo "'$pods_project' does not exist in '$PWD'"
+  exit 1
+fi
+
+for scheme in $pods_project/$shared_schemes/*.xcscheme
+do
+  if [ -f "$scheme" ]; then
+    mv -v "$scheme" "$pods_project/$user_schemes/$(basename "$scheme")"
+  fi
+done
