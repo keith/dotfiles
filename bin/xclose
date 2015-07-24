@@ -1,0 +1,29 @@
+#!/bin/sh
+
+workspace() {
+  ls | grep -E ".*\.xcworkspace" | head -1
+}
+
+project() {
+  ls | grep -E ".*\.xcodeproj" | head -1
+}
+
+name=$1
+name=${name:-$(workspace)}
+name=${name:-$(project)}
+
+if [ -z "$name" ]; then
+  exit
+fi
+
+osascript <<EOF
+tell application "Xcode"
+  set windowCount to number of windows
+  repeat with x from 1 to windowCount
+    set docName to (name of document of front window)
+    if (docName is equal to "$name") then
+      close window x
+    end if
+    end repeat
+end tell
+EOF
