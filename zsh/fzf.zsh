@@ -16,7 +16,7 @@ __fzfcmd() {
 }
 
 __fselgit() {
-  command git status --porcelain | cut -c4- | $(__fzfcmd) -m
+  command git status --short | cut -c4- | $(__fzfcmd) -m
   echo
 }
 
