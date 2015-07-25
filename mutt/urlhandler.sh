@@ -11,6 +11,7 @@ EOF
 
 before=$(frontmost)
 open -g "$1"
+sleep 0.1
 after=$(frontmost)
 
 if [ "$before" != "$after" ]; then
