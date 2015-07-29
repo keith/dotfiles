@@ -36,7 +36,6 @@
 [alias]
   a           = add
   adeleted    = !sh -c 'git rm `git ls-files --deleted`'
-  af          = !sh -c 'git ls-files --modified --others --exclude-standard | fzf --query=$1 -0 | xargs git add' -
   ap          = add -p
   auntracked  = !sh -c 'git add `git ls-files --others --exclude-standard`'
   b           = branch
