@@ -38,8 +38,8 @@ function! FuzzyFindCommand(vimCommand)
   endtry
 endfunction
 
-nnoremap <C-p>  :call FuzzyFindCommand("e")<cr>
-nnoremap <C-p>e :call FuzzyFindCommand("e")<cr>
+nnoremap <C-p>  :call FuzzyFindCommand("edit")<cr>
+nnoremap <C-p>e :call FuzzyFindCommand("edit")<cr>
 nnoremap <C-p>t :call FuzzyFindCommand("tabnew")<cr>
 nnoremap <C-p>v :call FuzzyFindCommand("vsplit")<cr>
 nnoremap <C-p>s :call FuzzyFindCommand("split")<cr>
