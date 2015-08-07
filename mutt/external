@@ -16,7 +16,7 @@ macro index S \
 message-hook '~f noreply@activebuilding\.com' \
   "unalternative_order *; alternative_order text/html"
 
-message-hook '~f do_not_reply@apple\.com ~s TestFlight:' \
+message-hook '~f no_reply@email\.apple\.com ~s TestFlight:' \
   "unalternative_order *; alternative_order text/html"
 
 # Github notifications
