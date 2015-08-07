@@ -3,7 +3,6 @@ unset record                                                          # Don't sa
   set sig_dashes = no
   set sig_on_top = yes
   set forward_format = "Fwd: %s"                                      # format of subject when forwarding
-  set pager_stop                                                      # Don't exit message when space is pressed at the end
   set editor = "vim"                                                  # Use vim for editing messages
   set fast_reply                                                      # Don't prompt for stuff when replying
   set reply_to                                                        # Reply to the address in the reply to header
@@ -34,7 +33,7 @@ unset collapse_unread
 # Pager inline configuration
   set pager_index_lines = 10                                          # number of index lines to show
   set pager_context = 3                                               # number of context lines to show
-  set pager_stop                                                      # don't go to next message automatically
+  set pager_stop                                                      # Don't exit message when space is pressed at the end
   set menu_scroll                                                     # scroll in menus
   set tilde                                                           # show tildes like in vim
 unset markers                                                         # no ugly plus signs
