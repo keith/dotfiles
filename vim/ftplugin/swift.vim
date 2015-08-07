@@ -1,1 +1,2 @@
-setlocal textwidth=0
+setlocal textwidth=110
+nnoremap <leader>u :make test<CR>
