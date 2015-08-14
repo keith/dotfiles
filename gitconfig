@@ -17,9 +17,8 @@
   algorithm = patience
 [difftool]
   prompt = false
-[mergetool "fugitive"]
-  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
 [mergetool]
+  cmd = vim -f \"$MERGED\"
   prompt = false
 [merge]
   tool = fugitive
