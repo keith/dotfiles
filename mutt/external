@@ -19,6 +19,9 @@ message-hook '~f noreply@activebuilding\.com' \
 message-hook '~f no_reply@email\.apple\.com ~s TestFlight:' \
   "unalternative_order *; alternative_order text/html"
 
+message-hook '~f VZWMail@ecrmemail\.verizonwireless\.com' \
+  "unalternative_order *; alternative_order text/html"
+
 # Github notifications
 message-hook '(~N|~O) ~f notifications@github\.com' \
   "push '<enter-command>set my_old_pipe_decode=\$pipe_decode \
