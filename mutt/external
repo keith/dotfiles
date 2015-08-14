@@ -24,7 +24,7 @@ message-hook '(~N|~O) ~f notifications@github\.com' \
   "push '<enter-command>set my_old_pipe_decode=\$pipe_decode \
   nopipe_decode<enter> \
   <pipe-message>$DOTFILES/mutt/ghnotification.sh<enter> \
-  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>'"
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>gg'"
 
 set display_filter=$DOTFILES/mutt/display_filter.sh
 
