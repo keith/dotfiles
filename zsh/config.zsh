@@ -61,7 +61,11 @@ setopt RM_STAR_SILENT
 bindkey -v
 
 # Restore 'normal' search in VI mode
+# Use C-r to start searches, while in them use C-p and C-n to navigate them
 bindkey '^R' history-incremental-search-backward
+bindkey -M isearch '^P' history-incremental-search-backward
+bindkey -M isearch '^N' history-incremental-search-forward
+# Use C-p and C-n to navigate through history while not searching
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
 

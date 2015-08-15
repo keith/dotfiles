@@ -1,4 +1,4 @@
-if [[ $OSTYPE == darwin* ]];then
+if [[ $OSTYPE == darwin* ]]; then
   export OSX=true
 fi
 
