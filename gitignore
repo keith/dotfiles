@@ -18,6 +18,7 @@
 /.hg/*
 \#*\#
 Icon
+node_modules
 Session.vim
 TAGS
-node_modules
+xcuserdata
