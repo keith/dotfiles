@@ -17,11 +17,13 @@
   algorithm = patience
 [difftool]
   prompt = false
-[mergetool]
+[mergetool "vim"]
   cmd = vim -f \"$MERGED\"
   prompt = false
+[mergetool]
+  keepBackup = false
 [merge]
-  tool = fugitive
+  tool = vim
   log = true
   stat = true
 [color]
