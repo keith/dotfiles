@@ -1,4 +1,4 @@
-// Keith's [Phoenix](https://github.com/keith/phoenix) config
+// Keith's [Conductor](https://github.com/keith/conductor) config
 var modifiers = ["ctrl", "cmd"];
 var padding = 2;
 
@@ -99,5 +99,5 @@ api.bind('.', modifiers, function() { Window.bottomRight() });
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
-api.bind('y', ["ctrl", "alt"], function () { api.launch("iTerm"); });
+api.bind('y', ["ctrl", "alt"], function () { api.launch("Terminal"); });
 api.bind('RETURN', ["shift", "cmd"], function () { api.launch("Messages"); });
