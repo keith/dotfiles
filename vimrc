@@ -285,8 +285,7 @@ function! CloseLists()
   silent! TagbarClose
 endfunction
 
-" Clean trailing whitespace
-nnoremap <silent> <leader>w :call ClearWhitespace()\|update<CR>
+command! ClearWhitespace :call ClearWhitespace()
 function! ClearWhitespace()
   normal mi
   silent! %s/\s\+$//e
