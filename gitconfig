@@ -56,7 +56,7 @@
   dtc         = difftool --cached
   dtk         = difftool --tool=Kaleidoscope
   dtkc        = difftool --tool=Kaleidoscope --cached
-  l           = log -5 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
+  l           = log -20 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow bold)(%an)%Creset'
   last        = diff HEAD^ HEAD
   pl          = !sh -c 'git branch --merged | grep -v "\\*" | grep -v "master" | xargs -n 1 git branch -d'
   pul         = pull
