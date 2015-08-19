@@ -292,6 +292,14 @@ function! ClearWhitespace()
   normal `i
 endfunction
 
+function! ClearWhitespaceIfExpected()
+  if &ft =~ 'markdown'
+    return
+  endif
+
+  call ClearWhitespace()
+endfunction
+
 " Unfuck my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
@@ -342,7 +350,7 @@ augroup ft_settings
   autocmd BufRead * call PositionRecall()
 
   " Clear whitespace on save
-  autocmd BufWritePre * call ClearWhitespace()
+  autocmd BufWritePre * call ClearWhitespaceIfExpected()
 
   autocmd CursorHold <buffer> checktime
 augroup END
