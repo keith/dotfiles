@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: mkgitignore [TEMPLATES...]"
+  exit 64
+fi
+
+URL="https://raw.githubusercontent.com/github/gitignore/master"
+templates=("Global/{}.gitignore" "{}.gitignore")
+
+for name in "$@"
+do
+  found=0
+  for template in "${templates[@]}"
+  do
+    filename="$(sed "s/{}/$name/" <<< "$template")"
+    output=$(curl --silent "$URL/$filename")
+
+    if [[ $output == *"Not Found"* ]]; then
+      continue
+    fi
+
+    found=1
+    echo "$output" >> ".gitignore"
+  done
+
+  if [[ $found -eq 0 ]]; then
+    echo "'${name}.gitignore' not found"
+    exit 1
+  fi
+done

@@ -7,7 +7,6 @@ gem-browse
 interactive_editor
 jekyll
 launchy
-mkgitignore
 rdiscount
 rspec
 tmuxinator
