@@ -1,0 +1,7 @@
+#compdef chruby
+
+rubies=$(chruby | tr -d " *")
+
+if [[ ${#words[@]} -eq 2 ]]; then
+  _values "rubies" $rubies
+fi
