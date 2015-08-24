@@ -1,53 +1,25 @@
-####### Custom #######
-ssh.dmg
-.dropbox
-vim/bundle/*
+!.gitignore
+**/*.pyc
+**/.ropeproject
+*.un~
+*~
+.*.s[a-w][a-z]
+._*
+.DS_Store
+Icon
+
+.netrwhist
+Session.vim
+vim/*.spl
 vim/autoload/pathogen.vim
-bin/yuicompressor*
-irssi/config.autosave
+vim/bundle/*
+
+linux/configs/fish/fish_history
+linux/configs/fish/fishd*
+linux/configs/fish/generated_completions
+
+!mutt/temp/.gitkeep
 mutt/cache
 mutt/certificates
 mutt/postponed
 mutt/temp/*
-!mutt/temp/.gitkeep
-linux/configs/fish/fish_history
-linux/configs/fish/fishd*
-vim/flavors
-gnupg/*
-!gnupg/gpg.conf
-vim/*.spl
-linux/configs/fish/generated_completions
-**/.ropeproject
-**/*.pyc
-flycheck_*
-emacs.d/elpa
-*.eld
-rbenv/*
-!rbenv/default-gems
-
-####### Linux #######
-!.gitignore
-*~
-
-
-####### OSX #######
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-
-####### vim #######
-.*.s[a-w][a-z]
-*.un~
-Session.vim
-.netrwhist
-*~
