@@ -1,9 +1,8 @@
 gem-ctags
 
-awesome_print
 bundler
 gem-browse
-interactive_editor
 jekyll
+pry
 rdiscount
 tmuxinator

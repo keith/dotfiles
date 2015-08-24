@@ -19,7 +19,6 @@ FILES=(\
     hushlogin \
     ideavimrc \
     inputrc \
-    irbrc \
     js \
     lldbinit \
     mutt \
