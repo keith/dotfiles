@@ -1,0 +1,38 @@
+#!/bin/bash
+# https://github.com/doxavore/dotfiles/blob/master/bin/chruby-ctags
+
+set -e
+shopt -s nullglob
+
+index() {
+  echo "  indexing $1"
+  (builtin cd "$1"; ctags -R --languages=ruby)
+}
+
+index_LOAD_PATH() {
+  local LOAD_PATH=()
+  local ruby="$1"
+
+  if [[ -d "$ruby"/lib/ruby && -w "$ruby"/lib/ruby ]]; then
+    LOAD_PATH+=("$ruby"/lib/ruby/[0-9]*)
+    LOAD_PATH+=("$ruby"/lib/ruby/shared*)
+    LOAD_PATH+=("$ruby"/lib/ruby/site_ruby/[0-9]*)
+    LOAD_PATH+=("$ruby"/lib/ruby/vendor_ruby/[0-9]*)
+  elif [[ -d "$ruby"/lib && -w "$ruby"/lib ]]; then
+    LOAD_PATH+=("$ruby"/lib "$ruby"/site "$ruby"/vendor)
+  else
+    echo "No \$LOAD_PATH directories found in $ruby" >&2
+    return 1
+  fi
+
+  echo "Generating ctags for $ruby"
+
+  for dir in "${LOAD_PATH[@]}"; do
+    [[ -d "$dir" ]] && index "$dir"
+  done
+}
+
+RUBIES=(~/.rubies/*)
+for dir in "${RUBIES[@]}"; do
+  index_LOAD_PATH "$dir"
+done
