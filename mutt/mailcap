@@ -1,12 +1,13 @@
-text/html; lynx -display_charset=utf-8 -width=100 -nolist -dump %s; nametemplate=%s.html; copiousoutput
-text/plain; view %s
+text/html;                lynx -display_charset=utf-8 -width=100 -nolist -dump %s; nametemplate=%s.html; copiousoutput
+text/plain;               view %s
+text/rtf;                 $HOME/.mutt/view_attachment.sh %s rtf
 
-image/gif;   $HOME/.mutt/view_attachment.sh %s gif
-image/jpeg;  $HOME/.mutt/view_attachment.sh %s jpg
-image/jpg;   $HOME/.mutt/view_attachment.sh %s jpg
-image/pdf;   $HOME/.mutt/view_attachment.sh %s pdf
-image/png;   $HOME/.mutt/view_attachment.sh %s png
+image/gif;                $HOME/.mutt/view_attachment.sh %s gif
+image/jpeg;               $HOME/.mutt/view_attachment.sh %s jpg
+image/jpg;                $HOME/.mutt/view_attachment.sh %s jpg
+image/pdf;                $HOME/.mutt/view_attachment.sh %s pdf
+image/png;                $HOME/.mutt/view_attachment.sh %s png
 
-application/msword; ~/.mutt/view_attachment.sh %s "-"
-application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
-application/pdf; $HOME/.mutt/view_attachment.sh %s pdf
+application/msword;       $HOME/.mutt/view_attachment.sh %s "-"
+application/octet-stream; $HOME/.mutt/view_attachment.sh %s "-"
+application/pdf;          $HOME/.mutt/view_attachment.sh %s pdf
