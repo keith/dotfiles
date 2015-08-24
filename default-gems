@@ -2,11 +2,8 @@ gem-ctags
 
 awesome_print
 bundler
-colored
 gem-browse
 interactive_editor
 jekyll
-launchy
 rdiscount
-rspec
 tmuxinator
