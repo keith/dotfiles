@@ -1,0 +1,13 @@
+#!/bin/sh
+
+trap ctrl_c INT
+ctrl_c() {
+  exit 130
+}
+
+while read line
+do
+  if [ -n "$line" ]; then
+    gem install "$line"
+  fi
+done < ~/.default-gems

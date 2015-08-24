@@ -8,6 +8,7 @@ FILES=(\
     css \
     ctags \
     curlrc \
+    default-gems \
     gemrc \
     ghci \
     git_template \
@@ -29,7 +30,6 @@ FILES=(\
     offlineimaprc \
     psqlrc \
     pylintrc \
-    rbenv \
     rspec \
     tmux.conf \
     tmuxinator \
