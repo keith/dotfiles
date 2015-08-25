@@ -35,6 +35,7 @@ FILES=(\
     urlview \
     vim \
     vimrc \
+    weechat \
     xvimrc \
     zshrc \
 )

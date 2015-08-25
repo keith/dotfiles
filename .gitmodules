@@ -7,3 +7,7 @@
 [submodule "css"]
 	path = css
 	url = https://github.com/keith/dotcss-styles.git
+[submodule "weechat"]
+	ignore = dirty
+	path = weechat
+	url = https://github.com/keith/weechat.git
