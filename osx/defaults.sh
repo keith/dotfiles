@@ -129,16 +129,16 @@ defaults write com.apple.dock mru-spaces -bool false
 # Dock setup
 dockutil --remove all
 
-dockutil --add /Applications/Google\ Chrome.app
-dockutil --add /Applications/Tweetbot.app
-dockutil --add /Applications/Messages.app
-dockutil --add /Applications/Xcode.app
-dockutil --add /Applications/Dash.app
-dockutil --add /Applications/iTerm.app
+dockutil --add "/Applications/Google Chrome.app"
+dockutil --add "/Applications/Tweetbot.app"
+dockutil --add "/Applications/Messages.app"
+dockutil --add "/Applications/Xcode.app"
+dockutil --add "/Applications/Dash.app"
+dockutil --add "/Applications/iTerm.app"
 
-dockutil --add '/Applications' --view list --display folder --sort name
-dockutil --add '~/Dropbox' --view grid --display folder --sort name
-dockutil --add '~/Downloads' --view grid --display stack --sort dateadded
+dockutil --add "/Applications" --view list --display folder --sort name
+dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
+dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
 
 # Run hot corners script
 if [[ -f ../bin/corners ]]; then
