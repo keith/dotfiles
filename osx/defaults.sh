@@ -630,6 +630,9 @@ defaults write com.apple.dt.Xcode AssistantEditorsLayout -int 1
 # Use open quickly to open in the focused pane
 defaults write com.apple.dt.Xcode IDEEditorCoordinatorTarget_Click -string FocusedEditor
 
+# Use custom derived data location
+defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation -string build
+
 # Disable source control
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_0 -bool false
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_1 -bool false
