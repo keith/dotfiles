@@ -111,6 +111,8 @@ set virtualedit=block       " Allow the cursor to move off the side in visual bl
 set foldlevelstart=99       " Set the default level of open folds
 set foldmethod=indent       " Decide where to fold based
 set foldnestmax=5           " Set deepest fold to x levels
+set exrc                    " Source local .vimrc files
+set secure                  " Don't load autocmds from local .vimrc files
 
 " Default text width to 80
 if &textwidth == 0
@@ -363,8 +365,3 @@ augroup END
 
 " ObjC curly brace error fix
 let c_no_curly_error = 1
-
-" Local vimrc settings
-if filereadable('.vimrc.local')
-  source .vimrc.local
-end
