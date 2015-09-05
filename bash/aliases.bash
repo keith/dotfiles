@@ -14,14 +14,10 @@ alias G="git"
 # Vim
 alias v="vim"
 alias vv="vim ."
-alias :q="exit"
 
 # Archives
 alias mktar="tar -pvczf"
 alias untar="tar -zxvf"
-
-# File size
-alias fs="stat -f %z"
 
 # Detect which ls flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
