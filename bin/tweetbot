@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+location=/Applications/Tweetbot.app/Contents/Resources/Colors.plist
+url=https://raw.githubusercontent.com/lucifr/Tweetbot-for-Mac-ColorScheme/master/Night/Colors.plist
+
+pkill Tweetbot || true
+
+echo "Backing up colors"
+sudo mv "$location" "${location}.backup" || echo "'$location' doesn't exist"
+echo "Downloading new colors"
+sudo curl -o "$location" "$url"
+
+open -a Tweetbot
