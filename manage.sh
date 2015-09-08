@@ -21,6 +21,7 @@ FILES=(\
     inputrc \
     js \
     lldbinit \
+    mailcap \
     mutt \
     notmuch-config \
     npmrc \

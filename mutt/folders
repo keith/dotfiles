@@ -10,7 +10,7 @@ folder-hook keithbsmiley-gmail.com/* source ~/.mutt/accounts/gmail.account
 set alias_file       = $HOME/.mutt/aliases
 set certificate_file = $HOME/.mutt/certificates
 set header_cache     = $HOME/.mutt/cache/headers
-set mailcap_path     = $HOME/.mutt/mailcap
+set mailcap_path     = $HOME/.mailcap
 set message_cachedir = $HOME/.mutt/cache/bodies
 set tmpdir           = $HOME/.mutt/temp
 
