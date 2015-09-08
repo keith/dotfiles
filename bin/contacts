@@ -9,15 +9,18 @@
 
 import AddressBook
 
-let arguments = Process.arguments
-let validArguments = arguments[arguments.startIndex + 1..<arguments.endIndex]
-if validArguments.count == 0 {
-  exit(1)
+let arguments = Process.arguments.dropFirst()
+if arguments.isEmpty {
+  exit(EXIT_FAILURE)
 }
 
-let addressBook = ABAddressBook.sharedAddressBook()
-let searchString = " ".join(validArguments)
-let comparison: ABSearchComparison = CFIndex(kABContainsSubStringCaseInsensitive.value)
+guard let addressBook = ABAddressBook.sharedAddressBook() else {
+    fputs("Failed to initialize address book\n", stderr)
+    exit(EXIT_FAILURE)
+}
+
+let searchString = arguments.joinWithSeparator(" ")
+let comparison: ABSearchComparison = CFIndex(kABContainsSubStringCaseInsensitive.rawValue)
 let firstNameSearch = ABPerson.searchElementForProperty(kABFirstNameProperty,
                                                         label: nil,
                                                         key: nil,
@@ -34,14 +37,14 @@ let emailSearch = ABPerson.searchElementForProperty(kABEmailProperty,
                                                     value: searchString,
                                                     comparison: comparison)
 let comparisons = [firstNameSearch, lastNameSearch, emailSearch]
-let orComparison = ABSearchElement(forConjunction: CFIndex(kABSearchOr.value), children: comparisons)
+let orComparison = ABSearchElement(forConjunction: CFIndex(kABSearchOr.rawValue), children: comparisons)
 let found = addressBook.recordsMatchingSearchElement(orComparison) as? [ABRecord] ?? []
 
 if found.count == 0 {
-  exit(0)
+  exit(EXIT_SUCCESS)
 }
 
-println("NAME\tEMAIL")
+print("NAME\tEMAIL")
 for person in found {
   let firstName = person.valueForProperty(kABFirstNameProperty) as? String ?? ""
   let lastName = person.valueForProperty(kABLastNameProperty) as? String ?? ""
@@ -49,7 +52,7 @@ for person in found {
   if let emails = emailsProperty {
     for i in 0..<emails.count() {
       let email = emails.valueAtIndex(i) as? String ?? ""
-      println("\(email)\t\(firstName) \(lastName)")
+      print("\(email)\t\(firstName) \(lastName)")
     }
   }
 }
