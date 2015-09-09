@@ -305,6 +305,9 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseButton
 # Turn Bluetooth off.
 sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
 
+# Disable El Capitan shake to magnify cursor
+defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
+
 
 #
 # Sound
