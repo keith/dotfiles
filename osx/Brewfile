@@ -41,6 +41,7 @@ brew 'opp'
 brew 'pinup'
 brew 'python'
 brew 'readline'
+brew 'reattach-to-user-namespace'
 brew 'ruby-install', args: ['HEAD']
 brew 'shellcheck'
 brew 'speedtest_cli'
