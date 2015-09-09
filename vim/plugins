@@ -1,7 +1,5 @@
-AndrewRadev/splitjoin.vim
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
-elzr/vim-json
 hynek/vim-python-pep8-indent
 keith/gist.vim
 keith/parsec.vim
@@ -10,12 +8,10 @@ keith/tmux.vim
 klen/python-mode
 majutsushi/tagbar
 michaeljsmith/vim-indent-object
-othree/html5.vim
 Raimondi/delimitMate
 scrooloose/syntastic
 sjl/vitality.vim
 tommcdo/vim-lion
-tpope/vim-abolish
 tpope/vim-bundler
 tpope/vim-commentary
 tpope/vim-dispatch
@@ -23,14 +19,11 @@ tpope/vim-endwise
 tpope/vim-eunuch
 tpope/vim-fugitive
 tpope/vim-git
-tpope/vim-liquid
 tpope/vim-markdown
 tpope/vim-projectionist
 tpope/vim-ragtag
 tpope/vim-repeat
-tpope/vim-rhubarb
 tpope/vim-scriptease
-tpope/vim-speeddating
 tpope/vim-surround
 tpope/vim-unimpaired
 tpope/vim-vinegar
