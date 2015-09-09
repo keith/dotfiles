@@ -12,6 +12,7 @@ brew 'chruby'
 brew 'class-dump'
 brew 'cloc'
 brew 'cocoapods'
+brew 'contacts-cli'
 brew 'ctags'
 brew 'dockutil'
 brew 'fzf', args: ['HEAD']
