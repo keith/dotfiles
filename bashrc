@@ -2,9 +2,9 @@
 export DOTFILES="$(dirname $(readlink $HOME/.bashrc))"
 
 configs=($DOTFILES/*/*.bash)
-for file in ${configs[@]}
+for file in "${configs[@]}"
 do
-  source $file
+  source "$file"
 done
 
 export PS1="(\w \j) \$ "

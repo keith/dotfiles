@@ -20,12 +20,6 @@ alias psl="pod spec lint *.podspec"
 alias psla="pod spec lint *.podspec --verbose"
 alias pclean="rm -rf \$HOME/Library/Caches/CocoaPods /tmp/CocoaPods"
 
-# MacRuby
-alias macirb="macirb --simple-prompt"
-
-# Open iOS Simulator
-alias ios="open /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone\ Simulator.app"
-
 # Clean up LaunchServices to remove duplicates in the "Open With" menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 alias lslist="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -dump"
