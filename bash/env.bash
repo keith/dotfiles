@@ -3,16 +3,14 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Set the path to include:
+#  - $HOME/.bin      for local tools
 #  - /usr/local/bin  for Homebrew
 #  - /usr/local/sbin
 #  - /usr/bin        for system executables
-#  - /bin
 #  - /usr/sbin
+#  - /bin
 #  - /sbin
-#  - $HOME/.bin      for local tools
-#  - .git/safe/../../bin  mkdir .git/safe in the root of repositories you trust
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/.bin:.git/safe/../../bin"
-
+export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 
 # Set my default editor to Vim :)
 vim=$(which vim)
