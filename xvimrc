@@ -57,3 +57,6 @@ nnoremap [e "uddk"uP
 " Center after find
 nnoremap n nzz
 nnoremap N Nzz
+
+" Change the background color for searches
+highlight Search guibg=red
