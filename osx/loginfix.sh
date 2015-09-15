@@ -1,13 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-sudo -v
+set -e
 
-file=/usr/bin/loginfix.sh
+file="/usr/local/bin/loginfix.sh"
 
-echo "#!/bin/bash" | sudo tee $file > /dev/null
-echo "rm /Users/*/Library/Preferences/ByHost/com.apple.loginwindow.*" \
-    | sudo tee -a $file > /dev/null
-sudo chmod +x $file
-sudo chown root:wheel $file
+echo "#!/bin/bash" > "$file"
+echo "rm /Users/*/Library/Preferences/ByHost/com.apple.loginwindow.*" >> "$file"
+chmod +x "$file"
 
-defaults write com.apple.loginwindow LoginHook $file
+defaults write com.apple.loginwindow LoginHook "$file"
