@@ -107,15 +107,16 @@ set foldmethod=indent       " Decide where to fold based
 set foldnestmax=5           " Set deepest fold to x levels
 set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
+set colorcolumn=+1          " Show a line past the text width
 
 " Default text width to 80
 if &textwidth == 0
   set textwidth=80
 endif
 
-set colorcolumn=+1
+" Don't have a text width for readonly files
 if &readonly
-  silent! set colorcolumn=
+  set textwidth=0
 endif
 
 " Completion options
@@ -134,17 +135,14 @@ set wildignore+=tags,.tags
 set dictionary+=/usr/share/dict/words
 set spellfile=$HOME/.vim/custom-words.utf-8.add
 
-" Setup stuff for mksession
-set sessionoptions+=resize,localoptions,help
-
 " Set mapping and key timeouts
 set timeout
 set timeoutlen=1000
 set ttimeoutlen=100
 
 " Setting to indent wrapped lines
-silent! set breakindent
-silent! set breakindentopt=shift:2
+set breakindent
+set breakindentopt=shift:2
 
 " Check for file specific vim settings in the last 3 lines of the file
 set modeline
@@ -176,7 +174,7 @@ if has("clipboard")     " If the feature is available
 endif
 
 " Fuck you, help key.
-noremap  <F1> <Nop>
+noremap <F1> <Nop>
 
 " Paging keys
 inoremap <PageDown> <Nop>
@@ -185,10 +183,7 @@ inoremap <PageUp> <Nop>
 nnoremap Q :q<CR>
 
 " Easier save mapping
-nnoremap W :update<CR>
-
-" Go backwards words
-nnoremap E ge
+nnoremap W :write<CR>
 
 " Disable K
 vnoremap K <Nop>
@@ -225,28 +220,9 @@ cnoremap w!! w !sudo tee % >/dev/null
 command! -bang Q q<bang>
 command! -bang W w<bang>
 
-" Tab mappings
-nnoremap <leader>tt :tabnew<cr>
-nnoremap <leader>tc :tabclose<cr>
-
-" Split window navigation ------ {{{
-if !exists('$TMUX')
-  nnoremap <C-h> <C-w>h
-  nnoremap <C-j> <C-w>j
-  nnoremap <C-k> <C-w>k
-  nnoremap <C-l> <C-w>l
-endif
-
-" Mappings for split resizing
-nnoremap + :resize +5<CR>
-nnoremap _ :resize -5<CR>
-nnoremap ( :vertical resize -5<CR>
-nnoremap ) :vertical resize +5<CR>
-
 " Change the way splits open by default
 set splitbelow
 set splitright
-" }}}
 
 " Better movement
 nnoremap H ^
