@@ -11,19 +11,13 @@ endif
 " Source files before plugins
 source ~/.vim/before/*.vim
 
-" Plugin setup ------ {{{
+" Plugin setup
 filetype off
-
-if empty(glob("~/.vim/autoload/pathogen.vim"))
-  let url = "https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim"
-  execute "!curl -fLo ~/.vim/autoload/pathogen.vim " . url
-endif
 
 execute pathogen#infect()
 
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
-" }}}
 
 let s:fzf = system("brew --prefix fzf")
 if v:shell_error == 0
