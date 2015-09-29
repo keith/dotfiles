@@ -218,7 +218,7 @@ nnoremap Y y$
 cnoremap w!! w !sudo tee % >/dev/null
 
 command! -bang Q q<bang>
-command! -bang W w<bang>
+command! -bang -nargs=* -complete=file W w<bang> <args>
 
 " Change the way splits open by default
 set splitbelow
@@ -259,9 +259,12 @@ endfunction
 
 command! ClearWhitespace :call ClearWhitespace()
 function! ClearWhitespace()
-  normal mi
+  let _s=@/
+  let line = line(".")
+  let column = col(".")
   silent! %s/\s\+$//e
-  normal `i
+  let @/=_s
+  call cursor(line, column)
 endfunction
 
 function! ClearWhitespaceIfExpected()
