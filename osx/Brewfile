@@ -17,6 +17,7 @@ brew 'ctags'
 brew 'dockutil'
 brew 'fzf', args: ['HEAD']
 brew 'ghb', args: ['HEAD']
+brew 'ghu'
 brew 'git'
 brew 'grc'
 brew 'grep'
