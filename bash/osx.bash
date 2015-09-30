@@ -6,6 +6,9 @@ fi
 # Homebrew cask install apps to global Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# Disable CocoaPods stats ¯\_(ツ)_/¯
+export COCOAPODS_DISABLE_STATS=1
+
 # Open with finder
 alias o="open"
 alias oo="open ."
