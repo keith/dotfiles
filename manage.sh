@@ -117,6 +117,8 @@ if [[ $1 == "install" ]]; then
     chmod 0600 ~/.mutt/msmtprc
 elif [[ $1 == "remove" ]]; then
     remove_links
+elif [[ $1 == "clean" ]]; then
+    find -L ~ -type l -maxdepth 1 -exec rm -i {} \;
 else
     die
 fi

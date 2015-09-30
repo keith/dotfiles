@@ -1,3 +1,0 @@
-#!/bin/sh
-
-find -L . -type l -maxdepth 1
