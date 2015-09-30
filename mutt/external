@@ -29,6 +29,4 @@ message-hook '(~N|~O) ~f notifications@github\.com' \
   <pipe-message>$DOTFILES/mutt/ghnotification.sh<enter> \
   <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>gg'"
 
-set display_filter=$DOTFILES/mutt/display_filter.sh
-
 # vim: ft=muttrc
