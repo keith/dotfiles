@@ -1,0 +1,1 @@
+export CDPATH=$HOME/dev

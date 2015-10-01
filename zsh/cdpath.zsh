@@ -1,1 +1,0 @@
-cdpath=(~/dev)
