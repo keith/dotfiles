@@ -98,7 +98,7 @@ export KEYTIMEOUT=1
 function zle-line-init zle-keymap-select {
   VIM_PROMPT="[% NORMAL]%"
   # Apparently EPS1 is not a typo
-  RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/} $EPS1"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
   zle reset-prompt
 }
 
