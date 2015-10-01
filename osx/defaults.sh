@@ -123,6 +123,9 @@ defaults write com.apple.dock mouse-over-hilte-stack -bool true
 # Don't show Dashboard as a Space
 defaults write com.apple.dock dashboard-in-overlay -bool true
 
+# Disable Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
+
 # Don't automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
@@ -133,8 +136,7 @@ dockutil --add "/Applications/Google Chrome.app"
 dockutil --add "/Applications/Tweetbot.app"
 dockutil --add "/Applications/Messages.app"
 dockutil --add "/Applications/Xcode.app"
-dockutil --add "/Applications/Dash.app"
-dockutil --add "/Applications/iTerm.app"
+dockutil --add "/Applications/Utilities/Terminal.app"
 
 dockutil --add "/Applications" --view list --display folder --sort name
 dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
@@ -245,10 +247,18 @@ sudo pmset -a sms 0
 
 # Disable Sleep image
 sudo pmset hibernatemode 0
-sudo rm -rf /var/vm/sleepimage
+# Remove the sleep image file to save disk space
+sudo rm /private/var/vm/sleepimage
+# Create a zero-byte file instead…
+sudo touch /private/var/vm/sleepimage
+# and make sure it can’t be rewritten
+sudo chflags uchg /private/var/vm/sleepimage
 
 # Disable startup sound
-sudo nvram SystemAudioVolume=0
+sudo nvram SystemAudioVolume=" "
+
+# Enable the MacBook Air SuperDrive on any Mac
+sudo nvram boot-args="mbasd=1"
 
 # Power button behavior
 defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool NO
@@ -383,7 +393,7 @@ defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Finder: new window location set to $HOME. Same as Finder > Preferences > New Finder Windows show
 # For other path use "PfLo" and "file:///foo/bar/"
-defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
 
 # Disable the warning when changing a file extension
@@ -397,6 +407,13 @@ defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # Empty Trash securely by default
 # defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Expand the following File Info panes:
+# “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+	General -bool true \
+	OpenWith -bool true \
+	Privileges -bool true
 
 # Should remove downloaded from the internet warnings
 defaults write com.apple.LaunchServices LSQuarantine -bool false
@@ -457,6 +474,9 @@ defaults write com.apple.Safari HomePage -string "about:blank"
 # Prevent Safari from opening 'safe' files automatically after downloading
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
+# Hide Safari’s sidebar in Top Sites
+defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+
 # Auto clear downloads
 defaults write com.apple.Safari DownloadsClearingPolicy -int 2
 
@@ -495,6 +515,15 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Set to available when you come back from idle
 defaults write com.apple.iChat WelcomeBackMode -int 1
 
+# Disable automatic emoji substitution (i.e. use plain text smileys)
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+
+# Disable smart quotes as it’s annoying for messages that contain code
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+
+# Disable continuous spell checking
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
 
 #
 # iCal
@@ -524,6 +553,7 @@ defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
+defaults write com.apple.DiskUtility advanced-image-options -bool true
 
 
 #
@@ -665,6 +695,11 @@ defaults write org.pqrs.Seil sysctl -dict \
 
 # Caffeine
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
+
+# ClipMenu
+defaults write com.naotaka.ClipMenu maxHistorySize -int 100
+defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
+defaults write com.naotaka.ClipMenu showStatusItem -bool false
 
 
 # Killing affected applications
