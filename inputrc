@@ -7,6 +7,8 @@ set keymap vi
 
 set blink-matching-paren on
 
+set show-all-if-ambiguous on
+set completion-ignore-case on
 set convert-meta on
 
 "\C-a": beginning-of-line
