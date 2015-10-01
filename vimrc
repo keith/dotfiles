@@ -141,8 +141,10 @@ set timeoutlen=1000
 set ttimeoutlen=100
 
 " Setting to indent wrapped lines
-set breakindent
-set breakindentopt=shift:2
+if exists("+breakindent")
+  set breakindent
+  set breakindentopt=shift:2
+endif
 
 " Check for file specific vim settings in the last 3 lines of the file
 set modeline
