@@ -1,10 +1,9 @@
 tap 'caskroom/cask'
-tap 'homebrew/brewdler'
+tap 'homebrew/bundle'
 tap 'homebrew/dupes'
 tap 'keith/formulae'
 
 brew 'ag'
-brew 'bash'
 brew 'carthage'
 brew 'chisel'
 brew 'chruby'
@@ -14,7 +13,7 @@ brew 'cocoapods'
 brew 'contacts-cli'
 brew 'ctags'
 brew 'dockutil'
-brew 'fzf', args: ['HEAD']
+brew 'fzf'
 brew 'ghb', args: ['HEAD']
 brew 'ghu'
 brew 'git'
@@ -27,7 +26,6 @@ brew 'keith/formulae/cask', args: ['HEAD']
 brew 'less'
 brew 'libyaml'
 brew 'lynx'
-brew 'macvim', args: ['HEAD']
 brew 'msmtp'
 brew 'mutt'
 brew 'node'
