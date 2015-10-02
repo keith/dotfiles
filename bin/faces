@@ -2,7 +2,17 @@
 # Lifted from https://github.com/lukaszkorecki/DotFiles/blob/master/bins/faces
 # https://github.com/pengwynn/dotfile://github.com/pengwynn/dotfiles
 
-faces=('ಠ_ಠ' 'ಠ_ರೃ' '﴾͡๏̯͡๏﴿' '๏_๏' 'ಠ▃ಠ' '(•‿•)' 'Ծ_Ծ' '¯\(°_o)/¯' '(✌ﾟ∀ﾟ)☞' '╚(•⌂•)╝' 't(-_-t)t' '¯\_(ツ)_/¯' '◔_◔' '◎⃝ _◎⃝'  '༼ つ ◕_◕ ༽つ' ';ლ(ಠ_ಠლ)' '(╯°□°）╯︵ ┻━┻' 'ᶘ ᵒᴥᵒᶅ' '┻━┻ ︵ \(°□°)/ ︵ ┻━┻')
+faces=( \
+  'ಠ_ಠ' \
+  '(•‿•)' \
+  '¯\(°_o)/¯' \
+  't(-_-t)t' \
+  '¯\_(ツ)_/¯' \
+  '◔_◔' \
+  '༼ つ ◕_◕ ༽つ' \
+  '(╯°□°）╯︵ ┻━┻' \
+  '┻━┻ ︵ \(°□°)/ ︵ ┻━┻' \
+)
 
 if [[ -z $1 ]]; then
   echo 'Usage: faces [NUM]'
@@ -13,5 +23,5 @@ if [[ -z $1 ]]; then
     i=`expr $i + 1`
   done
 else
-  echo ${faces[$1]} | pbcopy
+  echo -n ${faces[$1]} | pbcopy
 fi
