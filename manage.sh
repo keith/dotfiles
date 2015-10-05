@@ -102,7 +102,7 @@ function remove_links () {
 
 # Fuction to print the usage and exit when there's bad input
 function die () {
-    echo "Usage ./manage.sh {install|remove}"
+    echo "Usage ./manage.sh {install|remove|clean}"
     exit 1
 }
 
