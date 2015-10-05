@@ -13,9 +13,8 @@ Session.vim
 vim/*.spl
 vim/bundle/*
 
-linux/configs/fish/fish_history
-linux/configs/fish/fishd*
-linux/configs/fish/generated_completions
+config/newsbeuter/*
+!config/newsbeuter/config
 
 !mutt/temp/.gitkeep
 mutt/cache
