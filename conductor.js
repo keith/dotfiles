@@ -82,6 +82,15 @@ function push() {
   });
 }
 
+function toggleapp(name) {
+  var currentApp = Window.focusedWindow().app();
+  if (currentApp.title() === name) {
+    currentApp.hide()
+  } else {
+    api.launch(name)
+  }
+}
+
 api.bind('u', modifiers, function() { center() });
 api.bind('i', modifiers, function() { left() });
 api.bind('o', modifiers, function() { right() });
@@ -100,4 +109,5 @@ api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
 api.bind('y', ["ctrl", "alt"], function () { api.launch("Terminal"); });
-api.bind('RETURN', ["shift", "cmd"], function () { api.launch("Messages"); });
+api.bind('RETURN', ["shift", "cmd"], function () { toggleapp("Messages"); });
+api.bind('c', ["ctrl", "cmd"], function () { toggleapp("Tweetbot"); });
