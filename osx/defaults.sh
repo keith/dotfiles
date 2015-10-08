@@ -589,6 +589,10 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
+# Finally disable opening random Apple photo applications when plugging in devices
+# https://twitter.com/stroughtonsmith/status/651854070496534528
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
+
 # Disable shadow in screenshots
 # defaults write com.apple.screencapture disable-shadow -bool true
 
