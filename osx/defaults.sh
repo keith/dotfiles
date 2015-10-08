@@ -166,6 +166,15 @@ fi
 
 
 #
+# Terminal
+#
+
+# Disable leading [ on prompt lines (which is totally broken in anything curses)
+# https://twitter.com/UINT_MIN/status/652142001932996609
+defaults write com.apple.Terminal AutoMarkPromptLines -bool false
+
+
+#
 # Firewall
 #
 
