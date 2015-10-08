@@ -82,12 +82,12 @@ function push() {
   });
 }
 
-function toggleapp(name) {
-  var currentApp = Window.focusedWindow().app();
-  if (currentApp.title() === name) {
-    currentApp.hide()
+function toggleapp(title) {
+  var app = App.frontmostApp();
+  if (app.title() === title) {
+    app.hide();
   } else {
-    api.launch(name)
+    api.launch(title);
   }
 }
 
