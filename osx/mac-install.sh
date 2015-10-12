@@ -22,6 +22,6 @@ if ! which brew &> /dev/null; then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-brew tap Homebrew/brewdler
-brew update
+brew tap Homebrew/bundle
 brew bundle --file="$DOTFILES/osx/Brewfile"
+brew bundle --file="$DOTFILES/osx/Brewfile.cask"
