@@ -3,6 +3,7 @@
 FILES=(\
     agignore \
     bashrc \
+    bash_profile \
     bin \
     conductor.js \
     config \
