@@ -712,14 +712,15 @@ defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 # ClipMenu
 defaults write com.naotaka.ClipMenu maxHistorySize -int 100
 defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
+defaults write com.naotaka.ClipMenu showAlertBeforeClearHistory -bool false
 defaults write com.naotaka.ClipMenu showStatusItem -bool false
 
 
-# Killing affected applications
+echo "Killing affected applications"
 for app in Safari Finder Dock Mail Messages SystemUIServer Xquartz
 do
     killall "$app" >/dev/null 2>&1
 done
 
-# Done. Note that some of these changes require a logout/restart to take effect.
+echo "Done. Note that some of these changes require a logout/restart to take effect."
 # vim:tw=0
