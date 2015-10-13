@@ -16,7 +16,7 @@ containsElement () {
   return 1
 }
 
-readarray -t repos < $file
+repos=$(cat $file)
 names=()
 existing=()
 new=()
