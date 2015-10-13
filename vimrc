@@ -330,6 +330,9 @@ augroup ft_settings
   autocmd BufWritePre * call ClearWhitespaceIfExpected()
 
   autocmd CursorHold <buffer> checktime
+
+  " Create the binary spell file when opening vim
+  autocmd VimEnter * execute "mkspell! " . &spellfile
 augroup END
 
 augroup cursorline
