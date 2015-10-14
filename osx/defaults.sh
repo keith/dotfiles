@@ -684,6 +684,10 @@ defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation -string build
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_0 -bool false
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_5_1 -bool false
 
+# Show build times in toolbar
+# http://cocoa.tumblr.com/post/131023038113/build-speed
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool true
+
 
 #
 # Third Party
