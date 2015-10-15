@@ -1,5 +1,4 @@
 // Keith's [Conductor](https://github.com/keith/conductor) config
-var modifiers = ["ctrl", "cmd"];
 var padding = 2;
 
 function windowToGrid(win, x, y, width, height) {
@@ -17,33 +16,13 @@ function toGrid(x, y, width, height) {
   windowToGrid(Window.focusedWindow(), x, y, width, height);
 }
 
-Window.fullScreen = function() {
-  toGrid(0, 0, 1, 1);
-}
-
-Window.leftHalf = function() {
-  toGrid(0, 0, 0.5, 1);
-}
-
-Window.rightHalf = function() {
-  toGrid(0.5, 0, 0.5, 1);
-}
-
-Window.topLeft = function() {
-  toGrid(0, 0, 0.5, 0.5);
-}
-
-Window.bottomLeft = function() {
-  toGrid(0, 0.5, 0.5, 0.5);
-}
-
-Window.topRight = function() {
-  toGrid(0.5, 0, 0.5, 0.5);
-}
-
-Window.bottomRight = function() {
-  toGrid(0.5, 0.5, 0.5, 0.5);
-}
+Window.fullScreen = function() { toGrid(0, 0, 1, 1); }
+Window.leftHalf = function() { toGrid(0, 0, 0.5, 1); }
+Window.rightHalf = function() { toGrid(0.5, 0, 0.5, 1); }
+Window.topLeft = function() { toGrid(0, 0, 0.5, 0.5); }
+Window.bottomLeft = function() { toGrid(0, 0.5, 0.5, 0.5); }
+Window.topRight = function() { toGrid(0.5, 0, 0.5, 0.5); }
+Window.bottomRight = function() { toGrid(0.5, 0.5, 0.5, 0.5); }
 
 function center() {
   var win = Window.focusedWindow();
@@ -91,6 +70,7 @@ function toggleapp(title) {
   }
 }
 
+var modifiers = ["ctrl", "cmd"];
 api.bind('u', modifiers, function() { center() });
 api.bind('i', modifiers, function() { left() });
 api.bind('o', modifiers, function() { right() });
@@ -111,3 +91,4 @@ api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.
 api.bind('y', ["ctrl", "alt"], function () { api.launch("Terminal"); });
 api.bind('RETURN', ["shift", "cmd"], function () { toggleapp("Messages"); });
 api.bind('c', ["ctrl", "cmd"], function () { toggleapp("Tweetbot"); });
+api.bind('a', ["shift", "alt", "cmd"], function () { api.launch("Activity Monitor"); });
