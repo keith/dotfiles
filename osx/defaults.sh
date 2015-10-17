@@ -6,8 +6,8 @@
 #  sudo opensnoop | grep plist
 
 if [[ $# -ne 1 ]];then
-    echo "Usage: ./$(basename "$0") COMPNAME"
-    exit
+  echo "Usage: ./$(basename "$0") COMPNAME"
+  exit
 fi
 
 killall System\ Preferences
@@ -39,7 +39,7 @@ defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -int 1
 # Disables shutting down inactive applications
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
-# Disable the “reopen windows when logging back in” option
+# Disable the "reopen windows when logging back in" option
 # This works, although the checkbox will still appear to be checked.
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
@@ -230,15 +230,11 @@ sudo pmset -a halfdim 0
 
 # Sleep options
 sudo pmset -a displaysleep 5
-sudo pmset -a disksleep 0
 sudo pmset -a sleep 0
+sudo pmset -a disksleep 0
 
 # Wake for network access
 sudo pmset -a womp 1
-
-# Power button shows shutdown dialog <=10.8
-# Removed *intentionally* in Mavericks
-# sudo pmset -a powerbutton 0
 
 # Don't restart after power failure
 sudo pmset -a autorestart 0
@@ -335,9 +331,6 @@ defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 
 # Change the error sound
 defaults write com.apple.systemsound com.apple.sound.beep.sound -string "/System/Library/Sounds/Morse.aiff"
-
-# Disable volume change feedback
-defaults write NSGlobalDomain com.apple.sound.beep.feedback -int 0
 
 
 #
@@ -616,11 +609,11 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 #
 
 # Clipboard syncing
-defaults write org.macosforge.xquartz.X11 sync_clipboard_to_pasteboard -boolean true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard -boolean true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_clipboard -boolean true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_primary -boolean true
-defaults write org.macosforge.xquartz.X11 sync_primary_on_select -boolean false
+defaults write org.macosforge.xquartz.X11 sync_clipboard_to_pasteboard -bool true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard -bool true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_clipboard -bool true
+defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_primary -bool true
+defaults write org.macosforge.xquartz.X11 sync_primary_on_select -bool false
 
 # Run xterm by default (without this vim's clipboard doesn't work)
 defaults write org.macosforge.xquartz.X11 app_to_run -string "/opt/X11/bin/xterm"
@@ -724,7 +717,7 @@ defaults write com.naotaka.ClipMenu showStatusItem -bool false
 echo "Killing affected applications"
 for app in Safari Finder Dock Mail Messages SystemUIServer Xquartz
 do
-    killall "$app" >/dev/null 2>&1
+  killall "$app"
 done
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
