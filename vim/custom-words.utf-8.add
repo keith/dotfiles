@@ -3,6 +3,8 @@ APIs
 app
 Clojure
 CocoaPods
+codebase
+codebases
 CSS
 GitHub
 Gmail
@@ -14,6 +16,8 @@ iOS
 JIRA
 JSON
 localizable
+Lyft
+mockup
 ObjC
 offline
 onboarding
@@ -23,6 +27,8 @@ plugin
 plugins
 Podfile
 refactor
+refactors
+screenshot
 SDK
 SDKs
 subclassing
