@@ -3,5 +3,5 @@ if [ -z $OSX ]; then
 fi
 
 # Link zsh completion files from homebrew
-fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-fpath=($(brew --prefix)/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
