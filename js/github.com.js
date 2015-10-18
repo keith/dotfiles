@@ -92,9 +92,7 @@ function insertButtons(elem) {
   buttonGroup.appendChild(btn);
   btn = button("Trunk", "We have just launched 'Trunk', which is the new way for you to submit your Pods. For more information on this have a read through the post at http://blog.cocoapods.org/CocoaPods-Trunk/ If you have previously had your Pod merged into the master repository, please ensure you claim your Pod http://blog.cocoapods.org/Claim-Your-Pods/");
   buttonGroup.appendChild(btn);
-  btn = button("Structure", "The folder structure of this spec should be `name/version/name.podspec` where `name` is the same as `s.name` in the spec file.", false);
-  buttonGroup.appendChild(btn);
-  btn = button("Tags", "`git push --tags`", false);
+  btn = button("Merge?", "Can we merge this or mark it as awaiting QA?", false);
   buttonGroup.appendChild(btn);
   btn = button("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/beers.png' width='14' height='14'>", ":beers:", false);
   buttonGroup.appendChild(btn);
