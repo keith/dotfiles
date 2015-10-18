@@ -1,6 +1,6 @@
 #compdef chruby
 
-rubies=$(chruby | tr -d " *")
+rubies=($(chruby | tr -d " *") system)
 
 if [[ ${#words[@]} -eq 2 ]]; then
   if [[ $rubies != "" ]]; then
