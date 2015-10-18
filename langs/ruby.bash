@@ -15,4 +15,3 @@ else
 fi
 
 alias bi="bundle install"
-alias bdgem="gem build *.gemspec; gem install *.gem --no-ri --no-rdoc"
