@@ -23,6 +23,8 @@ if os.path.exists(historyPath):
     readline.read_history_file(historyPath)
 
 readline.parse_and_bind('tab: complete')
+readline.parse_and_bind('\C-a: beginning-of-line')
+readline.parse_and_bind('\C-e: end-of-line')
 atexit.register(save_history)
 del os, atexit, readline, rlcompleter, save_history, historyPath
 
