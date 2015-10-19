@@ -1,9 +1,0 @@
-#!/bin/sh
-
-sudo rmmod b43
-sudo rmmod ssb
-sudo modprobe -f wl
-
-sudo lsmod | grep wl
-sudo lsmod | grep lib80211
-sudo depmod -a
