@@ -2,18 +2,17 @@ setlocal omnifunc=htmlcomplete#CompleteTags
 setlocal spell
 setlocal textwidth=72
 
-function! Marked()
-  if !executable("mark")
-    echohl ErrorMsg
-    echom "Missing 'mark' CLI"
-    echohl None
-    return
-  endif
-
+function! s:Marked()
   silent !mark %
   redraw!
 endfunction
 
+function! s:Markdown()
+  silent !open -a MacDown %
+  redraw!
+endfunction
+
 if has("mac")
-  command! -buffer -bang Marked :call Marked()
+  command! -buffer Marked call s:Marked()
+  command! -buffer MD call s:Markdown()
 endif
