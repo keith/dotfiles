@@ -1,4 +1,7 @@
 #!/bin/sh
 
-kill -9 "$(pgrep -f offlineimap | head -1 | awk '{ print $1; }')"
-offlineimap
+pid="$(pgrep -f offlineimap | head -1)"
+
+if [ -n "$pid" ]; then
+  kill -9 "$pid" && offlineimap
+fi
