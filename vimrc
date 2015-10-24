@@ -160,12 +160,16 @@ set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
 " Right Side
-set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
+if isdirectory(expand("$HOME/.vim/bundle/tagbar"))
+  set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
+endif
 set statusline+=%y
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
-set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
+if isdirectory(expand("$HOME/.vim/bundle/syntastic"))
+  set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
+endif
 
 if has("clipboard")     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
