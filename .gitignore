@@ -21,3 +21,5 @@ mutt/cache
 mutt/certificates
 mutt/postponed
 mutt/temp/*
+
+ncmpcpp/error.log

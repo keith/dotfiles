@@ -2,8 +2,8 @@
 
 FILES=(\
     agignore \
-    bashrc \
     bash_profile \
+    bashrc \
     bin \
     conductor.js \
     config \
@@ -24,7 +24,9 @@ FILES=(\
     js \
     lldbinit \
     mailcap \
+    mpdconf \
     mutt \
+    ncmpcpp \
     notmuch-config \
     npmrc \
     nvim \
