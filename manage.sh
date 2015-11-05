@@ -22,6 +22,7 @@ FILES=(\
     ideavimrc \
     inputrc \
     js \
+    lldbhelpers \
     lldbinit \
     mailcap \
     mpdconf \
