@@ -13,6 +13,7 @@ Session.vim
 vim/*.spl
 vim/bundle/*
 
+config/hub
 config/newsbeuter/*
 !config/newsbeuter/config
 
