@@ -53,20 +53,28 @@ set nostartofline              " Keep cursor in the same place after saves
 set showcmd                    " Show command information on the right side of the command line
 set isfname-==                 " Remove characters from filenames for gf
 
+" Create a directory if it doesn't exist yet
+function! s:EnsureDirectory(directory)
+  if !isdirectory(expand(a:directory))
+    call mkdir(expand(a:directory), "p")
+  endif
+endfunction
+
+" Save backup files, storage is cheap, losing changes is sad
+set backup
+set backupdir=$HOME/.tmp/vim/backup
+call s:EnsureDirectory(&backupdir)
+
 " Write undo tree to a file to resume from next time the file is opened
 if has("persistent_undo")
   set undolevels=2000            " The number of undo items to remember
   set undofile                   " Save undo history to files locally
   set undodir=$HOME/.vimundo     " Set the directory of the undofile
-  if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-  endif
+  call s:EnsureDirectory(&undodir)
 endif
 
-set directory=$HOME/.tmp/vim
-if !isdirectory(expand(&directory))
-  call mkdir(expand(&directory), "p")
-endif
+set directory=$HOME/.tmp/vim/swap
+call s:EnsureDirectory(&directory)
 
 " On quit reset title
 let &titleold=getcwd()
