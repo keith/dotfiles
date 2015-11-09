@@ -283,7 +283,7 @@ function! s:ClearWhitespaceIfExpected()
     return
   endif
 
-  call ClearWhitespace()
+  call s:ClearWhitespace()
 endfunction
 
 " Unfuck my screen
