@@ -1,5 +1,5 @@
 # Path to dotfiles repo
-export DOTFILES="$(dirname $(readlink $HOME/.zshrc))"
+export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
 
 # Find all zsh files
 configs=($DOTFILES/*/*.bash $DOTFILES/*/*.zsh)

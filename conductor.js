@@ -71,19 +71,19 @@ function toggleapp(title) {
 }
 
 var modifiers = ["ctrl", "cmd"];
-api.bind('u', modifiers, function() { center() });
-api.bind('i', modifiers, function() { left() });
-api.bind('o', modifiers, function() { right() });
-api.bind('p', modifiers, function() { push() });
+api.bind('u', modifiers, center);
+api.bind('i', modifiers, left);
+api.bind('o', modifiers, right);
+api.bind('p', modifiers, push);
 
-api.bind('k', modifiers, function() { Window.fullScreen() });
-api.bind('h', modifiers, function() { Window.leftHalf() });
-api.bind('l', modifiers, function() { Window.rightHalf() });
+api.bind('k', modifiers, Window.fullScreen);
+api.bind('h', modifiers, Window.leftHalf);
+api.bind('l', modifiers, Window.rightHalf);
 
-api.bind('n', modifiers, function() { Window.topLeft() });
-api.bind('m', modifiers, function() { Window.bottomLeft() });
-api.bind(',', modifiers, function() { Window.topRight() });
-api.bind('.', modifiers, function() { Window.bottomRight() });
+api.bind('n', modifiers, Window.topLeft);
+api.bind('m', modifiers, Window.bottomLeft);
+api.bind(',', modifiers, Window.topRight);
+api.bind('.', modifiers, Window.bottomRight);
 
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });

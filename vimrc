@@ -194,7 +194,7 @@ noremap <F1> <Nop>
 inoremap <PageDown> <Nop>
 inoremap <PageUp> <Nop>
 
-nnoremap Q :q<CR>
+nnoremap Q :quit<CR>
 
 " Easier save mapping
 nnoremap W :write<CR>
@@ -241,9 +241,6 @@ set splitright
 " Better movement
 nnoremap H ^
 vnoremap H ^
-nnoremap L g_
-vnoremap L g_
-nmap <tab> %
 
 " Switch to the last file
 nnoremap <leader><leader> <C-^>
@@ -263,16 +260,16 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Close all the lists
-nnoremap <leader>q :call CloseLists()<CR>
-function! CloseLists()
+nnoremap <leader>q call s:CloseLists()<CR>
+function! s:CloseLists()
   lclose
   cclose
   pclose
   silent! TagbarClose
 endfunction
 
-command! ClearWhitespace :call ClearWhitespace()
-function! ClearWhitespace()
+command! ClearWhitespace call s:ClearWhitespace()
+function! s:ClearWhitespace()
   let _s=@/
   let line = line(".")
   let column = col(".")
@@ -281,7 +278,7 @@ function! ClearWhitespace()
   call cursor(line, column)
 endfunction
 
-function! ClearWhitespaceIfExpected()
+function! s:ClearWhitespaceIfExpected()
   if &ft =~ 'markdown'
     return
   endif
@@ -302,7 +299,7 @@ if &diff
 endif
 
 " Position resume
-function! PositionRecall()
+function! s:PositionRecall()
   if &ft =~ 'gitcommit\|gitrebase'
     return
   endif
@@ -336,10 +333,10 @@ augroup ft_settings
   autocmd VimEnter,BufRead * set formatoptions-=o
 
   " Return to the same position you left the file in
-  autocmd BufRead * call PositionRecall()
+  autocmd BufRead * call s:PositionRecall()
 
   " Clear whitespace on save
-  autocmd BufWritePre * call ClearWhitespaceIfExpected()
+  autocmd BufWritePre * call s:ClearWhitespaceIfExpected()
 
   autocmd CursorHold <buffer> checktime
 
