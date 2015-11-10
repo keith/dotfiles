@@ -61,6 +61,30 @@ let g:tagbar_type_objc = {
 \ }
 " }}}
 
+let g:tagbar_type_swift = {
+  \ 'ctagstype': 'swift',
+  \ 'ctagsargs': [
+    \ '-f',
+    \ '-',
+    \ '--excmd=pattern',
+    \ '--extra=',
+    \ '--format=2',
+    \ '--fields=nksaSmt',
+  \ ],
+  \ 'sro': ' ',
+  \ 'kinds': [
+    \ 'c:class',
+    \ 'e:enum',
+    \ 'f:function',
+    \ 'c:constant',
+    \ 'P:protocol',
+    \ 's:struct',
+    \ 't:typealias',
+    \ 'v:variable',
+  \ ],
+\ }
+" }}}
+
 " Syntastic ------ {{{
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
