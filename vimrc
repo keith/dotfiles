@@ -116,6 +116,7 @@ set foldnestmax=5           " Set deepest fold to x levels
 set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
 set colorcolumn=+1          " Show a line past the text width
+set tags^=.tags             " Add local .tags file
 
 " Default text width to 80
 if &textwidth == 0
