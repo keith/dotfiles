@@ -1,4 +1,4 @@
-command! GenerateCtags :call s:GenerateCtags()
+command! GenerateCtags call s:GenerateCtags()
 function! s:GenerateCtags()
   let tagfile = '.tags'
   if filereadable('tags')

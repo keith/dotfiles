@@ -17,6 +17,16 @@ __fselgit() {
   echo
 }
 
+__fselgitfiles() {
+  command git ls-files `git rev-parse --show-toplevel` --cached --exclude-standard --others | $(__fzfcmd) -m
+  echo
+}
+
+fzf-git-files-widget() {
+  LBUFFER="${LBUFFER}$(__fselgitfiles)"
+  zle redisplay
+}
+
 fzf-git-status-widget() {
   LBUFFER="${LBUFFER}$(__fselgit)"
   zle redisplay
@@ -30,3 +40,6 @@ fzf-file-widget() {
 }
 zle     -N   fzf-file-widget
 bindkey '^T' fzf-file-widget
+
+zle     -N   fzf-git-files-widget
+bindkey '^G' fzf-git-files-widget
