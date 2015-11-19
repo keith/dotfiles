@@ -14,12 +14,12 @@ source ~/.vim/before/*.vim
 " Plugin setup
 filetype off
 
-execute pathogen#infect()
+execute g:pathogen#infect()
 
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
-let s:fzf = system("brew --prefix fzf")
+let s:fzf = system('brew --prefix fzf')
 if v:shell_error == 0
   execute 'set rtp+=' . s:fzf
 endif
@@ -30,7 +30,7 @@ runtime macros/matchit.vim
 runtime ftplugin/man.vim
 
 " Use space as leader!
-let mapleader="\<Space>"
+let g:mapleader="\<Space>"
 
 " I - Disable the startup message
 " a - Avoid pressing enter after saves
@@ -56,7 +56,7 @@ set isfname-==                 " Remove characters from filenames for gf
 " Create a directory if it doesn't exist yet
 function! s:EnsureDirectory(directory)
   if !isdirectory(expand(a:directory))
-    call mkdir(expand(a:directory), "p")
+    call mkdir(expand(a:directory), 'p')
   endif
 endfunction
 
@@ -66,7 +66,7 @@ set backupdir=$HOME/.tmp/vim/backup
 call s:EnsureDirectory(&backupdir)
 
 " Write undo tree to a file to resume from next time the file is opened
-if has("persistent_undo")
+if has('persistent_undo')
   set undolevels=2000            " The number of undo items to remember
   set undofile                   " Save undo history to files locally
   set undodir=$HOME/.vimundo     " Set the directory of the undofile
@@ -150,7 +150,7 @@ set timeoutlen=1000
 set ttimeoutlen=100
 
 " Setting to indent wrapped lines
-if exists("+breakindent")
+if exists('+breakindent')
   set breakindent
   set breakindentopt=shift:2
 endif
@@ -169,21 +169,21 @@ set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
 " Right Side
-if isdirectory(expand("$HOME/.vim/bundle/tagbar"))
+if isdirectory(expand('$HOME/.vim/bundle/tagbar'))
   set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
 endif
 set statusline+=%y
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
-if isdirectory(expand("$HOME/.vim/bundle/syntastic"))
+if isdirectory(expand('$HOME/.vim/bundle/syntastic'))
   set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
 endif
 
-if has("clipboard")     " If the feature is available
+if has('clipboard')     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
 
-  if has("unnamedplus")
+  if has('unnamedplus')
     set clipboard+=unnamedplus
   endif
 endif
@@ -271,16 +271,16 @@ endfunction
 
 command! ClearWhitespace call s:ClearWhitespace()
 function! s:ClearWhitespace()
-  let _s=@/
-  let line = line(".")
-  let column = col(".")
+  let l:backup = @/
+  let l:line = line('.')
+  let l:column = col('.')
   silent! %s/\s\+$//e
-  let @/=_s
-  call cursor(line, column)
+  let @/=l:backup
+  call cursor(l:line, l:column)
 endfunction
 
 function! s:ClearWhitespaceIfExpected()
-  if &ft =~ 'markdown'
+  if &ft =~? 'markdown'
     return
   endif
 
@@ -301,11 +301,11 @@ endif
 
 " Position resume
 function! s:PositionRecall()
-  if &ft =~ 'gitcommit\|gitrebase'
+  if &ft =~? 'gitcommit\|gitrebase'
     return
   endif
 
-  if line("'\"") > 0 && line("'\"") <= line("$")
+  if line("'\"") > 0 && line("'\"") <= line('$')
     execute "normal g`\"zz"
   endif
 endfunction
@@ -352,4 +352,4 @@ augroup cursorline
 augroup END
 
 " ObjC curly brace error fix
-let c_no_curly_error = 1
+let g:c_no_curly_error = 1
