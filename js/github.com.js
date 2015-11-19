@@ -29,6 +29,24 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $(".js-new-blob-submit").remove();
+  $("a[href^=github-mac]").remove();
+});
+
+$(document).ready(function() {
+  var url = document.URL
+  if (url.toLowerCase().indexOf("lyft") <= 0) {
+    return
+  }
+
+  $(".label.tooltipped").each(function() {
+    if ($(this).text() !== "Approved - Awaiting QA") {
+      $(this).remove();
+    }
+  });
+});
+
 $(document).keypress(function(e) {
   // Exit early if we're in an input field
   // This wasn't needed in Chrome but is in Safari
