@@ -32,6 +32,7 @@ $(document).ready(function() {
 $(document).ready(function() {
   $(".js-new-blob-submit").remove();
   $("a[href^=github-mac]").remove();
+  $("button:contains('Update branch')").remove();
 });
 
 $(document).ready(function() {
