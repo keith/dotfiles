@@ -689,6 +689,8 @@ defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool true
 defaults write com.drewwilson.screeny RecordAudio -bool false
 
 # Tweetbot
+# Skip t.co URLs
+defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
 defaults write com.tapbots.TweetbotMac openURLInBackground -bool true
 defaults write com.tapbots.TweetbotMac showStatusItem -bool false
 defaults write com.tapbots.TweetbotMac soundType -int 1
