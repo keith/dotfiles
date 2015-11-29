@@ -66,7 +66,13 @@ function toggleapp(title) {
   if (app.title() === title) {
     app.hide();
   } else {
-    api.launch(title);
+    var apps = App.runningApps().map(function(app) {
+      return app.title();
+    });
+
+    if (apps.indexOf(title) >= 0) {
+      api.launch(title);
+    }
   }
 }
 
@@ -88,7 +94,7 @@ api.bind('.', modifiers, Window.bottomRight);
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
-api.bind('y', ["ctrl", "alt"], function () { api.launch("Terminal"); });
-api.bind('RETURN', ["shift", "cmd"], function () { toggleapp("Messages"); });
-api.bind('c', ["ctrl", "cmd"], function () { toggleapp("Tweetbot"); });
-api.bind('a', ["shift", "alt", "cmd"], function () { api.launch("Activity Monitor"); });
+api.bind('y', ["ctrl", "alt"], function() { api.launch("Terminal"); });
+api.bind('RETURN', ["shift", "cmd"], function() { toggleapp("Messages"); });
+api.bind('c', ["ctrl", "cmd"], function() { toggleapp("Tweetbot"); });
+api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
