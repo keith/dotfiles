@@ -260,6 +260,10 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+" Jump to next/previous merge conflict marker
+nnoremap <silent> ]c /\v^(\<\|\=\|\>){7}([^=].+)?$<CR>
+nnoremap <silent> [c ?\v^(\<\|\=\|\>){7}([^=].+)\?$<CR>
+
 " Close all the lists
 nnoremap <leader>q call s:CloseLists()<CR>
 function! s:CloseLists()

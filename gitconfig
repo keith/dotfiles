@@ -18,7 +18,7 @@
 [difftool]
   prompt = false
 [mergetool "vim"]
-  cmd = vim -f \"$MERGED\"
+  cmd = vim -c "normal\\ gg]c" -f \"$MERGED\"
   prompt = false
 [mergetool]
   keepBackup = false
