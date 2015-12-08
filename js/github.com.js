@@ -120,7 +120,7 @@ function configureLabelButton(button) {
         $('input[type="checkbox"][value="keith"]')[0].click();
         $("body").click();
       }, 200);
-    }, 200);
+    }, 750);
   });
 
   return button
