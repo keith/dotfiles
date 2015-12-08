@@ -23,7 +23,7 @@ __fselgitfiles() {
 }
 
 fzf-git-files-widget() {
-  LBUFFER="${LBUFFER}$(__fselgitfiles)"
+  LBUFFER="${LBUFFER}\"$(__fselgitfiles)\""
   zle redisplay
 }
 
