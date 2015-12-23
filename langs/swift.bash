@@ -1,5 +1,5 @@
 if ! command -v swiftenv >/dev/null; then
-  exit 0
+  return
 fi
 
 export SWIFTENV_ROOT="$HOME/.swiftenv"
