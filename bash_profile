@@ -1,1 +1,1 @@
-[ -f ~/.bashrc ] && source ~/.bashrc
+[[ $- == *i* ]] && source "$HOME/.bashrc"
