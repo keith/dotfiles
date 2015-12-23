@@ -14,7 +14,7 @@ source ~/.vim/before/*.vim
 " Plugin setup
 filetype off
 
-execute g:pathogen#infect()
+execute pathogen#infect()
 
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
