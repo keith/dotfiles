@@ -90,6 +90,14 @@ bindkey '^[[6~' down-line-or-history
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
+# Stop highlighting text when it's pasted
+# This feature was intended so you wouldn't paste text with a \n and that would
+# immediately be interpreted as a "execute command". This feature is totally
+# fine but the side effect of giving a background highlight color to the pasted
+# text was too much visual churn for me.
+# https://github.com/zsh-users/zsh/commit/a2efa4d1c809a098b8fbf3a0cd9cc2e77300bf5a
+unset zle_bracketed_paste
+
 # Reduce the lag switching into Normal mode to 0.1s
 export KEYTIMEOUT=1
 
