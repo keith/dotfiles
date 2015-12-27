@@ -33,6 +33,9 @@ export GREP_OPTIONS="--color"
 # Disable ^-S in the terminal
 stty -ixon -ixoff
 
+# The directory for maildir mail
+export MAILDIR="$HOME/.mail"
+
 # Source something from all shells for private ENV vars
 if [[ -f "$HOME/.secrets" ]]; then
   source "$HOME/.secrets"
