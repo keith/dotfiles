@@ -1,7 +1,7 @@
 #!/bin/sh
 # Show the number of unread messages from a maildir directory
 
-dirs="$HOME/.mail/*/INBOX/new/"
+dirs="$MAILDIR/*/INBOX/new/"
 
 new=$(find $dirs -type f | wc -l | xargs)
 if [ "$new" -gt 0 ]; then

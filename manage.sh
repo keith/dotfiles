@@ -28,7 +28,6 @@ FILES=(\
     mpdconf \
     mutt \
     ncmpcpp \
-    notmuch-config \
     npmrc \
     nvim \
     nvimrc \

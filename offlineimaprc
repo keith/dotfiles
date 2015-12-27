@@ -16,7 +16,7 @@ footer = "\n"
 localrepository  = gmail-local
 remoterepository = gmail-remote
 status_backend   = sqlite
-postsynchook     = notmuch new
+postsynchook     = mu index
 
 [Repository gmail-local]
 type = Maildir
@@ -39,7 +39,7 @@ folderfilter = folder_filter
 localrepository  = lyft-local
 remoterepository = lyft-remote
 status_backend   = sqlite
-postsynchook     = notmuch new
+postsynchook     = mu index
 
 [Repository lyft-local]
 type = Maildir

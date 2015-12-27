@@ -1,5 +1,5 @@
 set realname         = "Keith Smiley"
-set folder           = $HOME/.mail
+set folder           = $MAILDIR
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
 source ~/.mutt/temp/mailboxes
 
