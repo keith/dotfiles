@@ -79,7 +79,7 @@ function setup-prompt() {
     ssh="%m "
   fi
 
-  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$git_info %# "
+  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$git_info %(?.%{$fg[green]%}%#%{$reset_color%} .%{$fg[red]%}%#%{$reset_color%} )"
 }
 setup-prompt ""
 
