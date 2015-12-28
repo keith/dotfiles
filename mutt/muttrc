@@ -3,7 +3,7 @@ unset record                                                          # Don't sa
   set sig_dashes = no
   set sig_on_top = yes
   set forward_format = "Fwd: %s"                                      # format of subject when forwarding
-  set editor = "vim"                                                  # Use vim for editing messages
+  set editor = "vim -f"                                               # Use vim for editing messages
   set fast_reply                                                      # Don't prompt for stuff when replying
   set reply_to                                                        # Reply to the address in the reply to header
   set delete = yes                                                    # Delete messages without asking when Mutt is quit
@@ -21,14 +21,14 @@ unset mark_old                                                        # read/new
   set thorough_search                                                 # strip headers and eval mimes before searching
   set auto_tag = yes                                                  # Automatically delete marked messages when switching boxes
   set date_format = "%m/%d"
-  set index_format = "[%Z]  %D  %-20.20F  %s"
+  set index_format = "[%Z] %D  %-20.20F  %s"
   set sort = threads                                                  # like gmail
   set sort_aux = reverse-last-date-received                           # like gmail
 unset collapse_unread
   set uncollapse_jump                                                 # don't collapse on an unread message
   set sort_re                                                         # thread based on regex
   set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-  set abort_unmodified = no                                           # Don't abort when the message hasn't been changed
+  set abort_unmodified = ask-yes                                      # asks if unmodified message should continue or be discarded
 
 # Pager inline configuration
   set pager_index_lines = 10                                          # number of index lines to show
@@ -45,8 +45,11 @@ hdr_order Date From To Reply-To Cc Subject X-PGP-Key
 message-hook . "unalternative_order *; alternative_order text/plain text/enriched text/html"
 auto_view text/x-vcard text/html text/enriched
 
-source $HOME/.mutt/folders
-source $HOME/.mutt/bindings
-source $HOME/.mutt/external
-source $HOME/.mutt/macros
-source $HOME/.mutt/crypto
+# Load broken out config
+set my_cfgdir = $HOME/.mutt
+source $my_cfgdir/bindings
+source $my_cfgdir/crypto
+source $my_cfgdir/external
+source $my_cfgdir/folders
+source $my_cfgdir/lists
+source $my_cfgdir/macros
