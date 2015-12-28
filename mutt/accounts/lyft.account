@@ -6,6 +6,10 @@ set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a lyft"
 set signature        = $HOME/.mutt/accounts/lyft.signature
 set spoolfile        = "+keith-lyft.com/INBOX"
 
+# Don't send messages to my other accounts
+alternates keith@lyft.com
+alternates keithbsmiley@gmail.com
+
 # Gmail-style keyboard shortcuts
 macro index,pager d "<save-message>+keith-lyft.com/trash<enter>" "Archive message"
 macro index,pager e "<save-message>+keith-lyft.com/archive<enter>" "Archive message"
