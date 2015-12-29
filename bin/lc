@@ -4,7 +4,7 @@ NAME="Keith Smiley"
 WEBSITE="http://keith.so"
 
 usage() {
-  echo "usage: $(basename "$0") [-mw]"
+  echo "usage: $(basename "$0") [-m]"
   exit 1
 }
 
@@ -30,22 +30,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 "
 }
 
-wtf() {
-printf "%s" "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-Version 2, December 2004
-
-Copyright (C) $(date +"%Y") $NAME <$WEBSITE>
-
-Everyone is permitted to copy and distribute verbatim or modified copies changed.
-
-DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-
-0. You just DO WHAT THE FUCK YOU of this license document, and changing it is
-allowed as long as the name is WANT TO.
-"
-}
-
 write() {
   "$1" > LICENSE
 }
@@ -57,9 +41,6 @@ fi
 case $1 in
   -m)
     write mit
-    ;;
-  -w)
-    write wtf
     ;;
   *)
     usage
