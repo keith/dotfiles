@@ -1,4 +1,5 @@
-subscribe swift-evolution@swift.org
 subscribe swift-build-dev@swift.org
+subscribe swift-dev@swift.org
+subscribe swift-evolution@swift.org
 
 # vim: ft=muttrc
