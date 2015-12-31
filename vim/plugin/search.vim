@@ -1,4 +1,9 @@
-set grepprg=grep\ -RIn\ --exclude-dir=build\ --exclude-dir=.git\ $*\ *
+" Custom grepprg for happy greping
+if filereadable(".git") || isdirectory(".git")
+  set grepprg=git\ rgrep
+else
+  set grepprg=grep\ -RIn\ --exclude-dir=build\ --exclude-dir=.git\ $*\ *
+endif
 
 command -nargs=+ -complete=file -bar -bang Grep execute 'silent grep<bang> <args>' | copen
 

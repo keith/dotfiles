@@ -7,7 +7,7 @@ endfunction
 " aren't tracked with git
 function! s:SearchCommand()
   let l:command = ""
-  if isdirectory(".git")
+  if isdirectory(".git") || filereadable(".git")
     let l:command = s:GitListCommand(".")
   endif
 

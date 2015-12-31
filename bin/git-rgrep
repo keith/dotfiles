@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# A simple git script for searching a repo (optionally) with (nested) submodules
+#
+# This works by taking the PWD, and combining that with the relative submodule
+# path. This is necessary to get the relative file system path correct. It also
+# outputs the format expected by vim.
+#
+# Vim usage:
+#
+#   set grepprg=git\ rgrep
+#
+
+base_dir="$PWD"
+search="$*"
+
+git --no-pager grep -n "$search"
+git --no-pager submodule foreach --recursive --quiet "
+  nested_dir=\$(git rev-parse --show-toplevel)
+  relative_dir=\$(echo \$nested_dir | sed s=^$base_dir/==)
+  git grep -n $search | while read line; do echo \$relative_dir/\$line; done
+"
