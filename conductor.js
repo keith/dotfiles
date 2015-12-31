@@ -61,7 +61,7 @@ function push() {
   });
 }
 
-function toggleapp(title) {
+function toggleAppIfOpen(title) {
   var app = App.frontmostApp();
   if (app.title() === title) {
     app.hide();
@@ -73,6 +73,15 @@ function toggleapp(title) {
     if (apps.indexOf(title) >= 0) {
       api.launch(title);
     }
+  }
+}
+
+function toggleApp(title) {
+  var app = App.frontmostApp();
+  if (app.title() === title) {
+    app.hide();
+  } else {
+    api.launch(title);
   }
 }
 
@@ -95,6 +104,6 @@ api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
 api.bind('y', ["ctrl", "alt"], function() { api.launch("Terminal"); });
-api.bind('RETURN', ["shift", "cmd"], function() { toggleapp("Messages"); });
-api.bind('c', ["ctrl", "cmd"], function() { toggleapp("Tweetbot"); });
+api.bind('RETURN', ["shift", "cmd"], function() { toggleApp("Messages"); });
+api.bind('c', ["ctrl", "cmd"], function() { toggleAppIfOpen("Tweetbot"); });
 api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
