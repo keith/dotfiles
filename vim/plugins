@@ -1,6 +1,5 @@
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
-hynek/vim-python-pep8-indent
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
@@ -13,18 +12,13 @@ Raimondi/delimitMate
 scrooloose/syntastic
 sjl/vitality.vim
 tommcdo/vim-lion
-tpope/vim-bundler
 tpope/vim-commentary
-tpope/vim-dispatch
 tpope/vim-endwise
 tpope/vim-eunuch
 tpope/vim-fugitive
 tpope/vim-git
 tpope/vim-markdown
-tpope/vim-projectionist
-tpope/vim-ragtag
 tpope/vim-repeat
 tpope/vim-scriptease
 tpope/vim-surround
 tpope/vim-unimpaired
-tpope/vim-vinegar
