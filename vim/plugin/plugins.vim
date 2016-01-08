@@ -1,8 +1,3 @@
-" Airline
-let g:airline_theme = 'custom'
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-
 " TagBar ------ {{{
 nnoremap <silent> <Leader>b :TagbarToggle<CR>
 " Order tags by their appearence in the file
