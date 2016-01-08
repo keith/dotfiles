@@ -142,7 +142,6 @@ let g:clever_f_across_no_line = 1
 nnoremap <leader>d :w<CR>:Dispatch<CR>
 
 " python-mode
-let g:pymode_indent = 0
 let g:pymode_breakpoint = 0
 
 " delimitMate
