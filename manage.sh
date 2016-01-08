@@ -29,8 +29,6 @@ FILES=(\
     mutt \
     ncmpcpp \
     npmrc \
-    nvim \
-    nvimrc \
     offlineimaprc \
     psqlrc \
     pylintrc \
