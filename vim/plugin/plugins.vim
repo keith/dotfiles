@@ -90,19 +90,6 @@ let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
 
-let g:syntastic_objc_compiler = 'clang'
-let g:syntastic_objcpp_compiler = 'clang'
-" let g:syntastic_objc_gcc_quiet_messages = { "regex": 'file not found' }
-let g:syntastic_objc_check_header = 1
-
-let s:pch_paths = ['*/*.pch', 'Resources/*/*.pch']
-for path in s:pch_paths
-  if !empty(glob(path))
-    let b:syntastic_objc_cflags = '-include ' . expand(path)
-    break
-  endif
-endfor
-
 " Allow toggling of syntastic errors list
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
 function! ToggleErrors()
@@ -118,17 +105,6 @@ function! ToggleErrors()
 endfunction
 nnoremap <leader>e :call ToggleErrors()<cr>
 " }}}
-
-" clang_complete
-let g:clang_close_preview = 1
-let g:clang_complete_macros = 1
-let g:clang_complete_patterns = 1
-let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-let g:clang_snippets = 1
-let g:clang_snippets_engine = 'ultisnips'
-let g:clang_use_library = 1
-let g:clang_auto_user_options = "compile_commands.json"
-let g:clang_make_default_keymappings = 0
 
 " python-mode
 let g:pymode_breakpoint = 0
