@@ -126,41 +126,11 @@ function! BackwardsTab()
   return ""
 endfunction
 
-let g:ran_after_ultisnips = 0
-function! RunAfterUltiSnips()
-  snoremap <Tab> <Esc>:call UltiSnips#ExpandSnippetOrJump()<cr>
-  let g:clang_snippets_engine = 'ultisnips'
-  let g:ran_after_ultisnips = 1
-endfunction
-
-function! LoadedUltiSnips()
-  if exists("s:loaded_ultisnips")
-    return s:loaded_ultisnips
-  endif
-
-  if exists("g:did_UltiSnips_plugin") && g:did_UltiSnips_plugin
-    let s:loaded_ultisnips = 1
-    if !g:ran_after_ultisnips
-      call RunAfterUltiSnips()
-    endif
-    return s:loaded_ultisnips
-  else
-    return 0
-  endif
-endfunction
-
 inoremap <silent> <Tab> <C-R>=TabWrapper()<CR>
 function! TabWrapper()
   if pumvisible()
     return "\<C-y>"
   else
-    if LoadedUltiSnips()
-      call UltiSnips#ExpandSnippetOrJump()
-      if g:ulti_expand_or_jump_res != 0
-        return ""
-      endif
-    endif
-
     if ForceTab() || empty(&omnifunc)
       return "\<Tab>"
     else
@@ -170,13 +140,6 @@ function! TabWrapper()
 
   return "\<Tab>"
 endfunction
-
-" Ignore UltiSnips mappings, deal with it manually
-let g:UltiSnipsExpandTrigger = "<F30>"
-let g:UltiSnipsJumpForwardTrigger = "<F30>"
-let g:UltiSnipsJumpBackwardTrigger = "<F30>"
-let g:snips_author = "Keith Smiley"
-let g:ulti_expand_or_jump_res = 0
 
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
