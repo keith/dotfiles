@@ -52,6 +52,7 @@
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
+  dm          = !sh -c 'git diff $(git show-branch --merge-base)'
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   dt          = difftool
   dtc         = difftool --cached
