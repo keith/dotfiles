@@ -26,4 +26,11 @@ macro pager ,o \
   <enter-command>set pipe_decode=\$my_old_pipe_decode<enter>" \
   "Unsubscribe from any email with a List-Unsubscribe header"
 
+macro pager ,a \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode nopipe_decode<enter> \
+  <pipe-message>$DOTFILES/mutt/listarchive.sh<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter> \
+  <top>" \
+  "Open the archive for a mailing list"
+
 # vim: ft=muttrc
