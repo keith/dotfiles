@@ -1,5 +1,5 @@
-text/html;                lynx -display_charset=utf-8 -width=100 -nolist -dump %s; nametemplate=%s.html; copiousoutput
-text/plain;               view %s
+text/html;                w3m -I %{charset} -cols 80 -T text/html -dump; copiousoutput
+text/plain;               less
 text/rtf;                 $HOME/.mutt/view_attachment.sh %s rtf
 
 image/gif;                $HOME/.mutt/view_attachment.sh %s gif
