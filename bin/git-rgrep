@@ -12,9 +12,10 @@
 #
 
 base_dir="$PWD"
-search="$*"
+search="$1"
+search_dir="${2:-*}"
 
-git --no-pager grep -n "$search"
+git --no-pager grep -n "$search" "$search_dir"
 git --no-pager submodule foreach --recursive --quiet "
   nested_dir=\$(git rev-parse --show-toplevel)
   relative_dir=\$(echo \$nested_dir | sed s=^$base_dir/==)
