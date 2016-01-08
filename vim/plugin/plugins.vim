@@ -217,19 +217,8 @@ function! ForceTab()
   return !(column > 0 && (iskeychar && invalidchar))
 endfunction
 
-" Don't hide quotes in elzr/vim-json
-" This is way too confusing, it makes me forget quotes on lines after others
-let g:vim_json_syntax_conceal = 0
-
 " vim-markdown
 let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
-
-" rails.vim
-let g:rails_projections = {
-      \ "config/routes.rb": {"command": "routes"},
-      \ "spec/factories.rb": {"command": "factories"},
-      \ "spec/factories/*.rb": {"command": "factories"}
-    \ }
 
 " vim-sort-motion
 let g:sort_motion_flags = "ui"
