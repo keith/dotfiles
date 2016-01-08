@@ -135,12 +135,6 @@ let g:clang_use_library = 1
 let g:clang_auto_user_options = "compile_commands.json"
 let g:clang_make_default_keymappings = 0
 
-" Clever-f
-let g:clever_f_across_no_line = 1
-
-" Dispatch.vim
-nnoremap <leader>d :w<CR>:Dispatch<CR>
-
 " python-mode
 let g:pymode_breakpoint = 0
 
