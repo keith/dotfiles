@@ -12,12 +12,20 @@ macro index S \
 # Computers are horrible. Instead of just sending only the HTML meme type, this
 # ridiculous website sends a text/plain entry that just says "View this in an
 # HTML email client"
+
+# My apartment building emails
 message-hook '~f noreply@activebuilding\.com' \
   "unalternative_order *; alternative_order text/html"
 
+# For test flight betas
 message-hook '~f no_reply@email\.apple\.com ~s TestFlight:' \
   "unalternative_order *; alternative_order text/html"
 
+# Radar responses
+message-hook '~f dts-bugmail@group\.apple\.com' \
+  "unalternative_order *; alternative_order text/html"
+
+# Verizon.
 message-hook '~f VZWMail@ecrmemail\.verizonwireless\.com' \
   "unalternative_order *; alternative_order text/html"
 
