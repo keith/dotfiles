@@ -11,7 +11,7 @@ alternates keith@lyft.com
 alternates keithbsmiley@gmail.com
 
 # Gmail-style keyboard shortcuts
-macro index,pager d "<save-message>+keith-lyft.com/trash<enter>" "Archive message"
+macro index,pager d "<save-message>+keith-lyft.com/trash<enter>" "Delete message"
 macro index,pager e "<save-message>+keith-lyft.com/archive<enter>" "Archive message"
 macro index,pager ga "<change-folder>+keith-lyft.com/archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+keith-lyft.com/INBOX<enter>" "Go to inbox"
