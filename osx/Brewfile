@@ -15,6 +15,7 @@ brew 'ghb', args: ['HEAD']
 brew 'ghu'
 brew 'gifiate'
 brew 'git'
+brew 'gnupg2'
 brew 'grc'
 brew 'grep'
 brew 'httpie'
