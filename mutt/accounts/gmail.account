@@ -17,10 +17,11 @@ macro index,pager ga "<change-folder>+keithbsmiley-gmail.com/archive<enter>" "Go
 macro index,pager gi "<change-folder>+keithbsmiley-gmail.com/INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+keithbsmiley-gmail.com/sent<enter>" "Go to sent mail"
 
+set pgp_autosign=yes
 set pgp_sign_as=0x4C7167F8
 my_hdr X-PGP-Key: fp=\"AC20 B263 327E 9C9A A61A  55A1 33BA 60D4 4C71 67F8\"\; id=\"0x4C7167F8\"\; get=<http://keith.so/pubkey.asc>\; get=<https://pgp.mit.edu/pks/lookup?op=vindex&search=0x33BA60D44C7167F8>\;
 
-set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x4C7167F8 -- -r %r -- %f"
-set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x4C7167F8 -- -r %r -- %f"
+set pgp_encrypt_only_command="pgpewrap gpg2 --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust --encrypt-to 0x4C7167F8 -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg2 --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust --encrypt-to 0x4C7167F8 -- -r %r -- %f"
 
 # vim: ft=muttrc
