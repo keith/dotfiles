@@ -16,6 +16,7 @@ FILES=(\
     git_template \
     gitconfig \
     gitignore \
+    gnupg \
     haskeline \
     hgrc \
     hushlogin \

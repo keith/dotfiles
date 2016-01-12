@@ -23,4 +23,8 @@ mutt/certificates
 mutt/postponed
 mutt/temp/*
 
+gnupg/*
+!gnupg/gpg.conf
+!gnupg/gpg-agent.conf
+
 ncmpcpp/error.log
