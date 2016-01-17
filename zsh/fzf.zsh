@@ -23,8 +23,11 @@ __fselgitfiles() {
 }
 
 fzf-git-files-widget() {
-  LBUFFER="${LBUFFER}\"$(__fselgitfiles)\""
-  zle redisplay
+  result="$(__fselgitfiles)"
+  if [[ "$result" != "" ]]; then
+    LBUFFER="${LBUFFER}\"$result\""
+    zle redisplay
+  fi
 }
 
 fzf-git-status-widget() {
