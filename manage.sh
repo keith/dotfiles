@@ -39,6 +39,7 @@ FILES=(\
     urlview \
     vim \
     vimrc \
+    w3m \
     weechat \
     xvimrc \
     zshrc \

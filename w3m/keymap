@@ -1,0 +1,13 @@
+# More vim like movement
+# Unclear why this one is reversed
+keymap j UP
+keymap J MOVE_DOWN
+# Unclear why this one is reversed
+keymap k DOWN
+keymap K MOVE_UP
+
+keymap C-d NEXT_PAGE
+keymap C-u PREV_PAGE
+
+# External browser
+keymap b EXTERN

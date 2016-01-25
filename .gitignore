@@ -27,4 +27,8 @@ gnupg/*
 !gnupg/gpg.conf
 !gnupg/gpg-agent.conf
 
+w3m/*
+!w3m/config
+!w3m/keymap
+
 ncmpcpp/error.log
