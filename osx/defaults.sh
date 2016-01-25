@@ -585,7 +585,7 @@ defaults write com.apple.screencapture type -string "png"
 
 # Finally disable opening random Apple photo applications when plugging in devices
 # https://twitter.com/stroughtonsmith/status/651854070496534528
-defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool YES
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Disable shadow in screenshots
 # defaults write com.apple.screencapture disable-shadow -bool true
