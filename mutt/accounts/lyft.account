@@ -3,7 +3,7 @@ set from             = "keith@lyft.com"
 set mbox             = "+keith-lyft.com/archive"
 set postponed        = "+keith-lyft.com/drafts"
 set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a lyft"
-set signature        = $HOME/.mutt/accounts/lyft.signature
+set signature        = $HOME/.mutt/accounts/signature
 set spoolfile        = "+keith-lyft.com/INBOX"
 
 # Don't send messages to my other accounts

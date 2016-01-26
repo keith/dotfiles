@@ -3,7 +3,7 @@ set from             = "keithbsmiley@gmail.com"
 set mbox             = "+keithbsmiley-gmail.com/archive"
 set postponed        = "+keithbsmiley-gmail.com/drafts"
 set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a gmail"
-set signature        = $HOME/.mutt/accounts/gmail.signature
+set signature        = $HOME/.mutt/accounts/signature
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
 
 # Don't send messages to my other accounts
