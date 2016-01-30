@@ -60,6 +60,7 @@ function removeDislikedElements() {
   $(".js-new-blob-submit").remove();
   $("a[href^=github-mac]").remove();
   $("button:contains('Update branch')").remove();
+  $(".toolbar-help").remove();
 }
 
 // Remove distracting labels from some repos
