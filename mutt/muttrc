@@ -5,6 +5,7 @@ unset record                                                          # Don't sa
   set forward_format = "Fwd: %s"                                      # format of subject when forwarding
   set editor = "vim -f"                                               # Use vim for editing messages
   set fast_reply                                                      # Don't prompt for stuff when replying
+  set sleep_time = 0                                                  # Quickly switch between folders/refresh mailbox
   set reply_to                                                        # Reply to the address in the reply to header
   set delete = yes                                                    # Delete messages without asking when Mutt is quit
   set include                                                         # include message in replies
