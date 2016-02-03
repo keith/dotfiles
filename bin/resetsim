@@ -1,6 +1,6 @@
 #!/bin/sh
-# The first time you run this script you will have to enable
-# accessibility settings for the terminal application you are
-# using in System Preferences
 
-osascript "$DOTFILES"/scripts/resetsimulator.applescript
+set -e
+
+pkill Simulator
+xcrun simctl erase all
