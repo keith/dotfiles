@@ -156,3 +156,7 @@ let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
 
 " vim-sort-motion
 let g:sort_motion_flags = "ui"
+
+" vim-gnupg
+let g:GPGDefaultRecipients = ["0x4C7167F8"]
+let g:GPGPreferArmor = 1
