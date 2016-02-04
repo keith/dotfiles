@@ -23,6 +23,7 @@ brew 'httpie'
 brew 'ideviceinstaller'
 brew 'jq'
 brew 'keith/formulae/brew-cask', args: ['HEAD']
+brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'less'
 brew 'msmtp'
 brew 'mu'
