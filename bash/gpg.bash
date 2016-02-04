@@ -1,3 +1,7 @@
+if ! which gpg-agent &> /dev/null; then
+  return
+fi
+
 # Fix gpg not asking for password because it didn't know how
 export GPG_TTY=$(tty)
 
