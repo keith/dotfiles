@@ -1,3 +1,3 @@
 #!/bin/sh
 
-open -a Xcode-beta .
+open -a 'Xcode-7.3.app' .
