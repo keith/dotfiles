@@ -61,6 +61,7 @@ function removeDislikedElements() {
   $("a[href^=github-mac]").remove();
   $("button:contains('Update branch')").remove();
   $(".toolbar-help").remove();
+  $(".toolbar-commenting").remove();
 }
 
 // Remove distracting labels from some repos
