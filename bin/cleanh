@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-names=$(ls | grep -e "\.hs" | awk '{ split($1,a,"."); print a[1]; }')
-for name in ${names[@]}
-do
-    rm -f $name ${name}.o ${name}.hi
-done
