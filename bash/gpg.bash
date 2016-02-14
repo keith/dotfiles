@@ -6,7 +6,7 @@ fi
 export GPG_TTY=$(tty)
 
 envfile="$HOME/.gpg-agent-info"
-if [[ -e "$envfile" ]] && kill -0 "$(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2)" 2>/dev/null; then
+if [ -e "$envfile" ] && kill -0 "$(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2)" 2>/dev/null; then
   eval "$(cat "$envfile")"
 else
   eval "$(gpg-agent --daemon --enable-ssh-support --write-env-file "$envfile")"

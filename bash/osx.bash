@@ -13,10 +13,6 @@ export COCOAPODS_DISABLE_STATS=1
 alias o="open"
 alias oo="open ."
 
-# Open MacVim
-alias vm="mvim"
-alias vmm="mvim ."
-
 # CocoaPods
 alias pi="pod install --no-repo-update"
 alias psl="pod spec lint *.podspec"
@@ -36,8 +32,8 @@ alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv \$HOME/.Trash/
 alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv \$HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
 
 # Show/hide hidden files in Finder
-alias show="defaults write com.apple.Finder AppleShowAllFiles -bool TRUE; killall Finder"
-alias hide="defaults write com.apple.Finder AppleShowAllFiles FALSE; killall Finder"
+alias show="defaults write com.apple.Finder AppleShowAllFiles -bool true; killall Finder"
+alias hide="defaults write com.apple.Finder AppleShowAllFiles -bool false; killall Finder"
 
 # Hide/show all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"

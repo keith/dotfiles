@@ -9,5 +9,5 @@ EOF
 }
 
 cdf() {
-  cd "$(top_finder_path)"
+  cd "$(top_finder_path)" || exit 1
 }
