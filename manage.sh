@@ -10,7 +10,6 @@ FILES=(\
     css \
     ctags \
     curlrc \
-    default-gems \
     gemrc \
     ghci \
     git_template \
@@ -35,7 +34,6 @@ FILES=(\
     pylintrc \
     rspec \
     tmux.conf \
-    tmuxinator \
     urlview \
     vim \
     vimrc \

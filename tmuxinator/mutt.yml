@@ -1,9 +1,0 @@
-# ~/.tmuxinator/mutt.yml
-
-name: mutt
-root: ~/
-
-windows:
-  - mutt:
-      panes:
-        - mutt
