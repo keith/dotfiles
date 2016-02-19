@@ -72,7 +72,7 @@ function removeMostLabels() {
   }
 
   $(".label.tooltipped").each(function() {
-    if ($(this).text() !== "Approved - Awaiting QA") {
+    if (!$(this).text().startsWith("Approved")) {
       $(this).remove();
     }
   });
