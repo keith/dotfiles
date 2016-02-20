@@ -164,7 +164,7 @@ set laststatus=2 " Always show the statusline
 " Left Side
 set statusline=
 set statusline+=%#IncSearch#%{&paste?'\ \ PASTE\ ':''}%*
-set statusline+=\ %f
+set statusline+=\ %.50f
 set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
