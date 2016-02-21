@@ -57,11 +57,12 @@ function registerIssueButtonMutations() {
 
 // Remove some buttons GitHub adds that I don't want to click
 function removeDislikedElements() {
+  $(".file-navigation .btn-group").remove();
   $(".js-new-blob-submit").remove();
+  $(".toolbar-commenting").remove();
+  $(".toolbar-help").remove();
   $("a[href^=github-mac]").remove();
   $("button:contains('Update branch')").remove();
-  $(".toolbar-help").remove();
-  $(".toolbar-commenting").remove();
 }
 
 // Remove distracting labels from some repos
@@ -102,10 +103,9 @@ function addIssueButtons() {
   textArea = commentContainer.find("textarea");
   actions = commentContainer.find(".form-actions #partial-new-comment-form-actions")[0];
 
-  var labelButton = newButton("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png' width='14' height='14'>L", ":+1:", textArea);
+  var labelButton = newButton("+1L", ":+1:", textArea);
   actions.appendChild(configureLabelButton(labelButton));
-  actions.appendChild(newButton("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png' width='14' height='14'>", ":+1:", textArea));
-  actions.appendChild(newButton("<img src='https://a248.e.akamai.net/assets.github.com/images/icons/emoji/beers.png' width='14' height='14'>", ":beers:", textArea));
+  actions.appendChild(newButton("+1", ":+1:", textArea));
   actions.appendChild(newButton("Merge?", "Can we merge this or mark it as awaiting QA?", textArea));
   actions.appendChild(newButton("Trunk", "We have just launched 'Trunk', which is the new way for you to submit your Pods. For more information on this have a read through the post at http://blog.cocoapods.org/CocoaPods-Trunk/ If you have previously had your Pod merged into the master repository, please ensure you claim your Pod http://blog.cocoapods.org/Claim-Your-Pods/", textArea));
   actions.appendChild(newButton("Unver", "We cannot update unversioned specs (specs that point to a commit). If you'd like to add a new version the repository would have to be tagged. If you would like to use a different commit in your own project you can use some flags in your `Podfile` documented [here](http://guides.cocoapods.org/syntax/podfile.html#pod)", textArea));
