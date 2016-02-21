@@ -19,11 +19,6 @@ execute pathogen#infect()
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
-let s:fzf = system('brew --prefix fzf')
-if v:shell_error == 0
-  execute 'set rtp+=' . s:fzf
-endif
-
 " Load MatchIt for % jumping
 runtime macros/matchit.vim
 " Load man page plugin for :Man command
