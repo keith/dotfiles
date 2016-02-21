@@ -2,6 +2,14 @@
 // Mostly copied from https://github.com/Igglyboo/hn_collapse
 (function () {
     'use strict';
+
+    // This makes sure we're on a comment page. Otherwise dotjs in firefox
+    // will not load the css because the JS fails to load
+    var commentTree = document.getElementsByClassName("comment-tree");
+    if (commentTree.length === 0) {
+        return;
+    }
+
     var comments = document.getElementsByClassName('athing');
     if(comments.length === 0){
         return;
