@@ -17,7 +17,7 @@
 .vimrc.local
 /.hg/*
 \#*\#
-build
+./build
 Icon
 node_modules
 Session.vim
