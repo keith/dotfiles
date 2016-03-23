@@ -7,6 +7,11 @@ mailboxes +keith-lyft.com/INBOX +keithbsmiley-gmail.com/INBOX
 folder-hook keith-lyft.com/* source ~/.mutt/accounts/lyft.account
 folder-hook keithbsmiley-gmail.com/* source ~/.mutt/accounts/gmail.account
 
+# Don't send messages to my other accounts
+alternates keith@lyft.com
+alternates keithbsmiley@gmail.com
+alternates ksmiley@lyft.com
+
 set alias_file       = $HOME/.mutt/aliases
 set certificate_file = $HOME/.mutt/certificates
 set header_cache     = $HOME/.mutt/cache/headers
