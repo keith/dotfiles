@@ -21,7 +21,7 @@ postsynchook     = mu index --maildir=~/.mail
 [Repository gmail-local]
 type = Maildir
 localfolders = ~/.mail/keithbsmiley-gmail.com
-nametrans = local_nametrans
+nametrans = local_nametrans_gmail
 folderfilter = folder_filter
 
 [Repository gmail-remote]
@@ -32,7 +32,7 @@ remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com",
                                    server ="imap.gmail.com")
 realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
-nametrans = remote_nametrans
+nametrans = remote_nametrans_gmail
 folderfilter = folder_filter
 
 [Account lyft]
@@ -44,7 +44,7 @@ postsynchook     = mu index --maildir=~/.mail
 [Repository lyft-local]
 type = Maildir
 localfolders = ~/.mail/keith-lyft.com
-nametrans = local_nametrans
+nametrans = local_nametrans_gmail
 folderfilter = folder_filter
 
 [Repository lyft-remote]
@@ -55,5 +55,5 @@ remotepasseval = get_keychain_pass(account="ksmiley@lyft.com",
                                    server ="imap.gmail.com")
 realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
-nametrans = remote_nametrans
+nametrans = remote_nametrans_gmail
 folderfilter = folder_filter

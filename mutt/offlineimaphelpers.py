@@ -34,7 +34,7 @@ def get_keychain_pass(account=None, server=None):
     return re.match(r'password: "(.*)"', outtext).group(1)
 
 
-def local_nametrans(folder):
+def local_nametrans_gmail(folder):
     return {
         'archive': '[Gmail]/All Mail',
         'drafts':  '[Gmail]/Drafts',
@@ -43,7 +43,7 @@ def local_nametrans(folder):
     }.get(folder, folder)
 
 
-def remote_nametrans(folder):
+def remote_nametrans_gmail(folder):
     return {
         '[Gmail]/All Mail':  'archive',
         '[Gmail]/Drafts':    'drafts',
@@ -61,16 +61,5 @@ def folder_filter(folder):
         '[Gmail]/Important',
         '[Gmail]/Spam',
         '[Gmail]/Starred',
-        '[Mailbox]',
-        '[Mailbox]/Later',
-        '[Mailbox]/To Buy',
-        '[Mailbox]/To Read',
-        '[Mailbox]/To Watch',
-        '[Readdle]',
-        '[Readdle]/Later',
-        'Dev',
-        'flagged',
-        'Github',
         'Notes',
-        'sudoers',
     }
