@@ -33,4 +33,11 @@ macro pager ,a \
   <top>" \
   "Open the archive for a mailing list"
 
+macro pager ,b \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode nopipe_decode<enter> \
+  <pipe-message>$DOTFILES/mutt/swiftbugs.sh<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter> \
+  <top>" \
+  "Open all Swift bugs links (or numbers) in urlview"
+
 # vim: ft=muttrc
