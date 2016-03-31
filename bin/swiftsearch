@@ -1,0 +1,5 @@
+#!/bin/sh
+
+URL="https://duckduckgo.com/?q=site:lists.swift.org+"
+query="$(echo "$@" | sed "s/ /+/g")"
+open "${URL}${query}"
