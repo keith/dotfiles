@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+file="$1"
+
+if file --brief --mime "$file" | grep --quiet "charset=binary"; then
+  exit 1
+fi
+
+sed -i '' -e's/[[:space:]]*$//' "$file"

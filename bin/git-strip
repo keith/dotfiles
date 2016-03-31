@@ -1,0 +1,8 @@
+#!/bin/bash
+
+files=$(git --work-tree="$(git rev-parse --show-toplevel)" ls-files -- "$@")
+
+while read -r file
+do
+  trimfile "$file"
+done <<< "$files"
