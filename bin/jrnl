@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+ROOT="$HOME/Dropbox/journal"
+FOLDER="$(date "+%m%y")"
+FILE="$(date -v -5H "+%d%m%y")"
+
+mkdir -p "$FOLDER"
+exec "$EDITOR" "$ROOT/$FOLDER/$FILE.asc"
