@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+set -o pipefail
+
+dir="$HOME/Dropbox/gifs"
+query="$1"
+
+gif=$(find "$dir" -type f -name "*.gif" | fzf --select-1 --query="$query")
+if [ -n "$gif" ]; then
+  open -R "$gif"
+fi
