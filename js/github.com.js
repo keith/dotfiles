@@ -106,9 +106,6 @@ function addIssueButtons() {
   var labelButton = newButton("+1L", ":+1:", textArea);
   actions.appendChild(configureLabelButton(labelButton));
   actions.appendChild(newButton("+1", ":+1:", textArea));
-  actions.appendChild(newButton("Merge?", "Can we merge this or mark it as awaiting QA?", textArea));
-  actions.appendChild(newButton("Trunk", "We have just launched 'Trunk', which is the new way for you to submit your Pods. For more information on this have a read through the post at http://blog.cocoapods.org/CocoaPods-Trunk/ If you have previously had your Pod merged into the master repository, please ensure you claim your Pod http://blog.cocoapods.org/Claim-Your-Pods/", textArea));
-  actions.appendChild(newButton("Unver", "We cannot update unversioned specs (specs that point to a commit). If you'd like to add a new version the repository would have to be tagged. If you would like to use a different commit in your own project you can use some flags in your `Podfile` documented [here](http://guides.cocoapods.org/syntax/podfile.html#pod)", textArea));
 }
 
 // Show the labels dialog, select the right label, close it
