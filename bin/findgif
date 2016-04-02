@@ -8,9 +8,7 @@ case "$1" in
   -R|-r)
     reveal=1
     shift
-    query="$1"
     ;;
-  *)
 esac
 
 dir="$HOME/Dropbox/gifs"
