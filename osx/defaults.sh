@@ -706,6 +706,9 @@ defaults write com.tapbots.TweetbotMac globalHideShowHotKey -dict \
   chars -string "c" \
   keyCode -int 8 \
   modifierFlags -int 1310985
+# Setup a column on the right hand side with mentions
+defaults delete com.tapbots.TweetbotMac MainWindowColumnInfo || true
+defaults write com.tapbots.TweetbotMac MainWindowColumnInfo -array-add '{ "accountTID" = 14429563; "controllerClass" = "PTHTweetbotMentionsViewController"; "displayingMediaTimeline" = 0; }'
 
 # Seil
 defaults write org.pqrs.Seil sysctl -dict \
