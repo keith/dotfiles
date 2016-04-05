@@ -199,6 +199,26 @@ input {
 # blocks. Setting this block is optional, though the server will only attempt
 # autodetection for one sound card.
 #
+
+# Duplicate the default OS X output so we can have multiple
+audio_output {
+  type "osx"
+  name "OS X"
+}
+
+# icecast output for playing to the sonos
+audio_output {
+	type		    "shout"
+	encoding	  "mp3"			# Needs mp3 for the sonos
+	name		    "icecast"
+	host		    "localhost"
+	port		    "8000"
+	mount		    "/mpd.mp3"
+	password	  "lolwutever" # Yes I know this is public
+	quality		  "0"
+	format		  "44100:16:1"
+}
+
 # An example of an ALSA output:
 #
 #audio_output {
