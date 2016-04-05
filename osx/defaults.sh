@@ -130,17 +130,21 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Dock setup
-dockutil --remove all
+if which dockutil > /dev/null; then
+  dockutil --remove all
 
-dockutil --add "/Applications/Google Chrome.app"
-dockutil --add "/Applications/Tweetbot.app"
-dockutil --add "/Applications/Messages.app"
-dockutil --add "/Applications/Xcode.app"
-dockutil --add "/Applications/Utilities/Terminal.app"
+  dockutil --add "/Applications/Firefox.app"
+  dockutil --add "/Applications/Tweetbot.app"
+  dockutil --add "/Applications/Messages.app"
+  dockutil --add "/Applications/Xcode.app"
+  dockutil --add "/Applications/Utilities/Terminal.app"
 
-dockutil --add "/Applications" --view list --display folder --sort name
-dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
-dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
+  dockutil --add "/Applications" --view list --display folder --sort name
+  dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
+  dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
+else
+  echo "dockutil not installed, re-run after installing"
+fi
 
 # Run hot corners script
 if [[ -f ../bin/corners ]]; then
@@ -173,6 +177,9 @@ fi
 # https://twitter.com/UINT_MIN/status/652142001932996609
 defaults write com.apple.Terminal AutoMarkPromptLines -bool false
 defaults write com.apple.Terminal ShowLineMarks -bool false
+
+# Hide scrollbars in terminal
+defaults write com.apple.Terminal AppleShowScrollBars -string "WhenScrolling"
 
 
 #
@@ -255,7 +262,7 @@ sudo pmset -a sms 0
 sudo pmset hibernatemode 0
 # Remove the sleep image file to save disk space
 sudo rm -f /private/var/vm/sleepimage
-# Create a zero-byte file instead…
+# Create a zero-byte file instead
 sudo touch /private/var/vm/sleepimage
 # and make sure it can’t be rewritten
 sudo chflags uchg /private/var/vm/sleepimage
@@ -713,6 +720,9 @@ defaults write com.naotaka.ClipMenu maxHistorySize -int 100
 defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
 defaults write com.naotaka.ClipMenu showAlertBeforeClearHistory -bool false
 defaults write com.naotaka.ClipMenu showStatusItem -bool false
+
+# Firefox
+defaults write org.mozilla.firefox AppleShowScrollBars -string "WhenScrolling"
 
 
 echo "Killing affected applications"
