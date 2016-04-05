@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Move all symlinked cask applications to /Applications
+#
+
+dir="/opt/homebrew-cask/Caskroom"
+apps=$(find "$dir" -name "*.app" -depth 3)
+last_app=""
+last_path=""
+
+IFS=$'\n'
+for app in ${apps[@]}
+do
+  current_app="$(echo "$app" | cut -d/ -f7)"
+
+  if [[ "$current_app" == "$last_app" ]]; then
+    rm -r "$last_path"
+  elif [[ -e "$last_path" && -n "$last_app" ]]; then
+    rm -rf "/Applications/$last_app"
+    mv "$last_path" "/Applications"
+  fi
+
+  last_app="$current_app"
+  last_path="$app"
+done
+
+if [[ -e "$last_path" && -n "$last_app" ]]; then
+  rm -rf "/Applications/$last_app"
+  mv "$last_path" "/Applications"
+fi

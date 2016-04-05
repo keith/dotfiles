@@ -20,7 +20,6 @@ brew 'gnupg2'
 brew 'gpg-agent'
 brew 'httpie'
 brew 'ideviceinstaller'
-brew 'keith/formulae/brew-cask', args: ['HEAD']
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'msmtp'
 brew 'mu'
