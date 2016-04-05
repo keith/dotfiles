@@ -3,14 +3,17 @@ set folder           = $MAILDIR
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
 source ~/.mutt/temp/mailboxes
 
-mailboxes +keith-lyft.com/INBOX +keithbsmiley-gmail.com/INBOX
+mailboxes +keith-lyft.com/INBOX +keithbsmiley-gmail.com/INBOX +fastmail/INBOX
 folder-hook keith-lyft.com/* source ~/.mutt/accounts/lyft.account
 folder-hook keithbsmiley-gmail.com/* source ~/.mutt/accounts/gmail.account
+folder-hook fastmail/* source ~/.mutt/accounts/fastmail.account
 
 # Don't send messages to my other accounts
+alternates k@keith.so
 alternates keith@lyft.com
 alternates keithbsmiley@gmail.com
 alternates ksmiley@lyft.com
+alternates smileykeith@fastmail.com
 
 set alias_file       = $HOME/.mutt/aliases
 set certificate_file = $HOME/.mutt/certificates

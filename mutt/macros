@@ -8,6 +8,7 @@ macro pager <tab> "<exit><sync-mailbox>" "Sync mailbox"
 # Easy switching between account inboxes
 macro index,pager gt "<change-folder>+keith-lyft.com/INBOX<enter>" "Go to lyft inbox"
 macro index,pager gk "<change-folder>+keithbsmiley-gmail.com/INBOX<enter>" "Go to gmail inbox"
+macro index,pager gf "<change-folder>+fastmail/INBOX<enter>" "Go to fastmail inbox"
 
 macro index \Cd <pagedown>
 macro index \Cu <pageup>

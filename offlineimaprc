@@ -1,6 +1,6 @@
 [general]
 ui         = ttyui
-accounts   = gmail, lyft
+accounts   = gmail, lyft, fastmail
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
@@ -56,4 +56,29 @@ remotepasseval = get_keychain_pass(account="ksmiley@lyft.com",
 realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
 nametrans = remote_nametrans_gmail
+folderfilter = folder_filter
+
+[Account fastmail]
+localrepository  = fastmail-local
+remoterepository = fastmail-remote
+status_backend   = sqlite
+postsynchook     = mu index --maildir=~/.mail
+
+[Repository fastmail-local]
+type = Maildir
+localfolders = ~/.mail/fastmail
+nametrans = local_nametrans_fastmail
+folderfilter = folder_filter
+
+[Repository fastmail-remote]
+maxconnections = 1
+type = IMAP
+ssl = yes
+remoteuser = smileykeith@fastmail.com
+remotehost = mail.messagingengine.com
+remotepasseval = get_keychain_pass(account="smileykeith@fastmail.com",
+                                   server="mail.messagingengine.com")
+realdelete = no
+sslcacertfile = ~/.mutt/fastmail.cert
+nametrans = remote_nametrans_fastmail
 folderfilter = folder_filter

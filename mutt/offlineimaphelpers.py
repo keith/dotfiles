@@ -52,6 +52,25 @@ def remote_nametrans_gmail(folder):
     }.get(folder, folder)
 
 
+def local_nametrans_fastmail(folder):
+    inbox_emails = [
+        "Archive",
+        "Drafts",
+        "Sent",
+        "Spam",
+        "Trash",
+    ]
+
+    if folder in inbox_emails:
+        return "INBOX.%s" % folder
+    else:
+        return folder
+
+
+def remote_nametrans_fastmail(folder):
+    return folder.split("INBOX.")[-1]
+
+
 def folder_filter(folder):
     return folder not in {
         '[Airmail]',
