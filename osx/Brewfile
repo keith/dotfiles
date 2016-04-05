@@ -25,7 +25,6 @@ brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'msmtp'
 brew 'mu'
 brew 'mutt'
-brew 'openssh', args: ['with-libressl']
 brew 'parallel'
 brew 'pick'
 brew 'pinup'
