@@ -181,6 +181,10 @@ defaults write com.apple.Terminal ShowLineMarks -bool false
 # Hide scrollbars in terminal
 defaults write com.apple.Terminal AppleShowScrollBars -string "WhenScrolling"
 
+# Setup the correct theme
+defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
+defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
+
 
 #
 # Firewall
@@ -726,13 +730,6 @@ defaults write com.naotaka.ClipMenu showStatusItem -bool false
 
 # Firefox
 defaults write org.mozilla.firefox AppleShowScrollBars -string "WhenScrolling"
-
-
-echo "Killing affected applications"
-for app in Safari Finder Dock Mail Messages SystemUIServer Xquartz
-do
-  killall "$app"
-done
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 # vim:tw=0
