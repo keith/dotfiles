@@ -34,7 +34,6 @@ $(document).keypress(function(e) {
 
 $(document).ready(function() {
   removeDislikedElements();
-  removeMostLabels();
   addHideDiffButton();
   addIssueButtons();
 });
@@ -57,26 +56,9 @@ function registerIssueButtonMutations() {
 
 // Remove some buttons GitHub adds that I don't want to click
 function removeDislikedElements() {
-  $(".file-navigation .btn-group").remove();
   $(".js-new-blob-submit").remove();
-  $(".toolbar-commenting").remove();
   $(".toolbar-help").remove();
   $("a[href^=github-mac]").remove();
-  $("button:contains('Update branch')").remove();
-}
-
-// Remove distracting labels from some repos
-function removeMostLabels() {
-  var url = document.URL
-  if (url.toLowerCase().indexOf("lyft/lyft") <= 0) {
-    return;
-  }
-
-  $(".label.tooltipped").each(function() {
-    if (!$(this).text().startsWith("Approved")) {
-      $(this).remove();
-    }
-  });
 }
 
 // Add a button to 'fold' a file in diff mode (super nice for storyboards!)
