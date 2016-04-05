@@ -3,5 +3,7 @@
 pid="$(pgrep -f offlineimap | head -1)"
 
 if [ -n "$pid" ]; then
-  kill -9 "$pid" && offlineimap
+  exit $(kill -9 "$pid")
+else
+  exit 1
 fi
