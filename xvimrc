@@ -62,12 +62,12 @@ nnoremap N Nzz
 highlight Search guibg=red
 
 " Better move controls
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
+" nnoremap j gj
+" nnoremap k gk
+" nnoremap gj j
+" nnoremap gk k
 
-vnoremap j gj
-vnoremap k gk
-vnoremap gj j
-vnoremap gk k
+" vnoremap j gj
+" vnoremap k gk
+" vnoremap gj j
+" vnoremap gk k
