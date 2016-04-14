@@ -154,6 +154,20 @@ endif
 set modeline
 set modelines=2
 
+" Functions for status line config since these functions aren't loaded
+" when the vimrc is sourced
+function! CurrentTag(...)
+  if exists('g:tagbar_iconchars')
+    return call("tagbar#currenttag", a:000)
+  else
+    return ""
+  endif
+endfunction
+
+function! SyntasticStatuslineFlag()
+  return ""
+endfunction
+
 " Status line setup (without plugins)
 set laststatus=2 " Always show the statusline
 " Left Side
@@ -164,16 +178,12 @@ set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
 " Right Side
-if isdirectory(expand('$HOME/.vim/bundle/tagbar'))
-  set statusline+=%{tagbar#currenttag('%s\ <\ ','','')}
-endif
+set statusline+=%{CurrentTag('%s\ <\ ','','')}
 set statusline+=%y
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
-if isdirectory(expand('$HOME/.vim/bundle/syntastic'))
-  set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
-endif
+set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
 
 if has('clipboard')     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
