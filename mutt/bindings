@@ -17,9 +17,16 @@ bind pager \Cu previous-page
 bind pager c mail
 bind pager G bottom
 bind pager gg top
-bind pager j next-line
-bind pager k previous-line
+# bind pager j next-line
+# bind pager k previous-line
 bind pager m change-folder
 bind pager R group-reply
+
+# tarmak
+bind pager n next-line
+bind pager e previous-line
+
+bind index n next-entry
+bind index e previous-entry
 
 # vim: ft=muttrc

@@ -67,7 +67,8 @@ bindkey -M isearch '^P' history-incremental-search-backward
 bindkey -M isearch '^N' history-incremental-search-forward
 # Use C-p and C-n to navigate through history while not searching
 bindkey '^P' history-search-backward
-bindkey '^N' history-search-forward
+# bindkey '^N' history-search-forward
+bindkey '^K' history-search-forward
 
 # You can hit C-X to open your $EDITOR
 # with the command typed in the buffer
@@ -77,7 +78,8 @@ bindkey '^X' edit-command-line
 
 # You know.
 bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
+# bindkey "^E" end-of-line
+bindkey "^J" end-of-line
 
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
@@ -85,6 +87,10 @@ bindkey '\e.' insert-last-word
 # Page up and down since I accidentally hit those sometimes
 bindkey '^[[5~' up-line-or-history
 bindkey '^[[6~' down-line-or-history
+
+# tarmak
+bindkey -M vicmd 'e' up-line-or-history
+bindkey -M vicmd 'n' down-line-or-history
 
 # Auto insert quotes on typed URLs
 autoload -U url-quote-magic

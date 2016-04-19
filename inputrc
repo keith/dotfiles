@@ -12,5 +12,6 @@ set completion-ignore-case on
 set convert-meta on
 
 "\C-a": beginning-of-line
-"\C-e": end-of-line
+"\C-j": end-of-line
+# "\C-e": end-of-line
 "\C-w": backward-kill-word

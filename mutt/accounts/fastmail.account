@@ -8,7 +8,8 @@ set spoolfile        = "+fastmail/INBOX"
 
 # Gmail-style keyboard shortcuts
 macro index,pager d "<save-message>+fastmail/trash<enter>" "Delete message"
-macro index,pager e "<save-message>+fastmail/archive<enter>" "Archive message"
+# macro index,pager e "<save-message>+fastmail/archive<enter>" "Archive message"
+macro index,pager j "<save-message>+fastmail/archive<enter>" "Archive message"
 macro index,pager ga "<change-folder>+fastmail/archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+fastmail/INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+fastmail/sent<enter>" "Go to sent mail"
