@@ -54,6 +54,9 @@ vnoremap s :sort ui<CR>
 nnoremap ]e "udd"up
 nnoremap [e "uddk"uP
 
+nnoremap ]j "udd"up
+nnoremap [j "uddk"uP
+
 " Center after find
 nnoremap n nzz
 nnoremap N Nzz
@@ -71,3 +74,14 @@ highlight Search guibg=red
 " vnoremap k gk
 " vnoremap gj j
 " vnoremap gk k
+
+nnoremap n j
+nnoremap e k
+
+vnoremap n j
+vnoremap e k
+
+nnoremap j e
+vnoremap j e
+
+nnoremap N J
