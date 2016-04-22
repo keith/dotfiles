@@ -22,6 +22,7 @@ FILES=(\
     ideavimrc \
     inputrc \
     js \
+    lesskey \
     lldbhelpers \
     lldbinit \
     mailcap \
