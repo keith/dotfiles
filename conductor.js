@@ -91,11 +91,11 @@ api.bind('i', modifiers, left);
 api.bind('o', modifiers, right);
 api.bind('p', modifiers, push);
 
-api.bind('k', modifiers, Window.fullScreen);
+api.bind('e', modifiers, Window.fullScreen);
 api.bind('h', modifiers, Window.leftHalf);
 api.bind('l', modifiers, Window.rightHalf);
 
-api.bind('n', modifiers, Window.topLeft);
+api.bind('k', modifiers, Window.topLeft);
 api.bind('m', modifiers, Window.bottomLeft);
 api.bind(',', modifiers, Window.topRight);
 api.bind('.', modifiers, Window.bottomRight);
