@@ -661,9 +661,9 @@ defaults write com.apple.dt.Xcode IDEEnableLiveIssues -bool true
 # Continue building after errors
 defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool true
 
-# Show ruler at 80 chars
+# Setup page guide
 defaults write com.apple.dt.Xcode DVTTextShowPageGuide -bool true
-defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 80
+defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 110
 
 # Max number of lines
 defaults write com.apple.dt.Xcode IDEIssueNavigatorDetailLevel -int 10
