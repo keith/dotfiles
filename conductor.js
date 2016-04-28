@@ -91,14 +91,14 @@ api.bind('i', modifiers, left);
 api.bind('o', modifiers, right);
 api.bind('p', modifiers, push);
 
-api.bind('e', modifiers, Window.fullScreen);
+api.bind('k', modifiers, Window.fullScreen);
 api.bind('h', modifiers, Window.leftHalf);
 api.bind('l', modifiers, Window.rightHalf);
 
-api.bind('k', modifiers, Window.topLeft);
-api.bind('m', modifiers, Window.bottomLeft);
-api.bind(',', modifiers, Window.topRight);
-api.bind('.', modifiers, Window.bottomRight);
+// api.bind('k', modifiers, Window.topLeft);
+// api.bind('m', modifiers, Window.bottomLeft);
+// api.bind(',', modifiers, Window.topRight);
+// api.bind('.', modifiers, Window.bottomRight);
 
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
