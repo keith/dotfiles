@@ -362,3 +362,6 @@ augroup END
 
 " ObjC curly brace error fix
 let g:c_no_curly_error = 1
+
+" https://github.com/thoughtbot/dotfiles/pull/471
+let g:is_posix = 1
