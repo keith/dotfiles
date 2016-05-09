@@ -1,4 +1,10 @@
 #!/bin/sh
 
-rm -f .git/tags
-ctags -Rf.git/tags
+set -e
+set -o pipefail
+
+PATH="/usr/local/bin:$PATH"
+git_dir="$(git rev-parse --git-dir)"
+trap 'rm -f "$git_dir/$$.tags"' EXIT
+git rls-files | "${CTAGS:-ctags}" --tag-relative -L - -f"$git_dir/$$.tags"
+mv "$git_dir/$$.tags" "$git_dir/tags"

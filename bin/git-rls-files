@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# A simple git script listing all files in a git repo and the repo's nested
+# submodules
+#
+
+base_dir="$PWD"
+
+git --no-pager ls-files
+git --no-pager submodule foreach --recursive --quiet "
+  nested_dir=\$(git rev-parse --show-toplevel)
+  relative_dir=\$(echo \$nested_dir | sed s=^$base_dir/==)
+  git ls-files | while read line; do echo \$relative_dir/\$line; done
+"
