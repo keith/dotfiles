@@ -4,6 +4,7 @@
 --exclude=node_modules
 --exclude=vendor
 --exclude=Vendor
+--exclude=build
 
 --langdef=objc
 --langmap=objc:.m..mm..h
