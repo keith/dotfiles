@@ -62,7 +62,7 @@
   last        = diff HEAD^ HEAD
   pul         = pull
   punch       = push --force-with-lease
-  r           = reflog -5
+  r           = reflog -20
   ra          = rebase --abort
   rc          = rebase --continue
   rma         = rebase master
