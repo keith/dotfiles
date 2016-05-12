@@ -11,13 +11,16 @@ case "$1" in
     ;;
 esac
 
-dir="$HOME/Dropbox/gifs"
+search_dir="$HOME/Dropbox/gifs"
 query="$1"
-gif=$(find "$dir" -type f -name "*.gif" | fzf --select-1 --query="$query")
+gif=$(find "$search_dir" -type f -name "*.gif" -exec basename {} \; \
+  | fzf --select-1 --query="$query")
 
 if [ -z "$gif" ]; then
   exit 1
 fi
+
+gif="$search_dir/$gif"
 
 if [ $reveal -eq 1 ]; then
   open -R "$gif"
