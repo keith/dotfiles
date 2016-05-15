@@ -1,0 +1,9 @@
+#!/bin/sh
+
+query="$1"
+if [ -z "$query" ]; then
+  echo "Usage: banish-gems MATCHING"
+  exit 1
+fi
+
+exec gem list | grep "$query" | cut -d" " -f1 | xargs gem uninstall -aIx
