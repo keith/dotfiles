@@ -1,4 +1,10 @@
-command script import /usr/local/opt/chisel/libexec/fblldb.py
+settings set target.x86-disassembly-flavor intel
+
+command script import ~/.lldbhelpers/aslr.py
 command script import ~/.lldbhelpers/breakpoints.py
+command script import ~/.lldbhelpers/context.py
+command script import ~/.lldbhelpers/function_address.py
 
 command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'
+
+command script import /usr/local/opt/chisel/libexec/fblldb.py
