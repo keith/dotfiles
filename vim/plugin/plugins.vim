@@ -160,3 +160,7 @@ let g:sort_motion_flags = "ui"
 " vim-gnupg
 let g:GPGDefaultRecipients = ["0x4C7167F8"]
 let g:GPGPreferArmor = 1
+
+" Twitvim
+let g:twitvim_count = 50
+let g:twitvim_allow_multiline = 1
