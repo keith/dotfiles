@@ -14,6 +14,7 @@ vim/*.spl
 vim/bundle/*
 
 config/hub
+config/rtv
 config/newsbeuter/*
 !config/newsbeuter/config
 
