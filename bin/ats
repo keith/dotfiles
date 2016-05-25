@@ -1,0 +1,32 @@
+#!/bin/sh
+
+action="$1"
+file="$2"
+
+case "$action" in
+  --enable)
+    disable=0
+    ;;
+  --disable)
+    disable=1
+    ;;
+  *)
+    echo "Usage: ats [--enable/--disable] PATH_TO_INFO.PLIST"
+    exit 1
+    ;;
+esac
+
+if [ ! -e "$file" ]; then
+  echo "'$file' doesn't exist"
+  echo "Usage: ats [--enable/--disable] PATH_TO_INFO.PLIST"
+  exit 1
+fi
+
+if [ "$disable" -eq 1 ]; then
+  /usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity:NSAllowsArbitraryLoads bool" "$file"
+  /usr/libexec/PlistBuddy -c "Set :NSAppTransportSecurity:NSAllowsArbitraryLoads true" "$file" && echo "ATS arbitrary loads enabled"
+else
+  /usr/libexec/PlistBuddy -c "Delete :NSAppTransportSecurity:NSAllowsArbitraryLoads" "$file" && echo "ATS arbitrary loads disabled"
+fi
+
+# vim:tw=0
