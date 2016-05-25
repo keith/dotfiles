@@ -227,9 +227,20 @@ inoremap <Up> <C-o>gk
 nnoremap <C-u> 10<C-u>
 nnoremap <C-d> 10<C-d>
 
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" https://www.reddit.com/r/vim/comments/4jy1mh/slightly_more_subltle_n_and_n_behavior/
+" Keep search matches in the middle of the window unless the next match is in
+" the same viewport
+function! s:NextAndCenter(cmd)
+  let view = winsaveview()
+  execute "normal! " . a:cmd
+
+  if view.topline != winsaveview().topline
+    normal! zzzv
+  endif
+endfunction
+
+nnoremap <silent> n :call <SID>NextAndCenter('n')<CR>
+nnoremap <silent> N :call <SID>NextAndCenter('N')<CR>
 
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
