@@ -59,6 +59,7 @@ def local_nametrans_fastmail(folder):
         "Sent",
         "Spam",
         "Trash",
+        "channel"
         "swift-evolution",
     ]
 
