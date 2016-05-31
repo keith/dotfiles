@@ -232,7 +232,14 @@ nnoremap <C-d> 10<C-d>
 " the same viewport
 function! s:NextAndCenter(cmd)
   let view = winsaveview()
-  execute "normal! " . a:cmd
+  try
+    execute "normal! " . a:cmd
+  catch /^Vim\%((\a\+)\)\=:E486/
+    " Fake a 'rethrow' of an exception without causing a 3 line error message
+    echohl ErrorMsg
+    echo "E486: Pattern not found: " . @/
+    echohl None
+  endtry
 
   if view.topline != winsaveview().topline
     normal! zzzv
