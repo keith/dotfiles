@@ -284,7 +284,7 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Close all the lists
-nnoremap <leader>q call s:CloseLists()<CR>
+nnoremap <silent> <leader>q :call <SID>CloseLists()<CR>
 function! s:CloseLists()
   lclose
   cclose
