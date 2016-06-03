@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Usage: cycript-attach APPNAME [script.cy]
+#
+
+set -e
+
+app="$1"
+script="$2"
+
+if [ -z "$app" ]; then
+  echo "Usage: cycript-attach APPNAME [script.cy]"
+  exit 1
+fi
+
+if [ -n "$script" ] && [ ! -f "$script" ]; then
+  echo "'$script' doesn't exist"
+  exit 1
+fi
+
+pid="$(pgrep "$app")"
+echo "pid $pid"
+if [ -z "$pid" ]; then
+  echo "'$app' is not currently running"
+  exit 1
+fi
+
+if [ -n "$script" ]; then
+  echo "Loading script '$script'"
+  cycript -p "$pid" "$script"
+fi
+
+exec cycript -p "$pid"
