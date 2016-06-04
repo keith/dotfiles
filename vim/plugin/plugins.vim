@@ -87,6 +87,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
 let g:syntastic_python_flake8_args = "--ignore = E501"
 let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
 
