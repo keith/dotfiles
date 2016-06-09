@@ -35,24 +35,7 @@ $(document).keypress(function(e) {
 $(document).ready(function() {
   removeDislikedElements();
   addHideDiffButton();
-  addIssueButtons();
 });
-
-// Observe changes to re-add custom issue buttons after page changes
-function registerIssueButtonMutations() {
-  MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-  var observer = new MutationObserver(function(mutations, observer) {
-    var buttons = $("#custom_button");
-    if (buttons.length === 0) {
-      addIssueButtons();
-    }
-  });
-
-  observer.observe(document, {
-    subtree: true,
-    attributes: true
-  });
-}
 
 // Remove some buttons GitHub adds that I don't want to click
 function removeDislikedElements() {
@@ -74,54 +57,4 @@ function addHideDiffButton() {
       return false;
     });
   });
-}
-
-function addIssueButtons() {
-  commentContainer = $(".timeline-new-comment");
-  if (commentContainer === undefined) {
-    return;
-  }
-
-  textArea = commentContainer.find("textarea");
-  actions = commentContainer.find(".form-actions #partial-new-comment-form-actions")[0];
-
-  var labelButton = newButton("+1L", ":+1:", textArea);
-  actions.appendChild(configureLabelButton(labelButton));
-  actions.appendChild(newButton("+1", ":+1:", textArea));
-}
-
-// Show the labels dialog, select the right label, close it
-function configureLabelButton(button) {
-  button.addEventListener("click", function(event) {
-    event.stopPropagation();
-
-    setTimeout(function() {
-      $(".sidebar-labels").find("button")[0].click();
-      setTimeout(function() {
-        $('input[type="checkbox"][value="keith"]')[0].click();
-        $("body").click();
-      }, 200);
-    }, 750);
-  });
-
-  return button
-}
-
-// Create generic buttons which change the value of the given textArea
-function newButton(title, actionText, textArea) {
-  if (actionText === null) {
-    actionText = title;
-  }
-
-  var button = document.createElement("button");
-  button.innerHTML = title;
-  button.className = "btn";
-  button.id = "custom_button";
-  button.setAttribute("type", "submit");
-  button.setAttribute("title", title);
-  button.addEventListener("click", function(event) {
-    textArea.val(actionText);
-  });
-
-  return button;
 }
