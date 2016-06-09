@@ -13,27 +13,29 @@ __fuzzycmd() {
   echo "pick"
 }
 
-__fselgit() {
-  command git status --short | cut -c4- | $(__fuzzycmd)
-  echo
-}
-
-__fselgitfiles() {
-  command git ls-files `git rev-parse --show-toplevel` --cached --exclude-standard --others | $(__fuzzycmd)
-  echo
-}
-
 fuzzy-git-files-widget() {
-  result="$(__fselgitfiles)"
+  trap "" INT
+
+  result="$(git ls-files "$(git rev-parse --show-toplevel 2>/dev/null)" \
+    --cached --exclude-standard --others 2>/dev/null | $(__fuzzycmd))"
   if [[ "$result" != "" ]]; then
     LBUFFER="${LBUFFER}\"$result\""
     zle redisplay
   fi
+
+  trap INT
 }
 
 fuzzy-git-status-widget() {
-  LBUFFER="${LBUFFER}$(__fselgit)"
-  zle redisplay
+  trap "" INT
+
+  result="$(git status --short | cut -c4- | $(__fuzzycmd))"
+  if [ -n "$result" ]; then
+    LBUFFER="${LBUFFER}$result"
+    zle redisplay
+  fi
+
+  trap INT
 }
 
 fuzzy-file-widget() {
