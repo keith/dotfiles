@@ -15,6 +15,7 @@
   renames = copies
   mnemonicprefix = true
   algorithm = patience
+  compactionHeuristic = true
 [difftool]
   prompt = false
 [mergetool "vim"]
@@ -87,3 +88,8 @@
   program = gpg2
 [commit]
   gpgsign = true
+  verbose = true
+[submodule]
+  fetchJobs = 8
+[interactive]
+  diffFilter = diff-highlight
