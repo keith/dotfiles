@@ -34,6 +34,7 @@ realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
 nametrans = remote_nametrans_gmail
 folderfilter = folder_filter
+createfolders = False
 
 [Account lyft]
 localrepository  = lyft-local
@@ -57,6 +58,7 @@ realdelete = no
 sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
 nametrans = remote_nametrans_gmail
 folderfilter = folder_filter
+createfolders = False
 
 [Account fastmail]
 localrepository  = fastmail-local
