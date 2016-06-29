@@ -13,21 +13,21 @@ esac
 
 search_dir="$HOME/Dropbox/gifs"
 query="$1"
-gif=$(find "$search_dir" -type f -name "*.gif" -exec basename {} \; \
+image=$(find "$search_dir" -type f -exec basename {} \; \
   | fzf --select-1 --query="$query")
 
-if [ -z "$gif" ]; then
+if [ -z "$image" ]; then
   exit 1
 fi
 
-gif="$search_dir/$gif"
+image="$search_dir/$image"
 
 if [ $reveal -eq 1 ]; then
-  open -R "$gif"
+  open -R "$image"
   exit $?
 fi
 
-swift - "$gif" <<EOF
+swift - "$image" <<EOF
 import AppKit
 import Foundation
 
