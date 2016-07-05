@@ -10,9 +10,6 @@ macro index,pager gt "<change-folder>+keith-lyft.com/INBOX<enter>" "Go to lyft i
 macro index,pager gk "<change-folder>+keithbsmiley-gmail.com/INBOX<enter>" "Go to gmail inbox"
 macro index,pager gf "<change-folder>+fastmail/INBOX<enter>" "Go to fastmail inbox"
 
-macro index \Cd <pagedown>
-macro index \Cu <pageup>
-
 # ghu, the second alias opens the URL for mailchimp like URLs that require a
 # redirect in order to actually unsubscribe you.
 macro pager ,u \

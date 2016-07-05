@@ -11,6 +11,10 @@ bind index gg first-entry
 bind index m change-folder
 bind index p recall-message
 bind index R group-reply
+bind index \Cd next-page
+bind index \Cu previous-page
+bind index \Cw delete-thread
+bind index \Cs undelete-thread
 
 bind pager \Cd next-page
 bind pager \Cu previous-page
