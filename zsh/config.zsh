@@ -3,8 +3,8 @@ autoload -Uz $DOTFILES/functions/*(:t)
 
 # History settings
 # Save x items to the given history file
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000000000000000
+SAVEHIST=$HISTSIZE
 HISTFILE=$HOME/.zsh_history
 
 # Append history to the zsh_history file
