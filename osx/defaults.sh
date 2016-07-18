@@ -43,6 +43,8 @@ defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 # This works, although the checkbox will still appear to be checked.
 defaults write com.apple.loginwindow TALLogoutSavesState -bool false
 defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
+# Disable reopen on restart
+defaults write NSGlobalDomain ApplePersistence -bool false
 
 # Disabling App Nap
 #defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
