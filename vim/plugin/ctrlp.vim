@@ -29,6 +29,8 @@ function! s:EscapeFilePath(path)
 endfunction
 
 function! FuzzyFindCommand(vimCommand)
+  update
+
   try
     let selection = system(s:SearchCommand() . " | pick")
   catch /Vim:Interrupt/
