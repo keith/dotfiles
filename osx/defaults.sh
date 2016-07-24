@@ -693,6 +693,11 @@ defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_7_1 -bool 
 # http://cocoa.tumblr.com/post/131023038113/build-speed
 defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool true
 
+# Add more information to Xcode's build output about why specific commands are being run
+# https://twitter.com/bdash/status/661742266487205888
+# http://www.openradar.me/27516128
+defaults write com.apple.dt.Xcode ExplainWhyBuildCommandsAreRun -bool true
+
 
 #
 # Third Party
