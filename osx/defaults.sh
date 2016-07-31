@@ -698,6 +698,11 @@ defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool true
 # http://www.openradar.me/27516128
 defaults write com.apple.dt.Xcode ExplainWhyBuildCommandsAreRun -bool true
 
+# Stop Xcode from reopening files (specifically storyboards) on launch.
+# I also have a `xcuser` shell command to wipe this state so you don't reopen
+# storyboards and dirty the diff, or just take 30 seconds to launch
+defaults write com.apple.dt.Xcode IDEDisableStateRestoration -bool true
+
 
 #
 # Third Party
