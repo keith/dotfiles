@@ -5,12 +5,13 @@ end
 function run()
   local windex = focused_window_index()
   local input = table.concat(arguments, " ")
+  local target = ""
 
   if looks_like_url(input) then
-    local target = input
+    target = input
   else
     local encoded = url_encode(input)
-    local target = table.concat({"https://duckduckgo.com?q=", encoded}, "")
+    target = table.concat({"https://duckduckgo.com?q=", encoded}, "")
   end
 
   load_uri(windex, focused_webview_index(windex), target)
