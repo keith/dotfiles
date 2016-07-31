@@ -1,5 +1,8 @@
+cespare/vim-toml
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
+davidhalter/jedi-vim
+gfontenot/vim-xcode
 jamessan/vim-gnupg
 kana/vim-textobj-indent
 kana/vim-textobj-user
@@ -7,9 +10,9 @@ keith/gist.vim
 keith/parsec.vim
 keith/swift.vim
 keith/tmux.vim
-klen/python-mode
 majutsushi/tagbar
 Raimondi/delimitMate
+rust-lang/rust.vim
 scrooloose/syntastic
 sjl/vitality.vim
 tommcdo/vim-lion
