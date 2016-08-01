@@ -18,4 +18,4 @@ function! s:SecureDelete(args, bang)
   unlet s:file
 endfunction
 
-command! -bar -bang SUnlink :call s:SecureDelete(<q-args>, <q-bang>)
+command! -bar -bang Sunlink :call s:SecureDelete(<q-args>, <q-bang>)
