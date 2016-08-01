@@ -9,7 +9,7 @@ error-log "~/.newsbeuter/error.log"
 # Hide read stuff
 show-read-feeds no
 show-read-articles no
-mark-as-read-on-hover yes
+mark-as-read-on-hover no
 
 # vim-like keys
 bind-key j down
