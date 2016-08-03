@@ -31,7 +31,7 @@ fuzzy-git-status-widget() {
 
   result="$(git status --short | cut -c4- | $(__fuzzycmd))"
   if [ -n "$result" ]; then
-    LBUFFER="${LBUFFER}\"$result\""
+    LBUFFER="${LBUFFER}$result"
     zle redisplay
   fi
 
