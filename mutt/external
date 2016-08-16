@@ -25,6 +25,10 @@ message-hook '~f no_reply@email\.apple\.com ~s TestFlight:' \
 message-hook '~f dts-bugmail@group\.apple\.com' \
   "unalternative_order *; alternative_order text/html"
 
+# iTunes Connect emails
+message-hook '~f itunesconnect@apple\.com' \
+  "unalternative_order *; alternative_order text/html"
+
 # Verizon.
 message-hook '~f VZWMail@ecrmemail\.verizonwireless\.com' \
   "unalternative_order *; alternative_order text/html"
