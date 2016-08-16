@@ -358,6 +358,9 @@ augroup ft_settings
   if empty(&commentstring) | setlocal commentstring=#\ %s | endif
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
 
+  " Treat .ipas as .zip files
+  autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
+
   " Save files on some focus lost events, like switching splits
   autocmd BufLeave,FocusLost * silent! wall
 
