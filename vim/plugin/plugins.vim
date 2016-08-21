@@ -165,3 +165,6 @@ let g:GPGPreferArmor = 1
 " Twitvim
 let g:twitvim_count = 50
 let g:twitvim_allow_multiline = 1
+
+" jedi.vim
+let g:jedi#show_call_signatures = 0
