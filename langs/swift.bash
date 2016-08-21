@@ -1,3 +1,6 @@
+# Add swiftpm build to path
+export PATH=".git/safe/../../.build/debug:$PATH"
+
 export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
 

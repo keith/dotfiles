@@ -65,7 +65,7 @@ fi
 existing=($(ls $target))
 for dir in ${existing[@]}
 do
-  containsElement "$dir" in "${names[@]}"
+  containsElement "$dir" "${names[@]}"
   if [[ "$?" -eq "0" ]]; then
     continue
   fi
