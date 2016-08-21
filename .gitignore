@@ -19,9 +19,6 @@ config/hub
 config/radare2/history
 config/rtv
 
-config/newsbeuter/*
-!config/newsbeuter/config
-
 !mutt/temp/.gitkeep
 mutt/cache
 mutt/certificates

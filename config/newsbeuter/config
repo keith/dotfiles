@@ -40,9 +40,7 @@ feedhq-show-special-feeds "no"
 feedhq-login "keithbsmiley@gmail.com"
 feedhq-passwordfile "~/.feedhqpassword"
 
-# Top and bottom colors
-color info color10 color0
-# Highlighted row color
-color listfocus default color0
+# Include colors per theme
+include ~/.config/newsbeuter/parsec.conf
 
 # vim:ft=conf
