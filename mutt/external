@@ -29,6 +29,10 @@ message-hook '~f dts-bugmail@group\.apple\.com' \
 message-hook '~f itunesconnect@apple\.com' \
   "unalternative_order *; alternative_order text/html"
 
+# iTunes Connect emails
+message-hook '~f no_reply@email\.apple\.com' \
+  "unalternative_order *; alternative_order text/html"
+
 # Verizon.
 message-hook '~f VZWMail@ecrmemail\.verizonwireless\.com' \
   "unalternative_order *; alternative_order text/html"
