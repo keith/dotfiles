@@ -32,7 +32,7 @@ color markers       red             white
 color attachment    white           default
 color search        brightmagenta   default
 #color status        J_black         J_status
-color status        brightyellow    black
+color status        brightyellow    color237
 color indicator     brightblack     yellow
 color tree          yellow          default                                     # arrow in threads
 
