@@ -22,6 +22,6 @@ set mailcap_path     = $HOME/.mailcap
 set message_cachedir = $HOME/.mutt/cache/bodies
 set tmpdir           = $HOME/.mutt/temp
 
-source $HOME/.mutt/solarized-dark.muttrc
+source $HOME/.mutt/colors
 
 # vim: ft=muttrc
