@@ -13,8 +13,12 @@ Session.vim
 vim/*.spl
 vim/bundle/*
 
+config/gtk-2.0
+config/htop/htoprc
 config/hub
+config/radare2/history
 config/rtv
+
 config/newsbeuter/*
 !config/newsbeuter/config
 
