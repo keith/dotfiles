@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+  echo "Usage: bak [backup|restore|fsck|ls] SOURCE <DESTINATION>"
+  echo
+  echo "Example: bak backup ~/Documents file:///Volumes/External/backup"
+  exit 1
+}
+
+require_args() {
+  for arg; do
+    if [ -z "$arg" ]; then
+      usage
+    fi
+  done
+}
+
+cmd="$1"
+src="$2"
+dest="$3"
+
+key="keithbsmiley@gmail.com"
+args="--gpg-binary gpg2 --encrypt-key $key --use-agent"
+
+ulimit -n 1024
+
+case "$cmd" in
+  backup)
+    require_args "$src" "$dest"
+    duplicity $args incremental --full-if-older-than 1M "$src" "$dest"
+    ;;
+  restore)
+    require_args "$src" "$dest"
+    duplicity $args "$src" "$dest"
+    ;;
+  cleanup)
+    require_args "$src"
+    duplicity $args remove-all-but-n-full 3 "$src"
+    ;;
+  fsck)
+    require_args "$src" "$dest"
+    duplicity $args verify --compare-data "$src" "$dest"
+    ;;
+  ls)
+    require_args "$src"
+    duplicity $args list-current-files "$src"
+    ;;
+  *)
+    usage
+    ;;
+esac
