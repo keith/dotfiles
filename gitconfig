@@ -82,6 +82,7 @@
 [rebase]
   autosquash = true
   autostash = true
+  stat = true
 [stash]
   showPatch = true
 [gpg]
@@ -93,3 +94,5 @@
   fetchJobs = 8
 [interactive]
   diffFilter = diff-highlight
+[pull]
+  rebase = true
