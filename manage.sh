@@ -33,6 +33,7 @@ FILES=(\
     psqlrc \
     pylintrc \
     rspec \
+    tmux \
     tmux.conf \
     urlview \
     vim \
