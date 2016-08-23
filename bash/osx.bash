@@ -3,6 +3,10 @@ if [[ "$OSX" != true ]]; then
   return
 fi
 
+# Disable fastlane stuff ¯\_(ツ)_/¯
+export FASTLANE_OPT_OUT_USAGE=1
+export FASTLANE_SKIP_UPDATE_CHECK=1
+
 # Disable CocoaPods stats ¯\_(ツ)_/¯
 export COCOAPODS_DISABLE_STATS=1
 
