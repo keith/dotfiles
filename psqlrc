@@ -4,9 +4,9 @@
 \pset null '[NULL]'
 
 -- Set the prompt for normal actions
-\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+\set PROMPT1 '%m %/%R%# '
 -- Set the prompt for extra input
-\set PROMPT2 '[more] %R > '
+\set PROMPT2 '%R%# '
 
 -- Use table format (with headers across the top) by default, but switch to
 -- expanded table format when there's a lot of data, which makes it much
@@ -26,3 +26,5 @@
 -- typing them in lower case.
 \set COMP_KEYWORD_CASE upper
 
+-- Show how long each query takes to execute
+\timing
