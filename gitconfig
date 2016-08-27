@@ -94,5 +94,3 @@
   fetchJobs = 8
 [interactive]
   diffFilter = diff-highlight
-[pull]
-  rebase = true
