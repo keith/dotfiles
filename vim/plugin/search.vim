@@ -5,7 +5,7 @@ else
   set grepprg=grep\ -RIn\ --exclude-dir=build\ --exclude-dir=.git\ $*\ *
 endif
 
-command -nargs=+ -complete=file -bar -bang Grep execute "silent grep<bang> <args>" | copen | redraw!
+command -nargs=+ -complete=file -bar -bang Grep execute "silent grep<bang> <args>"
 
 " Custom search motions
 " From http://www.vimbits.com/bits/153
@@ -17,3 +17,8 @@ function! s:GrepMotion(type) abort
   execute "Grep! " . shellescape(@@)
   let @@ = save
 endfunction
+
+augroup search
+  autocmd!
+  autocmd QuickFixCmdPost *grep* cwindow | redraw!
+augroup END
