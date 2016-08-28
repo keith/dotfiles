@@ -12,6 +12,7 @@ keith/parsec.vim
 keith/swift.vim
 keith/tmux.vim
 majutsushi/tagbar
+metakirby5/codi.vim
 Raimondi/delimitMate
 rust-lang/rust.vim
 scrooloose/syntastic
