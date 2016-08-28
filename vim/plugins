@@ -3,6 +3,7 @@ christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 davidhalter/jedi-vim
 gfontenot/vim-xcode
+hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
 kana/vim-textobj-indent
 kana/vim-textobj-user
