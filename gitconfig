@@ -3,6 +3,7 @@
   email = keithbsmiley@gmail.com
 [core]
   excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
   editor = vim
   whitespace = trailing-space,space-before-tab
   pager = pager
@@ -94,3 +95,7 @@
   fetchJobs = 8
 [interactive]
   diffFilter = diff-highlight
+[diff "plist"]
+  textconv = plutil -convert xml1 -o -
+[diff "provision"]
+  textconv = openssl smime -inform der -verify -in

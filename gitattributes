@@ -1,0 +1,2 @@
+*.mobileprovision diff=provision
+*.plist diff=plist
