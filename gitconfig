@@ -98,4 +98,4 @@
 [diff "plist"]
   textconv = plutil -convert xml1 -o -
 [diff "provision"]
-  textconv = openssl smime -inform der -verify -in
+  textconv = security cms -D -i
