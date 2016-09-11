@@ -13,6 +13,10 @@ macro index,pager ga "<change-folder>+fastmail/archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+fastmail/INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+fastmail/sent<enter>" "Go to sent mail"
 
+macro index S \
+        "<shell-escape>mu-mutt fastmail<enter><change-folder-readonly>~/.cache/mu/mutt/search<enter>" \
+        "search mail (using mu)"
+
 set pgp_autosign=no
 set pgp_sign_as=
 my_hdr X-PGP-Key:

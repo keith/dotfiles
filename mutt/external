@@ -5,10 +5,6 @@ macro pager <Return> "<pipe-entry>urlview<enter>" "follow links with urlview"
 set query_command="contacts '%s'"
 bind editor <Tab> complete-query
 
-macro index S \
-        "<shell-escape>mu-mutt<enter><change-folder-readonly>~/.cache/mu/mutt/search<enter>" \
-        "search mail (using mu)"
-
 # Computers are horrible. Instead of just sending only the HTML meme type, this
 # ridiculous website sends a text/plain entry that just says "View this in an
 # HTML email client"

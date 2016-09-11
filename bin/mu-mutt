@@ -2,4 +2,9 @@
 
 printf "Query: "
 read -r query
-mu find --clearlinks --format=links --linksdir=~/.cache/mu/mutt/search "$query"
+mu find \
+  --clearlinks \
+  --format=links \
+  --linksdir=~/.cache/mu/mutt/search \
+  maildir:"/$1/"\* \
+  "$query"
