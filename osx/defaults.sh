@@ -181,7 +181,7 @@ defaults write com.apple.Terminal AutoMarkPromptLines -bool false
 defaults write com.apple.Terminal ShowLineMarks -bool false
 
 # Hide scrollbars in terminal
-defaults write com.apple.Terminal AppleShowScrollBars -string "WhenScrolling"
+defaults write com.apple.Terminal AppleShowScrollBars -string "Automatic"
 
 # Setup the correct theme
 defaults write com.apple.Terminal "Default Window Settings" -string "parsec"
@@ -531,6 +531,9 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Set to available when you come back from idle
 defaults write com.apple.iChat WelcomeBackMode -int 1
 
+# Hide scrollbars in Messages.app
+defaults write com.apple.iChat AppleShowScrollBars -string "Automatic"
+
 # Disable automatic emoji substitution (i.e. use plain text smileys)
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
 
@@ -741,7 +744,7 @@ defaults write com.naotaka.ClipMenu showAlertBeforeClearHistory -bool false
 defaults write com.naotaka.ClipMenu showStatusItem -bool false
 
 # Firefox
-defaults write org.mozilla.firefox AppleShowScrollBars -string "WhenScrolling"
+defaults write org.mozilla.firefox AppleShowScrollBars -string "Automatic"
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
 # vim:tw=0
