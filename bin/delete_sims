@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import json
+import subprocess
+
+
+def delete_sim(udid):
+    cmd = "xcrun simctl delete %s" % udid
+    subprocess.call(cmd.split())
+
+
+def main():
+    subprocess.call("xcrun simctl shutdown all".split())
+    output = subprocess.check_output("xcrun simctl list --json".split())
+    json_output = json.loads(output)
+    devices = json_output["devices"]
+
+    for key, value in devices.iteritems():
+        for device in value:
+            delete_sim(device["udid"])
+
+if __name__ == "__main__":
+    main()
