@@ -4,8 +4,8 @@
 "
 
 " Comments
-nnoremap gcc :xccmd commentAndUncommentCurrentLines<CR>
-vnoremap gc  :xccmd commentAndUncommentCurrentLines<CR>
+nnoremap gcc :xcmenucmd Comment Selection<CR>
+vnoremap gc  :xcmenucmd Comment Selection<CR>
 
 " Emulate CTRL-P
 noremap <C-p> :xccmd openQuickly<CR>
