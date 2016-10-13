@@ -19,6 +19,8 @@
   compactionHeuristic = true
 [difftool]
   prompt = false
+[difftool "idiff"]
+  cmd = "colordiff -Nur -i $LOCAL $REMOTE | diff-highlight"
 [mergetool "vim"]
   cmd = vim -c "normal\\ gg]c" -f \"$MERGED\"
   prompt = false
