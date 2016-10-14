@@ -2,11 +2,13 @@ accessor
 API
 APIs
 app
+casted
 Clojure
 CocoaPods
 codebase
 codebases
 CSS
+downcasting
 erroring
 GitHub
 Gmail
@@ -32,6 +34,7 @@ Podfile
 rebase
 refactor
 refactors
+rpath
 screenshot
 SDK
 SDKs
