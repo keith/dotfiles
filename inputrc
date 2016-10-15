@@ -1,9 +1,11 @@
 # http://usevim.com/2013/10/09/vim-zsh/
 # Set terms that use Readline to vi mode
+$if !ruby
 set -o vi
 
 set editing-mode vi
 set keymap vi
+$endif
 
 set blink-matching-paren on
 
