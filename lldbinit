@@ -10,3 +10,4 @@ command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'
 command script import /usr/local/opt/chisel/libexec/fblldb.py
 
 command alias reveal expr -l objc++ -- (void*)dlopen("/Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/libReveal.dylib", 0x2);
+                                     \ (void)[(NSNotificationCenter*)[NSNotificationCenter defaultCenter] postNotificationName:@"IBARevealRequestStart" object:nil];
