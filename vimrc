@@ -300,7 +300,7 @@ function! s:ClearWhitespace()
   let l:backup = @/
   let l:line = line('.')
   let l:column = col('.')
-  silent! %s/\s\+$//e
+  keepjumps silent! %s/\s\+$//e
   let @/=l:backup
   call cursor(l:line, l:column)
 endfunction
