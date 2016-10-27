@@ -122,6 +122,9 @@ if &readonly
   set textwidth=0
 endif
 
+" Make |:find| discover recursive paths
+set path+=**
+
 " Completion options
 set complete=.,w,b,u,t,i,kspell
 set completeopt=menu
