@@ -22,7 +22,7 @@ def token(machine):
     return "%s:%s" % (user, password)
 
 
-def request_params(params={}):
+def request_params(params):
     return dict({"format": "json",
                  "auth_token": token("pinboard.in")}.items() + params.items())
 
@@ -53,7 +53,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         usage(sys.argv[0])
     try:
-        url = str(sys.argv[1])
-        main(url)
+        main(str(sys.argv[1]))
     except ValueError:
         usage(sys.argv[0])
