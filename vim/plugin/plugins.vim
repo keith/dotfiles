@@ -177,3 +177,11 @@ function! s:Scratch(ft)
 endfunction
 
 command! -nargs=1 Scratch execute s:Scratch("<args>")
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_list_hide =
+      \ netrw_gitignore#Hide()
+      \ . ',^\./'
+      \ . ',^\.git/'
