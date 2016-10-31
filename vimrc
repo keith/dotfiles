@@ -300,11 +300,9 @@ endfunction
 
 command! ClearWhitespace call s:ClearWhitespace()
 function! s:ClearWhitespace()
-  let l:backup = @/
   let l:line = line('.')
   let l:column = col('.')
   keepjumps silent! %s/\s\+$//e
-  let @/=l:backup
   call cursor(l:line, l:column)
 endfunction
 
