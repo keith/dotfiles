@@ -304,6 +304,7 @@ function! s:ClearWhitespace()
   let l:column = col('.')
   keepjumps silent! %s/\s\+$//e
   call cursor(l:line, l:column)
+  call histdel("search", -1)
 endfunction
 
 function! s:ClearWhitespaceIfExpected()
