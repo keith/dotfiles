@@ -1,0 +1,6 @@
+#!/bin/sh
+
+args="$*"
+title="${args/ /%20}"
+curl --silent "https://www.omdbapi.com/?t=$title&plot=short&r=json" \
+  | jq '{Title, Year, Actors, imdbRating}'
