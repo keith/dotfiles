@@ -9,18 +9,29 @@ brew 'chisel'
 brew 'class-dump'
 brew 'cocoapods'
 brew 'contacts-cli'
+brew 'coreutils'
 brew 'ctags'
 brew 'curl', args: ['with-libressl', 'with-nghttp2']
+brew 'diffutils'
 brew 'dockutil'
+brew 'findutils', args: ['with-default-names']
+brew 'gawk'
 brew 'ghb'
 brew 'ghu'
 brew 'gifiate'
 brew 'git', args: ['with-brewed-curl']
+brew 'gnu-sed', args: ['with-default-names']
+brew 'gnu-tar', args: ['with-default-names']
+brew 'gnu-which', args: ['with-default-names']
 brew 'gnupg2'
+brew 'gpatch'
 brew 'gpg-agent'
+brew 'grep', args: ['with-default-names']
+brew 'gzip'
 brew 'httpie'
 brew 'ideviceinstaller'
 brew 'keith/formulae/urlview', args: ['HEAD']
+brew 'less'
 brew 'msmtp'
 brew 'mu'
 brew 'mutt'
@@ -37,6 +48,7 @@ brew 'tmux'
 brew 'tree'
 brew 'vim'
 brew 'w3m'
+brew 'watch'
 brew 'weechat', args: ['with-aspell', 'with-python', 'with-perl']
 brew 'wget', args: ['with-libressl']
 brew 'youtube-dl'
