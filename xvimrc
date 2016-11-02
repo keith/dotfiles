@@ -59,7 +59,7 @@ nnoremap n nzz
 nnoremap N Nzz
 
 " Change the background color for searches
-highlight Search guibg=red
+highlight Search guibg=orange
 
 " Better move controls
 nnoremap j gj
