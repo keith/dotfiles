@@ -111,16 +111,7 @@ set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
 set colorcolumn=+1          " Show a line past the text width
 set tags^=.tags             " Add local .tags file
-
-" Default text width to 80
-if &textwidth == 0
-  set textwidth=80
-endif
-
-" Don't have a text width for readonly files
-if &readonly
-  set textwidth=0
-endif
+set textwidth=0             " Default to no text width
 
 " Make |:find| discover recursive paths
 set path+=**
