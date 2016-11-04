@@ -21,7 +21,6 @@ nnoremap <Space>4 /~<CR>
 
 " Setup the number line
 set number
-set relativenumber
 
 " Use the system pasteboard
 set clipboard=unnamed
