@@ -43,6 +43,14 @@ def main(raw_url):
     url = format_url(raw_url)
     params = request_params({"url": url, "description": url, "toread": "yes"})
     r = requests.post(ADD_URL, params=params)
+    if r.status_code != 200:
+        print(r.text)
+        sys.exit(1)
+
+    if "Pinboard is Down" in r.text:
+        print(r.text)
+        sys.exit(1)
+
     json = r.json()
     if json["result_code"] != "done":
         print(json)
@@ -52,7 +60,10 @@ def main(raw_url):
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         usage(sys.argv[0])
+
     try:
-        main(str(sys.argv[1]))
+        url_string = str(sys.argv[1])
     except ValueError:
         usage(sys.argv[0])
+
+    main(url_string)
