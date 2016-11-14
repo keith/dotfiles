@@ -29,6 +29,7 @@ brew 'gpg-agent'
 brew 'grep', args: ['with-default-names']
 brew 'gzip'
 brew 'httpie'
+brew 'icecast'
 brew 'ideviceinstaller'
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'less'
