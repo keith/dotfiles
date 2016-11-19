@@ -109,9 +109,7 @@ set foldmethod=indent       " Decide where to fold based
 set foldnestmax=5           " Set deepest fold to x levels
 set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
-set colorcolumn=+1          " Show a line past the text width
 set tags^=.tags             " Add local .tags file
-set textwidth=0             " Default to no text width
 
 " Make |:find| discover recursive paths
 set path+=**
@@ -333,6 +331,16 @@ function! s:PositionRecall()
   endif
 endfunction
 
+function! s:SetColorColumn()
+  if &textwidth == 0
+    " Set colorcolumn specifically to 80 unless textwidth is set
+    set colorcolumn=80
+  else
+    " Show a line past the text width
+    set colorcolumn=+1
+  endif
+endfunction
+
 " Window sizes
 augroup window_sizes
   autocmd!
@@ -358,6 +366,9 @@ augroup ft_settings
 
   " Don't auto insert a comment when using O/o for a newline
   autocmd VimEnter,BufRead,FileType * set formatoptions-=o
+
+  " Set color column based on textwidth setting
+  autocmd FileType * call s:SetColorColumn()
 
   " Return to the same position you left the file in
   autocmd BufRead * call s:PositionRecall()
