@@ -45,10 +45,10 @@ FILES=(\
     zshrc \
 )
 
-function custom_path () {
+function custom_path() {
     for i in "${!PATHS[@]}"
     do
-        if [[ $1 == "$i" ]]; then
+        if [[ "$1" == "$i" ]]; then
             return 0
         fi
     done
@@ -56,55 +56,54 @@ function custom_path () {
     return 1
 }
 
-function new_path () {
+function new_path() {
     echo "$HOME/.$1"
 }
 
 # Links the passed filename to its new location
-function link () {
-    local filename=$1
+function link() {
+    local filename="$1"
 
-    if [[ ! -e $filename ]]; then
+    if [[ ! -e "$filename" ]]; then
         echo "$filename doesn't exist"
         return
     fi
 
-    local path=$(new_path "$filename")
-    if [[ ! -e "$path" ]]; then
-        echo "Linking $filename to $path"
-        ln -s "$PWD/$filename" "$path"
+    target="$(new_path "$filename")"
+    if [[ ! -e "$target" ]]; then
+        echo "Linking $filename to $target"
+        ln -s "$PWD/$filename" "$target"
     fi
 }
 
-# Delete the linked file path
+# Delete the linked file
 function unlink () {
-    local filename=$1
-    local path=$(new_path "$filename")
+    target="$(new_path "$1")"
 
-    if [ -e "$path" ]; then
-        rm "$(new_path "$1")"
-        echo "Removing $(new_path "$1")"
+    if [ -e "$target" ]; then
+        echo "Removing $target"
+        rm "$target"
     fi
 }
 
 # Loops through and link all files without links
 function install_links () {
-    for FILE in "${FILES[@]}"
+    for file in "${FILES[@]}"
     do
-        link $FILE
+        link "$file"
     done
 }
 
 # Function to remove all linked files
-function remove_links () {
-    for FILE in "${FILES[@]}"
+function remove_links() {
+    for file in "${FILES[@]}"
     do
-        unlink $FILE
+        unlink "$file"
     done
 }
 
 # Fuction to print the usage and exit when there's bad input
-function die () {
+function die() {
     echo "Usage ./manage.sh {install|remove|clean}"
     exit 1
 }
@@ -122,7 +121,7 @@ if [[ $1 == "install" ]]; then
 elif [[ $1 == "remove" ]]; then
     remove_links
 elif [[ $1 == "clean" ]]; then
-    find -L ~ -type l -maxdepth 1 -exec rm -i {} \;
+    find -L "$HOME" -maxdepth 1 -type l -exec rm -i {} \;
 else
     die
 fi
