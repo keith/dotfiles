@@ -61,4 +61,4 @@ def address_for_function(debugger, command, result, internal_dict):
 
 def __lldb_init_module(debugger, internal_dict):
     handle = debugger.HandleCommand
-    handle('command script add -f context.address_for_function aff')
+    handle('command script add -f function_address.address_for_function aff')

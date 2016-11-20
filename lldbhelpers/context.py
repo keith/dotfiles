@@ -1,16 +1,10 @@
 import lldb
 
-INTEL_ARGS_REGISTERS = [
-    "rdx", "rcx", "r8", "r9",
-]
-
-
-def class_from_reciever(reciever):
-    return reciever.split()[0].strip("<:")
+INTEL_ARGS_REGISTERS = ["arg1", "arg2", "arg3", "arg4", "arg5", "arg6"]
 
 
 def selector_from_register(register):
-    return register.split()[-1].strip('"')
+    return register.split()[-1].strip("\"")
 
 
 def output_for_command(debugger, command):
@@ -60,4 +54,4 @@ def objc_context(debugger, command, result, internal_dict):
 
 def __lldb_init_module(debugger, internal_dict):
     handle = debugger.HandleCommand
-    handle('command script add -f context.objc_context objc_context')
+    handle("command script add -f context.objc_context objc_context")
