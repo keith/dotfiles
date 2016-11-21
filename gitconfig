@@ -62,7 +62,7 @@
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   dt          = difftool
   dtc         = difftool --cached
-  l           = log -20 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset %C(red)%G?%Creset'
+  l           = log -20 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset'
   last        = diff HEAD^ HEAD
   pul         = pull
   punch       = push --force-with-lease
