@@ -1,55 +1,25 @@
 import lldb
 
-INTEL_ARGS_REGISTERS = ["arg1", "arg2", "arg3", "arg4", "arg5", "arg6"]
-
-
-def selector_from_register(register):
-    return register.split()[-1].strip("\"")
-
-
-def output_for_command(debugger, command):
-    interpreter = debugger.GetCommandInterpreter()
-    result = lldb.SBCommandReturnObject()
-    interpreter.HandleCommand(command, result)
-
-    if result.GetStatus() == 2:
-        return result.GetOutput()
-    else:
-        return ""
-
-
-def blue(string):
-    return "\x1b[34m" + string + "\x1b[39m"
-
-
-def red(string):
-    return "\x1b[31m" + string + "\x1b[39m"
-
 
 def objc_context(debugger, command, result, internal_dict):
-    reciever = output_for_command(debugger, "po $rdi").strip()
-    selector = selector_from_register(output_for_command(debugger, "x/s $rsi"))
-    number_of_arguments = selector.count(":")
-    labels = selector.split(":")
-    body = "Reciever: {} Selector: {}\nArgs:\n".format(blue(reciever),
-                                                       red(selector))
-    for i in range(number_of_arguments):
-        register = INTEL_ARGS_REGISTERS[i]
-        arg = output_for_command(debugger, "po $%s" % register).strip()
-        body += "\n{}: {}\n".format(red(labels[i]), arg)
+    target = debugger.GetSelectedTarget()
+    process = target.GetProcess()
+    thread = process.GetSelectedThread()
+    frame = thread.GetFrameAtIndex(0)
 
-    disassembly = output_for_command(debugger, "disassemble -c 5")
+    print frame.GetFunctionName()
+    print
+    print frame.get_arguments()
+    print
+    disassembly = frame.Disassemble()
 
     try:
         import pygments.lexers
         import pygments.formatters
-        disassembly = pygments.highlight(
-                disassembly, pygments.lexers.NasmLexer(),
-                pygments.formatters.TerminalFormatter())
+        print(pygments.highlight(disassembly, pygments.lexers.NasmLexer(),
+                                 pygments.formatters.TerminalFormatter()))
     except ImportError:
-        pass
-
-    print(body + "\n" + disassembly)
+        print(disassembly)
 
 
 def __lldb_init_module(debugger, internal_dict):
