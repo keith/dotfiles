@@ -1,4 +1,4 @@
-text/html;                w3m -I %{charset} -cols 80 -T text/html -dump; copiousoutput
+text/html;                w3m -I %{charset} -cols 2000 -T text/html -dump; copiousoutput
 text/plain;               less
 text/rtf;                 $HOME/.mutt/view_attachment.sh %s rtf
 text/directory;           $HOME/.mutt/view_attachment.sh %s
