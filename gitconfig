@@ -16,7 +16,7 @@
   renames = copies
   mnemonicprefix = true
   algorithm = patience
-  compactionHeuristic = true
+  indentHeuristic = true
 [difftool]
   prompt = false
 [difftool "idiff"]
