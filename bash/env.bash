@@ -25,8 +25,6 @@ export EDITOR=$vim
 export LESS="ij.5KMRX"
 export PAGER="less"
 
-export GREP_OPTIONS="--color"
-
 # Disable ^-S in the terminal
 stty -ixon -ixoff
 
