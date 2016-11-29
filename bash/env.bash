@@ -16,10 +16,6 @@ export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/
 vim=$(which vim)
 export EDITOR=$vim
 
-if which clang > /dev/null; then
-  export CC=clang
-fi
-
 # i - Vim's smart case
 # j.5 - Center search results
 # K - Quit on CTRL-C
