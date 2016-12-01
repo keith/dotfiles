@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-FILES=(\
+files=(\
   agignore \
   bash_profile \
   bashrc \
@@ -43,9 +43,9 @@ FILES=(\
   weechat \
   xvimrc \
   zshrc \
-  )
+)
 
-function custom_path() {
+custom_path() {
   for i in "${!PATHS[@]}"
   do
     if [[ "$1" == "$i" ]]; then
@@ -56,12 +56,12 @@ function custom_path() {
   return 1
 }
 
-function new_path() {
+new_path() {
   echo "$HOME/.$1"
 }
 
 # Links the passed filename to its new location
-function link() {
+link() {
   local filename="$1"
 
   if [[ ! -e "$filename" ]]; then
@@ -77,7 +77,7 @@ function link() {
 }
 
 # Delete the linked file
-function unlink () {
+unlink() {
   target="$(new_path "$1")"
 
   if [ -e "$target" ]; then
@@ -87,23 +87,23 @@ function unlink () {
 }
 
 # Loops through and link all files without links
-function install_links () {
-  for file in "${FILES[@]}"
+install_links() {
+  for file in "${files[@]}"
   do
     link "$file"
   done
 }
 
 # Function to remove all linked files
-function remove_links() {
-  for file in "${FILES[@]}"
+remove_links() {
+  for file in "${files[@]}"
   do
     unlink "$file"
   done
 }
 
 # Fuction to print the usage and exit when there's bad input
-function die() {
+die() {
   echo "Usage ./manage.sh {install|remove|clean}"
   exit 1
 }
@@ -116,6 +116,7 @@ fi
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
   install_links
+
   # It's required for this to have these permissions
   chmod 0600 ~/.mutt/msmtprc
 elif [[ $1 == "remove" ]]; then
