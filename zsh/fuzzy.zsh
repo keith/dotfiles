@@ -2,7 +2,7 @@ find_files() {
   command find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
     -o -type f -print \
     -o -type d -print \
-    -o -type l -print 2> /dev/null | sed 1d | cut -b3- | fzf | while read item; do
+    -o -type l -print 2> /dev/null | sed 1d | cut -b3- | fzy | while read item; do
     printf '%q ' "$item"
   done
   echo
@@ -16,7 +16,7 @@ fuzzy_git_files_widget() {
   trap "" INT
 
   result="$(git ls-files "$(git rev-parse --show-toplevel 2>/dev/null)" \
-    --cached --exclude-standard --others 2>/dev/null | fzf)"
+    --cached --exclude-standard --others 2>/dev/null | fzy)"
   if [ "$result" != "" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi
@@ -28,7 +28,7 @@ fuzzy_git_files_widget() {
 fuzzy_git_status_widget() {
   trap "" INT
 
-  result="$(git status --short | cut -c4- | fzf)"
+  result="$(git status --short | cut -c4- | fzy)"
   if [ -n "$result" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi

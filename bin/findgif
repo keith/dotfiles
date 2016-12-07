@@ -13,8 +13,7 @@ esac
 
 search_dir="$HOME/Dropbox/gifs"
 query="$1"
-image=$(find "$search_dir" -type f -exec basename {} \; \
-  | fzf --select-1 --query="$query")
+image=$(find "$search_dir" -type f -exec basename {} \; | fzy --query="$query")
 
 if [ -z "$image" ]; then
   exit 1

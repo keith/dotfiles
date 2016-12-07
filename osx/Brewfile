@@ -13,7 +13,6 @@ brew 'curl', args: ['with-libressl', 'with-nghttp2']
 brew 'diffutils'
 brew 'dockutil'
 brew 'findutils', args: ['with-default-names']
-brew 'fzf'
 brew 'gawk'
 brew 'ghb'
 brew 'ghu'
@@ -30,6 +29,7 @@ brew 'gzip'
 brew 'httpie'
 brew 'icecast'
 brew 'ideviceinstaller'
+brew 'jhawthorn/fzy/fzy'
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'less'
 brew 'msmtp'

@@ -32,8 +32,7 @@ function! FuzzyFindCommand(vimCommand)
   update
 
   try
-    " let selection = system(s:SearchCommand() . " | fzy")
-    execute ':call fzf#run({"sink": "' . a:vimCommand . '", "source": "' . s:SearchCommand() . '"})'
+    let selection = system(s:SearchCommand() . " | fzy")
   catch /Vim:Interrupt/
     " Catch the ^C so that the redraw happens
     redraw!

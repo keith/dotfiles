@@ -19,9 +19,6 @@ execute pathogen#infect()
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
-" Add homebrew fzf to rtp
-set rtp+=/usr/local/opt/fzf
-
 " Load MatchIt for % jumping
 runtime macros/matchit.vim
 " Load man page plugin for :Man command
