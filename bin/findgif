@@ -30,7 +30,7 @@ swift - "$image" <<EOF
 import AppKit
 import Foundation
 
-guard Process.arguments.count > 1, let path = Process.arguments.last else {
+guard CommandLine.arguments.count > 1, let path = CommandLine.arguments.last else {
     fputs("Must pass file path\n", stderr)
     exit(1)
 }
@@ -41,7 +41,7 @@ guard URL.checkResourceIsReachableAndReturnError(nil) else {
     exit(1)
 }
 
-let pb = NSPasteboard.generalPasteboard()
+let pb = NSPasteboard.general()
 pb.clearContents()
 let result = pb.writeObjects([URL])
 if !result {
