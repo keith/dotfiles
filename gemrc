@@ -1,7 +1,4 @@
 ---
-:backtrace: false
-:bulk_threshold: 1000
 :update_sources: true
 :verbose: true
-:ssl_verify_mode: 0
 gem: --no-document
