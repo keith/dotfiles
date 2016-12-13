@@ -707,6 +707,11 @@ defaults write com.apple.dt.Xcode ExplainWhyBuildCommandsAreRun -bool true
 # storyboards and dirty the diff, or just take 30 seconds to launch
 defaults write com.apple.dt.Xcode IDEDisableStateRestoration -bool true
 
+# Write detailed build system info into derived data
+# If you don't enable this but `mkdir /tmp/xcode_dependency_logs` the logs will
+# be created there instead
+defaults write com.apple.dt.Xcode EnableBuildSystemLogging -bool true
+
 
 #
 # Third Party
