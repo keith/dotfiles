@@ -21,11 +21,10 @@ brew 'git', args: ['with-brewed-curl']
 brew 'gnu-sed', args: ['with-default-names']
 brew 'gnu-tar', args: ['with-default-names']
 brew 'gnu-which', args: ['with-default-names']
-brew 'gnupg2'
 brew 'gpatch'
-brew 'gpg-agent'
 brew 'grep', args: ['with-default-names']
 brew 'gzip'
+brew 'homebrew/versions/gnupg21'
 brew 'httpie'
 brew 'icecast'
 brew 'ideviceinstaller'
