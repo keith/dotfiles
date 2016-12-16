@@ -4,6 +4,7 @@ command script import ~/.lldbhelpers/aslr.py
 command script import ~/.lldbhelpers/breakpoints.py
 command script import ~/.lldbhelpers/context.py
 command script import ~/.lldbhelpers/function_address.py
+command script import ~/.lldbhelpers/delete_breakpoint.py
 
 command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'
 
