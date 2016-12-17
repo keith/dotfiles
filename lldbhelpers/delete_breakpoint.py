@@ -17,16 +17,20 @@ def delete_breakpoint(debugger, command, result, internal_dict):
 
     breakpoint = target.FindBreakpointByID(breakpoint_id)
     if not breakpoint:
-        print("Breakpoint '{}.{}' not found"
-              .format(breakpoint_id, location_id))
+        result.SetError("Breakpoint '{}.{}' not found"
+                        .format(breakpoint_id, location_id))
         return
 
     location = breakpoint.FindLocationByID(location_id)
     if not location:
-        print("Location '{}.{}' not found".format(breakpoint_id, location_id))
+        result.SetError("Location '{}.{}' not found"
+                        .format(breakpoint_id, location_id))
         return
 
     location.SetEnabled(False)
+    assert(not location.IsEnabled())
+    result.SetStatus(lldb.eReturnStatusSuccessContinuingResult)
+    debugger.HandleCommand("continue")
 
 
 def __lldb_init_module(debugger, internal_dict):
