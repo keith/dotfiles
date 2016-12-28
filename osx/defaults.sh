@@ -67,6 +67,9 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
+# Use tabs
+defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
+
 
 #
 # Desktop & Screen Saver
@@ -445,6 +448,9 @@ chflags nohidden ~/Library
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+# Don't use tabs in Finder
+defaults write com.apple.finder AppleWindowTabbingMode -string "manual"
 
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
