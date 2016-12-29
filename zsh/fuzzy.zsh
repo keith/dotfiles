@@ -42,6 +42,11 @@ fuzzy_file_widget() {
   zle redisplay
 }
 
+fuzzy_history_widget() {
+  LBUFFER="$(fc -l 1 | cut -c 8- | tac | fzy)"
+  zle redisplay
+}
+
 zle     -N   fuzzy_git_status_widget
 bindkey '^F' fuzzy_git_status_widget
 
@@ -50,3 +55,6 @@ bindkey '^T' fuzzy_file_widget
 
 zle     -N   fuzzy_git_files_widget
 bindkey '^G' fuzzy_git_files_widget
+
+zle     -N   fuzzy_history_widget
+bindkey '^U' fuzzy_history_widget
