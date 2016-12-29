@@ -17,14 +17,17 @@ set -e
 message="$(cat)"
 archive="$(echo "$message" | grep -i "^list-archive:" | grep -o "<.*>" | tr -d "<>")"
 
-if [ "$archive" != "" ]; then
-  date=$(echo "$message" | grep -i "^Date: " | sed "s/^Date: //")
-
-  if [ "$date" != "" ]; then
-    list_date=$(date -j -v-mon -f "%a, %d %b %Y %H:%M:%S %z" "$date" "+%Y%m%d")
-    # Open the date view, switch to different HTML for different format
-    open "$archive/Week-of-Mon-$list_date/date.html"
-  else
-    open "$archive"
-  fi
+if [ -z "$archive" ]; then
+  exit
 fi
+
+date=$(echo "$message" | grep -i "^Date: " | sed "s/^Date: //")
+date=""
+if [ -z "$date" ]; then
+  open "$archive"
+  exit
+fi
+
+list_date=$(date -j -v-mon -f "%a, %d %b %Y %H:%M:%S %z" "$date" "+%Y%m%d")
+# Open the date view, switch to different HTML for different format
+open "$archive/Week-of-Mon-$list_date/date.html"
