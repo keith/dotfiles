@@ -1,8 +1,7 @@
 tap 'caskroom/cask'
 tap 'homebrew/bundle'
+tap 'homebrew/versions'
 tap 'keith/formulae'
-tap 'neonichu/formulae'
-tap 'thoughtbot/formulae'
 
 brew 'chisel'
 brew 'class-dump'
@@ -12,19 +11,20 @@ brew 'ctags'
 brew 'curl', args: ['with-libressl', 'with-nghttp2']
 brew 'diffutils'
 brew 'dockutil'
-brew 'findutils', args: ['with-default-names']
+brew 'findutils'
 brew 'gawk'
 brew 'ghb'
 brew 'ghu'
 brew 'gifiate'
 brew 'git', args: ['with-brewed-curl']
-brew 'gnu-sed', args: ['with-default-names']
-brew 'gnu-tar', args: ['with-default-names']
+brew 'gnu-sed'
+brew 'gnu-tar'
+brew 'gnu-time', args: ['with-default-names']
 brew 'gnu-which', args: ['with-default-names']
+brew 'gnupg21'
 brew 'gpatch'
 brew 'grep', args: ['with-default-names']
 brew 'gzip'
-brew 'homebrew/versions/gnupg21'
 brew 'httpie'
 brew 'icecast'
 brew 'ideviceinstaller'
