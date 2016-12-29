@@ -42,4 +42,7 @@ alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv \$HOME
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
+# Xcode commands which are not linked"
+alias simctl="xcrun simctl"
+
 # vim:tw=0
