@@ -1,0 +1,86 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+import argparse
+import re
+import subprocess
+import sys
+
+
+ARCH_REGEX = re.compile(r"\WMach-O\s+.*\s+executable\s+([\w\d]+)")
+SIZE_REGEX = re.compile(
+    r"\s+sectname\s+(.*)\n\s+segname\s+(.*)\n\s+addr\s+[a-zA-Z0-9]+"
+    r"\n\s+size\s+([a-zA-Z0-9]+)\n", re.MULTILINE)
+
+
+def format_size(num, suffix="B"):
+    for unit in ["B", "KiB", "MiB"]:
+        if abs(num) < 1024.0:
+            return "%3.1f %s" % (num, unit)
+        num /= 1024.0
+    return "%.1f %s" % (num, "GiB")
+
+
+def right_pad(string, max_width):
+    padding = " " * (max_width - len(string))
+    return "{}{}".format(string, padding)
+
+
+def cleanup_arch_identifier(arch):
+    arch = arch.replace("_", "")
+    return arch
+
+
+def get_architectures(path):
+    output = subprocess.check_output(["file", path])
+    return map(cleanup_arch_identifier, ARCH_REGEX.findall(output))
+
+
+def output_sizes(binary, arch):
+    output = subprocess.check_output(["otool", "-l", "-arch", arch, binary])
+
+    matches = []
+    for match in SIZE_REGEX.finditer(output):
+        name = match.group(1)
+        section_name = match.group(2)
+        size = int(match.group(3), 16)
+        matches.append((name, section_name, size))
+
+    matches = sorted(matches, key=lambda x: x[2], reverse=True)
+    for match in matches:
+        name = right_pad(match[0], 18)
+        section_name = right_pad(match[1], 8)
+        print(name, section_name, format_size(match[2]))
+
+
+def main(binary, arch):
+    archs = get_architectures(binary)
+    if len(archs) == 0:
+        print("'{}' does not appear to be a Mach-O executable"
+              .format(binary), file=sys.stderr)
+        sys.exit(1)
+    elif arch is not None and arch not in archs:
+        print("'{}' doesn't have a '{}' slice. Valid architectures: {}"
+              .format(binary, arch, ", ".join(archs)), file=sys.stderr)
+        sys.exit(1)
+    elif len(archs) > 1 and arch not in archs:
+        print("'{}' has multiple architectures ({}), use '--arch' to specify"
+              .format(binary, ", ".join(archs)), file=sys.stderr)
+        sys.exit(1)
+
+    output_sizes(binary, arch or archs[0])
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--arch", "-a",
+        help="The specific architecture to see the section size for"
+    )
+    parser.add_argument(
+        "binary",
+        help="The binary to get the size breakdown for"
+    )
+
+    arguments = parser.parse_args()
+    main(arguments.binary, arguments.arch)
