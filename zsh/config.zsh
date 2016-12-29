@@ -13,9 +13,6 @@ setopt APPEND_HISTORY
 # Write to history after each command
 setopt INC_APPEND_HISTORY
 
-# Don't store the history command
-setopt HIST_NO_STORE
-
 # Ignore duplicates in zsh history
 setopt HIST_IGNORE_ALL_DUPS
 
