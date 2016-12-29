@@ -7,6 +7,8 @@
 # too-many-public-methods: Ignore public method count django
 # too-few-public-methods: Ignore public method count when it's a small class
 # too-man-return-statements: Ignore having more than 6 return statements
+# deprecated-lambda: Use lambdas over list comprehensions
+# blacklisted-name: Be able to name files foo.py
 # fixme: Ignore FIXME and TODO comments
 # C0111: Ignore method missing docstring
 # C0103: Too short of variable names
@@ -14,7 +16,7 @@
 # W0142: * or ** 'magic'
 # C0411: Import ordering for first and third party
 # C0325: Unnecessary parens
-disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, C0111, C0103, W0614, W0401, W0142, C0411, C0325
+disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, deprecated-lambda, blacklisted-name, C0111, C0103, W0614, W0401, W0142, C0411, C0325
 
 
 [TYPECHECK]
