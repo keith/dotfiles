@@ -4,7 +4,7 @@ fi
 
 GNU_MANPATHS=( \
   /usr/local/opt/coreutils/libexec/gnuman \
-  /usr/local/opt/findutils/libexec/gunman \
+  /usr/local/opt/findutils/libexec/gnuman \
   /usr/local/opt/gnu-sed/libexec/gnuman   \
   /usr/local/opt/gnu-tar/libexec/gnuman   \
 )
