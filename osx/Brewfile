@@ -1,5 +1,6 @@
 tap 'caskroom/cask'
 tap 'homebrew/bundle'
+tap 'homebrew/dupes'
 tap 'homebrew/versions'
 tap 'keith/formulae'
 
