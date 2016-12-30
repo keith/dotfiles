@@ -302,6 +302,10 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Disable auto capitalize
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+# Disable auto period insert
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 
 
 #
