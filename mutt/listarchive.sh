@@ -22,12 +22,18 @@ if [ -z "$archive" ]; then
 fi
 
 date=$(echo "$message" | grep -i "^Date: " | sed "s/^Date: //")
-date=""
 if [ -z "$date" ]; then
   open "$archive"
   exit
 fi
 
-list_date=$(date -j -v-mon -f "%a, %d %b %Y %H:%M:%S %z" "$date" "+%Y%m%d")
+if date --version > /dev/null 2>&1; then
+  # Adjust the date by the number of days to the monday before
+  # -1 because Monday=1
+  difference=$(date --date "$date -1 day" "+%w")
+  list_date=$(date --date "$date -$difference days" "+%Y%m%d")
+else
+  list_date=$(date -j -v-mon -f "%a, %d %b %Y %H:%M:%S %z" "$date" "+%Y%m%d")
+fi
 # Open the date view, switch to different HTML for different format
 open "$archive/Week-of-Mon-$list_date/date.html"
