@@ -73,13 +73,20 @@ function RCMD() {
 function setup-prompt() {
   git_info=$1
   ssh=""
+  venv=""
+  venv_padding=""
 
   # Show the hostname over SSH
   if [[ -n $SSH_CONNECTION ]]; then
     ssh="%m "
   fi
 
-  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%})$git_info %(?.%{$fg[green]%}%#%{$reset_color%} .%{$fg[red]%}%#%{$reset_color%} )"
+  if [[ -n $VIRTUAL_ENV ]]; then
+    venv="v"
+    venv_padding=" "
+  fi
+
+  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}%{$fg[green]%}%(1j..$venv_padding)$venv%{$reset_color%})$git_info %(?.%{$fg[green]%}%#%{$reset_color%} .%{$fg[red]%}%#%{$reset_color%} )"
 }
 setup-prompt ""
 
