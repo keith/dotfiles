@@ -149,14 +149,14 @@ set modelines=2
 " when the vimrc is sourced
 function! CurrentTag(...)
   if exists('g:tagbar_iconchars')
-    return call("tagbar#currenttag", a:000)
+    return call('tagbar#currenttag', a:000)
   else
-    return ""
+    return ''
   endif
 endfunction
 
 function! SyntasticStatuslineFlag()
-  return ""
+  return ''
 endfunction
 
 " Status line setup (without plugins)
@@ -226,17 +226,17 @@ nnoremap gx :call netrw#BrowseX(expand('<cfile>'), 0)<CR>
 " Keep search matches in the middle of the window unless the next match is in
 " the same viewport
 function! s:NextAndCenter(cmd)
-  let view = winsaveview()
+  let l:view = winsaveview()
   try
-    execute "normal! " . a:cmd
+    execute 'normal! ' . a:cmd
   catch /^Vim\%((\a\+)\)\=:E486/
     " Fake a 'rethrow' of an exception without causing a 3 line error message
     echohl ErrorMsg
-    echo "E486: Pattern not found: " . @/
+    echo 'E486: Pattern not found: ' . @/
     echohl None
   endtry
 
-  if view.topline != winsaveview().topline
+  if l:view.topline != winsaveview().topline
     normal! zzzv
   endif
 endfunction
@@ -293,11 +293,11 @@ function! s:ClearWhitespace()
   let l:column = col('.')
   keepjumps silent! %s/\s\+$//e
   call cursor(l:line, l:column)
-  call histdel("search", -1)
+  call histdel('search', -1)
 endfunction
 
 function! s:ClearWhitespaceIfExpected()
-  if &ft =~? 'markdown'
+  if &filetype =~? 'markdown'
     return
   endif
 
@@ -322,7 +322,7 @@ endif
 
 " Position resume
 function! s:PositionRecall()
-  if &ft =~? 'gitcommit\|gitrebase'
+  if &filetype =~? 'gitcommit\|gitrebase'
     return
   endif
 
