@@ -23,4 +23,5 @@ node_modules
 Session.vim
 TAGS
 tmp
+venv
 xcuserdata
