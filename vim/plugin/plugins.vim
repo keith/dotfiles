@@ -84,7 +84,7 @@ let g:tagbar_type_swift = {
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 
-let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
+let g:syntastic_html_tidy_ignore_errors = [' proprietary attribute \"ng-']
 let g:syntastic_python_checkers = ['pylint', 'python']
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
@@ -94,12 +94,12 @@ let g:hdevtools_options = '-g -Wall'
 " http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
 function! ToggleErrors()
   " Check the total number of open windows
-  let old_last_winnr = winnr('$')
+  let l:old_last_winnr = winnr('$')
   " Attempt to close the location list
   lclose
   " If there are still the same number of windows
   " Open the errors list
-  if old_last_winnr == winnr('$')
+  if l:old_last_winnr == winnr('$')
     Errors
   endif
 endfunction
@@ -112,8 +112,8 @@ let g:pymode_breakpoint = 0
 " delimitMate
 " Currently doesn't work with vim-endwise
 " https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
-let delimitMate_expand_cr = 1
-let delimitMate_quotes = "\" '"
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_quotes = "\" '"
 
 " Tab/Enter usage
 " If the popup menu is open go back with shift-tab
@@ -123,7 +123,7 @@ function! BackwardsTab()
     return "\<C-p>"
   endif
 
-  return ""
+  return ''
 endfunction
 
 inoremap <silent> <Tab> <C-R>=TabWrapper()<CR>
@@ -144,21 +144,21 @@ endfunction
 " All of supertab in one function. #trolol
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
 function! ForceTab()
-  let column = col('.') - 1
-  let lastchar = getline('.')[column - 1]
-  let iskeychar = lastchar =~ '\k' || lastchar == '.'
-  let invalidchar = index(g:invalid_tab_chars, lastchar) < 0
-  return !(column > 0 && (iskeychar && invalidchar))
+  let l:column = col('.') - 1
+  let l:lastchar = getline('.')[l:column - 1]
+  let l:iskeychar = l:lastchar =~? '\k' || l:lastchar ==? '.'
+  let l:invalidchar = index(g:invalid_tab_chars, l:lastchar) < 0
+  return !(l:column > 0 && (l:iskeychar && l:invalidchar))
 endfunction
 
 " vim-markdown
 let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
 
 " vim-sort-motion
-let g:sort_motion_flags = "ui"
+let g:sort_motion_flags = 'ui'
 
 " vim-gnupg
-let g:GPGDefaultRecipients = ["0x4C7167F8"]
+let g:GPGDefaultRecipients = ['0x4C7167F8']
 let g:GPGPreferArmor = 1
 
 " Twitvim
@@ -170,12 +170,12 @@ let g:jedi#show_call_signatures = 0
 
 " codi.vim
 function! s:Scratch(ft)
-  execute "edit " . tempname()
-  execute "set filetype=" . a:ft
-  execute "Codi " . a:ft
+  execute 'edit ' . tempname()
+  execute 'set filetype=' . a:ft
+  execute 'Codi ' . a:ft
 endfunction
 
-command! -nargs=1 Scratch execute s:Scratch("<args>")
+command! -nargs=1 Scratch execute s:Scratch('<args>')
 
 " Netrw
 let g:netrw_banner = 0
@@ -186,6 +186,6 @@ let g:netrw_list_hide =
       \ . ',^\.git/'
 
 " completer.vim
-let g:completor_whitelist = ["python"]
+let g:completor_whitelist = ['python']
 
 let g:ale_linters = {'ruby': [], 'python': ['pylint']}

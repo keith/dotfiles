@@ -379,7 +379,7 @@ augroup ft_settings
   autocmd CursorHold <buffer> checktime
 
   " Create the binary spell file when opening vim
-  autocmd VimEnter * execute "silent mkspell! " . &spellfile
+  autocmd VimEnter * execute 'silent mkspell! ' . &spellfile
 augroup END
 
 augroup cursorline
