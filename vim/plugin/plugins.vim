@@ -85,8 +85,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 
 let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-"]
-let g:syntastic_python_flake8_args = "--ignore = E501"
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['pylint', 'python']
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
 let g:hdevtools_options = '-g -Wall'
@@ -185,3 +184,8 @@ let g:netrw_list_hide =
       \ netrw_gitignore#Hide()
       \ . ',^\./'
       \ . ',^\.git/'
+
+" completer.vim
+let g:completor_whitelist = ["python"]
+
+let g:ale_linters = {'ruby': [], 'python': ['pylint']}
