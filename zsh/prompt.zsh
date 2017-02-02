@@ -86,7 +86,21 @@ function setup-prompt() {
     venv_padding=" "
   fi
 
-  PROMPT="$ssh(%2c%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}%{$fg[green]%}%(1j..$venv_padding)$venv%{$reset_color%})$git_info %(?.%{$fg[green]%}%#%{$reset_color%} .%{$fg[red]%}%#%{$reset_color%} )"
+  NEW_PROMPT=""
+  # The local hostname if the current session is over ssh
+  NEW_PROMPT="$NEW_PROMPT$ssh"
+  # Opening paren and 2 components of pwd
+  NEW_PROMPT="$NEW_PROMPT(%2c"
+  # Yellow number of jobs, if there are any jobs, otherwise empty string
+  NEW_PROMPT="$NEW_PROMPT%{$fg[yellow]%}%(1j. %j.)%{$reset_color%}"
+  # Green virtualenv info, prefix with space (unless it's already done by jobs)
+  NEW_PROMPT="$NEW_PROMPT%{$fg[green]%}%(1j..$venv_padding)$venv%{$reset_color%}"
+  # Closing paren around pwd, any passed git information
+  NEW_PROMPT="$NEW_PROMPT)$git_info"
+  # Either green/red (based on previous command exit code) either %/# (depending on root)
+  NEW_PROMPT="$NEW_PROMPT %(?.%{$fg[green]%}%#%{$reset_color%} .%{$fg[red]%}%#%{$reset_color%} )"
+
+  PROMPT="$NEW_PROMPT"
 }
 setup-prompt ""
 
