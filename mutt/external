@@ -2,7 +2,7 @@
 macro pager <Return> "<pipe-entry>urlview<enter>" "follow links with urlview"
 
 # Contacts settings
-set query_command="contacts '%s'"
+set query_command="contacts '%s' 2> /dev/null"
 bind editor <Tab> complete-query
 
 # Computers are horrible. Instead of just sending only the HTML meme type, this
