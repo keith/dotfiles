@@ -13,6 +13,11 @@ setopt APPEND_HISTORY
 # Write to history after each command
 setopt INC_APPEND_HISTORY
 
+# Write the running time of commands to the history
+# NOTE: the zsh documentation says this and INC_APPEND_HISTORY are mutually
+# exclusive, but this seems to work fine.
+setopt INC_APPEND_HISTORY_TIME
+
 # Ignore duplicates in zsh history
 setopt HIST_IGNORE_ALL_DUPS
 
