@@ -88,10 +88,12 @@ bindkey '^[[6~' down-line-or-history
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
-# Stop highlighting text when it's pasted
-# This feature was intended so you wouldn't paste text with a \n and that would
-# immediately be interpreted as a "execute command". This feature is totally
-# fine but the side effect of giving a background highlight color to the pasted
-# text was too much visual churn for me.
-# https://github.com/zsh-users/zsh/commit/a2efa4d1c809a098b8fbf3a0cd9cc2e77300bf5a
-unset zle_bracketed_paste
+# Stop highlighting text when it's pasted. zle_bracketed_paste is a feature to
+# not allow multiline pastes while executing each line. I do this all the time
+# when I accidentally paste an entire file into my zsh buffer. When this feature
+# was added in zsh 5.1, I'm not sure if I didn't notice it, or the highlighting
+# options didn't exist, but originally I disabled it all together with:
+# unset zle_bracketed_paste
+# But now we can just disable the highlighting that adds a lot of visual churn,
+# but keep the feature for our own sanity.
+zle_highlight=(paste:none)
