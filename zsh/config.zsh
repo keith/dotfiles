@@ -102,3 +102,22 @@ zle -N self-insert url-quote-magic
 # But now we can just disable the highlighting that adds a lot of visual churn,
 # but keep the feature for our own sanity.
 zle_highlight=(paste:none)
+
+# Enable bracketed-paste-magic so that url-quote-magic works while bracketed
+# paste is enabled. It seems as though the self-insert functionality is only
+# allowed with bracketed paste disabled, or with this bracketed-paste-magic
+# widget enabled
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
+# Trim the pasted contents once it's been handled by bracket-paste
+# This is for when you paste multiline strings (or strings with trailing
+# newlines). It strips any whitespace from the beginning and end of the string,
+# and sets the trimmed content in the zle buffer.
+zstyle ':bracketed-paste-magic' paste-finish trim-pasted
+function trim-pasted() {
+  new_content="$PASTED"
+  new_content="${new_content#"${new_content%%[![:space:]]*}"}"
+  new_content="${new_content%"${new_content##*[![:space:]]}"}"
+  PASTED="$new_content"
+}
