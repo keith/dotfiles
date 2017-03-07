@@ -189,3 +189,20 @@ let g:netrw_list_hide =
 let g:completor_whitelist = ['python']
 
 let g:ale_linters = {'ruby': [], 'python': ['pylint']}
+
+augroup neomake_config
+  autocmd!
+  autocmd! BufWritePost * Neomake
+augroup END
+
+let g:neomake_error_sign = {'text': '>>', 'texthl': 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text': '>>', 'texthl': 'NeomakeWarningSign' }
+let g:neomake_message_sign = {'text': 'm>', 'texthl': 'NeomakeMessageSign' }
+let g:neomake_info_sign = {'text': 'i>', 'texthl': 'NeomakeInfoSign'}
+
+let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
+
+let g:ycm_filetype_whitelist = {
+      \ 'python': 1,
+      \ 'rust': 1,
+    \ }
