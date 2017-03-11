@@ -107,3 +107,5 @@ api.bind('y', ["ctrl", "alt"], function() { api.launch("Terminal"); });
 api.bind('RETURN', ["shift", "cmd"], function() { toggleApp("Messages"); });
 api.bind('c', ["ctrl", "cmd"], function() { toggleAppIfOpen("Tweetbot"); });
 api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
+
+Config.hideMenuBar();
