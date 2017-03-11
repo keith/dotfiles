@@ -17,6 +17,7 @@ extract () {
       *.tgz)      tar -zxvf "$1"                     ;;
       *.zip)      unzip "$1"                         ;;
       *.ZIP)      unzip "$1"                         ;;
+      *.ipa)      unzip "$1"                         ;;
       *.pax)      pax -r < "$1"                      ;;
       *.pax.Z)    uncompress "$1" --stdout | pax -r  ;;
       *.Z)        uncompress "$1"                    ;;
