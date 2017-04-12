@@ -7,10 +7,15 @@ import subprocess
 import sys
 
 
-ARCH_REGEX = re.compile(r"\WMach-O\s+.*\s+executable\s+([\w\d]+)")
+ARCH_REGEX = re.compile(
+    r"\WMach-O\W.*(executable|dynamically linked shared library)\s+([\w\d]+)$",
+    re.MULTILINE
+)
+
 SIZE_REGEX = re.compile(
     r"\s+sectname\s+(.*)\n\s+segname\s+(.*)\n\s+addr\s+[a-zA-Z0-9]+"
-    r"\n\s+size\s+([a-zA-Z0-9]+)\n", re.MULTILINE)
+    r"\n\s+size\s+([a-zA-Z0-9]+)\n", re.MULTILINE
+)
 
 
 def format_size(num, suffix="B"):
@@ -32,8 +37,9 @@ def cleanup_arch_identifier(arch):
 
 
 def get_architectures(path):
-    output = subprocess.check_output(["file", path])
-    return map(cleanup_arch_identifier, ARCH_REGEX.findall(output))
+    output = subprocess.check_output(["file", path]).strip()
+    matches = map(lambda x: x[1], ARCH_REGEX.findall(output))
+    return map(cleanup_arch_identifier, matches)
 
 
 def output_sizes(binary, arch):
