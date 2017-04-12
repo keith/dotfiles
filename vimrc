@@ -80,7 +80,7 @@ silent! colorscheme parsec
 set ttyfast                 " Set that we have a fast terminal
 set t_Co=256                " Explicitly tell Vim that the terminal supports 256 colors
 set lazyredraw              " Don't redraw vim in all situations
-set synmaxcol=300           " The max number of columns to try and highlight
+set synmaxcol=500           " The max number of columns to try and highlight
 set noerrorbells            " Don't make noise
 set autoread                " Watch for file changes and auto update
 set showmatch               " Set show matching parenthesis
