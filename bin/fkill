@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+set -u
+
+signal=9
+if [[ "$1" == "-"* ]]; then
+  signal="$1"
+  shift
+fi
+
+process="$(ps -ef | sed 1d | grep -v fzy | grep -v fkill | fzy --query "$1")"
+pid="$(echo "$process" | awk '{ print $2 }')"
+
+kill -"$signal" "$pid"
+
+process_name="$(echo "$process" \
+  | awk '{ for(i=8; i<=NF; ++i) printf "%s ", $i }')"
+echo "Killed $process_name"
