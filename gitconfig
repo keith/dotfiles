@@ -101,3 +101,7 @@
   textconv = plutil -convert xml1 -o -
 [diff "provision"]
   textconv = security cms -D -i
+[status]
+	showUntrackedFiles = all
+[transfer]
+	fsckObjects = true
