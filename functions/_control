@@ -1,0 +1,25 @@
+#compdef control
+# From https://github.com/zackhsi/dotfiles/blob/master/sources/bash_completion.d/control.bash
+
+if [[ ${#words[@]} -eq 2 ]]; then
+  # control -h | sed -n '/for detailed help/,$p' | tail -n+2 | awk '{print $1}'
+  _subcommands=(
+    'ancestors' 'build' 'check' 'clean' 'deploy' 'descendants' 'discover'
+    'ensure' 'enter' 'extract' 'function' 'kill' 'list' 'manifest' 'override'
+    'present' 'provision' 'pull' 'push' 'release' 'reset' 'restart' 'run'
+    'snapshot' 'start' 'stats' 'status' 'stop' 'test' 'update' 'url' 'version'
+  )
+
+  _values "subcommands" $_subcommands
+elif [[ ${#words[@]} -eq 3 ]]; then
+  if [[ "$words[2]" =~ "enter|kill|restart|stop" ]]; then
+    _containers=$(docker ps --format "{{.Names}}")
+    if [[ $_containers != "" ]]; then
+      _values "running containers" $_containers
+    else
+      _message "no running containers"
+    fi
+  else
+    _message "no completions for '$words[2]'"
+  fi
+fi
