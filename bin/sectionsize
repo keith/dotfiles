@@ -32,6 +32,9 @@ def right_pad(string, max_width):
 
 
 def cleanup_arch_identifier(arch):
+    if arch == "x86_64":
+        return arch
+
     arch = arch.replace("_", "")
     return arch
 
