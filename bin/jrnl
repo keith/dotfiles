@@ -4,7 +4,13 @@ set -e
 
 ROOT="$HOME/Dropbox/journal"
 FOLDER="$(date "+%m%y")"
-FILE="$(date -v -5H "+%d%m%y")"
+
+# GNU vs BSD date
+if date --version > /dev/null 2>&1; then
+  FILE=$(date --date "-5 hours" "+%d%m%y")
+else
+  FILE="$(date -v -5H "+%d%m%y")"
+fi
 
 mkdir -p "$FOLDER"
 exec "$EDITOR" "$ROOT/$FOLDER/$FILE.asc"
