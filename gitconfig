@@ -49,12 +49,12 @@
   c           = clone --recursive
   cb          = !sh -c 'git checkout -b $1 && git push -u origin $1' -
   co          = checkout
+  co-pr       = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   com         = commit --verbose
   coma        = commit --verbose --amend --no-edit
   comf        = commit --verbose --fixup=HEAD
   cop         = !sh -c 'git branch | cut -c 3- | fzy --query=$1 | xargs git checkout' -
   copr        = !sh -c 'git branch -r | cut -c 3- | grep -v HEAD | cut -d "/" -f 2 | fzy --query=$1 | xargs git checkout' -
-  co-pr       = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
@@ -64,6 +64,8 @@
   dtc         = difftool --cached
   l           = log -20 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset'
   last        = diff HEAD^ HEAD
+  last-msg    = !git --no-pager log --format=format:%B -1
+  last-sha    = !git --no-pager log --format=format:%H -1
   pul         = pull
   punch       = push --force-with-lease
   r           = reflog -20
