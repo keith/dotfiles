@@ -2,7 +2,6 @@
 
 set -e
 set -o pipefail
-set -u
 
 signal=9
 if [[ "$1" == "-"* ]]; then
