@@ -111,4 +111,3 @@
   smtpEncryption = tls
   smtpServer = /usr/local/bin/msmtp
   smtpServerOption = -afastmail
-  suppresscc = self
