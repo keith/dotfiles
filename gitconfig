@@ -104,6 +104,11 @@
 [diff "provision"]
   textconv = security cms -D -i
 [status]
-	showUntrackedFiles = all
+  showUntrackedFiles = all
 [transfer]
-	fsckObjects = true
+  fsckObjects = true
+[sendemail]
+  smtpEncryption = tls
+  smtpServer = /usr/local/bin/msmtp
+  smtpServerOption = -afastmail
+  suppresscc = self

@@ -27,6 +27,7 @@ files=(\
   lldbinit \
   mailcap \
   mpdconf \
+  msmtprc \
   mutt \
   ncmpcpp \
   npmrc \
@@ -118,7 +119,7 @@ if [[ $1 == "install" ]]; then
   install_links
 
   # It's required for this to have these permissions
-  chmod 0600 ~/.mutt/msmtprc
+  chmod 0600 ~/.msmtprc
 elif [[ $1 == "remove" ]]; then
   remove_links
 elif [[ $1 == "clean" ]]; then

@@ -2,7 +2,7 @@
 set from             = "smileykeith@fastmail.com"
 set mbox             = "+fastmail/Archive"
 set postponed        = "+fastmail/drafts"
-set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a fastmail"
+set sendmail         = "/usr/local/bin/msmtp -a fastmail"
 set signature        = $HOME/.mutt/accounts/signature
 set spoolfile        = "+fastmail/INBOX"
 

@@ -2,7 +2,7 @@
 set from             = "keith@lyft.com"
 set mbox             = "+keith-lyft.com/archive"
 set postponed        = "+keith-lyft.com/drafts"
-set sendmail         = "/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc -a lyft"
+set sendmail         = "/usr/local/bin/msmtp -a lyft"
 set signature        = $HOME/.mutt/accounts/signature
 set spoolfile        = "+keith-lyft.com/INBOX"
 
