@@ -1,7 +1,6 @@
 cespare/vim-toml
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
-davidhalter/jedi-vim
 gfontenot/vim-xcode
 hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
@@ -14,8 +13,9 @@ keith/tmux.vim
 keith/xcconfig.vim
 majutsushi/tagbar
 metakirby5/codi.vim
+neomake/neomake
 rust-lang/rust.vim
-scrooloose/syntastic
+saltstack/salt-vim
 sjl/vitality.vim
 tommcdo/vim-lion
 tpope/vim-commentary
@@ -25,7 +25,9 @@ tpope/vim-fugitive
 tpope/vim-git
 tpope/vim-markdown
 tpope/vim-repeat
+tpope/vim-rhubarb
 tpope/vim-scriptease
 tpope/vim-surround
 tpope/vim-unimpaired
 twitvim/twitvim
+Valloric/YouCompleteMe
