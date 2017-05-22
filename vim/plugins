@@ -12,7 +12,6 @@ keith/swift.vim
 keith/tmux.vim
 keith/xcconfig.vim
 majutsushi/tagbar
-metakirby5/codi.vim
 neomake/neomake
 rust-lang/rust.vim
 saltstack/salt-vim
@@ -29,5 +28,4 @@ tpope/vim-rhubarb
 tpope/vim-scriptease
 tpope/vim-surround
 tpope/vim-unimpaired
-twitvim/twitvim
 Valloric/YouCompleteMe

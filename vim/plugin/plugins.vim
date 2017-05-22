@@ -168,13 +168,6 @@ let g:twitvim_allow_multiline = 1
 " jedi.vim
 let g:jedi#show_call_signatures = 0
 
-" codi.vim
-function! s:Scratch(ft)
-  execute 'edit ' . tempname()
-  execute 'set filetype=' . a:ft
-  execute 'Codi ' . a:ft
-endfunction
-
 command! -nargs=1 Scratch execute s:Scratch('<args>')
 
 " Netrw
