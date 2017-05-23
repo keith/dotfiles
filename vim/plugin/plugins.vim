@@ -194,6 +194,21 @@ let g:neomake_message_sign = {'text': 'm>', 'texthl': 'NeomakeMessageSign' }
 let g:neomake_info_sign = {'text': 'i>', 'texthl': 'NeomakeInfoSign'}
 
 let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
+let g:neomake_open_list = 2
+
+command! -nargs=+ Nrun call<sid>Nrun("<args>")
+function! s:Nrun(args)
+  let l:arguments = split(a:args)
+  let l:executable = remove(l:arguments, 0)
+  let l:arguments = join(l:arguments, ' ')
+
+  let l:maker = {
+        \ 'exe': l:executable,
+        \ 'args': l:arguments,
+        \ 'errorformat': &errorformat,
+      \ }
+  call neomake#Make(0, [l:maker])
+endfunction
 
 let g:ycm_filetype_whitelist = {
       \ 'python': 1,
