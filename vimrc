@@ -304,6 +304,15 @@ function! s:ClearWhitespaceIfExpected()
   call s:ClearWhitespace()
 endfunction
 
+command! FormatShellCommand call s:FormatShellCommand()
+function! s:FormatShellCommand()
+  let l:line = line('.')
+  let l:column = col('.')
+  keepjumps silent! %s/ -/ \\\r -/e
+  call cursor(l:line, l:column)
+  call histdel('search', -1)
+endfunction
+
 " Unfuck my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
