@@ -10,6 +10,7 @@ codebase
 codebases
 crossposting
 CSS
+demangle
 downcasting
 erroring
 GitHub
@@ -42,6 +43,9 @@ screenshot
 SDK
 SDKs
 subclassing
+submodule
+submodules
+SwiftPM
 toolchain
 unhandled
 unstaged
@@ -50,4 +54,6 @@ URLs
 Vimscript
 WordPress
 WWDC
+xcconfig
 Xcode
+xcodeproj
