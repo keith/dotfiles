@@ -1,0 +1,38 @@
+#!/bin/bash
+
+cmd_prefix=""
+if [ "$(id -u)" != 0 ]; then
+  cmd_prefix="sudo"
+fi
+
+current_path="$(xcode-select --print-path)"
+apps="$(find /Applications -maxdepth 1 -name "Xcode*.app")"
+other_apps=()
+
+for app in $apps
+do
+  echo "a $app"
+  if [[ "$current_path" =~ "$app"* ]]; then
+    echo "current is $app"
+    continue
+  fi
+
+  other_apps+=("$app")
+done
+
+case "${#other_apps[@]}" in
+  0)
+    echo "No other Xcode found to switch to"
+    exit 1
+    ;;
+  1)
+    eval "$cmd_prefix /usr/bin/xcode-select --switch ${other_apps[0]}"
+    ;;
+  *)
+    printf '%s\n' "${other_apps[@]}" \
+      | fzy --query="$1" \
+      | xargs -I{} $cmd_prefix xcode-select --switch {}
+    ;;
+esac
+
+echo "Current Xcode is now '$(xcode-select --print-path)'"
