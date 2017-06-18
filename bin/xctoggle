@@ -11,9 +11,7 @@ other_apps=()
 
 for app in $apps
 do
-  echo "a $app"
   if [[ "$current_path" =~ "$app"* ]]; then
-    echo "current is $app"
     continue
   fi
 
