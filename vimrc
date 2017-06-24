@@ -97,6 +97,7 @@ set incsearch               " Show searches as you type
 set wrap                    " Softwrap text
 set linebreak               " Don't wrap in the middle of words
 set ignorecase              " Ignore case when searching
+set infercase               " Change behavior of completion since ignorecase is set
 set smartcase               " Ignore case if search is lowercase, otherwise case-sensitive
 set title                   " Change the terminal's title
 set updatetime=2000         " Set the time before plugins assume you're not typing
