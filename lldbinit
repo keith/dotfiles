@@ -1,4 +1,6 @@
 settings set target.x86-disassembly-flavor intel
+# Allow stepping in to code you don't have the debug symbols for
+settings set target.process.thread.step-in-avoid-nodebug false
 
 command script import ~/.lldbhelpers/aslr.py
 command script import ~/.lldbhelpers/breakpoints.py
