@@ -8,7 +8,7 @@ command script import ~/.lldbhelpers/context.py
 command script import ~/.lldbhelpers/function_address.py
 command script import ~/.lldbhelpers/delete_breakpoint.py
 
-command regex fw 's/(.+)/expr -l objc++ -O -- @import %1/'
+command regex fw 's/(.+)/expr -l objective-c -O -- @import %1/'
 
 command script import /usr/local/opt/chisel/libexec/fblldb.py
 
