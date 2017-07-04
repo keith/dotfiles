@@ -105,8 +105,6 @@
   textconv = security cms -D -i
 [status]
   showUntrackedFiles = all
-[transfer]
-  fsckObjects = true
 [sendemail]
   smtpEncryption = tls
   smtpServer = /usr/local/bin/msmtp
