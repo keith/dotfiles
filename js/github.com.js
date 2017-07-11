@@ -5,6 +5,8 @@ function alternate(URL) {
     newURL = URL.replaceLast("m");
   } else if (URL.endsWith(".m")) {
     newURL = URL.replaceLast("h");
+  } else if (URL.endsWith(".c")) {
+    newURL = URL.replaceLast("h");
   }
 
   if (newURL) {
