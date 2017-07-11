@@ -5,8 +5,9 @@ settings set target.process.thread.step-in-avoid-nodebug false
 command script import ~/.lldbhelpers/aslr.py
 command script import ~/.lldbhelpers/breakpoints.py
 command script import ~/.lldbhelpers/context.py
-command script import ~/.lldbhelpers/function_address.py
 command script import ~/.lldbhelpers/delete_breakpoint.py
+command script import ~/.lldbhelpers/function_address.py
+command script import ~/.lldbhelpers/symbol_address.py
 
 command regex fw 's/(.+)/expr -l objective-c -O -- @import %1/'
 

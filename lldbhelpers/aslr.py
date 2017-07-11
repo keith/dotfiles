@@ -1,22 +1,33 @@
 import lldb
-import re
 
 
-def ASLR(debugger, command, result, internal_dict, debug=True):
+def _aslr_for_module(target, module):
     """
-    Returns the offset of the first image address (ASLR offset).
+    Get the aslr offset for a specific module
+
+    :param target: the lldb.SBTarget that is currently being debugged
+    :param module: the lldb.SBModule to find the offset for
+    :returns: the offset as an int, this should be converted to hex for display
     """
-    interpreter = debugger.GetCommandInterpreter()
+    header_address = module.GetObjectFileHeaderAddress()
+    load_address = header_address.GetLoadAddress(target)
+    return load_address - header_address.GetFileAddress()
 
-    return_obj = lldb.SBCommandReturnObject()
-    interpreter.HandleCommand('image list -o', return_obj)
 
-    output = return_obj.GetOutput().split("\n")[0]
-    match = re.match(r'.+(0x[0-9a-fA-F]+)', output)
-    if debug and match:
-        print "ASLR offset is:", match.group(1)
+def ASLR(debugger, command, result, internal_dict):
+    """
+    (lldb) aslr
 
-    return int(match.group(1), 16) if match else None
+    Returns the aslr offset for the executable image being debugged
+
+    Note: for executables launched with lldb this will be 0x0
+    """
+    target = debugger.GetSelectedTarget()
+    module = target.FindModule(target.GetExecutable())
+    offset = hex(_aslr_for_module(target, module))
+
+    result.AppendMessage(offset)
+    result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
 
 
 def __lldb_init_module(debugger, internal_dict):
