@@ -1,7 +1,7 @@
 import lldb
 import re
 
-SYMBOL_REGEX = re.compile("^([+-])\[([^\s\]]+)\s([^\s\]]+)\]$")
+SYMBOL_REGEX = re.compile("^([+-])\[([^\s\]\(]+)(\([^\s]+\))?\s+([^\s\]]+)\]$")
 
 
 def output_for_command(debugger, command):
@@ -38,7 +38,7 @@ def address_for_function(debugger, command, result, internal_dict):
 
     scope_identifier = match.group(1)
     class_name = match.group(2)
-    selector_name = match.group(3)
+    selector_name = match.group(4)
 
     class_argument = "(id)NSClassFromString(@\"%s\")" % class_name
     selector_argument = "@selector(%s)" % selector_name
