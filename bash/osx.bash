@@ -22,7 +22,6 @@ alias o="open"
 alias oo="open ."
 
 # CocoaPods
-alias pi="pod install || pod install --repo-update"
 alias psl="pod spec lint *.podspec"
 alias psla="pod spec lint *.podspec --verbose"
 
