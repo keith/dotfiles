@@ -722,6 +722,9 @@ defaults write com.apple.dt.Xcode IDEDisableStateRestoration -bool true
 # be created there instead
 defaults write com.apple.dt.Xcode EnableBuildSystemLogging -bool true
 
+# Disable the print keyboard shortcut in Xcode. I accidentally hit this a lot
+defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil"
+
 
 #
 # Third Party
