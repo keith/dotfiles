@@ -12,6 +12,7 @@ set blink-matching-paren on
 set show-all-if-ambiguous on
 set completion-ignore-case on
 set convert-meta on
+set colored-stats on
 
 "\C-a": beginning-of-line
 "\C-e": end-of-line
