@@ -24,7 +24,7 @@ def objc_context(debugger, command, result, internal_dict):
     target = debugger.GetSelectedTarget()
     process = target.GetProcess()
     thread = process.GetSelectedThread()
-    frame = thread.GetFrameAtIndex(0)
+    frame = thread.GetSelectedFrame()
 
     function_name = frame.GetFunctionName()
     print(function_name)
