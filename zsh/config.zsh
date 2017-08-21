@@ -59,6 +59,10 @@ setopt CHECK_JOBS
 # Don't ask before running a rm *
 setopt RM_STAR_SILENT
 
+# Clear the RPS1 in the scrollback, since I use this for vim mode indication,
+# once you're done editing the text, it's not useful information
+setopt TRANSIENT_RPROMPT
+
 # Use vim shortcuts within the terminal (defaults to insert mode)
 bindkey -v
 
