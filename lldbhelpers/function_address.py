@@ -26,7 +26,7 @@ def address_for_command(debugger, command):
 
 def get_command(function, *args):
     arguments = ", ".join([str(x) for x in args])
-    return "expr (void *){}({})".format(function, arguments)
+    return "expr -l objc++ -- (void *){}({})".format(function, arguments)
 
 
 def address_for_function(debugger, command, result, internal_dict):
