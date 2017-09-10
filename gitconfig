@@ -109,3 +109,5 @@
   smtpEncryption = tls
   smtpServer = /usr/local/bin/msmtp
   smtpServerOption = -afastmail
+[log]
+  follow = true
