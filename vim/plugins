@@ -25,6 +25,7 @@ tpope/vim-git
 tpope/vim-markdown
 tpope/vim-repeat
 tpope/vim-rhubarb
+tpope/vim-rsi
 tpope/vim-scriptease
 tpope/vim-surround
 tpope/vim-unimpaired
