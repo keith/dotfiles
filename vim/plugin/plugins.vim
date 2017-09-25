@@ -84,7 +84,6 @@ let g:tagbar_type_swift = {
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 
-let g:syntastic_html_tidy_ignore_errors = [' proprietary attribute \"ng-']
 let g:syntastic_python_checkers = ['pylint', 'python']
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
@@ -117,8 +116,8 @@ let g:delimitMate_quotes = "\" '"
 
 " Tab/Enter usage
 " If the popup menu is open go back with shift-tab
-inoremap <S-Tab> <C-R>=BackwardsTab()<CR>
-function! BackwardsTab()
+inoremap <S-Tab> <C-R>=<SID>BackwardsTab()<CR>
+function! s:BackwardsTab()
   if pumvisible()
     return "\<C-p>"
   endif
@@ -126,12 +125,12 @@ function! BackwardsTab()
   return ''
 endfunction
 
-inoremap <silent> <Tab> <C-R>=TabWrapper()<CR>
-function! TabWrapper()
+inoremap <silent> <Tab> <C-R>=<SID>TabWrapper()<CR>
+function! s:TabWrapper()
   if pumvisible()
     return "\<C-y>"
   else
-    if ForceTab() || empty(&omnifunc)
+    if s:ForceTab() || empty(&omnifunc)
       return "\<Tab>"
     else
       return "\<C-x>\<C-o>"
@@ -141,9 +140,9 @@ function! TabWrapper()
   return "\<Tab>"
 endfunction
 
-" All of supertab in one function. #trolol
+" Check if you should use a tab based on special characters
 let g:invalid_tab_chars = ['^', '\^', '\s', '#', '/', '\\', '*']
-function! ForceTab()
+function! s:ForceTab()
   let l:column = col('.') - 1
   let l:lastchar = getline('.')[l:column - 1]
   let l:iskeychar = l:lastchar =~? '\k' || l:lastchar ==? '.'
@@ -168,8 +167,6 @@ let g:twitvim_allow_multiline = 1
 " jedi.vim
 let g:jedi#show_call_signatures = 0
 
-command! -nargs=1 Scratch execute s:Scratch('<args>')
-
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -177,11 +174,6 @@ let g:netrw_list_hide =
       \ netrw_gitignore#Hide()
       \ . ',^\./'
       \ . ',^\.git/'
-
-" completer.vim
-let g:completor_whitelist = ['python']
-
-let g:ale_linters = {'ruby': [], 'python': ['pylint']}
 
 augroup neomake_config
   autocmd!
@@ -196,7 +188,7 @@ let g:neomake_info_sign = {'text': 'i>', 'texthl': 'NeomakeInfoSign'}
 let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
 let g:neomake_open_list = 2
 
-command! -nargs=+ Nrun call<sid>Nrun("<args>")
+command! -nargs=+ Nrun call s:Nrun(<q-args>)
 function! s:Nrun(args)
   let l:arguments = split(a:args)
   let l:executable = remove(l:arguments, 0)
