@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # A simple git script for searching a repo (optionally) with (nested) submodules
 #
@@ -12,7 +12,7 @@
 #
 
 base_dir="$PWD"
-search="$1"
+search="${1//\"/\\\"}"
 search_dir="${2:-*}"
 
 if [ -z "$search" ]; then
