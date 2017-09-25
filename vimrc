@@ -298,7 +298,7 @@ function! s:ClearWhitespace()
 endfunction
 
 function! s:ClearWhitespaceIfExpected()
-  if &filetype =~? 'markdown\|mail'
+  if &filetype =~? 'markdown\|mail\|diff'
     return
   endif
 
