@@ -62,6 +62,7 @@
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   dt          = difftool
   dtc         = difftool --cached
+  git         = !exec git
   l           = log -20 --topo-order --graph --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset'
   last        = diff HEAD^ HEAD
   last-msg    = !git --no-pager log --format=format:%B -1
