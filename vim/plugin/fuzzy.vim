@@ -1,6 +1,11 @@
 " Concatenate the directory into the ls-files command
 function! s:GitListCommand(directory)
-  return "git ls-files " . a:directory . " --cached --exclude-standard --others"
+  " Until you can use --recurse-submodules and --others together
+  if filereadable(".gitmodules")
+    return "git ls-files " . a:directory . " --cached --exclude-standard --recurse-submodules"
+  else
+    return "git ls-files " . a:directory . " --cached --exclude-standard --others"
+  endif
 endfunction
 
 " Command for searching folders even if they
