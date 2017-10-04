@@ -93,6 +93,9 @@ bindkey '\e.' insert-last-word
 bindkey '^[[5~' up-line-or-history
 bindkey '^[[6~' down-line-or-history
 
+# Enable zmv http://onethingwell.org/post/24608988305/zmv
+autoload -U zmv
+
 # Auto insert quotes on typed URLs
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
