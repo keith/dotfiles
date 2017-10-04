@@ -34,11 +34,16 @@ function! FuzzyFindCommand(vimCommand)
   try
     let selection = system(s:SearchCommand() . " | fzy")
   catch /Vim:Interrupt/
-    " Catch the ^C so that the redraw happens
     redraw!
     return
   endtry
+
   redraw!
+  " Catch the ^C so that the redraw happens
+  if v:shell_error
+    return
+  endif
+
   exec ":" . a:vimCommand . " " . s:EscapeFilePath(selection)
 endfunction
 
