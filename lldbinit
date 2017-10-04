@@ -2,6 +2,9 @@ settings set target.x86-disassembly-flavor intel
 # Allow stepping in to code you don't have the debug symbols for
 settings set target.process.thread.step-in-avoid-nodebug false
 
+# Add type summary for Unmanaged in Swift
+type summary add --category swift --summary-string "Unmanaged Contains: ${var._value%@}" Swift.Unmanaged<AnyObject>
+
 command script import ~/.lldbhelpers/aslr.py
 command script import ~/.lldbhelpers/breakpoints.py
 command script import ~/.lldbhelpers/context.py
