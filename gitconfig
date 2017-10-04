@@ -105,6 +105,8 @@
   textconv = plutil -convert xml1 -o -
 [diff "provision"]
   textconv = security cms -D -i
+[diff "exif"]
+  textconv = exiftool
 [status]
   showUntrackedFiles = all
 [sendemail]
