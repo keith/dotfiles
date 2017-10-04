@@ -6,8 +6,6 @@ else
   let s:arguments="--vimgrep --case-sensitive {}"
 endif
 
-echom "using " . s:executable
-
 command -nargs=+ -complete=file Grep call <SID>Grep(<q-args>)
 function! s:Grep(args)
   if empty(a:args)
