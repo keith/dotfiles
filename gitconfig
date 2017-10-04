@@ -107,6 +107,8 @@
   textconv = security cms -D -i
 [diff "exif"]
   textconv = exiftool
+[difftool "ksdiff"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [status]
   showUntrackedFiles = all
 [sendemail]
