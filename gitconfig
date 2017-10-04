@@ -26,6 +26,7 @@
   prompt = false
 [mergetool]
   keepBackup = false
+  trustExitCode = true
 [merge]
   tool = vim
   log = true
