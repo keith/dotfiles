@@ -117,3 +117,5 @@
   smtpServerOption = -afastmail
 [log]
   follow = true
+[grep]
+  LineNumber = true
