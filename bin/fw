@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source_path=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library
+source_path=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library
 
 accessibility_path() {
   echo "$source_path/AccessibilityBundles/$1.axbundle/$1"
