@@ -9,3 +9,4 @@ if [[ -d $CHRUBY ]]; then
 fi
 
 alias bi="bundle install"
+alias be="bundle exec"
