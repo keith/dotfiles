@@ -1,3 +1,26 @@
 #!/bin/sh
 
-open -a Xcode .
+# This is only complicated because of http://www.openradar.me/35308287
+# Otherwise we could just call `open -a Xcode .`
+
+set -e
+
+# shellcheck disable=2009
+# Can't use pgrep here since Xcode is the parent of tons of processes
+xcodes="$(ps -axo comm= | grep "Xcode$")"
+
+if [ -z "$xcodes" ]; then
+  xcode="$(xcode-select -p)"
+  exec open -a "$(dirname "$(dirname "$xcode")")" .
+fi
+
+count="$(echo "$xcodes" | wc -l | xargs)"
+case "$count" in
+  1)
+    exec open -a "$(dirname "$(dirname "$(dirname "$xcodes")")")" .
+    ;;
+  *)
+    echo "You have $count Xcodes running, good luck with that"
+    exit 1
+    ;;
+esac
