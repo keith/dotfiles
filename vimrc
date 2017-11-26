@@ -242,8 +242,8 @@ function! s:NextAndCenter(cmd)
   endif
 endfunction
 
-nnoremap <silent> n :call <SID>NextAndCenter('n')<CR>
-nnoremap <silent> N :call <SID>NextAndCenter('N')<CR>
+nnoremap <silent> n :set hlsearch \| call <SID>NextAndCenter('n')<CR>
+nnoremap <silent> N :set hlsearch \| call <SID>NextAndCenter('N')<CR>
 
 " Remap capital y to act more like other capital letters
 nnoremap Y y$
