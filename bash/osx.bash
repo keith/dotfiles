@@ -41,7 +41,12 @@ alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv \$HOME
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
-# Xcode commands which are not linked"
+# Xcode commands which are not linked
 alias simctl="xcrun simctl"
+
+# lldb doesn't work with brewed python
+# https://github.com/Homebrew/homebrew-core/issues/2730
+# https://github.com/Homebrew/legacy-homebrew/issues/47201
+alias lldb='PATH="/usr/bin" lldb'
 
 # vim:tw=0
