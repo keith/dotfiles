@@ -112,12 +112,6 @@ set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
 set tags^=.tags             " Add local .tags file
 
-" h: Restore search highlight when launching vim. Because of the way I work, I
-" clear the search register @/ when I'm done with a search, instead of setting
-" nohlsearch. This means if I've left a search around across launches, it was
-" intentional, and I want to see it.
-set viminfo-=h
-
 " Make |:find| discover recursive paths
 set path+=**
 
