@@ -8,7 +8,8 @@ import sys
 
 
 ARCH_REGEX = re.compile(
-    r"\WMach-O\W.*(executable|dynamically linked shared library)\s+([\w\d]+)$",
+    r"\WMach-O\W.*(executable|dynamically linked shared library|object)" +
+    r"\s+([\w\d]+)$",
     re.MULTILINE
 )
 
