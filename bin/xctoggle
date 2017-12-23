@@ -34,3 +34,4 @@ case "${#other_apps[@]}" in
 esac
 
 echo "Current Xcode is now '$(xcode-select --print-path)'"
+echo "\$DEVELOPER_DIR is '$DEVELOPER_DIR'"
