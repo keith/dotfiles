@@ -301,14 +301,6 @@ function! s:ClearWhitespace()
   call histdel('search', -1)
 endfunction
 
-function! s:ClearWhitespaceIfExpected()
-  if &filetype =~? 'markdown\|mail\|diff'
-    return
-  endif
-
-  call s:ClearWhitespace()
-endfunction
-
 command! FormatShellCommand call s:FormatShellCommand()
 function! s:FormatShellCommand()
   let l:line = line('.')
@@ -386,9 +378,6 @@ augroup ft_settings
 
   " Return to the same position you left the file in
   autocmd BufRead * call s:PositionRecall()
-
-  " Clear whitespace on save
-  autocmd BufWritePre * call s:ClearWhitespaceIfExpected()
 
   autocmd CursorHold <buffer> checktime
 
