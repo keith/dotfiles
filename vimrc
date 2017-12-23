@@ -112,6 +112,10 @@ set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
 set tags^=.tags             " Add local .tags file
 
+" https://kinbiko.com/vim/my-shiniest-vim-gems/
+" Remove comments when joining lines with J
+set formatoptions+=j
+
 " Make |:find| discover recursive paths
 set path+=**
 
