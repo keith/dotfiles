@@ -48,5 +48,6 @@ alias simctl="xcrun simctl"
 # https://github.com/Homebrew/homebrew-core/issues/2730
 # https://github.com/Homebrew/legacy-homebrew/issues/47201
 alias lldb='PATH="/usr/bin" lldb'
+alias swift='PATH="/usr/bin" swift'
 
 # vim:tw=0
