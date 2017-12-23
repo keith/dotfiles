@@ -725,6 +725,9 @@ defaults write com.apple.dt.Xcode EnableBuildSystemLogging -bool true
 # Disable the print keyboard shortcut in Xcode. I accidentally hit this a lot
 defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil"
 
+# Enable extra logging for XCBuild
+defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool YES
+
 
 #
 # Third Party
