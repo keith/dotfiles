@@ -186,6 +186,7 @@ let g:neomake_message_sign = {'text': 'm>', 'texthl': 'NeomakeMessageSign' }
 let g:neomake_info_sign = {'text': 'i>', 'texthl': 'NeomakeInfoSign'}
 
 let g:neomake_python_enabled_makers = ['python', 'flake8', 'pylint']
+let g:neomake_ruby_enabled_makers = []
 let g:neomake_open_list = 2
 
 command! -nargs=+ Nrun call s:Nrun(<q-args>)
