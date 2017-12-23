@@ -1,6 +1,8 @@
 settings set target.x86-disassembly-flavor intel
 # Allow stepping in to code you don't have the debug symbols for
 settings set target.process.thread.step-in-avoid-nodebug false
+# Load local .lldbinit files
+settings set target.load-cwd-lldbinit true
 
 # Add type summary for Unmanaged in Swift
 type summary add --category swift --summary-string "Unmanaged Contains: ${var._value%@}" Swift.Unmanaged<AnyObject>
