@@ -29,7 +29,7 @@ case "${#other_apps[@]}" in
   *)
     printf '%s\n' "${other_apps[@]}" \
       | fzy --query="$1" \
-      | xargs -I{} $cmd_prefix xcode-select --switch {}
+      | xargs -I{} "$cmd_prefix" xcode-select --switch "{}"
     ;;
 esac
 
