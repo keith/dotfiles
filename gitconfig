@@ -17,6 +17,7 @@
   mnemonicprefix = true
   algorithm = patience
   indentHeuristic = true
+  colorMoved = zebra
 [difftool]
   prompt = false
 [difftool "idiff"]
