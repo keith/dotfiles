@@ -31,7 +31,7 @@ remoteuser = keithbsmiley@gmail.com
 remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com",
                                    server ="imap.gmail.com")
 realdelete = no
-sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
+sslcacertfile = ~/.mutt/cacert.pem
 nametrans = remote_nametrans_gmail
 folderfilter = folder_filter
 createfolders = False
@@ -55,7 +55,7 @@ remoteuser = ksmiley@lyft.com
 remotepasseval = get_keychain_pass(account="ksmiley@lyft.com",
                                    server ="imap.gmail.com")
 realdelete = no
-sslcacertfile = ~/.mutt/Equifax_Secure_CA.cert
+sslcacertfile = ~/.mutt/cacert.pem
 nametrans = remote_nametrans_gmail
 folderfilter = folder_filter
 createfolders = False
