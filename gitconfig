@@ -31,8 +31,6 @@
   tool = vim
   log = true
   stat = true
-[color]
-  ui = auto
 [github]
   user = keith
 [help]
