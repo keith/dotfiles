@@ -1,4 +1,6 @@
 #!/bin/sh
 
+set -e
+
 git branch --merged | grep -v "\\*" | grep -v "master" | xargs --no-run-if-empty -n 1 git branch -d
-git branch -vv | grep ": gone]" | awk '{ print $1 }' | xargs --no-run-if-empty -n 1 git branch -D
+git branch -vv | grep -v "\\*" | grep ": gone]" | awk '{ print $1 }' | xargs --no-run-if-empty -n 1 git branch -D
