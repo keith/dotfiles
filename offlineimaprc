@@ -15,7 +15,6 @@ footer = "\n"
 [Account gmail]
 localrepository  = gmail-local
 remoterepository = gmail-remote
-status_backend   = sqlite
 postsynchook     = mu index --maildir=~/.mail
 
 [Repository gmail-local]
@@ -39,7 +38,6 @@ createfolders = False
 [Account lyft]
 localrepository  = lyft-local
 remoterepository = lyft-remote
-status_backend   = sqlite
 postsynchook     = mu index --maildir=~/.mail
 
 [Repository lyft-local]
@@ -63,7 +61,6 @@ createfolders = False
 [Account fastmail]
 localrepository  = fastmail-local
 remoterepository = fastmail-remote
-status_backend   = sqlite
 postsynchook     = mu index --maildir=~/.mail
 
 [Repository fastmail-local]
