@@ -13,6 +13,7 @@ Session.vim
 vim/*.spl
 vim/bundle/*
 
+config/asciinema/config
 config/gtk-2.0
 config/htop/htoprc
 config/hub
