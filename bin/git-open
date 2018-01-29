@@ -58,7 +58,7 @@ def main(args):
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(url, _current_branch(), args.argument)
     elif _get_ref(args.argument):
-        url = "{}/commit/{}".format(url, args.argument)
+        url = "{}/commit/{}".format(url, _get_ref(args.argument))
     else:
         url = "{}/{}".format(url, args.argument)
 
