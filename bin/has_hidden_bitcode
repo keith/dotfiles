@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: has_hidden_bitcode FILE"
+  exit 1
+fi
+
+file="$1"
+
+if [ ! -f "$file" ]; then
+  echo "'$file' does not exist"
+  exit 1
+fi
+
+TMPFILE="$(mktemp -d /tmp/has_hidden_bitcode.XXXXX)" || exit 1
+echo "Doing work in $TMPFILE"
+
+filename="$(basename "$file")"
+cp "$file" "$TMPFILE/$filename"
+
+if file "$TMPFILE/$filename" | grep -q "universal binary"; then
+  arch="$(file "$TMPFILE/$filename" \
+    | grep -Eo "for architecture arm([^)]+)" \
+    | cut -d" " -f3 \
+    | head -1 || true)"
+
+  if [ -z "$arch" ]; then
+    echo "No valid bitcode architectures in '$file'"
+    exit 1
+  fi
+
+  lipo -thin "$arch" -output "$TMPFILE/slice" "$TMPFILE/$filename"
+else
+  mv "$TMPFILE/$filename" "$TMPFILE/slice"
+fi
+
+cd "$TMPFILE"
+bitcode_retriever "$TMPFILE/slice" > /dev/null
+mkdir bitcode
+xar -C bitcode -xf ./*.xar
+if grep -q "__hidden#" ./bitcode/*; then
+  echo "Has hidden bitcode :("
+  exit 1
+else
+  echo "No hidden bitcode!"
+  exit 0
+fi
