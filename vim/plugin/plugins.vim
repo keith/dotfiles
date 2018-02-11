@@ -151,7 +151,14 @@ function! s:ForceTab()
 endfunction
 
 " vim-markdown
-let g:markdown_fenced_languages = ['ruby', 'sh', 'objc', 'vim', 'swift']
+let g:markdown_fenced_languages = [
+      \ 'objc',
+      \ 'ruby',
+      \ 'sh',
+      \ 'swift',
+      \ 'vim',
+      \ 'yaml'
+    \ ]
 
 " vim-sort-motion
 let g:sort_motion_flags = 'ui'
