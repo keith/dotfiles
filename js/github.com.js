@@ -1,5 +1,9 @@
 // Alternate between h/m Objective-C files with 'a'
 function alternate(URL) {
+  if (URL.indexOf("#") !== -1) {
+    var URL = URL.substr(0, URL.indexOf('#'));
+  }
+
   var newURL = null;
   if (URL.endsWith(".h")) {
     newURL = URL.replaceLast("m");
