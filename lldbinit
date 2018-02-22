@@ -13,6 +13,7 @@ command script import ~/.lldbhelpers/breakpoints.py
 command script import ~/.lldbhelpers/context.py
 command script import ~/.lldbhelpers/delete_breakpoint.py
 command script import ~/.lldbhelpers/function_address.py
+command script import ~/.lldbhelpers/iblog.py
 command script import ~/.lldbhelpers/keypath.py
 command script import ~/.lldbhelpers/symbol_address.py
 
