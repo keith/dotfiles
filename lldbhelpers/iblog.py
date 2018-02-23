@@ -2,10 +2,6 @@ import lldb
 import re
 
 
-class ModuleNotFound(Exception):
-    pass
-
-
 class SectionNotFound(Exception):
     pass
 
@@ -27,14 +23,6 @@ def _find_section(module, section_name, segment_name):
         raise SectionNotFound()
 
 
-def _find_module(target, name):
-    for module in target.module_iter():
-        if module.GetFileSpec().GetFilename() == name:
-            return module
-
-    raise ModuleNotFound()
-
-
 def _output_for_command(debugger, command):
     interpreter = debugger.GetCommandInterpreter()
     result = lldb.SBCommandReturnObject()
@@ -48,7 +36,7 @@ def _output_for_command(debugger, command):
 
 def iblog(debugger, command, context, result, internal_dict):
     target = context.GetTarget()
-    module = _find_module(target, "UIKit")
+    module = target.module["UIKit"]
     section = _find_section(module, "__TEXT", "__cstring")
     load_address = section.GetLoadAddress(target)
     end_address = load_address + section.GetByteSize()
