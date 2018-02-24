@@ -34,22 +34,26 @@ def _output_for_command(debugger, command):
         return ""
 
 
-def iblog(debugger, command, context, result, internal_dict):
-    target = context.GetTarget()
-    module = target.module["UIKit"]
-    section = _find_section(module, "__TEXT", "__cstring")
+def _add_breakpoint_for_string(debugger, target, section, string):
     load_address = section.GetLoadAddress(target)
     end_address = load_address + section.GetByteSize()
-
-    command = """memory find --count 1 --string \
-'Could not load the "%@" image referenced from a nib in the bundle \
-with identifier "%@"' {} {}""".format(hex(load_address), hex(end_address))
+    command = ("memory find --count 1 --string '{}' {} {}"
+               .format(string, hex(load_address), hex(end_address)))
 
     output = _output_for_command(debugger, command)
     string_addr = _extract_address_from(output)
     debugger.HandleCommand(
         "br set --name NSLog --condition '(void *)[$arg1 cString] == {}'"
         .format(string_addr))
+
+
+def iblog(debugger, command, context, result, internal_dict):
+    target = context.GetTarget()
+    module = target.module["UIKit"]
+    section = _find_section(module, "__TEXT", "__cstring")
+    _add_breakpoint_for_string(debugger, target, section, 'Could not load the "%@" image referenced from a nib in the bundle with identifier "%@"')
+    _add_breakpoint_for_string(debugger, target, section,
+                               'Unknown class %@ in Interface Builder file.\n')
 
 
 def __lldb_init_module(debugger, internal_dict):
