@@ -1,6 +1,7 @@
 cespare/vim-toml
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
+dhruvasagar/vim-zoom
 gfontenot/vim-xcode
 hynek/vim-python-pep8-indent
 jamessan/vim-gnupg

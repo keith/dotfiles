@@ -214,3 +214,5 @@ let g:ycm_filetype_whitelist = {
       \ 'python': 1,
       \ 'rust': 1,
     \ }
+
+nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
