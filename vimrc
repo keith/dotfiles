@@ -372,6 +372,10 @@ augroup ft_settings
 
   " Don't auto insert a comment when using O/o for a newline
   autocmd VimEnter,BufRead,FileType * set formatoptions-=o
+  " Break lines based on 'textwidth' even if the line was longer before
+  " starting insert mode. This is useful for pasting long lines, and
+  " then continuing at the end of them.
+  autocmd VimEnter,BufRead,FileType * set formatoptions-=l
 
   " Set color column based on textwidth setting
   autocmd FileType * call s:SetColorColumn()
