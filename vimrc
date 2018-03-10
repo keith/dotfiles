@@ -19,11 +19,6 @@ execute pathogen#infect()
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
 
-" Load MatchIt for % jumping
-runtime macros/matchit.vim
-" Load man page plugin for :Man command
-runtime ftplugin/man.vim
-
 " Use space as leader!
 let g:mapleader="\<Space>"
 
