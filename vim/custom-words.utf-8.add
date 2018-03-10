@@ -40,6 +40,7 @@ plugin
 plugins
 Podfile
 rebase
+recurse
 refactor
 refactors
 rpath
