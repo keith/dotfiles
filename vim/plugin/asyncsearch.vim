@@ -16,6 +16,7 @@ function! s:Grep(args)
     return
   endif
 
+  cclose
   let l:formatted_args = '"' . escape(a:args, '\') . '"'
   let l:arguments = substitute(s:arguments, '{}', l:formatted_args, '')
   let l:maker = {
