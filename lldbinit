@@ -15,6 +15,7 @@ command script import ~/.lldbhelpers/delete_breakpoint.py
 command script import ~/.lldbhelpers/function_address.py
 command script import ~/.lldbhelpers/iblog.py
 command script import ~/.lldbhelpers/keypath.py
+command script import ~/.lldbhelpers/seq.py
 command script import ~/.lldbhelpers/symbol_address.py
 
 command regex fw 's/(.+)/expr -l objective-c -O -- @import %1/'
