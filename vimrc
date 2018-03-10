@@ -114,7 +114,7 @@ set formatoptions+=j
 set path+=**
 
 " Completion options
-set complete=.,w,b,u,t,i,kspell
+set complete=.,w,b,u,t,kspell
 set completeopt=menu
 set wildmenu                                           " Better completion in the CLI
 set wildmode=longest:full,full                         " Completion settings
