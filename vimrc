@@ -277,6 +277,13 @@ nnoremap # :keepjumps normal! mi#`i<CR>
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+augroup trailing_highlight
+  autocmd!
+  autocmd BufWinEnter * match ErrorMsg /\s\+$/
+  autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ErrorMsg /\s\+$/
+augroup END
+
 " Close all the lists
 nnoremap <silent> <leader>q :call <SID>CloseLists()<CR>
 function! s:CloseLists()
