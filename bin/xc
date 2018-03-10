@@ -15,7 +15,7 @@ fi
 count="$(echo "$xcodes" | wc -l | xargs)"
 case "$count" in
   1)
-    exec open -a "$(dirname "$(dirname "$(dirname "$xcodes")")")" .
+    PATH=/usr/bin:/bin open -a "$(dirname "$(dirname "$(dirname "$xcodes")")")" .
     ;;
   *)
     echo "You have $count Xcodes running, good luck with that"
