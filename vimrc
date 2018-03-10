@@ -87,7 +87,6 @@ set showmatch               " Set show matching parenthesis
 set matchtime=2             " The amount of time matches flash
 set display=lastline        " Display super long wrapped lines
 set number                  " Shows line numbers
-set cursorline              " Highlight the line the cursor is on
 set nrformats-=octal        " Never use octal notation
 set nojoinspaces            " Don't add 2 spaces when using J
 set mouse=a                 " Enable using the mouse if terminal emulator
@@ -392,12 +391,6 @@ augroup ft_settings
 
   " Create the binary spell file when opening vim
   autocmd VimEnter * execute 'silent mkspell! ' . &spellfile
-augroup END
-
-augroup cursorline
-  autocmd!
-  autocmd WinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
 augroup END
 
 " ObjC curly brace error fix
