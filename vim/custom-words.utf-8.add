@@ -12,6 +12,7 @@ crossposting
 CSS
 demangle
 deserialized
+deserializing
 dialogs
 downcasting
 erroring
@@ -56,6 +57,7 @@ unhandled
 unstaged
 unstyled
 URLs
+vendored
 Vimscript
 WordPress
 WWDC
