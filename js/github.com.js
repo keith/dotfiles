@@ -46,6 +46,7 @@ $(document).ready(function() {
 // Remove some buttons GitHub adds that I don't want to click
 function removeDislikedElements() {
   $(".js-new-blob-submit").remove();
+  $(".signup-prompt-bg").remove();
   $(".toolbar-help").remove();
   $("a[href^=github-mac]").remove();
 }
