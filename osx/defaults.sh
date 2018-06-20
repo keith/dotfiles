@@ -728,6 +728,9 @@ defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil
 # Enable extra logging for XCBuild
 defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool YES
 
+# Make the tab key actually be a tab key
+defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Never
+
 
 #
 # Third Party
