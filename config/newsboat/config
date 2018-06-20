@@ -1,10 +1,9 @@
-# http://www.newsbeuter.org/
 auto-reload yes
 reload-time 30
 notify-beep yes
 reload-threads 20
 
-error-log "~/.newsbeuter/error.log"
+error-log "~/.newsboat/error.log"
 
 # Hide read stuff
 show-read-feeds no
@@ -41,6 +40,6 @@ feedhq-login "keithbsmiley@gmail.com"
 feedhq-passwordfile "~/.feedhqpassword"
 
 # Include colors per theme
-include ~/.config/newsbeuter/parsec.conf
+include ~/.config/newsboat/parsec.conf
 
 # vim:ft=conf
