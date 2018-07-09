@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+set -u
+
+cat | grep "^\\s*func test" | sed -E 's/\s*func (test\w+)\(\).*$/("\1", \1),/'
