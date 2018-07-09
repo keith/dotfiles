@@ -135,7 +135,7 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 defaults write com.apple.dock mru-spaces -bool false
 
 # Dock setup
-if which dockutil > /dev/null; then
+if command -v dockutil; then
   dockutil --remove all
 
   dockutil --add "/Applications/Firefox.app"
@@ -404,7 +404,7 @@ defaults write com.apple.finder ShowPathbar -bool true
 
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: 'icnv', 'clmv', 'Flwv', 'Nlsv'
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+defaults write com.apple.finder FXPreferredViewStyle -string clmv
 
 # Allow text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -bool true
@@ -413,12 +413,12 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf
 
 # Finder: new window location set to $HOME. Same as Finder > Preferences > New Finder Windows show
 # For other path use "PfLo" and "file:///foo/bar/"
-defaults write com.apple.finder NewWindowTarget -string "PfLo"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+defaults write com.apple.finder NewWindowTarget -string PfLo
+defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/"
 
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -469,9 +469,9 @@ defaults write com.apple.finder AppleWindowTabbingMode -string "manual"
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist
 
 # Set the finder window toolbar to only have back/forward buttons
-/usr/libexec/PlistBuddy -c "Delete :NSToolbar\ Configuration\ Browser:TB\ Item\ Identifiers" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ Browser:TB\ Item\ Identifiers array" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ Browser:TB\ Item\ Identifiers:0 string com.apple.finder.BACK" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Delete :NSToolbar\\ Configuration\\ Browser:TB\\ Item\\ Identifiers" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ Browser:TB\\ Item\\ Identifiers array" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ Browser:TB\\ Item\\ Identifiers:0 string com.apple.finder.BACK" ~/Library/Preferences/com.apple.finder.plist
 
 # Remove all tags from contextual menu
 /usr/libexec/PlistBuddy -c "Delete :FavoriteTagNames" ~/Library/Preferences/com.apple.finder.plist
@@ -519,12 +519,12 @@ defaults write com.apple.Safari ShowStatusBar -bool true
 defaults write com.apple.Safari ShowStatusBarInFullScreen -bool true
 
 # Toolbar setup
-/usr/libexec/PlistBuddy -c "Delete :NSToolbar\ Configuration\ BrowserToolbarIdentifier-v2:TB\ Item\ Identifiers" ~/Library/Preferences/com.apple.Safari.plist &>/dev/null
-/usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ BrowserToolbarIdentifier-v2:TB\ Item\ Identifiers array" ~/Library/Preferences/com.apple.Safari.plist
+/usr/libexec/PlistBuddy -c "Delete :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers" ~/Library/Preferences/com.apple.Safari.plist &>/dev/null
+/usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers array" ~/Library/Preferences/com.apple.Safari.plist
 items=(BackForwardToolbarIdentifier NSToolbarFlexibleSpaceItem InputFieldsToolbarIdentifier NSToolbarFlexibleSpaceItem ShareToolbarIdentifier)
 
 for i in "${!items[@]}"; do
-  /usr/libexec/PlistBuddy -c "Add :NSToolbar\ Configuration\ BrowserToolbarIdentifier-v2:TB\ Item\ Identifiers:$i string ${items[$i]}" ~/Library/Preferences/com.apple.Safari.plist
+  /usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers:$i string ${items[$i]}" ~/Library/Preferences/com.apple.Safari.plist
 done
 
 #
@@ -536,23 +536,23 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
 #
-# iChat/Messages
+# Messages
 #
 
 # Set to available when you come back from idle
 defaults write com.apple.iChat WelcomeBackMode -int 1
 
 # Hide scrollbars in Messages.app
-defaults write com.apple.iChat AppleShowScrollBars -string "Automatic"
+defaults write com.apple.iChat AppleShowScrollBars -string Automatic
 
 # Disable automatic emoji substitution (i.e. use plain text smileys)
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add automaticEmojiSubstitutionEnablediMessage -bool false
 
 # Disable smart quotes as it’s annoying for messages that contain code
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add automaticQuoteSubstitutionEnabled -bool false
 
 # Disable continuous spell checking
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add continuousSpellCheckingEnabled -bool false
 
 
 #
@@ -614,9 +614,6 @@ defaults write com.apple.screencapture type -string "png"
 # https://twitter.com/stroughtonsmith/status/651854070496534528
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-# Disable shadow in screenshots
-# defaults write com.apple.screencapture disable-shadow -bool true
-
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
@@ -643,10 +640,10 @@ defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_primary -bool true
 defaults write org.macosforge.xquartz.X11 sync_primary_on_select -bool false
 
 # Run xterm by default (without this vim's clipboard doesn't work)
-defaults write org.macosforge.xquartz.X11 app_to_run -string "/opt/X11/bin/xterm"
+defaults write org.macosforge.xquartz.X11 app_to_run -string /opt/X11/bin/xterm
 
 # Set default shell
-defaults write org.macosforge.xquartz.X11 login_shell -string "/usr/local/bin/zsh"
+defaults write org.macosforge.xquartz.X11 login_shell -string /usr/local/bin/zsh
 
 
 #
