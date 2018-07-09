@@ -34,6 +34,14 @@ def _get_remotes():
     return remotes
 
 
+def _get_remote(name):
+    for remote_name, url in _get_remotes():
+        if name == remote_name:
+            return url
+
+    return None
+
+
 def _current_branch():
     return _run_git_command(["symbolic-ref", "--short", "HEAD"])
 
@@ -59,6 +67,8 @@ def main(args):
         url = "{}/blob/{}/{}".format(url, _current_branch(), args.argument)
     elif _get_ref(args.argument):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
+    elif _get_remote(args.argument):
+        url = _get_remote(args.argument)
     else:
         url = "{}/{}".format(url, args.argument)
 
