@@ -14,9 +14,8 @@
 # C0103: Too short of variable names
 # W0614, W0401: Ignore wildcard import settings
 # W0142: * or ** 'magic'
-# C0411: Import ordering for first and third party
 # C0325: Unnecessary parens
-disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, deprecated-lambda, blacklisted-name, C0111, C0103, W0614, W0401, W0142, C0411, C0325
+disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, deprecated-lambda, blacklisted-name, C0111, C0103, W0614, W0401, W0142, C0325
 
 
 [TYPECHECK]
