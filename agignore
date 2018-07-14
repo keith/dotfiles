@@ -1,7 +1,7 @@
 *.pem
 .tags
 bower_components
-build
+build.noindex
 coverage
 doc
 log
