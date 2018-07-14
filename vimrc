@@ -384,7 +384,7 @@ augroup ft_settings
   " Return to the same position you left the file in
   autocmd BufRead * call s:PositionRecall()
 
-  autocmd CursorHold <buffer> checktime
+  autocmd FocusGained,CursorHold <buffer> checktime
 
   " Create the binary spell file when opening vim
   autocmd VimEnter * execute 'silent mkspell! ' . &spellfile
