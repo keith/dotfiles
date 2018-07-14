@@ -1,7 +1,10 @@
+bitc/vim-hdevtools
 cespare/vim-toml
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 dhruvasagar/vim-zoom
+eagletmt/ghcmod-vim
+eagletmt/neco-ghc
 gfontenot/vim-xcode
 hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
@@ -17,6 +20,7 @@ neomake/neomake
 racer-rust/vim-racer
 rust-lang/rust.vim
 saltstack/salt-vim
+Shougo/vimproc.vim
 sjl/vitality.vim
 tommcdo/vim-lion
 tpope/vim-commentary
