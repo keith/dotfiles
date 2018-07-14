@@ -218,3 +218,17 @@ let g:ycm_filetype_whitelist = {
 let g:highlightedyank_highlight_duration = 150
 
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
+
+let s:lldb_projections = {
+      \   "include/lldb/*.h": {"alternate": "source/{}.cpp"},
+      \   "source/*.cpp": {"alternate": "include/lldb/{}.h"}
+      \ }
+
+augroup lldb_projectionist
+  autocmd!
+
+  autocmd User ProjectionistDetect
+        \ if fnamemodify(getcwd(), ":t") == "lldb" |
+        \   call projectionist#append(getcwd(), s:lldb_projections) |
+        \ endif
+augroup END

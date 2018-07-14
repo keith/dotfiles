@@ -30,6 +30,7 @@ tpope/vim-eunuch
 tpope/vim-fugitive
 tpope/vim-git
 tpope/vim-markdown
+tpope/vim-projectionist
 tpope/vim-repeat
 tpope/vim-rhubarb
 tpope/vim-rsi
