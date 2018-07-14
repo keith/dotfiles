@@ -29,6 +29,7 @@ brew 'ideviceinstaller'
 brew 'jhawthorn/fzy/fzy'
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'less'
+brew 'milend/taps/hmap'
 brew 'msmtp'
 brew 'mu'
 brew 'mutt'
