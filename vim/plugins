@@ -23,6 +23,7 @@ saltstack/salt-vim
 Shougo/vimproc.vim
 sjl/vitality.vim
 tommcdo/vim-lion
+tpope/vim-abolish
 tpope/vim-commentary
 tpope/vim-endwise
 tpope/vim-eunuch
