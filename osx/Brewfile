@@ -1,15 +1,13 @@
-tap 'caskroom/cask'
 tap 'homebrew/bundle'
 tap 'homebrew/dupes'
-tap 'homebrew/versions'
 tap 'keith/formulae'
 
+brew 'ag'
 brew 'chisel'
-brew 'class-dump'
 brew 'contacts-cli'
 brew 'coreutils'
 brew 'ctags'
-brew 'curl', args: ['with-libressl', 'with-nghttp2']
+brew 'curl', args: ['with-nghttp2']
 brew 'diffutils'
 brew 'dockutil'
 brew 'findutils'
@@ -17,17 +15,16 @@ brew 'gawk'
 brew 'ghb'
 brew 'ghu'
 brew 'gifiate'
-brew 'git', args: ['with-brewed-curl']
+brew 'git', args: ['with-curl']
 brew 'gnu-sed'
 brew 'gnu-tar'
 brew 'gnu-time', args: ['with-default-names']
 brew 'gnu-which', args: ['with-default-names']
-brew 'gnupg21'
+brew 'gnupg'
 brew 'gpatch'
 brew 'grep', args: ['with-default-names']
 brew 'gzip'
 brew 'httpie'
-brew 'icecast'
 brew 'ideviceinstaller'
 brew 'jhawthorn/fzy/fzy'
 brew 'keith/formulae/urlview', args: ['HEAD']
@@ -37,19 +34,17 @@ brew 'mu'
 brew 'mutt'
 brew 'parallel'
 brew 'pinboard'
-brew 'python'
+brew 'pyenv'
 brew 'reattach-to-user-namespace'
-brew 'redshift'
+brew 'rg'
 brew 'shellcheck'
-brew 'syncthing'
-brew 'syncthing-inotify'
 brew 'tmux'
 brew 'tree'
 brew 'vim'
 brew 'w3m'
 brew 'watch'
-brew 'weechat', args: ['with-aspell', 'with-python', 'with-perl']
-brew 'wget', args: ['with-libressl']
+brew 'weechat', args: ['with-aspell', 'with-python@2', 'with-perl']
+brew 'wget'
 brew 'youtube-dl'
 brew 'zsh'
 brew 'zsh-completions'
