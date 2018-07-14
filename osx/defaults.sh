@@ -717,6 +717,13 @@ defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool YES
 # Make the tab key actually be a tab key
 defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Never
 
+# Set the keybindings to my customizations (see $DOTFILES/xcode)
+# Stored in ~/Library/Developer/Xcode/UserData/KeyBindings
+defaults write com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet -string custom.idekeybindings
+
+# Set custom colorscheme
+defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string panic.xccolortheme
+
 
 #
 # Third Party
