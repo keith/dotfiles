@@ -121,3 +121,5 @@
   follow = true
 [grep]
   LineNumber = true
+[advice]
+  waitingForEditor = false
