@@ -14,6 +14,7 @@ keith/xcconfig.vim
 machakann/vim-highlightedyank
 majutsushi/tagbar
 neomake/neomake
+racer-rust/vim-racer
 rust-lang/rust.vim
 saltstack/salt-vim
 sjl/vitality.vim
