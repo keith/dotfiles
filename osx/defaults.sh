@@ -241,7 +241,8 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 # Power Settings
 #
 
-# To stop the display from half dimming before full display 'sleep' [docs](http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html)
+# To stop the display from half dimming before full display 'sleep'
+# http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html
 sudo pmset -a halfdim 0
 
 # Sleep options
@@ -266,15 +267,6 @@ sudo pmset -a lessbright 0
 
 # Disable sudden motion sensor
 sudo pmset -a sms 0
-
-# Disable Sleep image
-sudo pmset hibernatemode 0
-# Remove the sleep image file to save disk space
-sudo rm -f /private/var/vm/sleepimage
-# Create a zero-byte file instead
-sudo touch /private/var/vm/sleepimage
-# and make sure it can’t be rewritten
-sudo chflags uchg /private/var/vm/sleepimage
 
 # Disable startup sound
 sudo nvram SystemAudioVolume=" "
