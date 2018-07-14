@@ -348,12 +348,6 @@ function! s:SetColorColumn()
   endif
 endfunction
 
-function! s:CloseLastQuickfix()
-  if &buftype == "quickfix" && winnr('$') < 2
-    quit
-  endif
-endfunction
-
 " Window sizes
 augroup window_sizes
   autocmd!
@@ -389,9 +383,6 @@ augroup ft_settings
 
   " Return to the same position you left the file in
   autocmd BufRead * call s:PositionRecall()
-
-  " Close Vim if the last buffer is a quickfix window
-  autocmd BufEnter * call s:CloseLastQuickfix()
 
   autocmd CursorHold <buffer> checktime
 
