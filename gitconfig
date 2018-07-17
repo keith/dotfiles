@@ -123,3 +123,5 @@
   LineNumber = true
 [advice]
   waitingForEditor = false
+[pager]
+  branch = false
