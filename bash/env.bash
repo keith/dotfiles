@@ -35,9 +35,6 @@ export MAILDIR="$HOME/.mail"
 # Force gpg-agent to use the current tty
 export GPG_TTY=$(tty)
 
-# Set DOCKER_HOST for Lyft docker infra
-export DOCKER_HOST="tcp://127.0.0.1:2375"
-
 # Source something from all shells for private ENV vars
 if [[ -f "$HOME/.secrets" ]]; then
   source "$HOME/.secrets"
