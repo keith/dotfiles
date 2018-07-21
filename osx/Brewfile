@@ -1,6 +1,7 @@
 tap 'homebrew/bundle'
-tap 'homebrew/dupes'
+tap 'jhawthorn/fzy'
 tap 'keith/formulae'
+tap 'milend/taps'
 
 brew 'ag'
 brew 'chisel'
