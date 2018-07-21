@@ -33,7 +33,8 @@ stty -ixon -ixoff
 export MAILDIR="$HOME/.mail"
 
 # Force gpg-agent to use the current tty
-export GPG_TTY=$(tty)
+tty_path=$(tty)
+export GPG_TTY=$tty_path
 
 # Source something from all shells for private ENV vars
 if [[ -f "$HOME/.secrets" ]]; then
