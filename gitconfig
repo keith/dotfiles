@@ -95,7 +95,6 @@
 [gpg]
   program = gpg
 [commit]
-  gpgsign = true
   verbose = true
 [submodule]
   fetchJobs = 8
