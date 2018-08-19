@@ -34,7 +34,7 @@ fuzzy_git_files_widget() {
 fuzzy_git_status_widget() {
   trap "" INT
 
-  result="$(git status --short | cut -c4- | fzy)"
+  result="$(git status --porcelain | grep -v "^ D " | cut -c4- | fzy)"
   if [ -n "$result" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi
