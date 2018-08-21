@@ -16,6 +16,7 @@ deserializing
 dialogs
 downcasting
 erroring
+git
 GitHub
 Gmail
 HipChat
@@ -30,11 +31,13 @@ linters
 localizable
 Lyft
 macOS
+Migrator
 mockup
 nullability
 ObjC
 offline
 onboarding
+parseable
 performant
 PGP
 plugin
