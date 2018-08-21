@@ -66,6 +66,9 @@ endif
 set directory=$HOME/.tmp/vim/swap
 call s:EnsureDirectory(&directory)
 
+set viewdir=$HOME/.tmp/vim/view
+call s:EnsureDirectory(&viewdir)
+
 " On quit reset title
 let &titleold=getcwd()
 
