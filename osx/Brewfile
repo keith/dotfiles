@@ -17,6 +17,7 @@ brew 'ghb'
 brew 'ghu'
 brew 'gifiate'
 brew 'git', args: ['with-curl']
+brew 'git-relative-status'
 brew 'gnu-sed'
 brew 'gnu-tar'
 brew 'gnu-time', args: ['with-default-names']
