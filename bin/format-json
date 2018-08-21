@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+set -o pipefail
+set -u
+
+if [ $# -lt 1 ]; then
+  echo "Usage: format-json FILE.json"
+  exit 127
+fi
+
+for file in "$@"
+do
+  tmpdir=$(mktemp -d)
+  mv "$file" "$tmpdir/file.json"
+  python -m json.tool "$tmpdir/file.json" > "$file"
+done
