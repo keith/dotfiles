@@ -87,7 +87,6 @@ bindkey -M vicmd '^X' edit-command-line
 # https://unix.stackexchange.com/a/368576/30131
 bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^H' backward-delete-char
-bindkey -M viins '^W' backward-kill-word
 
 # You know.
 bindkey "^A" beginning-of-line
