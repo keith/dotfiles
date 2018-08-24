@@ -38,3 +38,4 @@ tpope/vim-rsi
 tpope/vim-scriptease
 tpope/vim-surround
 tpope/vim-unimpaired
+udalov/kotlin-vim
