@@ -31,7 +31,7 @@ linters
 localizable
 Lyft
 macOS
-Migrator
+migrator
 mockup
 nullability
 ObjC
