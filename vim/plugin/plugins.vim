@@ -259,3 +259,14 @@ augroup custom_projectionist
         \   call projectionist#append(getcwd(), s:llvm_projections) |
         \ endif
 augroup END
+
+let g:ale_linters = {
+      \ 'python': ['pyls'],
+      \ 'ruby': [],
+      \ 'rust': ['rls', 'cargo'],
+      \ 'sh': ['shellcheck'],
+      \ 'swift': ['swiftpm'],
+    \ }
+let g:ale_fixers = {'rust': ['rustfmt']}
+let g:ale_fix_on_save = 1
+let g:ale_open_list = 1
