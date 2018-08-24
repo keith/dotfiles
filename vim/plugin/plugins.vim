@@ -225,11 +225,29 @@ let s:lldb_projections = {
       \   "source/*.cpp": {"alternate": "include/lldb/{}.h"}
       \ }
 
-augroup lldb_projectionist
+let s:swift_projections = {
+      \   "include/swift/*.h": {"alternate": "lib/{}.cpp"},
+      \   "lib/*.cpp": {"alternate": "include/swift/{}.h"}
+      \ }
+
+let s:llvm_projections = {
+      \   "include/llvm/*.h": {"alternate": "lib/{}.cpp"},
+      \   "lib/*.cpp": {"alternate": "include/llvm/{}.h"}
+      \ }
+
+augroup custom_projectionist
   autocmd!
 
   autocmd User ProjectionistDetect
         \ if fnamemodify(getcwd(), ":t") == "lldb" |
         \   call projectionist#append(getcwd(), s:lldb_projections) |
+        \ endif
+  autocmd User ProjectionistDetect
+        \ if fnamemodify(getcwd(), ":t") == "swift" |
+        \   call projectionist#append(getcwd(), s:swift_projections) |
+        \ endif
+  autocmd User ProjectionistDetect
+        \ if fnamemodify(getcwd(), ":t") == "llvm" |
+        \   call projectionist#append(getcwd(), s:llvm_projections) |
         \ endif
 augroup END
