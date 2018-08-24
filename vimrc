@@ -391,6 +391,9 @@ augroup ft_settings
 
   " Create the binary spell file when opening vim
   autocmd VimEnter * execute 'silent mkspell! ' . &spellfile
+
+  " Close location list when closing the window it belongs to
+  autocmd QuitPre * nested if &filetype != 'qf' | silent! lclose | endif
 augroup END
 
 " ObjC curly brace error fix
