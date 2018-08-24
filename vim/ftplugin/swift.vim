@@ -36,3 +36,4 @@ endfunction
 
 nnoremap <leader>c :call CopyTestCommand()<CR>
 nnoremap <leader>t :Neomake swiftpmtest<CR>
+nnoremap <leader>f :TestNearest -strategy=neomake<CR>

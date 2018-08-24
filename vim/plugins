@@ -8,6 +8,7 @@ eagletmt/neco-ghc
 gfontenot/vim-xcode
 hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
+janko-m/vim-test
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
