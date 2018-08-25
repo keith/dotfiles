@@ -10,16 +10,13 @@ draw_bold_text_with_bright_colors: false
 custom_cursor_colors: true
 
 font:
-  size: 13.0
-
   normal:
-    family: "SF Mono"
+    family: SF Mono
     style: Regular
-
   bold:
-    family: "SF Mono"
+    family: SF Mono
     style: Regular
-
+  size: 13.0
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
   # for retina displays, but for non-retina you probably want this set to
   # false.
