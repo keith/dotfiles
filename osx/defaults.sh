@@ -660,9 +660,6 @@ defaults write com.apple.dt.Xcode DVTDownloadableAutomaticUpdate -bool true
 # Live issues
 defaults write com.apple.dt.Xcode IDEEnableLiveIssues -bool true
 
-# Continue building after errors
-defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool true
-
 # Setup page guide
 defaults write com.apple.dt.Xcode DVTTextShowPageGuide -bool true
 defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 110
