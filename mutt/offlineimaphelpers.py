@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import re
@@ -11,7 +11,7 @@ def get_env(var="EP"):
 
 
 def get_keychain_pass(account=None, server=None):
-    if not sys.platform == 'darwin':
+    if sys.platform != 'darwin':
         return get_env()
 
     home = os.environ.get('HOME')
@@ -65,8 +65,8 @@ def local_nametrans_fastmail(folder):
 
     if folder in inbox_emails:
         return "INBOX.%s" % folder
-    else:
-        return folder
+
+    return folder
 
 
 def remote_nametrans_fastmail(folder):

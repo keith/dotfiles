@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import json
 import subprocess
@@ -15,9 +15,10 @@ def main():
     json_output = json.loads(output)
     devices = json_output["devices"]
 
-    for key, value in devices.iteritems():
+    for value in devices.values():
         for device in value:
             delete_sim(device["udid"])
+
 
 if __name__ == "__main__":
     main()

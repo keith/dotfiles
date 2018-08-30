@@ -13,5 +13,5 @@ for file in "$@"
 do
   tmpdir=$(mktemp -d)
   mv "$file" "$tmpdir/file.json"
-  python -m json.tool "$tmpdir/file.json" > "$file"
+  python3 -m json.tool "$tmpdir/file.json" > "$file"
 done

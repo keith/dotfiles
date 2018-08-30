@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from __future__ import print_function
 import argparse
 import re
 import subprocess
@@ -41,13 +40,13 @@ def cleanup_arch_identifier(arch):
 
 
 def get_architectures(path):
-    output = subprocess.check_output(["file", path]).strip()
-    matches = map(lambda x: x[1], ARCH_REGEX.findall(output))
-    return map(cleanup_arch_identifier, matches)
+    output = subprocess.check_output(["file", path]).decode().strip()
+    matches = [x[1] for x in ARCH_REGEX.findall(output)]
+    return [cleanup_arch_identifier(x) for x in matches]
 
 
 def output_sizes(binary, arch):
-    output = subprocess.check_output(["otool", "-l", "-arch", arch, binary])
+    output = subprocess.check_output(["otool", "-l", "-arch", arch, binary]).decode()
 
     matches = []
     for match in SIZE_REGEX.finditer(output):

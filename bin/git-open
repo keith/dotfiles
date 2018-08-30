@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import os
@@ -19,9 +19,9 @@ def _convert_to_http(url):
 def _run_git_command(args):
     command = ["git"] + args
     devnull = open(os.devnull)
-    output = subprocess.check_output(command, stderr=devnull).strip()
+    output = subprocess.check_output(command, stderr=devnull)
     devnull.close()
-    return output
+    return output.decode().strip()
 
 
 def _get_remotes():
@@ -56,7 +56,7 @@ def _get_ref(ref):
 def main(args):
     remotes = _get_remotes()
     try:
-        url = (url for (name, url) in remotes if name == args.remote).next()
+        url = next(url for (name, url) in remotes if name == args.remote)
     except StopIteration:
         print("No remotes found for '{}'".format(args.remote))
         sys.exit(1)
@@ -82,6 +82,7 @@ def _get_parser():
     parser.add_argument("argument", nargs="?",
                         help="The argument to try and open")
     return parser
+
 
 if __name__ == "__main__":
     main(_get_parser().parse_args())

@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from __future__ import print_function
 import argparse
 import os
 import re
@@ -9,13 +8,14 @@ import sys
 
 REGEX = re.compile(r"^\s*cmd\s+LC_RPATH\n\s*cmdsize\s+\d+\n\s*path\s+(.*)\s+\(offset\s+\d+\)$", re.MULTILINE)
 
+
 def main(binary):
     if not os.path.exists(binary):
         print("No file at '{}'".format(binary), file=sys.stderr)
         sys.exit(1)
 
     try:
-        output = subprocess.check_output(["otool", "-l", binary])
+        output = subprocess.check_output(["otool", "-l", binary]).decode()
     except subprocess.CalledProcessError:
         sys.exit(1)
 

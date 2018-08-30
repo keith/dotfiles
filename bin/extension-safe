@@ -1,6 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from __future__ import print_function
 import subprocess
 import sys
 
@@ -10,12 +9,13 @@ EXTENSION_SAFE = 0x02000000
 
 
 def main(binary):
-    output = subprocess.check_output(["otool", "-h", binary])
+    output = subprocess.check_output(["otool", "-h", binary]).decode()
     flags = int(output.split(" ")[-1].strip(), 16)
     if flags & EXTENSION_SAFE == EXTENSION_SAFE:
         print("{}: is extension safe".format(binary))
     else:
         print("{}: is not extension safe".format(binary))
+
 
 if __name__ == "__main__":
     try:
