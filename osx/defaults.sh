@@ -681,7 +681,7 @@ defaults write com.apple.dt.Xcode AssistantEditorsLayout -int 1
 defaults write com.apple.dt.Xcode IDEEditorCoordinatorTarget_Click -string FocusedEditor
 
 # Use custom derived data location
-defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation -string build
+defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation -string build.noindex
 
 # Show build times in toolbar
 # http://cocoa.tumblr.com/post/131023038113/build-speed
