@@ -683,9 +683,6 @@ defaults write com.apple.dt.Xcode IDEEditorCoordinatorTarget_Click -string Focus
 # Use custom derived data location
 defaults write com.apple.dt.Xcode IDECustomDerivedDataLocation -string build
 
-# Disable source control
-defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_7_1 -bool false
-
 # Show build times in toolbar
 # http://cocoa.tumblr.com/post/131023038113/build-speed
 defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool true
