@@ -27,36 +27,37 @@ def _swift_statement_for_target(target):
 
 
 def _run_swift_command(debugger, result, target, path):
-    swift_command = ('{}.value(forKeyPath: "{}")'
-                     .format(_swift_statement_for_target(target), path))
+    swift_command = '{}.value(forKeyPath: "{}")'.format(
+        _swift_statement_for_target(target), path
+    )
 
-    debugger_command = 'po '
-    debugger_command += 'if let value = %s {' % swift_command
-    debugger_command += '    print(value)'
-    debugger_command += '} else {'
+    debugger_command = "po "
+    debugger_command += "if let value = %s {" % swift_command
+    debugger_command += "    print(value)"
+    debugger_command += "} else {"
     debugger_command += '    print("nil")'
-    debugger_command += '}'
+    debugger_command += "}"
 
     try:
         _run_command(debugger, debugger_command)
         result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
-    except KeypathException, e:
+    except KeypathException as e:
         result.AppendWarning(e.message)
         result.SetStatus(lldb.eReturnStatusFailed)
 
 
 def _run_objc_command(debugger, result, target, path):
     objc_command = '[(id){} valueForKeyPath:@"{}"]'.format(target, path)
-    debugger_command = 'po '
-    debugger_command += 'id value = {};'.format(objc_command)
+    debugger_command = "po "
+    debugger_command += "id value = {};".format(objc_command)
     debugger_command += 'printf("%s\\n",'
-    debugger_command += '[(NSString *)[value debugDescription]'
-    debugger_command += '                    UTF8String]);'
+    debugger_command += "[(NSString *)[value debugDescription]"
+    debugger_command += "                    UTF8String]);"
 
     try:
         _run_command(debugger, debugger_command)
         result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
-    except KeypathException, e:
+    except KeypathException as e:
         result.AppendWarning(e.message)
         result.SetStatus(lldb.eReturnStatusFailed)
 

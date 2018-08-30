@@ -50,8 +50,9 @@ def address_for_symbol(debugger, command, result, internal_dict):
     # TODO: Allow user to pass module for symbol
     symbol = command.strip()
     if "?" in symbol:
-        result.AppendWarning("Symbol must not have Swift syntax sugar '{}'"
-                             .format(symbol))
+        result.AppendWarning(
+            "Symbol must not have Swift syntax sugar '{}'".format(symbol)
+        )
         result.SetStatus(lldb.eReturnStatusFailed)
         return
 
@@ -88,4 +89,4 @@ def address_for_symbol(debugger, command, result, internal_dict):
 
 def __lldb_init_module(debugger, internal_dict):
     handle = debugger.HandleCommand
-    handle('command script add -f symbol_address.address_for_symbol afs')
+    handle("command script add -f symbol_address.address_for_symbol afs")

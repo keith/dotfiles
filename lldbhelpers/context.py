@@ -39,14 +39,20 @@ def objc_context(debugger, command, result, internal_dict):
 
     disassembly = frame.Disassemble().split("\n")
     index = index_of(disassembly, lambda x: x.startswith("-> "))
-    assert(index)
-    disassembly = "\n".join(disassembly[index - 1:index + 4]).strip()
+    assert index
+    disassembly = "\n".join(disassembly[index - 1 : index + 4]).strip()
 
     try:
         import pygments.lexers
         import pygments.formatters
-        print(pygments.highlight(disassembly, pygments.lexers.NasmLexer(),
-                                 pygments.formatters.TerminalFormatter()))
+
+        print(
+            pygments.highlight(
+                disassembly,
+                pygments.lexers.NasmLexer(),
+                pygments.formatters.TerminalFormatter(),
+            )
+        )
     except ImportError:
         print(disassembly)
 

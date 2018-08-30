@@ -9,7 +9,7 @@ def seq(debugger, commands, context, result, _):
     Run multiple separate lldb commands in order, and print the output
     """
     interpreter = debugger.GetCommandInterpreter()
-    for command in re.split(r'; *', commands):
+    for command in re.split(r"; *", commands):
         return_value = lldb.SBCommandReturnObject()
         interpreter.HandleCommand(command, context, return_value)
         print >> result, return_value
@@ -18,4 +18,4 @@ def seq(debugger, commands, context, result, _):
 
 
 def __lldb_init_module(debugger, _):
-    debugger.HandleCommand('command script add -f seq.seq seq')
+    debugger.HandleCommand("command script add -f seq.seq seq")

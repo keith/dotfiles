@@ -6,7 +6,10 @@ import re
 import subprocess
 import sys
 
-REGEX = re.compile(r"^\s*cmd\s+LC_RPATH\n\s*cmdsize\s+\d+\n\s*path\s+(.*)\s+\(offset\s+\d+\)$", re.MULTILINE)
+REGEX = re.compile(
+    r"^\s*cmd\s+LC_RPATH\n\s*cmdsize\s+\d+\n\s*path\s+(.*)\s+\(offset\s+\d+\)$",
+    re.MULTILINE,
+)
 
 
 def main(binary):

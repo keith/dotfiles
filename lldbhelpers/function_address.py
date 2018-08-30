@@ -40,25 +40,27 @@ def address_for_function(debugger, command, result, internal_dict):
     class_name = match.group(2)
     selector_name = match.group(4)
 
-    class_argument = "(id)NSClassFromString(@\"%s\")" % class_name
+    class_argument = '(id)NSClassFromString(@"%s")' % class_name
     selector_argument = "@selector(%s)" % selector_name
 
     get_method_function = "class_getInstanceMethod"
     if scope_identifier == "+":
         get_method_function = "class_getClassMethod"
 
-    get_method_command = get_command(get_method_function, class_argument,
-                                     selector_argument)
+    get_method_command = get_command(
+        get_method_function, class_argument, selector_argument
+    )
     method_address = address_for_command(debugger, get_method_command)
     if method_address == 0:
         print("'%s' doesn't exist" % signature)
         return
 
-    get_implementation_command = get_command("method_getImplementation",
-                                             method_address)
+    get_implementation_command = get_command(
+        "method_getImplementation", method_address
+    )
     print(hex(address_for_command(debugger, get_implementation_command)))
 
 
 def __lldb_init_module(debugger, internal_dict):
     handle = debugger.HandleCommand
-    handle('command script add -f function_address.address_for_function aff')
+    handle("command script add -f function_address.address_for_function aff")

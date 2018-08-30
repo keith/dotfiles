@@ -7,14 +7,15 @@ import sys
 
 
 ARCH_REGEX = re.compile(
-    r"\WMach-O\W.*(executable|dynamically linked shared library|object)" +
+    r"\WMach-O\W.*(executable|dynamically linked shared library|object)"
     r"\s+([\w\d]+)$",
-    re.MULTILINE
+    re.MULTILINE,
 )
 
 SIZE_REGEX = re.compile(
     r"\s+sectname\s+(.*)\n\s+segname\s+(.*)\n\s+addr\s+[a-zA-Z0-9]+"
-    r"\n\s+size\s+([a-zA-Z0-9]+)\n", re.MULTILINE
+    r"\n\s+size\s+([a-zA-Z0-9]+)\n",
+    re.MULTILINE,
 )
 
 
@@ -46,7 +47,9 @@ def get_architectures(path):
 
 
 def output_sizes(binary, arch):
-    output = subprocess.check_output(["otool", "-l", "-arch", arch, binary]).decode()
+    output = subprocess.check_output(
+        ["otool", "-l", "-arch", arch, binary]
+    ).decode()
 
     matches = []
     for match in SIZE_REGEX.finditer(output):
@@ -65,16 +68,26 @@ def output_sizes(binary, arch):
 def main(binary, arch):
     archs = get_architectures(binary)
     if len(archs) == 0:
-        print("'{}' does not appear to be a Mach-O executable"
-              .format(binary), file=sys.stderr)
+        print(
+            "'{}' does not appear to be a Mach-O executable".format(binary),
+            file=sys.stderr,
+        )
         sys.exit(1)
     elif arch is not None and arch not in archs:
-        print("'{}' doesn't have a '{}' slice. Valid architectures: {}"
-              .format(binary, arch, ", ".join(archs)), file=sys.stderr)
+        print(
+            "'{}' doesn't have a '{}' slice. Valid architectures: {}".format(
+                binary, arch, ", ".join(archs)
+            ),
+            file=sys.stderr,
+        )
         sys.exit(1)
     elif len(archs) > 1 and arch not in archs:
-        print("'{}' has multiple architectures ({}), use '--arch' to specify"
-              .format(binary, ", ".join(archs)), file=sys.stderr)
+        print(
+            "'{}' has multiple architectures ({}), use '--arch' to specify".format(
+                binary, ", ".join(archs)
+            ),
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     output_sizes(binary, arch or archs[0])
@@ -83,12 +96,12 @@ def main(binary, arch):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--arch", "-a",
-        help="The specific architecture to see the section size for"
+        "--arch",
+        "-a",
+        help="The specific architecture to see the section size for",
     )
     parser.add_argument(
-        "binary",
-        help="The binary to get the size breakdown for"
+        "binary", help="The binary to get the size breakdown for"
     )
 
     arguments = parser.parse_args()

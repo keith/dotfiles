@@ -77,10 +77,16 @@ def main(args):
 
 def _get_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--remote", default="origin", required=False,
-                        help="The name of the remote to open")
-    parser.add_argument("argument", nargs="?",
-                        help="The argument to try and open")
+    parser.add_argument(
+        "-r",
+        "--remote",
+        default="origin",
+        required=False,
+        help="The name of the remote to open",
+    )
+    parser.add_argument(
+        "argument", nargs="?", help="The argument to try and open"
+    )
     return parser
 
 
