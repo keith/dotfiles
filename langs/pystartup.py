@@ -2,11 +2,10 @@
 # interactive interpreter. Requires Python 2.0+, readline. Autocomplete is
 # bound to the Esc key by default (you can change it - see readline docs).
 #
-# Store the file in ~/.pystartup, and set an environment variable to point
-# to it:  "export PYTHONSTARTUP=/home/user/.pystartup" in bash.
+# Set an environment variable to point to it:  "export PYTHONSTARTUP=foo"
 #
-# Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the
-# full path to your home directory.
+# Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the full
+# path to your home directory.
 
 import atexit
 import os
@@ -15,16 +14,18 @@ import rlcompleter
 
 historyPath = os.path.expanduser("~/.pyhistory")
 
-def save_history(historyPath=historyPath):
+
+def save_history(path=historyPath):
     import readline
-    readline.write_history_file(historyPath)
+    readline.write_history_file(path)
+
 
 if os.path.exists(historyPath):
     readline.read_history_file(historyPath)
 
-readline.parse_and_bind('tab: complete')
-readline.parse_and_bind('\C-a: beginning-of-line')
-readline.parse_and_bind('\C-e: end-of-line')
+readline.parse_and_bind("tab: complete")
+readline.parse_and_bind(r"\C-a: beginning-of-line")
+readline.parse_and_bind(r"\C-e: end-of-line")
 atexit.register(save_history)
 del os, atexit, readline, rlcompleter, save_history, historyPath
 

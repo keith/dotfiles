@@ -1,4 +1,4 @@
-export PYTHONSTARTUP=$DOTFILES/langs/pystartup
+export PYTHONSTARTUP=$DOTFILES/langs/pystartup.py
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
