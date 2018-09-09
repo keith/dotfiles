@@ -37,7 +37,7 @@ fuzzy_git_status_widget() {
   result="$(git relative-status | fzy)"
 
   if [ -n "$result" ]; then
-    LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
+    LBUFFER="${LBUFFER}$result"
   fi
 
   zle redisplay
