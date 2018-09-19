@@ -722,6 +722,9 @@ defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string panic.xccol
 # https://twitter.com/dmartincy/status/1034930612543676418
 defaults write com.apple.dt.Xcode IDEIndexerActivityShowNumericProgress -bool true
 
+# Make command click jump to definition instead of showing the menu
+defaults write com.apple.dt.Xcode IDECommandClickNavigates -bool YES
+
 
 #
 # Third Party
