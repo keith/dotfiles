@@ -44,6 +44,7 @@ plugin
 plugins
 Podfile
 precompiled
+productionize
 rebase
 recurse
 refactor
