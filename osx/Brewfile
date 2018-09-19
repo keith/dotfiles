@@ -5,6 +5,7 @@ tap 'milend/taps'
 
 brew 'ag'
 brew 'chisel'
+brew 'colordiff'
 brew 'contacts-cli'
 brew 'coreutils'
 brew 'ctags'
