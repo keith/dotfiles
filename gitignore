@@ -1,6 +1,6 @@
 !.gitignore
-*.pyc
 !TAGS/
+*.pyc
 *.un~
 */.hg/*
 *~
@@ -10,7 +10,9 @@
 .DS_Store
 .hgignore
 .LSOverride
+.mypy_cache
 .netrwhist
+.pytest_cache
 .ropeproject
 .Spotlight-V100
 .tags
