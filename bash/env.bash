@@ -14,8 +14,7 @@ fi
 export PATH="$HOME/.bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 
 # Set my default editor to Vim :)
-vim=$(command -v vim)
-export EDITOR=$vim
+export EDITOR=vim
 
 # i - Vim's smart case
 # j.5 - Center search results
