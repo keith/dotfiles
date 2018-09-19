@@ -119,7 +119,8 @@
 [log]
   follow = true
 [grep]
-  LineNumber = true
+  column = true
+  lineNumber = true
 [advice]
   waitingForEditor = false
 [pager]
