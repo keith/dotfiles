@@ -108,6 +108,9 @@ defaults write com.apple.dock mouse-over-hilte-stack -bool true
 # Don't show recents
 defaults write com.apple.dock show-recents -bool false
 
+# Disable the Launchpad gesture (pinch with thumb and three fingers)
+defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
+
 
 #
 # Mission Control
