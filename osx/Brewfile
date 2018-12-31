@@ -34,6 +34,7 @@ brew 'htop'
 brew 'httpie'
 brew 'ideviceinstaller'
 brew 'jhawthorn/fzy/fzy'
+brew 'keith/formulae/tag'
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'keith/formulae/zap'
 brew 'less'
