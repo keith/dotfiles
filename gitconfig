@@ -75,6 +75,8 @@
   rc          = rebase --continue
   rma         = rebase master
   rmi         = rebase master -i
+  roma        = rebase origin/master
+  romi        = rebase origin/master -i
   rv          = remote -v
   s           = status -sb
   sub         = submodule update --init --recursive
