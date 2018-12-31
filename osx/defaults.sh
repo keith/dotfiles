@@ -244,9 +244,6 @@ sudo pmset -a lessbright 0
 # Disable sudden motion sensor
 sudo pmset -a sms 0
 
-# Disable startup sound
-sudo nvram SystemAudioVolume=" "
-
 # Enable the MacBook Air SuperDrive on any Mac
 sudo nvram boot-args="mbasd=1"
 
