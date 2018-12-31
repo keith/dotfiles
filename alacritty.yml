@@ -7,7 +7,6 @@ dpi:
 # Display tabs using this many cells (changes require restart)
 tabspaces: 4
 draw_bold_text_with_bright_colors: false
-custom_cursor_colors: true
 
 font:
   normal:
@@ -28,8 +27,8 @@ visual_bell:
 # Colors (Parsec)
 colors:
   cursor:
-    background: '0x8000FF'
-    foreground: '0x000000'
+    cursor: '0x8000FF'
+    text: '0x000000'
   # Default colors
   primary:
     background: '0x3B3B3B'
