@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
-# This is a script for bootstrapping OS X setup
+# This is a script for bootstrapping macOS setup
 
-set -e
+set -euo pipefail
 
-if [[ ! -e "../manage.sh" ]]; then
-  echo "Make sure you have the manage script nearby"
+if [[ ! -e ./manage.sh ]]; then
+  echo "This script must be run from the root of the dotfiles repo"
   exit 1
 fi
 
-cd "$(dirname "$0")"
-cd ..
 ./manage.sh install
 
 if [[ ! -e "$HOME/.bashrc" ]]; then
@@ -17,7 +15,7 @@ if [[ ! -e "$HOME/.bashrc" ]]; then
   exit 1
 fi
 
-if ! which brew &> /dev/null; then
+if ! command -v brew &> /dev/null; then
   echo "You need to install homebrew"
   exit 1
 fi
@@ -25,6 +23,12 @@ fi
 open "$DOTFILES/osx/parsec.terminal"
 "$DOTFILES/osx/defaults.sh"
 
-brew tap Homebrew/bundle
-brew bundle --file="$DOTFILES/osx/Brewfile"
-brew bundle --file="$DOTFILES/osx/Brewfile.cask"
+# Add Terminal.app theme
+open ./osx/parsec.terminal
+
+# Install some default software
+brew bundle --file="./osx/Brewfile"
+brew bundle --file="./osx/Brewfile.cask"
+
+# Set many default settings
+./osx/defaults.sh
