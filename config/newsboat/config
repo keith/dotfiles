@@ -3,7 +3,7 @@ reload-time 30
 notify-beep yes
 reload-threads 20
 
-error-log "~/.newsboat/error.log"
+error-log "~/.newsboat-error.log"
 
 # Hide read stuff
 show-read-feeds no
