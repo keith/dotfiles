@@ -5,7 +5,6 @@ set -e
 qldirectory=~/Library/QuickLook
 
 PLUGINS=( \
-  whomwah/qlstephen \
   keith/PlaygroundQuickLook \
 )
 
