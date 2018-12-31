@@ -34,9 +34,6 @@ defaults write com.apple.loginwindow LoginwindowLaunchesRelaunchApps -bool false
 # Disable reopen on restart
 defaults write NSGlobalDomain ApplePersistence -bool false
 
-# Disabling App Nap
-#defaults write NSGlobalDomain NSAppSleepDisabled -bool YES
-
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
