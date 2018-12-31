@@ -312,9 +312,12 @@ defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 # Sound
 #
 
-# Change the error sound
-defaults write com.apple.systemsound com.apple.sound.beep.sound -string "/System/Library/Sounds/Morse.aiff"
+# Disable the system alert sound
+defaults write NSGlobalDomain com.apple.sound.beep.volume -int 0
+defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -int 0
 
+# Enable volume change feedback
+defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool true
 
 #
 # Date/Time
