@@ -105,6 +105,9 @@ defaults write com.apple.dock showhidden -bool true
 # Dock tweaks
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
+# Don't show recents
+defaults write com.apple.dock show-recents -bool false
+
 
 #
 # Mission Control
