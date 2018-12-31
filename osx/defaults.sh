@@ -149,21 +149,6 @@ else
     echo "Failed to setup hot corners, script missing"
 fi
 
-#
-# Spotlight
-#
-
-# Disable Spotlight
-# sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-# sudo mdutil -a -i off
-
-# Hide Spotlight Icon
-# sudo mv /System/Library/CoreServices/Search.bundle /System/Library/CoreServices/Search.bundle.bak
-
-# Show Spotlight Icon
-#sudo mv /System/Library/CoreServices/Search.bundle.bak /System/Library/CoreServices/Search.bundle
-#killall SystemUIServer
-
 
 #
 # Terminal
