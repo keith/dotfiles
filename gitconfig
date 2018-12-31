@@ -129,3 +129,5 @@
   branch = false
 [branch "master"]
   pushRemote = NOPE
+[pull]
+  rebase = true
