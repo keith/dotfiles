@@ -54,6 +54,18 @@ fuzzy_history_widget() {
   zle redisplay
 }
 
+fuzzy_log_widget() {
+  trap "" INT
+
+  result="$(git log --format="%h %s" | fzy)"
+  if [[ -n "$result" ]]; then
+    LBUFFER="${LBUFFER}$(echo "$result" | cut -d " " -f 1)"
+  fi
+
+  zle redisplay
+  trap INT
+}
+
 zle     -N   fuzzy_git_status_widget
 bindkey '^F' fuzzy_git_status_widget
 
@@ -65,3 +77,6 @@ bindkey '^G' fuzzy_git_files_widget
 
 zle     -N   fuzzy_history_widget
 bindkey '^U' fuzzy_history_widget
+
+zle     -N   fuzzy_log_widget
+bindkey '^N' fuzzy_log_widget
