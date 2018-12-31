@@ -1,4 +1,5 @@
 cask '1password'
+cask 'alacritty'
 cask 'blockblock'
 cask 'brisk'
 cask 'clipmenu'

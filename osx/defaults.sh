@@ -133,7 +133,7 @@ if command -v dockutil; then
   dockutil --add "/Applications/Tweetbot.app"
   dockutil --add "/Applications/Messages.app"
   dockutil --add "/Applications/Xcode.app"
-  dockutil --add "/Applications/Utilities/Terminal.app"
+  dockutil --add "/Applications/Alacritty.app"
 
   dockutil --add "/Applications" --view list --display folder --sort name
   dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
