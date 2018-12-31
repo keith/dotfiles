@@ -20,8 +20,16 @@ if ! command -v brew &> /dev/null; then
   exit 1
 fi
 
-open "$DOTFILES/osx/parsec.terminal"
-"$DOTFILES/osx/defaults.sh"
+# Set correct netrc permissions
+touch "$HOME/.netrc"
+chmod 0600 "$HOME/.netrc"
+
+# Correct gnupg permissions after linking, this must be done before a private
+# key is added otherwise it will bork the key setup
+# https://superuser.com/a/954536
+chown -R "$(whoami)" ~/.gnupg/
+chmod 600 ~/.gnupg/*
+chmod 700 ~/.gnupg
 
 # Add Terminal.app theme
 open ./osx/parsec.terminal
