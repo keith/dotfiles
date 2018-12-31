@@ -573,7 +573,10 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write com.apple.screencapture location -string "$HOME/Desktop"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
-defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture type -string png
+
+# Don't show iOS like thumbnail
+defaults write com.apple.screencapture show-thumbnail -string -bool false
 
 # Finally disable opening random Apple photo applications when plugging in devices
 # https://twitter.com/stroughtonsmith/status/651854070496534528
