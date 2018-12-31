@@ -129,7 +129,7 @@ defaults write com.apple.dock mru-spaces -bool false
 if command -v dockutil; then
   dockutil --remove all
 
-  dockutil --add "/Applications/Firefox.app"
+  dockutil --add "/Applications/Google Chrome.app"
   dockutil --add "/Applications/Tweetbot.app"
   dockutil --add "/Applications/Messages.app"
   dockutil --add "/Applications/Xcode.app"
