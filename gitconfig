@@ -127,3 +127,5 @@
   waitingForEditor = false
 [pager]
   branch = false
+[branch "master"]
+  pushRemote = NOPE
