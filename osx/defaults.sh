@@ -206,8 +206,12 @@ defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add 
 # Displays
 #
 
-# Show displays in menu bar
-defaults write com.apple.airplay showInMenuBarIfPresent -bool false
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu"
 
 # Enable HiDPI display modes (requires restart)
 sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
