@@ -1,5 +1,5 @@
 if [[ ! -d "$HOME/.cargo" ]]; then
-  exit 0
+  return
 fi
 
 source "$HOME/.cargo/env"
