@@ -709,6 +709,7 @@ defaults write com.apple.dt.Xcode IDEKeyBindingCurrentPreferenceSet -string cust
 
 # Set custom colorscheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string panic.xccolortheme
+defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string panic.xccolortheme
 
 # Show indexing progress
 # https://twitter.com/dmartincy/status/1034930612543676418
