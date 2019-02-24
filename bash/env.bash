@@ -24,6 +24,7 @@ export EDITOR=vim
 # X - Don't send clear screen signal
 export LESS="ij.5KMRX"
 export PAGER="less"
+export RIPGREP_CONFIG_PATH="$HOME/.config/rgrc.conf"
 
 # Disable ^-S in the terminal
 stty -ixon -ixoff
