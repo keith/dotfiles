@@ -2,7 +2,6 @@
 
 files=(\
   agignore \
-  alacritty.yml \
   bash_profile \
   bashrc \
   bin \
