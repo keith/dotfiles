@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ "$#" -ne 1 ]]; then
+  echo "Usage $0 IPA_PATH"
+  exit 1
+fi
+
+tmpdir="$(mktemp -d)"
+cp "$1" "$tmpdir"
+pushd "$tmpdir" > /dev/null
+echo "Unzipping in $PWD"
+unzip -q ./*.ipa
+
+app="$(find . -name "*.app" | head -1)"
+identifier="$(defaults read "$PWD/$app/Info.plist" CFBundleIdentifier)"
+xcrun simctl install booted "$app"
+exec xcrun simctl launch --console-pty booted "$identifier"
