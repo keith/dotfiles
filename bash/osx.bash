@@ -16,6 +16,8 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_EMOJI=1
 # Stop homebrew from auto-updating
 export HOMEBREW_NO_AUTO_UPDATE=1
+# Stop homebrew from running cleanup automatically
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 # Open with finder
 alias o="open"
