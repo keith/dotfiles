@@ -7,6 +7,7 @@
 .*.s[a-w][a-z]
 ._*
 .AppleDouble
+.black
 .DS_Store
 .hgignore
 .LSOverride

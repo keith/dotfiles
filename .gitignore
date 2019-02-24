@@ -12,6 +12,7 @@ Icon
 Session.vim
 vim/*.spl
 vim/bundle/*
+vim/black
 
 config/asciinema/config
 config/gtk-2.0
