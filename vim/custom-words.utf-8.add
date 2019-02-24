@@ -3,6 +3,7 @@ API
 APIs
 app
 architecting
+bazel
 casted
 Clojure
 CocoaPods
@@ -10,6 +11,7 @@ codebase
 codebases
 crossposting
 CSS
+debuggability
 demangle
 deserialized
 deserializing
@@ -50,10 +52,12 @@ rebasing
 recurse
 refactor
 refactors
+rollout
 rpath
 screenshot
 SDK
 SDKs
+snuck
 subclassing
 submodule
 submodules
