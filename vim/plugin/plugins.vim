@@ -276,3 +276,5 @@ let g:black_linelength = 79
 if filereadable('.black')
   autocmd BufWritePre *.py execute ':silent Black'
 endif
+
+let g:tmux_navigator_disable_when_zoomed = 1
