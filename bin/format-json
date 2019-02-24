@@ -1,8 +1,6 @@
 #!/bin/bash
 
-set -e
-set -o pipefail
-set -u
+set -euo pipefail
 
 if [ $# -lt 1 ]; then
   echo "Usage: format-json FILE.json"
@@ -12,6 +10,6 @@ fi
 for file in "$@"
 do
   tmpdir=$(mktemp -d)
-  mv "$file" "$tmpdir/file.json"
+  cp "$file" "$tmpdir/file.json"
   python3 -m json.tool "$tmpdir/file.json" > "$file"
 done
