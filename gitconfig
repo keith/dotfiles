@@ -89,6 +89,7 @@
   autosetupmerge = true
 [rerere]
   enabled = true
+  autoupdate = true
 [rebase]
   autosquash = true
   autostash = true
