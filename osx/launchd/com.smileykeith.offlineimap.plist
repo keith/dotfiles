@@ -2,17 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key>
-  <string>com.smileykeith.offlineimap.plist</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>/Users/ksmiley/.bin/offlineimap</string>
-    <string>-u</string>
-    <string>quiet</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StartInterval</key>
-  <integer>200</integer>
+	<key>Label</key>
+	<string>com.smileykeith.offlineimap.plist</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/ksmiley/.bin/offlineimap</string>
+		<string>-u</string>
+		<string>quiet</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>StartInterval</key>
+	<integer>300</integer>
 </dict>
 </plist>
