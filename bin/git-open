@@ -70,7 +70,7 @@ def main(args):
     elif _get_remote(args.argument):
         url = _get_remote(args.argument)
     else:
-        url = "{}/{}".format(url, args.argument)
+        url = os.path.join(url, args.argument)
 
     webbrowser.open_new_tab(url)
 
