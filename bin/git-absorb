@@ -1,0 +1,113 @@
+#!/usr/bin/env python3
+
+from typing import List, Dict, Tuple
+import os
+import subprocess
+import sys
+
+
+class _MultipleCommits(Exception):
+    def __init__(self, filepath: str):
+        super(_MultipleCommits, self).__init__(filepath)
+        self.filepath = filepath.decode("utf-8")
+
+
+class _GitError(Exception):
+    pass
+
+
+def _run_git_command(args: List[str]) -> str:
+    try:
+        return subprocess.check_output(["git"] + args).strip()
+    except subprocess.CalledProcessError:
+        raise _GitError()
+
+
+def _is_in_repo() -> bool:
+    try:
+        _run_git_command(["rev-parse", "--show-toplevel"])
+        return True
+    except _GitError:
+        return False
+
+
+def _get_staged_files() -> List[str]:
+    return _run_git_command(["diff", "--cached", "--name-only"]).splitlines()
+
+
+def _get_modified_files() -> List[str]:
+    return _run_git_command(["diff", "--name-only"]).splitlines()
+
+
+def _get_possible_shas() -> List[str]:
+    return _run_git_command(
+        ["log", "--pretty=%H", "@{upstream}...HEAD"]
+    ).splitlines()
+
+
+def _get_changed_files() -> Tuple[List[str], bool]:
+    staged_files = _get_staged_files()
+    if staged_files:
+        return (staged_files, False)
+
+    modified_files = _get_modified_files()
+    if modified_files:
+        return (modified_files, True)
+
+    return ([], False)
+
+
+def _files_for_sha(sha: str) -> List[str]:
+    return _run_git_command(
+        ["show", "--name-only", "--pretty=", sha]
+    ).splitlines()
+
+
+def _shas_by_file(shas: List[str]) -> Dict[str, str]:
+    shas_by_file: Dict[str, str] = {}
+    for sha in shas:
+        for filepath in _files_for_sha(sha):
+            if filepath in shas_by_file:
+                raise _MultipleCommits(filepath)
+            shas_by_file[filepath] = sha
+
+    return shas_by_file
+
+
+def _main():
+    if not _is_in_repo():
+        sys.exit("error: not in git repo")
+
+    possible_shas = _get_possible_shas()
+    if not possible_shas:
+        sys.exit("error: no commits ahead of upstream")
+
+    changed_files, stage_first = _get_changed_files()
+    if not changed_files:
+        sys.exit("error: no changed files")
+
+    try:
+        shas_by_file = _shas_by_file(possible_shas)
+    except _MultipleCommits as e:
+        sys.exit("error: multiple commits edit '{}'".format(e.filepath))
+
+    matching_shas = set(shas_by_file[filepath] for filepath in changed_files)
+    if not matching_shas:
+        sys.exit(
+            "error: sha commits changed: {}".format(", ".join(changed_files))
+        )
+    elif len(matching_shas) > 1:
+        sys.exit("error: files where changed in multiple recent commits")
+
+    if stage_first:
+        _run_git_command(["add"] + changed_files)
+
+    code = os.system("git commit")
+    if code != 0:
+        sys.exit("Not updating PR without a commit")
+
+    _run_git_command(["updatepr", matching_shas.pop()])
+
+
+if __name__ == "__main__":
+    _main()
