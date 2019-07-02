@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-source_path=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library
+set -euo pipefail
+
+source_path=$(xcode-select -p)/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library
 
 accessibility_path() {
   echo "$source_path/AccessibilityBundles/$1.axbundle/$1"
 }
-
 framework_path() {
   for path in Frameworks PrivateFrameworks
   do
@@ -15,11 +16,6 @@ framework_path() {
       break
     fi
   done
-}
-
-inspect() {
-  echo "Opening '$1'"
-  hopper -e "$1"
 }
 
 usage() {
@@ -51,4 +47,5 @@ elif [ ! -f "$path" ]; then
   exit 1
 fi
 
-inspect "$path"
+echo "$path"
+hopperv4 -e "$path"
