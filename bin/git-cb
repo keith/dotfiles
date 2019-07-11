@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -euo pipefail
+
+branch_name="$1"
+remote="${2:-origin}"
+if current_upstream=$(git rev-parse "@{upstream}" 2>/dev/null); then
+  git branch --no-track "$branch_name" "$current_upstream"
+else
+  git branch "$branch_name"
+fi
+
+git checkout --quiet "$branch_name"
+# These 2 commands are separated because setting upstream while pushing prints
+# when the branch's upstream is successfully set
+git push --quiet "$remote" "$branch_name" 2>/dev/null && \
+  git branch --quiet -u "$remote/$branch_name" "$branch_name" &
