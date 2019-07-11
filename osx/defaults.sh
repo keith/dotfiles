@@ -252,7 +252,7 @@ sudo pmset -a sms 0
 sudo nvram boot-args="mbasd=1"
 
 # Power button behavior
-defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool NO
+defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
 
 
 #
@@ -698,7 +698,7 @@ defaults write com.apple.dt.Xcode EnableBuildSystemLogging -bool true
 defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil"
 
 # Enable extra logging for XCBuild
-defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool YES
+defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool true
 
 # Make the tab key actually be a tab key
 defaults write com.apple.dt.Xcode DVTTextTabKeyIndentBehavior -string Never
@@ -716,7 +716,13 @@ defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string panic.x
 defaults write com.apple.dt.Xcode IDEIndexerActivityShowNumericProgress -bool true
 
 # Make command click jump to definition instead of showing the menu
-defaults write com.apple.dt.Xcode IDECommandClickNavigates -bool YES
+defaults write com.apple.dt.Xcode IDECommandClickNavigates -bool true
+
+# https://gist.github.com/tkersey/6b6c1d91415c785a10560ae564288a65
+defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
+
+# Hide the Xcode 11 minimap
+defaults write com.apple.dt.Xcode DVTTextShowMinimap -bool false
 
 
 #
