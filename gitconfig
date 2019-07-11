@@ -110,6 +110,8 @@
   textconv = security cms -D -i
 [diff "exif"]
   textconv = exiftool
+[diff "zip"]
+  textconv = unzip -c -a
 [difftool "ksdiff"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "ksdiff"]
