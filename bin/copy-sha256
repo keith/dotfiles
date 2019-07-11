@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -euo pipefail
+
+url="$1"
+tempdir=$(mktemp -d)
+output="$tempdir/download"
+
+if ! curl --location --fail --silent --output "$output" "$url"; then
+  echo "error: failed to download $url" >&2
+  exit 1
+fi
+
+sha="$(shasum -a 256 "$output" | cut -d " " -f1 | xargs)"
+echo -n "$sha" | pbcopy
