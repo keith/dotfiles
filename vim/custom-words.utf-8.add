@@ -3,6 +3,7 @@ API
 APIs
 app
 architecting
+automatable
 bazel
 casted
 Clojure
@@ -31,6 +32,7 @@ JSON
 linter
 linters
 localizable
+lowercased
 Lyft
 macOS
 migrator
@@ -62,6 +64,9 @@ subclassing
 submodule
 submodules
 SwiftPM
+symbolicate
+symbolicated
+symbolicating
 toolchain
 unhandled
 unstaged
