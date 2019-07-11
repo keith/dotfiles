@@ -370,6 +370,8 @@ augroup ft_settings
 
   " Treat .ipas as .zip files
   autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.apk call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.aar call zip#Browse(expand("<amatch>"))
 
   " Save files on some focus lost events, like switching splits
   autocmd BufLeave,FocusLost * silent! wall
