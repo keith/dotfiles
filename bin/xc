@@ -1,24 +1,27 @@
-#!/bin/sh
+#!/bin/bash
+
+set -euo pipefail
 
 # This is only complicated because of http://www.openradar.me/35308287
 # Otherwise we could just call `open -a Xcode .`
 
-# shellcheck disable=2009
 # Can't use pgrep here since Xcode is the parent of tons of processes
-xcodes="$(ps -axo comm= | grep "Xcode$")"
+xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode=="))
 
-if [ -z "$xcodes" ]; then
-  xcode="$(xcode-select -p)"
-  exec open -a "$(dirname "$(dirname "$xcode")")" .
-fi
+open_project() {
+  PATH=/usr/bin:/bin open -a "$1" .
+}
 
-count="$(echo "$xcodes" | wc -l | xargs)"
-case "$count" in
+case "${#xcodes[@]}" in
+  0)
+    xcode="$(xcode-select -p | sed "s=/Contents/Developer==")"
+    open_project "$xcode"
+    ;;
   1)
-    PATH=/usr/bin:/bin open -a "$(dirname "$(dirname "$(dirname "$xcodes")")")" .
+    open_project "${xcodes[0]}"
     ;;
   *)
-    echo "You have $count Xcodes running, good luck with that"
-    exit 1
+    xcode=$(printf '%s\n' "${xcodes[@]}" | fzy)
+    open_project "$xcode"
     ;;
 esac
