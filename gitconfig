@@ -121,7 +121,7 @@
 [sendemail]
   smtpEncryption = tls
   smtpServer = /usr/local/bin/msmtp
-  smtpServerOption = -afastmail
+  smtpServerOption = -agmail
 [log]
   follow = true
 [grep]
