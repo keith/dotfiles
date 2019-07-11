@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ -n "${DEV:-}" ]]; then
+  exec "$DOTFILES/../bazel/bazel-bin/src/bazel" "$@"
+fi
+
+if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
+  if command -v bazelisk > /dev/null; then
+    exec bazelisk "$@"
+  else
+    echo "error: no bazelisk found"
+    exit 1
+  fi
+fi
+
+if [[ -e ./bazelw ]]; then
+  exec ./bazelw "$@"
+fi
+
+if command -v bazelisk > /dev/null; then
+  exec bazelisk "$@"
+fi
+
+if command -v bazel > /dev/null; then
+  exec bazel "$@"
+fi
+
+echo "error: no bazel found"
+exit 1
