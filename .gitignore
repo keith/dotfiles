@@ -15,11 +15,13 @@ vim/bundle/*
 vim/black
 
 config/asciinema/config
+config/configstore
 config/gtk-2.0
 config/htop/htoprc
 config/hub
 config/radare2/history
 config/rtv
+config/yarn
 
 !mutt/temp/.gitkeep
 mutt/cache
