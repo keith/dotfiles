@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [[ -n "${DEV:-}" ]]; then
-  exec "$DOTFILES/../bazel/bazel-bin/src/bazel" "$@"
+  exec "$DOTFILES/../bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
