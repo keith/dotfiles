@@ -9,7 +9,7 @@ import sys
 class _MultipleCommits(Exception):
     def __init__(self, filepath: str):
         super(_MultipleCommits, self).__init__(filepath)
-        self.filepath = filepath.decode("utf-8")
+        self.filepath = filepath
 
 
 class _GitError(Exception):
@@ -18,7 +18,8 @@ class _GitError(Exception):
 
 def _run_git_command(args: List[str]) -> str:
     try:
-        return subprocess.check_output(["git"] + args).strip()
+        output: bytes = subprocess.check_output(["git"] + args)
+        return output.strip().decode("utf-8")
     except subprocess.CalledProcessError:
         raise _GitError()
 
@@ -77,7 +78,7 @@ def _shas_by_file(shas: List[str], changed_files: List[str]) -> Dict[str, str]:
     return shas_by_file
 
 
-def _main():
+def _main() -> None:
     if not _is_in_repo():
         sys.exit("error: not in git repo")
 
@@ -101,7 +102,7 @@ def _main():
     )
     if not matching_shas:
         sys.exit(
-            "error: sha commits changed: {}".format(", ".join(changed_files))
+            "error: no commits changed: {}".format(", ".join(changed_files))
         )
     elif len(matching_shas) > 1:
         sys.exit("error: files where changed in multiple recent commits")
