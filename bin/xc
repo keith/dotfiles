@@ -6,7 +6,7 @@ set -euo pipefail
 # Otherwise we could just call `open -a Xcode .`
 
 # Can't use pgrep here since Xcode is the parent of tons of processes
-xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode=="))
+xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode==" || true))
 
 open_project() {
   PATH=/usr/bin:/bin open -a "$1" .
