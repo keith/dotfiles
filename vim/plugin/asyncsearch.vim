@@ -37,10 +37,12 @@ endfunction
 
 nnoremap <silent> s :set operatorfunc=<SID>GrepMotion<CR>g@
 function! s:GrepMotion(...) abort
+  call highlightedyank#off()
   let save = @@
   silent execute "normal! `[v`]y"
   call s:Grep(s:Escape(@@))
   let @@ = save
+  call highlightedyank#on()
 endfunction
 
 vnoremap <silent> s :<C-U>call <SID>GrepVisual()<CR>
