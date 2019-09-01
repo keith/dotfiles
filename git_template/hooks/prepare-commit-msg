@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# A git hook to error if the repo requires DCO sign-off but it's not provided
+#
+
+set -euo pipefail
+
+if ! git config --local custom.requiresdco > /dev/null; then
+  exit 0
+fi
+
+if ! grep -qs "^Signed-off-by:" "$1"; then
+  echo "Make sure to signoff"
+  exit 1
+fi
