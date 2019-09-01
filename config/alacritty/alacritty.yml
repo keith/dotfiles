@@ -8,6 +8,9 @@ dpi:
 tabspaces: 4
 draw_bold_text_with_bright_colors: false
 
+window:
+  startup_mode: Maximized
+
 font:
   normal:
     family: SF Mono
