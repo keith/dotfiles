@@ -12,7 +12,7 @@ alias g="git"
 alias G="git"
 
 # Vim
-alias v="vim"
+alias v="nvim"
 
 # Archives
 alias mktar="tar -pvczf"

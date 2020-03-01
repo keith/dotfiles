@@ -4,7 +4,7 @@
 [core]
   excludesfile = ~/.gitignore
   attributesfile = ~/.gitattributes
-  editor = vim
+  editor = nvim
   whitespace = trailing-space,space-before-tab
   pager = pager
 [init]
@@ -12,7 +12,7 @@
 [push]
   default = upstream
 [diff]
-  tool = vimdiff
+  tool = nvim -d
   renames = copies
   mnemonicprefix = true
   algorithm = patience
@@ -22,14 +22,14 @@
   prompt = false
 [difftool "idiff"]
   cmd = "diff -Nuri -U3 --minimal \"$LOCAL\" \"$REMOTE\" | sed 's/^-/\\x1b[1;31m-/;s/^+/\\x1b[1;32m+/;s/^@/\\x1b[1;34m@/;s/$/\\x1b[0m/' | diff-highlight"
-[mergetool "vim"]
-  cmd = vim -c "normal\\ gg]c" -f \"$MERGED\"
+[mergetool "nvim"]
+  cmd = nvim -c "normal\\ gg]c" -f \"$MERGED\"
   prompt = false
 [mergetool]
   keepBackup = false
   trustExitCode = true
 [merge]
-  tool = vim
+  tool = nvim
   log = true
   stat = true
 [github]

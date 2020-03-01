@@ -13,8 +13,7 @@ fi
 #  - /sbin
 export PATH="$HOME/.bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 
-# Set my default editor to Vim :)
-export EDITOR=vim
+export EDITOR=nvim
 
 # i - Vim's smart case
 # j.5 - Center search results
