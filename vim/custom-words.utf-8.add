@@ -5,6 +5,8 @@ app
 architecting
 automatable
 bazel
+broadcasted
+cacheable
 casted
 Clojure
 CocoaPods
@@ -22,9 +24,11 @@ erroring
 git
 GitHub
 Gmail
+hermeticity
 HipChat
 HTTPS
 iCloud
+impactful
 inbox
 iOS
 JIRA
@@ -35,11 +39,13 @@ localizable
 lowercased
 Lyft
 macOS
+mergeable
 migrator
 mockup
 nullability
 ObjC
 offline
+Onboarded
 onboarding
 parseable
 performant
@@ -49,6 +55,7 @@ plugins
 Podfile
 precompiled
 productionize
+productionized
 rebase
 rebasing
 recurse
@@ -59,6 +66,7 @@ rpath
 screenshot
 SDK
 SDKs
+siloed
 snuck
 subclassing
 submodule
@@ -71,6 +79,7 @@ toolchain
 unhandled
 unstaged
 unstyled
+Upstreamed
 URLs
 vendored
 Vimscript
