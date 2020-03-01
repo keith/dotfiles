@@ -130,13 +130,10 @@ if command -v dockutil; then
   dockutil --remove all
 
   dockutil --add "/Applications/Google Chrome.app"
-  dockutil --add "/Applications/Tweetbot.app"
   dockutil --add "/Applications/Messages.app"
-  dockutil --add "/Applications/Xcode.app"
   dockutil --add "/Applications/Alacritty.app"
 
   dockutil --add "/Applications" --view list --display folder --sort name
-  dockutil --add "$HOME/Dropbox" --view grid --display folder --sort name
   dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
 else
   echo "dockutil not installed, re-run after installing"
