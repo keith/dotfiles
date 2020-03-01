@@ -18,6 +18,10 @@ function alternate(URL) {
   }
 }
 
+function commits(oldURL) {
+  window.location.href = oldURL + "/commits/master";
+}
+
 String.prototype.replaceLast = function(character) {
   return this.substr(0, this.length - 1) + character;
 };
@@ -25,14 +29,24 @@ String.prototype.replaceLast = function(character) {
 $(document).keypress(function(e) {
   // Exit early if we're in an input field
   // This wasn't needed in Chrome but is in Safari
-  if (document.activeElement.nodeName === "INPUT") {
+  if (document.activeElement.nodeName === "INPUT" || document.activeElement.nodeName === "TEXTAREA") {
     return;
   }
 
-  // The letter 'a'
-  var aPressed = (e.which == 97 ? true : false);
-  if (aPressed) {
-    alternate(window.location.href);
+  // If you're in a file editing box it's not technically an input field.
+  if (document.activeElement.isContentEditable) {
+    return;
+  }
+
+  switch (e.which) {
+    case 97: // 'a'
+      alternate(window.location.href);
+      break;
+    case 99: // 'c'
+      commits(window.location.href);
+      break;
+    default:
+      break;
   }
 });
 
