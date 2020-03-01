@@ -12,4 +12,5 @@ if ! curl --location --fail --silent --output "$output" "$url"; then
 fi
 
 sha="$(shasum -a 256 "$output" | cut -d " " -f1 | xargs)"
+echo "Copying: $sha"
 echo -n "$sha" | pbcopy
