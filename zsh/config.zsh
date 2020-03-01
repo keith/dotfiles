@@ -95,6 +95,13 @@ bindkey "^E" end-of-line
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
 
+export HELPDIR=/usr/share/zsh/$ZSH_VERSION/help/
+# There is a default alias that overrides this function unless it's removed
+unalias run-help
+autoload -Uz run-help
+autoload -Uz run-help-git
+bindkey '^o' run-help
+
 # Page up and down since I accidentally hit those sometimes
 bindkey '^[[5~' up-line-or-history
 bindkey '^[[6~' down-line-or-history
