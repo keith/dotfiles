@@ -132,3 +132,5 @@
   pushRemote = NOPE
 [pull]
   rebase = true
+[http]
+  cookiefile = ~/.gitcookies
