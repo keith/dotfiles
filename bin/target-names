@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'xcodeproj'
+
+project = Xcodeproj::Project.open(ARGV[0])
+puts project.targets.map(&:name).sort_by(&:downcase)

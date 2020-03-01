@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'xcodeproj'
+
+project = Xcodeproj::Project.open(ARGV[0])
+puts project.targets.count
