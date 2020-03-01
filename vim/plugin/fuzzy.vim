@@ -33,23 +33,31 @@ function! s:EscapeFilePath(path)
   return substitute(a:path, ' ', '\\ ', 'g')
 endfunction
 
-function! FuzzyFindCommand(vimCommand)
-  update
+function! FuzzyFindCommand(vimCommand) abort
+  let l:callback = {
+        \ 'filename': tempname(),
+        \ 'vimCommand':  a:vimCommand,
+        \ 'window_id': win_getid(),
+      \ }
 
-  try
-    let selection = system(s:SearchCommand() . " | fzy")
-  catch /Vim:Interrupt/
-    redraw!
-    return
-  endtry
+  function! l:callback.on_exit(job_id, data, event) abort
+    bdelete!
+    call win_gotoid(self.window_id)
+    if filereadable(self.filename)
+      try
+        let l:selected_filename = readfile(self.filename)[0]
+        exec self.vimCommand . ' ' . l:selected_filename
+      catch /E684/
+      endtry
+    endif
+    call delete(self.filename)
+  endfunction
 
-  redraw!
-  " Catch the ^C so that the redraw happens
-  if v:shell_error
-    return
-  endif
-
-  exec ":" . a:vimCommand . " " . s:EscapeFilePath(selection)
+  botright 10 new
+  let l:term_command = s:SearchCommand() . ' | fzy > ' .  l:callback.filename
+  silent call termopen(l:term_command, l:callback)
+  setlocal nonumber norelativenumber
+  startinsert
 endfunction
 
 nnoremap <C-p>  :call FuzzyFindCommand("edit")<cr>
