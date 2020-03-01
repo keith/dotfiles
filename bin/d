@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ -t 1 ]]; then
+  colordiff -ur "$1" "$2" | diff-highlight | less
+else
+  diff -ur "$1" "$2"
+fi
