@@ -51,7 +51,7 @@ alias simctl="xcrun simctl"
 # lldb doesn't work with brewed python
 # https://github.com/Homebrew/homebrew-core/issues/2730
 # https://github.com/Homebrew/legacy-homebrew/issues/47201
-alias lldb='PATH="/usr/bin" lldb'
-alias swift='PATH="/usr/bin" swift'
+alias lldb='PATH="/usr/bin:/bin" lldb'
+alias swift='PATH="/usr/bin:/bin" swift'
 
 # vim:tw=0
