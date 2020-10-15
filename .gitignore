@@ -16,6 +16,7 @@ vim/black
 
 config/asciinema/config
 config/configstore
+config/gcloud
 config/gtk-2.0
 config/htop/htoprc
 config/hub
