@@ -42,8 +42,11 @@ DIRSTACKSIZE=16
 # * matches .foo
 setopt GLOB_DOTS
 
+# TODO: Figure out what I want here
 # Special chars as file globs
-setopt EXTENDED_GLOB
+# setopt EXTENDED_GLOB
+# Make flags with # work like clang -###
+unsetopt EXTENDED_GLOB
 
 # Jump to end after completion
 setopt ALWAYS_TO_END
