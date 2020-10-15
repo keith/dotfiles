@@ -15,6 +15,7 @@ if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
   fi
 fi
 
+# TODO check root of git repo for this
 if [[ -e ./bazelw ]]; then
   exec ./bazelw "$@"
 fi
