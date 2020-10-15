@@ -367,7 +367,7 @@ augroup ft_settings
   if empty(&commentstring) | setlocal commentstring=#\ %s | endif
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
 
-  " Treat .ipas as .zip files
+  " Treat more extensions as .zip files
   autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.apk call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.aar call zip#Browse(expand("<amatch>"))
