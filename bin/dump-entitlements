@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 BINARY" >&2
+  exit 1
+fi
+
+readonly binary=$1
+
+# have to lipo the binary, maybe leave that up to the caller? probably only required for segedit, not for codesign
+# might be weird to not handle that since then in the matrix of simulator vs fat that would be the only one that didn't work. we don't have that case today tho i guess
+
+# How to tell if binary has embedded or code signed?
+# 1. device vs simulator? how to tell? arches? not for macOS vs iOS, arm macs?
+# 2. check what sections exist in binary? size -m? ideally some other args
+# 3. run segedit, if fails run codesign? other way around? how to tell real failure vs wrong binary.
+
+if grep -q __entitlements "$binary"; then
+  xcrun segedit "$binary" -extract __TEXT __entitlements -
+else
+  codesign -d --entitlements :- "$binary" 2> >(grep -v Executable= >&2 || true)
+fi
