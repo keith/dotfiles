@@ -16,7 +16,7 @@
 # W0142: * or ** 'magic'
 # C0325: Unnecessary parens
 # bad-continuation: This conflicts with black's alignment
-disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, deprecated-lambda, blacklisted-name, C0111, C0103, W0614, W0401, W0142, C0325, bad-continuation, no-self-use, too-many-arguments, too-many-branches, too-many-locals
+disable=line-too-long, no-name-in-module, too-many-public-methods, too-few-public-methods, too-many-return-statements, unused-argument, fixme, deprecated-lambda, blacklisted-name, C0111, C0103, W0614, W0401, W0142, C0325, bad-continuation, no-self-use, too-many-arguments, too-many-branches, too-many-locals, W1202, R0915
 
 
 [TYPECHECK]
