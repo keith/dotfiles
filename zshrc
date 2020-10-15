@@ -19,3 +19,7 @@ for file in ${(M)configs:#*/completions.zsh}
 do
   source "$file"
 done
+
+if [[ "$(wc -l ~/.zsh_history | cut -d " " -f 1)" -lt 1000 ]]; then
+  echo "warning: zsh_history looks borked"
+fi
