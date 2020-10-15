@@ -34,7 +34,7 @@ case $1 in
     path=$(accessibility_path "$framework")
     ;;
   *)
-    [ -z "$2" ] || usage
+    [ -z "${2:-}" ] || usage
     path=$(framework_path "$framework")
     ;;
 esac
