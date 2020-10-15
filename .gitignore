@@ -39,3 +39,4 @@ w3m/*
 !w3m/keymap
 
 ncmpcpp/error.log
+bin/lyft*
