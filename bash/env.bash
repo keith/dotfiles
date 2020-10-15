@@ -39,3 +39,5 @@ export GPG_TTY=$tty_path
 if [[ -f "$HOME/.secrets" ]]; then
   source "$HOME/.secrets"
 fi
+
+export PIP_DISABLE_PIP_VERSION_CHECK=1
