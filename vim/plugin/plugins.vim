@@ -205,6 +205,7 @@ let g:neomake_ruby_enabled_makers = []
 let g:neomake_java_enabled_makers = []
 let g:neomake_swift_enabled_makers = ["swiftc"]
 let g:neomake_open_list = 2
+let g:neomake_verbose = 0
 
 command! -nargs=+ Nrun call s:Nrun(<q-args>)
 function! s:Nrun(args)
