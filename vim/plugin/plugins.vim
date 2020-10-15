@@ -271,10 +271,4 @@ let g:ale_fixers = {'rust': ['rustfmt']}
 let g:ale_fix_on_save = 1
 let g:ale_open_list = 1
 
-let g:black_linelength = 79
-" Run Black on save if file .black exists.
-if filereadable('.black')
-  autocmd BufWritePre *.py execute ':silent Black'
-endif
-
 let g:tmux_navigator_disable_when_zoomed = 1
