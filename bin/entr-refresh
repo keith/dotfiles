@@ -1,0 +1,9 @@
+#!/bin/bash
+# https://jvns.ca/blog/2020/06/28/entr
+
+set -euo pipefail
+
+while true
+do
+  { git ls-files; git ls-files . --exclude-standard --others; } | entr -d "$@"
+done
