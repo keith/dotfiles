@@ -22,3 +22,9 @@ command regex fw 's/(.+)/expr -l objective-c -O -- @import %1/'
 
 command alias rs process launch --stop-at-entry
 command alias reveal expr -l objc++ -- (void*)dlopen("/Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/libReveal.dylib", 0x2); (void)[(NSNotificationCenter*)[NSNotificationCenter defaultCenter] postNotificationName:@"IBARevealRequestStart" object:nil];
+
+# log enable -f /tmp/types.log lldb types
+# log enable -f /tmp/dwarf.log dwarf all
+# log enable -f /tmp/breakpoints.log lldb break
+# log enable -f /tmp/all.log lldb all
+# log enable -f /tmp/expr.log lldb expr
