@@ -39,6 +39,9 @@ setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
 DIRSTACKSIZE=16
 
+# * matches .foo
+setopt GLOB_DOTS
+
 # Special chars as file globs
 setopt EXTENDED_GLOB
 
