@@ -185,7 +185,7 @@ key_bindings:
   - { key: F12,                     chars: "\x1b[24~"                    }
   - { key: Back,                    chars: "\x7f"                        }
   - { key: Delete,                  chars: "\x1b[3~",  mode: AppKeypad   }
-  - { key: Delete,                  chars: "\x1b[P",   mode: ~AppKeypad  }
+  - { key: Delete,                  chars: "\x1b[P",   mode: ~AppKeypad  } # Disabled because with this ctrl-backspace changes panes in tmux, 07/08/19 re-enabled because ctrl-backspace changes panes in tmux without this
   - { key: Period,   mods: Alt,     chars: "\x1b."                     }
 
 # Mouse bindings
