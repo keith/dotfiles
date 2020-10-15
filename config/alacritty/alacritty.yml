@@ -139,6 +139,11 @@ colors: *solarized_light
 key_bindings:
   - { key: V,        mods: Command, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
+  - { key: M,        mods: Command, action: None                         }
+  - { key: H,        mods: Command, action: None                         }
+  - { key: Equals, mods: Command,         action: None }
+  - { key: Add,    mods: Command,         action: None }
+  - { key: Minus,  mods: Command,         action: None }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: Home,                    chars: "\x1b[1~",  mode: AppCursor   }
   - { key: End,                     chars: "\x1b[F",   mode: ~AppCursor  }
