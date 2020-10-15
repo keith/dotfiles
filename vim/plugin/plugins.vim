@@ -221,9 +221,10 @@ function! s:Nrun(args)
   call neomake#Make(0, [l:maker])
 endfunction
 
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 let g:ycm_filetype_whitelist = {
+      \ 'cpp': 1,
       \ 'python': 1,
-      \ 'rust': 1,
     \ }
 
 let g:highlightedyank_highlight_duration = 150
