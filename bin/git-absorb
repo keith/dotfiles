@@ -33,7 +33,16 @@ def _is_in_repo() -> bool:
 
 
 def _get_staged_files() -> List[str]:
-    return _run_git_command(["diff", "--cached", "--name-only"]).splitlines()
+    statuses = _run_git_command(
+        ["diff", "--cached", "--name-status"]
+    ).splitlines()
+    files = []
+    for status in statuses:
+        # Modified files are formatted as M<tab>filepath
+        # Renamed files are formatted as R%<tab>old path<tab>new path
+        files.extend(status.split("\t")[1:])
+
+    return files
 
 
 def _get_modified_files() -> List[str]:
@@ -78,7 +87,7 @@ def _shas_by_file(shas: List[str], changed_files: List[str]) -> Dict[str, str]:
     return shas_by_file
 
 
-def _main() -> None:
+def _main(args: List[str]) -> None:
     if not _is_in_repo():
         sys.exit("error: not in git repo")
 
@@ -105,12 +114,14 @@ def _main() -> None:
             "error: no commits changed: {}".format(", ".join(changed_files))
         )
     elif len(matching_shas) > 1:
+        # TODO: fuzzy find commits
         sys.exit("error: files where changed in multiple recent commits")
 
     if stage_first:
         _run_git_command(["add"] + changed_files)
 
-    code = os.system("git commit")
+    # TODO: add -s for custom ones
+    code = os.system("git commit {}".format(" ".join(args)))
     if code != 0:
         sys.exit("Not updating PR without a commit")
 
@@ -118,4 +129,4 @@ def _main() -> None:
 
 
 if __name__ == "__main__":
-    _main()
+    _main(sys.argv[1:])
