@@ -1,6 +1,9 @@
 # Path to dotfiles repo
 export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
 
+# temporary workaround for https://stackoverflow.com/questions/15454174/how-can-a-shell-function-know-if-it-is-running-within-a-virtualenv#comment31587975_15454284
+unset VIRTUAL_ENV
+
 # Find all zsh files
 configs=($DOTFILES/*/*.bash $DOTFILES/*/*.zsh)
 for file in ${configs:#*/completions.zsh}
