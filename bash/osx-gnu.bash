@@ -14,6 +14,7 @@ GNU_BINS=( \
   /usr/local/opt/findutils/libexec/gnubin \
   /usr/local/opt/gnu-sed/libexec/gnubin   \
   /usr/local/opt/gnu-tar/libexec/gnubin   \
+  /usr/local/opt/make/libexec/gnubin \
 )
 
 NEW_MANPATH=""
