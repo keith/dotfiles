@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+_xcrun() {
+  xcrun -sdk iphonesimulator \
+    "$@"
+}
+
+output=$(mktemp)
+_xcrun swiftc \
+  -target x86_64-apple-ios11.0-simulator \
+  -o "$output" \
+  "$@"
+
+# TODO filter by simulator non json output so you can see name / device, alternatively I guess I could do that in python and just store the json around
+# simulators=($(simctl list devices booted --json | jq -r '.devices[] | values[] | .udid'))
+
+# simulator_id=""
+# if [[ -z "${simulators[@]:-}" ]]; then
+#   echo "error: no booted simulators" >&2
+#   exit 1
+# elif [[ "${#simulators[@]}" == 1 ]]; then
+#   simulator_id="${simulators[1]}"
+# else
+#   simulator_id=$(echo "${simulators[@]}" | fzy)"
+# fi
+
+# _xcrun simctl spawn -s booted "$output"
