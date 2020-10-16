@@ -147,3 +147,6 @@ function trim-pasted() {
   new_content="${new_content%"${new_content##*[![:space:]]}"}"
   PASTED="$new_content"
 }
+
+chpwd_functions=($chpwd_functions _auto_source_venv)
+_auto_source_venv

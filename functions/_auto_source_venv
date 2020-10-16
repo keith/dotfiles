@@ -1,0 +1,23 @@
+_auto_source_venv() {
+  if [[ -d venv ]]; then
+    source venv/bin/activate
+    return 0
+  fi
+
+  if ! root="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+    if command -v deactivate > /dev/null; then
+      deactivate
+    fi
+
+    return 0
+  fi
+
+  root_venv="$root/venv"
+  if [[ -d "$root_venv" ]]; then
+    source "$root_venv/bin/activate"
+  else
+    if command -v deactivate > /dev/null; then
+      deactivate
+    fi
+  fi
+}
