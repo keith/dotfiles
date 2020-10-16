@@ -2,6 +2,7 @@ altercation/vim-colors-solarized
 ambv/black
 bitc/vim-hdevtools
 cespare/vim-toml
+Chiel92/vim-autoformat
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 dhruvasagar/vim-zoom
