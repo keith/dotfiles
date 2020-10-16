@@ -269,6 +269,8 @@ augroup custom_projectionist
         \ endif
 augroup END
 
+nnoremap <leader>g :LspDefinition<CR>
+
 let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 

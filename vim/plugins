@@ -21,6 +21,8 @@ ludovicchabant/vim-gutentags
 machakann/vim-highlightedyank
 majutsushi/tagbar
 neomake/neomake
+prabirshrestha/async.vim
+prabirshrestha/vim-lsp
 racer-rust/vim-racer
 rust-lang/rust.vim
 saltstack/salt-vim
