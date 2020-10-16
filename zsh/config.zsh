@@ -1,5 +1,6 @@
-fpath=($DOTFILES/functions $fpath)
+fpath=($DOTFILES/functions $HOME/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
+autoload -Uz $HOME/functions/*(:t)
 
 # History settings
 # Save x items to the given history file
