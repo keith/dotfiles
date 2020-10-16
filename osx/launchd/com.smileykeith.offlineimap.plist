@@ -14,6 +14,10 @@
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
+	<key>StandardErrorPath</key>
+	<string>/tmp/offlineimap-stderr.log</string>
+	<key>StandardOutPath</key>
+	<string>/tmp/offlineimap-stdout.log</string>
 	<key>StartInterval</key>
 	<integer>300</integer>
 </dict>
