@@ -159,3 +159,16 @@ function trim-pasted() {
 
 chpwd_functions=($chpwd_functions _auto_source_venv)
 _auto_source_venv
+
+# --build_event_json_file=./tmp/logs/bep.json
+# autoload -Uz delete-whole-word-match
+# # Improve ctrl-w to delete words even if you didn't type them in the same
+# # session, such as type, escape to vim mode, insert mode, ctrl-w
+# # https://unix.stackexchange.com/a/250700/30131
+# my-backward-delete-word() {
+#   # local WORDCHARS="*?_-[]~&;!#$%^(){}<>"
+#   # local WORDCHARS="*?_-.[]~=/&;!#$%^(){}<>"
+#   zle delete-whole-word-match
+# }
+# zle -N my-backward-delete-word
+# bindkey '^W' my-backward-delete-word
