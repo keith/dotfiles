@@ -227,6 +227,12 @@ let g:ycm_filetype_whitelist = {
       \ 'python': 1,
     \ }
 
+" Let clangd fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
+let g:ycm_clangd_binary_path = '/usr/local/opt/llvm/bin/clangd'
+let g:ycm_clangd_args = ['-log=verbose', '-pretty']
+
 let g:highlightedyank_highlight_duration = 150
 
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
