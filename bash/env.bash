@@ -41,3 +41,4 @@ if [[ -f "$HOME/.secrets" ]]; then
 fi
 
 export PIP_DISABLE_PIP_VERSION_CHECK=1
+export SCCACHE_CACHE_SIZE=100G
