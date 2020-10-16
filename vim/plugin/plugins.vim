@@ -263,6 +263,9 @@ augroup custom_projectionist
         \ endif
 augroup END
 
+let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
+
 let g:ale_linters = {
       \ 'python': ['pyls'],
       \ 'ruby': [],
