@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+files=($(git show --diff-filter=AM --pretty="format:" --name-only "$1"))
+nvim "${files[@]}"
