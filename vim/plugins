@@ -25,6 +25,7 @@ neomake/neomake
 prabirshrestha/async.vim
 prabirshrestha/vim-lsp
 racer-rust/vim-racer
+RRethy/vim-illuminate
 rust-lang/rust.vim
 saltstack/salt-vim
 Shougo/vimproc.vim

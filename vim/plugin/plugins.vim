@@ -174,6 +174,9 @@ let g:twitvim_allow_multiline = 1
 " jedi.vim
 let g:jedi#show_call_signatures = 0
 
+let g:Illuminate_delay = 200
+highlight illuminatedWord ctermbg=white ctermfg=black
+
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
