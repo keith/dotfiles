@@ -172,3 +172,8 @@ _auto_source_venv
 # }
 # zle -N my-backward-delete-word
 # bindkey '^W' my-backward-delete-word
+
+# Should start making tmux go up without having to skip into that mode
+# tmuxup(){tmux copy-mode -u}
+# zle -N tmuxup
+# bindkey '^[v' tmuxup
