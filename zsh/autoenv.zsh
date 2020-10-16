@@ -59,3 +59,4 @@ _dotenv_source_env() {
 }
 
 chpwd_functions=($chpwd_functions _dotenv_source_env)
+_dotenv_source_env
