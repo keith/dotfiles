@@ -101,6 +101,15 @@ bindkey "^E" end-of-line
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
 
+insert-last-word-before-pipe() {
+  first_half="$(fc -ln -1 | cut -d "|" -f 1)"
+  stripped="${first_half%% }"
+  LBUFFER="${LBUFFER}${stripped##* }"
+  zle redisplay
+}
+zle -N insert-last-word-before-pipe
+bindkey '\e,' insert-last-word-before-pipe
+
 export HELPDIR=/usr/share/zsh/$ZSH_VERSION/help/
 # There is a default alias that overrides this function unless it's removed
 unalias run-help
