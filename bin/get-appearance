@@ -1,0 +1,6 @@
+#!/usr/bin/env swift
+
+import AppKit
+
+let isDark = NSAppearance.current.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+print(isDark ? "dark" : "light", terminator: "")

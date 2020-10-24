@@ -72,8 +72,9 @@ call s:EnsureDirectory(&viewdir)
 " On quit reset title
 let &titleold=getcwd()
 
-set background=dark
-silent! colorscheme parsec
+let output=system("get-appearance")
+exec 'set background=' . output
+silent! colorscheme solarized
 
 set ttyfast                 " Set that we have a fast terminal
 set t_Co=256                " Explicitly tell Vim that the terminal supports 256 colors
