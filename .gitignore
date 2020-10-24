@@ -15,6 +15,7 @@ vim/bundle/*
 vim/black
 
 config/asciinema/config
+config/coc
 config/configstore
 config/gcloud
 config/gtk-2.0
