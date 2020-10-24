@@ -122,17 +122,6 @@ nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
 let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
-let g:ale_linters = {
-      \ 'python': ['pyls'],
-      \ 'ruby': [],
-      \ 'rust': ['rls', 'cargo'],
-      \ 'sh': ['shellcheck'],
-      \ 'swift': ['swiftpm'],
-    \ }
-let g:ale_fixers = {'rust': ['rustfmt']}
-let g:ale_fix_on_save = 1
-let g:ale_open_list = 1
-
 let g:tmux_navigator_disable_when_zoomed = 1
 
 let g:autoformat_autoindent = 0
