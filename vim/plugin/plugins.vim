@@ -1,12 +1,3 @@
-" python-mode
-let g:pymode_breakpoint = 0
-
-" delimitMate
-" Currently doesn't work with vim-endwise
-" https://github.com/tpope/vim-endwise/issues/11#issuecomment-38747137
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_quotes = "\" '"
-
 " Tab/Enter usage
 " If the popup menu is open go back with shift-tab
 inoremap <S-Tab> <C-R>=<SID>BackwardsTab()<CR>
@@ -59,13 +50,6 @@ let g:sort_motion_flags = 'ui'
 " vim-gnupg
 let g:GPGDefaultRecipients = ['0x4C7167F8']
 let g:GPGPreferArmor = 1
-
-" Twitvim
-let g:twitvim_count = 50
-let g:twitvim_allow_multiline = 1
-
-" jedi.vim
-let g:jedi#show_call_signatures = 0
 
 let g:Illuminate_delay = 200
 highlight illuminatedWord ctermbg=white ctermfg=black
