@@ -108,6 +108,7 @@ set foldnestmax=5           " Set deepest fold to x levels
 set exrc                    " Source local .vimrc files
 set secure                  " Don't load autocmds from local .vimrc files
 set tags^=.tags,.git/tags   " Add local .tags file
+set signcolumn=yes
 
 " https://kinbiko.com/vim/my-shiniest-vim-gems/
 " Remove comments when joining lines with J
