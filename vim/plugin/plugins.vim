@@ -124,23 +124,6 @@ let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'git
 
 let g:tmux_navigator_disable_when_zoomed = 1
 
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-
 let g:formatdef_buildifierbzl = "'buildifier -type bzl'"
 let g:formatdef_buildifierbuild = "'buildifier -type build'"
 let g:formatdef_buildifierworkspace = "'buildifier -type workspace'"
-
-augroup setup_buildifier
-  autocmd!
-
-  " TODO: This is broken if you have a build file and then a json file? idk
-  autocmd BufNewFile,BufRead *.bzl let g:formatters_bzl = ['buildifierbzl']
-  autocmd BufNewFile,BufRead BUILD,BUILD.bazel,*.BUILD,BUILD.* let g:formatters_bzl = ['buildifierbuild']
-  autocmd BufNewFile,BufRead WORKSPACE let g:formatters_bzl = ['buildifierworkspace']
-
-  autocmd BufWrite *.bzl,BUILD,BUILD.bazel,*.BUILD,BUILD.*,WORKSPACE :Autoformat
-  " this is bad when working on llvm
-  " autocmd BufWrite *.cpp,*.c,*.h :Autoformat
-augroup END
