@@ -1,28 +1,3 @@
-" Syntastic ------ {{{
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-
-let g:syntastic_python_checkers = ['pylint', 'python']
-let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
-let g:syntastic_haskell_checkers = ['ghc-mod', 'hdevtools']
-let g:hdevtools_options = '-g -Wall'
-
-" Allow toggling of syntastic errors list
-" http://stackoverflow.com/questions/17512794/toggle-error-location-panel-in-syntastic
-function! ToggleErrors()
-  " Check the total number of open windows
-  let l:old_last_winnr = winnr('$')
-  " Attempt to close the location list
-  lclose
-  " If there are still the same number of windows
-  " Open the errors list
-  if l:old_last_winnr == winnr('$')
-    Errors
-  endif
-endfunction
-nnoremap <leader>e :call ToggleErrors()<cr>
-" }}}
-
 " python-mode
 let g:pymode_breakpoint = 0
 
