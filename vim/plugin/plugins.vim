@@ -119,38 +119,6 @@ let g:highlightedyank_highlight_duration = 150
 
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
 
-let s:lldb_projections = {
-      \   "include/lldb/*.h": {"alternate": "source/{}.cpp"},
-      \   "source/*.cpp": {"alternate": "include/lldb/{}.h"}
-      \ }
-
-let s:swift_projections = {
-      \   "include/swift/*.h": {"alternate": "lib/{}.cpp"},
-      \   "lib/*.cpp": {"alternate": "include/swift/{}.h"}
-      \ }
-
-let s:llvm_projections = {
-      \   "include/llvm/*.h": {"alternate": "lib/{}.cpp"},
-      \   "lib/*.cpp": {"alternate": "include/llvm/{}.h"}
-      \ }
-
-augroup custom_projectionist
-  autocmd!
-
-  autocmd User ProjectionistDetect
-        \ if fnamemodify(getcwd(), ":t") == "lldb" |
-        \   call projectionist#append(getcwd(), s:lldb_projections) |
-        \ endif
-  autocmd User ProjectionistDetect
-        \ if fnamemodify(getcwd(), ":t") == "swift" |
-        \   call projectionist#append(getcwd(), s:swift_projections) |
-        \ endif
-  autocmd User ProjectionistDetect
-        \ if fnamemodify(getcwd(), ":t") == "llvm" |
-        \   call projectionist#append(getcwd(), s:llvm_projections) |
-        \ endif
-augroup END
-
 let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
