@@ -34,3 +34,7 @@ let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 let g:tmux_navigator_disable_when_zoomed = 1
+
+let g:formatdef_buildifierbzl = "'buildifier -type bzl'"
+let g:formatdef_buildifierbuild = "'buildifier -type build'"
+let g:formatdef_buildifierworkspace = "'buildifier -type workspace'"
