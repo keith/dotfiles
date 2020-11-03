@@ -1,8 +1,3 @@
-if [[ ! -d "$HOME/.cargo" ]]; then
-  return
+if [[ -d "$HOME/.cargo" ]]; then
+  source "$HOME/.cargo/env"
 fi
-
-source "$HOME/.cargo/env"
-
-rust_src="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export RUST_SRC_PATH="$rust_src"
