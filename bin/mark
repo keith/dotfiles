@@ -1,3 +1,0 @@
-#!/bin/sh
-
-open -a Marked.app "$1"

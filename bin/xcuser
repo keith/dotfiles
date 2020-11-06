@@ -1,3 +1,0 @@
-#!/bin/sh
-
-rm -r *.xc*/xcuserdata/$USER.xcuserdatad
