@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+readonly pr_commit="${1:-HEAD}"
+readonly branch_name="ks/$(git show --no-patch --format=%f "$pr_commit")"
+
+if git show-ref --verify --quiet refs/heads/"$branch_name"; then
+  echo "error: branch named '$branch_name' already exists" >&2
+  exit 1
+fi
+
+git branch --no-track "$branch_name" "@{upstream}"
+
+did_stash=false
+if ! git switch "$branch_name"; then
+  git stash push -m "$0 $branch_name"
+  did_stash=true
+
+  if ! git switch "$branch_name"; then
+    git stash pop
+    git branch -d "$branch_name"
+    exit 1
+  fi
+fi
+
+_restore_state() {
+  git switch "@{-1}"
+  if $did_stash; then
+    git stash pop
+  fi
+}
+
+if ! git cherry-pick "$pr_commit"; then
+  if ! git mergetool; then
+    _restore_state
+  fi
+
+  exit 1
+fi
+
+if git push --quiet --set-upstream origin "$branch_name"; then
+  ghb pr --draft "$@"
+fi
+
+_restore_state
