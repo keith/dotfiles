@@ -103,8 +103,8 @@ api.bind('.', modifiers, Window.bottomRight);
 api.bind('F1', [], function() { Screen.setBrightness(Screen.getBrightness() - 6.25); });
 api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.25); });
 
-api.bind('y', ["ctrl", "alt"], function() { api.launch("Alacritty"); });
 api.bind('RETURN', ["shift", "cmd"], function() { toggleApp("Messages"); });
+api.bind('d', ["ctrl", "alt"], function() { toggleApp("Dash"); });
 api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
 
 Config.hideMenuBar();
