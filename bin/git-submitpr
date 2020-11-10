@@ -3,8 +3,9 @@
 set -euo pipefail
 set -x
 
-readonly pr_commit="${1:-HEAD}"
-readonly branch_name="ks/$(git show --no-patch --format=%f "$pr_commit")"
+readonly commit_arg="${1:-HEAD}"
+readonly commit="$(git rev-parse "$commit_arg")"
+readonly branch_name="ks/$(git show --no-patch --format=%f "$commit" | tr '[:upper:]' '[:lower:]')"
 
 if git show-ref --verify --quiet refs/heads/"$branch_name"; then
   echo "error: branch named '$branch_name' already exists" >&2
@@ -32,7 +33,7 @@ _restore_state() {
   fi
 }
 
-if ! git cherry-pick "$pr_commit"; then
+if ! git cherry-pick "$commit"; then
   if ! git mergetool; then
     _restore_state
   fi

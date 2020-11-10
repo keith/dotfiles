@@ -16,7 +16,7 @@ if ! git cat-file -e "$commit_to_update" 2> /dev/null; then
   exit 1
 fi
 
-readonly branch_name="ks/$(git show --no-patch --format=%f "$commit_to_update")"
+readonly branch_name="ks/$(git show --no-patch --format=%f "$commit_to_update" | tr '[:upper:]' '[:lower:]')"
 if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
   echo "error: branch '$branch_name' doesn't exist" >&2
   exit 1
