@@ -43,6 +43,8 @@ fi
 
 if git push --quiet --set-upstream origin "$branch_name"; then
   ghb pr --draft "$@"
+elif git push --quiet --set-upstream mine "$branch_name"; then
+  git open --remote mine "pull/new/$branch_name"
 fi
 
 _restore_state
