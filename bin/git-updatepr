@@ -24,11 +24,17 @@ fi
 
 did_stash=false
 if ! git switch "$branch_name"; then
+  readonly stash_count_before=$(git stash list | wc -l | xargs)
   git stash push -m "$0 $branch_name"
-  did_stash=true
+  if [[ $(git stash list | wc -l | xargs) -gt "$stash_count_before" ]]; then
+    did_stash=true
+  fi
 
   if ! git switch "$branch_name"; then
-    git stash pop
+    if $did_stash; then
+      git stash pop
+    fi
+
     exit 1
   fi
 fi
