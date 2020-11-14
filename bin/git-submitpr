@@ -28,6 +28,7 @@ _checkout_empty() {
 if ! git -C "$worktree_dir" cherry-pick "$commit"; then
   if ! git -C "$worktree_dir" mergetool; then
     # TODO: should this be -D?
+    git -C "$worktree_dir" cherry-pick --abort
     _checkout_empty
     git branch -d "$branch_name"
     exit 1
