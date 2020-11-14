@@ -10,6 +10,7 @@ fi
 
 readonly commit_to_update=$1
 readonly new_refspec=$(git rev-parse "${2:-HEAD}")
+readonly base_refspec=$(git rev-parse HEAD)
 
 if ! git cat-file -e "$commit_to_update" 2> /dev/null; then
   echo "error: invalid commit sha: '$commit_to_update'" >&2
@@ -22,40 +23,21 @@ if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
   exit 1
 fi
 
-did_stash=false
-if ! git switch "$branch_name"; then
-  readonly stash_count_before=$(git stash list | wc -l | xargs)
-  git stash push -m "$0 $branch_name"
-  if [[ $(git stash list | wc -l | xargs) -gt "$stash_count_before" ]]; then
-    did_stash=true
-  fi
+readonly worktree_dir="/tmp/$(git rev-parse --show-toplevel | md5)"
+if [[ ! -d "$worktree_dir" ]]; then
+  git worktree add "$worktree_dir" "$branch_name"
+else
+  git -C "$worktree_dir" switch "$branch_name"
+fi
 
-  if ! git switch "$branch_name"; then
-    if $did_stash; then
-      git stash pop
-    fi
-
+if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
+  if ! git -C "$worktree_dir" mergetool; then
+    # TODO what do i do? i think we have to reset branch state? maybe just abort cherry pick?
     exit 1
   fi
 fi
 
-_restore_state() {
-  git switch "@{-1}"
-  if $did_stash; then
-    git stash pop
-  fi
-}
-
-if ! git cherry-pick "$new_refspec^..@{-1}"; then
-  if ! git mergetool; then
-    _restore_state
-  fi
-
-  exit 1
-fi
-
-git push --quiet || echo "warning: failed to push '$branch_name'" >&2
-_restore_state
+git -C "$worktree_dir" push --quiet || echo "warning: failed to push '$branch_name'" >&2
 
 export GIT_SEQUENCE_EDITOR=true
 
