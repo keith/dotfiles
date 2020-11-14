@@ -127,6 +127,7 @@ set wildmode=longest:full,full                         " Completion settings
 set wildignore+=.hg,.git,.svn                          " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg         " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.pyc " compiled object files
+set wildignore+=*.resolved                             " package manager lock files
 set wildignore+=tags,.tags
 
 " Dictionary for custom words

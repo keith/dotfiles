@@ -5,7 +5,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' insert-tab pending
 
 # Ignore compiled files on vi/vim completion
-zstyle ':completion:*:*:(v|vim):*:*files' ignored-patterns '*.(a|dylib|so|o|pyc)'
+zstyle ':completion:*:*:(v|vim|nvim):*:*files' ignored-patterns '*.(a|dylib|so|o|pyc|resolved)'
 
 # Ignore pyc files for python
 zstyle ':completion:*:*:(python*|pytest):*:*files' ignored-patterns '*.(pyc)'
