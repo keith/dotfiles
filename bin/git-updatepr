@@ -30,8 +30,13 @@ else
   git -C "$worktree_dir" switch "$branch_name"
 fi
 
+_checkout_empty() {
+  git -C "$worktree_dir" switch -C empty --quiet
+}
+
 if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
   if ! git -C "$worktree_dir" mergetool; then
+    _checkout_empty
     # TODO what do i do? i think we have to reset branch state? maybe just abort cherry pick?
     exit 1
   fi
@@ -43,3 +48,4 @@ export GIT_SEQUENCE_EDITOR=true
 
 git rebase --interactive --exec "git commit --amend --fixup '$commit_to_update'" "$new_refspec"^
 git rebase --interactive --autosquash "$commit_to_update"^
+_checkout_empty
