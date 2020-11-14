@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if git show-branch origin/main > /dev/null 2>&1; then
+  echo "main"
+else
+  echo "master"
+fi

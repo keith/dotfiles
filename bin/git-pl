@@ -1,6 +1,7 @@
 #!/bin/sh
 
-set -e
+set -eu
 
-git branch --merged master | grep -v "\\*" | grep -v "master" | xargs --no-run-if-empty -n 1 git branch -d
+main_branch=$(git main-branch)
+git branch --merged "$main_branch" | grep -v "\\*" | grep -v "$main_branch" | xargs --no-run-if-empty -n 1 git branch -d
 git branch -vv | grep -v "\\*" | grep ": gone]" | awk '{ print $1 }' | xargs --no-run-if-empty -n 1 git branch -D

@@ -58,7 +58,7 @@
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
-  dm          = !sh -c 'git diff $@ $(git merge-base master $(git name-rev --name-only HEAD))' -
+  dm          = !sh -c 'git diff $@ $(git merge-base $(git main-branch) $(git name-rev --name-only HEAD))' -
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   g           = !exec git
   git         = !exec git
@@ -71,10 +71,8 @@
   r           = reflog -20
   ra          = rebase --abort
   rc          = rebase --continue
-  rma         = rebase master
-  rmi         = rebase master -i
-  roma        = rebase origin/master
-  romi        = rebase origin/master -i
+  roma        = !sh -c 'git rebase origin/$(git main-branch)'
+  romi        = !sh -c 'git rebase origin/$(git main-branch) -i'
   rv          = remote -v
   s           = status -sb
   sub         = submodule update --init --recursive
