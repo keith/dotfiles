@@ -2,6 +2,7 @@
     "clangd.path": "/usr/local/opt/llvm/bin/clangd",
     "clangd.semanticHighlighting": true,
     "git.addGBlameToVirtualText": true,
+    "diagnostic.checkCurrentLine": true,
     "languageserver": {
         "bash": {
             "args": [
