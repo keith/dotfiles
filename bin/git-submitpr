@@ -14,6 +14,7 @@ fi
 
 git branch --no-track "$branch_name" "@{upstream}"
 
+git worktree prune
 readonly worktree_dir="/tmp/$(git rev-parse --show-toplevel | md5)"
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add "$worktree_dir" "$branch_name"

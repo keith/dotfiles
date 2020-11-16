@@ -23,6 +23,7 @@ if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
   exit 1
 fi
 
+git worktree prune
 readonly worktree_dir="/tmp/$(git rev-parse --show-toplevel | md5)"
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add "$worktree_dir" "$branch_name"
