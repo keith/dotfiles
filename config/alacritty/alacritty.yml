@@ -5,7 +5,6 @@ dpi:
   y: 120.0
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 4
 draw_bold_text_with_bright_colors: false
 
 window:
