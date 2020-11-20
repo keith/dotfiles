@@ -4,6 +4,10 @@ set -euo pipefail
 set -x
 
 readonly commit_arg="${1:-HEAD}"
+if [[ $# -gt 0 ]]; then
+  shift
+fi
+
 readonly commit="$(git rev-parse "$commit_arg")"
 readonly branch_name="ks/$(git show --no-patch --format=%f "$commit" | tr '[:upper:]' '[:lower:]')"
 
