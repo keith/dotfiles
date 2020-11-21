@@ -19,7 +19,8 @@ fi
 git branch --no-track "$branch_name" "@{upstream}"
 
 git worktree prune
-readonly worktree_dir="/tmp/$(git rev-parse --show-toplevel | md5)"
+readonly worktree_name=$(git rev-parse --show-toplevel | md5)
+readonly worktree_dir="/tmp/$worktree_name"
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add "$worktree_dir" "$branch_name"
 else
@@ -27,7 +28,7 @@ else
 fi
 
 _checkout_empty() {
-  git -C "$worktree_dir" switch -C empty --quiet
+  git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
 }
 
 if ! git -C "$worktree_dir" cherry-pick "$commit"; then
