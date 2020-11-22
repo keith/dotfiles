@@ -7,8 +7,8 @@ set signature        = $HOME/.mutt/accounts/signature
 set spoolfile        = "+keithbsmiley-gmail.com/INBOX"
 
 # Gmail-style keyboard shortcuts
-macro index,pager d "<save-message>+keithbsmiley-gmail.com/trash<enter>" "Delete message"
-macro index,pager e "<save-message>+keithbsmiley-gmail.com/archive<enter>" "Archive message"
+macro index,pager d "t<save-message>+keithbsmiley-gmail.com/trash<enter>" "Delete message"
+macro index,pager e "t<save-message>+keithbsmiley-gmail.com/archive<enter>" "Archive message"
 macro index,pager ga "<change-folder>+keithbsmiley-gmail.com/archive<enter>" "Go to all mail"
 macro index,pager gi "<change-folder>+keithbsmiley-gmail.com/INBOX<enter>" "Go to inbox"
 macro index,pager gs "<change-folder>+keithbsmiley-gmail.com/sent<enter>" "Go to sent mail"
