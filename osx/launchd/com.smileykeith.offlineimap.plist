@@ -2,18 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>KeepAlive</key>
-  <false/>
+	<key>KeepAlive</key>
+	<false/>
 	<key>Label</key>
 	<string>com.smileykeith.offlineimap.plist</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/Users/ksmiley/.bin/offlineimap</string>
-		<string>-u</string>
-		<string>quiet</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/Users/ksmiley/.pyenv/shims:/Users/ksmiley/.pyenv/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
 	<key>StandardErrorPath</key>
 	<string>/tmp/offlineimap-stderr.log</string>
 	<key>StandardOutPath</key>
