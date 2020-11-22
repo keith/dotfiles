@@ -1,6 +1,8 @@
-subscribe swift-build-dev@swift.org
-subscribe swift-dev@swift.org
-subscribe swift-evolution@swift.org
+subscribe buildkite1@discoursemail.com
+subscribe cfe-dev@lists.llvm.org
+subscribe llvm-dev@lists.llvm.org
+subscribe llvm@discoursemail.com
 subscribe mutt-users@mutt.org
+subscribe swift@discoursemail.com
 
 # vim: ft=muttrc
