@@ -33,4 +33,11 @@ message-hook '~f no_reply@email\.apple\.com' \
 message-hook '~f VZWMail@ecrmemail\.verizonwireless\.com' \
   "unalternative_order *; alternative_order text/html"
 
+# Github notifications
+message-hook '~U !~T ~f notifications@github\.com' \
+  "push '<enter-command>set my_old_pipe_decode=\$pipe_decode \
+  nopipe_decode<enter> \
+  <pipe-message>$DOTFILES/mutt/ghnotification.sh<enter> \
+  <enter-command>set pipe_decode=\$my_old_pipe_decode<enter><top>'"
+
 # vim: ft=muttrc
