@@ -7,6 +7,7 @@
   editor = nvim
   whitespace = trailing-space,space-before-tab
   pager = pager
+  commentChar = ";"
 [init]
   templatedir = ~/.git_template
 [push]
