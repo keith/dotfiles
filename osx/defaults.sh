@@ -4,6 +4,7 @@
 # Watch for changes in files with either of
 #  sudo fs_usage | grep plist
 #  sudo opensnoop | grep plist
+# Useful reference: http://www.hcs.harvard.edu/~jrus/Site/Cocoa%20Text%20System.html
 
 killall System\ Preferences
 
