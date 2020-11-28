@@ -2,8 +2,13 @@
 
 set -euo pipefail
 
+if [[ $# -lt 1 ]]; then
+  echo "error: must pass some files" >&2
+  exit 1
+fi
+
 if [[ -t 1 ]]; then
-  colordiff -ur "$1" "$2" | diff-highlight | less
+  colordiff -ur "$@" | diff-highlight | less
 else
-  diff -ur "$1" "$2"
+  diff -ur "$@"
 fi
