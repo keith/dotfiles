@@ -506,20 +506,9 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Messages
 #
 
-# Set to available when you come back from idle
-defaults write com.apple.iChat WelcomeBackMode -int 1
 
 # Hide scrollbars in Messages.app
 defaults write com.apple.iChat AppleShowScrollBars -string Automatic
-
-# Disable automatic emoji substitution (i.e. use plain text smileys)
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add automaticEmojiSubstitutionEnablediMessage -bool false
-
-# Disable smart quotes as it’s annoying for messages that contain code
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add automaticQuoteSubstitutionEnabled -bool false
-
-# Disable continuous spell checking
-defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add continuousSpellCheckingEnabled -bool false
 
 
 #
