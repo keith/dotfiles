@@ -507,6 +507,15 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 #
 
 
+# Seems that Messages.app doesn't respect the system setting on Big Sur+ FB8920792
+defaults write com.apple.messages.text SmartQuotes -bool false
+
+# Add a shortcut for deleting messages
+# NOTE: cmd+delete which was the previous shortcut doesn't work for some reason FB8920763
+# defaults write "$HOME/Library/Preferences/com.apple.MobileSMS.plist" NSUserKeyEquivalents -dict 'Delete Conversation...' '@\U007F'
+# NOTE: Something is wrong with how you reference the plist, sometimes the one in the Messages "container" is preferred, but isn't preferred by messages at runtime FB8920785
+defaults write "$HOME/Library/Preferences/com.apple.MobileSMS.plist" NSUserKeyEquivalents -dict 'Delete Conversation...' '@d'
+
 # Hide scrollbars in Messages.app
 defaults write com.apple.iChat AppleShowScrollBars -string Automatic
 
