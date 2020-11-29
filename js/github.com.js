@@ -19,7 +19,7 @@ function alternate(URL) {
 }
 
 function commits(oldURL) {
-  window.location.href = oldURL + "/commits/master";
+  window.location.href = oldURL + "/commits";
 }
 
 String.prototype.replaceLast = function(character) {
