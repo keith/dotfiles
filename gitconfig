@@ -8,6 +8,7 @@
   whitespace = trailing-space,space-before-tab
   pager = pager
 [init]
+  defaultBranch = main
   templatedir = ~/.git_template
 [push]
   default = upstream
