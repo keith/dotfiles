@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+git config branch.main.pushRemote origin
+git config branch.master.pushRemote origin
