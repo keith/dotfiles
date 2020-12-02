@@ -56,6 +56,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Use tabs
 defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
 
+# https://mjtsai.com/blog/2020/10/05/big-surs-hidden-document-proxy-icon
+defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
+
 
 #
 # Desktop & Screen Saver
