@@ -37,7 +37,10 @@ _checkout_empty() {
 }
 
 if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
-  if ! git -C "$worktree_dir" mergetool; then
+  if git -C "$worktree_dir" mergetool; then
+    git -C "$worktree_dir" cherry-pick --continue
+  else
+    git -C "$worktree_dir" cherry-pick --abort
     _checkout_empty
     # TODO what do i do? i think we have to reset branch state? maybe just abort cherry pick?
     exit 1
