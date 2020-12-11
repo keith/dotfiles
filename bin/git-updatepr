@@ -36,6 +36,34 @@ _checkout_empty() {
   git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
 }
 
+_ask() {
+  read -p "$1" -n 1 -r
+  if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+    echo "y"
+  elif [[ "$REPLY" =~ ^[Nn]$ ]]; then
+    echo "n"
+  else
+    echo >&2
+    _ask "$1"
+  fi
+}
+
+branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
+remote_name="${branch_with_remote%%/*}"
+remote_branch_name="${branch_with_remote#*/}"
+
+git -C "$worktree_dir" fetch "$remote_name" "$remote_branch_name"
+if ! git diff --quiet "HEAD...@{upstream}"; then
+  answer=$(ask "warning: upstream has new commits, would you like to pull those (or abort)? (y/n) ")
+  if [[ "$answer" == y ]]; then
+    git -C "$worktree_dir" pull
+  else
+    echo "warning: not updating PR, checkout '$branch_name', pull and try again" >&2
+    _checkout_empty
+    exit 1
+  fi
+fi
+
 if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
   if git -C "$worktree_dir" mergetool; then
     git -C "$worktree_dir" cherry-pick --continue
