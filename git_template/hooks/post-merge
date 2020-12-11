@@ -1,3 +1,4 @@
 #!/bin/sh
 
-.git/hooks/ctags >/dev/null 2>&1 &
+hooks_dir=$(git rev-parse --git-path hooks)
+"$hooks_dir/ctags" >/dev/null 2>&1 &

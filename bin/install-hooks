@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 
-hooks=(~/.git_template/hooks/*)
+hooks_dir=$(git rev-parse --git-path hooks)
 
-if [[ ! -d .git ]]; then
-  echo "No .git directory"
-  exit 1
-fi
-
-mkdir -p ./.git/hooks
-for hook in "${hooks[@]}"
+mkdir -p "$hooks_dir"
+for hook in ~/.git_template/hooks/*
 do
-  cp "$hook" ./.git/hooks
+  cp "$hook" "$hooks_dir"
 done
-
-echo "Done"
