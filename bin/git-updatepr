@@ -48,13 +48,13 @@ _ask() {
   fi
 }
 
-branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
+branch_with_remote=$(git -C "$worktree_dir" rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
 remote_name="${branch_with_remote%%/*}"
 remote_branch_name="${branch_with_remote#*/}"
 
 git -C "$worktree_dir" fetch "$remote_name" "$remote_branch_name"
-if ! git diff --quiet "HEAD...@{upstream}"; then
-  answer=$(ask "warning: upstream has new commits, would you like to pull those (or abort)? (y/n) ")
+if ! git -C "$worktree_dir" diff --quiet "HEAD...@{upstream}"; then
+  answer=$(_ask "warning: upstream has new commits, would you like to pull those (or abort)? (y/n) ")
   if [[ "$answer" == y ]]; then
     git -C "$worktree_dir" pull
   else
