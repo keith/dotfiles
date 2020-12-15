@@ -23,7 +23,7 @@ font:
   # false.
   use_thin_strokes: false
 
-visual_bell:
+bell:
   duration: 0
 
 schemes:
@@ -141,7 +141,7 @@ key_bindings:
   - { key: M,        mods: Command, action: None                         }
   - { key: H,        mods: Command, action: None                         }
   - { key: Equals, mods: Command,         action: None }
-  - { key: Add,    mods: Command,         action: None }
+  - { key: Plus,   mods: Command,         action: None }
   - { key: Minus,  mods: Command,         action: None }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: Home,                    chars: "\x1b[1~",  mode: AppCursor   }
