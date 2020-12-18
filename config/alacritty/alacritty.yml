@@ -12,10 +12,8 @@ window:
 
 font:
   normal:
-    family: SF Mono
     style: Regular
   bold:
-    family: SF Mono
     style: Regular
   size: 13.0
   # OS X only: use thin stroke font rendering. Thin strokes are suitable
