@@ -727,6 +727,9 @@ defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 # Hide the Xcode 11 minimap
 defaults write com.apple.dt.Xcode DVTTextShowMinimap -bool false
 
+# https://www.smileykeith.com/2020/09/29/lldb-reproducers
+defaults write com.apple.dt.Xcode IDEDebuggerEnableReproducerCapture -bool true
+
 
 #
 # Third Party
