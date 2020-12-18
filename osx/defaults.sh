@@ -608,6 +608,8 @@ defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 # Open an empty file directly
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+# Force files to open in new windows instead of new tabs
+defaults write com.apple.TextEdit AppleWindowTabbingMode -string manual
 
 
 #
