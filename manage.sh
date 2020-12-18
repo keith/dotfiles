@@ -5,6 +5,7 @@ files=(\
   bash_profile \
   bashrc \
   bin \
+  colordiffrc \
   conductor.js \
   config \
   css \
