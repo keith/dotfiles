@@ -135,3 +135,5 @@
   rebase = true
 [http]
   cookiefile = ~/.gitcookies
+[checkout]
+  guess = true
