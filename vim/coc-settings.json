@@ -46,7 +46,11 @@
             "rootPatterns": [
                 "Package.swift"
             ]
-        }
+        },
+       "zls" : {
+           "command": "zls",
+           "filetypes": ["zig"]
+       }
     },
     "python.jediEnabled": false,
     "python.linting.mypyEnabled": true
