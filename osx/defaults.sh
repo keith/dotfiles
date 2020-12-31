@@ -552,6 +552,7 @@ defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
 defaults write com.apple.DiskUtility advanced-image-options -bool true
+defaults write com.apple.DiskUtility SidebarShowAllDevices -bool true
 
 
 #
