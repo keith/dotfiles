@@ -5,6 +5,8 @@ if (( $+commands[tag] )); then
     trap - SIGINT
   }
   alias s="tag rg"
+  alias fd="tag fd"
+  alias find="tag find"
 else
   alias s=rg
 fi
