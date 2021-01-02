@@ -72,8 +72,7 @@ call s:EnsureDirectory(&viewdir)
 " On quit reset title
 let &titleold=getcwd()
 
-let output=system("get-appearance")
-exec 'set background=' . output
+exec 'set background=' . system("get-appearance")
 silent! colorscheme solarized
 
 set ttyfast                 " Set that we have a fast terminal
@@ -360,6 +359,12 @@ augroup window_sizes
   " Set the minimum window width for vertical splits
   autocmd VimEnter * silent! set winwidth=80
   autocmd VimEnter * silent! set winminwidth=20
+augroup END
+
+augroup theme
+  autocmd!
+
+  autocmd FocusGained * silent! exec 'set background=' . system("get-appearance")
 augroup END
 
 " Various filetype settings
