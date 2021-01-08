@@ -55,7 +55,7 @@ fi
 if git -C "$worktree_dir" push --quiet --set-upstream origin "$branch_name"; then
   # TODO maybe ghb should support -C ?
   pushd "$worktree_dir" >/dev/null
-  ghb pr --draft "$remote_branch_name" "$@"
+  ghb pr --no-edit --draft "$remote_branch_name" "$@"
   popd
 elif git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; then
   git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
