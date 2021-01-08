@@ -26,6 +26,8 @@ fi
 git worktree prune
 readonly worktree_name=$(git rev-parse --show-toplevel | md5)
 readonly worktree_dir="/tmp/$worktree_name"
+# If the OS cleaned the directory in the /tmp dir, it maybe exist but be empty
+rmdir "$worktree_dir" 2>/dev/null || true
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add "$worktree_dir" "$branch_name"
 else
