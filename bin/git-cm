@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# git c(heckout)m(ain) is a script to abstract checking out the main branch.
+# This is helpful for master -> main conversions as well as worktrees where you
+# have a separate main branch that has to be named differently
+#
+
+set -euo pipefail
+
+config_key="$(git rev-parse --show-toplevel | md5).main-branch"
+if main_branch="$(git config --local "$config_key")"; then
+  git checkout "$main_branch"
+else
+  git checkout "$(git main-branch)"
+fi
