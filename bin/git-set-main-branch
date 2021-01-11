@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# This script sets the appropriate git config key for use with `git-cm`
+#
+
+set -euo pipefail
+
+config_key="$(git rev-parse --show-toplevel | md5).main-branch"
+git config --local "$config_key" "$1"
