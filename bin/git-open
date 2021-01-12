@@ -42,8 +42,15 @@ def _get_remote(name):
     return None
 
 
-def _current_branch():
-    return _run_git_command(["symbolic-ref", "--short", "HEAD"])
+def _current_branch_upstream():
+    return _run_git_command(
+        [
+            "rev-parse",
+            "--abbrev-ref",
+            "--symbolic-full-name",
+            "@{upstream}",
+        ]
+    ).split("/", 1)[-1]
 
 
 def _get_ref(ref):
@@ -64,7 +71,9 @@ def main(args):
     if not args.argument:
         pass
     elif os.path.exists(args.argument):
-        url = "{}/blob/{}/{}".format(url, _current_branch(), args.argument)
+        url = "{}/blob/{}/{}".format(
+            url, _current_branch_upstream(), args.argument
+        )
     elif _get_ref(args.argument):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
     elif _get_remote(args.argument):
