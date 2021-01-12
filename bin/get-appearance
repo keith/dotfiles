@@ -1,6 +1,7 @@
-#!/usr/bin/env -i swift
+#!/bin/bash
 
-import AppKit
-
-let isDark = NSAppearance.current.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-print(isDark ? "dark" : "light", terminator: "")
+if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
+  echo -n dark
+else
+  echo -n light
+fi
