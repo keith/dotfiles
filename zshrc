@@ -20,7 +20,7 @@ do
   source "$file"
 done
 
-if [[ "$(wc -l ~/.keith_zsh_history | cut -d " " -f 1)" -lt 1000 ]]; then
+if [[ "$(wc -l ~/.keith_zsh_history | xargs | cut -d " " -f 1)" -lt 1000 ]]; then
   echo "warning: ~/.keith_zsh_history looks borked"
 fi
 
