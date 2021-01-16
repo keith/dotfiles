@@ -3,6 +3,6 @@
 set -euo pipefail
 
 theme=$(get-appearance)
-/usr/bin/sed -i "" \
-  's/colors: \*solarized_\w\+$/colors: *solarized_'"$theme"'/g' \
+/usr/bin/sed -E -i "" \
+  's/colors: \*solarized_[[:alpha:]]+$/colors: *solarized_'"$theme"'/g' \
   ~/.config/alacritty/alacritty.yml
