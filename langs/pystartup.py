@@ -23,6 +23,15 @@ def save_history(path=historyPath):
 if os.path.exists(historyPath):
     readline.read_history_file(historyPath)
 
+try:
+    import __builtin__
+except ImportError:
+    import builtins as __builtin__
+
+__builtin__.true = True
+__builtin__.false = False
+__builtin__.null = None
+
 readline.parse_and_bind("tab: complete")
 readline.parse_and_bind(r"\C-a: beginning-of-line")
 readline.parse_and_bind(r"\C-e: end-of-line")
