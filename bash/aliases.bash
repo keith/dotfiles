@@ -7,16 +7,10 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Git
 alias g="git"
 alias G="git"
 
-# Vim
 alias v="nvim"
-
-# Archives
-alias mktar="tar -pvczf"
-alias untar="tar -zxvf"
 
 # Remove all items from the dock
 alias cleardock="defaults write com.apple.dock persistent-apps -array \"\" && killall Dock"

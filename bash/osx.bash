@@ -34,11 +34,6 @@ alias lslist="/System/Library/Frameworks/CoreServices.framework/Frameworks/Launc
 # Clear the Quarantine database
 alias qcleanup="sqlite3 \$HOME/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
-# Empty the Trash on all mounted volumes and the main HDD
-# Also, clear Apple’s System Logs to improve shell startup speed
-alias emptytrash="sudo rm -rfv /Volumes/\*/.Trashes; sudo rm -rfv \$HOME/.Trash/; sudo rm -rfv /private/var/log/asl/\*.asl"
-alias secureemptytrash="sudo srm -rfv /Volumes/\*/.Trashes; sudo srm -rfv \$HOME/.Trash/; sudo srm -rfv /private/var/log/asl/\*.asl"
-
 # Hide/show all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
@@ -53,5 +48,3 @@ alias simctl="xcrun simctl"
 # https://github.com/Homebrew/legacy-homebrew/issues/47201
 alias lldb='PATH="/usr/bin:/bin" lldb'
 alias swift='PATH="/usr/bin:/bin" swift'
-
-# vim:tw=0
