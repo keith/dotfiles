@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Inspired by https://github.com/joshdick/dntw
+#
+
+set -euo pipefail
+
+if [[ -z "$TMUX" ]]; then
+  exec nvim "$@"
+fi
+
+session_id=$(tmux display-message -p '#{session_id}')
+window_id=$(tmux display-message -p '#{window_id}')
+
+address="/tmp/shared_nvim_${session_id}_${window_id}"
+if nvr --serverlist | grep -q "$address" ; then
+  nvr --servername "$address" "$@"
+else
+  NVIM_LISTEN_ADDRESS="$address" nvim "$@"
+fi
