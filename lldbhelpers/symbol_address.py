@@ -27,7 +27,7 @@ def _address_for_symbol(target, symbol_context, include_symbol):
         raise Exception("Start address is invalid")
 
     module = symbol_context.GetModule()
-    offset = aslr._aslr_for_module(target, module)
+    offset = aslr.aslr_for_module(target, module)
     address = hex(offset + start_address.GetFileAddress())
 
     if include_symbol:
@@ -36,7 +36,8 @@ def _address_for_symbol(target, symbol_context, include_symbol):
         return "{}".format(address)
 
 
-def address_for_symbol(debugger, command, result, internal_dict):
+@lldb.command()
+def afs(debugger, command, context, result, _):
     """
     Get the address for a symbol regardless of the ASLR offset
 
@@ -85,8 +86,3 @@ def address_for_symbol(debugger, command, result, internal_dict):
         for context in functions:
             result.AppendMessage(_address_for_symbol(target, context, True))
         result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
-
-
-def __lldb_init_module(debugger, internal_dict):
-    handle = debugger.HandleCommand
-    handle("command script add -f symbol_address.address_for_symbol afs")

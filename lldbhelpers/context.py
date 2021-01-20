@@ -1,7 +1,7 @@
 import lldb
 
 
-def output_for_command(debugger, command):
+def _output_for_command(debugger, command):
     interpreter = debugger.GetCommandInterpreter()
     result = lldb.SBCommandReturnObject()
     interpreter.HandleCommand(command, result)
@@ -12,7 +12,7 @@ def output_for_command(debugger, command):
         return ""
 
 
-def index_of(target, function):
+def _index_of(target, function):
     for i, x in enumerate(target):
         if function(x):
             return i
@@ -20,25 +20,21 @@ def index_of(target, function):
     return None
 
 
-def objc_context(debugger, command, result, internal_dict):
-    target = debugger.GetSelectedTarget()
-    process = target.GetProcess()
-    thread = process.GetSelectedThread()
-    frame = thread.GetSelectedFrame()
-
-    function_name = frame.GetFunctionName()
+@lldb.command()
+def objc_context(debugger, _ignored, context, result, _):
+    function_name = context.frame.GetFunctionName()
     print(function_name)
-    print
+    print()
 
     argument_count = function_name.count(":")
     argument_names = function_name.split(" ")[-1].split(":")
     for i in range(3, 3 + argument_count):
-        argument_value = output_for_command(debugger, "po $arg{}".format(i))
+        argument_value = _output_for_command(debugger, "po $arg{}".format(i))
         argument_name = argument_names[i - 3]
         print("{}: {}".format(argument_name, argument_value))
 
-    disassembly = frame.Disassemble().split("\n")
-    index = index_of(disassembly, lambda x: x.startswith("-> "))
+    disassembly = context.frame.Disassemble().split("\n")
+    index = _index_of(disassembly, lambda x: x.startswith("-> "))
     assert index
     disassembly = "\n".join(disassembly[index - 1 : index + 4]).strip()
 
@@ -55,8 +51,3 @@ def objc_context(debugger, command, result, internal_dict):
         )
     except ImportError:
         print(disassembly)
-
-
-def __lldb_init_module(debugger, internal_dict):
-    handle = debugger.HandleCommand
-    handle("command script add -f context.objc_context objc_context")

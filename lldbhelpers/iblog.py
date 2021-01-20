@@ -53,8 +53,9 @@ def _add_breakpoint_for_string(debugger, target, section, string):
     )
 
 
-def iblog(debugger, command, context, result, internal_dict):
-    target = context.GetTarget()
+@lldb.command()
+def iblog(debugger, _ignored, context, result, _):
+    target = context.target
     module = target.module["UIKit"]
     section = _find_section(module, "__TEXT", "__cstring")
     _add_breakpoint_for_string(
@@ -69,8 +70,3 @@ def iblog(debugger, command, context, result, internal_dict):
         section,
         "Unknown class %@ in Interface Builder file.\n",
     )
-
-
-def __lldb_init_module(debugger, internal_dict):
-    handle = debugger.HandleCommand
-    handle("command script add -f iblog.iblog iblog")

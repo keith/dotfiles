@@ -14,8 +14,8 @@ def _run_command(debugger, command):
         raise KeypathException(result.GetError())
 
 
-def _is_swift_context(context):
-    language = context.GetFrame().GetFunction().GetLanguage()
+def _is_swift_frame(frame):
+    language = frame.GetFunction().GetLanguage()
     return language == lldb.eLanguageTypeSwift
 
 
@@ -62,7 +62,8 @@ def _run_objc_command(debugger, result, target, path):
         result.SetStatus(lldb.eReturnStatusFailed)
 
 
-def keypath(debugger, command, context, result, internal_dict):
+@lldb.command()
+def keypath(debugger, command, context, result, _):
     """
     Print the value for the given keypath on the given object from Objective-C
     or Swift
@@ -84,12 +85,7 @@ def keypath(debugger, command, context, result, internal_dict):
     target = parts[0].strip()
     path = parts[1].strip()
 
-    if _is_swift_context(context):
+    if _is_swift_frame(context.frame):
         _run_swift_command(debugger, result, target, path)
     else:
         _run_objc_command(debugger, result, target, path)
-
-
-def __lldb_init_module(debugger, internal_dict):
-    handle = debugger.HandleCommand
-    handle("command script add -f keypath.keypath keypath")

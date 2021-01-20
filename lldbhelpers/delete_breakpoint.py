@@ -1,10 +1,10 @@
 import lldb
 
 
-def delete_breakpoint(debugger, command, result, internal_dict):
+@lldb.command()
+def db(debugger, _ignored, context, result, _):
     target = debugger.GetSelectedTarget()
-    process = target.GetProcess()
-    thread = process.GetSelectedThread()
+    thread = context.thread
 
     if thread.GetStopReason() != lldb.eStopReasonBreakpoint:
         return
@@ -33,8 +33,3 @@ def delete_breakpoint(debugger, command, result, internal_dict):
     assert not location.IsEnabled()
     result.SetStatus(lldb.eReturnStatusSuccessContinuingResult)
     debugger.HandleCommand("continue")
-
-
-def __lldb_init_module(debugger, internal_dict):
-    handle = debugger.HandleCommand
-    handle("command script add -f delete_breakpoint.delete_breakpoint db")
