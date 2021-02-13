@@ -9,9 +9,18 @@ if [[ -z "${TMUX:-}" ]]; then
   exec nvim "$@"
 fi
 
+if [[ $1 =~ ^[0-9]+$ ]] ; then
+  pane_index=$1
+  shift
+fi
+
+if [[ -z "${pane_index:-}" ]]; then
+  tmux display-panes -d 400
+  read -rp 'which pane index? ' pane_index
+fi
+
 session_id=$(tmux display-message -p '#{session_id}')
 window_id=$(tmux display-message -p '#{window_id}')
-pane_index=$(tmux display-message -p '#{pane_index}')
 
 address="/tmp/shared_nvim_${session_id}_${window_id}_${pane_index}"
 if nvr --serverlist | grep -q "$address" ; then
