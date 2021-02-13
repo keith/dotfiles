@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# https://josh.works/shell-script-basics-change-mac-address
+#
+
+ether_adapter="en0"
+if [[ $# -gt 1 ]]; then
+  ether_adapter="$1"
+fi
+
+echo "Changing address associated with: $ether_adapter"
+
+generate_and_set_new_mac_address() {
+  mac=$(openssl rand -hex 6 | sed "s/\(..\)/\1:/g; s/./0/2; s/.$//")
+  old_mac=$(ifconfig "$ether_adapter" | grep ether)
+  sudo ifconfig "$ether_adapter" ether "$mac"
+  new_mac=$(ifconfig "$ether_adapter" | grep ether)
+}
+
+while [[ "$new_mac" == "$old_mac" ]]
+do
+  generate_and_set_new_mac_address
+done
+
+echo "The new value is: $new_mac"
+echo "go ahead and re-connect to the wifi. You should be able to join the network."
