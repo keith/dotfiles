@@ -1,16 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-set -e
+set -euo pipefail
 
-ROOT="$HOME/Dropbox/journal"
-FOLDER="$(date "+%m%y")"
+root="$HOME/journal"
+folder="$(date "+%m%y")"
 
 # GNU vs BSD date
 if date --version > /dev/null 2>&1; then
-  FILE=$(date --date "-5 hours" "+%d%m%y")
+  file=$(date --date "-5 hours" "+%d%m%y")
 else
-  FILE="$(date -v -5H "+%d%m%y")"
+  file="$(date -v -5H "+%d%m%y")"
 fi
 
-mkdir -p "$FOLDER"
-exec "$EDITOR" "$ROOT/$FOLDER/$FILE.asc"
+mkdir -p "$folder"
+exec "$EDITOR" "$root/$folder/$file.asc"
