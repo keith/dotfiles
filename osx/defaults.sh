@@ -303,9 +303,6 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerFromRight
 # Mouse: TwoButton mouse
 defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseButtonMode -string "TwoButton"
 
-# Turn Bluetooth off.
-sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
-
 # Disable El Capitan shake to magnify cursor
 defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 
