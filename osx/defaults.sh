@@ -249,9 +249,6 @@ sudo pmset -a lessbright 0
 # Disable sudden motion sensor
 sudo pmset -a sms 0
 
-# Enable the MacBook Air SuperDrive on any Mac
-sudo nvram boot-args="mbasd=1"
-
 # Power button behavior
 defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
 
