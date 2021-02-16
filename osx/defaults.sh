@@ -319,12 +319,6 @@ defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool true
 # Date/Time
 #
 
-# Setup the menu bar date format
-defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
-
-# Flash the : in the menu bar
-defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
-
 # 24 hour time
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
