@@ -742,19 +742,6 @@ defaults write com.tapbots.TweetbotMac MainWindowColumnInfo -array-add '{ "accou
 # Caffeine
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 
-# https://github.com/naotaka/ClipMenu
-defaults write com.naotaka.ClipMenu maxHistorySize -int 100
-defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
-defaults write com.naotaka.ClipMenu showAlertBeforeClearHistory -bool false
-defaults write com.naotaka.ClipMenu showStatusItem -bool false
-
-# https://github.com/Clipy/Clipy
-defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInlineKey -int 10
-defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInsideFolderKey -int 100
-defaults write com.clipy-app.Clipy kCPYPrefShowAlertBeforeClearHistoryKey -bool false
-defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -bool false
-defaults write com.clipy-app.Clipy SUEnableAutomaticChecks -bool true
-
 # Firefox
 defaults write org.mozilla.firefox AppleShowScrollBars -string "Automatic"
 
