@@ -300,9 +300,6 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.rotateGesture -int
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture -int 0
 
-# Mouse: TwoButton mouse
-defaults write com.apple.driver.AppleBluetoothMultitouch.mouse.plist MouseButtonMode -string "TwoButton"
-
 # Disable El Capitan shake to magnify cursor
 defaults write NSGlobalDomain CGDisableCursorLocationMagnification -bool true
 
