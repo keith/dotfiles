@@ -52,6 +52,5 @@
            "filetypes": ["zig"]
        }
     },
-    "python.jediEnabled": false,
     "python.linting.mypyEnabled": true
 }
