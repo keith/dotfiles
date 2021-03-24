@@ -63,7 +63,7 @@
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   g           = !exec git
   git         = !exec git
-  l           = log -20 --topo-order --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset'
+  l           = log -20 --topo-order --pretty='format:%Cblue%h%Creset %s%Cred%d%Creset %C(yellow)(%an)%Creset %ar'
   last        = diff HEAD^ HEAD
   last-msg    = !git --no-pager log --format=format:%B -1
   last-sha    = !git --no-pager log --format=format:%H -1
