@@ -10,6 +10,8 @@ alias .....="cd ../../../.."
 alias g="git"
 alias G="git"
 
+alias v=nvim
+
 # Remove all items from the dock
 alias cleardock="defaults write com.apple.dock persistent-apps -array \"\" && killall Dock"
 
