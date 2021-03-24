@@ -41,4 +41,7 @@ if [[ -f "$HOME/.secrets" ]]; then
 fi
 
 export PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Swift compiler sccache setup
 export SCCACHE_CACHE_SIZE=100G
+export SWIFT_USE_SCCACHE=1
