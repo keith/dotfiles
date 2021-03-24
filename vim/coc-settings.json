@@ -47,10 +47,12 @@
                 "Package.swift"
             ]
         },
-       "zls" : {
-           "command": "zls",
-           "filetypes": ["zig"]
-       }
+        "zls": {
+            "command": "zls",
+            "filetypes": [
+                "zig"
+            ]
+        }
     },
     "python.linting.mypyEnabled": true
 }
