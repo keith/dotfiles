@@ -4,11 +4,19 @@ set -euo pipefail
 set -x
 
 if [[ $# -lt 1 ]]; then
-  echo "usage: $0 <new_sha> [<sha_to_update>]" >&2
+  echo "usage: $0 <new_sha> [--squash] [<sha_to_update>]" >&2
   exit 1
 fi
 
+export GIT_SEQUENCE_EDITOR=true
+
 readonly commit_to_update=$1
+squash=false
+if [[ "${2:-}" == --squash ]]; then
+  squash=true
+  shift
+fi
+
 readonly new_refspec=$(git rev-parse "${2:-HEAD}")
 readonly base_refspec=$(git rev-parse HEAD)
 
@@ -74,9 +82,13 @@ if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
   fi
 fi
 
-git -C "$worktree_dir" push --quiet || echo "warning: failed to push '$branch_name'" >&2
-
-export GIT_SEQUENCE_EDITOR=true
+if [[ "$squash" == true ]]; then
+  git -C "$worktree_dir" commit --amend --fixup=HEAD~
+  git -C "$worktree_dir" rebase --interactive --autosquash HEAD~2
+  git -C "$worktree_dir" push --force-with-lease --quiet || echo "warning: failed to force push '$branch_name'" >&2
+else
+  git -C "$worktree_dir" push --quiet || echo "warning: failed to push '$branch_name'" >&2
+fi
 
 git rebase --interactive --exec "git commit --amend --fixup '$commit_to_update'" "$new_refspec"^
 git rebase --interactive --autosquash "$commit_to_update"^
