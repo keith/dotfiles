@@ -27,8 +27,7 @@ if [[ ! -d "$worktree_dir" ]]; then
   git worktree add "$worktree_dir" "$branch_name"
 else
   if ! git -C "$worktree_dir" switch "$branch_name"; then
-    # TODO: should this be -D?
-    git branch -d "$branch_name"
+    git branch -D "$branch_name"
     exit 1
   fi
 fi
@@ -41,10 +40,9 @@ if ! git -C "$worktree_dir" cherry-pick "$commit"; then
   if git -C "$worktree_dir" mergetool; then
     git -C "$worktree_dir" -c core.editor=true cherry-pick --continue
   else
-    # TODO: should this be -D?
     git -C "$worktree_dir" cherry-pick --abort
     _checkout_empty
-    git branch -d "$branch_name"
+    git branch -D "$branch_name"
     exit 1
   fi
 fi
@@ -59,7 +57,7 @@ elif git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; the
 else
   echo "error: failed to create remote branch" >&2
   _checkout_empty
-  git branch -d "$branch_name"
+  git branch -D "$branch_name"
 fi
 
 _checkout_empty
