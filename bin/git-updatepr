@@ -43,6 +43,8 @@ _checkout_empty() {
   git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
 }
 
+trap _checkout_empty EXIT
+
 _ask() {
   read -p "$1" -n 1 -r
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
@@ -66,7 +68,6 @@ if ! git -C "$worktree_dir" diff --quiet "HEAD...@{upstream}"; then
     git -C "$worktree_dir" pull
   else
     echo "warning: not updating PR, checkout '$branch_name', pull and try again" >&2
-    _checkout_empty
     exit 1
   fi
 fi
@@ -76,7 +77,6 @@ if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
     git -C "$worktree_dir" cherry-pick --continue
   else
     git -C "$worktree_dir" cherry-pick --abort
-    _checkout_empty
     # TODO what do i do? i think we have to reset branch state? maybe just abort cherry pick?
     exit 1
   fi
@@ -92,4 +92,3 @@ fi
 
 git rebase --interactive --exec "git commit --amend --fixup '$commit_to_update'" "$new_refspec"^
 git rebase --interactive --autosquash "$commit_to_update"^
-_checkout_empty
