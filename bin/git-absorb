@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from typing import List, Dict, Tuple
+import argparse
 import os
 import subprocess
 import sys
@@ -14,6 +15,22 @@ class _MultipleCommits(Exception):
 
 class _GitError(Exception):
     pass
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-s",
+        action="store_true",
+        dest="sign_off",
+        help="Add Signed-off-by to commit"
+    )
+    parser.add_argument(
+        "--squash",
+        action="store_true",
+        help="Squash the commit instead of adding a new commit to the branch",
+    )
+    return parser
 
 
 def _run_git_command(args: List[str]) -> str:
@@ -87,7 +104,7 @@ def _shas_by_file(shas: List[str], changed_files: List[str]) -> Dict[str, str]:
     return shas_by_file
 
 
-def _main(args: List[str]) -> None:
+def _main(squash: bool, sign_off: bool) -> None:
     if not _is_in_repo():
         sys.exit("error: not in git repo")
 
@@ -120,13 +137,22 @@ def _main(args: List[str]) -> None:
     if stage_first:
         _run_git_command(["add"] + changed_files)
 
-    # TODO: add -s for custom ones
+    args = []
+    if squash:
+        args.append("-m 'ignore, will be squashed'")
+    if sign_off:
+        args.append("-s")
+
     code = os.system("git commit {}".format(" ".join(args)))
     if code != 0:
         sys.exit("Not updating PR without a commit")
 
-    _run_git_command(["updatepr", matching_shas.pop()])
+    update_command = ["updatepr", matching_shas.pop()]
+    if squash:
+        update_command.append("--squash")
+    _run_git_command(update_command)
 
 
 if __name__ == "__main__":
-    _main(sys.argv[1:])
+    args = _build_parser().parse_args()
+    _main(args.squash, args.sign_off)
