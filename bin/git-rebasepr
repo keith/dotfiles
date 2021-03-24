@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+readonly commit_to_rebase=${1:-HEAD}
+readonly branch_name="ks/$(git show --no-patch --format=%f "$commit_to_rebase" | tr '[:upper:]' '[:lower:]')"
+if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
+  echo "error: branch '$branch_name' doesn't exist" >&2
+  exit 1
+fi
+
+readonly worktree_name=$(git rev-parse --show-toplevel | md5)
+readonly worktree_dir="$HOME/.cache/git-pile/$worktree_name"
+if [[ ! -d "$worktree_dir" ]]; then
+  git worktree add "$worktree_dir" "$branch_name"
+else
+  git -C "$worktree_dir" switch "$branch_name"
+fi
+
+_checkout_empty() {
+  git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
+}
+
+trap _checkout_empty EXIT
+
+branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
+# TODO: if this fails start a mergetool?
+git -C "$worktree_dir" rebase "$branch_with_remote"
+git -C "$worktree_dir" push --force-with-lease --quiet
