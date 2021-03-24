@@ -63,6 +63,7 @@ remote_branch_name="${branch_with_remote#*/}"
 
 git -C "$worktree_dir" fetch "$remote_name" "$remote_branch_name"
 if ! git -C "$worktree_dir" diff --quiet "HEAD...@{upstream}"; then
+  git -C "$worktree_dir" diff "HEAD...@{upstream}"
   answer=$(_ask "warning: upstream has new commits, would you like to pull those (or abort)? (y/n) ")
   if [[ "$answer" == y ]]; then
     git -C "$worktree_dir" pull
