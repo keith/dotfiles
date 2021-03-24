@@ -1,6 +1,7 @@
 {
     "clangd.path": "/usr/local/opt/llvm/bin/clangd",
     "clangd.semanticHighlighting": true,
+    "coc.preferences.useQuickfixForLocations": true,
     "diagnostic.checkCurrentLine": true,
     "git.addGBlameToVirtualText": true,
     "languageserver": {
