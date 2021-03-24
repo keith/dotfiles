@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euo pipefail
+
+security cms -D -i "$@" | sort-profile

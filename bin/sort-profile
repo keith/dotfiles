@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+import sys
+import xml.etree.ElementTree as ET
+
+def sort_and_output(element: ET.Element, indent: str="") -> None:
+    stack = [element]
+
+    nested_indent = indent + "  "
+    while stack:
+        element = stack.pop()
+        tag = element.tag
+        if tag == "dict":
+            print(f"{indent}<dict>")
+
+            all_items = iter(element)
+            items = zip(all_items, all_items)
+            ordered_items = sorted(items, key=lambda item: str(item[0].text))
+            for key, value in ordered_items:
+                sort_and_output(key, nested_indent)
+                sort_and_output(value, nested_indent)
+
+            print(f"{indent}</dict>")
+        elif tag == "array":
+            print(f"{indent}<array>")
+
+            ordered_items = sorted(iter(element), key=lambda item: str(item.text))
+            for item in ordered_items:
+                sort_and_output(item, nested_indent)
+
+            print(f"{indent}</array>")
+        elif tag in {"data", "date", "integer", "string", "key"}:
+            print(f"{indent}<{tag}>{element.text}</{tag}>")
+        elif tag == "true" or tag == "false":
+            print(f"{indent}<{tag}/>")
+        else:
+            raise SystemExit(f"error: hit unexpected tag: {tag}")
+
+
+
+def _main() -> None:
+    tree = ET.parse(sys.stdin)
+    for element in tree.getroot():
+        sort_and_output(element)
+
+if __name__ == "__main__":
+    _main()
