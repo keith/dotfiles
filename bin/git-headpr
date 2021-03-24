@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+commit_args=(--)
+if [[ "${1:-}" == "--squash" ]]; then
+  commit_args=(-m ignore)
+fi
+
+head_sha=$(git rev-parse HEAD)
+git commit "${commit_args[@]}"
+git updatepr "$head_sha" "$@"
