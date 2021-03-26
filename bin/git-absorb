@@ -23,7 +23,7 @@ def _build_parser() -> argparse.ArgumentParser:
         "-s",
         action="store_true",
         dest="sign_off",
-        help="Add Signed-off-by to commit"
+        help="Add Signed-off-by to commit",
     )
     parser.add_argument(
         "--squash",
@@ -36,9 +36,13 @@ def _build_parser() -> argparse.ArgumentParser:
 def _run_git_command(args: List[str]) -> str:
     try:
         output: bytes = subprocess.check_output(["git"] + args)
+        # TODO: got an exception here at some point
         return output.strip().decode("utf-8")
     except subprocess.CalledProcessError:
         raise _GitError()
+    except UnicodeDecodeError:
+        print(f"error: output was {output}")
+        raise
 
 
 def _is_in_repo() -> bool:
