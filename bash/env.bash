@@ -45,3 +45,6 @@ export PIP_DISABLE_PIP_VERSION_CHECK=1
 # Swift compiler sccache setup
 export SCCACHE_CACHE_SIZE=100G
 export SWIFT_USE_SCCACHE=1
+
+export GIT_PILE_PREFIX=ks/
+export GIT_PILE_VERBOSE=true
