@@ -1,7 +1,10 @@
 #!/bin/bash
 
 set -euo pipefail
-set -x
+
+if [[ -n "${GIT_PILE_VERBOSE:-}" ]]; then
+  set -x
+fi
 
 if [[ $# -lt 1 ]]; then
   echo "usage: $0 <new_sha> [--squash] [<sha_to_update>]" >&2

@@ -1,7 +1,10 @@
 #!/bin/bash
 
 set -euo pipefail
-set -x
+
+if [[ -n "${GIT_PILE_VERBOSE:-}" ]]; then
+  set -x
+fi
 
 readonly commit_to_rebase=${1:-HEAD}
 readonly branch_name="ks/$(git show --no-patch --format=%f "$commit_to_rebase" | tr '[:upper:]' '[:lower:]')"
