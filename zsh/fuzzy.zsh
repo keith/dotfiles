@@ -57,7 +57,7 @@ fuzzy_history_widget() {
 fuzzy_log_widget() {
   trap "" INT
 
-  result="$(git log --format="%h %s" | fzy)"
+  result="$(git log -50 --format="%h %s" | fzy)"
   if [[ -n "$result" ]]; then
     LBUFFER="${LBUFFER}$(echo "$result" | cut -d " " -f 1)"
   fi
