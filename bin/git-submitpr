@@ -35,16 +35,17 @@ else
   fi
 fi
 
-_checkout_empty() {
-  git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
+_detach_branch() {
+  git -C "$worktree_dir" switch --detach --quiet
 }
+
+trap _detach_branch EXIT
 
 if ! git -C "$worktree_dir" cherry-pick "$commit"; then
   if git -C "$worktree_dir" mergetool; then
     git -C "$worktree_dir" -c core.editor=true cherry-pick --continue
   else
     git -C "$worktree_dir" cherry-pick --abort
-    _checkout_empty
     git branch -D "$branch_name"
     exit 1
   fi
@@ -59,8 +60,5 @@ elif git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; the
   git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
 else
   echo "error: failed to create remote branch" >&2
-  _checkout_empty
   git branch -D "$branch_name"
 fi
-
-_checkout_empty

@@ -42,11 +42,11 @@ else
   git -C "$worktree_dir" switch "$branch_name"
 fi
 
-_checkout_empty() {
-  git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
+_detach_branch() {
+  git -C "$worktree_dir" switch --detach --quiet
 }
 
-trap _checkout_empty EXIT
+trap _detach_branch EXIT
 
 _ask() {
   read -p "$1" -n 1 -r

@@ -21,11 +21,11 @@ else
   git -C "$worktree_dir" switch "$branch_name"
 fi
 
-_checkout_empty() {
-  git -C "$worktree_dir" switch -C "empty-$worktree_name" --quiet
+_detach_branch() {
+  git -C "$worktree_dir" switch --detach --quiet
 }
 
-trap _checkout_empty EXIT
+trap _detach_branch EXIT
 
 branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
 # TODO: if this fails start a mergetool?
