@@ -26,9 +26,9 @@
 [mergetool "nvim"]
   cmd = nvim -c "normal\\ gg]c" -f \"$MERGED\"
   prompt = false
+  trustExitCode = true
 [mergetool]
   keepBackup = false
-  trustExitCode = true
 [merge]
   tool = nvim
   log = true
