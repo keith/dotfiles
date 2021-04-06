@@ -45,6 +45,7 @@ files=(\
   w3m \
   weechat \
   xvimrc \
+  zshenv \
   zshrc \
 )
 
