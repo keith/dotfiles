@@ -1,7 +1,9 @@
 #!/bin/sh
 
-key="$HOME/.ssh/id_rsa.pub"
-if [ ! -e "$key" ]; then
+set -euo pipefail
+
+key=$(ls "$HOME"/.ssh/*.pub | fzy)
+if [[ ! -e "$key" ]]; then
   echo "No public key exists in $key"
   exit 1
 fi
