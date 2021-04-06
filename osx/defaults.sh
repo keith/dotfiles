@@ -597,6 +597,9 @@ defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile
 # Force files to open in new windows instead of new tabs
 defaults write com.apple.TextEdit AppleWindowTabbingMode -string manual
 
+# https://mjtsai.com/blog/2021/03/29/how-to-stop-mac-app-store-notifications
+defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:00:00 +0000"
+
 
 #
 # X11
