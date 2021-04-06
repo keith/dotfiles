@@ -10,6 +10,3 @@ if (( $+commands[tag] )); then
 else
   alias s=rg
 fi
-
-alias ag="echo 'use s'"
-alias rg="echo 'use s'"
