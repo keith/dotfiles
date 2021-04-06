@@ -151,10 +151,11 @@ def _main(squash: bool, sign_off: bool) -> None:
     if code != 0:
         sys.exit("Not updating PR without a commit")
 
-    update_command = ["updatepr", matching_shas.pop()]
+    update_command = ["git", "updatepr", matching_shas.pop()]
     if squash:
         update_command.append("--squash")
-    _run_git_command(update_command)
+
+    subprocess.check_call(update_command)
 
 
 if __name__ == "__main__":
