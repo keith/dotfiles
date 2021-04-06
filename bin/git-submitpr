@@ -46,6 +46,7 @@ if ! git -C "$worktree_dir" cherry-pick "$commit"; then
     git -C "$worktree_dir" -c core.editor=true cherry-pick --continue
   else
     git -C "$worktree_dir" cherry-pick --abort
+    _detach_branch
     git branch -D "$branch_name"
     exit 1
   fi
@@ -60,5 +61,6 @@ elif git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; the
   git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
 else
   echo "error: failed to create remote branch" >&2
+  _detach_branch
   git branch -D "$branch_name"
 fi
