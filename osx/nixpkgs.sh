@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# Install nix with https://duan.ca/2020/12/13/nix-on-macos-11-big-sur
 pkgs=(
   nixpkgs.bash
   nixpkgs.chruby
