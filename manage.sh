@@ -4,6 +4,7 @@ files=(\
   agignore \
   bash_profile \
   bashrc \
+  bazelrc \
   bin \
   colordiffrc \
   conductor.js \
