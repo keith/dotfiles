@@ -719,6 +719,9 @@ defaults write com.apple.dt.Xcode DVTTextShowMinimap -bool false
 # https://www.smileykeith.com/2020/09/29/lldb-reproducers
 defaults write com.apple.dt.Xcode IDEDebuggerEnableReproducerCapture -bool true
 
+# Disable Source Control
+defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_10_0 -bool false
+
 
 #
 # Third Party
