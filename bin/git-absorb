@@ -154,6 +154,8 @@ def _main(squash: bool, sign_off: bool) -> None:
     update_command = ["git", "updatepr", matching_shas.pop()]
     if squash:
         update_command.append("--squash")
+    if sign_off:
+        update_command.append("-s")
 
     subprocess.check_call(update_command)
 
