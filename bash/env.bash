@@ -5,13 +5,14 @@ fi
 # Set the path to include:
 #  - $HOME/.bin       for local tools
 #  - $HOME/.local/bin for haskell tools installed by stack
+#  - /opt/homebrew/bin  for Homebrew on Apple Silicon
 #  - /usr/local/bin   for Homebrew
 #  - /usr/local/sbin
 #  - /usr/bin         for system executables
 #  - /usr/sbin
 #  - /bin
 #  - /sbin
-export PATH="$HOME/.bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+export PATH="$HOME/.bin:$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 
 export EDITOR=nvim
 
