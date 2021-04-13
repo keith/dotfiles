@@ -23,6 +23,7 @@
 \#*\#
 bazel_cache
 build.noindex
+DerivedData
 Icon
 node_modules
 Session.vim
