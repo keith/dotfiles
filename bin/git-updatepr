@@ -34,7 +34,7 @@ if ! git cat-file -e "$commit_to_update" 2> /dev/null; then
 fi
 
 readonly branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit_to_update" | tr '[:upper:]' '[:lower:]')"
-if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
+if ! git show-ref --quiet "$branch_name"; then
   echo "error: branch '$branch_name' doesn't exist" >&2
   exit 1
 fi
