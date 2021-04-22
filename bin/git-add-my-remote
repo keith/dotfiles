@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+url=$(git config --get remote.origin.url | sed -E 's=github.com/[[:alnum:]]+=github.com/keith=')
+git remote add mine "$url"
+git fetch mine
