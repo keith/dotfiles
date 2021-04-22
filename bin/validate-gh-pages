@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly domain=$1
+
+readonly urls=(
+  "http://$domain"
+  "http://www.$domain"
+  "https://$domain"
+  "https://www.$domain"
+)
+
+for url in "${urls[@]}"
+do
+  if curl --silent --output /dev/null -L "$url"; then
+    echo "good: $url"
+  else
+    echo "bad: $url"
+  fi
+done
