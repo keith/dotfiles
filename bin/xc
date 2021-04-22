@@ -9,7 +9,7 @@ set -euo pipefail
 xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode==" || true))
 
 open_project() {
-  PATH=/usr/bin:/bin open -a "$1" .
+  env --unset=GEM_HOME --unset=GEM_PATH PATH=/usr/bin:/bin open -a "$1" .
 }
 
 case "${#xcodes[@]}" in
