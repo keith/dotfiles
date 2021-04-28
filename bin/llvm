@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+prg=$1
+shift
+
+prefix="$(brew --prefix llvm)/bin"
+if [[ -x "$prefix/$prg" ]]; then
+  exec "$prefix/$prg" "$@"
+elif [[ -x "$prefix/llvm-$prg" ]]; then
+  exec "$prefix/llvm-$prg" "$@"
+else
+  echo "error: '$prg' not found in $prefix" >&2
+  exit 1
+fi
