@@ -9,19 +9,34 @@ set -euo pipefail
 xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode==" || true))
 
 open_project() {
-  env --unset=GEM_HOME --unset=GEM_PATH PATH=/usr/bin:/bin open -a "$1" .
+  env --unset=GEM_HOME --unset=GEM_PATH PATH=/usr/bin:/bin open -a "$1" ./$2
 }
+
+# Open prefers Package.swifts to checked in projects so we have to do this manually FB9092403
+glob=""
+globs=("*.xcworkspace" "*.xcodeproj" "Package.swift")
+for option in "${globs[@]}"
+do
+  if [[ -n "$(find . -maxdepth 1 -name "$option")" ]]; then
+    glob=$option
+  fi
+done
+
+if [[ -z "$glob" ]]; then
+  echo "error: nothing found to open" >&2
+  exit 1
+fi
 
 case "${#xcodes[@]}" in
   0)
     xcode="$(xcode-select -p | sed "s=/Contents/Developer==")"
-    open_project "$xcode"
+    open_project "$xcode" "$glob"
     ;;
   1)
-    open_project "${xcodes[0]}"
+    open_project "${xcodes[0]}" "$glob"
     ;;
   *)
     xcode=$(printf '%s\n' "${xcodes[@]}" | fzy)
-    open_project "$xcode"
+    open_project "$xcode" "$glob"
     ;;
 esac
