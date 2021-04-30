@@ -1,6 +1,18 @@
 #!/bin/bash
+#
+# Open $EDITOR (some vim variant) at the currently open line in Xcode
+#
 
 set -euo pipefail
+
+# TODO: There are a few issues with this script:
+# 1. I cannot find a way to get the _actual_ focused window in Xcode, just all
+#    documents that are open in general, which is why it fuzzy finds.
+# 2. If you have multiple Xcode versions open I don't understand how AppleScript
+#    picks which one to use but it doesn't work, maybe I could find multiple open
+#    ones and collect all the files from them
+# 3. It would be nice if the paths were relativized to the pwd since my expected
+#    use case is you'd execute this from the project's SRCROOT
 
 read -r -d '' script <<EOF || true
 var documents = Application("Xcode").sourceDocuments();
@@ -24,4 +36,4 @@ fi
 
 selected=$(echo "$paths" | cut -d: -f2 | fzy)
 start_position=$(echo "$paths" | grep "^PATH:$selected:" | cut -d: -f3 | cut -d, -f1)
-exec "$EDITOR" "$selected" "+call cursor(byte2line($start_position), 0)"
+exec "$EDITOR" "$selected" "+call cursor(byte2line($start_position), $start_position - line2byte(byte2line($start_position)))"
