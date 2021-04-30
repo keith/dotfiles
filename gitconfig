@@ -55,7 +55,7 @@
   coma        = commit --verbose --amend --no-edit
   comf        = commit --verbose --fixup=HEAD
   cop         = !sh -c 'git branch | cut -c 3- | fzy --query=$1 | xargs git checkout' -
-  copr        = !sh -c 'git branch -r | cut -c 3- | grep -v HEAD | cut -d "/" -f 2 | fzy --query=$1 | xargs git checkout' -
+  copr        = !sh -c 'git branch -r | cut -c 3- | grep -v HEAD | cut -d/ -f2- | fzy --query=$1 | xargs git checkout' -
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
