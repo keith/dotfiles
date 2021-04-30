@@ -6,15 +6,12 @@ gnu_manpaths=( \
   "$BREW_PREFIX/opt/coreutils/libexec/gnuman" \
   "$BREW_PREFIX/opt/findutils/libexec/gnuman" \
   "$BREW_PREFIX/opt/gnu-sed/libexec/gnuman" \
-  "$BREW_PREFIX/opt/gnu-tar/libexec/gnuman" \
 )
 
 gnu_bins=( \
   "$BREW_PREFIX/opt/coreutils/libexec/gnubin" \
   "$BREW_PREFIX/opt/findutils/libexec/gnubin" \
   "$BREW_PREFIX/opt/gnu-sed/libexec/gnubin" \
-  "$BREW_PREFIX/opt/gnu-tar/libexec/gnubin" \
-  "$BREW_PREFIX/opt/make/libexec/gnubin" \
 )
 
 new_manpath=""
