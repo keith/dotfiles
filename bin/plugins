@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 file=~/.vim/plugins
 target=~/.vim/bundle
 if [[ ! -e "$file" ]]; then
@@ -7,72 +9,54 @@ if [[ ! -e "$file" ]]; then
   exit 1
 fi
 
-containsElement () {
+containsElement() {
   local e
-  for e in "${@:2}"
+  for e in "$@"
   do
     [[ "$e" == "$1" ]] && return 0
   done
   return 1
 }
 
-repos=$(cat $file)
 names=()
-existing=()
-new=()
+commands=()
 
-for repo in ${repos[@]}
+while read -r repo
 do
-  parts=(${repo//\// })
-  name=${parts[1]}
-  if [[ "$name" == "" ]]; then
+  if [[ -z "$repo" ]]; then
     continue
   fi
 
+  name="${repo#*/}"
+  names+=("$name")
   path="$target/$name"
-  names[${#names[@]}]=$name
-  if [[ -d $path ]];then
-    existing[${#existing[@]}]=$path
+  if [[ -d "$path" ]];then
+    commands+=("echo '$path'; git -C '$path' pull")
   else
-    new[${#new[@]}]="git clone --recursive https://github.com/$repo.git $target/$name"
+    commands+=("git clone --recursive https://github.com/$repo.git '$path'")
   fi
-done
+done < "$file"
 
-if command -v parallel &> /dev/null;then
-  if [[ "${#existing[@]}" -gt "0" ]];then
-    parallel -j0 cd {}\; pwd\; git pull ::: "${existing[@]}"
-  fi
-
-  if [[ "${#new[@]}" -gt "0" ]];then
-    parallel -j0 ::: "${new[@]}"
-  fi
+if command -v parallel &> /dev/null && parallel --version >/dev/null 2>&1;then
+  parallel -j0 ::: "${commands[@]}"
+elif command -v parallel &> /dev/null; then
+  echo "note: install gnu-parallel instead of moreutils for better output grouping"
+  parallel -- "${commands[@]}"
 else
-  for dir in ${existing[@]}
+  echo "note: install gnu-parallel to run commands in parallel"
+  for cmd in "${commands[@]}"
   do
-    pushd $dir > /dev/null
-    git pull &
-    popd > /dev/null
-  done
-
-  for ((i = 0; i < ${#new[@]}; i++))
-  do
-    eval "${new[$i]} &"
+    eval "$cmd &"
   done
 
   wait
 fi
 
-existing=($(ls $target))
-for dir in ${existing[@]}
+for dir in *
 do
-  containsElement "$dir" "${names[@]}"
-  if [[ "$?" -eq "0" ]]; then
-    continue
+  if ! containsElement "$dir" "${names[@]}"; then
+    path="$target/$dir"
+    echo "Removing $path"
+    rm -rf "$path"
   fi
-
-  path="$target/$dir"
-  echo "Removing $path"
-  rm -rf $path &
 done
-
-wait
