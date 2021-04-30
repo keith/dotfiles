@@ -1,5 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
-set -euo pipefail
+import plistlib
+import subprocess
+import sys
 
-security cms -D -i "$@" | sort-profile
+process = subprocess.run(
+    ["security", "cms", "-D", "-i", sys.argv[1]],
+    stdout=subprocess.PIPE,
+    check=True,
+)
+plist = plistlib.loads(process.stdout)
+plistlib.dump(plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True)
