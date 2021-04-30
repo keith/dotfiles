@@ -13,6 +13,8 @@ set -euo pipefail
 #    ones and collect all the files from them
 # 3. It would be nice if the paths were relativized to the pwd since my expected
 #    use case is you'd execute this from the project's SRCROOT
+# 4. I didn't find a way to print to stdout from the script so I have to capture
+#    everything and filter on lines with the special PATH: prefix
 
 read -r -d '' script <<EOF || true
 var documents = Application("Xcode").sourceDocuments();
