@@ -20,7 +20,6 @@ keith/gist.vim
 keith/parsec.vim
 keith/swift.vim
 keith/xcconfig.vim
-LnL7/vim-nix
 ludovicchabant/vim-gutentags
 machakann/vim-highlightedyank
 majutsushi/tagbar
