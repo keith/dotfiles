@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -euo pipefail
+
+read -r -d '' script <<EOF || true
+var documents = Application("Xcode").sourceDocuments();
+for (const documentIndex in documents) {
+  var document = documents[documentIndex];
+  console.log("PATH:" + document.path() + ":" + document.selectedCharacterRange.get());
+}
+EOF
+
+all_output=$(mktemp)
+if ! echo "$script" | osascript -l JavaScript > "$all_output" 2>&1; then
+  echo "error: failed to fetch files: $(grep -v PATH: "$all_output")" >&2
+  exit 1
+fi
+
+paths=$(grep PATH: "$all_output" || true)
+if [[ -z "$paths" ]]; then
+  echo "error: no open files in Xcode" >&2
+  exit 1
+fi
+
+selected=$(echo "$paths" | cut -d: -f2 | fzy)
+start_position=$(echo "$paths" | grep "^PATH:$selected:" | cut -d: -f3 | cut -d, -f1)
+exec "$EDITOR" "$selected" "+call cursor(byte2line($start_position), 0)"
