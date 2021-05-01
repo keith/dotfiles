@@ -17,10 +17,10 @@ var nameGetter = ObjectSpecifier().name
 var apps = processes.whose({_match: [nameGetter, "Xcode"]})
 for (const appIndex in apps) {
   var xcode = Application(apps[appIndex].file().posixPath.get())
-  var active = xcode.activeWorkspaceDocument()
-  var documents = xcode.sourceDocuments()
-  if (active !== null) {
-    console.log("WORKSPACE:" + active.path.get())
+  var activeWorkspace = xcode.activeWorkspaceDocument()
+  if (activeWorkspace !== null) {
+    console.log("WORKSPACE:" + activeWorkspace.path.get())
+    var documents = xcode.sourceDocuments()
     for (const documentIndex in documents) {
       var document = documents[documentIndex];
       console.log("PATH:" + document.path() + ":" + document.selectedCharacterRange.get());
