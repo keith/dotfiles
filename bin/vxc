@@ -6,21 +6,26 @@
 set -euo pipefail
 
 # TODO: There are a few issues with this script:
-# 1. I cannot find a way to get the _actual_ focused window in Xcode, just all
-#    documents that are open in general, which is why it fuzzy finds.
-# 2. If you have multiple Xcode versions open I don't understand how AppleScript
-#    picks which one to use but it doesn't work, maybe I could find multiple open
-#    ones and collect all the files from them
-# 3. It would be nice if the paths were relativized to the pwd since my expected
-#    use case is you'd execute this from the project's SRCROOT
-# 4. I didn't find a way to print to stdout from the script so I have to capture
-#    everything and filter on lines with the special PATH: prefix
+# - I cannot find a way to get the _actual_ focused window in Xcode, just all
+#   documents that are open in general, which is why it fuzzy finds.
+# - I didn't find a way to print to stdout from the script so I have to capture
+#   everything and filter on lines with the special PATH: prefix
 
 read -r -d '' script <<EOF || true
-var documents = Application("Xcode").sourceDocuments();
-for (const documentIndex in documents) {
-  var document = documents[documentIndex];
-  console.log("PATH:" + document.path() + ":" + document.selectedCharacterRange.get());
+var processes = Application("System Events").processes
+var nameGetter = ObjectSpecifier().name
+var apps = processes.whose({_match: [nameGetter, "Xcode"]})
+for (const appIndex in apps) {
+  var xcode = Application(apps[appIndex].file().posixPath.get())
+  var active = xcode.activeWorkspaceDocument()
+  var documents = xcode.sourceDocuments()
+  if (active !== null) {
+    console.log("WORKSPACE:" + active.path.get())
+    for (const documentIndex in documents) {
+      var document = documents[documentIndex];
+      console.log("PATH:" + document.path() + ":" + document.selectedCharacterRange.get());
+    }
+  }
 }
 EOF
 
@@ -33,6 +38,24 @@ fi
 paths=$(grep PATH: "$all_output" || true)
 if [[ -z "$paths" ]]; then
   echo "error: no open files in Xcode" >&2
+  exit 1
+fi
+
+workspaces=$(grep WORKSPACE: "$all_output" | cut -d: -f2 | xargs dirname || true)
+current_workspace=""
+for workspace in "${workspaces[@]}"
+do
+  if [[ "$workspace" == "$(pwd)" ]]; then
+    current_workspace="$workspace"
+  fi
+done
+
+if [[ -n "$current_workspace" ]]; then
+  paths=$(grep "PATH:$current_workspace/" "$all_output" | sed "s=$current_workspace/==g" || true)
+fi
+
+if [[ -z "$paths" ]]; then
+  echo "error: no open files in '$current_workspace'" >&2
   exit 1
 fi
 
