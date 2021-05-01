@@ -41,14 +41,14 @@ if [[ -z "$paths" ]]; then
   exit 1
 fi
 
-workspaces=$(grep WORKSPACE: "$all_output" | cut -d: -f2 | xargs dirname || true)
 current_workspace=""
-for workspace in "${workspaces[@]}"
+while read -r workspace
 do
   if [[ "$workspace" == "$(pwd)" ]]; then
     current_workspace="$workspace"
+    break
   fi
-done
+done <<< "$(grep WORKSPACE: "$all_output" | cut -d: -f2 | xargs dirname || true)"
 
 if [[ -n "$current_workspace" ]]; then
   paths=$(grep "PATH:$current_workspace/" "$all_output" | sed "s=$current_workspace/==g" || true)
