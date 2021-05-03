@@ -35,11 +35,10 @@ def _get_remotes():
 
 
 def _get_remote(name):
-    for remote_name, url in _get_remotes():
-        if name == remote_name:
-            return url
-
-    return None
+    return next(
+        (url for remote_name, url in _get_remotes() if name == remote_name),
+        None,
+    )
 
 
 def _current_branch_upstream():
@@ -69,15 +68,15 @@ def main(args):
         sys.exit(1)
 
     if not args.argument:
-        pass
+        return
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(
             url, _current_branch_upstream(), args.argument
         )
     elif _get_ref(args.argument):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
-    elif _get_remote(args.argument):
-        url = _get_remote(args.argument)
+    elif remote_url := _get_remote(args.argument):
+        url = remote_url
     else:
         url = os.path.join(url, args.argument)
 
