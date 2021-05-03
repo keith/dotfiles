@@ -107,7 +107,8 @@
 [diff "exif"]
   textconv = exiftool
 [diff "zip"]
-  textconv = unzip -c -a
+  textconv = textconv-zip
+  cachetextconv = true
 [difftool "ksdiff"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "ksdiff"]

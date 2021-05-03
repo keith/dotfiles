@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+output=$(mktemp)
+if unzip -c -a "$@" >"$output" 2>&1; then
+  cat "$output"
+else
+  echo "warning: failed to unzip with args: $*" >&2
+fi
