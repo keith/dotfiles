@@ -68,7 +68,7 @@ def main(args):
         sys.exit(1)
 
     if not args.argument:
-        return
+        pass
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(
             url, _current_branch_upstream(), args.argument
