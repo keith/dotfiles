@@ -51,3 +51,6 @@ export SWIFT_USE_SCCACHE=1
 
 export GIT_PILE_PREFIX=ks/
 export GIT_PILE_VERBOSE=true
+
+export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_NDK_HOME=~/Library/Android/sdk/ndk
