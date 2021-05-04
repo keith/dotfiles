@@ -13,6 +13,7 @@ fi
 #  - /bin
 #  - /sbin
 export PATH="$HOME/.bin:$HOME/.local/bin:$BREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+export CDPATH=$HOME/dev/mnf:$HOME/dev/lyft:$HOME/dev:$HOME/go/src/github.com/lyft:$HOME/go/src/github.com/bazelbuild
 
 export EDITOR=nvim
 
