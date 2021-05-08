@@ -1,13 +1,33 @@
 #!/usr/bin/env python3
 
+import argparse
 import plistlib
 import subprocess
 import sys
 
-process = subprocess.run(
-    ["security", "cms", "-D", "-i", sys.argv[1]],
-    stdout=subprocess.PIPE,
-    check=True,
+parser = argparse.ArgumentParser()
+parser.add_argument("profile", help="The provisioning file to process")
+parser.add_argument(
+    "--ignore-invalid",
+    action="store_true",
+    help="Ignore invalid profiles and print a constant string",
 )
-plist = plistlib.loads(process.stdout)
-plistlib.dump(plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True)
+args = parser.parse_args()
+
+try:
+    process = subprocess.run(
+        ["security", "cms", "-D", "-i", args.profile],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=True,
+    )
+
+    plist = plistlib.loads(process.stdout)
+    plistlib.dump(
+        plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True
+    )
+except subprocess.CalledProcessError:
+    if args.ignore_invalid:
+        print("warning: failed to read profile")
+    else:
+        sys.exit(f"error: failed to parse '{args.profile}'")
