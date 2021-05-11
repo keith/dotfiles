@@ -11,9 +11,11 @@ fi
 
 containsElement() {
   local e
+  local element=$1
+  shift
   for e in "$@"
   do
-    [[ "$e" == "$1" ]] && return 0
+    [[ "$e" == "$element" ]] && return 0
   done
   return 1
 }
@@ -52,11 +54,11 @@ else
   wait
 fi
 
-for dir in *
+for dir in "$target"/*
 do
-  if ! containsElement "$dir" "${names[@]}"; then
-    path="$target/$dir"
-    echo "Removing $path"
-    rm -rf "$path"
+  name=$(basename "$dir")
+  if ! containsElement "$name" "${names[@]}"; then
+    echo "Removing $dir"
+    rm -rf "$dir"
   fi
 done
