@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -euo pipefail
+
+args=()
+for arg in "$@"
+do
+  if [[ "$arg" == keith:* ]]; then
+    args+=("${arg:6}")
+  else
+    args+=("$arg")
+  fi
+done
+
+git checkout "${args[@]}"
