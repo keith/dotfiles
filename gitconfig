@@ -58,7 +58,7 @@
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
-  dm          = !sh -c 'git diff $@ $(git merge-base $(git main-branch) $(git name-rev --name-only HEAD))' -
+  dm          = !sh -c 'git diff $@ $(git merge-base origin/$(git main-branch) $(git name-rev --name-only HEAD))' -
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   g           = !exec git
   git         = !exec git
