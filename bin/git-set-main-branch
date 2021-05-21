@@ -5,5 +5,7 @@
 
 set -euo pipefail
 
+branch_name=${1:-$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)}
 config_key="$(git rev-parse --show-toplevel | md5).main-branch"
-git config --local "$config_key" "$1"
+echo "Setting main branch to '$branch_name'"
+git config --local "$config_key" "$branch_name"
