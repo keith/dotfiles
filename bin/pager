@@ -2,5 +2,5 @@
 
 content=$(cat)
 if [ -n "$content" ]; then
-  echo "$content" | diff-highlight | less
+  printf '%s' "$content" | diff-highlight | less
 fi
