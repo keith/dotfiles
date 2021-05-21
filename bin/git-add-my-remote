@@ -4,4 +4,7 @@ set -euo pipefail
 
 url=$(git config --get remote.origin.url | sed -E 's=github.com/[[:alnum:]]+=github.com/keith=')
 git remote add mine "$url"
-git fetch mine
+if ! git fetch mine; then
+  git remote rm mine
+  gh repo fork --remote-name mine --remote
+fi
