@@ -8,7 +8,7 @@ fi
 
 readonly commit_to_rebase=${1:-HEAD}
 readonly branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit_to_rebase" | tr '[:upper:]' '[:lower:]')"
-if ! git show-ref --verify --quiet refs/heads/"$branch_name"; then
+if ! git show-ref --quiet "$branch_name"; then
   echo "error: branch '$branch_name' doesn't exist" >&2
   exit 1
 fi
