@@ -1,6 +1,7 @@
 common:orf --override_repository=rules_foreign_cc=/Users/ksmiley/dev/rules_foreign_cc
 common:org --override_repository=io_bazel_rules_go=/Users/ksmiley/dev/rules_go
 common:orp --override_repository=rules_python=/Users/ksmiley/dev/rules_python
+common:orsky --override_repository=bazel_skylib=/Users/ksmiley/dev/bazel-skylib
 
 common:ora --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple
 common:oras --override_repository=build_bazel_apple_support=/Users/ksmiley/dev/apple_support
