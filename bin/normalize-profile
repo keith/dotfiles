@@ -12,6 +12,12 @@ parser.add_argument(
     action="store_true",
     help="Ignore invalid profiles and print a constant string",
 )
+parser.add_argument(
+    "--ignore-field",
+    action="append",
+    help="Fields to strip from the profile for diffing, useful to ignore things that always change like UUID",
+    default=[],
+)
 args = parser.parse_args()
 
 try:
@@ -23,6 +29,10 @@ try:
     )
 
     plist = plistlib.loads(process.stdout)
+    for field in args.ignore_field:
+        if field in plist:
+            del plist[field]
+
     plistlib.dump(
         plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True
     )
