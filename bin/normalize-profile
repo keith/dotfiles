@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import hashlib
 import plistlib
 import subprocess
 import sys
@@ -31,6 +32,12 @@ parser.add_argument(
     help="Ignore fields in the profile that always change such as UUID or creation and expiration dates",
     default=False,
 )
+parser.add_argument(
+    "--shorten-certs",
+    action="store_true",
+    help="Shorten the developer certificate data for easier diffing, these values won't have any relation to the certificate, but will be reproducible",
+    default=False,
+)
 args = parser.parse_args()
 fields_to_ignore = args.ignore_field
 if args.ignore_noisy_fields:
@@ -48,6 +55,13 @@ try:
     for field in fields_to_ignore:
         if field in plist:
             del plist[field]
+
+    if args.shorten_certs and "DeveloperCertificates" in plist:
+        cert_shas = []
+        certs = plist.pop("DeveloperCertificates")
+        for cert in certs:
+            cert_shas.append(hashlib.sha256(cert).hexdigest())
+        plist["DeveloperCertificates"] = sorted(cert_shas)
 
     plistlib.dump(
         plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True
