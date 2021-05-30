@@ -2,6 +2,7 @@
 
 import argparse
 import hashlib
+import os
 import plistlib
 import subprocess
 import sys
@@ -42,6 +43,9 @@ args = parser.parse_args()
 fields_to_ignore = args.ignore_field
 if args.ignore_noisy_fields:
     fields_to_ignore.extend(_NOISY_FIELDS)
+
+if not os.path.isfile(args.profile):
+    raise SystemExit(f"error: {args.profile} does not exist")
 
 try:
     process = subprocess.run(
