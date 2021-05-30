@@ -45,7 +45,16 @@ if args.ignore_noisy_fields:
 
 try:
     process = subprocess.run(
-        ["security", "cms", "-D", "-i", args.profile],
+        [
+            "openssl",
+            "smime",
+            "-inform",
+            "der",
+            "-verify",
+            "-noverify",
+            "-in",
+            args.profile,
+        ],
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
         check=True,
