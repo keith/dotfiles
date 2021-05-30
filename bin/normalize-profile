@@ -76,9 +76,7 @@ try:
             cert_shas.append(hashlib.sha256(cert).hexdigest())
         plist["DeveloperCertificates"] = sorted(cert_shas)
 
-    plistlib.dump(
-        plist, sys.stdout.buffer, fmt=plistlib.FMT_XML, sort_keys=True
-    )
+    plistlib.dump(plist, sys.stdout.buffer, sort_keys=True)
 except subprocess.CalledProcessError:
     if args.ignore_invalid:
         print("warning: failed to read profile")
