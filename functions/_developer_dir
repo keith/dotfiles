@@ -1,0 +1,5 @@
+#compdef -value-,DEVELOPER_DIR,-default-
+
+local -a xcodes
+xcodes=($(mdfind 'kMDItemCFBundleIdentifier == com.apple.dt.Xcode'))
+_describe 'Xcode' xcodes
