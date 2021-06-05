@@ -10,6 +10,7 @@ eagletmt/ghcmod-vim
 eagletmt/neco-ghc
 fatih/vim-go
 gfontenot/vim-xcode
+hashivim/vim-terraform
 hynek/vim-python-pep8-indent
 jackguo380/vim-lsp-cxx-highlight
 jamessan/vim-gnupg
