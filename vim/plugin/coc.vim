@@ -1,3 +1,6 @@
+" Disabled for nvim-lsp for now
+finish
+
 autocmd Filetype gitcommit,gitconfig,gitrebase,gitsendemail,git let b:coc_suggest_disable = 1
 
 let g:coc_global_extensions = [

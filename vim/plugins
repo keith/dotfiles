@@ -9,7 +9,6 @@ dhruvasagar/vim-zoom
 fatih/vim-go
 hashivim/vim-terraform
 hynek/vim-python-pep8-indent
-jackguo380/vim-lsp-cxx-highlight
 jamessan/vim-gnupg
 kana/vim-textobj-indent
 kana/vim-textobj-user
@@ -20,7 +19,6 @@ keith/xcconfig.vim
 ludovicchabant/vim-gutentags
 machakann/vim-highlightedyank
 majutsushi/tagbar
-neoclide/coc.nvim
 neomake/neomake
 RRethy/vim-illuminate
 rust-lang/rust.vim
@@ -42,3 +40,11 @@ tpope/vim-sleuth
 tpope/vim-surround
 tpope/vim-unimpaired
 udalov/kotlin-vim
+
+hrsh7th/nvim-compe
+neovim/nvim-lspconfig
+nvim-treesitter/nvim-treesitter
+nvim-treesitter/nvim-treesitter-textobjects
+nvim-treesitter/playground
+ray-x/lsp_signature.nvim
+RRethy/nvim-treesitter-textsubjects
