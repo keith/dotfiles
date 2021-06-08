@@ -19,6 +19,7 @@ keith/xcconfig.vim
 ludovicchabant/vim-gutentags
 machakann/vim-highlightedyank
 majutsushi/tagbar
+mhinz/vim-signify
 neomake/neomake
 RRethy/vim-illuminate
 rust-lang/rust.vim

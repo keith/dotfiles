@@ -36,3 +36,7 @@ let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'git
 let g:tmux_navigator_disable_when_zoomed = 1
 
 let g:hdevtools_stack = 1
+
+let g:signify_sign_change = '~'
+nnoremap <leader>[g <plug>(signify-next-hunk)
+nnoremap <leader>]g <plug>(signify-prev-hunk)
