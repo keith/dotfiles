@@ -727,24 +727,6 @@ defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_10_0 -bool
 # Third Party
 #
 
-# Screeny don't record audio
-defaults write com.drewwilson.screeny RecordAudio -bool false
-
-# Tweetbot
-# Skip t.co URLs
-defaults write com.tapbots.TweetbotMac OpenURLsDirectly -bool true
-defaults write com.tapbots.TweetbotMac openURLInBackground -bool true
-defaults write com.tapbots.TweetbotMac showStatusItem -bool false
-defaults write com.tapbots.TweetbotMac soundType -int 1
-defaults write com.tapbots.TweetbotMac statusViewImageType -int 2
-defaults write com.tapbots.TweetbotMac globalHideShowHotKey -dict \
-  chars -string "c" \
-  keyCode -int 8 \
-  modifierFlags -int 1310985
-# Setup a column on the right hand side with mentions
-defaults delete com.tapbots.TweetbotMac MainWindowColumnInfo || true
-defaults write com.tapbots.TweetbotMac MainWindowColumnInfo -array-add '{ "accountTID" = 14429563; "controllerClass" = "PTHTweetbotMentionsViewController"; "displayingMediaTimeline" = 0; }'
-
 # Caffeine
 defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 
