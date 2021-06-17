@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+
+import collections
+import glob
+import http.client
+import json
+import plistlib
+import subprocess
+import urllib.request
+from pathlib import Path
+
+xcodes = glob.glob("/Applications/Xcode*.app")
+selected = (
+    subprocess.check_output("fzy", input="\n".join(xcodes).encode())
+    .decode()
+    .strip()
+)
+
+plist_path = Path(selected) / "Contents/version.plist"
+with plist_path.open("rb") as f:
+    plist = plistlib.load(f)
+
+build_number = plist["ProductBuildVersion"]
+
+response: http.client.HTTPResponse = urllib.request.urlopen(
+    "https://xcodereleases.com/data.json"
+)
+if response.getcode() != 200:
+    raise SystemExit(
+        f"error: got unexpected status code: {response.getcode()}: {response.read()}"
+    )
+
+complete_version_info = collections.defaultdict(dict)
+response_json = json.loads(response.read())
+for blob in response_json:
+    version_info = blob["version"]
+    if version_info["build"] == build_number:
+        complete_version_info[build_number]["number"] = version_info["number"]
+        complete_version_info[build_number].update(version_info["release"])
+
+version_info = complete_version_info[build_number]
+extra_info = ""
+# Prioritize releases over RC even if the same build number is both
+if version_info.get("release"):
+    pass
+elif beta_version := version_info.get("beta"):
+    extra_info = f" beta {beta_version}"
+elif rc_version := version_info.get("rc"):
+    extra_info = f" RC {rc_version}"
+
+print(f'Xcode {version_info["number"]}{extra_info} ({build_number})')
