@@ -9,4 +9,4 @@ common:oras --override_repository=build_bazel_apple_support=/Users/ksmiley/dev/a
 common:ors --override_repository=build_bazel_rules_swift=/Users/ksmiley/dev/rules_swift
 
 build:s --spawn_strategy=standalone
-build:d --disk_cache=bazel_cache
+build:d --disk_cache=~/.bazel_cache
