@@ -102,7 +102,7 @@
 [diff "plist"]
   textconv = plutil -convert xml1 -o -
 [diff "provision"]
-  textconv = normalize-profile --ignore-invalid
+  textconv = normalize-profile --ignore-invalid --shorten-certs
 [diff "exif"]
   textconv = exiftool
 [diff "zip"]
