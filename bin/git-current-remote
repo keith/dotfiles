@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}" 2>/dev/null | cut -d/ -f1); then
+  echo "$remote"
+else
+  echo origin
+fi
