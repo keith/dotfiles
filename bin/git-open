@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 import webbrowser
+from typing import Optional
 
 
 def _convert_to_http(url):
@@ -41,7 +42,7 @@ def _get_remote(name):
     )
 
 
-def _current_branch_upstream():
+def _get_upstream():
     return _run_git_command(
         [
             "rev-parse",
@@ -49,7 +50,18 @@ def _current_branch_upstream():
             "--symbolic-full-name",
             "@{upstream}",
         ]
-    ).split("/", 1)[-1]
+    )
+
+
+def _current_branch_upstream():
+    return _get_upstream().split("/", 1)[-1]
+
+
+def _get_tracked_remote() -> Optional[str]:
+    try:
+        return _get_upstream().split("/", 1)[0]
+    except subprocess.CalledProcessError:
+        return None
 
 
 def _get_ref(ref):
@@ -61,10 +73,11 @@ def _get_ref(ref):
 
 def main(args):
     remotes = _get_remotes()
+    remote = args.remote or _get_tracked_remote() or "origin"
     try:
-        url = next(url for (name, url) in remotes if name == args.remote)
+        url = next(url for (name, url) in remotes if name == remote)
     except StopIteration:
-        print("No remotes found for '{}'".format(args.remote))
+        print(f"error: no remote named: {remote}")
         sys.exit(1)
 
     if not args.argument:
@@ -88,8 +101,8 @@ def _get_parser():
     parser.add_argument(
         "-r",
         "--remote",
-        default="origin",
-        required=False,
+        default=None,
+        type=str,
         help="The name of the remote to open",
     )
     parser.add_argument(
