@@ -25,10 +25,10 @@ case "${#other_apps[@]}" in
     ;;
   *)
     printf '%s\n' "${other_apps[@]}" \
-      | fzy --query="$1" \
+      | fzy --query="${1:-}" \
       | xargs -I{} sudo xcode-select --switch "{}"
     ;;
 esac
 
 echo "Current Xcode is now '$(xcode-select --print-path)'"
-echo "\$DEVELOPER_DIR is '$DEVELOPER_DIR'"
+echo "\$DEVELOPER_DIR is '${DEVELOPER_DIR:-}'"
