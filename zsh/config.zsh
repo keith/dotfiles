@@ -1,4 +1,4 @@
-fpath=($DOTFILES/functions $HOME/.nix-profile/share/zsh/site-functions $fpath)
+fpath=($DOTFILES/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
 
 if [[ -d $HOME/functions ]]; then
