@@ -21,6 +21,8 @@ brew 'keith/formulae/reminders-cli'
 brew 'keith/formulae/tag'
 brew 'keith/formulae/urlview', args: ['HEAD']
 brew 'keith/formulae/zap'
+brew 'kubectl'
+brew 'kubectx'
 brew 'less'
 brew 'msmtp'
 brew 'mu'

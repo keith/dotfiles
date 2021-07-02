@@ -20,3 +20,6 @@ zstyle ':completion:*' cache-path "$HOME/.zsh/tmp/cache"
 # Explicitly write the type of what autocomplete has found / was looking for
 zstyle ':completion:*:descriptions' format '%B%d%b'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
+
+# Setup kubectl alias with completion
+alias compdef k="kubectl"

@@ -10,6 +10,7 @@ alias .....="cd ../../../.."
 alias g="git"
 alias G="git"
 
+alias k=kubectl
 alias v=nvim
 
 # Remove all items from the dock
