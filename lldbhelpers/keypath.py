@@ -42,7 +42,7 @@ def _run_swift_command(debugger, result, target, path):
         _run_command(debugger, debugger_command)
         result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
     except KeypathException as e:
-        result.AppendWarning(e.message)
+        result.AppendWarning(str(e))
         result.SetStatus(lldb.eReturnStatusFailed)
 
 
@@ -58,7 +58,7 @@ def _run_objc_command(debugger, result, target, path):
         _run_command(debugger, debugger_command)
         result.SetStatus(lldb.eReturnStatusSuccessFinishResult)
     except KeypathException as e:
-        result.AppendWarning(e.message)
+        result.AppendWarning(str(e))
         result.SetStatus(lldb.eReturnStatusFailed)
 
 
