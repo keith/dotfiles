@@ -2,6 +2,9 @@
 
 set -eu
 
+config_key="$(git rev-parse --show-toplevel | md5).main-branch"
+worktree_main_branch="$(git config --local "$config_key" || true)"
+
 main_branch=$(git main-branch)
-git branch --merged "$main_branch" | grep -v "^[^ ]" | grep -v "$main_branch" | xargs --no-run-if-empty -n 1 git branch -d
+git branch --merged "$main_branch" | grep -v "^[^ ]" | grep -v "$main_branch" | grep -v "${worktree_main_branch:-$main_branch}" | xargs --no-run-if-empty -n 1 git branch -d
 git branch -vv | grep -v "^[^ ]" | grep ": gone]" | awk '{ print $1 }' | xargs --no-run-if-empty -n 1 git branch -D
