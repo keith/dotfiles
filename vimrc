@@ -199,6 +199,9 @@ vnoremap K <Nop>
 vnoremap < <gv
 vnoremap > >gv
 
+" Don't copy the contents of an overwritten selection.
+vnoremap p "_dP
+
 " Move as expected on wrapped lines
 noremap j gj
 noremap gj j
