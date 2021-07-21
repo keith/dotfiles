@@ -19,6 +19,8 @@ nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 " TODO: Ideally this would happen automatically when there were diagnostics
 nnoremap <silent> <leader>l <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
+nnoremap <silent> <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
+
 lua <<EOF
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.clangd.setup{}
