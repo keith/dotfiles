@@ -1,4 +1,10 @@
 #!/bin/sh
+#
+### DANGER ###
+# This script aggressively deletes local branches assuming that the remote is
+# the source of truth. This means it could delete branches locally that were
+# deleted from the remote even if you have local changes.
+#
 
 set -eu
 
