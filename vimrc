@@ -217,7 +217,7 @@ inoremap <Up> <C-o>gk
 nnoremap <C-u> 10<C-u>
 nnoremap <C-d> 10<C-d>
 
-" Netrw unfucking, custom gx because fugitive:// breaks the default gx
+" Netrw improvement, custom gx because fugitive:// breaks the default gx
 " The key here is that the second argument is a 0 which means !remote
 nnoremap gx :call netrw#BrowseX(expand('<cfile>'), 0)<CR>
 
@@ -311,7 +311,7 @@ function! s:FormatShellCommand()
   call histdel('search', -1)
 endfunction
 
-" Unfuck my screen
+" Fixup my screen
 nnoremap U :syntax sync fromstart<CR>:redraw!<CR>
 
 " Running as diff
