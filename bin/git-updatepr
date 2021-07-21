@@ -42,7 +42,7 @@ fi
 readonly worktree_name=$(git rev-parse --show-toplevel | md5)
 readonly worktree_dir="$HOME/.cache/git-pile/$worktree_name"
 if [[ ! -d "$worktree_dir" ]]; then
-  git worktree add "$worktree_dir" "$branch_name"
+  git worktree add -f "$worktree_dir" "$branch_name"
 else
   git -C "$worktree_dir" switch "$branch_name"
 fi
