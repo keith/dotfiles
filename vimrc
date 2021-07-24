@@ -399,6 +399,8 @@ augroup ft_settings
 
   " Close location list when closing the window it belongs to
   autocmd QuitPre * nested if &filetype != 'qf' | silent! lclose | endif
+
+  autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh | normal! G
 augroup END
 
 " ObjC curly brace error fix
