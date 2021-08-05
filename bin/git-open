@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import argparse
 import os
@@ -27,7 +27,9 @@ def _run_git_command(args):
 
 def _get_remotes():
     remotes = set([])
-    lines = _run_git_command(["remote", "-v"]).split("\n")
+    lines = [
+        line for line in _run_git_command(["remote", "-v"]).split("\n") if line
+    ]
     for line in lines:
         name, url, _ = line.split()
         remotes.add((name, _convert_to_http(url)))
@@ -35,9 +37,10 @@ def _get_remotes():
     return remotes
 
 
-def _get_remote(name):
+# TODO: Remove this
+def _get_remote(name, remotes):
     return next(
-        (url for remote_name, url in _get_remotes() if name == remote_name),
+        (url for remote_name, url in remotes if name == remote_name),
         None,
     )
 
@@ -88,7 +91,7 @@ def main(args):
         )
     elif _get_ref(args.argument):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
-    elif remote_url := _get_remote(args.argument):
+    elif remote_url := _get_remote(args.argument, remotes):
         url = remote_url
     else:
         url = os.path.join(url, args.argument)
