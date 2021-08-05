@@ -35,3 +35,5 @@ let g:hdevtools_stack = 1
 let g:signify_sign_change = '~'
 nmap [g <plug>(signify-prev-hunk)
 nmap ]g <plug>(signify-next-hunk)
+
+nnoremap <leader>g :Git blame<CR>
