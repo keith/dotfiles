@@ -7,21 +7,14 @@
 # http://www.openradar.me/42206958
 #
 
-set -e
-set -o pipefail
-set -u
+set -euo pipefail
 
-if [ ! -d xcode ]; then
-  echo "Must be run from root of dotfiles"
-  exit 1
-fi
-
-bindings="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
+readonly bindings="$HOME/Library/Developer/Xcode/UserData/KeyBindings"
 rm -f "$bindings/custom.idekeybindings"
 mkdir -p "$bindings"
 ln -s "$DOTFILES/xcode/custom.idekeybindings" "$bindings"
 
-colors="$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
+readonly colors="$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
 rm -f "$colors/panic.xccolortheme"
 mkdir -p "$colors"
 ln -s "$DOTFILES/xcode/panic.xccolortheme" "$colors"
