@@ -401,6 +401,12 @@ augroup ft_settings
   autocmd QuitPre * nested if &filetype != 'qf' | silent! lclose | endif
 
   autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh | normal! G
+  autocmd BufNewFile *.sh let b:is_new = 1
+  autocmd BufWritePost *.sh
+      \  if get(b:, 'is_new', 0)
+      \|   silent execute '!chmod +x %'
+      \|   let b:is_new = 0
+      \| endif
 augroup END
 
 " ObjC curly brace error fix
