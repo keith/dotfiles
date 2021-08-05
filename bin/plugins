@@ -48,19 +48,21 @@ do
   fi
 done < "$file"
 
-if command -v parallel &> /dev/null && parallel --version >/dev/null 2>&1;then
-  parallel -j0 ::: "${commands[@]}"
-elif command -v parallel &> /dev/null; then
-  echo "note: install gnu-parallel instead of moreutils for better output grouping"
-  parallel -- "${commands[@]}"
-else
-  echo "note: install gnu-parallel to run commands in parallel"
-  for cmd in "${commands[@]}"
-  do
-    eval "$cmd &"
-  done
+if [[ -n "${commands:-}" ]]; then
+  if command -v parallel &> /dev/null && parallel --version >/dev/null 2>&1;then
+    parallel -j0 ::: "${commands[@]}"
+  elif command -v parallel &> /dev/null; then
+    echo "note: install gnu-parallel instead of moreutils for better output grouping"
+    parallel -- "${commands[@]}"
+  else
+    echo "note: install gnu-parallel to run commands in parallel"
+    for cmd in "${commands[@]}"
+    do
+      eval "$cmd &"
+    done
 
-  wait
+    wait
+  fi
 fi
 
 for dir in "$target"/*
