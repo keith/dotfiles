@@ -15,9 +15,6 @@ let g:sort_motion_flags = 'ui'
 let g:GPGDefaultRecipients = ['0x4C7167F8']
 let g:GPGPreferArmor = 1
 
-let g:Illuminate_delay = 200
-highlight illuminatedWord ctermbg=white ctermfg=black
-
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -25,8 +22,6 @@ let g:netrw_list_hide =
       \ netrw_gitignore#Hide()
       \ . ',^\./'
       \ . ',^\.git/'
-
-let g:highlightedyank_highlight_duration = 150
 
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
 

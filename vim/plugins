@@ -17,7 +17,6 @@ keith/parsec.vim
 keith/swift.vim
 keith/xcconfig.vim
 ludovicchabant/vim-gutentags
-machakann/vim-highlightedyank
 majutsushi/tagbar
 mhinz/vim-signify
 neomake/neomake
