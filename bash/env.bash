@@ -54,3 +54,5 @@ export GIT_PILE_VERBOSE=true
 
 export ANDROID_HOME=~/Library/Android/sdk
 export ANDROID_NDK_HOME=~/Library/Android/sdk/ndk
+
+export KUBECTL_EXTERNAL_DIFF=d
