@@ -101,7 +101,7 @@ set scrolloff=5             " Lines the cursor is to the edge before scrolling
 set sidescrolloff=5         " Same as scrolloff but horizontal
 set gdefault                " Adds g at the end of substitutions by default
 set virtualedit=block       " Allow the cursor to move off the side in visual block
-set foldlevelstart=99       " Set the default level of open folds
+set nofoldenable
 set foldmethod=indent       " Decide where to fold based
 set foldnestmax=5           " Set deepest fold to x levels
 set exrc                    " Source local .vimrc files
@@ -359,7 +359,6 @@ augroup END
 
 augroup theme
   autocmd!
-
   autocmd FocusGained * silent! exec 'set background=' . system("get-appearance")
 augroup END
 
