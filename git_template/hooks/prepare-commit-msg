@@ -9,6 +9,10 @@ if ! git config --local custom.requiresdco > /dev/null; then
   exit 0
 fi
 
+if [[ -n "${SKIP_DCO_HOOK:-}" ]]; then
+  exit 0
+fi
+
 if [[ "${GIT_REFLOG_ACTION:-}" == rebase* ]]; then
   exit 0
 fi
