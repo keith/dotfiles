@@ -25,17 +25,3 @@ let g:neomake_rust_enabled_makers = []
 let g:neomake_swift_enabled_makers = ["swiftc"]
 let g:neomake_open_list = 2
 let g:neomake_verbose = 0
-
-command! -nargs=+ Nrun call s:Nrun(<q-args>)
-function! s:Nrun(args)
-  let l:arguments = split(a:args)
-  let l:executable = remove(l:arguments, 0)
-  let l:arguments = join(l:arguments, ' ')
-
-  let l:maker = {
-        \ 'exe': l:executable,
-        \ 'args': l:arguments,
-        \ 'errorformat': &errorformat,
-      \ }
-  call neomake#Make(0, [l:maker])
-endfunction
