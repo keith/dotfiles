@@ -9,9 +9,10 @@ endif
 
 source ~/.vimrc
 
+set fileignorecase
 set guicursor=
 set inccommand=nosplit
-set fileignorecase
+set omnifunc=v:lua.vim.lsp.omnifunc
 
 autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 
