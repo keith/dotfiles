@@ -51,7 +51,7 @@ function! FuzzyFindCommand(vimCommand) abort
   endfunction
 
   botright 10 new
-  let l:term_command = s:SearchCommand() . ' | fzy > ' .  l:callback.filename
+  let l:term_command = '(' . s:SearchCommand() . ') | fzy > ' .  l:callback.filename
   silent call termopen(l:term_command, l:callback)
   setlocal nonumber norelativenumber
   startinsert
