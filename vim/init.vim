@@ -105,3 +105,7 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+sign define LspDiagnosticsSignError text=E numhl=LspDiagnosticsDefaultError
+sign define LspDiagnosticsSignWarning text=W numhl=LspDiagnosticsDefaultWarning
+sign define LspDiagnosticsSignInformation text=I numhl=LspDiagnosticsDefaultInformation
+sign define LspDiagnosticsSignHint text=H numhl=LspDiagnosticsDefaultHint
