@@ -9,6 +9,7 @@ fatih/vim-go
 hashivim/vim-terraform
 hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
+jparise/vim-graphql
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
