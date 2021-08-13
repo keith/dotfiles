@@ -40,3 +40,4 @@ nmap [g <plug>(signify-prev-hunk)
 nmap ]g <plug>(signify-next-hunk)
 
 nnoremap <leader>g :Git blame<CR>
+nnoremap <leader>v :.,.GBrowse<CR>
