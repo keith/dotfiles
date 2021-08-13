@@ -11,12 +11,9 @@ endfunction
 " Command for searching folders even if they
 " aren't tracked with git
 function! s:SearchCommand()
-  let l:command = ""
   if isdirectory(".git") || filereadable(".git")
     let l:command = s:GitListCommand(".")
-  endif
-
-  if strlen(l:command) < 1
+  else
     let l:output = system("git rev-parse --show-toplevel")
     if v:shell_error == 0
       let l:output = substitute(l:output, "\\n", "", "")
