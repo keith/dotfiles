@@ -17,12 +17,14 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 " TODO: Ideally this would happen automatically when there were diagnostics
 nnoremap <silent> <leader>l <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
+nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <Leader>d <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 
 lua <<EOF
