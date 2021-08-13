@@ -2,7 +2,7 @@
 function! s:GitListCommand(directory)
   " Until you can use --recurse-submodules and --others together
   if filereadable(".gitmodules")
-    return "git ls-files " . a:directory . " --cached --exclude-standard --recurse-submodules 2>/dev/null"
+    return "git ls-files " . a:directory . " --cached --exclude-standard --recurse-submodules 2>/dev/null && git ls-files " . a:directory . " --exclude-standard --others 2>/dev/null"
   else
     return "git ls-files " . a:directory . " --cached --exclude-standard --others 2>/dev/null"
   endif
