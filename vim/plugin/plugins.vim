@@ -16,7 +16,6 @@ let g:GPGDefaultRecipients = ['0x4C7167F8']
 let g:GPGPreferArmor = 1
 
 let g:Illuminate_delay = 200
-highlight illuminatedWord ctermbg=white ctermfg=black
 
 " Netrw
 let g:netrw_banner = 0
