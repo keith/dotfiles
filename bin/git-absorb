@@ -2,15 +2,10 @@
 
 from typing import List, Dict, Tuple
 import argparse
+import collections
 import os
 import subprocess
 import sys
-
-
-class _MultipleCommits(Exception):
-    def __init__(self, filepath: str):
-        super(_MultipleCommits, self).__init__(filepath)
-        self.filepath = filepath
 
 
 class _GitError(Exception):
@@ -94,16 +89,14 @@ def _files_for_sha(sha: str) -> List[str]:
     ).splitlines()
 
 
-def _shas_by_file(shas: List[str], changed_files: List[str]) -> Dict[str, str]:
-    shas_by_file: Dict[str, str] = {}
+def _shas_by_file(
+    shas: List[str], changed_files: List[str]
+) -> Dict[str, List[str]]:
+    shas_by_file: Dict[str, List[str]] = collections.defaultdict(list)
     for sha in shas:
         for filepath in _files_for_sha(sha):
-            if filepath not in changed_files:
-                continue
-
-            if filepath in shas_by_file:
-                raise _MultipleCommits(filepath)
-            shas_by_file[filepath] = sha
+            if filepath in changed_files:
+                shas_by_file[filepath].append(sha)
 
     return shas_by_file
 
@@ -120,23 +113,42 @@ def _main(squash: bool, sign_off: bool) -> None:
     if not changed_files:
         sys.exit("error: no changed files")
 
-    try:
-        shas_by_file = _shas_by_file(possible_shas, changed_files)
-    except _MultipleCommits as e:
-        sys.exit("error: multiple commits edit '{}'".format(e.filepath))
-
+    shas_by_file = _shas_by_file(possible_shas, changed_files)
     matching_shas = set(
-        shas_by_file[filepath]
-        for filepath in changed_files
-        if filepath in shas_by_file
+        sum(
+            (
+                shas_by_file[filepath]
+                for filepath in changed_files
+                if filepath in shas_by_file
+            ),
+            [],
+        )
     )
+
     if not matching_shas:
         sys.exit(
             "error: no commits changed: {}".format(", ".join(changed_files))
         )
     elif len(matching_shas) > 1:
-        # TODO: fuzzy find commits
-        sys.exit("error: files where changed in multiple recent commits")
+        option_lines = []
+        print(
+            "Which commit would you like to add your changes to? (ctrl-c to cancel)"
+        )
+        # TODO: Put shas in committed date order?
+        for sha in matching_shas:
+            output = subprocess.check_output(
+                ["git", "log", "--oneline", "-1", sha]
+            ).decode()
+            option_lines.append(output)
+
+        try:
+            selected_line = subprocess.check_output(
+                ["fzy"], input="\n".join(sorted(option_lines)).encode()
+            ).decode()
+        except subprocess.CalledProcessError:
+            sys.exit(1)
+
+        selected_sha = selected_line.split(" ")[0]
 
     if stage_first:
         _run_git_command(["add"] + changed_files)
