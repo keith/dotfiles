@@ -43,6 +43,7 @@ udalov/kotlin-vim
 
 hrsh7th/nvim-compe
 neovim/nvim-lspconfig
+nvim-lua/lsp_extensions.nvim
 nvim-treesitter/nvim-treesitter
 nvim-treesitter/nvim-treesitter-textobjects
 nvim-treesitter/playground
