@@ -12,7 +12,8 @@ endfunction
 inoremap <silent> <Tab> <C-R>=<SID>TabWrapper()<CR>
 function! s:TabWrapper()
   if pumvisible()
-    return "\<C-y>"
+    call compe#confirm("\<C-y>")
+    return
   else
     if s:ForceTab() || empty(&omnifunc)
       return "\<Tab>"
