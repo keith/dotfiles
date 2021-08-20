@@ -149,6 +149,8 @@ def _main(squash: bool, sign_off: bool) -> None:
             sys.exit(1)
 
         selected_sha = selected_line.split(" ")[0]
+    else:
+        selected_sha = matching_shas.pop()
 
     if stage_first:
         _run_git_command(["add"] + changed_files)
@@ -163,7 +165,7 @@ def _main(squash: bool, sign_off: bool) -> None:
     if code != 0:
         sys.exit("Not updating PR without a commit")
 
-    update_command = ["git", "updatepr", matching_shas.pop()]
+    update_command = ["git", "updatepr", selected_sha]
     if squash:
         update_command.append("--squash")
     if sign_off:
