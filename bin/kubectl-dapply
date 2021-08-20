@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euo pipefail
+
+exit_code=0
+kubectl diff "$@" || exit_code=$?
+if [[ "$exit_code" -eq 0 ]]; then
+  echo "No diff, no need to apply"
+  exit 0
+elif [[ "$exit_code" -ne 1 ]]; then
+  exit "$exit_code"
+fi
+
+while true; do
+  read -r -n1 -p "Apply changes? [yn] " yn
+
+  case $yn in
+    [Yy]*) printf "\nApplying...\n"; kubectl apply "$@"; exit 0;;
+    [Nn]*) printf "\nNot applying changes\n"; exit 1;;
+    *) echo "Please answer [y]es or [n]o";;
+  esac
+done
