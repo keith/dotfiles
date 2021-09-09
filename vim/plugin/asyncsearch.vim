@@ -3,7 +3,7 @@ if v:shell_error == 0
   let s:executable="git"
   let s:arguments="grep --recurse-submodules --line-number {}"
 else
-  let s:executable="ag"
+  let s:executable="rg"
   let s:arguments="--vimgrep --case-sensitive {}"
 endif
 
