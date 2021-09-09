@@ -1,4 +1,5 @@
-if filereadable(".git") || isdirectory(".git")
+call system("git rev-parse --show-toplevel")
+if v:shell_error == 0
   let s:executable="git"
   let s:arguments="grep --recurse-submodules --line-number {}"
 else
