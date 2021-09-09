@@ -84,7 +84,7 @@ fi
 if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
   # TODO if you exit in vim with :cq, it asks you if it was successful, i think if you hit yes it will continue even if it's not?
   if git -C "$worktree_dir" mergetool; then
-    git -C "$worktree_dir" cherry-pick --continue
+    git -C "$worktree_dir" -c core.editor=true cherry-pick --continue
   else
     git -C "$worktree_dir" cherry-pick --abort
     # TODO what do i do? i think we have to reset branch state? maybe just abort cherry pick?
