@@ -1,4 +1,5 @@
 common:orf --override_repository=rules_foreign_cc=/Users/ksmiley/dev/rules_foreign_cc
+common:ort --override_repository=xctestrunner=/Users/ksmiley/dev/xctestrunner
 common:orc --override_repository=rules_cc=/Users/ksmiley/dev/rules_cc
 common:org --override_repository=io_bazel_rules_go=/Users/ksmiley/dev/rules_go
 common:orp --override_repository=rules_python=/Users/ksmiley/dev/rules_python
