@@ -37,7 +37,12 @@ _dotenv_print_unauthorized_message() {
 }
 
 _dotenv_source_env() {
-  local env_file="$PWD/.env"
+  _dotenv_source_file "$PWD/.env"
+  _dotenv_source_file "$PWD/.keithenv"
+}
+
+_dotenv_source_file() {
+  local env_file="$1"
 
   if [[ ! -f $env_file ]];then
     return

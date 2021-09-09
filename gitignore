@@ -9,6 +9,7 @@
 .clangd
 .DS_Store
 .hgignore
+.keithenv
 .LSOverride
 .mypy_cache
 .netrwhist
