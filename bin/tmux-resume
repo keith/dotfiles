@@ -5,7 +5,7 @@ set -x
 exec 2> /tmp/tmux-resume
 
 index=$(tmux display -p "TMUXPWD_#D" | tr -d "%")
-new_pwd=$(tmux show-environment | grep "$index=" | sed 's/^.*=//')
+new_pwd=$(tmux show-environment | grep "$index=" | sed 's/^.*=//' || true)
 if [[ -z "$new_pwd" || ! -d "$new_pwd" ]];then
   if [[ -f "$CURRENT_PROJECT_PATH" ]]; then
     new_pwd="$(cat "$CURRENT_PROJECT_PATH")"
