@@ -8,10 +8,7 @@ if [[ $# -lt 1 ]]; then
 fi
 
 if [[ -t 1 ]]; then
-  content=$(colordiff -ur "$@")
-  if [[ -n "$content" ]]; then
-    printf '%s' "$content" | diff-highlight | less
-  fi
+  colordiff -ur "$@" | diff-highlight | less
 else
   diff -ur "$@"
 fi
