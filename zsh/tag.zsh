@@ -5,7 +5,11 @@ if (( $+commands[tag] )); then
     trap - SIGINT
   }
   alias s="tag rg"
-  alias fd="tag fd"
+  if command -v fdfind >/dev/null 2>&1; then
+    alias fd="tag fdfind --hidden"
+  else
+    alias fd="tag fd --hidden"
+  fi
   alias find="tag find"
 else
   alias s=rg
