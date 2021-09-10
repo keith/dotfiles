@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-config_key="$(git rev-parse --show-toplevel | md5).main-branch"
+config_key="$(git roothash).main-branch"
 if main_branch="$(git config --local "$config_key")"; then
   git checkout "$main_branch"
 else

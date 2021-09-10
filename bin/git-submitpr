@@ -24,7 +24,7 @@ remote_branch_name="${branch_with_remote#*/}"
 
 git branch --no-track "$branch_name" "@{upstream}"
 
-readonly worktree_name=$(git rev-parse --show-toplevel | md5)
+worktree_name=$(git roothash)
 readonly worktree_dir="$HOME/.cache/git-pile/$worktree_name"
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add -f "$worktree_dir" "$branch_name"
