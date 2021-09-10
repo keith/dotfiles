@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+root=$(git rev-parse --show-toplevel)
+if [[ $OSTYPE == darwin* ]]; then
+  echo "$root" | md5
+else
+  echo "$root" | md5sum | cut -d" " -f1
+fi
