@@ -1,5 +1,16 @@
 #!/bin/bash
 
+if [[ $OSTYPE != darwin* ]]; then
+  hour=$(TZ=America/Los_Angeles date +%H)
+  if [[ "$hour" -gt "19" && "$hour" -lt 7 ]]; then
+    echo -n dark
+  else
+    echo -n light
+  fi
+
+  exit 0
+fi
+
 # TODO: When your computer crashes this doesn't get reset correctly, I imagine the AppKit API does since the system looks correct in general in that case
 if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]]; then
   echo -n dark
