@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $OSTYPE != darwin* ]]; then
-  hour=$(TZ=America/Los_Angeles date +%H)
+  hour=$(TZ=America/Los_Angeles date +%-H)
   if [[ "$hour" -gt "19" && "$hour" -lt 7 ]]; then
     echo -n dark
   else
