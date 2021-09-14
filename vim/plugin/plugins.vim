@@ -40,3 +40,7 @@ nmap ]g <plug>(signify-next-hunk)
 
 nnoremap <leader>g :Git blame<CR>
 nnoremap <leader>v :.,.GBrowse<CR>
+
+" The only vim-rsi mappings I need
+inoremap <C-A> <C-O>^
+cnoremap <C-A> <Home>
