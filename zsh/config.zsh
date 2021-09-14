@@ -104,6 +104,32 @@ bindkey "^E" end-of-line
 # Allow alt/option . to insert the argument from the previous command
 bindkey '\e.' insert-last-word
 
+# autoload quote-region
+# zle -N quote-region
+# bindkey '^q' quote-region
+insert-grep() {
+  LBUFFER="${LBUFFER} | grep "
+  zle redisplay
+}
+zle -N insert-grep
+bindkey '\eg' insert-grep
+
+insert-less() {
+  LBUFFER="${LBUFFER} | less "
+  zle redisplay
+}
+zle -N insert-less
+bindkey '\el' insert-less
+
+quote-thing() {
+  first_half="${LBUFFER%% *}"
+  second_half="${LBUFFER##* }"
+  LBUFFER="$first_half \"$second_half\""
+  zle redisplay
+}
+zle -N quote-thing
+bindkey '\eq' quote-thing
+
 insert-last-word-before-pipe() {
   first_half="$(fc -ln -1 | cut -d "|" -f 1)"
   stripped="${first_half%% }"
