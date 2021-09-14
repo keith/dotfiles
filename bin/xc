@@ -19,6 +19,7 @@ for option in "${globs[@]}"
 do
   if [[ -n "$(find . -maxdepth 1 -name "$option")" ]]; then
     glob=$option
+    break
   fi
 done
 
