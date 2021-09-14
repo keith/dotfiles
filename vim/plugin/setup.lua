@@ -87,12 +87,21 @@ require'compe'.setup {
   };
 }
 
+function has_highlights(lang)
+  local supported = {
+    c = true,
+    cpp = true,
+  }
+  return supported[lang] ~= nil
+end
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
-  -- TODO: Enable once I fix highlight groups
-  -- highlight = {
-  --   enable = true,
-  -- },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+    is_supported = has_highlights,
+  },
 
   textsubjects = {
     enable = true,
