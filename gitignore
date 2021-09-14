@@ -9,6 +9,7 @@
 .clangd
 .DS_Store
 .hgignore
+.keithclangformat
 .keithenv
 .LSOverride
 .mypy_cache
