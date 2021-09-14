@@ -976,6 +976,53 @@ highlight! LspDiagnosticsDefaultInformation ctermfg=Black ctermbg=LightBlue
 highlight! link LspDiagnosticsDefaultHint LspDiagnosticsDefaultInformation
 highlight! link LspDiagnosticsDefaultError ErrorMsg
 
+" Treesitter config
+" ---------------------------------------------------------------------
+" Current group discoverable with :TSHighlightCapturesUnderCursor
+hi! link TSPunctBracket None
+hi! link TSPunctDelimiter None
+hi! link TSPunctSpecial Special
+
+hi! link TSVariable None
+hi! link TSFunction None
+
+hi! link TSBoolean Constant
+hi! link TSCharacter Constant
+hi! link TSComment Comment
+hi! link TSConditional Conditional
+hi! link TSConstant Constant
+hi! link TSConstBuiltin Constant
+hi! link TSConstMacro Constant
+hi! link TSConstructor Function
+hi! link TSError Error
+hi! link TSException Exception
+hi! link TSField Identifier
+hi! link TSFloat Float
+hi! link TSFuncBuiltin Function
+hi! link TSFuncMacro Function
+hi! link TSInclude Include
+hi! link TSKeyword Keyword
+hi! link TSKeywordFunction Identifier
+hi! link TSLabel Label
+hi! link TSLiteral Normal
+hi! link TSMethod Function
+hi! link TSNamespace Identifier
+hi! link TSNumber Constant
+hi! link TSOperator Operator
+hi! link TSParameter Identifier
+hi! link TSParameterReference Identifier
+hi! link TSProperty TSField
+hi! link TSRepeat Repeat
+hi! link TSString Constant
+hi! link TSStringEscape Constant
+hi! link TSStringRegex Constant
+hi! link TSTag Special
+hi! link TSTagDelimiter Delimiter
+hi! link TSTitle Title
+hi! link TSType Type
+hi! link TSTypeBuiltin Type
+hi! link TSVariableBuiltin Identifier
+
 "}}}
 " Utility autocommand "{{{
 " ---------------------------------------------------------------------
