@@ -51,3 +51,7 @@ ray-x/lsp_signature.nvim
 RRethy/nvim-treesitter-textsubjects
 ruifm/gitlinker.nvim
 simrat39/symbols-outline.nvim
+
+nvim-lua/plenary.nvim
+nvim-telescope/telescope-fzy-native.nvim
+nvim-telescope/telescope.nvim
