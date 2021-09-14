@@ -1,24 +1,42 @@
 #!/usr/bin/env python3
 
+import argparse
+import fnmatch
 import json
 import subprocess
+from typing import Any, Dict, List
 
 
-def delete_sim(udid):
-    cmd = "xcrun simctl delete %s" % udid
-    subprocess.call(cmd.split())
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "exclude_patterns",
+        help="Skip deletion of simulators matching these patterns",
+        nargs="*",
+    )
+    return parser
 
 
-def main():
-    subprocess.call("xcrun simctl shutdown all".split())
-    output = subprocess.check_output("xcrun simctl list --json".split())
+def _matches(device: Dict[str, Any], exclude_patterns: List[str]) -> bool:
+    return any(
+        fnmatch.fnmatch(device["name"], pattern)
+        for pattern in exclude_patterns
+    )
+
+
+def _main(exclude_patterns: List[str]):
+    output = subprocess.check_output(
+        "xcrun simctl list devices --json".split()
+    )
     json_output = json.loads(output)
-    devices = json_output["devices"]
-
-    for value in devices.values():
-        for device in value:
-            delete_sim(device["udid"])
+    devices = sum(json_output["devices"].values(), [])
+    devices = [
+        device for device in devices if not _matches(device, exclude_patterns)
+    ]
+    udids = " ".join(device["udid"] for device in devices)
+    subprocess.check_call(f"xcrun simctl delete {udids}".split())
 
 
 if __name__ == "__main__":
-    main()
+    args = _build_parser().parse_args()
+    _main(args.exclude_patterns)
