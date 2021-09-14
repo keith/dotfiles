@@ -1,35 +1,58 @@
 -- vim.lsp.set_log_level("debug")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      prefix = "",
-      spacing = 2,
-    },
-  }
-)
+local lspconfig = require "lspconfig"
+local lsp_spinner = require "lsp_spinner"
 
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.clangd.setup{}
-require'lspconfig'.gopls.setup{}
-require'lspconfig'.graphql.setup{}
-require'lspconfig'.terraformls.setup{}
+lsp_spinner.setup {
+  placeholder = "  ",
+}
 
--- TODO: Which is better?
-require'lspconfig'.pyright.setup{}
--- require'lspconfig'.jedi_language_server.setup{}
+local function on_attach(client, bufnr)
+  require("lsp_spinner").on_attach(client, bufnr)
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = {
+    prefix = "",
+    spacing = 2,
+  },
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
-require'lspconfig'.rust_analyzer.setup{ capabilities = capabilities }
-require'lspconfig'.sourcekit.setup{ filetypes = { "swift" } }
+lsp_spinner.init_capabilities(capabilities)
+
+local nvim_lsp = require "lspconfig"
+local servers = {
+  "bashls",
+  "clangd", -- TODO: clangd.switchSourceHeader
+  "cmake",
+  "gopls",
+  "graphql",
+  "pyright",
+  "rust_analyzer",
+  "sourcekit",
+  "terraformls",
+}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  }
+end
+
+require("lspconfig").sourcekit.setup {
+  capabilities = capabilities,
+  filetypes = { "swift" },
+  on_attach = on_attach,
+}
 
 require'lsp_signature'.on_attach({
   bind = true,

@@ -40,6 +40,7 @@ tpope/vim-surround
 tpope/vim-unimpaired
 udalov/kotlin-vim
 
+doums/lsp_spinner.nvim
 hrsh7th/nvim-compe
 neovim/nvim-lspconfig
 nvim-lua/lsp_extensions.nvim

@@ -158,8 +158,8 @@ function! CurrentTag(...)
   endif
 endfunction
 
-function! SyntasticStatuslineFlag()
-  return ''
+function! LspStatus()
+  return luaeval("require'lsp_spinner'.status(bufnr)")
 endfunction
 
 " Status line setup (without plugins)
@@ -177,7 +177,7 @@ set statusline+=%y
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
-set statusline+=\ %#ErrorMsg#%{SyntasticStatuslineFlag()}%*
+set statusline+=\ %{LspStatus()}
 
 if has('clipboard')     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
