@@ -23,3 +23,14 @@ zstyle ':completion:*:warnings' format 'No matches for: %d'
 
 # Setup kubectl alias with completion
 alias compdef k="kubectl"
+
+# https://unix.stackexchange.com/a/310382/30131
+_g () {
+  case "${words[2]}" in
+    co) words[1,2]=(git checkout);;
+  esac
+
+  _git # Delegate to completion
+}
+compdef _g g
+compdef _g git
