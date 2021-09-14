@@ -6,6 +6,7 @@
 ._*
 .AppleDouble
 .black
+.ccls-cache
 .clangd
 .DS_Store
 .hgignore
