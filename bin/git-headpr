@@ -10,8 +10,8 @@ do
     --squash)
       commit_args+=(-m ignore)
       ;;
-    -s)
-      commit_args+=(-s)
+    -s|--no-verify)
+      commit_args+=("$arg")
       shift
       ;;
     *)
