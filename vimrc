@@ -159,7 +159,11 @@ function! CurrentTag(...)
 endfunction
 
 function! LspStatus()
-  return luaeval("require'lsp_spinner'.status(bufnr)")
+  if has('nvim')
+    return luaeval("require'lsp_spinner'.status(bufnr)")
+  else
+    return ''
+  endif
 endfunction
 
 " Status line setup (without plugins)
