@@ -3,7 +3,7 @@ let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 
 if filereadable('.keithclangformat')
-  let b:clang_format_on_safe = 1
+  let b:clang_format_on_save = 1
 endif
 
 augroup setup_buildifier
@@ -15,7 +15,7 @@ augroup setup_buildifier
 
   autocmd BufWritePre *.bzl,BUILD,BUILD.bazel,*.BUILD,BUILD.*,WORKSPACE :Autoformat
   " this is bad when working on llvm
-  autocmd BufWritePre *.cpp,*.c,*.cc,*.h,*.hpp if b:clang_format_on_safe | :Autoformat | endif
+  autocmd BufWritePre *.cpp,*.c,*.cc,*.h,*.hpp if get(b:, "clang_format_on_save", 0) | :Autoformat | endif
 
   autocmd BufWritePre *.lua :Autoformat
 augroup END
