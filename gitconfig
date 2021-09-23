@@ -135,3 +135,5 @@
   cookiefile = ~/.gitcookies
 [checkout]
   guess = true
+[format]
+  pretty = fuller
