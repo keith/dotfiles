@@ -81,7 +81,7 @@ def keypath(debugger, command, context, result, _):
         result.SetStatus(lldb.eReturnStatusFailed)
         return
 
-    parts = command.split(".", 1)
+    parts = command.rsplit(".", 1)
     target = parts[0].strip()
     path = parts[1].strip()
 
