@@ -15,7 +15,6 @@
 [diff]
   tool = nvim -d
   renames = copies
-  mnemonicprefix = true
   algorithm = patience
   indentHeuristic = true
   colorMoved = zebra
