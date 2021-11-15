@@ -38,7 +38,6 @@ local servers = {
   "graphql",
   "pyright",
   "rust_analyzer",
-  "sourcekit",
   "terraformls",
 }
 for _, lsp in ipairs(servers) do
