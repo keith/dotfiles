@@ -3,7 +3,7 @@
 set -euo pipefail
 set -x
 
-arc_base_commit=$(arc which --show-base)
+arc_base_commit=${1:-$(arc which --show-base)}
 git diff-index -U0 "$arc_base_commit" \
   | clang/tools/clang-format/clang-format-diff.py -style file -i -p1
 
