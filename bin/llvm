@@ -5,7 +5,7 @@ set -euo pipefail
 prg=$1
 shift
 
-prefix="$(brew --prefix llvm)/bin"
+readonly prefix="$BREW_PREFIX/opt/llvm/bin"
 if [[ -x "$prefix/$prg" ]]; then
   exec "$prefix/$prg" "$@"
 elif [[ -x "$prefix/llvm-$prg" ]]; then
