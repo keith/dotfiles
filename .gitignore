@@ -12,6 +12,7 @@ Icon
 Session.vim
 vim/*.spl
 vim/bundle/*
+vim/nvimbundle/*
 vim/black
 
 config/asciinema/config

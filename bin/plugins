@@ -20,8 +20,6 @@ containsElement() {
   return 1
 }
 
-names=()
-commands=()
 update=true
 if [[ "${1:-}" == --no-update ]]; then
   update=false
@@ -30,6 +28,14 @@ elif [[ -n "${1:-}" ]]; then
   exit 1
 fi
 
+prefixes=("" nvim)
+for prefix in "${prefixes[@]}"
+do
+  file=~/.vim/${prefix}plugins
+  target=~/.vim/${prefix}bundle
+
+names=()
+commands=()
 while read -r repo
 do
   if [[ -z "$repo" ]]; then
@@ -41,7 +47,7 @@ do
   path="$target/$name"
   if [[ -d "$path" ]];then
     if [[ "$update" == true ]]; then
-      commands+=("echo '$path'; git -C '$path' pull")
+      commands+=("echo '$path'; git -C '$path' pull || true")
     fi
   else
     commands+=("git clone --recursive https://github.com/$repo.git '$path'")
@@ -72,4 +78,5 @@ do
     echo "Removing $dir"
     rm -rf "$dir"
   fi
+done
 done

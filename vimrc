@@ -14,7 +14,10 @@ source ~/.vim/before/*.vim
 " Plugin setup
 filetype off
 
-execute pathogen#infect()
+execute pathogen#infect("~/.vim/bundle/{}")
+if has('nvim')
+  execute pathogen#infect("~/.vim/nvimbundle/{}")
+endif
 
 filetype plugin indent on " Re-enable after setup
 syntax enable " Enable vim syntax highlighting as is (enable != on)
