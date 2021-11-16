@@ -7,7 +7,8 @@ else
   let s:arguments="--vimgrep --case-sensitive {}"
 endif
 
-command -nargs=+ -complete=file Grep call <SID>Grep(<q-args>)
+" command -nargs=+ -complete=file Grep call <SID>Grep(<q-args>)
+command -nargs=+ -complete=file Grep lua require('telescope.builtin').grep_string({search = <q-args>})
 function! s:Grep(args)
   if empty(a:args)
     echohl ErrorMsg
@@ -17,15 +18,19 @@ function! s:Grep(args)
     return
   endif
 
-  cclose
-  let l:formatted_args = '"' . escape(a:args, '\') . '"'
-  let l:arguments = substitute(s:arguments, '{}', l:formatted_args, '')
-  let l:maker = {
-        \ 'exe': s:executable,
-        \ 'args': l:arguments,
-        \ 'errorformat': &errorformat,
-      \ }
-  call neomake#Make(0, [l:maker])
+  " cclose
+  " let l:formatted_args = '"' . escape(a:args, '\') . '"'
+  " echom formatted_args
+  " let l:arguments = substitute(s:arguments, '{}', l:formatted_args, '')
+  " let l:maker = {
+  "       \ 'exe': s:executable,
+  "       \ 'args': l:arguments,
+  "       \ 'errorformat': &errorformat,
+  "     \ }
+  " call neomake#Make(0, [l:maker])
+  let s = a:args
+  lua require('telescope.builtin').grep_string({search = s})
+  " lua require('telescope.builtin').live_grep({search = a:args})
 endfunction
 
 function! s:Escape(string)
@@ -40,13 +45,17 @@ nnoremap <silent> s :set operatorfunc=<SID>GrepMotion<CR>g@
 function! s:GrepMotion(...) abort
   let save = @@
   silent execute "normal! `[v`]y"
-  call s:Grep(s:Escape(@@))
+  " call s:Grep(s:Escape(@@))
+  let s = s:Escape(@@)
+  lua require('telescope.builtin').grep_string({search = s})
   let @@ = save
 endfunction
 
 vnoremap <silent> s :<C-U>call <SID>GrepVisual()<CR>
 function! s:GrepVisual()
-  call s:Grep(s:Escape(s:GetVisualSelection()))
+  " call s:Grep(s:Escape(s:GetVisualSelection()))
+  let s = s:Escape(s:GetVisualSelection())
+  lua require('telescope.builtin').grep_string({search = s})
 endfunction
 
 " What a PITA https://stackoverflow.com/a/6271254/902968
