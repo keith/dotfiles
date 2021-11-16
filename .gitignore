@@ -22,6 +22,7 @@ config/gh
 config/gtk-2.0
 config/htop/htoprc
 config/hub
+config/iterm2
 config/pip
 config/radare2/history
 config/rtv
