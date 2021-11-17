@@ -38,6 +38,9 @@ let g:signify_sign_change = '~'
 nmap [g <plug>(signify-prev-hunk)
 nmap ]g <plug>(signify-next-hunk)
 
+nnoremap [d :lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap ]d :lua vim.lsp.diagnostic.goto_next()<CR>
+
 nnoremap <leader>g :Git blame<CR>
 nnoremap <leader>v :.,.GBrowse<CR>
 
