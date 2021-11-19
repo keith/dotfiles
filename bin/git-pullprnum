@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+# TODO: bail if there are unstaged files?
+
+readonly pr_num=$1
+readonly local_branch=pr/$pr_num
+git fetch origin "pull/$pr_num/head:$local_branch"
+commit_msg=$(git log -1 --format=format:%B "$local_branch")
+if git merge --squash "$local_branch"; then
+  git commit -m "$commit_msg"
+else
+  if git mergetool; then
+    git commit -m "$commit_msg"
+  # If git rerere kicked in there might not be unmerged files
+  elif [[ -z $(git ls-files --unmerged) ]]; then
+    git commit -m "$commit_msg"
+  fi
+fi
