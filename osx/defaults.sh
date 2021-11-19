@@ -722,6 +722,9 @@ defaults write com.apple.dt.Xcode IDEDebuggerEnableReproducerCapture -bool true
 # Disable Source Control
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_10_0 -bool false
 
+# Show all file extensions
+defaults write com.apple.dt.Xcode IDEFileExtensionDisplayMode -int 1
+
 
 #
 # Third Party
