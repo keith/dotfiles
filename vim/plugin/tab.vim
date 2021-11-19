@@ -11,16 +11,27 @@ endfunction
 
 inoremap <silent> <Tab> <C-R>=<SID>TabWrapper()<CR>
 function! s:TabWrapper()
-  if pumvisible()
-    call compe#confirm("\<C-y>")
+  echom "1"
+  let a = luaeval("require('cmp').visible()")
+  if a
+  " if pumvisible() || lua require('cmp').visible()
+
+
+  echom "2"
+    luaeval("require'cmp'.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })")
+    " call compe#confirm("\<C-y>")
     return
   else
+  echom "3"
     if s:ForceTab() || empty(&omnifunc)
+  echom "4"
       return "\<Tab>"
     else
+  echom "5"
       return "\<C-x>\<C-o>"
     endif
   endif
+  echom "6"
 
   return "\<Tab>"
 endfunction
