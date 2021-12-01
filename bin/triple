@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+from typing import List, Optional, Set
+import argparse
+import json
+import platform
+import subprocess
+
+
+class SDK:
+    def __init__(self, requested_sdk: str, sdk_path: Path):
+        with open(sdk_path / "SDKSettings.json") as f:
+            blob = json.load(f)
+
+        sdk_spec = blob["SupportedTargets"][requested_sdk]
+        self.name: str = blob["CanonicalName"]
+        self.archs: List[str] = sorted(sdk_spec["Archs"])
+        self.deployment_targets: Set[str] = set(
+            sdk_spec["ValidDeploymentTargets"]
+        )
+        self.default_deployment_target: str = sdk_spec[
+            "DefaultDeploymentTarget"
+        ]
+        self.triple_vendor: str = sdk_spec["LLVMTargetTripleVendor"]
+        self.triple_system: str = sdk_spec["LLVMTargetTripleSys"]
+        self.target_environment: str = sdk_spec["LLVMTargetTripleEnvironment"]
+
+    def default_arch(self) -> str:
+        host_arch = platform.machine()
+        if host_arch in self.archs:
+            return host_arch
+
+        return self.archs[0]
+
+    def validate_arch(self, arch: str) -> None:
+        if arch not in self.archs:
+            raise SystemExit(
+                f"error: arch '{arch}' is not valid for {self.name}"
+            )
+
+    def validate_deployment_target(self, deployment_target: str) -> None:
+        if deployment_target not in self.deployment_targets:
+            raise SystemExit(
+                f"error: deployment target '{deployment_target}' is not valid for {self.name}"
+            )
+
+    def triple(self, arch: str, deployment_target: str) -> str:
+        triple_suffix = (
+            f"-{self.target_environment}" if self.target_environment else ""
+        )
+        return f"{arch}-{self.triple_vendor}-{self.triple_system}{deployment_target}{triple_suffix}"
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "sdk", choices=("macosx", "iphonesimulator", "iphoneos")
+    )
+    parser.add_argument("--min-os")
+    parser.add_argument("--arch", choices=("x86_64", "arm64"))
+    return parser
+
+
+def _get_sdk_path(sdk: str) -> Path:
+    return Path(
+        subprocess.check_output(["xcrun", "--show-sdk-path", "--sdk", sdk])
+        .decode()
+        .strip()
+    )
+
+
+def _main(sdk_identifier: str, min_os: Optional[str], arch: Optional[str]):
+    sdk_path = _get_sdk_path(sdk_identifier)
+    sdk = SDK(sdk_identifier, sdk_path)
+
+    arch = arch or sdk.default_arch()
+    sdk.validate_arch(arch)
+    min_os = min_os or sdk.default_deployment_target
+    sdk.validate_deployment_target(min_os)
+
+    triple = sdk.triple(arch, min_os)
+    print(f"-sdk {sdk_path} -triple {triple}")
+
+
+if __name__ == "__main__":
+    args = _build_parser().parse_args()
+    _main(args.sdk, args.min_os, args.arch)
