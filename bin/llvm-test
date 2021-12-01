@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+files=($(git ls-files --modified "$(git rev-parse --show-toplevel)" | grep test))
+new_files=()
+for file in "${files[@]}"
+do
+  if [[ -e "$file" ]]; then
+    new_files+=("$file")
+  fi
+done
+
+./bin/llvm-lit "${new_files[@]}" "$@"
