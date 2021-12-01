@@ -26,6 +26,10 @@ export EDITOR=nvim
 # X - Don't send clear screen signal
 export LESS="ij.5KMRX"
 export MANPAGER="$EDITOR +Man\!"
+# On macOS _something_ is setting this which breaks default behavior like 'man
+# libtool' pointing at Xcode
+export MANPATH=
+
 export PAGER="less"
 export RIPGREP_CONFIG_PATH="$HOME/.config/rgrc.conf"
 
