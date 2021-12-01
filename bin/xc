@@ -9,7 +9,7 @@ set -euo pipefail
 xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode==" || true))
 
 open_project() {
-  env --unset=GEM_HOME --unset=GEM_PATH PATH=/usr/bin:/bin open -a "$1" ./$2
+  env -u GEM_HOME -u GEM_PATH PATH=/usr/bin:/bin open -a "$1" ./$2
 }
 
 # Open prefers Package.swifts to checked in projects so we have to do this manually FB9092403
