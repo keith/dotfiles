@@ -31,7 +31,7 @@ def get_keychain_pass(account=None, server=None):
     )
     output = subprocess.check_output(
         command, shell=True, stderr=subprocess.STDOUT
-    )
+    ).decode()
     outtext = [l for l in output.splitlines() if l.startswith("password: ")][0]
 
     return re.match(r'password: "(.*)"', outtext).group(1)
