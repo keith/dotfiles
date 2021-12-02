@@ -37,3 +37,4 @@ tpope/vim-sleuth
 tpope/vim-surround
 tpope/vim-unimpaired
 udalov/kotlin-vim
+ziglang/zig.vim
