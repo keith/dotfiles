@@ -20,6 +20,7 @@ config/coc
 config/configstore
 config/gcloud
 config/gh
+config/github-copilot
 config/gtk-2.0
 config/htop/htoprc
 config/hub
