@@ -11,6 +11,7 @@
 .DS_Store
 .hgignore
 .keithclangformat
+.keithcmakeformat
 .keithenv
 .LSOverride
 .mypy_cache
