@@ -228,8 +228,6 @@ sudo pmset -a halfdim 0
 
 # Sleep options
 sudo pmset -a displaysleep 5
-sudo pmset -a sleep 0
-sudo pmset -a disksleep 0
 
 # Wake for network access
 sudo pmset -a womp 1
@@ -245,12 +243,6 @@ sudo pmset -a acwake 0
 
 # Don't dim brightness on any different source
 sudo pmset -a lessbright 0
-
-# Disable sudden motion sensor
-sudo pmset -a sms 0
-
-# Power button behavior
-defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool false
 
 
 #
