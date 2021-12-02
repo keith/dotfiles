@@ -8,7 +8,6 @@ nvim-treesitter/nvim-treesitter-textobjects
 nvim-treesitter/playground
 ray-x/lsp_signature.nvim
 RRethy/nvim-treesitter-textsubjects
-ruifm/gitlinker.nvim
 simrat39/symbols-outline.nvim
 
 nvim-lua/plenary.nvim

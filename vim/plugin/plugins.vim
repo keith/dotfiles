@@ -43,6 +43,7 @@ nnoremap ]d :lua vim.lsp.diagnostic.goto_next()<CR>
 
 nnoremap <leader>g :Git blame<CR>
 nnoremap <leader>v :.,.GBrowse<CR>
+vnoremap <leader>v :.,.GBrowse<CR>
 
 " The only vim-rsi mappings I need
 inoremap <C-A> <C-O>^
