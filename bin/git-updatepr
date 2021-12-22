@@ -14,18 +14,27 @@ fi
 export GIT_SEQUENCE_EDITOR=true
 
 readonly commit_to_update=$1
-squash=false
-if [[ "${2:-}" == --squash ]]; then
-  squash=true
-  shift
-fi
-signoff=false
-if [[ "${2:-}" == -s ]]; then
-  signoff=true
-  shift
-fi
+shift
 
-new_refspec=$(git rev-parse "${2:-HEAD}")
+signoff=false
+squash=false
+for arg in "$@"
+do
+  case "$arg" in
+    -s)
+      signoff=true
+      shift
+      ;;
+    --squash)
+      squash=true
+      shift
+      ;;
+    *)
+      ;;
+  esac
+done
+
+new_refspec=$(git rev-parse "${1:-HEAD}")
 base_refspec=$(git rev-parse HEAD)
 
 if ! git cat-file -e "$commit_to_update" 2> /dev/null; then
