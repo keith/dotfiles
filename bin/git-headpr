@@ -3,16 +3,18 @@
 set -euo pipefail
 set -x
 
+updatepr_args=()
 commit_args=()
 for arg in "$@"
 do
   case "$arg" in
     --squash)
       commit_args+=(-m ignore)
+      updatepr_args+=(--squash)
       ;;
     -s|--no-verify)
       commit_args+=("$arg")
-      shift
+      updatepr_args+=(-s)
       ;;
     *)
       ;;
@@ -22,7 +24,10 @@ done
 if [[ -z "${commit_args:-}" ]]; then
   commit_args=(--)
 fi
+if [[ -z "${updatepr_args:-}" ]]; then
+  updatepr_args=(--)
+fi
 
 head_sha=$(git rev-parse HEAD)
 git commit "${commit_args[@]}"
-git updatepr "$head_sha" "$@"
+git updatepr "$head_sha" "${updatepr_args[@]}"
