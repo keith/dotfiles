@@ -12,11 +12,16 @@ do
       commit_args+=(-m ignore)
       updatepr_args+=(--squash)
       ;;
-    -s|--no-verify)
-      commit_args+=("$arg")
+    -s)
+      commit_args+=(-s)
       updatepr_args+=(-s)
       ;;
+    --no-verify)
+      commit_args+=(--no-verify)
+      ;;
     *)
+      echo "error: unexpected argument: $arg"
+      exit 1
       ;;
   esac
 done
