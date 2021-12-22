@@ -25,15 +25,15 @@ if [[ "${2:-}" == -s ]]; then
   shift
 fi
 
-readonly new_refspec=$(git rev-parse "${2:-HEAD}")
-readonly base_refspec=$(git rev-parse HEAD)
+new_refspec=$(git rev-parse "${2:-HEAD}")
+base_refspec=$(git rev-parse HEAD)
 
 if ! git cat-file -e "$commit_to_update" 2> /dev/null; then
   echo "error: invalid commit sha: '$commit_to_update'" >&2
   exit 1
 fi
 
-readonly branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit_to_update" | tr '[:upper:]' '[:lower:]')"
+branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit_to_update" | tr '[:upper:]' '[:lower:]')"
 if ! git show-ref --quiet "$branch_name"; then
   echo "error: branch '$branch_name' doesn't exist" >&2
   exit 1
