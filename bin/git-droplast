@@ -2,9 +2,14 @@
 
 set -euo pipefail
 
-if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
-  echo "error: has uncommitted changes that would be lost" >&2
+if [[ -z "$(git status --porcelain --untracked-files=no --ignore-submodules)" ]]; then
+  git reset --hard HEAD~
+  exit 0
+elif [[ -n "$(git diff --cached)" ]]; then
+  echo "error: has staged changes, not going to stash"
   exit 1
 fi
 
+trap 'git stash pop' EXIT
+git stash
 git reset --hard HEAD~
