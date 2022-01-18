@@ -29,10 +29,7 @@ done
 if [[ -z "${commit_args:-}" ]]; then
   commit_args=(--)
 fi
-if [[ -z "${updatepr_args:-}" ]]; then
-  updatepr_args=(--)
-fi
 
 head_sha=$(git rev-parse HEAD)
 git commit "${commit_args[@]}"
-git updatepr "$head_sha" "${updatepr_args[@]}"
+git updatepr "$head_sha" "${updatepr_args[@]:-}"
