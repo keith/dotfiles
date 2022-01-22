@@ -122,6 +122,7 @@
   lineNumber = true
 [advice]
   waitingForEditor = false
+  skippedCherryPicks = false
 [pager]
   branch = false
 [branch "main"]
