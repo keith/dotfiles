@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
+if [[ -n "$(git status --porcelain --untracked-files=no --ignore-submodules)" ]]; then
   echo "error: has uncommitted changes that would be lost" >&2
   exit 1
 fi
