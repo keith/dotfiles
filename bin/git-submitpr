@@ -11,8 +11,8 @@ if [[ $# -gt 0 ]]; then
   shift
 fi
 
-readonly commit="$(git rev-parse "$commit_arg")"
-readonly branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit" | tr '[:upper:]' '[:lower:]')"
+commit="$(git rev-parse "$commit_arg")"
+branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$commit" | tr '[:upper:]' '[:lower:]')"
 
 if git show-ref --verify --quiet refs/heads/"$branch_name"; then
   echo "error: branch named '$branch_name' already exists" >&2
