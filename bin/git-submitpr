@@ -53,13 +53,13 @@ if ! git -C "$worktree_dir" cherry-pick "$commit"; then
   fi
 fi
 
-if git -C "$worktree_dir" push --quiet --set-upstream origin "$branch_name"; then
+if git -C "$worktree_dir" remote get-url mine && git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; then
+  git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
+elif git -C "$worktree_dir" push --quiet --set-upstream origin "$branch_name"; then
   # TODO maybe ghb should support -C ?
   pushd "$worktree_dir" >/dev/null
   ghb pr --no-edit --draft "$remote_branch_name" "$@"
   popd
-elif git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; then
-  git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
 else
   echo "error: failed to create remote branch" >&2
   _detach_branch
