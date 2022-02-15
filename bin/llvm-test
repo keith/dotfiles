@@ -3,7 +3,7 @@
 set -euo pipefail
 set -x
 
-files=($(git ls-files --modified "$(git rev-parse --show-toplevel)" | grep test))
+files=($(git ls-files --modified --others --exclude-standard "$(git rev-parse --show-toplevel)" | grep test))
 new_files=()
 for file in "${files[@]}"
 do
