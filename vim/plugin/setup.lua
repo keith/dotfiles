@@ -32,7 +32,7 @@ lsp_spinner.init_capabilities(capabilities)
 local nvim_lsp = require "lspconfig"
 local servers = {
   "bashls",
-  "clangd", -- TODO: clangd.switchSourceHeader
+  "clangd",
   "cmake",
   "gopls",
   "graphql",
