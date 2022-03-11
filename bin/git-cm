@@ -7,6 +7,11 @@
 
 set -euo pipefail
 
+if [[ $# -gt 0 ]]; then
+  echo "error: unexpected args" >&2
+  exit 1
+fi
+
 config_key="$(git roothash).main-branch"
 if main_branch="$(git config --local "$config_key")"; then
   git checkout "$main_branch"
