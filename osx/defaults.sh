@@ -6,8 +6,6 @@
 #  sudo opensnoop | grep plist
 # Useful reference: http://www.hcs.harvard.edu/~jrus/Site/Cocoa%20Text%20System.html
 
-killall System\ Preferences
-
 # Ask for the administrator password upfront
 sudo -v
 
@@ -38,14 +36,8 @@ defaults write NSGlobalDomain ApplePersistence -bool false
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
-# Dark UI
-defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
-
 # Disable Resume system-wide
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
-
-# Enable subpixel font rendering on non-Apple LCDs
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Disable 'smart' quotes
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -120,17 +112,11 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 # Mission Control
 #
 
-# Don't show Dashboard as a Space
-defaults write com.apple.dock dashboard-in-overlay -bool true
-
-# Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -bool true
-
 # Don't automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
 # Dock setup
-if command -v dockutil; then
+if command -v dockutil >/dev/null; then
   dockutil --remove all
 
   dockutil --add "/Applications/Google Chrome.app"
@@ -144,7 +130,7 @@ else
 fi
 
 # Run hot corners script
-if [[ -f ../bin/corners ]]; then
+if command -v corners >/dev/null; then
     ../bin/corners enable
 else
     echo "Failed to setup hot corners, script missing"
@@ -177,45 +163,9 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "parsec"
 # 1 = on for specific services
 # 2 = on for essential services
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
-# Enable Stealth mode.
-sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -int 1
-# Enable Firewall logging.
-sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -int 1
-
-# Disable IR remote control.
-sudo defaults write /Library/Preferences/com.apple.driver.AppleIRController DeviceEnabled -bool false
 
 # Disable auto-adjust brightness
 sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plist "Automatic Display Enabled" -bool false
-
-
-#
-# Media
-#
-
-# Disable all actions when inserting disks
-defaults write com.apple.digihub com.apple.digihub.blank.bd.appeared -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.blank.cd.appeared -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.blank.dvd.appeared -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.cd.music.appeared -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.appeared -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.dvcamera.IIDC.irisopened -dict-add action -int 1
-defaults write com.apple.digihub com.apple.digihub.dvd.video.appeared -dict-add action -int 1
-
-
-#
-# Displays
-#
-
-defaults write com.apple.systemuiserver menuExtras -array \
-  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-  "/System/Library/CoreServices/Menu Extras/Volume.menu"
-
-# Enable HiDPI display modes (requires restart)
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
 
 
 #
@@ -318,13 +268,6 @@ defaults write NSGlobalDomain AppleICUTimeFormatStrings -dict \
   2 -string "H:mm:ss" \
   3 -string "H:mm:ss z" \
   4 -string "H:mm:ss zzzz"
-
-
-#
-# Battery Percentage
-#
-
-defaults write com.apple.menuextra.battery ShowPercent -bool true
 
 
 #
@@ -520,9 +463,6 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
-# Sort contacts by first name
-defaults write com.apple.AddressBook ABNameSortingFormat -string "sortingFirstName sortingLastName"
-
 # Disk image changes
 defaults write com.apple.frameworks.diskimages skip-verify -bool true
 defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
@@ -557,7 +497,7 @@ defaults write com.apple.screencapture location -string "$HOME/Desktop"
 defaults write com.apple.screencapture type -string png
 
 # Don't show iOS like thumbnail
-defaults write com.apple.screencapture show-thumbnail -string -bool false
+defaults write com.apple.screencapture show-thumbnail -bool false
 
 # Finally disable opening random Apple photo applications when plugging in devices
 # https://twitter.com/stroughtonsmith/status/651854070496534528
@@ -608,7 +548,7 @@ defaults write org.macosforge.xquartz.X11 sync_primary_on_select -bool false
 defaults write org.macosforge.xquartz.X11 app_to_run -string /opt/X11/bin/xterm
 
 # Set default shell
-defaults write org.macosforge.xquartz.X11 login_shell -string /usr/local/bin/zsh
+defaults write org.macosforge.xquartz.X11 login_shell -string $BREW_PREFIX/bin/zsh
 
 
 #
@@ -707,9 +647,6 @@ defaults write com.apple.dt.Xcode ShowDVTDebugMenu -bool true
 
 # Hide the Xcode 11 minimap
 defaults write com.apple.dt.Xcode DVTTextShowMinimap -bool false
-
-# https://www.smileykeith.com/2020/09/29/lldb-reproducers
-defaults write com.apple.dt.Xcode IDEDebuggerEnableReproducerCapture -bool true
 
 # Disable Source Control
 defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_10_0 -bool false
