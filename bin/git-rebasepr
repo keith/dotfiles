@@ -28,6 +28,7 @@ _detach_branch() {
 trap _detach_branch EXIT
 
 branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
+# TODO: Might have to pass -i here sometimes
 if ! git -C "$worktree_dir" rebase "$branch_with_remote"; then
   if git -C "$worktree_dir" mergetool; then
     GIT_EDITOR=true git -C "$worktree_dir" rebase --continue
