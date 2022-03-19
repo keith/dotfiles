@@ -179,6 +179,7 @@ set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
 " Right Side
+" TODO: use treesitter here first if enabled? nvim_treesitter#statusline
 set statusline+=%{CurrentTag('%s\ <\ ','','')}
 set statusline+=%y
 set statusline+=\ \ %P
