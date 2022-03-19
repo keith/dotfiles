@@ -6,9 +6,33 @@ if [[ -n "${GIT_PILE_VERBOSE:-}" ]]; then
   set -x
 fi
 
-readonly commit_arg="${1:-HEAD}"
-if [[ $# -gt 0 ]]; then
-  shift
+while [[ $# -gt 0 ]]; do
+  arg=$1
+  case $arg in
+    -b|--base)
+      base_sha=$2
+      shift
+      shift
+      ;;
+    -c|--commit)
+      commit=$2
+      shift
+      shift
+      ;;
+    *)
+      echo "error: unexpected arg: '$1'" >&2
+      exit 1
+      ;;
+  esac
+done
+
+readonly commit_arg="${commit:-HEAD}"
+upstream_ref="@{upstream}"
+if [[ -n "${base_branch:-}" ]]; then
+  upstream_ref="$base_branch@{upstream}"
+elif [[ -n "${base_sha:-}" ]]; then
+  base_branch_name="${GIT_PILE_PREFIX:-}$(git show --no-patch --format=%f "$base_sha" | tr '[:upper:]' '[:lower:]')"
+  upstream_ref="$base_branch_name@{upstream}"
 fi
 
 commit="$(git rev-parse "$commit_arg")"
@@ -19,21 +43,32 @@ if git show-ref --verify --quiet refs/heads/"$branch_name"; then
   exit 1
 fi
 
-branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "@{upstream}")
-remote_branch_name="${branch_with_remote#*/}"
+branch_with_remote=$(git rev-parse --abbrev-ref --symbolic-full-name "$upstream_ref")
+readonly remote_branch_name="${branch_with_remote#*/}"
 
-git branch --no-track "$branch_name" "@{upstream}"
+git branch --no-track "$branch_name" "$upstream_ref"
 
 worktree_name=$(git roothash)
 readonly worktree_dir="$HOME/.cache/git-pile/$worktree_name"
-if [[ ! -d "$worktree_dir" ]]; then
-  git worktree add -f "$worktree_dir" "$branch_name"
-else
+
+if git -C "$worktree_dir" rev-parse --show-toplevel >/dev/null 2>&1; then
   if ! git -C "$worktree_dir" switch "$branch_name"; then
     git branch -D "$branch_name"
     exit 1
   fi
+else
+  rm -rf "$worktree_dir"
+  git worktree add -f "$worktree_dir" "$branch_name"
 fi
+
+# if [[ ! -d "$worktree_dir" ]]; then
+#   git worktree add -f "$worktree_dir" "$branch_name"
+# else
+#   if ! git -C "$worktree_dir" switch "$branch_name"; then
+#     git branch -D "$branch_name"
+#     exit 1
+#   fi
+# fi
 
 _detach_branch() {
   git -C "$worktree_dir" switch --detach --quiet
@@ -58,7 +93,7 @@ if git -C "$worktree_dir" remote get-url mine && git -C "$worktree_dir" push --q
 elif git -C "$worktree_dir" push --quiet --set-upstream origin "$branch_name"; then
   # TODO maybe ghb should support -C ?
   pushd "$worktree_dir" >/dev/null
-  ghb pr --no-edit --draft "$remote_branch_name" "$@"
+  ghb pr --no-edit --draft "$remote_branch_name"
   popd
 else
   echo "error: failed to create remote branch" >&2
