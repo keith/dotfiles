@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ -e Gemfile ]]; then
+  bundle exec pod install || bundle exec pod install --repo-update
+else
+  pod install || pod install --repo-update
+fi
