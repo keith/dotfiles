@@ -5,7 +5,9 @@
 
 set -euo pipefail
 
-if ! git config --local custom.requiresdco > /dev/null; then
+if git remote get-url origin | grep -qE 'envoyproxy|mobilenativefoundation'; then
+  true
+elif ! git config --local custom.requiresdco > /dev/null; then
   exit 0
 fi
 
