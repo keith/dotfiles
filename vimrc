@@ -314,7 +314,10 @@ command! FormatShellCommand call s:FormatShellCommand()
 function! s:FormatShellCommand()
   let l:line = line('.')
   let l:column = col('.')
-  keepjumps silent! %s/ -/ \\\r -/e
+  let l:content = getline('.')
+  let l:output = systemlist("print -l -- " . l:content)
+  call setline(".", l:output)
+  keepjumps silent! 1,$-1s/\n/ \\\r /e
   call cursor(l:line, l:column)
   call histdel('search', -1)
 endfunction
