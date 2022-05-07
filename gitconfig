@@ -138,3 +138,5 @@
   guess = true
 [format]
   pretty = fuller
+[color]
+  ui = auto
