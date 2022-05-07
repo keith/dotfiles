@@ -6,6 +6,10 @@ if [[ -n "${DEV:-}" ]]; then
   exec "$DOTFILES/../bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
+if [[ -n "${DEVREL:-}" ]]; then
+  exec "$DOTFILES/../bazel-rel/bazel-bin/src/bazel-dev" "$@"
+fi
+
 if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
   if command -v bazelisk > /dev/null; then
     exec bazelisk "$@"
