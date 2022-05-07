@@ -157,8 +157,8 @@ def _main(squash: bool, sign_off: bool) -> None:
 
     args = []
     if squash:
-        args.append("-m 'ignore, will be squashed'")
-    if sign_off:
+        args.append("-m 'ignore, will be squashed' -s")
+    elif sign_off:
         args.append("-s")
 
     code = os.system("git commit {}".format(" ".join(args)))
@@ -168,8 +168,6 @@ def _main(squash: bool, sign_off: bool) -> None:
     update_command = ["git", "updatepr", selected_sha]
     if squash:
         update_command.append("--squash")
-    if sign_off:
-        update_command.append("-s")
 
     subprocess.check_call(update_command)
 

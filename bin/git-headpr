@@ -9,12 +9,11 @@ for arg in "$@"
 do
   case "$arg" in
     --squash)
-      commit_args+=(-m ignore)
+      commit_args+=(-m ignore -s)
       updatepr_args+=(--squash)
       ;;
     -s)
       commit_args+=(-s)
-      updatepr_args+=(-s)
       ;;
     --no-verify)
       commit_args+=(--no-verify)

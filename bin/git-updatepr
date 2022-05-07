@@ -7,7 +7,7 @@ if [[ -n "${GIT_PILE_VERBOSE:-}" ]]; then
 fi
 
 if [[ $# -lt 1 ]]; then
-  echo "usage: $0 <new_sha> [--squash] [-s] [<sha_to_update>]" >&2
+  echo "usage: $0 <new_sha> [--squash] [<sha_to_update>]" >&2
   exit 1
 fi
 
@@ -16,15 +16,10 @@ export GIT_SEQUENCE_EDITOR=true
 readonly commit_to_update=$1
 shift
 
-signoff=false
 squash=false
 for arg in "$@"
 do
   case "$arg" in
-    -s)
-      signoff=true
-      shift
-      ;;
     --squash)
       squash=true
       shift
@@ -102,11 +97,7 @@ if ! git -C "$worktree_dir" cherry-pick "$new_refspec^..$base_refspec"; then
 fi
 
 if [[ "$squash" == true ]]; then
-  if [[ "$signoff" == true ]]; then
-    git -C "$worktree_dir" commit -s --amend --fixup=HEAD~
-  else
-    git -C "$worktree_dir" commit --amend --fixup=HEAD~
-  fi
+  git -C "$worktree_dir" commit -s --amend --fixup=HEAD~
   git -C "$worktree_dir" rebase --interactive --autosquash HEAD~2
   git -C "$worktree_dir" push --force-with-lease --quiet || echo "warning: failed to force push '$branch_name'" >&2
 else
