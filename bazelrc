@@ -4,6 +4,7 @@ common:orc --override_repository=rules_cc=/Users/ksmiley/dev/rules_cc
 common:org --override_repository=io_bazel_rules_go=/Users/ksmiley/dev/rules_go
 common:orp --override_repository=rules_python=/Users/ksmiley/dev/rules_python
 common:orsky --override_repository=bazel_skylib=/Users/ksmiley/dev/bazel-skylib
+common:orsd --override_repository=io_bazel_stardoc=/Users/ksmiley/dev/stardoc
 common:orr --override_repository=rules_rust=/Users/ksmiley/dev/rules_rust
 
 common:ora --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple
