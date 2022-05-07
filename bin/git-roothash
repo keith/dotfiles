@@ -2,7 +2,8 @@
 
 set -euo pipefail
 
-root=$(git rev-parse --show-toplevel)
+# Get the primary clone's path in the case of using worktrees
+root=$(git worktree list --porcelain | head -1 | cut -d" " -f2)
 if [[ $OSTYPE == darwin* ]]; then
   echo "$root" | md5
 else
