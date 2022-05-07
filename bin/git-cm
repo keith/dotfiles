@@ -12,7 +12,7 @@ if [[ $# -gt 0 ]]; then
   exit 1
 fi
 
-config_key="$(git roothash).main-branch"
+config_key="$(git rootworktreehash).main-branch"
 if main_branch="$(git config --local "$config_key")"; then
   git checkout "$main_branch"
 else

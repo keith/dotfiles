@@ -8,7 +8,7 @@
 
 set -eu
 
-config_key="$(git roothash).main-branch"
+config_key="$(git rootworktreehash).main-branch"
 worktree_main_branch="$(git config --local "$config_key" || true)"
 
 main_branch=$(git main-branch)
