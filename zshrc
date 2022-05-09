@@ -18,7 +18,7 @@ done
 
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
-compinit -u
+compinit -C
 
 for file in ${(M)configs:#*/completions.zsh}
 do
