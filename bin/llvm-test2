@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -euo pipefail
+
+args=()
+for file in "$@"
+do
+  relative_path=../$file
+  if [[ -f "$relative_path" ]]; then
+    args+=("$relative_path")
+    continue
+  fi
+
+  relative_path=../llvm/test/$file
+  if [[ -f "$relative_path" ]]; then
+    args+=("$relative_path")
+    continue
+  fi
+
+  args+=("$file")
+done
+
+# Workaround https://stackoverflow.com/a/9988385/902968 with pyenv
+python3 ./bin/llvm-lit "${args[@]}"
