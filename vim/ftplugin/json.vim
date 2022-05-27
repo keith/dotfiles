@@ -1,2 +1,2 @@
 setlocal foldmethod=syntax
-setlocal formatprg=python\ -mjson.tool
+setlocal formatprg=python3\ -mjson.tool
