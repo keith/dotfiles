@@ -13,3 +13,13 @@ common:ors --override_repository=build_bazel_rules_swift=/Users/ksmiley/dev/rule
 
 build:s --spawn_strategy=standalone
 build:d --disk_cache=~/.bazel_cache
+
+build:krc --bes_backend=grpcs://remote.buildbuddy.io
+build:krc --bes_results_url=https://app.buildbuddy.io/invocation/
+build:krc --experimental_remote_cache_compression
+build:krc --remote_cache=grpcs://remote.buildbuddy.io
+build:krc --remote_instance_name=keith/1
+build:krc --remote_timeout=3600
+build:krc --remote_upload_local_results
+
+try-import /Users/ksmiley/.secrets.bazelrc
