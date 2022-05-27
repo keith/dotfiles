@@ -6,7 +6,7 @@ url="$1"
 tempdir=$(mktemp -d)
 output="$tempdir/download"
 
-if ! curl --location --fail --silent --output "$output" "$url"; then
+if ! curl --location --fail --output "$output" "$url"; then
   echo "error: failed to download $url" >&2
   exit 1
 fi
