@@ -410,6 +410,8 @@ augroup ft_settings
   " Close location list when closing the window it belongs to
   autocmd QuitPre * nested if &filetype != 'qf' | silent! lclose | endif
 
+  autocmd FileType fugitiveblame nnoremap <buffer> x :call system("git open " . expand("<cword>"))<CR>
+
   autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh | normal! G
   autocmd BufNewFile *.sh let b:is_new = 1
   autocmd BufWritePost *.sh
