@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euo pipefail
+
+d <(xxd "$1") <(xxd "$2")
