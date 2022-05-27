@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# From https://github.com/git/git/blob/master/contrib/git-jump/git-jump
+
+set -euo pipefail
+
+git diff -U0 --no-prefix --relative "$@" |
+  perl -ne '
+  if (m{^\+\+\+ (.*)}) { $file = $1; next }
+  defined($file) or next;
+  if (m/^@@ .*?\+(\d+)/) { $line = $1; next }
+  defined($line) or next;
+  if (/^ /) { $line++; next }
+  if (/^[-+]\s*(.*)/) {
+    print "$file:$line: $1\n";
+    $line = undef;
+  }
+' | (grep -v /dev/null || true) | (grep -v ": Subproject commit" || true)

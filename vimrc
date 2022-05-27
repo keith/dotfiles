@@ -424,3 +424,5 @@ let g:c_no_curly_error = 1
 
 " https://github.com/thoughtbot/dotfiles/pull/471
 let g:is_posix = 1
+
+command -nargs=? Gqf silent cexpr systemlist('git diff-qf <args>') | copen
