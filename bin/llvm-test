@@ -12,4 +12,5 @@ do
   fi
 done
 
-./bin/llvm-lit "${new_files[@]}" "$@"
+# Workaround https://stackoverflow.com/a/9988385/902968 with pyenv
+python3 ./bin/llvm-lit "${new_files[@]}" "$@"
