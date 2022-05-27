@@ -1,5 +1,6 @@
 " vim-markdown
 let g:markdown_fenced_languages = [
+      \ 'bzl',
       \ 'objc',
       \ 'ruby',
       \ 'sh',
