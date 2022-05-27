@@ -332,11 +332,11 @@ if &diff
   if tabpagenr('$') == 1
     nnoremap ZZ :wqall<CR>
   endif
-else
-  " Jump to next/previous merge conflict marker
-  nnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>zz
-  nnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>zz
 endif
+
+" Jump to next/previous merge conflict marker
+nnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>zz
+nnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>zz
 
 " Position resume
 function! s:PositionRecall()
