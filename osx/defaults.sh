@@ -474,6 +474,9 @@ defaults write com.apple.DiskUtility DUDebugMenuEnabled 1
 defaults write com.apple.DiskUtility advanced-image-options -bool true
 defaults write com.apple.DiskUtility SidebarShowAllDevices -bool true
 
+# Disable badges for Feedback Assistant, they never go away if you have a response that you reply to
+defaults write com.apple.appleseed.FeedbackAssistant AttentionPrefBundleIDs -bool false
+
 
 #
 # Other Interface changes
