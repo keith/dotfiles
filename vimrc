@@ -334,8 +334,8 @@ if &diff
   endif
 else
   " Jump to next/previous merge conflict marker
-  nnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>
-  nnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>
+  nnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>zz
+  nnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>zz
 endif
 
 " Position resume
