@@ -51,6 +51,9 @@ defaults write NSGlobalDomain AppleWindowTabbingMode -string "always"
 # https://mjtsai.com/blog/2020/10/05/big-surs-hidden-document-proxy-icon
 defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
 
+# https://mmazzarolo.com/blog/2022-04-16-drag-window-by-clicking-anywhere-on-macos
+defaults write NSGlobalDomain NSWindowShouldDragOnGesture -bool true
+
 
 #
 # Desktop & Screen Saver
