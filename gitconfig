@@ -32,6 +32,7 @@
   tool = nvim
   log = true
   stat = true
+  conflictstyle = zdiff3
 [github]
   user = keith
 [help]
