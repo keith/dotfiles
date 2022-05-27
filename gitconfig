@@ -46,6 +46,7 @@
   auntracked  = !sh -c 'git ls-files `git rev-parse --show-toplevel` --others --exclude-standard -z | xargs -0 git add'
   b           = branch
   ba          = branch -a
+  bisect-fixed = bisect start --term-new=fixed --term-old=broken
   c           = clone --recursive
   cbm         = !sh -c 'git cb $1 mine' -
   co-pr       = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
