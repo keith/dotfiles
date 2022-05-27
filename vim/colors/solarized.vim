@@ -971,10 +971,10 @@ hi! link pandocMetadataTitle             pandocMetadata
 
 " LSP config
 " ---------------------------------------------------------------------
-highlight! LspDiagnosticsDefaultWarning ctermfg=Black ctermbg=LightYellow
-highlight! LspDiagnosticsDefaultInformation ctermfg=Black ctermbg=LightBlue
-highlight! link LspDiagnosticsDefaultHint LspDiagnosticsDefaultInformation
-highlight! link LspDiagnosticsDefaultError ErrorMsg
+highlight! DiagnosticWarn ctermfg=Black ctermbg=LightYellow
+highlight! DiagnosticInfo ctermfg=Black ctermbg=LightBlue
+highlight! link DiagnosticSignHint DiagnosticInfo
+highlight! link DiagnosticError ErrorMsg
 
 " Treesitter config
 " ---------------------------------------------------------------------

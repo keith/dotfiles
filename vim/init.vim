@@ -20,15 +20,15 @@ autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hi
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 " TODO: Ideally this would happen automatically when there were diagnostics
-nnoremap <silent> <leader>l <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <silent> <leader>l <cmd>lua vim.lsp.diagnostic.setloclist()<CR>
 
 nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <Leader>d <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+nnoremap <silent> <Leader>d <cmd>lua vim.diagnostic.open_float()<CR>
 nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <leader>r <cmd>lua vim.lsp.buf.rename()<CR>
 
-sign define LspDiagnosticsSignError text=E numhl=LspDiagnosticsDefaultError
-sign define LspDiagnosticsSignWarning text=W numhl=LspDiagnosticsDefaultWarning
-sign define LspDiagnosticsSignInformation text=I numhl=LspDiagnosticsDefaultInformation
-sign define LspDiagnosticsSignHint text=H numhl=LspDiagnosticsDefaultHint
+sign define DiagnosticSignError text=E numhl=DiagnosticSignError
+sign define DiagnosticSignWarn text=W numhl=DiagnosticSignWarn
+sign define DiagnosticSignInfo text=I numhl=DiagnosticSignInfo
+sign define DiagnosticSignHint text=H numhl=DiagnosticSignHint
