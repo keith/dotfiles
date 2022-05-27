@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+
+# TODO: force sudo
+
+if [[ $OSTYPE == freebsd* ]]; then
+  user=ec2-user
+
+  newfs /dev/nvd1
+  mount /dev/nvme1 /home/$user/ephemeral
+else
+  user=ubuntu
+
+  mkfs.ext4 /dev/nvme1n1
+  mount -o discard,noatime /dev/nvme1n1 /home/$user/ephemeral
+fi
+
+mkdir /home/$user/ephemeral/build_root
+mkdir /home/$user/ephemeral/compdb_root
+mkdir /home/$user/ephemeral
+chown -R $user /home/$user/ephemeral
