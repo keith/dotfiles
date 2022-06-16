@@ -96,8 +96,11 @@ function has_highlights(lang)
 end
 
 require("nvim-treesitter.configs").setup {
-  ensure_installed = "maintained",
-  ignore_install = { "zig" }, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2049
+  ensure_installed = "all",
+  ignore_install = {
+    "phpdoc", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2837
+    "zig", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2049
+  },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
