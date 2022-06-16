@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly orig_exe="$1"
+orig_dir=$(dirname "$orig_exe")
+readonly dest_dir="$2"
+new_exe="$dest_dir/$(basename "$orig_exe")"
+
+echo "cp \"$orig_exe\" \"$dest_dir\""
+cp "$orig_exe" "$dest_dir"
+
+extract_rpath() {
+  awk '/cmd LC_RPATH/,/path/ { if ($1 == "path") print $2 }'
+}
+orig_rpath=$(otool -l "$orig_exe" | extract_rpath)
+
+if [[ "$orig_rpath" =~ "@executable_path" ]]; then
+  readonly new_rpath="${orig_rpath/@executable_path/$orig_dir}"
+  echo "install_name_tool -rpath \"$orig_rpath\" \"$new_rpath\" \"$new_exe\""
+  install_name_tool -rpath "$orig_rpath" "$new_rpath" "$new_exe"
+fi
+
+# resign executable with "ad-hoc signing"
+set -x
+codesign --force --sign - "$new_exe"
