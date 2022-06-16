@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+root="$(git rev-parse --show-toplevel)"
+if [[ $# -gt 0 && $1 != -* ]]; then
+  relative_path=$(python3 -c "import os.path; print(os.path.relpath('$root'))")
+  files=($(git diff --name-only "$1" | sed "s=^=$relative_path/=g" | (grep test || true) | (grep -v Inputs || true)))
+  files+=($(git ls-files --others --exclude-standard "$root"))
+  shift
+else
+  files=($(git ls-files --modified --others --exclude-standard "$root" | grep test))
+fi
+
+new_files=()
+for file in "${files[@]}"
+do
+  if [[ -e "$file" ]]; then
+    new_files+=("$file")
+  fi
+done
+
+# Workaround https://stackoverflow.com/a/9988385/902968 with pyenv
+python3 ./bin/llvm-lit "${new_files[@]}" "$@"
