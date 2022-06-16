@@ -29,6 +29,7 @@ readonly worktree_dir="$HOME/.cache/git-pile/$worktree_name"
 if [[ ! -d "$worktree_dir" ]]; then
   git worktree add -f "$worktree_dir" "$branch_name"
 else
+  # TODO: I've had the repo be in a bad state and maybe we need a cherry pick abort here, or on the cleanup instead
   if ! git -C "$worktree_dir" switch "$branch_name"; then
     git branch -D "$branch_name"
     exit 1
