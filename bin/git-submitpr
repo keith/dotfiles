@@ -6,9 +6,12 @@ if [[ -n "${GIT_PILE_VERBOSE:-}" ]]; then
   set -x
 fi
 
-readonly commit_arg="${1:-HEAD}"
+commit_arg=HEAD
 if [[ $# -gt 0 ]]; then
-  shift
+  if [[ $1 != --* ]]; then
+    commit_arg="$1"
+    shift
+  fi
 fi
 
 commit="$(git rev-parse "$commit_arg")"
