@@ -23,3 +23,12 @@ build:krc --remote_timeout=3600
 build:krc --remote_upload_local_results
 
 try-import /Users/ksmiley/.secrets.bazelrc
+
+build:ktrace --build_event_json_file=./bep.json
+build:ktrace --build_event_json_file_path_conversion=false
+build:ktrace --execution_log_json_file=./execution.json
+build:ktrace --experimental_remote_capture_corrupted_outputs=./corrupted_outputs
+build:ktrace --experimental_remote_grpc_log=./grpc.log
+build:ktrace --explain=./explanation.log
+build:ktrace --profile=./trace.json
+build:ktrace --verbose_explanations
