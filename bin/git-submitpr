@@ -58,6 +58,7 @@ if ! git -C "$worktree_dir" cherry-pick "$commit"; then
 fi
 
 if git -C "$worktree_dir" remote get-url mine 2>/dev/null && git -C "$worktree_dir" push --quiet --set-upstream mine "$branch_name"; then
+  # TODO: Example URL for upstream fork PRs https://github.com/apple/swift/compare/release/5.6...keith:ks/fix-invalid-warning-for-enum-cases-named-self-41520?expand=1
   git -C "$worktree_dir" open --remote mine "pull/new/$branch_name"
 elif git -C "$worktree_dir" push --quiet --set-upstream origin "$branch_name"; then
   # TODO maybe ghb should support -C ?
