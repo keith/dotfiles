@@ -13,7 +13,7 @@ fi
 #  - /usr/sbin
 #  - /bin
 #  - /sbin
-export PATH="$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$BREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+export PATH="$DOTFILES/git-pile/bin:$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$BREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 export CDPATH="$HOME/src/mnf:$HOME/src/lyft:$HOME/src:$HOME/dev/mnf:$HOME/dev/lyft:$HOME/dev:$HOME/go/src/github.com/lyft:$HOME/go/src/github.com/bazelbuild"
 
 export EDITOR=nvim
