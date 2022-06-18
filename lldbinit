@@ -4,6 +4,10 @@ settings set target.process.thread.step-in-avoid-nodebug false
 # Load local .lldbinit files
 settings set target.load-cwd-lldbinit true
 
+# Store a log of the session in /tmp for reference
+settings set interpreter.save-session-directory /tmp/
+settings set interpreter.save-session-on-quit True
+
 # Add type summary for Unmanaged in Swift
 type summary add --category swift --summary-string "Unmanaged Contains: ${var._value%@}" Swift.Unmanaged<AnyObject>
 
