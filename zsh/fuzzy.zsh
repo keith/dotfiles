@@ -15,14 +15,7 @@ trim_quotes() {
 fuzzy_git_files_widget() {
   trap "" INT
 
-  if [ -e ".gitmodules" ]; then
-    result="$(git ls-files "$(git rev-parse --show-toplevel 2>/dev/null)" \
-      --cached --exclude-standard --recurse-submodules 2>/dev/null | fzy)"
-  else
-    result="$(git ls-files "$(git rev-parse --show-toplevel 2>/dev/null)" \
-      --cached --exclude-standard --others 2>/dev/null | fzy)"
-  fi
-
+  result="$(find-files-async | fzy)"
   if [ "$result" != "" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi

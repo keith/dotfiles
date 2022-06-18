@@ -1,8 +1,11 @@
-call system("git rev-parse --show-toplevel")
+let output = system("git rev-parse --show-toplevel")
 if v:shell_error == 0
+  let s:search_root = substitute(output, "\\n", "", "")
   let s:executable="git"
   let s:arguments="grep --recurse-submodules --line-number {}"
 else
+  " If not in a git repo, just use pwd
+  let s:search_root = "."
   let s:executable="rg"
   let s:arguments="--vimgrep --case-sensitive {}"
 endif
@@ -18,7 +21,14 @@ function! s:Grep(args)
   endif
 
   cclose
-  let l:formatted_args = '"' . escape(a:args, '\') . '"'
+
+  call system("git check-ignore .")
+  if v:shell_error == 0
+    let l:search_scope = s:search_root
+  else
+    let l:search_scope = '.'
+  endif
+  let l:formatted_args = '"' . escape(a:args, '\') . '" ' . l:search_scope
   let l:arguments = substitute(s:arguments, '{}', l:formatted_args, '')
   let l:maker = {
         \ 'exe': s:executable,

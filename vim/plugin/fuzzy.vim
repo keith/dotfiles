@@ -1,35 +1,3 @@
-" Concatenate the directory into the ls-files command
-function! s:GitListCommand(directory)
-  " Until you can use --recurse-submodules and --others together
-  if filereadable(".gitmodules")
-    return "git ls-files " . a:directory . " --cached --exclude-standard --recurse-submodules 2>/dev/null && git ls-files " . a:directory . " --exclude-standard --others 2>/dev/null"
-  else
-    return "git ls-files " . a:directory . " --cached --exclude-standard --others 2>/dev/null"
-  endif
-endfunction
-
-" Command for searching folders even if they
-" aren't tracked with git
-function! s:SearchCommand()
-  if isdirectory(".git") || filereadable(".git")
-    let l:command = s:GitListCommand(".")
-  else
-    let l:output = system("git rev-parse --show-toplevel")
-    if v:shell_error == 0
-      let l:output = substitute(l:output, "\\n", "", "")
-      let l:command = s:GitListCommand(l:output)
-    else
-      let l:command = "find * -type f -o -type l"
-    endif
-  endif
-
-  return l:command
-endfunction
-
-function! s:EscapeFilePath(path)
-  return substitute(a:path, ' ', '\\ ', 'g')
-endfunction
-
 function! FuzzyFindCommand(vimCommand) abort
   let l:callback = {
         \ 'filename': tempname(),
@@ -51,7 +19,7 @@ function! FuzzyFindCommand(vimCommand) abort
   endfunction
 
   botright 10 new
-  let l:term_command = '(' . s:SearchCommand() . ') | fzy > ' .  l:callback.filename
+  let l:term_command = 'find-files-async | fzy > ' .  l:callback.filename
   silent call termopen(l:term_command, l:callback)
   setlocal nonumber norelativenumber
   startinsert

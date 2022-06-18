@@ -1,0 +1,59 @@
+#!/bin/bash
+
+set -euo pipefail
+
+search_dir=.
+is_git=""
+has_submodules=""
+if root=$(git rev-parse --show-toplevel 2>/dev/null); then
+  is_git=true
+  if git check-ignore --quiet .; then
+    search_dir="$root"
+  fi
+
+  if [[ -f "$root/.gitmodules" ]]; then
+    has_submodules=true
+  fi
+fi
+
+# The cache file is derived to make all of these requests unique results because
+# git-ls-files correctly relativizes outputs based on these factors.
+#
+# Search dir | actual path | pwd | result
+# -----------+-------------+-----+-------
+# .          | /something  | /   | a
+# /something | /something  | /   | b
+# /something | /something  | /sometime   | c
+readonly cache_dir=~/.cache/find-files-async
+cache_file="$cache_dir/$(echo "$search_dir" | md5)-$(realpath "$search_dir" | md5)-$(pwd | md5)"
+mkdir -p "$cache_dir"
+
+run_cmd() {
+  if [[ -n "$is_git" ]]; then
+    if [[ -n "$has_submodules" ]]; then
+      git ls-files "$search_dir" --cached --exclude-standard --recurse-submodules 2>/dev/null && \
+        git ls-files "$search_dir" --exclude-standard --others 2>/dev/null
+    else
+      git ls-files "$search_dir" --cached --exclude-standard --others 2>/dev/null
+    fi
+  else
+    fd "$search_dir"
+  fi
+}
+
+# Initial file creation
+if [[ ! -r "$cache_file" ]]; then
+  run_cmd | tee "$cache_file"
+  exit 0
+fi
+
+# Happy path
+hours_since_change=$(( ($(date +%s) - $(stat -t %s -f %m "$cache_file")) / 3600 ))
+if [[ "$hours_since_change" -lt 24 ]]; then
+  cat "$cache_file"
+  run_cmd > "$cache_file" &
+  exit 0
+fi
+
+# File too old, ignore it
+run_cmd | tee "$cache_file"
