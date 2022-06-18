@@ -59,7 +59,7 @@ function! s:GrepVisual()
   call s:Grep(s:Escape(s:GetVisualSelection()))
 endfunction
 
-" What a PITA https://stackoverflow.com/a/6271254/902968
+" https://stackoverflow.com/a/6271254/902968
 function! s:GetVisualSelection()
   let [line_start, column_start] = getpos("'<")[1:2]
   let [line_end, column_end] = getpos("'>")[1:2]
