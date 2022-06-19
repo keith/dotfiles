@@ -24,7 +24,7 @@ fi
 # .          | /something  | /   | a
 # /something | /something  | /   | b
 # /something | /something  | /sometime   | c
-readonly cache_dir=~/.cache/find-files-async
+readonly cache_dir=/tmp/find-files-async
 cache_file="$cache_dir/$(echo "$search_dir" | md5)-$(realpath "$search_dir" | md5)-$(pwd | md5)"
 mkdir -p "$cache_dir"
 
