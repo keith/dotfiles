@@ -7,6 +7,7 @@ augroup setup_buildifier
 
   autocmd BufNewFile,BufRead *.bzl let b:formatters_bzl = ['buildifierbzl']
   autocmd BufNewFile,BufRead BUILD,BUILD.bazel,*.BUILD,BUILD.* let b:formatters_bzl = ['buildifierbuild']
+  autocmd BufNewFile,BufRead MODULE.bazel let b:formatters_bzl = ['buildifiermodule']
   autocmd BufNewFile,BufRead WORKSPACE,WORKSPACE.bazel let b:formatters_bzl = ['buildifierworkspace']
   autocmd FileType bzl autocmd BufWritePre <buffer> :Autoformat
 
