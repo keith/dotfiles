@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-source_path=$(xcode-select -p)/Platforms/iPhoneOS.platform/Developer/Library/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library
+source_path=$(xcode-select -p)/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library
 
 accessibility_path() {
   echo "$source_path/AccessibilityBundles/$1.axbundle/$1"
