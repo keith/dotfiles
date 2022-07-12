@@ -27,7 +27,8 @@ fuzzy_git_files_widget() {
 fuzzy_git_status_widget() {
   trap "" INT
 
-  result="$(git status -s | grep -v "^ D " | cut -c4- | fzy)"
+  # TODO: do renames / copies work?
+  result="$(git status -s | cut -c4- | fzy)"
 
   if [ -n "$result" ]; then
     LBUFFER="${LBUFFER}$result"
