@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 set -euo pipefail
 
+# TODO: Breaks with nothing
 key=$(ls "$HOME"/.ssh/*.pub | fzy)
 if [[ ! -e "$key" ]]; then
   echo "No public key exists in $key"
