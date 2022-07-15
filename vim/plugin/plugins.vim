@@ -49,3 +49,6 @@ vnoremap <leader>v :.,.GBrowse<CR>
 " The only vim-rsi mappings I need
 inoremap <C-A> <C-O>^
 cnoremap <C-A> <Home>
+
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+let g:oscyank_silent = 1

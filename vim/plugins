@@ -20,6 +20,7 @@ ludovicchabant/vim-gutentags
 majutsushi/tagbar
 mhinz/vim-signify
 neomake/neomake
+ojroques/vim-oscyank
 RRethy/vim-illuminate
 rust-lang/rust.vim
 saltstack/salt-vim
