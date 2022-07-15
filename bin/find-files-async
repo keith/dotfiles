@@ -16,6 +16,14 @@ if root=$(git rev-parse --show-toplevel 2>/dev/null); then
   fi
 fi
 
+hash_str() {
+  if command -v md5 >/dev/null; then
+    md5
+  else
+    md5sum | cut -d" " -f1
+  fi
+}
+
 # The cache file is derived to make all of these requests unique results because
 # git-ls-files correctly relativizes outputs based on these factors.
 #
@@ -25,7 +33,7 @@ fi
 # /something | /something  | /   | b
 # /something | /something  | /sometime   | c
 readonly cache_dir=/tmp/find-files-async
-cache_file="$cache_dir/$(echo "$search_dir" | md5)-$(realpath "$search_dir" | md5)-$(pwd | md5)"
+cache_file="$cache_dir/$(echo "$search_dir" | hash_str)-$(realpath "$search_dir" | hash_str)-$(pwd | hash_str)"
 mkdir -p "$cache_dir"
 
 run_cmd() {
@@ -48,7 +56,12 @@ if [[ ! -r "$cache_file" ]]; then
 fi
 
 # Happy path
-hours_since_change=$(( ($(date +%s) - $(stat -t %s -f %m "$cache_file")) / 3600 ))
+if [[ $OSTYPE == darwin* ]]; then
+  hours_since_change=$(( ($(date +%s) - $(stat -t %s -f %m "$cache_file")) / 3600 ))
+else
+  hours_since_change=$(( ($(date +%s) - $(stat -c %Y "$cache_file")) / 3600 ))
+fi
+
 if [[ "$hours_since_change" -lt 24 ]]; then
   cat "$cache_file"
   run_cmd > "$cache_file" &
