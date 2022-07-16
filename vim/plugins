@@ -1,19 +1,15 @@
 ambv/black
-bitc/vim-hdevtools
 cespare/vim-toml
 Chiel92/vim-autoformat
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
-dhruvasagar/vim-zoom
 fatih/vim-go
 hashivim/vim-terraform
-hynek/vim-python-pep8-indent
 jamessan/vim-gnupg
 jparise/vim-graphql
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
-keith/parsec.vim
 keith/swift.vim
 keith/xcconfig.vim
 ludovicchabant/vim-gutentags
@@ -23,7 +19,6 @@ neomake/neomake
 ojroques/vim-oscyank
 RRethy/vim-illuminate
 rust-lang/rust.vim
-saltstack/salt-vim
 sjl/vitality.vim
 tpope/vim-abolish
 tpope/vim-commentary
@@ -37,5 +32,3 @@ tpope/vim-scriptease
 tpope/vim-sleuth
 tpope/vim-surround
 tpope/vim-unimpaired
-udalov/kotlin-vim
-ziglang/zig.vim
