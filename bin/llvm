@@ -5,12 +5,26 @@ set -euo pipefail
 prg=$1
 shift
 
+which=false
+if [[ "$prg" == -w ]]; then
+  which=true
+  prg=$1
+  shift
+fi
+
 readonly prefix="$BREW_PREFIX/opt/llvm/bin"
+prg_path=""
 if [[ -x "$prefix/$prg" ]]; then
-  exec "$prefix/$prg" "$@"
+  prg_path="$prefix/$prg"
 elif [[ -x "$prefix/llvm-$prg" ]]; then
-  exec "$prefix/llvm-$prg" "$@"
+  prg_path="$prefix/llvm-$prg"
 else
   echo "error: '$prg' not found in $prefix" >&2
   exit 1
+fi
+
+if [[ "$which" == true ]]; then
+  echo "$prg_path"
+else
+  exec "$prg_path" "$@"
 fi
