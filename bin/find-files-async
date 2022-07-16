@@ -64,7 +64,8 @@ fi
 
 if [[ "$hours_since_change" -lt 24 ]]; then
   cat "$cache_file"
-  run_cmd > "$cache_file" &
+  tmp=$(mktemp)
+  (run_cmd > "$tmp" && mv "$tmp" "$cache_file" ) &
   exit 0
 fi
 
