@@ -428,3 +428,19 @@ let g:c_no_curly_error = 1
 let g:is_posix = 1
 
 command -nargs=? Gqf silent cexpr systemlist('git diff-qf <args>') | copen
+
+command! -bang Delete
+      \ let s:file = expand('%:p') |
+      \ execute 'bdelete!' |
+      \ if delete(s:file) != 0 |
+      \   echoerr 'Failed to delete "' . s:file . '"' |
+      \ endif |
+      \ unlet s:file
+
+command! -nargs=* Chmod
+      \ let s:file = expand('%:p') |
+      \ call system('chmod +x ' . shellescape(s:file)) |
+      \ if v:shell_error |
+      \   echoerr 'Failed to chmod +x "' . s:file . '"' |
+      \ endif |
+      \ unlet s:file
