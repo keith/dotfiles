@@ -15,22 +15,20 @@ vim/bundle/*
 vim/nvimbundle/*
 vim/black
 
-config/asciinema/config
-config/coc
-config/configstore
-config/gcloud
-config/gh
-config/github-copilot
-config/gtk-2.0
-config/htop/htoprc
-config/hub
-config/iterm2
-config/neofetch
-config/ookla
-config/pip
-config/radare2/history
-config/rtv
-config/yarn
+# It turns out config is too noisy for me unfortunately, just allowlist things
+/config/
+
+!config/icecast.xml
+!config/nvim
+!config/redshift.conf
+!config/rgrc.conf
+
+!config/alacritty
+!config/awesome
+!config/newsboat
+!config/nixpkgs
+!config/webkitten
+!config/yamllint
 
 !mutt/temp/.gitkeep
 mutt/cache
