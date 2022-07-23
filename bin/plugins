@@ -2,13 +2,6 @@
 
 set -euo pipefail
 
-file=~/.vim/plugins
-target=~/.vim/bundle
-if [[ ! -e "$file" ]]; then
-  echo "$file doesn't exist"
-  exit 1
-fi
-
 containsElement() {
   local e
   local element=$1
@@ -32,7 +25,13 @@ prefixes=("" nvim)
 for prefix in "${prefixes[@]}"
 do
   file=~/.vim/${prefix}plugins
-  target=~/.vim/${prefix}bundle
+  target=~/.vimplugins/${prefix}bundle/start
+  mkdir -p "$target"
+
+  if [[ ! -e "$file" ]]; then
+    echo "$file doesn't exist"
+    exit 1
+  fi
 
 names=()
 commands=()

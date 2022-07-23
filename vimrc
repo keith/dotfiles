@@ -14,9 +14,9 @@ source ~/.vim/before/*.vim
 " Plugin setup
 filetype off
 
-execute pathogen#infect("~/.vim/bundle/{}")
+set packpath^=~/.vimplugins/bundle
 if has('nvim')
-  execute pathogen#infect("~/.vim/nvimbundle/{}")
+  set packpath^=~/.vimplugins/nvimbundle
 endif
 
 filetype plugin indent on " Re-enable after setup
@@ -444,3 +444,5 @@ command! -nargs=* Chmod
       \   echoerr 'Failed to chmod +x "' . s:file . '"' |
       \ endif |
       \ unlet s:file
+
+command! Helptags helptags ALL

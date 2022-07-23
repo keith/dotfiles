@@ -8,9 +8,6 @@
 	ignore = dirty
 	path = weechat
 	url = https://github.com/keith/weechat.git
-[submodule "vim/pathogen"]
-	path = vim/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "git-pile"]
 	path = git-pile
 	url = https://github.com/keith/git-pile.git
