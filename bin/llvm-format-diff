@@ -3,6 +3,8 @@
 set -euo pipefail
 set -x
 
+root=$(git rev-parse --show-toplevel)
+pushd $root
 arc_base_commit=${1:-$(arc which --show-base)}
 git diff-index -U0 "$arc_base_commit" \
   | clang/tools/clang-format/clang-format-diff.py -style file -i -p1
