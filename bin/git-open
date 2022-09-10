@@ -103,6 +103,8 @@ def main(args):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
     elif remote_url := _get_remote(args.argument, remotes):
         url = remote_url
+    elif args.argument == "mp":
+        url = os.path.join(url, "pulls/keith")
     else:
         url = os.path.join(url, args.argument)
 
