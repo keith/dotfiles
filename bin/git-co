@@ -6,10 +6,17 @@ args=()
 for arg in "$@"
 do
   if [[ "$arg" == keith:* ]]; then
-    args+=("${arg:6}")
+    branch="${arg:6}"
+    args+=("$branch")
   else
     args+=("$arg")
   fi
 done
+
+if [[ -n "${branch:-}" ]]; then
+  if (! git show-ref --quiet "$branch") && git remote get-url mine 2>/dev/null; then
+    git fetch mine
+  fi
+fi
 
 git checkout "${args[@]}"
