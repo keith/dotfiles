@@ -74,6 +74,14 @@ def _get_ref(ref):
         return None
 
 
+def _is_branch(ref):
+    try:
+        _run_git_command(["show-ref", f"refs/heads/{ref}"])
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
 def main(args):
     remotes = _get_remotes()
     remote = args.remote or _get_tracked_remote() or "origin"
@@ -89,6 +97,8 @@ def main(args):
         url = "{}/blob/{}/{}".format(
             url, _current_branch_upstream(), args.argument
         )
+    elif _is_branch(args.argument):
+        url = "{}/tree/{}".format(url, args.argument)
     elif _get_ref(args.argument):
         url = "{}/commit/{}".format(url, _get_ref(args.argument))
     elif remote_url := _get_remote(args.argument, remotes):
