@@ -975,6 +975,8 @@ highlight! DiagnosticWarn ctermfg=Black ctermbg=LightYellow
 highlight! DiagnosticInfo ctermfg=Black ctermbg=LightBlue
 highlight! link DiagnosticSignHint DiagnosticInfo
 highlight! link DiagnosticError ErrorMsg
+" https://github.com/lvimuser/lsp-inlayhints
+highlight! link LspInlayHint Comment
 
 " Treesitter config
 " ---------------------------------------------------------------------
