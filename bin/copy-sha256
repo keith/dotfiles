@@ -2,13 +2,16 @@
 
 set -euo pipefail
 
-url="$1"
-tempdir=$(mktemp -d)
-output="$tempdir/download"
+readonly url="$1"
+if [[ -f "$url" ]]; then
+  output="$url"
+else
+  output="$(mktemp -d)/download"
 
-if ! curl --location --fail --output "$output" "$url"; then
-  echo "error: failed to download $url" >&2
-  exit 1
+  if ! curl --location --fail --output "$output" "$url"; then
+    echo "error: failed to download $url" >&2
+    exit 1
+  fi
 fi
 
 sha="$(shasum -a 256 "$output" | cut -d " " -f1 | xargs)"
