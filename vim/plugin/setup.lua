@@ -7,8 +7,11 @@ lsp_spinner.setup {
   placeholder = "  ",
 }
 
+require("lsp-inlayhints").setup()
+
 local function on_attach(client, bufnr)
   require("lsp_spinner").on_attach(client, bufnr)
+  require("lsp-inlayhints").on_attach(client, bufnr)
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
