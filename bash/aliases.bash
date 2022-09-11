@@ -7,8 +7,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias g="git"
-alias G="git"
+alias G="g"
 
 alias k=kubectl
 alias v=nvim

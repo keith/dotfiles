@@ -1,0 +1,6 @@
+if [[ $1 == "s" ]]; then
+  shift
+  tag git-status "$@"
+else
+  git "$@"
+fi

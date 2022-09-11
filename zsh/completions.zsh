@@ -32,5 +32,7 @@ _g () {
 
   _git # Delegate to completion
 }
-compdef _g g
+
+# Order matters
 compdef _g git
+compdef '_dispatch git git' g
