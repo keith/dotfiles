@@ -7,6 +7,7 @@ function! neomake#makers#ft#bzl#buildifier() abort
         \ 'exe': 'buildifier',
         \ 'args': ['-lint=check', '-lint=warn'],
         \ 'errorformat':
+          \ '%f:%l:%c: %m,' .
           \ '%E%f:%l: %m,' .
           \ '%W%f:%l: %m,' .
           \ '%Z%\s%#^~%#,' .
