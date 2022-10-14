@@ -7,8 +7,11 @@ common:orsky --override_repository=bazel_skylib=/Users/ksmiley/dev/bazel-skylib
 common:orsd --override_repository=io_bazel_stardoc=/Users/ksmiley/dev/stardoc
 common:orr --override_repository=rules_rust=/Users/ksmiley/dev/rules_rust
 common:orj --override_repository=rules_java=/Users/ksmiley/dev/rules_java
+common:orandk --override_repository=rules_android_ndk=/Users/ksmiley/dev/rules_android_ndk
 
 common:ora --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple
+common:ora2 --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple2
+common:ora3 --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple3
 common:oras --override_repository=build_bazel_apple_support=/Users/ksmiley/dev/apple_support
 common:ors --override_repository=build_bazel_rules_swift=/Users/ksmiley/dev/rules_swift
 
