@@ -149,3 +149,5 @@
   pretty = fuller
 [color]
   ui = auto
+[pile]
+  cleanupRemoteOnSubmitFailure = true
