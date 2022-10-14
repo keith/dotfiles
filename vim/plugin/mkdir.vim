@@ -1,6 +1,12 @@
-if exists("g:mkdir_loaded") && g:mkdir_loaded
-  finish
-endif
-let g:mkdir_loaded = 1
+function! s:Mkdir(path)
+  let dir = expand(a:path . ':p:h')
+  if !isdirectory(dir)
+    call mkdir(dir, 'p')
+    echo "Creating: " . dir
+  endif
+endfunction
 
-autocmd BufWritePre * call mkdir#Mkdir()
+augroup mkdir
+  autocmd!
+  autocmd BufWritePre * call s:Mkdir('<afile>')
+augroup END
