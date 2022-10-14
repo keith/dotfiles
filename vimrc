@@ -225,10 +225,6 @@ inoremap <Up> <C-o>gk
 nnoremap <C-u> 10<C-u>
 nnoremap <C-d> 10<C-d>
 
-" Netrw improvement, custom gx because fugitive:// breaks the default gx
-" The key here is that the second argument is a 0 which means !remote
-nnoremap gx :call netrw#BrowseX(expand('<cfile>'), 0)<CR>
-
 " https://www.reddit.com/r/vim/comments/4jy1mh/slightly_more_subltle_n_and_n_behavior/
 " Keep search matches in the middle of the window unless the next match is in
 " the same viewport
