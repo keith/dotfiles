@@ -105,6 +105,8 @@ def main(args):
         url = remote_url
     elif args.argument == "mp":
         url = os.path.join(url, "pulls/keith")
+    elif args.argument == "mi":
+        url = os.path.join(url, "issues/keith")
     else:
         url = os.path.join(url, args.argument)
 
