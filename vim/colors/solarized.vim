@@ -982,49 +982,90 @@ highlight! link LspInlayHint Comment
 " Treesitter config
 " ---------------------------------------------------------------------
 " Current group discoverable with :TSHighlightCapturesUnderCursor
+hi! link @punctuation.bracket None
 hi! link TSPunctBracket None
+hi! link @punctuation.delimiter None
 hi! link TSPunctDelimiter None
+hi! link @punctuation.special Special
 hi! link TSPunctSpecial Special
 
 hi! link TSVariable None
+hi! link @variable None
+hi! link TSVariableBuiltin Identifier
+hi! link @variable.builtin Identifier
+
+hi! link TSConstructor Function
+hi! link @constructor Function
 hi! link TSFunction None
+hi! link @function None
+hi! link TSFuncBuiltin Function
+hi! link @function.builtin Function
+hi! link TSFuncMacro Function
+hi! link @function.macro Function
+hi! link TSMethod Function
+hi! link @method Function
+hi! link TSKeywordFunction Identifier
+hi! link @keyword.function Identifier
 
 hi! link TSBoolean Constant
+hi! link @boolean Constant
 hi! link TSCharacter Constant
+hi! link @character Constant
 hi! link TSComment Comment
+hi! link @comment Comment
 hi! link TSConditional Conditional
+hi! link @conditional Conditional
+
 hi! link TSConstant Constant
 hi! link TSConstBuiltin Constant
 hi! link TSConstMacro Constant
-hi! link TSConstructor Function
+hi! link @constant Constant
+
 hi! link TSError Error
+hi! link @error Error
 hi! link TSException Exception
+hi! link @exception Exception
 hi! link TSField Identifier
+hi! link @field Identifier
 hi! link TSFloat Float
-hi! link TSFuncBuiltin Function
-hi! link TSFuncMacro Function
+hi! link @float Float
 hi! link TSInclude Include
+hi! link @include Include
 hi! link TSKeyword Keyword
-hi! link TSKeywordFunction Identifier
+hi! link @keyword Keyword
 hi! link TSLabel Label
+hi! link @label Label
 hi! link TSLiteral Normal
-hi! link TSMethod Function
+hi! link @text.literal Normal
 hi! link TSNamespace Identifier
+hi! link @namespace Identifier
 hi! link TSNumber Constant
+hi! link @number Constant
 hi! link TSOperator Operator
+hi! link @operator Operator
 hi! link TSParameter Identifier
+hi! link @parameter Identifier
 hi! link TSParameterReference Identifier
+hi! link @parameter.reference Identifier
 hi! link TSProperty TSField
+hi! link @property TSField
 hi! link TSRepeat Repeat
+hi! link @repeat Repeat
 hi! link TSString Constant
 hi! link TSStringEscape Constant
 hi! link TSStringRegex Constant
+hi! link @string Constant
 hi! link TSTag Special
+hi! link @tag Special
 hi! link TSTagDelimiter Delimiter
+hi! link @tag.delimiter Delimiter
 hi! link TSTitle Title
+hi! link @text.title Title
 hi! link TSType Type
 hi! link TSTypeBuiltin Type
-hi! link TSVariableBuiltin Identifier
+hi! link @type Type
+
+hi! link @text.note Todo
 
 "}}}
 " Utility autocommand "{{{
