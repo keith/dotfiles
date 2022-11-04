@@ -39,7 +39,6 @@ local servers = {
   "cmake",
   "gopls",
   "graphql",
-  "pyright",
   "rust_analyzer",
   "terraformls",
   "zls",
@@ -50,6 +49,22 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
+
+-- https://github.com/microsoft/pyright/issues/128
+require("lspconfig").pyright.setup {
+  capabilities = capabilities,
+  filetypes = { "python" },
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        -- autoSearchPaths = true,
+        -- useLibraryCodeForTypes = true,
+        diagnosticMode = "openFilesOnly",
+      },
+    },
+  },
+}
 
 require("lspconfig").sourcekit.setup {
   capabilities = capabilities,
