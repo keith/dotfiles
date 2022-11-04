@@ -35,7 +35,6 @@ lsp_spinner.init_capabilities(capabilities)
 local nvim_lsp = require "lspconfig"
 local servers = {
   "bashls",
-  "clangd",
   "cmake",
   "gopls",
   "graphql",
@@ -70,6 +69,12 @@ require("lspconfig").sourcekit.setup {
   capabilities = capabilities,
   filetypes = { "swift" },
   on_attach = on_attach,
+}
+
+require("lspconfig").clangd.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  fallbackFlags = { "--std=c++17" },
 }
 
 require("lsp_signature").on_attach {
