@@ -540,24 +540,6 @@ defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:0
 
 
 #
-# X11
-#
-
-# Clipboard syncing
-defaults write org.macosforge.xquartz.X11 sync_clipboard_to_pasteboard -bool true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard -bool true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_clipboard -bool true
-defaults write org.macosforge.xquartz.X11 sync_pasteboard_to_primary -bool true
-defaults write org.macosforge.xquartz.X11 sync_primary_on_select -bool false
-
-# Run xterm by default (without this vim's clipboard doesn't work)
-defaults write org.macosforge.xquartz.X11 app_to_run -string /opt/X11/bin/xterm
-
-# Set default shell
-defaults write org.macosforge.xquartz.X11 login_shell -string $BREW_PREFIX/bin/zsh
-
-
-#
 # Xcode
 #
 
