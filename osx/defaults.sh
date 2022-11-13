@@ -642,6 +642,9 @@ defaults write com.apple.dt.Xcode IDESourceControlEnableSourceControl_10_0 -bool
 # Show all file extensions
 defaults write com.apple.dt.Xcode IDEFileExtensionDisplayMode -int 1
 
+# https://twitter.com/iKenndac/status/1587867958348599308
+defaults write com.apple.dt.Xcode XcodeCloudUpsellPromptEnabled -bool false
+
 
 #
 # Third Party
