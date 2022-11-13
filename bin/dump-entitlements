@@ -29,5 +29,5 @@ fi
 if grep -q __entitlements "$binary"; then
   xcrun segedit "$binary" -extract __TEXT __entitlements -
 else
-  codesign -d --entitlements :- "$binary" 2> >(grep -v Executable= >&2 || true)
+  codesign -d --entitlements - "$binary" 2> >(grep -v Executable= >&2 || true)
 fi
