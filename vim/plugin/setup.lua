@@ -103,7 +103,7 @@ require("compe").setup {
   source = {
     path = true,
     buffer = {
-      ignored_filetypes = { "gitconfig", "gitcommit", "gitrebase", "git" },
+      ignored_filetypes = { "gitconfig", "gitcommit", "gitrebase", "git", "markdown" },
     },
     nvim_lsp = true,
     nvim_lua = true,
