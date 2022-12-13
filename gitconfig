@@ -80,7 +80,7 @@
   s           = status -sb
   sub         = submodule update --init --recursive
   undo        = reset --soft HEAD^
-  wtc         = !sh -c 'git commit $@ -m \""`curl -s http://whatthecommit.com/index.txt`"\"' -
+  wtc         = !sh -c 'git commit $@ -m \""`curl -s https://whatthecommit.com/index.txt`"\"' -
 [fetch]
   prune = true
 [branch]
