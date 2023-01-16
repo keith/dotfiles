@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+from typing import Tuple
+import os
+import sys
+
+_BASE = Path(os.environ["DOTFILES"]) / "../bazel-central-registry/modules"
+
+
+def _sort_key(version_dir: Path) -> Tuple[str]:
+    return tuple(x for x in version_dir.name.split("."))
+
+
+for module in sys.argv[1:]:
+    module_dir = _BASE / module
+    if not module_dir.exists():
+        raise SystemExit(f"{module_dir} does not exist")
+
+    versions = [v for v in module_dir.iterdir() if v.is_dir()]
+    versions.sort(key=_sort_key, reverse=True)
+    print(module, ", ".join(v.name for v in versions[:5]))
