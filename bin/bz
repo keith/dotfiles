@@ -6,6 +6,10 @@ if [[ -n "${DEV:-}" ]]; then
   exec "$DOTFILES/../bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
+if [[ -n "${DEV2:-}" ]]; then
+  exec "$DOTFILES/../bazel2/bazel-bin/src/bazel-dev" "$@"
+fi
+
 if [[ -n "${DEVREL:-}" ]]; then
   exec "$DOTFILES/../bazel-rel/bazel-bin/src/bazel-dev" "$@"
 fi

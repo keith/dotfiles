@@ -12,6 +12,7 @@ common:orandk --override_repository=rules_android_ndk=/Users/ksmiley/dev/rules_a
 common:ora --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple
 common:ora2 --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple2
 common:ora3 --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple3
+common:ora4 --override_repository=build_bazel_rules_apple=/Users/ksmiley/dev/rules_apple4
 common:oras --override_repository=build_bazel_apple_support=/Users/ksmiley/dev/apple_support
 common:ors --override_repository=build_bazel_rules_swift=/Users/ksmiley/dev/rules_swift
 
