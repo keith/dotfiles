@@ -21,7 +21,7 @@ augroup setup_buildifier
   autocmd BufNewFile,BufRead *.star let b:formatters_bzl = []
   autocmd BufNewFile,BufRead BUILD,BUILD.bazel,*.BUILD,BUILD.* let b:formatters_bzl = ['buildifierbuild']
   autocmd BufNewFile,BufRead MODULE.bazel let b:formatters_bzl = ['buildifiermodule']
-  autocmd BufNewFile,BufRead WORKSPACE,WORKSPACE.bazel let b:formatters_bzl = ['buildifierworkspace']
+  autocmd BufNewFile,BufRead WORKSPACE,WORKSPACE.bazel,WORKSPACE.bzlmod let b:formatters_bzl = ['buildifierworkspace']
 
   autocmd FileType bzl autocmd BufWritePre <buffer> call s:Format(1)
   autocmd FileType c,cpp,cmake autocmd BufWritePre <buffer> call s:Format(get(b:, "format_on_save", 0))
