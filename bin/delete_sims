@@ -33,6 +33,9 @@ def _main(exclude_patterns: List[str]):
     devices = [
         device for device in devices if not _matches(device, exclude_patterns)
     ]
+    if not devices:
+        raise SystemExit("warning: no devices to delete")
+
     udids = " ".join(device["udid"] for device in devices)
     subprocess.check_call(f"xcrun simctl delete {udids}".split())
 
