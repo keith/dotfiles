@@ -443,6 +443,9 @@ command! -nargs=* Chmod
 
 command! Helptags helptags ALL
 
+cnoremap DIR <c-r>=expand('%:p:h') . '/'<CR>
+command! CDC cd %:p:h
+
 function! MoveFile(newspec, bang)
   let s:old = expand('%')
   " could be improved:
