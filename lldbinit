@@ -20,6 +20,7 @@ command script import ~/.lldbhelpers/function_address.py
 command script import ~/.lldbhelpers/iblog.py
 command script import ~/.lldbhelpers/keypath.py
 command script import ~/.lldbhelpers/symbol_address.py
+command script import ~/.lldbhelpers/load_swift.py
 
 command regex fw 's/(.+)/expr -l objective-c -O -- @import %1/'
 
