@@ -7,7 +7,6 @@
   editor = nvim
   whitespace = trailing-space,space-before-tab
   pager = pager
-  fsmonitor = true
 [init]
   defaultBranch = main
   templatedir = ~/.git_template
