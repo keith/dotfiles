@@ -15,6 +15,7 @@ keith/xcconfig.vim
 ludovicchabant/vim-gutentags
 majutsushi/tagbar
 mhinz/vim-signify
+MTDL9/vim-log-highlighting
 neomake/neomake
 ojroques/vim-oscyank
 RRethy/vim-illuminate
