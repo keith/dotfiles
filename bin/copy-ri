@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly url="$1"
+if [[ -f "$url" ]]; then
+  output="$url"
+else
+  output="$(mktemp -d)/download"
+
+  if ! curl --location --fail --output "$output" "$url"; then
+    echo "error: failed to download $url" >&2
+    exit 1
+  fi
+fi
+
+# sha="$(shasum -a 256 "$output" | cut -d " " -f1 | xargs)"
+
+sha="$(openssl dgst -sha256 -binary "$output" | openssl base64 -A | sed 's/^/sha256-/')"
+echo "Copying: $sha"
+echo -n "$sha" | pbcopy
