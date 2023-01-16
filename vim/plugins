@@ -18,6 +18,7 @@ mhinz/vim-signify
 MTDL9/vim-log-highlighting
 neomake/neomake
 ojroques/vim-oscyank
+rhysd/vim-llvm
 RRethy/vim-illuminate
 rust-lang/rust.vim
 sjl/vitality.vim
