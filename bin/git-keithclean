@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+git clean -ffdx \
+ -e .black \
+ -e .keithclangformat \
+ -e .keithcmakeformat \
+ -e .keithenv \
+ -e .rustfmt \
+ -e .vimrc.local \
+ -e tags
