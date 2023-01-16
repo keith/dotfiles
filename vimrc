@@ -442,3 +442,18 @@ command! -nargs=* Chmod
       \ unlet s:file
 
 command! Helptags helptags ALL
+
+function! MoveFile(newspec, bang)
+  let s:old = expand('%')
+  " could be improved:
+  if (s:old == a:newspec)
+    return 0
+  endif
+
+  let s:oldperms = getfperm(s:old)
+  exe 'sav' . a:bang fnameescape(a:newspec)
+  call setfperm(a:newspec, s:oldperms)
+  call delete(s:old)
+endfunction
+
+command! -nargs=1 -complete=file -bang MoveFile call MoveFile('<args>', '<bang>')
