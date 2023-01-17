@@ -453,9 +453,15 @@ function! MoveFile(newspec, bang)
     return 0
   endif
 
+  if isdirectory(a:newspec)
+    let s:new = a:newspec . '/' . fnamemodify(s:old, ':t')
+  else
+    let s:new = a:newspec
+  endif
+
   let s:oldperms = getfperm(s:old)
-  exe 'sav' . a:bang fnameescape(a:newspec)
-  call setfperm(a:newspec, s:oldperms)
+  exe 'sav' . a:bang fnameescape(s:new)
+  call setfperm(s:new, s:oldperms)
   call delete(s:old)
 endfunction
 
