@@ -446,7 +446,7 @@ command! Helptags helptags ALL
 cnoremap DIR <c-r>=expand('%:p:h') . '/'<CR>
 command! CDC cd %:p:h
 
-function! MoveFile(newspec, bang)
+function! MoveFile(newspec, bang) abort
   let s:old = expand('%')
   " could be improved:
   if (s:old == a:newspec)
