@@ -45,7 +45,11 @@ run_cmd() {
       git ls-files "$search_dir" --cached --exclude-standard --others 2>/dev/null
     fi
   else
-    fd "$search_dir"
+    if command -v fdfind >/dev/null; then
+      fdfind "$search_dir"
+    else
+      fd "$search_dir"
+    fi
   fi
 }
 
