@@ -12,8 +12,17 @@ if [[ "$prg" == -w ]]; then
   shift
 fi
 
-readonly prefix="$BREW_PREFIX/opt/llvm/bin"
+prefix="$BREW_PREFIX/opt/llvm/bin"
 prg_path=""
+if [[ ! -d "$prefix" ]]; then
+  if command -v llvm-config >/dev/null; then
+    prefix="$(llvm-config --bindir)"
+  else
+    echo "error: llvm-config and llvm brew dir not found" >&2
+    exit 1
+  fi
+fi
+
 if [[ -x "$prefix/$prg" ]]; then
   prg_path="$prefix/$prg"
 elif [[ -x "$prefix/llvm-$prg" ]]; then
