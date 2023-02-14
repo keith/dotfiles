@@ -1,6 +1,8 @@
 # Path to dotfiles repo
 export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
-if [[ $(arch) == arm64* ]]; then
+if [[ $OSTYPE != darwin* ]]; then
+  export BREW_PREFIX=/home/linuxbrew/.linuxbrew
+elif [[ $(arch) == arm64* ]]; then
   export BREW_PREFIX=/opt/homebrew
 else
   export BREW_PREFIX=/usr/local
