@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+d \
+  <(normalize-profile --ignore-invalid --shorten-certs --ignore-noisy-fields "$1") \
+  <(normalize-profile --ignore-invalid --shorten-certs --ignore-noisy-fields "$2")
