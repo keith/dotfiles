@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -euo pipefail
-
-d <(otool -l "$1") <(otool -l "$2")
