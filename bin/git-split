@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "usage: git split <file> [<file> ...]"
+  exit 1
+fi
+
+if [[ -n "$(git diff --cached)" ]]; then
+  echo "error: has staged changes, not going to split since those would be commited as well"
+  exit 1
+fi
+
+git reset HEAD~1 -- "$@"
+git commit --amend --no-edit
