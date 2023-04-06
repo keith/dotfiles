@@ -17,6 +17,7 @@ function toGrid(x, y, width, height) {
 }
 
 Window.fullScreen = function() { toGrid(0, 0, 1, 1); }
+Window.leftThird = function() { toGrid(0, 0, 0.33, 1); }
 Window.leftHalf = function() { toGrid(0, 0, 0.5, 1); }
 Window.rightHalf = function() { toGrid(0.5, 0, 0.5, 1); }
 Window.topLeft = function() { toGrid(0, 0, 0.5, 0.5); }
@@ -92,6 +93,7 @@ api.bind('o', modifiers, right);
 api.bind('p', modifiers, push);
 
 api.bind('k', modifiers, Window.fullScreen);
+api.bind('t', modifiers, Window.leftThird);
 api.bind('h', modifiers, Window.leftHalf);
 api.bind('l', modifiers, Window.rightHalf);
 
