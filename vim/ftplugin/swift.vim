@@ -37,3 +37,9 @@ endfunction
 nnoremap <leader>c :call CopyTestCommand()<CR>
 nnoremap <leader>t :Neomake swiftpmtest<CR>
 nnoremap <leader>f :TestNearest -strategy=neomake<CR>
+
+function! GetCursorIndex()
+  let current_col = col('.')
+  let current_index = line2byte(".") + current_col
+  echo current_index
+endfunction
