@@ -1,3 +1,23 @@
 #!/bin/bash
 
-exec xcrun swift-demangle "$@"
+if [[ $# -ne 0 ]]; then
+  passed_args=("$@")
+else
+  read -r input_string
+  passed_args=("$input_string")
+fi
+
+args=(--compact)
+for arg in "${passed_args[@]}"; do
+  if [[ $arg == s:* ]]; then
+    args+=("_\$s${arg##*:}")
+  elif [[ $arg != _\$s* ]]; then
+    args+=("_\$s$arg")
+  elif [[ $arg != \$s* ]]; then
+    args+=("\$s$arg")
+  else
+    args+=("$arg")
+  fi
+done
+
+exec xcrun swift-demangle "${args[@]}"
