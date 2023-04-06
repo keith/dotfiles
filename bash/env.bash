@@ -48,6 +48,7 @@ if [[ -f "$HOME/.secrets" ]]; then
   source "$HOME/.secrets"
 fi
 
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # Swift compiler sccache setup
