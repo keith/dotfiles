@@ -106,5 +106,6 @@ api.bind('F2', [], function() { Screen.setBrightness(Screen.getBrightness() + 6.
 api.bind('RETURN', ["shift", "cmd"], function() { toggleApp("Messages"); });
 api.bind('d', ["ctrl", "alt"], function() { toggleApp("Dash"); });
 api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
+api.bind('c', ["ctrl", "cmd"], function() { toggleAppIfOpen("Ivory"); });
 
 Config.hideMenuBar();
