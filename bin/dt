@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -euo pipefail
+
+args=()
+while (($# > 2))
+do
+  args+=("$1")
+  shift
+done
+
+if [[ ! -r "$1" ]]; then
+  echo "error: $1 not found" >&2
+  exit 1
+fi
+
+if [[ ! -r "$2" ]]; then
+  echo "error: $2 not found" >&2
+  exit 1
+fi
+
+d <("${args[@]}" "$1") <("${args[@]}" "$2")
