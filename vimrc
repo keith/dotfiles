@@ -116,9 +116,6 @@ set signcolumn=yes
 " Remove comments when joining lines with J
 set formatoptions+=j
 
-" Make |:find| discover recursive paths
-set path+=**
-
 " Completion options
 set complete=.,w,b,u,t,kspell
 set completeopt=menuone,noselect
