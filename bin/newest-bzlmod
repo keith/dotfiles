@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Tuple
 import os
 import sys
+import subprocess
 
 _BASE = Path(os.environ["DOTFILES"]) / "../bazel-central-registry/modules"
 
@@ -12,11 +13,18 @@ def _sort_key(version_dir: Path) -> Tuple[str]:
     return tuple(x for x in version_dir.name.split("."))
 
 
+subprocess.check_call(["git", "-C", _BASE, "pull"])
+
 for module in sys.argv[1:]:
-    module_dir = _BASE / module
+    module_dir = (_BASE / module).resolve()
     if not module_dir.exists():
         raise SystemExit(f"{module_dir} does not exist")
 
     versions = [v for v in module_dir.iterdir() if v.is_dir()]
     versions.sort(key=_sort_key, reverse=True)
-    print(module, ", ".join(v.name for v in versions[:5]))
+    print(module.lower(), ", ".join(v.name for v in versions[:5]))
+    newest_version = versions[0]
+    print(
+        f"""\
+bazel_dep(name = "{module}", version = "{newest_version.name}")"""
+    )
