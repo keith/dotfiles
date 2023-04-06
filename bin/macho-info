@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly file="$1"
+lipo -info "$file"
+otool -lv "$file" | grep platform | sort -u
