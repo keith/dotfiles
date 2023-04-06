@@ -16,8 +16,6 @@ let g:sort_motion_flags = 'ui'
 let g:GPGDefaultRecipients = ['0x4C7167F8']
 let g:GPGPreferArmor = 1
 
-let g:Illuminate_delay = 200
-
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
