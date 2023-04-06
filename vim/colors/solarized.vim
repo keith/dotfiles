@@ -1067,6 +1067,10 @@ hi! link @type Type
 
 hi! link @text.note Todo
 
+hi! link IlluminatedWordText CursorLine
+hi! link IlluminatedWordRead CursorLine
+hi! link IlluminatedWordWrite CursorLine
+
 "}}}
 " Utility autocommand "{{{
 " ---------------------------------------------------------------------
