@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly target="$1"
+
+if [[ "$target" == *.bzl ]]; then
+  path="${target//://}"
+  search=""
+else
+  path="${target%%:*}/BUILD.bazel"
+  if [[ ! -f "$path" ]]; then
+    path="${target%%:*}/BUILD"
+  fi
+
+  search="${target#*:}"
+fi
+
+exec "$EDITOR" -c "silent! /\<$search\>" -c "normal! zz" "$path"
