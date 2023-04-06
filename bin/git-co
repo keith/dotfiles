@@ -5,8 +5,8 @@ set -euo pipefail
 args=()
 for arg in "$@"
 do
-  if [[ "$arg" == keith:* ]]; then
-    branch="${arg:6}"
+  if [[ "$arg" == *:* ]]; then
+    branch="${arg#*:}"
     args+=("$branch")
   else
     args+=("$arg")
