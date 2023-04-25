@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly binary=$1
+
+nm -U "$binary" | grep -o '_$.*Mc$' | xcrun swift-demangle | pcregrep -o1 ': ([^\s]+) in \w+$' | sort | uniq -c | sort -nr
