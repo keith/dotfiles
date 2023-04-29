@@ -17,6 +17,9 @@ set omnifunc=v:lua.vim.lsp.omnifunc
 autocmd TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, on_visual=true}
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+" TODO: Testing these out, better mappings needed
+nnoremap <silent> <leader>c <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <silent> <leader>i <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 " TODO: Ideally this would happen automatically when there were diagnostics
 nnoremap <silent> <leader>l <cmd>lua vim.lsp.diagnostic.setloclist()<CR>
