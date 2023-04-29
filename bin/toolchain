@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+toolchain=~/Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist
+if [[ ! -f $toolchain ]]; then
+  toolchain=/Library/Developer/Toolchains/swift-latest.xctoolchain/Info.plist
+fi
+
+if [[ ! -f $toolchain ]]; then
+  echo "error: unable to find any toolchain named swift-latest.xctoolchain"
+  exit 1
+fi
+
+bundle_id=$(/usr/libexec/PlistBuddy -c "print :CFBundleIdentifier" "$toolchain")
+TOOLCHAINS="$bundle_id" exec "$@"
