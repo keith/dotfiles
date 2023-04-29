@@ -84,31 +84,39 @@ def _is_branch(ref):
 
 def main(args):
     remotes = _get_remotes()
-    remote = args.remote or _get_tracked_remote() or "origin"
+    remote = args.remote or "origin"
     try:
-        url = next(url for (name, url) in remotes if name == remote)
+        remote_url = next(url for (name, url) in remotes if name == remote)
     except StopIteration:
-        print(f"error: no remote named: {remote}")
-        sys.exit(1)
+        raise SystemExit(f"error: no remote named: {remote}")
+
+    # tracked_remote = args.remote or _get_tracked_remote() or "origin"
+    # try:
+    #     # TODO: use tracked remote in the cases that's useful, forks vs not is the key
+    #     tracked_remote_url = next(
+    #         url for (name, url) in remotes if name == tracked_remote
+    #     )
+    # except StopIteration:
+    #     raise SystemExit(f"error: no remote named: {tracked_remote}")
 
     if not args.argument:
         pass
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(
-            url, _current_branch_upstream(), args.argument
+            remote_url, _current_branch_upstream(), args.argument
         )
     elif _is_branch(args.argument):
-        url = "{}/tree/{}".format(url, args.argument)
+        url = "{}/tree/{}".format(remote_url, args.argument)
     elif _get_ref(args.argument):
-        url = "{}/commit/{}".format(url, _get_ref(args.argument))
-    elif remote_url := _get_remote(args.argument, remotes):
-        url = remote_url
+        url = "{}/commit/{}".format(remote_url, _get_ref(args.argument))
+    elif remote_arg := _get_remote(args.argument, remotes):
+        url = remote_arg
     elif args.argument == "mp":
-        url = os.path.join(url, "pulls/keith")
+        url = os.path.join(remote_url, "pulls/keith")
     elif args.argument == "mi":
-        url = os.path.join(url, "issues/keith")
+        url = os.path.join(remote_url, "issues/keith")
     else:
-        url = os.path.join(url, args.argument)
+        url = os.path.join(remote_url, args.argument)
 
     webbrowser.open_new_tab(url)
 
