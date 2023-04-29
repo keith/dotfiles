@@ -29,3 +29,14 @@ nnoremap <C-p>  :call FuzzyFindCommand("edit")<cr>
 nnoremap <C-p>e :call FuzzyFindCommand("edit")<cr>
 nnoremap <C-p>v :call FuzzyFindCommand("vsplit")<cr>
 nnoremap <C-p>s :call FuzzyFindCommand("split")<cr>
+
+nnoremap <C-p>w :call FuzzySymbols()<cr>
+nnoremap <C-p>r :call FuzzyReferences()<cr>
+
+function! FuzzySymbols() abort
+  lua require('workspace_symbols').lsp_dynamic_workspace_symbols({})
+endfunction
+
+function! FuzzyReferences() abort
+  lua require('telescope.builtin').lsp_references({cwd = '.'})
+endfunction
