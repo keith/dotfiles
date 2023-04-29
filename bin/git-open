@@ -112,7 +112,10 @@ def main(args):
     elif remote_arg := _get_remote(args.argument, remotes):
         url = remote_arg
     elif args.argument == "mp":
-        url = os.path.join(remote_url, "pulls/keith")
+        query = "pulls?q=is%3Aopen+is%3Apr+author%3Akeith"
+        if args.argument2:
+            query = f"{query}+{args.argument2}"
+        url = os.path.join(remote_url, query)
     elif args.argument == "mi":
         url = os.path.join(remote_url, "issues/keith")
     else:
@@ -132,6 +135,9 @@ def _get_parser():
     )
     parser.add_argument(
         "argument", nargs="?", help="The argument to try and open"
+    )
+    parser.add_argument(
+        "argument2", nargs="?", help="The argument to try and open"
     )
     return parser
 
