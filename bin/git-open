@@ -118,6 +118,12 @@ def main(args):
         url = os.path.join(remote_url, query)
     elif args.argument == "mi":
         url = os.path.join(remote_url, "issues/keith")
+    elif args.argument == "issues":
+        query = "issues"
+        if args.argument2:
+            query = f"{query}?q=is%3Aissue+is%3Aopen+{args.argument2}"
+
+        url = os.path.join(remote_url, query)
     else:
         url = os.path.join(remote_url, args.argument)
 
