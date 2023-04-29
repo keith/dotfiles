@@ -7,35 +7,36 @@
 # Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the full
 # path to your home directory.
 
-import atexit
-import os
-import readline
-import rlcompleter
-
-historyPath = os.path.expanduser("~/.pyhistory")
+# Default imports for easier repl usage
+import re, os.path, sys, subprocess  # noqa
 
 
-def save_history(path=historyPath):
-    import readline
-    readline.write_history_file(path)
+def _main():
+    import atexit, readline
+
+    path = os.path.expanduser("~/.pyhistory")
+    if os.path.exists(path):
+        readline.read_history_file(path)
+
+    try:
+        import __builtin__
+    except ImportError:
+        import builtins as __builtin__
+
+    setattr(__builtin__, "true", True)
+    setattr(__builtin__, "false", False)
+    setattr(__builtin__, "null", None)
+
+    def save_history():
+        import readline
+
+        readline.write_history_file(path)
+
+    readline.parse_and_bind("tab: complete")
+    readline.parse_and_bind(r"\C-a: beginning-of-line")
+    readline.parse_and_bind(r"\C-e: end-of-line")
+    atexit.register(save_history)
 
 
-if os.path.exists(historyPath):
-    readline.read_history_file(historyPath)
-
-try:
-    import __builtin__
-except ImportError:
-    import builtins as __builtin__
-
-__builtin__.true = True
-__builtin__.false = False
-__builtin__.null = None
-
-readline.parse_and_bind("tab: complete")
-readline.parse_and_bind(r"\C-a: beginning-of-line")
-readline.parse_and_bind(r"\C-e: end-of-line")
-atexit.register(save_history)
-del os, atexit, readline, rlcompleter, save_history, historyPath
-
-# vim: ft=python
+if __name__ == "__main__":
+    _main()
