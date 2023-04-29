@@ -100,7 +100,7 @@ def main(args):
     #     raise SystemExit(f"error: no remote named: {tracked_remote}")
 
     if not args.argument:
-        pass
+        url = remote_url
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(
             remote_url, _current_branch_upstream(), args.argument
