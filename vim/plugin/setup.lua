@@ -149,10 +149,11 @@ require("nvim-treesitter.configs").setup {
 
     lsp_interop = {
       enable = true,
-      peek_definition_code = {
-        ["df"] = "@function.outer",
-        ["dF"] = "@class.outer",
-      },
+      -- TODO: These conflict with deleting things while visually selected
+      -- peek_definition_code = {
+      --   ["df"] = "@function.outer",
+      --   ["dF"] = "@class.outer",
+      -- },
     },
   },
 }
