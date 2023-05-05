@@ -12,5 +12,23 @@ if [[ -n "$(git diff --cached)" ]]; then
   exit 1
 fi
 
-git reset HEAD~1 -- "$@"
+args=()
+files=()
+for arg in "$@"
+do
+  if [[ "$arg" = -* ]]; then
+    args+=("$arg")
+  else
+    files+=("$arg")
+  fi
+done
+
+args+=(--)
+
+if [[ ${#files[@]} -eq 0 ]]; then
+  echo "error: no files to split"
+  exit 1
+fi
+
+git reset HEAD~1 "${args[@]}" -- "${files[@]}"
 git commit --amend --no-edit
