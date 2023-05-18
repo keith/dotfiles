@@ -8,7 +8,7 @@
 # path to your home directory.
 
 # Default imports for easier repl usage
-import re, os.path, sys, subprocess  # noqa
+import glob, fnmatch, re, os.path, pathlib, sys, subprocess  # noqa
 
 
 def _main():
