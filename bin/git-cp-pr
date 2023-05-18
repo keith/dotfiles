@@ -5,7 +5,7 @@ set -x
 
 pr_number=$1
 local_branch="pr/$pr_number"
-git fetch origin "pull/$pr_number/head:$local_branch"
+git fetch --force origin "pull/$pr_number/head:$local_branch"
 
 first_sha=$(git log --reverse --format=format:%H "HEAD..$local_branch" | head -1)
 message=$(git log -1 --format=format:%B "$first_sha")
