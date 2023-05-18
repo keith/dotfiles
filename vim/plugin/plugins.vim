@@ -48,5 +48,5 @@ vnoremap <leader>v :.,.GBrowse<CR>
 inoremap <C-A> <C-O>^
 cnoremap <C-A> <Home>
 
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankReg "' | endif
+autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
 let g:oscyank_silent = 1
