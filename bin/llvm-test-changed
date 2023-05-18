@@ -16,7 +16,7 @@ fi
 new_files=()
 for file in "${files[@]}"
 do
-  if [[ -e "$file" ]]; then
+  if [[ -e "$file" && "$file" != *CMakeLists.txt* && "$file" != *.cfg.py* ]]; then
     new_files+=("$file")
   fi
 done
