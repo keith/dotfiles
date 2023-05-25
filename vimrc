@@ -75,7 +75,7 @@ call s:EnsureDirectory(&viewdir)
 " On quit reset title
 let &titleold=getcwd()
 
-exec 'set background=' . system("get-appearance")
+let &background=system("get-appearance")
 silent! colorscheme solarized
 
 set ttyfast                 " Set that we have a fast terminal
@@ -363,7 +363,7 @@ augroup END
 
 augroup theme
   autocmd!
-  autocmd FocusGained * silent! exec 'set background=' . system("get-appearance")
+  autocmd FocusGained * silent! let &background=system("get-appearance")
 augroup END
 
 " Various filetype settings
