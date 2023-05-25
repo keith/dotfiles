@@ -51,7 +51,7 @@
   bisect-fixed = bisect start --term-new=fixed --term-old=broken
   c           = clone --recursive
   cbm         = !sh -c 'git cb $1 mine' -
-  co-pr       = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+  co-pr       = !sh -c 'git fetch --force origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   com         = commit --verbose
   coma        = commit --verbose --amend --no-edit --no-verify
   comf        = commit --verbose --fixup=HEAD --no-verify
