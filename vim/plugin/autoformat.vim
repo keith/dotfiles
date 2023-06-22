@@ -26,4 +26,5 @@ augroup setup_buildifier
   autocmd FileType bzl autocmd BufWritePre <buffer> call s:Format(1)
   autocmd FileType c,cpp,cmake autocmd BufWritePre <buffer> call s:Format(get(b:, "format_on_save", 0))
   autocmd FileType lua autocmd BufWritePre <buffer> call s:Format(1)
+  autocmd FileType python autocmd BufWritePre <buffer> call s:Format(get(b:, "format_on_save", 0))
 augroup END
