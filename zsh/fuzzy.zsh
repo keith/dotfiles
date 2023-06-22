@@ -1,7 +1,6 @@
 find_files() {
   command find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \
     -o -type f -print \
-    -o -type d -print \
     -o -type l -print 2> /dev/null | sed 1d | cut -b3- | fzy | while read item; do
     printf '%q ' "$item"
   done

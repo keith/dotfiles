@@ -46,9 +46,9 @@ run_cmd() {
     fi
   else
     if command -v fdfind >/dev/null; then
-      fdfind "$search_dir"
+      fdfind --type file --type symlink "$search_dir"
     else
-      fd "$search_dir"
+      fd --type file --type symlink "$search_dir"
     fi
   fi
 }
