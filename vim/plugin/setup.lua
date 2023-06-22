@@ -166,6 +166,7 @@ require("illuminate").configure {
   },
   delay = 200,
   filetypes_denylist = {
+    "bzl",
     "fugitive",
   },
 }
