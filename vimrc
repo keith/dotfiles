@@ -53,23 +53,28 @@ function! s:EnsureDirectory(directory)
   endif
 endfunction
 
+let s:subdir = "vim"
+if has('nvim')
+  let s:subdir = "nvim"
+endif
+
 " Save backup files, storage is cheap, losing changes is sad
 set backup
-set backupdir=$HOME/.tmp/vim/backup
+let &backupdir=$HOME . '/.tmp/' . s:subdir . '/backup'
 call s:EnsureDirectory(&backupdir)
 
 " Write undo tree to a file to resume from next time the file is opened
 if has('persistent_undo')
   set undolevels=2000            " The number of undo items to remember
   set undofile                   " Save undo history to files locally
-  set undodir=$HOME/.vimundo     " Set the directory of the undofile
+  let &undodir=$HOME . '/.tmp/' . s:subdir . '/undo'
   call s:EnsureDirectory(&undodir)
 endif
 
-set directory=$HOME/.tmp/vim/swap
+let &directory=$HOME . '/.tmp/' . s:subdir . '/swap'
 call s:EnsureDirectory(&directory)
 
-set viewdir=$HOME/.tmp/vim/view
+let &viewdir=$HOME . '/.tmp/' . s:subdir . '/view'
 call s:EnsureDirectory(&viewdir)
 
 " On quit reset title
