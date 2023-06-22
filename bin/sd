@@ -11,12 +11,12 @@ args=(--compact)
 for arg in "${passed_args[@]}"; do
   if [[ $arg == s:* ]]; then
     args+=("_\$s${arg##*:}")
-  elif [[ $arg != _\$s* ]]; then
-    args+=("_\$s$arg")
-  elif [[ $arg != \$s* ]]; then
-    args+=("\$s$arg")
-  else
+  elif [[ $arg == _\$s* ]]; then
     args+=("$arg")
+  elif [[ $arg == \$s* ]]; then
+    args+=("$arg")
+  else
+    args+=("_\$s$arg")
   fi
 done
 
