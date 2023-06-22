@@ -26,11 +26,17 @@ if [[ -n "${DEVREL:-}" ]]; then
   exec "$DOTFILES/../bazel-rel/bazel-bin/src/bazel-dev" "$@"
 fi
 
+bazelisk_bin=bazelisk
+if [[ -n "${FORCE_X86_64:-}" ]]; then
+  echo "note: using x86_64 bazelisk"
+  bazelisk_bin=bazelisk-darwin-amd64
+fi
+
 if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
-  if command -v bazelisk > /dev/null; then
-    exec bazelisk "$@"
+  if command -v "$bazelisk_bin" > /dev/null; then
+    exec "$bazelisk_bin" "$@"
   else
-    echo "error: no bazelisk found"
+    echo "error: no $bazelisk_bin found"
     exit 1
   fi
 fi
@@ -40,13 +46,9 @@ if [[ -e ./bazelw ]]; then
   exec ./bazelw "$@"
 fi
 
-if command -v bazelisk > /dev/null; then
-  exec bazelisk "$@"
+if command -v "$bazelisk_bin" > /dev/null; then
+  exec "$bazelisk_bin" "$@"
 fi
 
-if command -v bazel > /dev/null; then
-  exec bazel "$@"
-fi
-
-echo "error: no bazel found"
+echo "error: no $bazelisk_bin found"
 exit 1
