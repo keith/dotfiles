@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+./swift/utils/update-checkout --clone --scheme release/5.9
