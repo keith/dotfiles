@@ -110,7 +110,7 @@ ASYNC_PROC=0
 function right-prompt() {
   function async() {
     # save to temp file
-    printf "%s" "$(RCMD)" > "$HOME/.zsh_tmp_prompt"
+    printf "%s" "$(RCMD)" > "/tmp/.zsh_tmp_prompt_$(basename "$PWD")"
 
     # signal parent
     kill -s USR1 $$
@@ -129,7 +129,7 @@ add-zsh-hook precmd right-prompt
 
 function TRAPUSR1() {
   # read from temp file
-  setup-prompt "$(cat $HOME/.zsh_tmp_prompt)"
+  setup-prompt "$(cat "/tmp/.zsh_tmp_prompt_$(basename "$PWD")")"
 
   # reset proc number
   ASYNC_PROC=0
