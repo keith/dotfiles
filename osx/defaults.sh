@@ -610,6 +610,7 @@ defaults write com.apple.dt.Xcode EnableBuildSystemLogging -bool true
 defaults write com.apple.dt.Xcode NSUserKeyEquivalents -dict-add "Print..." "nil"
 
 # Enable extra logging for XCBuild
+defaults write com.apple.dt.XCBuild EnableBuildDebugging -bool true
 defaults write com.apple.dt.XCBuild EnableDebugActivityLogs -bool true
 
 # Make the tab key actually be a tab key
