@@ -18,6 +18,7 @@ common:ora5 --override_repository=build_bazel_rules_apple=~/dev/rules_apple5 --o
 common:orau --override_repository=build_bazel_rules_apple=~/dev/rules_apple-upstream
 common:oras --override_repository=build_bazel_apple_support=~/dev/apple_support --override_module=apple_support=~/dev/apple_support
 common:ors --override_repository=build_bazel_rules_swift=~/dev/rules_swift --override_module=rules_swift=~/dev/rules_swift
+common:ors2 --override_repository=build_bazel_rules_swift=~/dev/rules_swift2 --override_module=rules_swift=~/dev/rules_swift2
 common:orx --override_repository=rules_xcodeproj=~/dev/rules_xcodeproj --override_module=rules_xcodeproj=~/dev/rules_xcodeproj
 
 build:s --spawn_strategy=standalone
