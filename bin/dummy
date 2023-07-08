@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+extension=${1:-c}
+
+dir=$(mktemp -d)
+file="$dir/main.$extension"
+if [[ "$extension" == "c" || "$extension" == "m" ]]; then
+  echo "int main() { return 127; }" > "$file"
+elif [[ "$extension" == "swift" ]]; then
+  echo 'print("hi")' > "$file"
+else
+  echo "error: unhandled extension: $extension" >&2
+  exit 1
+fi
+
+echo "$file"
