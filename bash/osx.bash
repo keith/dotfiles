@@ -10,15 +10,6 @@ export FASTLANE_SKIP_UPDATE_CHECK=1
 # Disable CocoaPods stats ¯\_(ツ)_/¯
 export COCOAPODS_DISABLE_STATS=1
 
-# Disable homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
-# Disable crazy characters in brew
-export HOMEBREW_NO_EMOJI=1
-# Stop homebrew from auto-updating
-export HOMEBREW_NO_AUTO_UPDATE=1
-# Stop homebrew from running cleanup automatically
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-
 # Open with finder
 alias o="open"
 alias oo="open ."

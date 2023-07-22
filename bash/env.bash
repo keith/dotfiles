@@ -63,4 +63,9 @@ export ANDROID_NDK_HOME=~/Library/Android/sdk/ndk/21.3.6528147
 
 export KUBECTL_EXTERNAL_DIFF=d
 
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_EMOJI=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+
 ulimit -f unlimited
