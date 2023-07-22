@@ -19,4 +19,5 @@ DEVELOPER_DIR=/Applications/Xcode-15.2.0.app \
  --swift-disable-dead-stripping \
  --reconfigure \
  --bootstrapping off \
- --skip-early-swiftsyntax
+ --skip-early-swiftsyntax \
+ "$@"
