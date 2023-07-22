@@ -11,6 +11,7 @@ kana/vim-textobj-user
 keith/gist.vim
 keith/swift.vim
 keith/xcconfig.vim
+LnL7/vim-nix
 ludovicchabant/vim-gutentags
 majutsushi/tagbar
 mhinz/vim-signify
