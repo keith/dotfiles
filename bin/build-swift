@@ -3,13 +3,18 @@
 set -euo pipefail
 set -x
 
+sccache_arg=""
+if command -v sccache >/dev/null; then
+  sccache_arg="--sccache"
+fi
+
 DEVELOPER_DIR=/Applications/Xcode-14.3.1-RC1.app \
  ./swift/utils/build-script \
  --skip-build-benchmarks \
  --skip-watchos \
  --skip-tvos \
  --swift-darwin-supported-archs "$(uname -m)" \
- --sccache \
+ $sccache_arg \
  --release-debuginfo \
  --swift-disable-dead-stripping \
  --reconfigure \
