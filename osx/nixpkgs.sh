@@ -16,7 +16,9 @@ readonly pkgs=(
   colordiff
   ctags
   dockutil
+  dylibtree
   fd
+  gh
   graphviz
   htop
   hyperfine
