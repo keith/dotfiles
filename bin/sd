@@ -3,12 +3,15 @@
 if [[ $# -ne 0 ]]; then
   passed_args=("$@")
 else
-  read -r input_string
-  passed_args=("$input_string")
+  IFS=$'\n' read -ra passed_args -d '' || true
 fi
 
 args=(--compact)
 for arg in "${passed_args[@]}"; do
+  while [[ $arg == ' '* || $arg == "+"* || $arg == "-"* ]]; do
+    arg=${arg:1}
+  done
+
   if [[ $arg == s:* ]]; then
     args+=("_\$s${arg##*:}")
   elif [[ $arg == _\$s* ]]; then
