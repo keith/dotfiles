@@ -15,6 +15,7 @@ readonly pkgs=(
   cmake
   colordiff
   ctags
+  diff-grep
   dockutil
   dylibtree
   fd
