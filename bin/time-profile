@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-exec xctrace record --template 'Time Profiler' --launch -- "$@"
+exec xctrace record --template 'Time Profiler' --launch --target-stdout - --target-stderr - -- "$@"
