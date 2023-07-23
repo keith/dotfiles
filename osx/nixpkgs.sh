@@ -32,6 +32,7 @@ readonly pkgs=(
   mu
   mutt
   ninja
+  nixfmt
   nmap
   parallel
   pre-commit

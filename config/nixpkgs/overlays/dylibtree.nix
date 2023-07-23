@@ -14,7 +14,8 @@ self: super:
 
     cargoHash = "sha256-91ecGchpvp23snyTP1a+c+ZeTDSKX/bkE/u5r5eU7ck=";
     meta = with super.lib; {
-      description = "Inspect dynamic dependencies of Mach-O binaries recursively";
+      description =
+        "Inspect dynamic dependencies of Mach-O binaries recursively";
       homepage = "https://github.com/keith/dylibtree";
       license = licenses.mit;
     };
