@@ -13,6 +13,7 @@ readonly pkgs=(
   arp-scan
   chruby
   cmake
+  cmake-format
   colordiff
   ctags
   diff-grep
