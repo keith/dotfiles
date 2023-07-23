@@ -1,4 +1,0 @@
-#!/bin/bash
-
-echo "error: accidental 'gs' usage" >&2
-exit 1

@@ -8,6 +8,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 alias G="g"
+alias gs="g s"
 
 alias k=kubectl
 alias v=nvim
