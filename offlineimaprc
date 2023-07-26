@@ -15,7 +15,7 @@ footer = "\n"
 [Account gmail]
 localrepository  = gmail-local
 remoterepository = gmail-remote
-postsynchook     = mu index
+# postsynchook     = mu index
 
 [Repository gmail-local]
 type = Maildir
@@ -38,7 +38,7 @@ createfolders = False
 [Account lyft]
 localrepository  = lyft-local
 remoterepository = lyft-remote
-postsynchook     = mu index
+# postsynchook     = mu index
 
 [Repository lyft-local]
 type = Maildir

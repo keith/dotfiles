@@ -30,7 +30,6 @@ readonly pkgs=(
   kubectx
   less
   msmtp
-  mu
   mutt
   ninja
   nixfmt
