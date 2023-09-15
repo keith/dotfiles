@@ -23,6 +23,18 @@ fuzzy_git_files_widget() {
   trap INT
 }
 
+fuzzy_git_changed_files_widget() {
+  trap "" INT
+
+  result="$(git dm --name-only | fzy)"
+  if [ "$result" != "" ]; then
+    LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
+  fi
+
+  zle redisplay
+  trap INT
+}
+
 fuzzy_git_status_widget() {
   trap "" INT
 
@@ -67,6 +79,9 @@ bindkey '^T' fuzzy_file_widget
 
 zle     -N   fuzzy_git_files_widget
 bindkey '^G' fuzzy_git_files_widget
+
+zle     -N   fuzzy_git_changed_files_widget
+bindkey '^O' fuzzy_git_changed_files_widget
 
 zle     -N   fuzzy_history_widget
 bindkey '^U' fuzzy_history_widget
