@@ -2,16 +2,28 @@
 
 set -euo pipefail
 
-extension=${1:-c}
+original_extension=${1:-c}
+extension=$original_extension
+if [[ "$extension" == *lib ]]; then
+  extension=${extension%lib}
+fi
 
 dir=$(mktemp -d)
 file="$dir/main.$extension"
-if [[ "$extension" == "c" || "$extension" == "m" ]]; then
+if [[ "$original_extension" == "c" || "$original_extension" == "m" ]]; then
   echo "int main() { return 127; }" > "$file"
-elif [[ "$extension" == "swift" ]]; then
+elif [[ "$original_extension" == "swift" ]]; then
   echo 'print("hi")' > "$file"
+elif [[ "$original_extension" == "o" ]]; then
+  clang -c "$(dummy c)" -o "$file"
+elif [[ "$original_extension" == "clib" ]]; then
+  echo "void foo() {}" > "$file"
+elif [[ "$original_extension" == "olib" ]]; then
+  clang -c "$(dummy clib)" -o "$file"
+elif [[ "$original_extension" == "a" ]]; then
+  clang --emit-static-lib "$(dummy olib)" -o "$file"
 else
-  echo "error: unhandled extension: $extension" >&2
+  echo "error: unhandled extension: $original_extension" >&2
   exit 1
 fi
 
