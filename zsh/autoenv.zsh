@@ -53,14 +53,14 @@ _dotenv_source_file() {
     return 0
   fi
 
-  _dotenv_print_unauthorized_message $env_file
+  echo "Unauthorized env files found: $env_file, run dotenv_authorize to authorize"
+}
 
-  read answer
-
-  if [[ $answer == 'y' ]]; then
-    _dotenv_authorize $env_file
-    source $env_file
-  fi
+dotenv_authorize() {
+  _dotenv_authorize "$PWD/.env"
+  _dotenv_authorize "$PWD/.keithenv"
+  source "$PWD/.env"
+  source "$PWD/.keithenv"
 }
 
 chpwd_functions=($chpwd_functions _dotenv_source_env)
