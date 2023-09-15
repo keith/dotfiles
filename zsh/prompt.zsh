@@ -1,3 +1,5 @@
+_branch_string="%45>..>%b%>>"
+
 autoload -U add-zsh-hook
 autoload -U colors && colors
 autoload -Uz vcs_info
@@ -15,8 +17,8 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' unstagedstr ' %F{1}M%f'
 zstyle ':vcs_info:*' stagedstr ' %F{2}M%f'
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' formats "[%b%u%c%m]"
-zstyle ':vcs_info:*' actionformats "[%b%u%c] %F{4}%a%f"
+zstyle ':vcs_info:*' formats "[${_branch_string}%u%c%m]"
+zstyle ':vcs_info:*' actionformats "[${_branch_string}%u%c] %F{4}%a%f"
 zstyle ':vcs_info:git*+set-message:*' hooks git-st git-stash git-untracked
 
 # Show number of commits ahead or behind of the remote
@@ -24,26 +26,30 @@ function +vi-git-st() {
   local ahead behind remote
 
   # Are we on a remote-tracking branch?
-  remote=${$(git rev-parse --verify ${hook_com[branch]}"@{upstream}" \
-  --symbolic-full-name --abbrev-ref 2>/dev/null)}
+  remote=${$(git rev-parse --verify "@{upstream}" \
+    --symbolic-full-name --abbrev-ref 2>/dev/null)}
 
   if [[ -n ${remote} ]]; then
-    ahead=$(git rev-list ${hook_com[branch]}"@{upstream}"..HEAD 2>/dev/null \
+    ahead=$(git rev-list "@{upstream}"..HEAD 2>/dev/null \
       | wc -l | tr -d ' ')
 
-    behind=$(git rev-list HEAD..${hook_com[branch]}"@{upstream}" 2>/dev/null \
+    behind=$(git rev-list HEAD.."@{upstream}" 2>/dev/null \
       | wc -l | tr -d ' ')
 
-    diff="${hook_com[branch]}"
+    diff=""
     if [[ $ahead -gt 0 ]]; then
-      diff="$diff %F{2}$ahead%f"
+      diff+=" %F{2}$ahead%f"
     fi
 
     if [[ $behind -gt 0 ]]; then
-      diff="$diff%F{1}$behind%f"
+      if [[ -z "$diff" ]]; then
+        diff+=" "
+      fi
+
+      diff+="%F{1}$behind%f"
     fi
 
-    hook_com[branch]="$diff"
+    hook_com[misc]+="$diff"
   fi
 }
 
@@ -53,7 +59,7 @@ function +vi-git-stash() {
 
   stashes=$(git stash list 2>/dev/null | wc -l | tr -d ' ')
   if [[ $stashes -gt 0 ]]; then
-    hook_com[misc]=" %F{4}${stashes}%f"
+    hook_com[misc]+=" %F{4}${stashes}%f"
   fi
 }
 
