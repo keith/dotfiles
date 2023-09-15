@@ -26,8 +26,9 @@ syntax enable " Enable vim syntax highlighting as is (enable != on)
 let g:mapleader="\<Space>"
 
 " I - Disable the startup message
-" a - Avoid pressing enter after saves
-set shortmess=Ia
+" a - Shorten some messsages to avoid pressing enter in some cases
+" t - Truncate if the message is too wide instead of making you 'hit enter to continue'
+set shortmess=Iat
 
 set shell=$SHELL               " Set the default shell
 set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
@@ -176,7 +177,7 @@ set laststatus=2 " Always show the statusline
 " Left Side
 set statusline=
 set statusline+=%#IncSearch#%{&paste?'\ \ PASTE\ ':''}%*
-set statusline+=\ %.50f
+set statusline+=\ %f
 set statusline+=\ %m
 set statusline+=\ %r
 set statusline+=%=
