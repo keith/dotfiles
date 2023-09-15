@@ -4,26 +4,26 @@ set -euo pipefail
 
 if [[ -n "${DEV:-}" ]]; then
   if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
   fi
 
-  exec "$DOTFILES/../bazel/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEV2:-}" ]]; then
   if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazel2/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
   fi
 
-  exec "$DOTFILES/../bazel2/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEVREL:-}" ]]; then
   if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazel-rel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
   fi
 
-  exec "$DOTFILES/../bazel-rel/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 bazelisk_bin=bazelisk
