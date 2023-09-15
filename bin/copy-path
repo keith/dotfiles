@@ -2,4 +2,8 @@
 
 set -euo pipefail
 
-realpath -s "$1" | pbcopy
+if [[ "$1" == /* ]]; then
+  echo "$1" | pbcopy
+else
+  echo "$PWD/$1" | pbcopy
+fi
