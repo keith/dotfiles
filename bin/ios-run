@@ -10,7 +10,7 @@ _xcrun() {
 
 output=$(mktemp)
 _xcrun swiftc \
-  -target x86_64-apple-ios11.0-simulator \
+  -target x86_64-apple-ios14.0-simulator \
   -o "$output" \
   "$@"
 
