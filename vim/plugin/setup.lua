@@ -1,12 +1,12 @@
 -- vim.lsp.set_log_level("debug")
 
-local lspconfig = require "lspconfig"
 local lsp_spinner = require "lsp_spinner"
 
 lsp_spinner.setup {
   placeholder = "  ",
 }
 
+-- TODO: Remove once on neovim >= 0.10.0
 require("lsp-inlayhints").setup()
 
 local function on_attach(client, bufnr)
@@ -48,6 +48,24 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
   }
 end
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+require("lspconfig").lua_ls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+        },
+      },
+      telemetry = { enable = false },
+      hint = { enable = true },
+    },
+  },
+}
 
 -- https://github.com/microsoft/pyright/issues/128
 require("lspconfig").pyright.setup {
@@ -110,7 +128,7 @@ require("compe").setup {
   },
 }
 
-function has_highlights(lang)
+local function has_highlights(lang)
   local supported = {
     c = true,
     cpp = true,

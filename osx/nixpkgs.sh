@@ -28,6 +28,7 @@ readonly pkgs=(
   kubectl
   kubectx
   less
+  lua-language-server
   msmtp
   mutt
   ninja
