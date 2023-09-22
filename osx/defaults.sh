@@ -534,9 +534,17 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
 # Force files to open in new windows instead of new tabs
 defaults write com.apple.TextEdit AppleWindowTabbingMode -string manual
+# Set plain text font size
+defaults write com.apple.TextEdit NSFixedPitchFontSize -int 16
 
 # https://mjtsai.com/blog/2021/03/29/how-to-stop-mac-app-store-notifications
 defaults write com.apple.appstored LastUpdateNotification -date "2029-12-12 12:00:00 +0000"
+
+# Sort users in Contacts by first name
+defaults write -app Contacts ABNameSortingFormat -string "sortingFirstName sortingLastName"
+
+# Stop reminders from grouping by time of day
+defaults write "$HOME/Library/Group Containers/group.com.apple.reminders/Library/Preferences/group.com.apple.reminders" todayListIsGrouped -bool false
 
 
 #
