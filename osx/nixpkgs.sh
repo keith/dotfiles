@@ -23,7 +23,6 @@ readonly pkgs=(
   graphviz
   htop
   hyperfine
-  ideviceinstaller
   jq
   kubectl
   kubectx
