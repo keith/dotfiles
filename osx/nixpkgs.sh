@@ -6,7 +6,6 @@ set -euo pipefail
 # nixpkgs.git-zsh-completion
 # nixpkgs.gitAndTools.gitFull
 # nixpkgs.gnupg
-# nixpkgs.vim
 
 readonly pkgs=(
   ansifilter
@@ -46,6 +45,7 @@ readonly pkgs=(
   tokei
   tree
   unixtools.watch
+  vim
   w3m
   wget
   youtube-dl
