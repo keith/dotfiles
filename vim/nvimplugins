@@ -1,6 +1,6 @@
-doums/lsp_spinner.nvim
 github/copilot.vim
 hrsh7th/nvim-compe
+keith/lsp_spinner.nvim
 lvimuser/lsp-inlayhints.nvim
 neovim/nvim-lspconfig
 nvim-treesitter/nvim-treesitter
