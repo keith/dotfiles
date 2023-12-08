@@ -4,4 +4,4 @@ set -euo pipefail
 
 # Pre-Xcode 15.0 version
 # exec xctrace record --template 'Time Profiler' --launch -- "$@"
-exec xctrace record --template 'Time Profiler' --launch --target-stdout - --target-stderr - -- "$@"
+exec xctrace record --template 'Time Profiler' --launch --target-stdout - -- "$@"
