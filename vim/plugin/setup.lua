@@ -38,6 +38,7 @@ local servers = {
   "cmake",
   "gopls",
   "graphql",
+  "mojo",
   "rust_analyzer",
   "terraformls",
   "zls",
