@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+git diff --name-only origin/master --diff-filter=AMRCU \
+  | grep -e BUILD -e "\.bzl" \
+  | xargs buildifier -lint warn
