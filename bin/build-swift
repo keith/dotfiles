@@ -8,7 +8,7 @@ if command -v sccache >/dev/null; then
   sccache_arg="--sccache"
 fi
 
-DEVELOPER_DIR=/Applications/Xcode-14.3.1-RC1.app \
+DEVELOPER_DIR=/Applications/Xcode-15.2.0.app \
  ./swift/utils/build-script \
  --skip-build-benchmarks \
  --skip-watchos \
