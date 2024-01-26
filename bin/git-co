@@ -6,6 +6,11 @@ args=()
 for arg in "$@"
 do
   if [[ "$arg" == *:* ]]; then
+    remote="${arg%:*}"
+    if [[ "$remote" == keith ]]; then
+      remote=mine
+    fi
+
     branch="${arg#*:}"
     args+=("$branch")
   else
@@ -14,8 +19,8 @@ do
 done
 
 if [[ -n "${branch:-}" ]]; then
-  if (! git show-ref --quiet "$branch") && git remote get-url mine 2>/dev/null; then
-    git fetch mine
+  if (! git show-ref --quiet "$branch") && git remote get-url "$remote" 2>/dev/null; then
+    git fetch "$remote"
   fi
 fi
 
