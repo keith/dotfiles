@@ -1,3 +1,4 @@
 *.mobileprovision diff=provision
 *.plist diff=plist
+*.swift diff=swift
 *.zip diff=zip
