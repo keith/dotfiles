@@ -30,5 +30,6 @@ if [[ ${#files[@]} -eq 0 ]]; then
   exit 1
 fi
 
+# TODO: take arg that is sha for splits going further up the stack
 git reset HEAD~1 "${args[@]}" -- "${files[@]}"
 git commit --amend --no-edit
