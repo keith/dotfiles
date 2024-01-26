@@ -4,7 +4,6 @@ import argparse
 import os
 import re
 import subprocess
-import sys
 import webbrowser
 from typing import Optional
 
@@ -119,6 +118,11 @@ def main(args):
         url = os.path.join(remote_url, query)
     elif args.argument == "mi":
         url = os.path.join(remote_url, "issues/keith")
+    elif args.argument == "pr":
+        query = (
+            f"pulls?q=is%3Aopen+is%3Apr+head%3A{_current_branch_upstream()}"
+        )
+        url = os.path.join(remote_url, query)
     elif args.argument == "issues":
         query = "issues"
         if args.argument2:
