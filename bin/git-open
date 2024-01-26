@@ -114,7 +114,8 @@ def main(args):
     elif args.argument == "mp":
         query = "pulls?q=is%3Aopen+is%3Apr+author%3Akeith"
         if args.argument2:
-            query = f"{query}+{args.argument2}"
+            arg_string = args.argument2.replace(" ", "+")
+            query = f"{query}+{arg_string}"
         url = os.path.join(remote_url, query)
     elif args.argument == "mi":
         url = os.path.join(remote_url, "issues/keith")
