@@ -84,6 +84,7 @@
   prune = true
 [branch]
   autosetupmerge = true
+  sort = -committerdate
 [rerere]
   enabled = true
   autoupdate = true
