@@ -110,8 +110,10 @@ def main(args):
         url = "{}/commit/{}".format(remote_url, _get_ref(args.argument))
     elif remote_arg := _get_remote(args.argument, remotes):
         url = remote_arg
-    elif args.argument == "mp":
-        query = "pulls?q=is%3Aopen+is%3Apr+author%3Akeith"
+    elif args.argument in ("mp", "pulls"):
+        query = "pulls?q=is%3Aopen+is%3Apr"
+        if args.argument == "mp":
+            query = f"{query}+author%3Akeith"
         if args.argument2:
             arg_string = args.argument2.replace(" ", "+")
             query = f"{query}+{arg_string}"
