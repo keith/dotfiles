@@ -44,19 +44,19 @@ def _get_remote(name, remotes):
     )
 
 
-def _get_upstream():
+def _get_upstream(branch: Optional[str] = None):
     return _run_git_command(
         [
             "rev-parse",
             "--abbrev-ref",
             "--symbolic-full-name",
-            "@{upstream}",
+            f"{branch if branch else ''}@{{upstream}}",
         ]
     )
 
 
-def _current_branch_upstream():
-    return _get_upstream().split("/", 1)[-1]
+def _get_upstream_branch(branch: Optional[str] = None):
+    return _get_upstream(branch).split("/", 1)[-1]
 
 
 def _get_tracked_remote() -> Optional[str]:
@@ -102,7 +102,7 @@ def main(args):
         url = remote_url
     elif os.path.exists(args.argument):
         url = "{}/blob/{}/{}".format(
-            remote_url, _current_branch_upstream(), args.argument
+            remote_url, _get_upstream_branch(), args.argument
         )
     elif _is_branch(args.argument):
         url = "{}/tree/{}".format(remote_url, args.argument)
@@ -121,9 +121,12 @@ def main(args):
     elif args.argument == "mi":
         url = os.path.join(remote_url, "issues/keith")
     elif args.argument == "pr":
-        query = (
-            f"pulls?q=is%3Aopen+is%3Apr+head%3A{_current_branch_upstream()}"
-        )
+        upstream = _get_upstream_branch()
+        if upstream in ("master", "main"):
+            branch_name = _run_git_command(["pilebranchname", "HEAD"])
+            upstream = _get_upstream_branch(branch_name)
+
+        query = f"pulls?q=is%3Aopen+is%3Apr+head%3A{upstream}"
         url = os.path.join(remote_url, query)
     elif args.argument == "issues":
         query = "issues"
