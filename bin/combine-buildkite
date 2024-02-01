@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import asyncio
 import os
 import re
 import requests
@@ -33,13 +34,12 @@ def _get_job_log(
         headers=_BUILDKITE_AUTH_HEADERS,
     )
     response.raise_for_status()
-    # breakpoint()
     return ansi_escape_8bit.sub("", response.json()["content"]).replace(
         "\r", ""
     )
 
 
-def _main(org: str, pipeline: str, build_number: str) -> None:
+async def _main(org: str, pipeline: str, build_number: str) -> None:
     response = requests.get(
         f"{_BASE_URL}/{org}/pipelines/{pipeline}/builds/{build_number}",
         headers=_BUILDKITE_AUTH_HEADERS,
@@ -48,10 +48,19 @@ def _main(org: str, pipeline: str, build_number: str) -> None:
 
     combined_log = ""
     build = response.json()
-    # TODO: Parallelize
+    loop = asyncio.get_event_loop()
+    futures = []
+
     for job in build["jobs"]:
-        job_id = job["id"]
-        combined_log += _get_job_log(org, pipeline, build_number, job_id)
+        job_id = str(job["id"])
+        futures.append(
+            loop.run_in_executor(
+                None, _get_job_log, org, pipeline, build_number, job_id
+            )
+        )
+
+    for future in futures:
+        combined_log += await future
         combined_log += "\n"
 
     with open(f"buildkite-build-{build_number}.log", "w") as f:
@@ -62,4 +71,5 @@ def _main(org: str, pipeline: str, build_number: str) -> None:
 if __name__ == "__main__":
     args = _build_parser().parse_args()
     org, pipeline = args.pipeline.split("/", 1)
-    _main(org, pipeline, args.build_number)
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(_main(org, pipeline, args.build_number))
