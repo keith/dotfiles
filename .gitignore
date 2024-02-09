@@ -18,6 +18,7 @@ vim/black
 # It turns out config is too noisy for me unfortunately, just allowlist things
 /config/*
 
+!config/atuin/config.toml
 !config/icecast.xml
 !config/nvim
 !config/redshift.conf

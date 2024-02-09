@@ -49,3 +49,5 @@ if [[ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
 fi
 
 set-alacritty-theme
+
+eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"

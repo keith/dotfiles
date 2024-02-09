@@ -9,9 +9,9 @@ fi
 # History settings
 # Save x items to the given history file
 # https://unix.stackexchange.com/questions/568907/why-do-i-lose-my-zsh-history
-HISTSIZE=50000000
-SAVEHIST=50000000
-HISTFILE=$HOME/.keith_zsh_history
+export HISTSIZE=50000000
+export SAVEHIST=50000000
+export HISTFILE=$HOME/.keith_zsh_history
 
 # Append history to the zsh_history file
 setopt APPEND_HISTORY

@@ -10,6 +10,7 @@ set -euo pipefail
 readonly pkgs=(
   ansifilter
   arp-scan
+  atuin
   chruby
   cmake
   cmake-format
