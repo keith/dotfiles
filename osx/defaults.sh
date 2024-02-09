@@ -376,49 +376,31 @@ defaults write com.apple.finder AppleWindowTabbingMode -string "manual"
 # Safari/WebKit
 #
 
+defaults write -app Safari AlwaysRestoreSessionAtLaunch -bool true
+defaults write -app Safari AlwaysShowTabBar -bool true
+defaults write -app Safari AutoFillPasswords -bool false
+
+# Prevent Safari from opening 'safe' files automatically after downloading,
+# mostly because it trashes the original
+defaults write -app Safari AutoOpenSafeDownloads -bool false
+
 # Change the Safari search to find strings contained in other words
-defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
-
-# Show developer tools
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-# Disable Webkit start page
-defaults write org.webkit.nightly.WebKit StartPageDisabled -bool true
-
-# Set Safari's home page to 'about:blank' for faster loading
-defaults write com.apple.Safari HomePage -string "about:blank"
-
-# Prevent Safari from opening 'safe' files automatically after downloading
-defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
-
-# Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+defaults write -app Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Auto clear downloads
-defaults write com.apple.Safari DownloadsClearingPolicy -int 2
+defaults write -app Safari DownloadsClearingPolicy -int 2
 
-# Don't fill passwords
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -int 0
+# Show developer tools
+defaults write -app Safari IncludeDevelopMenu -bool true
 
 # Show full URL in Safari
-defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+defaults write -app Safari ShowFullURLInSmartSearchField -bool true
 
 # Show status bar
-defaults write com.apple.Safari ShowStatusBar -bool true
-defaults write com.apple.Safari ShowStatusBarInFullScreen -bool true
+defaults write -app Safari ShowOverlayStatusBar -bool true
 
-# Toolbar setup
-/usr/libexec/PlistBuddy -c "Delete :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers" ~/Library/Preferences/com.apple.Safari.plist &>/dev/null
-/usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers array" ~/Library/Preferences/com.apple.Safari.plist
-items=(BackForwardToolbarIdentifier NSToolbarFlexibleSpaceItem InputFieldsToolbarIdentifier NSToolbarFlexibleSpaceItem ShareToolbarIdentifier)
-
-for i in "${!items[@]}"; do
-  /usr/libexec/PlistBuddy -c "Add :NSToolbar\\ Configuration\\ BrowserToolbarIdentifier-v2:TB\\ Item\\ Identifiers:$i string ${items[$i]}" ~/Library/Preferences/com.apple.Safari.plist
-done
+# Never remove history, this is the constant the UI uses
+defaults write -app Safari HistoryAgeInDaysLimit -int 365000
 
 #
 # Mail
@@ -450,7 +432,7 @@ defaults write com.apple.iChat AppleShowScrollBars -string Automatic
 # iCal
 #
 
-defaults write com.apple.iCal "number of hours displayed" -int 16
+defaults write -app Calendar "number of hours displayed" -int 14
 
 
 #
