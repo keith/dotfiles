@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly filename=$1
+sips -s format jpeg "$filename" --out "${filename%.*}.jpg"
