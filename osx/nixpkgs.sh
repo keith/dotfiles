@@ -34,6 +34,8 @@ readonly pkgs=(
   ninja
   nixfmt
   nmap
+  nodePackages.bash-language-server
+  nodePackages.pyright
   parallel
   pre-commit
   pstree
