@@ -5,5 +5,6 @@ set -euo pipefail
 if git show-branch origin/main > /dev/null 2>&1; then
   echo "main"
 else
-  echo "master"
+  config_key="$(git rootworktreehash).main-branch"
+  git config --local --get --default master "$config_key"
 fi
