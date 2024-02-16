@@ -48,6 +48,8 @@ if [[ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
   source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 fi
 
-set-alacritty-theme
+if command -v atuin > /dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+fi
 
-eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
+set-alacritty-theme
