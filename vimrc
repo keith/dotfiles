@@ -469,3 +469,5 @@ function! MoveFile(newspec, bang) abort
 endfunction
 
 command! -nargs=1 -complete=file -bang MoveFile call MoveFile('<args>', '<bang>')
+
+nnoremap <silent> + :let @/ .= '\\|\<'.expand('<cword>').'\>'<cr>:call histadd('search', @/)<cr>n
