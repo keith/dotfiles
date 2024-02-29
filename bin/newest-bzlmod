@@ -65,6 +65,7 @@ class Version:
         return self.prerelease < other.prerelease
 
 
+subprocess.check_call(["git", "-C", _BASE, "checkout", "main"])
 subprocess.check_call(["git", "-C", _BASE, "pull"])
 
 for module in sys.argv[1:]:
