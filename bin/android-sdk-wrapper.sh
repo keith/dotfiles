@@ -25,7 +25,12 @@ readonly android_sdk_root_dir="/tmp/androidbin/sdk"
 readonly android_sdk_unarchived_dir="$android_sdk_root_dir/android-sdk-$android_sdk_version-unarchived"
 
 readonly cmdline_tools_version="7.0"
-readonly ndk_version="21.3.6528147"
+if [[ -n "${OLD_NDK:-}" ]]; then
+  readonly ndk_version="21.3.6528147"
+else
+  readonly ndk_version="26.2.11394342"
+fi
+
 readonly install_android_cmd_line_tools=(
   "$android_sdk_unarchived_dir/tools/bin/sdkmanager"
   "--install"
