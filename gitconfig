@@ -69,6 +69,7 @@
   last        = log -p -1
   last-msg    = !git --no-pager log --format=format:%B -1
   last-sha    = !git --no-pager log --format=format:%H -1
+  o           = open
   pul         = pull
   punch       = push --force-with-lease
   ra          = rebase --abort
