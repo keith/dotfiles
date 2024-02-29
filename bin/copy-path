@@ -2,8 +2,12 @@
 
 set -euo pipefail
 
-if [[ "$1" == /* ]]; then
-  echo "$1" | pbcopy
+readonly arg="${1:-.}"
+
+if [[ "$arg" == /* ]]; then
+  echo "$arg" | pbcopy
+elif [[ "$arg" == . ]]; then
+  echo "$PWD" | pbcopy
 else
-  echo "$PWD/$1" | pbcopy
+  echo "$PWD/$arg" | pbcopy
 fi
