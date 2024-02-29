@@ -54,8 +54,8 @@
   co-pr       = !sh -c 'git fetch --force origin pull/$1/head:pr/$1 && git checkout pr/$1' -
   com         = commit --verbose
   coma        = commit --verbose --amend --no-edit --no-verify
-  commsg      = !sh -c 'git commit --message \""$(pbpaste)"\"' -
   comf        = commit --verbose --fixup=HEAD --no-verify
+  commsg      = !sh -c 'git commit --message \""$(pbpaste)"\"' -
   cop         = !sh -c 'git branch | cut -c 3- | fzy --query=$1 | xargs git checkout' -
   copr        = !sh -c 'git branch -r | cut -c 3- | grep -v HEAD | cut -d/ -f2- | fzy --query=$1 | xargs git checkout' -
   ctags       = !.git/hooks/ctags
