@@ -44,4 +44,4 @@ build:ktrace --profile=./trace.json
 build:ktrace --verbose_explanations
 
 test:t --test_output=errors
-test:t --test_summary=none
+test:t --test_summary=terse
