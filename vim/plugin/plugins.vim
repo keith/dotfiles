@@ -48,5 +48,14 @@ vnoremap <leader>v :.,.GBrowse<CR>
 inoremap <C-A> <C-O>^
 cnoremap <C-A> <Home>
 
-autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | execute 'OSCYankRegister "' | endif
 let g:oscyank_silent = 1
+function! s:VimOSCYankPostCallback(event)
+  if a:event.operator == 'y' && index(['', '+', '*'], a:event.regname) != -1
+    call OSCYankRegister(a:event.regname)
+  endif
+endfunction
+
+augroup VimOSCYankPost
+  autocmd!
+  autocmd TextYankPost * call s:VimOSCYankPostCallback(v:event)
+augroup END
