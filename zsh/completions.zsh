@@ -36,3 +36,6 @@ _g () {
 # Order matters
 compdef _g git
 compdef '_dispatch git git' g
+
+compdef _bazel bazelisk
+compdef _bazel bz
