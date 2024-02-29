@@ -8,10 +8,6 @@ other_apps=()
 
 for app in $apps
 do
-  if [[ "$current_path" =~ "$app"* ]]; then
-    continue
-  fi
-
   other_apps+=("$app")
 done
 
@@ -30,6 +26,7 @@ case "${#other_apps[@]}" in
     ;;
 esac
 
+echo "Previous Xcode was   '$current_path'"
 echo "Current Xcode is now '$(xcode-select --print-path)'"
 if [[ -n "${DEVELOPER_DIR:-}" ]]; then
   echo "\$DEVELOPER_DIR is '${DEVELOPER_DIR:-}'"
