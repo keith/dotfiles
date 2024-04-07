@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 usage() {
   echo "Usage: bak [backup|restore|fsck|ls] SOURCE <DESTINATION>"
@@ -11,41 +11,39 @@ usage() {
 
 require_args() {
   for arg; do
-    if [ -z "$arg" ]; then
+    if [[  -z "$arg" ]]; then
       usage
     fi
   done
 }
 
-cmd="$1"
-src="$2"
-dest="$3"
-
-key="keithbsmiley@gmail.com"
-args="--gpg-binary gpg --encrypt-key $key --use-agent"
+readonly cmd="$1"
+readonly src="$2"
+readonly dest="$3"
+readonly args=("--gpg-binary" "gpg" "--encrypt-key" "keithbsmiley@gmail.com" "--use-agent")
 
 ulimit -n 1024
 
 case "$cmd" in
   backup)
     require_args "$src" "$dest"
-    duplicity $args incremental --full-if-older-than 1M "$src" "$dest"
+    duplicity "${args[@]}" incremental --full-if-older-than 1M "$src" "$dest"
     ;;
   restore)
     require_args "$src" "$dest"
-    duplicity $args "$src" "$dest"
+    duplicity "${args[@]}" "$src" "$dest"
     ;;
   cleanup)
     require_args "$src"
-    duplicity $args remove-all-but-n-full 3 "$src"
+    duplicity "${args[@]}" remove-all-but-n-full 3 "$src"
     ;;
   fsck)
     require_args "$src" "$dest"
-    duplicity $args verify --compare-data "$src" "$dest"
+    duplicity "${args[@]}" verify --compare-data "$src" "$dest"
     ;;
   ls)
     require_args "$src"
-    duplicity $args list-current-files "$src"
+    duplicity "${args[@]}" list-current-files "$src"
     ;;
   *)
     usage
