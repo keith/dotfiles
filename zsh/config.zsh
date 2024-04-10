@@ -141,7 +141,9 @@ bindkey '\e,' insert-last-word-before-pipe
 
 export HELPDIR=/usr/share/zsh/$ZSH_VERSION/help/
 # There is a default alias that overrides this function unless it's removed
-unalias run-help
+if alias run-help >/dev/null 2>&1; then
+  unalias run-help
+fi
 autoload -Uz run-help
 autoload -Uz run-help-git
 bindkey '^o' run-help
