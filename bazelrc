@@ -21,6 +21,8 @@ common:ors --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_
 common:ors2 --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_swift2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
 common:orx --override_repository=rules_xcodeproj=~/dev/mnf/rules_xcodeproj --override_module=rules_xcodeproj=~/dev/mnf/rules_xcodeproj
 
+common:oreg --registry=file:///Users/ksmiley/dev/bazelbuild/bazel-central-registry
+
 build:s --spawn_strategy=standalone
 build:d --disk_cache=~/.bazel_cache
 
