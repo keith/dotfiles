@@ -71,7 +71,12 @@ subprocess.check_call(["git", "-C", _BASE, "pull"])
 for module in sys.argv[1:]:
     module_dir = (_BASE / module).resolve()
     if not module_dir.exists():
-        raise SystemExit(f"{module_dir} does not exist")
+        loosely_matching = []
+        for path in _BASE.iterdir():
+            if module in path.name:
+                loosely_matching.append(path.name)
+        matches = ", ".join(sorted(loosely_matching))
+        raise SystemExit(f"{module_dir} does not exist, did you mean one of these: {matches}")
 
     versions = [v for v in module_dir.iterdir() if v.is_dir()]
     versions.sort(key=Version, reverse=True)
