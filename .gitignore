@@ -47,3 +47,5 @@ w3m/*
 
 ncmpcpp/error.log
 bin/lyft*
+
+osx/Brewfile*.lock.json
