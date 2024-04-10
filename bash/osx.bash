@@ -39,3 +39,6 @@ alias simctl="xcrun simctl"
 # https://github.com/Homebrew/legacy-homebrew/issues/47201
 alias lldb='PATH="/usr/bin:/usr/sbin:/bin:/sbin" lldb'
 alias swift='PATH="/usr/bin:/usr/sbin:/bin:/sbin" swift'
+
+# Local cds fail with CDPATH set
+alias make='CDPATH= make'
