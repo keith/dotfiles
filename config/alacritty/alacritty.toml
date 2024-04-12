@@ -1,0 +1,26 @@
+import = [
+  "~/.config/alacritty/keybindings.toml",
+  "~/.config/alacritty/solarized_light.toml",
+]
+
+[bell]
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[font]
+size = 13.0
+
+[font.bold]
+style = "Regular"
+
+[font.normal]
+style = "Regular"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[window]
+startup_mode = "Maximized"
