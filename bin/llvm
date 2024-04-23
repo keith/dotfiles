@@ -17,6 +17,16 @@ prg_path=""
 if [[ ! -d "$prefix" ]]; then
   if command -v llvm-config >/dev/null; then
     prefix="$(llvm-config --bindir)"
+  elif command -v llvm-config-20 >/dev/null; then
+    prefix="$(llvm-config-20 --bindir)"
+  elif command -v llvm-config-19 >/dev/null; then
+    prefix="$(llvm-config-19 --bindir)"
+  elif command -v llvm-config-18 >/dev/null; then
+    prefix="$(llvm-config-18 --bindir)"
+  elif command -v llvm-config-17 >/dev/null; then
+    prefix="$(llvm-config-17 --bindir)"
+  elif command -v llvm-config-16 >/dev/null; then
+    prefix="$(llvm-config-16 --bindir)"
   else
     echo "error: llvm-config and llvm brew dir not found" >&2
     exit 1
