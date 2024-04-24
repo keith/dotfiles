@@ -2,6 +2,7 @@ cespare/vim-toml
 Chiel92/vim-autoformat
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
+compnerd/modulemap-vim
 czheo/mojo.vim
 fatih/vim-go
 hashivim/vim-terraform
