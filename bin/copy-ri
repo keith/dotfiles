@@ -14,8 +14,6 @@ else
   fi
 fi
 
-# sha="$(shasum -a 256 "$output" | cut -d " " -f1 | xargs)"
-
 sha="$(openssl dgst -sha256 -binary "$output" | openssl base64 -A | sed 's/^/sha256-/')"
 echo "Copying: $sha"
 echo -n "$sha" | pbcopy
