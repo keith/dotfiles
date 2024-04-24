@@ -38,7 +38,6 @@ command alias reveal expr -l objc++ -- (void*)dlopen("/Applications/Reveal.app/C
 # some print statements telling you they've been installed
 # command script import lldb.macosx.crashlog
 # command script import lldb.macosx.heap
-command script add -c lldb.macosx.crashlog.Symbolicate crashlog
 command script add -f lldb.macosx.crashlog.save_crashlog save_crashlog
 command script add -f lldb.macosx.heap.cstr_refs cstr_refs
 command script add -f lldb.macosx.heap.find_variable find_variable
