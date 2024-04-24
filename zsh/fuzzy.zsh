@@ -26,7 +26,7 @@ fuzzy_git_files_widget() {
 fuzzy_git_changed_files_widget() {
   trap "" INT
 
-  result="$(git dm --name-only | fzy)"
+  result="$(git dm --name-only --relative=$(git rev-parse --show-prefix) | fzy)"
   if [ "$result" != "" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi
