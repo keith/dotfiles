@@ -252,3 +252,13 @@ mods = "Alt"
 chars = "\u001Bq"
 key = "Q"
 mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SelectNextTab"
+key = "Tab"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "SelectPreviousTab"
+key = "Tab"
+mods = "Control|Shift"
