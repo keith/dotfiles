@@ -5,8 +5,8 @@ set -x
 
 root=$(git rev-parse --show-toplevel)
 pushd $root
-arc_base_commit=${1:-$(arc which --show-base)}
-git diff-index -U0 "$arc_base_commit" \
+arc_base_commit=${1:"HEAD~"}
+git diff-index -U0 HEAD~ \
   | clang/tools/clang-format/clang-format-diff.py -style file -i -p1
 
 # g diff-index -U0 HEAD^ "llvm/tools/llvm-cov/CodeCoverage.cpp" | "clang/tools/clang-format/clang-format-diff.py" -style file -i -p1
