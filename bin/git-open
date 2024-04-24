@@ -44,6 +44,16 @@ def _get_remote(name, remotes):
     )
 
 
+def _get_sha() -> str:
+    return _run_git_command(
+        [
+            "git",
+            "rev-parse",
+            "HEAD",
+        ]
+    )
+
+
 def _get_upstream(branch: Optional[str] = None):
     return _run_git_command(
         [
@@ -101,9 +111,11 @@ def main(args):
     if not args.argument:
         url = remote_url
     elif os.path.exists(args.argument):
-        url = "{}/blob/{}/{}".format(
-            remote_url, _get_upstream_branch(), args.argument
-        )
+        try:
+            ref = _get_upstream_branch()
+        except subprocess.CalledProcessError:
+            ref = _get_sha()
+        url = "{}/blob/{}/{}".format(remote_url, ref, args.argument)
     elif _is_branch(args.argument):
         url = "{}/tree/{}".format(remote_url, args.argument)
     elif _get_ref(args.argument):
