@@ -45,5 +45,5 @@ build:ktrace --explain=./explanation.log
 build:ktrace --profile=./trace.json
 build:ktrace --verbose_explanations
 
-test:t --test_output=errors
-test:t --test_summary=terse
+build:t --test_output=errors
+build:t --test_summary=terse
