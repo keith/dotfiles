@@ -16,11 +16,6 @@ alias v=nvim
 # Remove all items from the dock
 alias cleardock="defaults write com.apple.dock persistent-apps -array \"\" && killall Dock"
 
-if ! command -v fd >/dev/null 2>&1 && command -v fdfind >/dev/null 2>&1; then
-  alias fd="fdfind --hidden"
-fi
-alias fd="fd --hidden"
-
 if ! command -v sha256sum >/dev/null 2>&1; then
   alias sha256sum="shasum -a 256"
 fi

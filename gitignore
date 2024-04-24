@@ -17,6 +17,7 @@
 .mypy_cache
 .netrwhist
 .pytest_cache
+.rgignore
 .ropeproject
 .rustfmt
 .Spotlight-V100
