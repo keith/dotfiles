@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly directory="${1:-.}"
+
+json="{\n"
+
+contents=""
+while IFS= read -r -d '' filename
+do
+  sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
+  contents+="        \"$(basename "$filename")\": \"$sha\",\n"
+done < <(find "$directory" -type f -iname "*.patch" -print0 | sort -z)
+
+# Strip trailing comma
+contents="${contents::${#contents}-3}"
+json+="$contents\n"
+json+="    }"
+
+if [[ -f source.json ]]; then
+  jq --indent 4 --argjson new_value "$(echo -e "$json")" '.patches = $new_value' source.json > temp.json
+  mv temp.json source.json
+else
+  echo -e "    \"patches\": $json"
+fi

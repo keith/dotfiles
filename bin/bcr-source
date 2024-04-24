@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly url="$1"
+output="$(mktemp -d)/download"
+
+if ! curl --location --fail --output "$output" "$url"; then
+  echo "error: failed to download $url" >&2
+  exit 1
+fi
+
+sha="$(openssl dgst -sha256 -binary "$output" | openssl base64 -A | sed 's/^/sha256-/')"
+
+echo "{"
+echo "    \"integrity\": \"$sha\","
+
+strip_prefix=$(tar tf "$output" | cut -d '/' -f1 | sort -u)
+line_count=$(echo "$strip_prefix" | wc -l | xargs)
+if [[ "$line_count" == 1 ]]; then
+  echo "    \"strip_prefix\": \"$strip_prefix\","
+fi
+
+echo "    \"url\": \"$url\","
+echo '    "patch_strip": 1,'
+cat - <<EOF
+    "patches": {
+    }
+}
+EOF
