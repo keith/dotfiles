@@ -11,7 +11,7 @@ while IFS= read -r -d '' filename
 do
   sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
   contents+="        \"$(basename "$filename")\": \"$sha\",\n"
-done < <(find "$directory" -type f -iname "*.patch" -print0 | sort -z)
+done < <(find "$directory" -type f \( -iname "*.patch" -o -iname "*.diff" \) -print0 | sort -z)
 
 # Strip trailing comma
 contents="${contents::${#contents}-3}"
