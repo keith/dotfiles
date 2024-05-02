@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -euo pipefail
+
+chown -R "$(whoami)" ~/.gnupg/
+find -L ~/.gnupg -type f -exec chmod 600 {} \;
+find -L ~/.gnupg -type d -exec chmod 700 {} \;
