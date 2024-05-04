@@ -118,27 +118,6 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 # Don't automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
-# Dock setup
-if command -v dockutil >/dev/null; then
-  dockutil --remove all
-
-  dockutil --add "/Applications/Google Chrome.app"
-  dockutil --add "/Applications/Messages.app"
-  dockutil --add "/Applications/Alacritty.app"
-
-  dockutil --add "/Applications" --view list --display folder --sort name
-  dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
-else
-  echo "dockutil not installed, re-run after installing"
-fi
-
-# Run hot corners script
-if command -v corners >/dev/null; then
-    ../bin/corners enable
-else
-    echo "Failed to setup hot corners, script missing"
-fi
-
 
 #
 # Terminal

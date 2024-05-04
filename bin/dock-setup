@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if ! command -v dockutil >/dev/null; then
+  echo "error: dockutil not installed, re-run after installing"
+fi
+
+dockutil --remove all
+
+dockutil --add "/Applications/Google Chrome.app"
+dockutil --add "/Applications/Messages.app"
+dockutil --add "/Applications/Alacritty.app"
+
+dockutil --add "/Applications" --view list --display folder --sort name
+dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded

@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+# https://superuser.com/questions/954509/what-are-the-correct-permissions-for-the-gnupg-enclosing-folder-gpg-warning/954536#954536
 chown -R "$(whoami)" ~/.gnupg/
 find -L ~/.gnupg -type f -exec chmod 600 {} \;
 find -L ~/.gnupg -type d -exec chmod 700 {} \;
