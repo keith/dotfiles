@@ -19,7 +19,7 @@ function! FuzzyFindCommand(vimCommand) abort
   endfunction
 
   botright 10 new
-  let l:term_command = 'find-files-async | fzy > ' .  l:callback.filename
+  let l:term_command = 'find-files-async | fzf > ' .  l:callback.filename
   silent call termopen(l:term_command, l:callback)
   setlocal nonumber norelativenumber
   startinsert
