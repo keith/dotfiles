@@ -1,5 +1,4 @@
 cask 'alacritty'
-cask 'blockblock'
 cask 'charles'
 cask 'hex-fiend'
 cask 'keith/formulae/conductor'
