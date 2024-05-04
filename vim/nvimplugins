@@ -3,13 +3,12 @@ hrsh7th/nvim-compe
 keith/lsp_spinner.nvim
 lvimuser/lsp-inlayhints.nvim
 neovim/nvim-lspconfig
+nvim-lua/plenary.nvim
+nvim-telescope/telescope-fzy-native.nvim
+nvim-telescope/telescope.nvim
 nvim-treesitter/nvim-treesitter
 nvim-treesitter/nvim-treesitter-textobjects
 nvim-treesitter/playground
 ray-x/lsp_signature.nvim
 RRethy/nvim-treesitter-textsubjects
 simrat39/symbols-outline.nvim
-
-nvim-lua/plenary.nvim
-nvim-telescope/telescope-fzy-native.nvim
-nvim-telescope/telescope.nvim
