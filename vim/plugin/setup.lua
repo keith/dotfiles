@@ -184,3 +184,5 @@ require("illuminate").configure {
     "fugitive",
   },
 }
+
+require("treesj").setup()
