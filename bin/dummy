@@ -10,7 +10,7 @@ fi
 
 dir=$(mktemp -d)
 file="$dir/main.$extension"
-if [[ "$original_extension" == "c" || "$original_extension" == "m" ]]; then
+if [[ "$original_extension" == "c" || "$original_extension" == "m" || "$original_extension" == "cpp" ]]; then
   echo "int main() { return 127; }" > "$file"
 elif [[ "$original_extension" == "swift" ]]; then
   echo 'print("hi")' > "$file"
