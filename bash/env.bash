@@ -66,6 +66,7 @@ export HOMEBREW_NO_EMOJI=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 export GH_NO_UPDATE_NOTIFIER=1
+export GH_BROWSER=open
 
 export FZF_DEFAULT_OPTS="--layout=reverse --height=11"
 

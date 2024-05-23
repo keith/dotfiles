@@ -10,6 +10,8 @@ if [[ -S "$sock" ]]; then
   else
     echo "${@}" | nc -U "$sock"
   fi
+
+  exit 0
 fi
 
 if command -v xdg-open >/dev/null; then
