@@ -74,8 +74,8 @@
   punch       = push --force-with-lease
   ra          = rebase --abort
   rc          = rebase --continue
-  roma        = !sh -c 'git rebase origin/$(git main-branch)'
-  romi        = !sh -c 'git rebase origin/$(git main-branch) -i'
+  roma        = !sh -c 'git rebase $(git rev-parse --abbrev-ref $(git main-branch)@{upstream})'
+  romi        = !sh -c 'git rebase $(git rev-parse --abbrev-ref $(git main-branch)@{upstream}) -i'
   rv          = remote -v
   s           = status -sb
   sub         = submodule update --init --recursive
