@@ -77,6 +77,8 @@ link() {
   if [[ ! -e "$target" ]]; then
     echo "Linking $filename to $target"
     ln -s "$PWD/$filename" "$target"
+  elif [[ ! "$PWD/$filename" -ef "$target" ]]; then
+    echo "warning: $target exists and is not linked" >&2
   fi
 }
 
