@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo hi | gpg --sign --armor | gpg --decrypt || true
+pkill gpg-agent
