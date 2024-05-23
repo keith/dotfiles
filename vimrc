@@ -286,10 +286,12 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 augroup trailing_highlight
   autocmd!
-  autocmd BufWinEnter * match ErrorMsg /\s\+$/
-  autocmd InsertEnter * match ErrorMsg /\s\+\%#\@<!$/
-  autocmd InsertLeave * match ErrorMsg /\s\+$/
+  autocmd BufWinEnter * match trailing_whitespace /\s\+$/
+  autocmd InsertEnter * match trailing_whitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match trailing_whitespace /\s\+$/
 augroup END
+
+hi! link trailing_whitespace ErrorMsg
 
 " Close all the lists
 nnoremap <silent> <leader>q :call <SID>CloseLists()<CR>

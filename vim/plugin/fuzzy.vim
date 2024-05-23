@@ -22,6 +22,8 @@ function! FuzzyFindCommand(vimCommand) abort
   let l:term_command = 'find-files-async | fzf > ' .  l:callback.filename
   silent call termopen(l:term_command, l:callback)
   setlocal nonumber norelativenumber
+  " Every fzf line has trailing whitespace
+  hi! link trailing_whitespace NONE
   startinsert
 endfunction
 
