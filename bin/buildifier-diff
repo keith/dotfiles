@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-git diff --name-only origin/master --diff-filter=AMRCU \
+git diff --name-only "$(git rev-parse --abbrev-ref "HEAD@{upstream}")" --diff-filter=AMRCU \
   | grep -e BUILD -e "\.bzl" \
   | xargs buildifier -lint warn
