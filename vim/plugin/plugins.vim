@@ -19,6 +19,8 @@ let g:GPGPreferArmor = 1
 " Netrw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
+" Use my custom open executable
+let g:netrw_browsex_viewer='open'
 let g:netrw_list_hide =
       \ netrw_gitignore#Hide()
       \ . ',^\./'
