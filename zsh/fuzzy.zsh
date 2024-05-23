@@ -14,7 +14,7 @@ trim_quotes() {
 fuzzy_git_files_widget() {
   trap "" INT
 
-  result="$(find-files-async | fzy)"
+  result="$(find-files-async | fzf)"
   if [ "$result" != "" ]; then
     LBUFFER="${LBUFFER}\"$(trim_quotes $result)\""
   fi
