@@ -4,9 +4,9 @@ set -euo pipefail
 set -x
 
 root=$(git rev-parse --show-toplevel)
-pushd $root
-arc_base_commit=${1:"HEAD~"}
-git diff-index -U0 HEAD~ \
+pushd "$root"
+base=${1:-"HEAD~"}
+git diff-index -U0 "$base" \
   | clang/tools/clang-format/clang-format-diff.py -style file -i -p1
 
 # g diff-index -U0 HEAD^ "llvm/tools/llvm-cov/CodeCoverage.cpp" | "clang/tools/clang-format/clang-format-diff.py" -style file -i -p1
