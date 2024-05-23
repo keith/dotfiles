@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly sock="$HOME/.opener.sock"
+
+if [[ -S "$sock" ]]; then
+  if [[ -p /dev/stdin ]]; then
+    cat - | nc -U "$sock"
+  else
+    echo "${@}" | nc -U "$sock"
+  fi
+fi
+
+if command -v xdg-open >/dev/null; then
+  xdg-open "$@"
+else
+  /usr/bin/open "$@"
+fi

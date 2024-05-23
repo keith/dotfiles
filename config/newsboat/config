@@ -31,7 +31,7 @@ bind-key ENTER show-urls article
 external-url-viewer "urlview"
 
 # Browser for opening URLs, same as mutt
-browser "~/.mutt/urlhandler.sh %u"
+browser "~/.bin/open %u"
 
 # feedhq as a sync engine
 urls-source "feedhq"

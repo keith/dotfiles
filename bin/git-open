@@ -4,7 +4,6 @@ import argparse
 import os
 import re
 import subprocess
-import webbrowser
 from typing import Optional
 
 
@@ -149,7 +148,7 @@ def main(args):
     else:
         url = os.path.join(remote_url, args.argument)
 
-    webbrowser.open_new_tab(url)
+    subprocess.check_call(["open", url])
 
 
 def _get_parser():

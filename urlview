@@ -1,4 +1,4 @@
-COMMAND ~/.mutt/urlhandler.sh %s
+COMMAND ~/.bin/open %s
 
 # Match either http(s) or www
 # Match characters, numbers, dot, dash
