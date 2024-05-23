@@ -41,6 +41,7 @@ local servers = {
   "graphql",
   "mojo",
   "rust_analyzer",
+  "starpls",
   "terraformls",
   "zls",
 }
