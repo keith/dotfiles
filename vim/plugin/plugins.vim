@@ -27,6 +27,7 @@ let g:netrw_list_hide =
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>
 
 let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_ctags_exclude = ['*/bazel-out/*', '*/bazel-bin/*']
 let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
 
 let g:tmux_navigator_disable_when_zoomed = 1
