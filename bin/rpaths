@@ -2,6 +2,4 @@
 
 set -euo pipefail
 
-otool -l "$@" \
-  | grep -A2 LC_RPATH \
-  | grep "^\s*path" | cut -d " " -f 11
+llvm objdump --macho --rpaths "$@"
