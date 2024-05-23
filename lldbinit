@@ -45,8 +45,5 @@ command script add -f lldb.macosx.heap.malloc_info malloc_info
 command script add -f lldb.macosx.heap.objc_refs objc_refs
 command script add -f lldb.macosx.heap.ptr_refs ptr_refs
 
-command unalias p
-command alias p dwim-print --persistent-result on --
-
 # Stop when the process exits with a non-zero exit code
 # break set -n exit -c '$arg1 != 0'
