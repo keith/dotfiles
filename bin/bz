@@ -2,25 +2,35 @@
 
 set -euo pipefail
 
+wrapper=tools/bazel
+if [[ -n "${BAZELISK_WRAPPER_DIRECTORY:-}" ]]; then
+  wrapper="$BAZELISK_WRAPPER_DIRECTORY/bazel"
+elif [[ -f .bazeliskrc ]]; then
+  if line=$(grep BAZELISK_WRAPPER_DIRECTORY .bazeliskrc); then
+    dir="${line#*=}"
+    wrapper="$dir/bazel"
+  fi
+fi
+
 if [[ -n "${DEV:-}" ]]; then
-  if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
   exec "$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEV2:-}" ]]; then
-  if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
   exec "$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEVREL:-}" ]]; then
-  if [[ -f tools/bazel ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec tools/bazel "$@"
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
   exec "$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" "$@"
