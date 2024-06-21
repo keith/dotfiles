@@ -5,7 +5,7 @@ function! s:Gx()
 python3 << EOF
 from urllib.parse import urlparse, urlunparse
 import re
-import webbrowser
+import subprocess
 import vim
 
 text = vim.eval("expand('<cWORD>')")
@@ -17,12 +17,12 @@ match = re.search(
     text)
 if match:
     url = urlunparse(urlparse(match.group(0), scheme="https"))
-    webbrowser.open(url)
+    subprocess.check_call(["open", url])
 else:
     # TODO: This actually opens virtually anything, but it enables just 'google.com' to work
     text = text.strip("\"'")
     url = urlunparse(urlparse(text, scheme="https"))
-    webbrowser.open(url)
+    subprocess.check_call(["open", url])
 EOF
 endfunction
 
