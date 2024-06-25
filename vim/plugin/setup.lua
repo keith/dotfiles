@@ -45,11 +45,14 @@ local servers = {
   "terraformls",
   "zls",
 }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities,
-    on_attach = on_attach,
-  }
+for _, server in ipairs(servers) do
+  local lsp = require('lspconfig')
+  if (vim.fn.executable(lsp[server].document_config.default_config.cmd[1]) == 1) then
+    nvim_lsp[server].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+    }
+  end
 end
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
