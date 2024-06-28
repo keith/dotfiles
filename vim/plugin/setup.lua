@@ -39,6 +39,7 @@ local servers = {
   "cmake",
   "gopls",
   "graphql",
+  "bazelrc-lsp",
   "mojo",
   "rust_analyzer",
   "starpls",
@@ -46,8 +47,8 @@ local servers = {
   "zls",
 }
 for _, server in ipairs(servers) do
-  local lsp = require('lspconfig')
-  if (vim.fn.executable(lsp[server].document_config.default_config.cmd[1]) == 1) then
+  local lsp = require "lspconfig"
+  if vim.fn.executable(lsp[server].document_config.default_config.cmd[1]) == 1 then
     nvim_lsp[server].setup {
       capabilities = capabilities,
       on_attach = on_attach,
