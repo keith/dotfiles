@@ -1,4 +1,4 @@
-function! FuzzyFindCommand(vimCommand) abort
+function! FuzzyFindCommand(vimCommand, default) abort
   let l:callback = {
         \ 'filename': tempname(),
         \ 'vimCommand':  a:vimCommand,
@@ -19,7 +19,7 @@ function! FuzzyFindCommand(vimCommand) abort
   endfunction
 
   botright 10 new
-  let l:term_command = 'find-files-async | fzf > ' .  l:callback.filename
+  let l:term_command = 'find-files-async | fzf --query="' . a:default . '" > ' .  l:callback.filename
   silent call termopen(l:term_command, l:callback)
   setlocal nonumber norelativenumber
   " Every fzf line has trailing whitespace
@@ -27,10 +27,15 @@ function! FuzzyFindCommand(vimCommand) abort
   startinsert
 endfunction
 
-nnoremap <C-p>  :call FuzzyFindCommand("edit")<cr>
-nnoremap <C-p>e :call FuzzyFindCommand("edit")<cr>
-nnoremap <C-p>v :call FuzzyFindCommand("vsplit")<cr>
-nnoremap <C-p>s :call FuzzyFindCommand("split")<cr>
+nnoremap <C-p>  :call FuzzyFindCommand("edit", "")<cr>
+nnoremap <C-p>e :call FuzzyFindCommand("edit", "")<cr>
+nnoremap <C-p>v :call FuzzyFindCommand("vsplit", "")<cr>
+nnoremap <C-p>s :call FuzzyFindCommand("split", "")<cr>
+
+nnoremap <C-p>p  :call FuzzyFindCommand("edit", expand("%:h"))<cr>
+nnoremap <C-p>pe :call FuzzyFindCommand("edit", expand("%:h"))<cr>
+nnoremap <C-p>pv :call FuzzyFindCommand("vsplit", expand("%:h"))<cr>
+nnoremap <C-p>ps :call FuzzyFindCommand("split", expand("%:h"))<cr>
 
 nnoremap <C-p>w :call FuzzySymbols()<cr>
 nnoremap <C-p>r :call FuzzyReferences()<cr>
