@@ -17,6 +17,7 @@
 .mypy_cache
 .netrwhist
 .pytest_cache
+.python-version
 .rgignore
 .ropeproject
 .rustfmt
@@ -31,6 +32,7 @@ bazel_cache
 build.noindex
 DerivedData
 Icon
+MODULE.bazel.lock
 node_modules
 Session.vim
 tags
