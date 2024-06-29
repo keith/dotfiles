@@ -6,7 +6,7 @@ sudo apt-add-repository -y ppa:git-core/ppa
 
 sudo apt purge --auto-remove cmake lib-nodedev || true
 wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ jammy main'
+sudo apt-add-repository -y 'deb https://apt.kitware.com/ubuntu/ jammy main'
 
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 
@@ -19,6 +19,7 @@ sudo apt install -y \
   curl \
   fd-find \
   forkstat \
+  fzf \
   fzy \
   gdb \
   gettext \
