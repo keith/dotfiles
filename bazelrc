@@ -5,7 +5,7 @@ common:org --override_repository=io_bazel_rules_go=~/dev/bazelbuild/rules_go
 common:orplat --override_repository=platforms=~/dev/bazelbuild/platforms --override_module=platforms=~/dev/bazelbuild/platforms
 common:orpy --override_repository=rules_python=~/dev/bazelbuild/rules_python --override_module=rules_python=~/dev/bazelbuild/rules_python
 common:orpro --override_repository=rules_proto=~/dev/bazelbuild/rules_proto --override_module=rules_proto=~/dev/bazelbuild/rules_proto
-common:orsky --override_repository=bazel_skylib=~/dev/bazelbuild/bazel-skylib
+common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib --override_repository=bazel_skylib=~/dev/bazelbuild/bazel-skylib
 common:orsd --override_repository=io_bazel_stardoc=~/dev/bazelbuild/stardoc
 common:orr --override_repository=rules_rust=~/dev/bazellbuild/rules_rust
 common:orj --override_repository=rules_java=~/dev/bazelbuild/rules_java
