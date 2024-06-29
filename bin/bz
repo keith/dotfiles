@@ -37,7 +37,7 @@ if [[ -n "${DEVREL:-}" ]]; then
 fi
 
 bazelisk_bin=bazelisk
-if [[ "$1" == -x86 ]]; then
+if [[ "${1:-}" == -x86 ]]; then
   shift
   echo "note: using x86_64 bazelisk"
   bazelisk_bin=bazelisk-darwin-amd64
