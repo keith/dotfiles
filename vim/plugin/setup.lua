@@ -1,5 +1,7 @@
 -- vim.lsp.set_log_level("debug")
 
+vim.o.termguicolors = false
+
 local lsp_spinner = require "lsp_spinner"
 
 lsp_spinner.setup {
