@@ -71,6 +71,26 @@ fuzzy_log_widget() {
   trap INT
 }
 
+fuzzy_bazel_widget() {
+  trap "" INT
+
+  local tokens
+  tokens=(${(z)LBUFFER})
+
+  query="kind('rule', //...)"
+  if [[ ${#tokens[@]} -ge 2 && "${tokens[2]}" == "test" ]]; then
+    query="kind('(test|test_suite) rule', //...)"
+  fi
+
+  result=$(bz query --keep_going --noshow_progress "$query" 2>/dev/null | fzf)
+  if [[ -n "$result" ]]; then
+    LBUFFER="${LBUFFER}$result"
+  fi
+
+  zle redisplay
+  trap INT
+}
+
 zle     -N   fuzzy_git_status_widget
 bindkey '^F' fuzzy_git_status_widget
 
@@ -88,3 +108,6 @@ bindkey '^U' fuzzy_history_widget
 
 zle     -N   fuzzy_log_widget
 bindkey '^N' fuzzy_log_widget
+
+zle     -N   fuzzy_bazel_widget
+bindkey '^V' fuzzy_bazel_widget
