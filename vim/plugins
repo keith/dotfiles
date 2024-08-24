@@ -11,6 +11,7 @@ jparise/vim-graphql
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
+keith/llvm.vim
 keith/swift.vim
 keith/xcconfig.vim
 LnL7/vim-nix
@@ -20,7 +21,6 @@ mhinz/vim-signify
 MTDL9/vim-log-highlighting
 neomake/neomake
 ojroques/vim-oscyank
-rhysd/vim-llvm
 RRethy/vim-illuminate
 rust-lang/rust.vim
 sjl/vitality.vim
