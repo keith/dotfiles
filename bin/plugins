@@ -13,9 +13,9 @@ containsElement() {
   return 1
 }
 
-update=true
-if [[ "${1:-}" == --no-update ]]; then
-  update=false
+update=false
+if [[ "${1:-}" == --update ]]; then
+  update=true
 elif [[ -n "${1:-}" ]]; then
   echo "error: invalid argument $1" >&2
   exit 1
