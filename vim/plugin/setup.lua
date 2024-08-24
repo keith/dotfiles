@@ -37,14 +37,15 @@ lsp_spinner.init_capabilities(capabilities)
 local nvim_lsp = require "lspconfig"
 local servers = {
   "bashls",
+  "bazelrc-lsp",
   "clangd",
   "cmake",
   "gopls",
   "graphql",
-  "bazelrc-lsp",
   "mojo",
   "rust_analyzer",
   "starpls",
+  "tblgen_lsp_server",
   "terraformls",
   "zls",
 }
