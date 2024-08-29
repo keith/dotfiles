@@ -23,6 +23,7 @@ sudo apt install -y \
   fzy \
   gdb \
   gettext \
+  gh \
   git \
   golang \
   htop \
@@ -30,10 +31,15 @@ sudo apt install -y \
   libedit-dev \
   ninja-build \
   nodejs \
+  parallel \
   patchelf \
+  python3 \
+  python3-pip \
+  python3-venv \
   ripgrep \
   speedtest-cli \
   sudo \
+  systemd-coredump \
   tmux \
   tree \
   universal-ctags \
