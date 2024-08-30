@@ -90,15 +90,6 @@ require("lspconfig").sourcekit.setup {
   on_attach = on_attach,
 }
 
-require("lsp_signature").on_attach {
-  bind = true,
-  hint_prefix = "",
-  -- TODO: the border is huge, but these don't seem to work
-  -- handler_opts = {
-  --   border = "single"
-  -- },
-}
-
 require("compe").setup {
   enabled = true,
   autocomplete = true,
