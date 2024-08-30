@@ -4,3 +4,5 @@ set -euo pipefail
 
 echo hi | gpg --sign --armor | gpg --decrypt || true
 pkill gpg-agent
+
+echo "If you are connected via ssh, disconnect and reconnect now"
