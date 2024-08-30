@@ -44,6 +44,7 @@ readonly pkgs=(
   ripgrep
   sccache
   shellcheck
+  stylua
   tmux
   tokei
   tree
