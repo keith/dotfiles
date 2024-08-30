@@ -1,5 +1,6 @@
 github/copilot.vim
 hrsh7th/nvim-compe
+j-hui/fidget.nvim
 neovim/nvim-lspconfig
 nvim-lua/plenary.nvim
 nvim-telescope/telescope-fzy-native.nvim

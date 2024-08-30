@@ -176,3 +176,4 @@ require("illuminate").configure {
 }
 
 require("treesj").setup()
+require("fidget").setup {}
