@@ -15,7 +15,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
   },
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
   properties = {
@@ -24,6 +24,74 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     "additionalTextEdits",
   },
 }
+
+local cmp = require "cmp"
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
+  mapping = {
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
+  },
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+  }, {
+    { name = "buffer" },
+  }, {
+    { name = "path" },
+  }, {
+    { name = "nvim_lsp_signature_help" },
+  }),
+}
+
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+  if vim.snippet.active { direction = 1 } then
+    return "<Cmd>lua vim.snippet.jump(1)<CR>"
+  elseif cmp.visible() then
+    return '<Cmd>lua require("cmp").confirm({ select = true })<CR>'
+  else
+    return "<Tab>"
+  end
+end, { expr = true })
+
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+  if vim.snippet.active { direction = -1 } then
+    return "<Cmd>lua vim.snippet.jump(-1)<CR>"
+  elseif cmp.visible() then
+    return '<Cmd>lua require("cmp").select_prev_item()<CR>'
+  else
+    return "<S-Tab>"
+  end
+end, { expr = true })
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "buffer" },
+  },
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = "path" },
+  }, {
+    { name = "cmdline" },
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false },
+})
+
+cmp.setup.filetype("git", { sources = {} })
+cmp.setup.filetype("gitcommit", { sources = {} })
+cmp.setup.filetype("gitconfig", { sources = {} })
+cmp.setup.filetype("gitrebase", { sources = {} })
+cmp.setup.filetype("markdown", { sources = {} })
 
 local nvim_lsp = require "lspconfig"
 local servers = {
@@ -88,30 +156,6 @@ require("lspconfig").sourcekit.setup {
   capabilities = capabilities,
   filetypes = { "swift" },
   on_attach = on_attach,
-}
-
-require("compe").setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "enable",
-  throttle_time = 80,
-  source_timeout = 200,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-
-  source = {
-    path = true,
-    buffer = {
-      ignored_filetypes = { "gitconfig", "gitcommit", "gitrebase", "git", "markdown" },
-    },
-    nvim_lsp = true,
-    nvim_lua = true,
-  },
 }
 
 local function has_highlights(lang)

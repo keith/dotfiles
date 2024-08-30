@@ -1,6 +1,6 @@
 " Tab/Enter usage
 " If the popup menu is open go back with shift-tab
-inoremap <S-Tab> <C-R>=<SID>BackwardsTab()<CR>
+"inoremap <S-Tab> <C-R>=<SID>BackwardsTab()<CR>
 function! s:BackwardsTab()
   if pumvisible()
     return "\<C-p>"
@@ -9,7 +9,7 @@ function! s:BackwardsTab()
   return ''
 endfunction
 
-inoremap <silent> <Tab> <C-R>=<SID>TabWrapper()<CR>
+"inoremap <silent> <Tab> <C-R>=<SID>TabWrapper()<CR>
 function! s:TabWrapper()
   if pumvisible()
     call compe#confirm("\<C-y>")
