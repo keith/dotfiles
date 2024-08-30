@@ -32,6 +32,7 @@ command alias reveal expr -l objc++ -- (void*)dlopen("/Applications/Reveal.app/C
 # log enable -f /tmp/dwarf.log dwarf all
 # log enable -f /tmp/breakpoints.log lldb break
 # log enable -f /tmp/all.log lldb all
+# log enable -f /tmp/gdb.log gdb-remote process
 # log enable -f /tmp/expr.log lldb expr
 
 # The commands below are the same as importing these modules but avoiding
