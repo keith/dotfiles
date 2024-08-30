@@ -19,6 +19,7 @@ let g:neomake_info_sign = {'text': 'i>', 'texthl': 'NeomakeInfoSign'}
 let g:neomake_python_enabled_makers = []
 let g:neomake_c_enabled_makers   = []
 let g:neomake_cpp_enabled_makers = []
+let g:neomake_lua_enabled_makers = []
 let g:neomake_ruby_enabled_makers = []
 let g:neomake_java_enabled_makers = []
 let g:neomake_rust_enabled_makers = []
