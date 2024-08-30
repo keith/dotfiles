@@ -1,6 +1,5 @@
 github/copilot.vim
 hrsh7th/nvim-compe
-keith/lsp_spinner.nvim
 lvimuser/lsp-inlayhints.nvim
 neovim/nvim-lspconfig
 nvim-lua/plenary.nvim

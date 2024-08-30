@@ -2,17 +2,10 @@
 
 vim.o.termguicolors = false
 
-local lsp_spinner = require "lsp_spinner"
-
-lsp_spinner.setup {
-  placeholder = "  ",
-}
-
 -- TODO: Remove once on neovim >= 0.10.0
 require("lsp-inlayhints").setup()
 
 local function on_attach(client, bufnr)
-  require("lsp_spinner").on_attach(client, bufnr)
   require("lsp-inlayhints").on_attach(client, bufnr)
 end
 
@@ -32,7 +25,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     "additionalTextEdits",
   },
 }
-lsp_spinner.init_capabilities(capabilities)
 
 local nvim_lsp = require "lspconfig"
 local servers = {

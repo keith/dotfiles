@@ -164,14 +164,6 @@ function! CurrentTag(...)
   endif
 endfunction
 
-function! LspStatus()
-  if has('nvim')
-    return luaeval("require'lsp_spinner'.status(bufnr)")
-  else
-    return ''
-  endif
-endfunction
-
 " Status line setup (without plugins)
 set laststatus=2 " Always show the statusline
 " Left Side
@@ -188,7 +180,6 @@ set statusline+=%y
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
-set statusline+=\ %{LspStatus()}
 
 if has('clipboard')     " If the feature is available
   set clipboard=unnamed " copy to the system clipboard
