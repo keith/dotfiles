@@ -157,7 +157,7 @@ set modelines=2
 " Functions for status line config since these functions aren't loaded
 " when the vimrc is sourced
 function! CurrentTag(...)
-  if exists('g:tagbar_iconchars')
+  if &ft != 'objc' && exists('g:tagbar_iconchars')
     return call('tagbar#currenttag', a:000)
   else
     return ''
