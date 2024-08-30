@@ -2,11 +2,10 @@
 
 vim.o.termguicolors = false
 
--- TODO: Remove once on neovim >= 0.10.0
-require("lsp-inlayhints").setup()
-
 local function on_attach(client, bufnr)
-  require("lsp-inlayhints").on_attach(client, bufnr)
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint.enable(true, { bufnr })
+  end
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
