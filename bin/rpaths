@@ -2,4 +2,8 @@
 
 set -euo pipefail
 
-llvm objdump --macho --rpaths "$@"
+if file -L "$1" | grep -q ELF; then
+  llvm readelf -d "$1" | grep -E "(RPATH|RUNPATH)" | cut -d '[' -f 2 | tr ':' '\n'
+else
+  llvm objdump --macho --rpaths "$1"
+fi
