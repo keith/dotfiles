@@ -442,6 +442,31 @@ command! Helptags helptags ALL
 cnoremap DIR <c-r>=expand('%:p:h') . '/'<CR>
 command! CDC cd %:p:h
 
+function! s:EditBuildFile() abort
+  let s:dir = expand('%:p:h')
+  let s:path = 'nothing'
+  while v:true
+    let s:path = s:dir . '/BUILD.bazel'
+    if filereadable(s:path)
+      break
+    endif
+
+    let s:path = s:dir . '/BUILD'
+    if filereadable(s:path)
+      break
+    endif
+
+    let s:dir = resolve(s:dir . '/..')
+    if s:dir == "/"
+      break
+    endif
+  endwhile
+
+  execute 'edit ' . s:path
+endfunction
+
+nnoremap <silent> <leader>2 :call <SID>EditBuildFile()<CR>
+
 function! MoveFile(newspec, bang) abort
   let s:old = expand('%')
   " could be improved:
