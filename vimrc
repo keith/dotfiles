@@ -443,7 +443,15 @@ cnoremap DIR <c-r>=expand('%:p:h') . '/'<CR>
 command! CDC cd %:p:h
 
 function! s:EditBuildFile() abort
-  let s:dir = expand('%:p:h')
+  let s:start = '%:p:h'
+
+  " If you're already editing a BUILD file, jump to the next one up the tree
+  let s:current = expand('%:t')
+  if s:current == "BUILD" || s:current == "BUILD.bazel"
+    let s:start = '%:p:h:h'
+  endif
+
+  let s:dir = expand(s:start)
   let s:path = 'nothing'
   while v:true
     let s:path = s:dir . '/BUILD.bazel'
@@ -462,7 +470,9 @@ function! s:EditBuildFile() abort
     endif
   endwhile
 
-  execute 'edit ' . s:path
+  if filereadable(s:path)
+    execute 'edit ' . s:path
+  endif
 endfunction
 
 nnoremap <silent> <leader>2 :call <SID>EditBuildFile()<CR>
