@@ -27,6 +27,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 local cmp = require "cmp"
 cmp.setup {
+  preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
       vim.snippet.expand(args.body)
