@@ -14,7 +14,7 @@ fi
 #  - /bin
 #  - /sbin
 export PATH="$HOME/dev/keith/knox:$DOTFILES/git-pile/bin:$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$BREW_PREFIX/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-export CDPATH="$HOME/dev/keith:$HOME/dev/bazelbuild:$HOME/dev/envoyproxy:$HOME/dev/llvm:$HOME/dev/google:$HOME/dev/mnf:$HOME/dev/apple:$HOME/dev/modularml:$HOME/dev"
+export CDPATH="$HOME/dev/keith:$HOME/dev/bazelbuild:$HOME/dev/envoyproxy:$HOME/dev/llvm:$HOME/dev/google:$HOME/dev/mnf:$HOME/dev/apple:$HOME/dev/modularml:$DOTFILES/.."
 
 export EDITOR=nvim
 
