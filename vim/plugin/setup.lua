@@ -97,7 +97,7 @@ cmp.setup.filetype("markdown", { sources = {} })
 local nvim_lsp = require "lspconfig"
 local servers = {
   "bashls",
-  "bazelrc-lsp",
+  "bazelrc_lsp",
   "clangd",
   "cmake",
   "gopls",
