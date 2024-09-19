@@ -122,6 +122,9 @@ set signcolumn=yes
 " Remove comments when joining lines with J
 set formatoptions+=j
 
+" Don't remove % on J
+set comments-=:%
+
 " Completion options
 set complete=.,w,b,u,t,kspell
 set completeopt=menuone,noselect
