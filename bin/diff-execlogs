@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -ne 3 ]]; then
+  echo "error: usage $0 BAZEL_DIR LOG_1 LOG_2" >&2
+  exit 1
+fi
+
+readonly bazel_dir=$1
+readonly log1=$2
+readonly log2=$3
+
+(cd "$bazel_dir" && bz build src/tools/execlog:parser src/tools/execlog:converter)
+
+readonly converter="$bazel_dir/bazel-bin/src/tools/execlog/converter"
+readonly parser="$bazel_dir/bazel-bin/src/tools/execlog/parser"
+
+log1_path=$log1
+log2_path=$log2
+
+if file "$log1" | grep -q "Zstandard"; then
+  log1_path=/tmp/execlog1_converted.txt
+  log2_path=/tmp/execlog2_converted.txt
+
+  "$converter" --input compact:"$log1" --output binary:"$log1_path" &
+  "$converter" --input compact:"$log2" --output binary:"$log2_path" &
+
+  wait
+fi
+
+readonly intermediate1_path=/tmp/execlog1.original.txt
+readonly intermediate2_path=/tmp/execlog2.original.txt
+
+"$parser" --log_path "$log1_path" --log_path "$log2_path" --output_path "$intermediate1_path" --output_path "$intermediate2_path"
+
+readonly diff1_path=/tmp/execlog1.txt
+readonly diff2_path=/tmp/execlog2.txt
+
+# Filter out some bloat
+sed -E '/^ *(size_bytes|hash_function_name):/d' "$intermediate1_path" > "$diff1_path" &
+sed -E '/^ *(size_bytes|hash_function_name):/d' "$intermediate2_path" > "$diff2_path" &
+
+wait
+
+d "$diff1_path" "$diff2_path"
