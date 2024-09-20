@@ -377,9 +377,10 @@ augroup ft_settings
   autocmd FileType c,cpp,go,objc,php setlocal commentstring=//\ %s
 
   " Treat more extensions as .zip files
-  autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
-  autocmd BufReadCmd *.apk call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.aar call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.apk call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.whl call zip#Browse(expand("<amatch>"))
 
   " Save files on some focus lost events, like switching splits
   autocmd BufLeave,FocusLost * silent! wall
