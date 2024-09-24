@@ -29,6 +29,8 @@ build:d --disk_cache=~/.bazel_cache
 build:b --sandbox_debug
 build:b --incompatible_sandbox_hermetic_tmp=false
 
+build:dyn --internal_spawn_scheduler --spawn_strategy=dynamic,remote,worker,sandboxed,local
+
 build:krc --bes_backend=grpcs://remote.buildbuddy.io
 build:krc --bes_results_url=https://app.buildbuddy.io/invocation/
 build:krc --experimental_remote_cache_compression
