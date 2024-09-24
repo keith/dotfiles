@@ -40,6 +40,7 @@ build:krc --remote_timeout=3600
 build:krc --remote_upload_local_results
 
 try-import /Users/ksmiley/.secrets.bazelrc
+try-import /home/ubuntu/.secrets.bazelrc
 
 build:ktrace --build_event_json_file=./bep.json
 build:ktrace --build_event_json_file_path_conversion=false
