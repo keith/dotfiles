@@ -11,6 +11,7 @@
 .clwb
 .DS_Store
 .hgignore
+.ignore
 .keithclangformat
 .keithcmakeformat
 .keithenv
