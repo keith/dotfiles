@@ -2,7 +2,13 @@
 
 set -euo pipefail
 
-url=$(git config --get remote.origin.url | sed -E 's=github.com/[[:alnum:]]+=github.com/keith=')
+origin_url=$(git config --get remote.origin.url)
+url=$(echo "$origin_url" | sed -E 's=github.com/[[:alnum:]_-]+/=github.com/keith/=')
+if [[ "$origin_url" == "$url" ]]; then
+  echo "error: failed to transform URL: $origin_url" >&2
+  exit 1
+fi
+
 git remote add mine "$url"
 if ! git fetch mine; then
   git remote rm mine
