@@ -379,6 +379,7 @@ augroup ft_settings
   " Treat more extensions as .zip files
   autocmd BufReadCmd *.aar call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.apk call zip#Browse(expand("<amatch>"))
+  autocmd BufReadCmd *.conda call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.ipa call zip#Browse(expand("<amatch>"))
   autocmd BufReadCmd *.whl call zip#Browse(expand("<amatch>"))
 
