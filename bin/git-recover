@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+file=$(git rev-parse --git-dir)/COMMIT_EDITMSG
+exec git commit -eF "$file" "$@"
