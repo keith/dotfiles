@@ -50,6 +50,7 @@ sudo apt install -y \
   unzip \
   urlview \
   vim \
+  zip \
   zsh
 
 sudo rm -f /usr/share/keyrings/kitware-archive-keyring.gpg
