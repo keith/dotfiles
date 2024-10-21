@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly directory="${1:-overlay}"
+
+json="{\n"
+
+contents=""
+pushd "$directory" >/dev/null
+while IFS= read -r -d '' filename
+do
+  sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
+  contents+="        \"${filename:2}\": \"$sha\",\n"
+done < <(find . \( -type f -o -type l \) -print0 | sort -z)
+popd
+
+# Strip trailing comma
+contents="${contents::${#contents}-3}"
+json+="$contents\n"
+json+="    }"
+
+if [[ -f source.json ]]; then
+  jq --indent 4 --argjson new_value "$(echo -e "$json")" '.overlay = $new_value' source.json > temp.json
+  mv temp.json source.json
+else
+  echo -e "    \"overlay\": $json"
+fi
