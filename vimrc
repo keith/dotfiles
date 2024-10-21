@@ -205,7 +205,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Don't copy the contents of an overwritten selection.
-vnoremap p "_dP
+vnoremap p P
 
 " Move as expected on wrapped lines
 noremap j gj
