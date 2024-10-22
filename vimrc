@@ -217,10 +217,8 @@ noremap gk k
 noremap <Up> gk
 inoremap <Up> <C-o>gk
 
-" Computers are dumb
-" scroll gets reset every time the window is resized
-nnoremap <C-u> 10<C-u>
-nnoremap <C-d> 10<C-d>
+nnoremap <C-u> 10k
+nnoremap <C-d> 10j
 
 " https://www.reddit.com/r/vim/comments/4jy1mh/slightly_more_subltle_n_and_n_behavior/
 " Keep search matches in the middle of the window unless the next match is in
