@@ -33,6 +33,7 @@ sudo apt install -y \
   htop \
   kitware-archive-keyring \
   libedit-dev \
+  libssl-dev \
   ninja-build \
   parallel \
   patchelf \
