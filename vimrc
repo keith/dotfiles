@@ -141,6 +141,7 @@ set wildignore+=tags,.tags
 " Dictionary for custom words
 set dictionary+=/usr/share/dict/words
 set spellfile=$HOME/.vim/custom-words.utf-8.add
+set spelloptions=camel
 
 " Set mapping and key timeouts
 set timeout
