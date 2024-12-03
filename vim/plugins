@@ -1,5 +1,4 @@
 cespare/vim-toml
-Chiel92/vim-autoformat
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
 compnerd/modulemap-vim
@@ -36,3 +35,4 @@ tpope/vim-sleuth
 tpope/vim-surround
 tpope/vim-unimpaired
 udalov/kotlin-vim
+vim-autoformat/vim-autoformat
