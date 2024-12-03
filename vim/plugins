@@ -11,9 +11,9 @@ jparise/vim-graphql
 kana/vim-textobj-indent
 kana/vim-textobj-user
 keith/gist.vim
-keith/llvm.vim
 keith/swift.vim
 keith/xcconfig.vim
+llvm/llvm.vim
 LnL7/vim-nix
 ludovicchabant/vim-gutentags
 majutsushi/tagbar
