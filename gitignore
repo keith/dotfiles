@@ -21,6 +21,7 @@
 .pytest_cache
 .python-version
 .rgignore
+.ignore
 .ropeproject
 .rustfmt
 .Spotlight-V100
