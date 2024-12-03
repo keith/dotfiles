@@ -31,6 +31,7 @@ sudo apt install -y \
   git \
   golang \
   htop \
+  jq \
   kitware-archive-keyring \
   libedit-dev \
   libssl-dev \
