@@ -218,6 +218,7 @@ require("illuminate").configure {
     "bzl",
     "fugitive",
     "log",
+    "tablegen",
   },
 }
 
