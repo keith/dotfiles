@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+set -x
+
+name=$(basename "$PWD")
+git checkout -b "$name"
+
+if git show-branch origin/main > /dev/null 2>&1; then
+  upstream=main
+else
+  upstream=master
+fi
+
+git branch --set-upstream-to=origin/"$upstream"
+git set-main-branch
+
+echo "note: you should probably run 'git takeupstream'"
