@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+
+export GIT_SEQUENCE_EDITOR=true
+
+upstream_sha=$(git rev-parse "$(git main-branch)@{upstream}")
+branch_first_sha=$(git --no-pager log --format=format:%H "$upstream_sha..HEAD" | tail -1)
+
+git -c commit.gpgSign=off rebase --quiet --interactive --autostash \
+  --exec "git -c commit.gpgSign=off commit --no-verify --amend --fixup '$branch_first_sha'" "$branch_first_sha"
+git rebase --quiet --interactive --autostash "$branch_first_sha"^
