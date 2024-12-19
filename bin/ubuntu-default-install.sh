@@ -67,8 +67,9 @@ pip3 install neovim
 pip3 install pyright
 
 cd /tmp
-git clone https://github.com/neovim/neovim
-cd neovim
+readonly nvim_version=0.10.2
+curl -L https://github.com/neovim/neovim/archive/refs/tags/v$nvim_version.tar.gz | tar zxf -
+cd neovim-$nvim_version
 make CMAKE_BUILD_TYPE=Release
 sudo make install
 
