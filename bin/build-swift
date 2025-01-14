@@ -23,7 +23,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   )
 fi
 
-DEVELOPER_DIR=/Applications/Xcode-15.2.0.app \
+DEVELOPER_DIR=/Applications/Xcode-15.4.0.app \
  ./swift/utils/build-script \
  "${args[@]}" \
  "$@"
