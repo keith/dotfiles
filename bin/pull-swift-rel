@@ -3,4 +3,4 @@
 set -euo pipefail
 set -x
 
-./swift/utils/update-checkout --clone --scheme release/5.10
+./swift/utils/update-checkout --clone --scheme release/6.0
