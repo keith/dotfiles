@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import time
+
+
+def _take_photo() -> None:
+    next_number = 0
+    for file in os.listdir("."):
+        name, ext = os.path.splitext(file)
+        if ext != ".nef":
+            continue
+
+        try:
+            number = int(name)
+        except ValueError:
+            continue
+
+        if number > next_number:
+            next_number = number
+
+    next_number += 1
+    next_filename = f"{next_number}.nef"
+    subprocess.check_call(
+        [
+            "sudo",
+            "gphoto2",
+            "--capture-image-and-download",
+            f"--filename={next_filename}",
+        ]
+    )
+
+    # NOTE: annoying because you have to alt-tab
+    # subprocess.check_call(["open", "-a", "Preview", next_filename])
+
+    # NOTE: no better way to quicklook a file from the command line
+    subprocess.Popen(["qlmanage", "-p", next_filename], stderr=subprocess.DEVNULL)
+
+    # NOTE: have to wait for the blocking process above to launch
+    time.sleep(1)
+
+    # NOTE: qlmanage doesn't launch in the foreground
+    subprocess.check_call(["open", "-a", "qlmanage.app"])
+
+
+def _main() -> None:
+    while True:
+        try:
+            input("Press Enter to take another photo...")
+        except KeyboardInterrupt:
+            break
+        _take_photo()
+
+
+if __name__ == "__main__":
+    _main()
