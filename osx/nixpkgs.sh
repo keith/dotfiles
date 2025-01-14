@@ -34,6 +34,7 @@ readonly pkgs=(
   ninja
   nixfmt
   nmap
+  nodejs_22
   nodePackages.bash-language-server
   nodePackages.pyright
   parallel
