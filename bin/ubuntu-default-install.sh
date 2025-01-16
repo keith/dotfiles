@@ -12,6 +12,8 @@ echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://ap
   | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
 
 sudo apt-add-repository -y ppa:git-core/ppa
+sudo add-apt-repository -y ppa:longsleep/golang-backports
+
 sudo apt-get update
 
 sudo apt install -y \
@@ -56,7 +58,7 @@ sudo apt install -y \
   zsh
 
 sudo rm -f /usr/share/keyrings/kitware-archive-keyring.gpg
-sudo apt autoremove
+sudo apt autoremove -y
 
 go install github.com/bazelbuild/bazelisk@latest
 go install github.com/bazelbuild/buildtools/buildifier@latest
