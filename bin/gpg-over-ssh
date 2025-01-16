@@ -1,0 +1,13 @@
+#!/bin/bash
+# https://wiki.gnupg.org/AgentForwarding
+
+set -euo pipefail
+
+config=/etc/ssh/sshd_config
+if [[ ! -f "$config" ]]; then
+  echo "error: $config doesn't exist" >&2
+  exit 1
+fi
+
+echo "StreamLocalBindUnlink yes" | sudo tee -a "$config"
+sudo systemctl restart ssh
