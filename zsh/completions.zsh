@@ -1,5 +1,6 @@
-# matches case insensitive
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# https://stackoverflow.com/a/14350512/902968
+# vim like "smart case"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
