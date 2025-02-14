@@ -95,6 +95,7 @@ set matchtime=2             " The amount of time matches flash
 set display=lastline        " Display super long wrapped lines
 set number                  " Shows line numbers
 set nrformats-=octal        " Never use octal notation
+set nrformats+=unsigned     " Ignore '-' denoting negative numbers
 set nojoinspaces            " Don't add 2 spaces when using J
 set mouse=a                 " Enable using the mouse if terminal emulator
 set mousehide               " Hide the mouse on typing
