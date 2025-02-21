@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Script so I never have to think about "ours" vs "theirs"
+# https://nitaym.github.io/ourstheirs
+
+set -euo pipefail
+set -x
+
+git rebase --show-current-patch >/dev/null
+git checkout --ours -- "$@"
