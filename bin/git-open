@@ -145,6 +145,8 @@ def main(args):
             query = f"{query}?q=is%3Aissue+is%3Aopen+{args.argument2}"
 
         url = os.path.join(remote_url, query)
+    elif args.argument == "r":
+        url = os.path.join(remote_url, "releases")
     else:
         url = os.path.join(remote_url, args.argument)
 
