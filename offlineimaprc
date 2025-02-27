@@ -1,6 +1,6 @@
 [general]
 ui         = ttyui
-accounts   = gmail, lyft
+accounts   = gmail
 pythonfile = ~/.mutt/offlineimaphelpers.py
 fsync      = False
 
@@ -28,29 +28,6 @@ maxconnections = 1
 type = Gmail
 remoteuser = keithbsmiley@gmail.com
 remotepasseval = get_keychain_pass(account="keithbsmiley@gmail.com",
-                                   server ="imap.gmail.com")
-realdelete = no
-sslcacertfile = ~/.mutt/cacert.pem
-nametrans = remote_nametrans_gmail
-folderfilter = folder_filter
-createfolders = False
-
-[Account lyft]
-localrepository  = lyft-local
-remoterepository = lyft-remote
-# postsynchook     = mu index
-
-[Repository lyft-local]
-type = Maildir
-localfolders = ~/.mail/keith-lyft.com
-nametrans = local_nametrans_gmail
-folderfilter = folder_filter
-
-[Repository lyft-remote]
-maxconnections = 1
-type = Gmail
-remoteuser = ksmiley@lyft.com
-remotepasseval = get_keychain_pass(account="ksmiley@lyft.com",
                                    server ="imap.gmail.com")
 realdelete = no
 sslcacertfile = ~/.mutt/cacert.pem
