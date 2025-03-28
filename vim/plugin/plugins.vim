@@ -22,8 +22,7 @@ let g:netrw_liststyle = 3
 " Use my custom open executable
 let g:netrw_browsex_viewer='open'
 let g:netrw_list_hide =
-      \ netrw_gitignore#Hide()
-      \ . ',^\./'
+      \ '^\./'
       \ . ',^\.git/'
 
 nnoremap <silent> <C-W>z :call zoom#toggle()<CR>

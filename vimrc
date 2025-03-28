@@ -31,7 +31,6 @@ let g:mapleader="\<Space>"
 set shortmess=Iat
 
 set shell=$SHELL               " Set the default shell
-set termencoding=utf-8         " Set the default encodings just in case $LANG isn't set
 set encoding=utf-8             " Set the default encodings just in case $LANG isn't set
 set autoindent                 " Indent the next line matching the previous line
 set smartindent                " Smart auto-indent when creating a new line
