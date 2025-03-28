@@ -12,6 +12,7 @@ alias gs="g s"
 
 alias k=kubectl
 alias v=nvim
+alias bz=bazel
 
 # Remove all items from the dock
 alias cleardock="defaults write com.apple.dock persistent-apps -array \"\" && killall Dock"
