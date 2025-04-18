@@ -2,6 +2,7 @@
 let g:markdown_fenced_languages = [
       \ 'bzl',
       \ 'objc',
+      \ 'python',
       \ 'ruby',
       \ 'sh',
       \ 'swift',
