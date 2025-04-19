@@ -11,7 +11,7 @@ readonly bazel_dir=$1
 readonly log1=$2
 readonly log2=$3
 
-(cd "$bazel_dir" && bz build src/tools/execlog:parser src/tools/execlog:converter)
+(cd "$bazel_dir" && bazel build src/tools/execlog:parser src/tools/execlog:converter)
 
 readonly converter="$bazel_dir/bazel-bin/src/tools/execlog/converter"
 readonly parser="$bazel_dir/bazel-bin/src/tools/execlog/parser"

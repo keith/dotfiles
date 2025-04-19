@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-exec bz query "$@"
+exec bazel query "$@"
