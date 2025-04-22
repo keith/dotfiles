@@ -131,6 +131,8 @@
 [grep]
   column = true
   lineNumber = true
+[notes]
+  rewriteRef = refs/notes/*
 [advice]
   waitingForEditor = false
   skippedCherryPicks = false
