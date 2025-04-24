@@ -8,3 +8,4 @@ set -x
 
 git rebase --show-current-patch >/dev/null
 git checkout --ours -- "$@"
+git add "$@"

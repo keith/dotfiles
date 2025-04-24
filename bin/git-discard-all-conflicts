@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+set -x
+
+
+for file in $(git diff --name-only --diff-filter=U --relative)
+do
+  git discard-conflict "$file"
+done
