@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+# https://github.com/pypa/pip/blob/24f4600851bbb3d7f22aed0ba6b1e2dcc4973412/src/pip/_internal/operations/install/wheel.py#L81
+
+from pip._internal.operations.install.wheel import rehash
+import sys
+
+print(",".join(rehash(sys.argv[1])))
