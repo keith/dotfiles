@@ -6,6 +6,10 @@
 set -euo pipefail
 set -x
 
-git rebase --show-current-patch >/dev/null
-git checkout --ours -- "$@"
-git add "$@"
+if git rebase --show-current-patch >/dev/null; then
+  git checkout --ours -- "$@"
+  git add "$@"
+else
+  git reset -- "$@"
+  git checkout -- "$@"
+fi
