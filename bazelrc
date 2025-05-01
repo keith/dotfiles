@@ -23,6 +23,8 @@ common:orx --override_repository=rules_xcodeproj=~/dev/mnf/rules_xcodeproj --ove
 
 common:oreg --registry=file:///Users/ksmiley/dev/bazelbuild/bazel-central-registry
 
+build:lt --modify_execution_info=TestRunner=+no-remote-exec
+
 build:s --spawn_strategy=standalone
 build:d --disk_cache=~/.bazel_cache
 
