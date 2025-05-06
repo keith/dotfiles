@@ -2,18 +2,20 @@
 
 set -euo pipefail
 
-readonly directory="${1:-overlay}"
-
 json="{\n"
 
 contents=""
-pushd "$directory" >/dev/null
 while IFS= read -r -d '' filename
 do
+  echo "a: $filename"
   sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
-  contents+="        \"${filename:2}\": \"$sha\",\n"
-done < <(find . \( -type f -o -type l \) -print0 | sort -z)
-popd
+  contents+="        \"$(basename "$filename")\": \"$sha\",\n"
+done < <(find "overlay" -not -type d -print0 | sort -z)
+
+if [[ -z "$contents" ]]; then
+  echo "error: no files found in overlay directory." >&2
+  exit 1
+fi
 
 # Strip trailing comma
 contents="${contents::${#contents}-3}"
