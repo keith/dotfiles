@@ -10,6 +10,7 @@ common:orsd --override_repository=io_bazel_stardoc=~/dev/bazelbuild/stardoc --ov
 common:orr --override_repository=rules_rust=~/dev/bazellbuild/rules_rust --override_module=rules_rust=~/dev/bazellbuild/rules_rust
 common:orj --override_repository=rules_java=~/dev/bazelbuild/rules_java --override_module=rules_java=~/dev/bazelbuild/rules_java
 common:orandk --override_repository=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
+common:ormojo --override_module=rules_mojo=~/dev/modularml/rules_mojo
 
 common:ora --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple --override_module=rules_apple=~/dev/bazelbuild/rules_apple
 common:ora2 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple2 --override_module=rules_apple=~/dev/bazelbuild/rules_apple2
