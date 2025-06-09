@@ -37,6 +37,8 @@ sudo apt install -y \
   kitware-archive-keyring \
   libedit-dev \
   libssl-dev \
+  ncurses-term \
+  netcat \
   ninja-build \
   parallel \
   patchelf \
