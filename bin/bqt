@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly name=$1
+shift
+
+patterns=$(mktemp)
+
+bazel query "attr(name, '$name', tests(...))" "$@" > "$patterns"
+
+if [[ ! -s $patterns ]]; then
+  echo "error: no tests matching '$name'" >&2
+  exit 1
+fi
+
+if [[ $(wc -l < "$patterns") -ne 1 ]]; then
+  echo "note: more than one test matches '$name':"
+  echo
+  cat "$patterns"
+
+  echo
+  echo -n "Do you want to run all of them? [Y/n] "
+  read -r answer
+  if [[ "$answer" != "Y" && "$answer" != "y" && "$answer" != "" ]]; then
+    exit 1
+  fi
+fi
+
+bazel test "$@" --target_pattern_file="$patterns"
