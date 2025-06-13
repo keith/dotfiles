@@ -18,6 +18,7 @@ sudo apt-get update
 
 sudo apt install -y \
   ansifilter \
+  autoconf \
   bash \
   build-essential \
   cmake \
@@ -36,6 +37,7 @@ sudo apt install -y \
   jq \
   kitware-archive-keyring \
   libedit-dev \
+  liblzma-dev \
   libssl-dev \
   ncurses-term \
   netcat \
