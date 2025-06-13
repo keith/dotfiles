@@ -2,15 +2,11 @@
 
 from pathlib import Path
 import functools
-import os
 import re
 import subprocess
 import sys
 
-_BASE = (
-    Path(os.environ["DOTFILES"])
-    / "../bazelbuild/bazel-central-registry/modules"
-)
+_BASE = Path.home() / "dev/bazelbuild/bazel-central-registry/modules"
 
 
 # https://github.com/bazelbuild/bazel-central-registry/blob/72637fe36c32613f039893fe821b1d5a20935401/tools/registry.py#L79
