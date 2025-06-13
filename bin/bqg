@@ -2,4 +2,7 @@
 
 set -euo pipefail
 
-exec bazel query ... | grep "$@"
+readonly name=$1
+shift
+
+exec bazel query "attr(name, '$name', ...)" "$@"
