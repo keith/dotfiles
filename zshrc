@@ -2,10 +2,8 @@
 export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
 if [[ $OSTYPE != darwin* ]]; then
   export BREW_PREFIX=/home/linuxbrew/.linuxbrew
-elif [[ $(arch) == arm64* ]]; then
-  export BREW_PREFIX=/opt/homebrew
 else
-  export BREW_PREFIX=/usr/local
+  export BREW_PREFIX=/opt/homebrew
 fi
 
 # temporary workaround for https://stackoverflow.com/questions/15454174/how-can-a-shell-function-know-if-it-is-running-within-a-virtualenv#comment31587975_15454284
