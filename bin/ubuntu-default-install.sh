@@ -11,6 +11,12 @@ wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
 echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" \
   | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
 
+# https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+out=$(mktemp) && wget -nv -O"$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+  && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+  && sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+  && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+
 sudo apt-add-repository -y ppa:git-core/ppa
 sudo add-apt-repository -y ppa:longsleep/golang-backports
 
