@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+
+from typing import Tuple
+import subprocess
+import sys
+
+
+def _changed_files() -> list[str]:
+    output = subprocess.check_output(
+        ["git", "diff", "--name-only", "--cached"], text=True
+    )
+    return output.strip().splitlines()
+
+
+def _get_tag(line: str) -> Tuple[str, str]:
+    if line.startswith("["):
+        return "[" + line.split("]")[0][1:].strip() + "]", line
+    elif ":" in line:
+        return line.split(":")[0].strip() + ":", line
+    return "", ""
+
+
+def _tag_for_file(file: str) -> Tuple[str, str]:
+    output = subprocess.check_output(
+        ["git", "log", "--pretty=format:%s", "-1", "--", file], text=True
+    ).strip()
+    return _get_tag(output)
+
+
+def _main(commit_args: list[str]) -> None:
+    tags: set[str] = set()
+    messages: set[str] = set()
+    for file in _changed_files():
+        tag, message = _tag_for_file(file)
+        if tag:
+            tags.add(tag)
+            messages.add(message)
+
+    prefix = ""
+    if len(tags) == 1:
+        prefix = next(iter(tags)) + " "
+    elif len(tags) > 1:
+        try:
+            selected_line = subprocess.check_output(
+                ["fzy"], input="\n".join(sorted(messages)).encode()
+            ).decode()
+        except subprocess.CalledProcessError:
+            sys.exit(1)
+
+        tag, _ = _get_tag(selected_line)
+        prefix = tag + " "
+
+    code = subprocess.Popen(
+        ["git", "commit", "--edit", "-m", prefix] + commit_args
+    ).wait()
+    if code != 0:
+        raise SystemExit("error: failed to commit")
+
+
+if __name__ == "__main__":
+    _main(sys.argv[1:])
