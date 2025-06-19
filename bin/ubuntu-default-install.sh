@@ -5,6 +5,9 @@ set -euo pipefail
 sudo apt-get update
 sudo apt-get install -y ca-certificates gpg wget
 
+curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
+echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
+
 wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
   | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
 
@@ -65,7 +68,8 @@ sudo apt install -y \
   urlview \
   vim \
   zip \
-  zsh
+  zsh \
+  zulu24-jdk
 
 sudo rm -f /usr/share/keyrings/kitware-archive-keyring.gpg
 sudo apt autoremove -y
