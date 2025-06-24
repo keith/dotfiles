@@ -14,34 +14,34 @@ fi
 
 if [[ -n "${DEV:-}" ]]; then
   if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+    BAZEL_REAL="$DOTFILES/../../bazelbuild/bazel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
-  exec "$DOTFILES/../bazelbuild/bazel/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../../bazelbuild/bazel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEV2:-}" ]]; then
   if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+    BAZEL_REAL="$DOTFILES/../../bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
-  exec "$DOTFILES/../bazelbuild/bazel2/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../../bazelbuild/bazel2/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEV3:-}" ]]; then
   if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel3/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+    BAZEL_REAL="$DOTFILES/../../bazelbuild/bazel3/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
-  exec "$DOTFILES/../bazelbuild/bazel3/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../../bazelbuild/bazel3/bazel-bin/src/bazel-dev" "$@"
 fi
 
 if [[ -n "${DEVREL:-}" ]]; then
   if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+    BAZEL_REAL="$DOTFILES/../../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
   fi
 
-  exec "$DOTFILES/../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" "$@"
+  exec "$DOTFILES/../../bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" "$@"
 fi
 
 bazelisk_bin=bazelisk
