@@ -45,8 +45,11 @@ sudo apt install -y \
   htop \
   jq \
   kitware-archive-keyring \
+  libbz2-dev \
   libedit-dev \
   liblzma-dev \
+  libreadline-dev \
+  libsqlite3-dev \
   libssl-dev \
   ncurses-term \
   netcat \
