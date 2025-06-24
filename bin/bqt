@@ -25,6 +25,11 @@ if [[ $(wc -l < "$patterns") -ne 1 ]]; then
   if [[ "$answer" != "Y" && "$answer" != "y" && "$answer" != "" ]]; then
     exit 1
   fi
+
+  args=(--target_pattern_file="$patterns")
+else
+  args=("$(cat "$patterns")")
 fi
 
-bazel test "$@" --target_pattern_file="$patterns"
+set -x
+bazel test "$@" "${args[@]}"
