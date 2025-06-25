@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+readonly name=$1
+shift
+
+patterns=$(mktemp)
+
+bazel query "attr(name, '$name', ...)" "$@" > "$patterns"
+
+if [[ ! -s $patterns ]]; then
+  echo "error: no targets matching '$name'" >&2
+  exit 1
+fi
+
+if [[ $(wc -l < "$patterns") -ne 1 ]]; then
+  echo "error: more than one target matches '$name':"
+  echo
+  cat "$patterns"
+  exit 1
+fi
+
+args=("$(cat "$patterns")")
+set -x
+bazel run "$@" "${args[@]}"
