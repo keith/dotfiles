@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# bazelbuild/bazel-skylib
+readonly repo="$1"
+repo_name="$(basename "$repo")"
+readonly repo_with_underscores="${repo_name//-/_}"
+
+readonly clone_url="https://github.com/$repo"
+mktemp_dir="$(mktemp -d)"
+trap 'rm -rf "$mktemp_dir"' EXIT
+
+git clone --depth 1 "$clone_url" "$mktemp_dir/repo"
+sha="$(git -C "$mktemp_dir/repo" rev-parse HEAD)"
+
+readonly archive_url="$clone_url/archive/$sha.tar.gz"
+curl --location --fail --output "$mktemp_dir/archive.tar.gz" "$archive_url"
+integrity="$(openssl dgst -sha256 -binary "$mktemp_dir/archive.tar.gz" | openssl base64 -A | sed 's/^/sha256-/')"
+
+cat <<EOF
+archive_override(
+    module_name = "$repo_with_underscores",
+    integrity = "$integrity",
+    strip_prefix = "$repo_name-$sha",
+    urls = [
+        "$archive_url",
+    ],
+)
+EOF
