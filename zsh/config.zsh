@@ -1,4 +1,4 @@
-fpath=($DOTFILES/functions $HOME/.nix-profile/share/zsh/site-functions $BREW_PREFIX/share/zsh/site-functions $BREW_PREFIX/share/zsh-completions $BREW_PREFIX/share/zsh/functions $fpath)
+fpath=($DOTFILES/functions $BREW_PREFIX/share/zsh/site-functions $BREW_PREFIX/share/zsh-completions $BREW_PREFIX/share/zsh/functions $fpath)
 autoload -Uz $DOTFILES/functions/*(:t)
 
 if [[ -d $HOME/functions ]]; then

@@ -42,10 +42,6 @@ fi
 
 echo $line_count > ~/.hist_line_count
 
-if [[ -e "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]]; then
-  source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-fi
-
 if command -v atuin > /dev/null; then
   eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 fi
