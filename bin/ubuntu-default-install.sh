@@ -57,6 +57,7 @@ sudo apt install -y \
   parallel \
   patchelf \
   pax-utils \
+  protobuf-compiler \
   python3 \
   python3-pip \
   python3-venv \
