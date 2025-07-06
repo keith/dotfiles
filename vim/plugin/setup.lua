@@ -1,19 +1,8 @@
 -- vim.lsp.set_log_level("debug")
 
 vim.o.termguicolors = false
-
-local function on_attach(client, bufnr)
-  if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(true, { bufnr })
-  end
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = {
-    prefix = "",
-    spacing = 2,
-  },
-})
+vim.lsp.inlay_hint.enable()
+vim.diagnostic.config { virtual_text = true }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -24,6 +13,10 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     "additionalTextEdits",
   },
 }
+
+vim.lsp.config("*", {
+  capabilities = capabilities,
+})
 
 local cmp = require "cmp"
 cmp.setup {
@@ -94,7 +87,6 @@ cmp.setup.filetype("gitconfig", { sources = {} })
 cmp.setup.filetype("gitrebase", { sources = {} })
 cmp.setup.filetype("markdown", { sources = {} })
 
-local nvim_lsp = require "lspconfig"
 local servers = {
   "bashls",
   "bazelrc_lsp",
@@ -102,64 +94,54 @@ local servers = {
   "cmake",
   "gopls",
   "graphql",
+  "lua_ls",
   "mojo",
+  "pyright",
   "rust_analyzer",
+  "sourcekit",
   "starpls",
   "tblgen_lsp_server",
   "terraformls",
+  "ty",
   "zls",
 }
 for _, server in ipairs(servers) do
-  local lsp = require "lspconfig"
-  if vim.fn.executable(lsp[server].document_config.default_config.cmd[1]) == 1 then
-    nvim_lsp[server].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-    }
-  end
+  vim.lsp.enable(server)
 end
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
-require("lspconfig").lua_ls.setup {
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+vim.lsp.config("lua_ls", {
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if
+        path ~= vim.fn.stdpath "config"
+        and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+      then
+        return
+      end
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+      runtime = {
+        version = "LuaJIT",
+        path = {
+          "lua/?.lua",
+          "lua/?/init.lua",
+        },
+      },
       workspace = {
         checkThirdParty = false,
         library = {
           vim.env.VIMRUNTIME,
         },
       },
-      telemetry = { enable = false },
-      hint = { enable = true },
-    },
-  },
-}
-
--- https://github.com/microsoft/pyright/issues/128
-require("lspconfig").pyright.setup {
-  capabilities = capabilities,
-  filetypes = { "python" },
-  on_attach = on_attach,
+    })
+  end,
   settings = {
-    python = {
-      analysis = {
-        -- autoSearchPaths = true,
-        -- useLibraryCodeForTypes = true,
-        diagnosticMode = "openFilesOnly",
-      },
-    },
+    Lua = {},
   },
-}
-
-require("lspconfig").sourcekit.setup {
-  capabilities = capabilities,
-  filetypes = { "swift" },
-  on_attach = on_attach,
-}
-
-vim.lsp.enable "ty"
+})
 
 local function has_highlights(lang)
   local supported = {
