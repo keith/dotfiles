@@ -159,6 +159,8 @@ require("lspconfig").sourcekit.setup {
   on_attach = on_attach,
 }
 
+vim.lsp.enable "ty"
+
 local function has_highlights(lang)
   local supported = {
     c = true,
