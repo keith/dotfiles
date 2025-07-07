@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+cd /tmp
+readonly nvim_version=0.11.2
+curl -L https://github.com/neovim/neovim/archive/refs/tags/v$nvim_version.tar.gz | tar zxf -
+cd neovim-$nvim_version
+make CMAKE_BUILD_TYPE=Release
+sudo make install

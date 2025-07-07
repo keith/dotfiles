@@ -86,12 +86,8 @@ pip3 install cmake-language-server
 pip3 install neovim
 pip3 install pyright
 
-cd /tmp
-readonly nvim_version=0.10.2
-curl -L https://github.com/neovim/neovim/archive/refs/tags/v$nvim_version.tar.gz | tar zxf -
-cd neovim-$nvim_version
-make CMAKE_BUILD_TYPE=Release
-sudo make install
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+"$script_dir"/install-nvim
 
 cd /tmp
 git clone https://github.com/keith/tag
