@@ -7,7 +7,7 @@ shift
 
 patterns=$(mktemp)
 
-bazel query "attr(name, '$name', ...)" "$@" > "$patterns"
+bazel query "attr(name, '$name', ...)" > "$patterns"
 
 if [[ ! -s $patterns ]]; then
   echo "error: no targets matching '$name'" >&2
@@ -21,6 +21,17 @@ if [[ $(wc -l < "$patterns") -ne 1 ]]; then
   exit 1
 fi
 
-args=("$(cat "$patterns")")
+# If the user passes --, pass that and all other args after any bazel args +
+# the target name
+bazel_args=("$(cat "$patterns")")
+for arg in "$@"; do
+  if [[ $arg == -- ]]; then
+    break
+  else
+    bazel_args+=("$arg")
+    shift
+  fi
+done
+
 set -x
-bazel run "$@" "${args[@]}"
+bazel run "${bazel_args[@]}" "$@"
