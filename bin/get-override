@@ -2,6 +2,11 @@
 
 set -euo pipefail
 
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <bazelbuild/bazel-skylib>" >&2
+  exit 1
+fi
+
 # bazelbuild/bazel-skylib
 readonly repo="$1"
 repo_name="$(basename "$repo")"
