@@ -15,15 +15,14 @@ if [[ ! -s $patterns ]]; then
 fi
 
 if [[ $(wc -l < "$patterns") -ne 1 ]]; then
-  echo "error: more than one target matches '$name':"
-  echo
-  cat "$patterns"
-  exit 1
+  target=$(fzf < "$patterns")
+  bazel_args=("$target")
+else
+  bazel_args=("$(cat "$patterns")")
 fi
 
 # If the user passes --, pass that and all other args after any bazel args +
 # the target name
-bazel_args=("$(cat "$patterns")")
 for arg in "$@"; do
   if [[ $arg == -- ]]; then
     break
