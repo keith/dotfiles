@@ -7,7 +7,7 @@ shift
 
 patterns=$(mktemp)
 
-bazel query "attr(name, '$name', tests(...))" "$@" > "$patterns"
+bazel query "attr(name, '$name', tests(...))" > "$patterns"
 
 if [[ ! -s $patterns ]]; then
   echo "error: no tests matching '$name'" >&2
