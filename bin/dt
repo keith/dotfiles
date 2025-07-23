@@ -19,4 +19,18 @@ if [[ ! -r "$2" ]]; then
   exit 1
 fi
 
-d <("${args[@]}" 2>&1 "$1") <("${args[@]}" 2>&1 "$2")
+output1=$(mktemp)
+output2=$(mktemp)
+trap 'rm -rf "$output1" "$output2"' EXIT
+
+if ! "${args[@]}" 2>&1 >"$output1" "$1"; then
+  cat "$output1" >&2
+  exit 1
+fi
+
+if ! "${args[@]}" 2>&1 >"$output2" "$2"; then
+  cat "$output2" >&2
+  exit 1
+fi
+
+d "$output1" "$output2"
