@@ -6,7 +6,8 @@ import re
 import subprocess
 import sys
 
-_BASE = Path.home() / "dev/bazelbuild/bazel-central-registry/modules"
+_REPO = Path.home() / "dev/bazelbuild/bazel-central-registry"
+_BASE = _REPO / "modules"
 
 
 # https://github.com/bazelbuild/bazel-central-registry/blob/72637fe36c32613f039893fe821b1d5a20935401/tools/registry.py#L79
@@ -61,8 +62,14 @@ class Version:
         return self.prerelease < other.prerelease
 
 
-subprocess.check_call(["git", "-C", _BASE, "checkout", "main"])
-subprocess.check_call(["git", "-C", _BASE, "pull"])
+if not _REPO.exists():
+    _REPO.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.check_call(
+        ["git", "clone", "https://github.com/bazelbuild/bazel-central-registry", _REPO]
+    )
+
+subprocess.check_call(["git", "-C", _REPO, "checkout", "main"])
+subprocess.check_call(["git", "-C", _REPO, "pull"])
 
 for module in sys.argv[1:]:
     module_dir = (_BASE / module).resolve()
@@ -72,7 +79,9 @@ for module in sys.argv[1:]:
             if module in path.name:
                 loosely_matching.append(path.name)
         matches = ", ".join(sorted(loosely_matching))
-        raise SystemExit(f"{module_dir} does not exist, did you mean one of these: {matches}")
+        raise SystemExit(
+            f"{module_dir} does not exist, did you mean one of these: {matches}"
+        )
 
     versions = [v for v in module_dir.iterdir() if v.is_dir()]
     versions.sort(key=Version, reverse=True)
