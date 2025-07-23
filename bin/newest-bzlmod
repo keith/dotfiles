@@ -76,7 +76,7 @@ for module in sys.argv[1:]:
 
     versions = [v for v in module_dir.iterdir() if v.is_dir()]
     versions.sort(key=Version, reverse=True)
-    print(module.lower(), ", ".join(v.name for v in versions[:5]))
+    print(module.lower(), ", ".join(v.name for v in versions[:10]))
     newest_version = versions[0]
     print(
         f"""\
