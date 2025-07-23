@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 <bazelbuild/bazel-skylib>" >&2
+  exit 1
+fi
+
+# bazelbuild/bazel-skylib
+readonly repo="$1"
+repo_name="$(basename "$repo")"
+
+readonly clone_url="https://github.com/$repo"
+mktemp_dir="$(mktemp -d)"
+trap 'rm -rf "$mktemp_dir"' EXIT
+
+git clone --depth 1 "$clone_url" "$mktemp_dir/repo"
+commit_sha="$(git -C "$mktemp_dir/repo" rev-parse HEAD)"
+
+readonly archive_url="$clone_url/archive/$commit_sha.tar.gz"
+curl --location --fail --output "$mktemp_dir/archive.tar.gz" "$archive_url"
+sha256="$(shasum -a 256 ""$mktemp_dir/archive.tar.gz"" | cut -d " " -f1 | xargs)"
+
+
+cat <<EOF
+http_archive(
+    name = "$repo_name",
+    sha256 = "$sha256",
+    strip_prefix = "$repo_name-$commit_sha",
+    urls = [
+        "$archive_url",
+    ],
+)
+EOF
