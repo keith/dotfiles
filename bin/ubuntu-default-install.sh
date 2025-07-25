@@ -51,6 +51,7 @@ sudo apt install -y \
   libreadline-dev \
   libsqlite3-dev \
   libssl-dev \
+  lsof \
   ncurses-term \
   netcat \
   ninja-build \
@@ -63,6 +64,7 @@ sudo apt install -y \
   python3-venv \
   ripgrep \
   speedtest-cli \
+  strace \
   sudo \
   systemd-coredump \
   tmux \
