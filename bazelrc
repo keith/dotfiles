@@ -34,6 +34,7 @@ build:b --sandbox_debug
 build:b --incompatible_sandbox_hermetic_tmp=false
 
 build:dyn --internal_spawn_scheduler --spawn_strategy=dynamic,remote,worker,sandboxed,local
+build:no-dyn --spawn_strategy=remote,worker,sandboxed,standalone
 
 build:krc --bes_backend=grpcs://remote.buildbuddy.io
 build:krc --bes_results_url=https://app.buildbuddy.io/invocation/
