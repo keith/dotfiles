@@ -12,6 +12,7 @@ files=(\
   css \
   ctags \
   curlrc \
+  gdbinit \
   gemrc \
   ghci \
   git_template \
