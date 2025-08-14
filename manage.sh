@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 files=(\
   agignore \
   bash_profile \
@@ -68,6 +70,7 @@ new_path() {
 # Links the passed filename to its new location
 link() {
   local filename="$1"
+  local overwrite="$2"
 
   if [[ ! -e "$filename" ]]; then
     echo "$filename doesn't exist"
@@ -80,6 +83,14 @@ link() {
     ln -s "$PWD/$filename" "$target"
   elif [[ ! "$PWD/$filename" -ef "$target" ]]; then
     echo "warning: $target exists and is not linked" >&2
+
+    if [[ "$overwrite" == "--overwrite" ]]; then
+      dir=/tmp/manage-backup
+      echo "warning: overwriting $target, moving original to $dir" >&2
+      mkdir -p "$dir"
+      mv "$target" "$dir"
+      ln -s "$PWD/$filename" "$target"
+    fi
   fi
 }
 
@@ -91,14 +102,6 @@ unlink() {
     echo "Removing $target"
     rm "$target"
   fi
-}
-
-# Loops through and link all files without links
-install_links() {
-  for file in "${files[@]}"
-  do
-    link "$file"
-  done
 }
 
 # Function to remove all linked files
@@ -116,13 +119,16 @@ die() {
 }
 
 # Make sure there is 1 command line argument
-if [[ $# != 1 ]]; then
+if [[ $# -lt 2 ]]; then
   die
 fi
 
 # Check whether the user is installing or removing
 if [[ $1 == "install" ]]; then
-  install_links
+  for file in "${files[@]}"
+  do
+    link "$file" "${2:-}"
+  done
 
   # It's required for this to have these permissions
   chmod 0600 ~/.msmtprc
