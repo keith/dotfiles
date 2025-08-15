@@ -119,7 +119,7 @@ die() {
 }
 
 # Make sure there is 1 command line argument
-if [[ $# -lt 2 ]]; then
+if [[ $# -ne 1 && $# -ne 2 ]]; then
   die
 fi
 
