@@ -1,0 +1,3 @@
+# Silence license on gdb launch
+# https://stackoverflow.com/a/71476647/902968
+set startup-quietly on

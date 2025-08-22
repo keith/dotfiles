@@ -14,6 +14,7 @@ files=(\
   css \
   ctags \
   curlrc \
+  gdbearlyinit \
   gdbinit \
   gemrc \
   ghci \
