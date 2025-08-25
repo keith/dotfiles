@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Named separately and handled in the g alias because you cannot override default command names.
+# https://stackoverflow.com/questions/3538774/is-it-possible-to-override-git-command-by-git-alias
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  exec git stash
+elif [[ -f "${1:-}" ]]; then
+  exec git stash -- "$@"
+elif [[ "$1" == "poop" ]]; then # Don't @ me
+  shift
+  exec git stash pop "$@"
+else
+  exec git stash "$@"
+fi

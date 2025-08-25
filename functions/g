@@ -1,6 +1,9 @@
 if [[ $1 == "s" ]]; then
   shift
   tag git-status "$@"
+elif [[ $1 == "stash" ]]; then
+  shift
+  git-mystash "$@"
 else
   git "$@"
 fi
