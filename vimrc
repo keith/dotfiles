@@ -58,20 +58,21 @@ if has('nvim')
   let s:subdir = "nvim"
 endif
 
+" https://stackoverflow.com/a/15317146/902968
 " Save backup files, storage is cheap, losing changes is sad
 set backup
-let &backupdir=$HOME . '/.tmp/' . s:subdir . '/backup'
+let &backupdir=$HOME . '/.tmp/' . s:subdir . '/backup//'
 call s:EnsureDirectory(&backupdir)
 
 " Write undo tree to a file to resume from next time the file is opened
 if has('persistent_undo')
   set undolevels=2000            " The number of undo items to remember
   set undofile                   " Save undo history to files locally
-  let &undodir=$HOME . '/.tmp/' . s:subdir . '/undo'
+  let &undodir=$HOME . '/.tmp/' . s:subdir . '/undo//'
   call s:EnsureDirectory(&undodir)
 endif
 
-let &directory=$HOME . '/.tmp/' . s:subdir . '/swap'
+let &directory=$HOME . '/.tmp/' . s:subdir . '/swap//'
 call s:EnsureDirectory(&directory)
 
 let &viewdir=$HOME . '/.tmp/' . s:subdir . '/view'
