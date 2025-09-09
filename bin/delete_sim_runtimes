@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import json
+import subprocess
+
+
+def _main():
+    output = subprocess.check_output("xcrun simctl runtime list --json".split())
+    json_output = json.loads(output)
+    deletable_ids = {
+        runtime["identifier"]
+        for runtime in json_output.values()
+        if runtime["deletable"]
+    }
+    if not deletable_ids:
+        raise SystemExit("warning: no runtimes to delete")
+
+    for id in deletable_ids:
+        cmd = f"xcrun simctl runtime delete {id}"
+        subprocess.check_call(cmd.split())
+
+    print("Remaining runtimes:")
+    subprocess.check_call("xcrun simctl runtime list".split())
+
+
+if __name__ == "__main__":
+    _main()
