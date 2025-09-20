@@ -107,6 +107,7 @@ def main(args):
     # except StopIteration:
     #     raise SystemExit(f"error: no remote named: {tracked_remote}")
 
+    remote_url = remote_url.rstrip("/")
     if not args.argument:
         url = remote_url
     elif os.path.exists(args.argument):
