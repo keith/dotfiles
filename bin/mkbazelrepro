@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -n "$(ls)" ]]; then
+  echo "error: Current directory is not empty."
+  exit 1
+fi
+
+newest-bzlmod apple_support rules_cc > MODULE.bazel
+
+cat > BUILD.bazel <<EOF
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "lib",
+    srcs = ["lib.c"],
+    hdrs = ["lib.h"],
+)
+
+cc_binary(
+    name = "main_with_dep",
+    srcs = ["main_with_dep.c"],
+    deps = [":lib"],
+)
+
+cc_binary(
+    name = "main",
+    srcs = ["main.c"],
+)
+EOF
+
+cat > lib.h <<EOF
+void foo();
+EOF
+
+cat > lib.c <<EOF
+#include <stdio.h>
+#include "lib.h"
+void foo() {
+    printf("Hello from foo()\\n");
+}
+EOF
+
+cat > main_with_dep.c <<EOF
+#include "lib.h"
+int main() {
+    foo();
+    return 0;
+}
+EOF
+
+cat > main.c <<EOF
+int main() {
+    return 42;
+}
+EOF

@@ -65,11 +65,12 @@ class Version:
 if not _REPO.exists():
     _REPO.parent.mkdir(parents=True, exist_ok=True)
     subprocess.check_call(
-        ["git", "clone", "https://github.com/bazelbuild/bazel-central-registry", _REPO]
+        ["git", "clone", "https://github.com/bazelbuild/bazel-central-registry", _REPO],
+        stdout=sys.stderr,
     )
 
-subprocess.check_call(["git", "-C", _REPO, "checkout", "main"])
-subprocess.check_call(["git", "-C", _REPO, "pull"])
+subprocess.check_call(["git", "-C", _REPO, "checkout", "main"], stdout=sys.stderr)
+subprocess.check_call(["git", "-C", _REPO, "pull"], stdout=sys.stderr)
 
 for module in sys.argv[1:]:
     module_dir = (_BASE / module).resolve()
@@ -85,9 +86,6 @@ for module in sys.argv[1:]:
 
     versions = [v for v in module_dir.iterdir() if v.is_dir()]
     versions.sort(key=Version, reverse=True)
-    print(module.lower(), ", ".join(v.name for v in versions[:10]))
+    print(module.lower(), ", ".join(v.name for v in versions[:10]), file=sys.stderr)
     newest_version = versions[0]
-    print(
-        f"""\
-bazel_dep(name = "{module}", version = "{newest_version.name}")"""
-    )
+    print(f'bazel_dep(name = "{module}", version = "{newest_version.name}")')
