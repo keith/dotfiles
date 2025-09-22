@@ -19,6 +19,7 @@ configurability
 crossposting
 CSS
 debuggability
+debuggable
 deduplicated
 deduplicating
 demangle
@@ -67,6 +68,7 @@ plists
 plugin
 plugins
 Podfile
+prebuilt
 precompiled
 prefill
 productionize
