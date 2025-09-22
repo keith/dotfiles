@@ -9,7 +9,7 @@ while IFS= read -r -d '' filename
 do
   echo "a: $filename"
   sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
-  contents+="        \"$(basename "$filename")\": \"$sha\",\n"
+  contents+="        \"${filename#overlay/}\": \"$sha\",\n"
 done < <(find "overlay" -not -type d -print0 | sort -z)
 
 if [[ -z "$contents" ]]; then
