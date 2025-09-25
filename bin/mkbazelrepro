@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+dir="${1:-}"
+if [[ -n "$dir" ]]; then
+  mkdir -p "$dir"
+  cd "$dir"
+fi
+
 if [[ -n "$(ls)" ]]; then
   echo "error: Current directory is not empty."
   exit 1
