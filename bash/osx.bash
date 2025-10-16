@@ -29,8 +29,6 @@ alias qcleanup="sqlite3 \$HOME/Library/Preferences/com.apple.LaunchServices.Quar
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 
-alias hopper=hopperv4
-
 # Xcode commands which are not linked
 alias simctl="xcrun simctl"
 
