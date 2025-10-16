@@ -7,8 +7,27 @@
 # Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the full
 # path to your home directory.
 
-# Default imports for easier repl usage
-import glob, fnmatch, re, os.path, pathlib, sys, subprocess  # noqa
+import os.path
+
+_JSON_BUILTINS = {
+    "true": True,
+    "false": False,
+    "null": None,
+}
+
+
+# https://mamot.fr/@mdk/115342681772436494
+class _BuiltinsWrapper(dict):
+    __slots__ = ()
+
+    def __missing__(self, key):
+        try:
+            return __import__(key)
+        except ImportError:
+            raise NameError(f"name {key!r} is not defined")
+
+
+__builtins__ = _BuiltinsWrapper(__import__("builtins").__dict__ | _JSON_BUILTINS)
 
 
 def _main():
@@ -17,15 +36,6 @@ def _main():
     path = os.path.expanduser("~/.pyhistory")
     if os.path.exists(path):
         readline.read_history_file(path)
-
-    try:
-        import __builtin__
-    except ImportError:
-        import builtins as __builtin__
-
-    setattr(__builtin__, "true", True)
-    setattr(__builtin__, "false", False)
-    setattr(__builtin__, "null", None)
 
     def save_history():
         import readline
