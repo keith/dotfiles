@@ -21,13 +21,16 @@ class _BuiltinsWrapper(dict):
     __slots__ = ()
 
     def __missing__(self, key):
+        if value := __import__("builtins").__dict__.get(key):
+            return value
+
         try:
             return __import__(key)
         except ImportError:
             raise NameError(f"name {key!r} is not defined")
 
 
-__builtins__ = _BuiltinsWrapper(__import__("builtins").__dict__ | _JSON_BUILTINS)
+__builtins__ = _BuiltinsWrapper(_JSON_BUILTINS)
 
 
 def _main():
