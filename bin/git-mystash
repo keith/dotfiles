@@ -9,6 +9,9 @@ if [[ $# -eq 0 ]]; then
   exec git stash
 elif [[ -f "${1:-}" ]]; then
   exec git stash -- "$@"
+elif [[ "$1" == "dorp" ]]; then # Don't @ me
+  shift
+  exec git stash drop "$@"
 elif [[ "$1" == "poop" ]]; then # Don't @ me
   shift
   exec git stash pop "$@"
