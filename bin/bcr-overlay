@@ -7,6 +7,10 @@ json="{\n"
 contents=""
 while IFS= read -r -d '' filename
 do
+  if [[ "$filename" == */MODULE.bazel.lock ]]; then
+    continue
+  fi
+
   echo "a: $filename"
   sha="$(openssl dgst -sha256 -binary "$filename" | openssl base64 -A | sed 's/^/sha256-/')"
   contents+="        \"${filename#overlay/}\": \"$sha\",\n"
