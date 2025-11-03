@@ -8,6 +8,7 @@
 .black
 .ccls-cache
 .clangd
+.claude/settings.local.json
 .clwb
 .DS_Store
 .hgignore
@@ -21,7 +22,6 @@
 .pytest_cache
 .python-version
 .rgignore
-.ignore
 .ropeproject
 .rustfmt
 .Spotlight-V100
