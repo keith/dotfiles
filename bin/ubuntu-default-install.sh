@@ -52,6 +52,8 @@ sudo apt install -y \
   libsqlite3-dev \
   libssl-dev \
   lsof \
+  manpages \
+  manpages-dev \
   ncurses-term \
   netcat \
   ninja-build \
@@ -75,6 +77,7 @@ sudo apt install -y \
   vim \
   zip \
   zsh \
+  zstd \
   zulu24-jdk
 
 sudo rm -f /usr/share/keyrings/kitware-archive-keyring.gpg
