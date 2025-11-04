@@ -12,7 +12,7 @@ config_key="$(git rootworktreehash).main-branch"
 worktree_main_branch="$(git config --local "$config_key" || true)"
 
 main_branch=$(git main-branch)
-git branch --merged "$main_branch" | grep -v "^[^ ]" | grep -v "$main_branch" | grep -v "${worktree_main_branch:-$main_branch}" | xargs -r -n 1 git branch -d
+git branch --merged "$main_branch" | grep -v "^[^ ]" | grep -v ks-main | grep -v "$main_branch" | grep -v "${worktree_main_branch:-$main_branch}" | xargs -r -n 1 git branch -d
 git branch -vv | grep -v "^[^ ]" | grep ": gone]" | awk '{ print $1 }' | xargs -r -n 1 git branch -D
 
 # Delete GitHub PR refs, you can always refect them
