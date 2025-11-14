@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+import signal
+import sys
+import tarfile
+import zipfile
+
+# Exit silently if output pipe (like `head`) is closed
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+
+
+def human_readable_size(size: float) -> str:
+    for unit in ["B", "K", "M", "G", "T", "P"]:
+        if size < 1024:
+            return f"{size:.1f}{unit}"
+        size /= 1024
+    return f"{size:.1f}E"
+
+
+def list_zip(zip_path: str) -> list[tuple[int, str]]:
+    with zipfile.ZipFile(zip_path, "r") as z:
+        files = [
+            (info.file_size, info.filename)
+            for info in z.infolist()
+            if not info.is_dir()
+        ]
+    return files
+
+
+def list_tar(tar_path: str) -> list[tuple[int, str]]:
+    with tarfile.open(tar_path, "r:*") as t:
+        files = [(m.size, m.name) for m in t.getmembers() if m.isfile()]
+    return files
+
+
+def list_archive(path: str) -> list[tuple[int, str]]:
+    if zipfile.is_zipfile(path):
+        return list_zip(path)
+    elif tarfile.is_tarfile(path):
+        return list_tar(path)
+    else:
+        raise ValueError(
+            "Unsupported archive format (must be .zip or .tar/.tar.gz/etc)"
+        )
+
+
+def main():
+    if len(sys.argv) != 2:
+        print(f"Usage: {sys.argv[0]} <archive.zip|archive.tar[.gz|.bz2|.xz]>")
+        sys.exit(1)
+
+    archive_path = sys.argv[1]
+    try:
+        files = list_archive(archive_path)
+    except ValueError as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    # largest -> smallest
+    files.sort(key=lambda x: x[0], reverse=True)
+
+    for size, name in files:
+        try:
+            print(f"{human_readable_size(size):>6}\t{name}")
+        except BrokenPipeError:
+            sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()
