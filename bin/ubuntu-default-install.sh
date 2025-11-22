@@ -55,7 +55,6 @@ sudo apt install -y \
   manpages \
   manpages-dev \
   ncurses-term \
-  netcat \
   ninja-build \
   parallel \
   patchelf \
