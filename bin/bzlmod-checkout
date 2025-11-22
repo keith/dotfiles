@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import argparse
+import functools
+import json
+import re
+import shutil
+import subprocess
+import sys
+
+_REPO = Path.home() / "dev/bazelbuild/bazel-central-registry"
+_BASE = _REPO / "modules"
+# https://github.com/curl/curl/releases/download/curl-8_11_0/curl-8.11.0.tar.gz
+_GITHUB_RELEASE_REGEX = re.compile(
+    r"https://github\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/releases/download/(?P<tag>[^/]+)/(?P<filename>.+)"
+)
+# https://github.com/wjakob/nanobind/archive/refs/tags/v2.9.2.tar.gz
+_GITHUB_TAG_REGEX = re.compile(
+    r"https://github\.com/(?P<owner>[^/]+)/(?P<repo>[^/]+)/archive/refs/tags/(?P<tag>[^/]+)\.tar\.gz"
+)
+
+
+# https://github.com/bazelbuild/bazel-central-registry/blob/72637fe36c32613f039893fe821b1d5a20935401/tools/registry.py#L79
+@functools.total_ordering
+class Version:
+    @functools.total_ordering
+    class Identifier:
+        def __init__(self, s):
+            if not s:
+                raise ValueError("identifier is empty")
+            self.val = int(s) if s.isnumeric() else s
+
+        def __eq__(self, other):
+            if type(self.val) != type(other.val):
+                return False
+            return self.val == other.val
+
+        def __lt__(self, other):
+            if type(self.val) != type(other.val):
+                return type(self.val) == int
+            return self.val < other.val
+
+    @staticmethod
+    def convert_to_identifiers(s):
+        if s == None:
+            return None
+        return [Version.Identifier(i) for i in s.split(".")]
+
+    def __init__(self, version_str: Path):
+        PATTERN = re.compile(
+            r"^([a-zA-Z0-9.]+)(?:-([a-zA-Z0-9.-]+))?(?:\+[a-zA-Z0-9.-]+)?$"
+        )
+        m = PATTERN.match(version_str.name)
+        if not m:
+            raise ValueError(f"`{version_str}` is not a valid version")
+        self.release = Version.convert_to_identifiers(m.groups()[0])
+        self.prerelease = Version.convert_to_identifiers(m.groups()[1])
+
+    def __eq__(self, other):
+        return (self.release, self.prerelease) == (
+            other.release,
+            other.prerelease,
+        )
+
+    def __lt__(self, other):
+        if self.release != other.release:
+            return self.release < other.release
+        if self.prerelease == None:
+            return False
+        if other.prerelease == None:
+            return True
+        return self.prerelease < other.prerelease
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "module",
+        type=str,
+        help="The module name in the bazel-central-registry to checkout",
+    )
+    parser.add_argument(
+        "--skip-download",
+        action="store_true",
+        help="Skip downloading and extracting the module, only apply patches and overlays",
+    )
+    return parser
+
+
+def _download(module: str, extract_dir: Path, url: str, strip_prefix: Path):
+    if extract_dir.exists():
+        # ask user if it should be removed
+        inp = input(f"Directory {extract_dir} already exists, remove it? [y/N] ")
+        if inp.lower() == "y":
+            shutil.rmtree(extract_dir)
+        else:
+            print("Not deleting, exiting")
+            sys.exit(1)
+
+    match = _GITHUB_RELEASE_REGEX.match(url) or _GITHUB_TAG_REGEX.match(url)
+    if match:
+        git_remote = "https://github.com/{owner}/{repo}.git".format(
+            owner=match.group("owner"), repo=match.group("repo")
+        )
+
+        subprocess.check_call(
+            [
+                "git",
+                "clone",
+                "--recursive",
+                "--depth",
+                "1",
+                "--branch",
+                match.group("tag"),
+                git_remote,
+                str(extract_dir),
+            ]
+        )
+    else:
+        print(f"Downloading {url} ...")
+        # TODO: Support more than just tar
+        download = f"/tmp/{module}_download.tar"
+        subprocess.check_call(["curl", "-L", "-o", download, url])
+
+        print(f"Extracting to {extract_dir} ...")
+        subprocess.check_call(
+            [
+                "tar",
+                "-xf",
+                download,
+                "-C",
+                str(extract_dir),
+                f"--strip-components={len(strip_prefix.parts)}",
+            ]
+        )
+
+        print(f"Module {module} extracted to {extract_dir}")
+
+        subprocess.check_call(["git", "-C", extract_dir, "init"])
+        subprocess.check_call(["git", "-C", extract_dir, "add", "-A"])
+        subprocess.check_call(["git", "-C", extract_dir, "commit", "-m", "init"])
+
+
+def _sync_bcr() -> None:
+    if not _REPO.exists():
+        _REPO.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.check_call(
+            [
+                "git",
+                "clone",
+                "https://github.com/bazelbuild/bazel-central-registry",
+                _REPO,
+            ],
+            stdout=sys.stderr,
+        )
+
+    subprocess.check_call(["git", "-C", _REPO, "checkout", "main"], stdout=sys.stderr)
+    subprocess.check_call(["git", "-C", _REPO, "pull"], stdout=sys.stderr)
+
+
+def _main(module: str, skip_download: bool) -> None:
+    module_dir = (_BASE / module).resolve()
+    if not module_dir.exists():
+        raise SystemExit(f"Module `{module}` does not exist in BCR")
+
+    versions = [v for v in module_dir.iterdir() if v.is_dir()]
+    versions.sort(key=Version, reverse=True)
+    newest_version = versions[0]
+    source = newest_version / "source.json"
+    with open(source) as f:
+        content = json.load(f)
+
+    url = content["url"]
+    strip_prefix = Path(content.get("strip_prefix", ""))
+
+    extract_dir = Path(f"/tmp/{module}")
+    if skip_download:
+        if not extract_dir.exists():
+            raise SystemExit(
+                f"error: extract directory {extract_dir} does not exist, cannot skip download"
+            )
+    else:
+        _download(module, extract_dir, url, strip_prefix)
+
+    patch_strip = content.get("patch_strip", 0)
+    patches = content.get("patches", [])
+    for patch in patches:
+        patch_path = newest_version / patch
+        print(f"Applying patch {patch_path} ...")
+        subprocess.check_call(
+            [
+                "git",
+                "-C",
+                str(extract_dir),
+                "am",
+                f"-p{patch_strip}",
+                str(patch_path),
+            ]
+        )
+
+    overlays = content.get("overlay", [])
+    overlay_dir = newest_version / "overlay"
+    for overlay_relative_path in overlays:
+        overlay_file = overlay_dir / overlay_relative_path
+        print(f"Applying overlay {overlay_relative_path} ...")
+        # symlink files into extract_dir
+        dest = extract_dir / overlay_file.relative_to(overlay_dir)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        if dest.exists():
+            if dest.resolve() != overlay_file.absolute():
+                raise SystemExit(
+                    f"erorr: {dest} already exists, cannot overlay, {dest.absolute()} != {overlay_file.absolute()}"
+                )
+        else:
+            dest.symlink_to(overlay_file)
+
+
+if __name__ == "__main__":
+    args = _build_parser().parse_args()
+    _sync_bcr()
+    _main(args.module, args.skip_download)
