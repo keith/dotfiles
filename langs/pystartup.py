@@ -8,6 +8,9 @@
 # path to your home directory.
 
 import os.path
+from pathlib import Path as _Path
+
+Path = _Path
 
 _JSON_BUILTINS = {
     "true": True,
