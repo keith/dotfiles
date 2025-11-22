@@ -186,14 +186,14 @@ def _main(module: str, skip_download: bool) -> None:
     patch_strip = content.get("patch_strip", 0)
     patches = content.get("patches", [])
     for patch in patches:
-        patch_path = newest_version / patch
+        patch_path = newest_version / "patches" / patch
         print(f"Applying patch {patch_path} ...")
         subprocess.check_call(
             [
                 "git",
                 "-C",
                 str(extract_dir),
-                "am",
+                "apply",
                 f"-p{patch_strip}",
                 str(patch_path),
             ]
