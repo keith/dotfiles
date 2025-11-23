@@ -272,8 +272,12 @@ nnoremap <C-o> <C-o>zz
 nnoremap <silent> <leader>4 :let @/=""<CR>
 
 " Don't automatically jump on search
-nnoremap * :keepjumps normal! mi*`i<CR>
-nnoremap # :keepjumps normal! mi#`i<CR>
+" https://vi.stackexchange.com/a/4055/123
+" - enable hlsearch without 'n' (I think '*' does that by default)
+" - search case sensitively even though 'ignorecase' is set
+" - don't move the cursor, don't jump to the next result
+nnoremap <silent> * :set hlsearch \| let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=1<CR>
+nnoremap <silent> # :set hlsearch \| let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=0<CR>
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
