@@ -64,11 +64,20 @@ if [[ -e ./bazelw ]]; then
   exec ./bazelw "$@"
 fi
 
-if repo_root=$(git rev-parse --show-toplevel 2>/dev/null); then
-  if [[ -e "$repo_root/bazelw" ]]; then
-    exec "$repo_root/bazelw" "$@"
+# /path/to/repo/bazelw
+# /path/to/repo/nested/dir/bazelw
+# /path/to/repo/nested/dir/tests/BUILD
+# ^ need to be able to run from here and pick up the closest bazelw
+dir="$PWD"
+while [[ "$dir" != "/" ]]; do
+  if [[ -e "$dir/bazelw" ]]; then
+    exec "$dir/bazelw" "$@"
+  elif [[ -e "$dir/.git" ]]; then
+    break
   fi
-fi
+
+  dir=$(dirname "$dir")
+done
 
 if command -v "$bazelisk_bin" > /dev/null; then
   exec "$bazelisk_bin" "$@"
