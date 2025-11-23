@@ -52,12 +52,7 @@ if [[ "${1:-}" == -x86 ]]; then
 fi
 
 if [[ -n "${USE_BAZEL_VERSION:-}" ]]; then
-  if command -v "$bazelisk_bin" > /dev/null; then
-    exec "$bazelisk_bin" "$@"
-  else
-    echo "error: no $bazelisk_bin found"
-    exit 1
-  fi
+  exec "$bazelisk_bin" "$@"
 fi
 
 if [[ -e ./bazelw ]]; then
@@ -79,9 +74,4 @@ while [[ "$dir" != "/" ]]; do
   dir=$(dirname "$dir")
 done
 
-if command -v "$bazelisk_bin" > /dev/null; then
-  exec "$bazelisk_bin" "$@"
-fi
-
-echo "error: no $bazelisk_bin found"
-exit 1
+exec "$bazelisk_bin" "$@"
