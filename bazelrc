@@ -2,6 +2,7 @@ common:orf --override_repository=rules_foreign_cc=~/dev/bazelbuild/rules_foreign
 common:ort --override_repository=xctestrunner=~/dev/bazelbuild/xctestrunner
 common:orcc --override_repository=rules_cc=~/dev/bazelbuild/rules_cc --override_module=rules_cc=~/dev/bazelbuild/rules_cc
 common:orgo --override_repository=io_bazel_rules_go=~/dev/bazelbuild/rules_go --override_module=rules_go=~/dev/bazelbuild/rules_go
+common:orgaz --override_module=gazelle=~/dev/bazelbuild/bazel-gazelle
 common:orplat --override_repository=platforms=~/dev/bazelbuild/platforms --override_module=platforms=~/dev/bazelbuild/platforms
 common:orpy --override_repository=rules_python=~/dev/bazelbuild/rules_python --override_module=rules_python=~/dev/bazelbuild/rules_python
 common:orpycross --override_repository=rules_pycross=~/dev/bazelbuild/rules_pycross --override_module=rules_pycross=~/dev/bazelbuild/rules_pycross
