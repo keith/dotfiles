@@ -1,0 +1,180 @@
+#!/usr/bin/env python3
+
+import argparse
+import subprocess
+import sys
+from pathlib import Path
+
+
+def run_git(repo_path, *args):
+    """Run a git command in the given repo and return stdout, or None on error."""
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repo_path)] + list(args),
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode == 0:
+            return result.stdout.strip()
+        return None
+    except Exception:
+        return None
+
+
+def get_commits_ahead(repo_path):
+    count = run_git(repo_path, "rev-list", "--count", "@{upstream}..HEAD")
+    if count:
+        return int(count)
+    return None
+
+
+def get_local_changes(repo_path):
+    staged = run_git(repo_path, "diff", "--cached", "--name-only")
+    staged_count = len(staged.splitlines()) if staged else 0
+
+    unstaged = run_git(repo_path, "diff", "--name-only")
+    unstaged_count = len(unstaged.splitlines()) if unstaged else 0
+
+    return staged_count + unstaged_count
+
+
+def get_untracked_files(repo_path):
+    """Get count of untracked files, excluding bazel-* symlinks."""
+    untracked = run_git(repo_path, "ls-files", "--others", "--exclude-standard")
+    if untracked:
+        files = [
+            f
+            for f in untracked.splitlines()
+            if not (f.startswith("bazel-") and (repo_path / f).is_symlink())
+        ]
+        return len(files)
+    return 0
+
+
+def get_stash_count(repo_path):
+    stashes = run_git(repo_path, "stash", "list")
+    if stashes:
+        return len(stashes.splitlines())
+    return 0
+
+
+def find_git_repos(base_path):
+    repos = []
+    warnings = []
+
+    for entry in sorted(base_path.iterdir()):
+        if not entry.is_dir():
+            continue
+
+        git_dir = entry / ".git"
+        if git_dir.exists():
+            repos.append(entry)
+        else:
+            # Check if it has any subdirectories that might be repos
+            has_subdirs = any(e.is_dir() for e in entry.iterdir())
+            if has_subdirs:
+                # Recurse into this directory
+                sub_repos, sub_warnings = find_git_repos(entry)
+                repos.extend(sub_repos)
+                warnings.extend(sub_warnings)
+            else:
+                # No .git and no subdirectories to check
+                warnings.append(entry)
+
+    return repos, warnings
+
+
+def analyze_repo(repo_path):
+    """Analyze a single repo and return its status."""
+    commits_ahead = get_commits_ahead(repo_path)
+    local_changes = get_local_changes(repo_path)
+    untracked = get_untracked_files(repo_path)
+    stashes = get_stash_count(repo_path)
+
+    return {
+        "path": repo_path,
+        "commits_ahead": commits_ahead,
+        "local_changes": local_changes,
+        "untracked": untracked,
+        "stashes": stashes,
+    }
+
+
+def format_value(value):
+    """Format a value for display, showing '-' for None/0."""
+    if value is None:
+        return " "
+    if value == 0:
+        return " "
+    return str(value)
+
+
+def print_table(repos_status, base_path):
+    headers = ["Repository", "Ahead", "Changes", "Untracked", "Stashes"]
+
+    rows = []
+    for status in repos_status:
+        rel_path = status["path"].relative_to(base_path)
+        rows.append(
+            [
+                str(rel_path),
+                format_value(status["commits_ahead"]),
+                format_value(status["local_changes"]),
+                format_value(status["untracked"]),
+                format_value(status["stashes"]),
+            ]
+        )
+
+    widths = [len(h) for h in headers]
+    for row in rows:
+        for i, cell in enumerate(row):
+            widths[i] = max(widths[i], len(cell))
+
+    header_line = " | ".join(h.ljust(widths[i]) for i, h in enumerate(headers))
+    separator = "-+-".join("-" * w for w in widths)
+    print(header_line)
+    print(separator)
+
+    for row in rows:
+        print(" | ".join(cell.ljust(widths[j]) for j, cell in enumerate(row)))
+        print(separator)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Check git repos for uncommitted changes"
+    )
+    parser.add_argument(
+        "directory",
+        nargs="?",
+        default=".",
+        help="Directory to scan (default: current directory)",
+    )
+    args = parser.parse_args()
+
+    base_path = Path(args.directory).expanduser().resolve()
+    if not base_path.is_dir():
+        print(f"Error: {base_path} is not a directory", file=sys.stderr)
+        sys.exit(1)
+
+    repos, warnings = find_git_repos(base_path)
+
+    for warning_path in warnings:
+        rel_path = warning_path.relative_to(base_path)
+        print(f"warning: {rel_path} is not a git repository", file=sys.stderr)
+
+    if not repos:
+        print("warning: no git repositories found")
+        sys.exit(1)
+
+    repos_status = [analyze_repo(repo) for repo in repos]
+    repos_status = [s for s in repos_status if any(s.values())]
+    if not repos_status:
+        print("All repositories are clean")
+        sys.exit(0)
+
+    print_table(repos_status, base_path)
+
+
+if __name__ == "__main__":
+    main()
