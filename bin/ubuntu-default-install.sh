@@ -54,6 +54,7 @@ sudo apt install -y \
   lsof \
   manpages \
   manpages-dev \
+  ncdu \
   ncurses-term \
   ninja-build \
   parallel \
