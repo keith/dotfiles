@@ -56,6 +56,7 @@ sudo apt install -y \
   manpages-dev \
   ncdu \
   ncurses-term \
+  netcat-openbsd \
   ninja-build \
   parallel \
   patchelf \
