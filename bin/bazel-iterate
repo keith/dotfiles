@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+import json
+import shutil
+
+
+_BUILD_EVENT_JSON = "/tmp/bazel-iterate-build-events.json"
+_FILTERED_TARGETS = "/tmp/bazel-iterate-filtered-targets.txt"
+
+
+def _get_failing_label() -> str:
+    build_event_file = _BUILD_EVENT_JSON
+    with open(build_event_file) as f:
+        build_events = [json.loads(line) for line in f if line.strip()]
+
+    for event in build_events:
+        target_completed = event.get("id", {}).get("targetCompleted", {})
+        if target_completed:
+            failure_detail = event.get("completed", {}).get("failureDetail", {})
+            if failure_detail:
+                return target_completed["label"]
+
+    raise SystemExit(
+        f"error: could not determine failing target, check {build_event_file}"
+    )
+
+
+def _remove_from_targets(label: str) -> None:
+    with open(_FILTERED_TARGETS) as f:
+        targets = f.readlines()
+
+    skipped = False
+    with open(_FILTERED_TARGETS, "w") as f:
+        for target in targets:
+            if target.strip() == label:
+                skipped = True
+            else:
+                f.write(target)
+
+    if skipped:
+        print(f"\nfiltered out target: {label}\n")
+    else:
+        print(
+            "\nwarning: could not find target to skip, it's likely a transitive dependency\n"
+        )
+
+
+def _main(file: str, args: list[str]) -> None:
+    shutil.copy(file, _FILTERED_TARGETS)
+
+    specific_target = None
+    while True:
+        command = (
+            ["bazel"]
+            + args
+            + [
+                f"--build_event_json_file={_BUILD_EVENT_JSON}",
+                "--color=yes",
+                "--curses=yes",
+            ]
+        )
+        if specific_target:
+            print(f"\nBuilding only target: {specific_target}\n")
+            command.append(specific_target)
+        else:
+            print("\nBuilding all targets in the filtered list\n")
+            command.append(f"--target_pattern_file={_FILTERED_TARGETS}")
+
+        result = subprocess.run(command)
+
+        if result.returncode == 0:
+            if specific_target:
+                print(f"\nTarget {specific_target} built successfully.\n")
+                specific_target = None
+                continue
+
+            print("\nAll done!\n")
+            break
+
+        specific_target = _get_failing_label()
+        print(f"\nDetermined failing target: {specific_target}")
+        while True:
+            response = (
+                input(
+                    f"Do you want to continue building only {specific_target}? [y/s/q]: "
+                )
+                .strip()
+                .lower()
+            )
+            if response == "y":
+                break
+            elif response == "q":
+                print("Exiting.")
+                sys.exit(1)
+            elif response == "s":
+                _remove_from_targets(specific_target)
+                specific_target = None
+                break
+
+
+if __name__ == "__main__":
+    if sys.argv[1] == "PARSE":
+        print(_get_failing_label())
+    else:
+        _main(sys.argv[1], sys.argv[2:])
