@@ -39,8 +39,11 @@ let g:sleuth_bzl_heuristics = 0
 let g:hdevtools_stack = 1
 
 let g:signify_sign_change = '~'
-nmap [g <plug>(signify-prev-hunk)
-nmap ]g <plug>(signify-next-hunk)
+" nmap [g <plug>(signify-prev-hunk)
+" nmap ]g <plug>(signify-next-hunk)
+
+nmap [g <plug>(GitGutterPrevHunk)
+nmap ]g <plug>(GitGutterNextHunk)
 
 nnoremap [d :lua vim.diagnostic.goto_prev()<CR>
 nnoremap ]d :lua vim.diagnostic.goto_next()<CR>

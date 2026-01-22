@@ -1,3 +1,4 @@
+airblade/vim-gitgutter
 cespare/vim-toml
 christoomey/vim-sort-motion
 christoomey/vim-tmux-navigator
@@ -16,7 +17,6 @@ llvm/llvm.vim
 LnL7/vim-nix
 ludovicchabant/vim-gutentags
 majutsushi/tagbar
-mhinz/vim-signify
 MTDL9/vim-log-highlighting
 neomake/neomake
 ojroques/vim-oscyank

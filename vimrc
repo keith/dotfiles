@@ -169,6 +169,12 @@ function! CurrentTag(...)
   endif
 endfunction
 
+" From ':h gitgutter'
+function! GitStatus()
+  let [a, m, r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
 " Status line setup (without plugins)
 set laststatus=2 " Always show the statusline
 " Left Side
@@ -182,6 +188,7 @@ set statusline+=%=
 " TODO: use treesitter here first if enabled? nvim_treesitter#statusline
 set statusline+=%{CurrentTag('%s\ <\ ','','')}
 set statusline+=%y
+set statusline+=\ %{GitStatus()}
 set statusline+=\ \ %P
 set statusline+=-%l
 set statusline+=-%c
