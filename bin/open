@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+set -x
 
 readonly sock="$HOME/.opener.sock"
 
@@ -16,8 +17,8 @@ if [[ -n "${SSH_CLIENT:-}" ]]; then
   fi
 fi
 
-if command -v xdg-open >/dev/null; then
-  xdg-open "$@"
+if [[ -x /usr/bin/xdg-open ]]; then
+  /usr/bin/xdg-open "$@"
 else
   /usr/bin/open "$@"
 fi
