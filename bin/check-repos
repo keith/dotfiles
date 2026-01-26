@@ -58,6 +58,44 @@ def get_stash_count(repo_path):
     return 0
 
 
+def get_worktree_info(repo_path):
+    """Get worktree info: 'child' if linked worktree, count if root with children, 0 otherwise.
+
+    Excludes worktrees in ~/.cache/git-pile from the count.
+    """
+    worktrees = run_git(repo_path, "worktree", "list", "--porcelain")
+    if not worktrees:
+        return 0
+
+    git_pile_dir = Path.home() / ".cache" / "git-pile"
+    root_path = None
+    child_count = 0
+
+    for line in worktrees.splitlines():
+        if line.startswith("worktree "):
+            worktree_path = Path(line[9:])
+
+            # Skip worktrees in git-pile cache
+            try:
+                worktree_path.relative_to(git_pile_dir)
+                continue
+            except ValueError:
+                pass
+
+            # First worktree listed is always the root
+            if root_path is None:
+                root_path = worktree_path
+                if repo_path != root_path:
+                    return "child"
+                continue
+
+            # Count this child worktree (but not if it's the current repo)
+            if worktree_path != repo_path:
+                child_count += 1
+
+    return child_count
+
+
 def find_git_repos(base_path):
     repos = []
     warnings = []
@@ -90,6 +128,7 @@ def analyze_repo(repo_path):
     local_changes = get_local_changes(repo_path)
     untracked = get_untracked_files(repo_path)
     stashes = get_stash_count(repo_path)
+    worktrees = get_worktree_info(repo_path)
 
     return {
         "path": repo_path,
@@ -97,6 +136,7 @@ def analyze_repo(repo_path):
         "local_changes": local_changes,
         "untracked": untracked,
         "stashes": stashes,
+        "worktrees": worktrees,
     }
 
 
@@ -110,7 +150,7 @@ def format_value(value):
 
 
 def print_table(repos_status, base_path):
-    headers = ["Repository", "Ahead", "Changes", "Untracked", "Stashes"]
+    headers = ["Repository", "Ahead", "Changes", "Untracked", "Stashes", "Worktrees"]
 
     rows = []
     for status in repos_status:
@@ -122,6 +162,7 @@ def print_table(repos_status, base_path):
                 format_value(status["local_changes"]),
                 format_value(status["untracked"]),
                 format_value(status["stashes"]),
+                format_value(status["worktrees"]),
             ]
         )
 
