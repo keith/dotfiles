@@ -21,6 +21,23 @@ def run_git(repo_path, *args):
         return None
 
 
+def get_current_ref(repo_path):
+    """Get current branch or tag name."""
+    # Try to get branch name
+    branch = run_git(repo_path, "rev-parse", "--abbrev-ref", "HEAD")
+    if branch and branch != "HEAD":
+        return branch
+
+    # Detached HEAD - try to get tag name
+    tag = run_git(repo_path, "describe", "--tags", "--exact-match")
+    if tag:
+        return tag
+
+    # Fall back to short commit hash
+    commit = run_git(repo_path, "rev-parse", "--short", "HEAD")
+    return commit or "?"
+
+
 def get_commits_ahead(repo_path):
     count = run_git(repo_path, "rev-list", "--count", "@{upstream}..HEAD")
     if count:
@@ -124,6 +141,7 @@ def find_git_repos(base_path):
 
 def analyze_repo(repo_path):
     """Analyze a single repo and return its status."""
+    current_ref = get_current_ref(repo_path)
     commits_ahead = get_commits_ahead(repo_path)
     local_changes = get_local_changes(repo_path)
     untracked = get_untracked_files(repo_path)
@@ -132,6 +150,7 @@ def analyze_repo(repo_path):
 
     return {
         "path": repo_path,
+        "current_ref": current_ref,
         "commits_ahead": commits_ahead,
         "local_changes": local_changes,
         "untracked": untracked,
@@ -150,7 +169,7 @@ def format_value(value):
 
 
 def print_table(repos_status, base_path):
-    headers = ["Repository", "Ahead", "Changes", "Untracked", "Stashes", "Worktrees"]
+    headers = ["Repository", "Branch", "Ahead", "Changes", "Untracked", "Stashes", "Worktrees"]
 
     rows = []
     for status in repos_status:
@@ -158,6 +177,7 @@ def print_table(repos_status, base_path):
         rows.append(
             [
                 str(rel_path),
+                status["current_ref"] or "",
                 format_value(status["commits_ahead"]),
                 format_value(status["local_changes"]),
                 format_value(status["untracked"]),
