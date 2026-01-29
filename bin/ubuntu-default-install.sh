@@ -74,7 +74,6 @@ sudo apt install -y \
   tree \
   universal-ctags \
   unzip \
-  urlview \
   vim \
   zip \
   zsh \

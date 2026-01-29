@@ -1,5 +1,5 @@
 # urlview
-macro pager <Return> "<pipe-entry>urlview<enter>" "follow links with urlview"
+macro pager <Return> "<pipe-entry>urlview2<enter>" "follow links with urlview"
 
 # Contacts settings
 set query_command="contacts '%s'"

@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+"""Extract URLs from stdin, select with fzf, and open it."""
+
+import re
+import subprocess
+import sys
+
+
+# Daring Fireball regex
+# https://daringfireball.net/2010/07/improved_regex_for_matching_urls
+# https://gist.github.com/gruber/8891611
+# https://gist.github.com/brendon-codes/2212479
+_R = re.compile(
+    r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)"""
+    r"""(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+"""
+    r"""(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()"""
+    r"""\[\]{};:'".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]))"""
+)
+
+
+def _extract_urls(text):
+    urls = []
+    for match in _R.finditer(text):
+        urls.append(match.group(0))
+    return urls
+
+
+def _main():
+    text = sys.stdin.read()
+    urls = _extract_urls(text)
+
+    if not urls:
+        print("No URLs found", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        with open("/dev/tty", "w") as tty:
+            proc = subprocess.Popen(
+                ["fzf", "--multi", "--disabled", "--bind=j:down,k:up"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=tty,
+                text=True,
+            )
+            stdout, _ = proc.communicate(input="\n".join(urls))
+        if proc.returncode == 0 and stdout:
+            subprocess.check_call(
+                ["open", stdout.strip()],
+                stdin=subprocess.DEVNULL,  # Make sure it doesn't try to read original stdin
+            )
+    except FileNotFoundError:
+        print("fzf not found", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    _main()

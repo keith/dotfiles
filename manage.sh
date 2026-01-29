@@ -43,7 +43,6 @@ files=(\
   rspec \
   tmux \
   tmux.conf \
-  urlview \
   vim \
   vimrc \
   w3m \

@@ -28,7 +28,7 @@ articlelist-format "%f %D    %t"
 
 # Mutt like URLView
 bind-key ENTER show-urls article
-external-url-viewer "urlview"
+external-url-viewer "urlview2"
 
 # Browser for opening URLs, same as mutt
 browser "~/.bin/open %u"
