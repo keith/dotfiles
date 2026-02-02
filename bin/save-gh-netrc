@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import netrc
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+
+def _get_gh_token() -> str:
+    try:
+        return subprocess.check_output(
+            ["gh", "auth", "token"],
+            text=True,
+        ).strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Error getting token from gh CLI: {e.stderr}", file=sys.stderr)
+        sys.exit(1)
+    except FileNotFoundError:
+        print("gh CLI not found. Please install it first.", file=sys.stderr)
+        sys.exit(1)
+
+
+def _main() -> None:
+    netrc_path = Path.home() / ".netrc"
+
+    hosts = {}
+    if netrc_path.exists():
+        try:
+            nrc = netrc.netrc(netrc_path)
+            hosts = dict(nrc.hosts)
+        except netrc.NetrcParseError as e:
+            print(f"Error parsing netrc: {e}", file=sys.stderr)
+            sys.exit(1)
+
+    token = _get_gh_token()
+    hosts["api.github.com"] = ("", "", token)  # Same format as netrc module
+
+    with open(netrc_path, "w") as f:
+        wrote_one = False
+        for host, (login, account, password) in hosts.items():
+            if wrote_one:
+                f.write("\n")
+            f.write(f"machine {host}\n")
+            if login:
+                f.write(f"  login {login}\n")
+            if password:
+                f.write(f"  password {password}\n")
+            if account:
+                f.write(f"  account {account}\n")
+            wrote_one = True
+
+    os.chmod(netrc_path, 0o600)
+    print(f"Updated {netrc_path} with GitHub token")
+
+
+if __name__ == "__main__":
+    _main()
