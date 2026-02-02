@@ -113,6 +113,24 @@ def get_worktree_info(repo_path):
     return child_count
 
 
+def get_submodules(repo_path):
+    """Get list of submodule paths for a repo."""
+    output = run_git(repo_path, "submodule", "status", "--recursive")
+    if not output:
+        return []
+
+    submodules = []
+    for line in output.splitlines():
+        # Format: [+- ]<sha> <path> (<describe>)
+        parts = line.split()
+        if len(parts) >= 2:
+            submodule_path = repo_path / parts[1]
+            if submodule_path.exists():
+                submodules.append(submodule_path)
+
+    return submodules
+
+
 def find_git_repos(base_path):
     repos = []
     warnings = []
@@ -219,6 +237,13 @@ def main():
         sys.exit(1)
 
     repos, warnings = find_git_repos(base_path)
+
+    # Also enumerate submodules within each repo
+    all_repos = []
+    for repo in repos:
+        all_repos.append(repo)
+        all_repos.extend(get_submodules(repo))
+    repos = all_repos
 
     for warning_path in warnings:
         rel_path = warning_path.relative_to(base_path)
