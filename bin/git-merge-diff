@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# https://gist.github.com/waldyrious/dd9ce48bd320351fed9c1e96094ba427
+
+set -euo pipefail
+
+readonly target_ref=${1:-main}
+readonly source_ref=${2:-HEAD}
+
+target_sha=$(git rev-parse "$target_ref")
+source_sha=$(git rev-parse "$source_ref")
+
+echo "Comparing $source_ref changes against $target_ref (resolving conflicts to 'theirs')..."
+tree_oid=$(git merge-tree --write-tree -Xtheirs "$target_sha" "$source_sha" | head -n 1)
+git diff "$target_sha" "$tree_oid"
