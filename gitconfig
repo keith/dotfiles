@@ -20,8 +20,6 @@
   colorMoved = zebra
 [difftool]
   prompt = false
-[difftool "idiff"]
-  cmd = "diff -Nuri -U3 --minimal \"$LOCAL\" \"$REMOTE\" | sed 's/^-/\\x1b[1;31m-/;s/^+/\\x1b[1;32m+/;s/^@/\\x1b[1;34m@/;s/$/\\x1b[0m/' | diff-highlight"
 [difftool "ksdiff"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "nvim"]
