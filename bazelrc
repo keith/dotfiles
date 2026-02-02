@@ -1,5 +1,5 @@
 common:orf --override_repository=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
-common:ort --override_repository=xctestrunner=~/dev/bazelbuild/xctestrunner
+common:ort --override_repository=+non_module_deps+xctestrunner=~/dev/bazelbuild/xctestrunner --override_repository=+http_archive+xctestrunner=~/dev/bazelbuild/xctestrunner
 common:orcc --override_repository=rules_cc=~/dev/bazelbuild/rules_cc --override_module=rules_cc=~/dev/bazelbuild/rules_cc
 common:orgo --override_repository=io_bazel_rules_go=~/dev/bazelbuild/rules_go --override_module=rules_go=~/dev/bazelbuild/rules_go
 common:orgaz --override_module=gazelle=~/dev/bazelbuild/bazel-gazelle
@@ -21,6 +21,7 @@ common:ora3 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules
 common:ora4 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple4 --override_module=rules_apple=~/dev/bazelbuild/rules_apple4
 common:ora5 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple5 --override_module=rules_apple=~/dev/bazelbuild/rules_apple5
 common:oras --override_repository=build_bazel_apple_support=~/dev/bazelbuild/apple_support --override_module=apple_support=~/dev/bazelbuild/apple_support
+common:oras2 --override_repository=build_bazel_apple_support=~/dev/bazelbuild/apple_support2 --override_module=apple_support=~/dev/bazelbuild/apple_support2
 common:ors --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_swift --override_module=rules_swift=~/dev/bazelbuild/rules_swift
 common:ors2 --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_swift2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
 common:orx --override_repository=rules_xcodeproj=~/dev/mnf/rules_xcodeproj --override_module=rules_xcodeproj=~/dev/mnf/rules_xcodeproj
