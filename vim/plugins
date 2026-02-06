@@ -27,6 +27,7 @@ tpope/vim-commentary
 tpope/vim-fugitive
 tpope/vim-git
 tpope/vim-markdown
+tpope/vim-obsession
 tpope/vim-repeat
 tpope/vim-rhubarb
 tpope/vim-scriptease
