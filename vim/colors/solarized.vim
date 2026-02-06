@@ -1072,6 +1072,15 @@ hi! link IlluminatedWordText CursorLine
 hi! link IlluminatedWordRead CursorLine
 hi! link IlluminatedWordWrite CursorLine
 
+exe "hi! GitSignsAdd"                 .s:fg_yellow   .s:bg_none   .s:fmt_bold
+exe "hi! GitSignsStagedAdd"           .s:fg_green    .s:bg_none   .s:fmt_bold
+
+exe "hi! GitSignsChange"              .s:fg_yellow   .s:bg_none   .s:fmt_bold
+exe "hi! GitSignsStagedChange"        .s:fg_green    .s:bg_none   .s:fmt_bold
+
+exe "hi! GitSignsDelete"              .s:fg_yellow   .s:bg_none   .s:fmt_bold
+exe "hi! GitSignsStagedDelete"        .s:fg_green    .s:bg_none   .s:fmt_bold
+
 "}}}
 " Utility autocommand "{{{
 " ---------------------------------------------------------------------

@@ -169,10 +169,12 @@ function! CurrentTag(...)
   endif
 endfunction
 
-" From ':h gitgutter'
 function! GitStatus()
-  let [a, m, r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
+  " From ':h gitsigns-statusline'
+  return get(b:,'gitsigns_status','')
+  " From ':h gitgutter'
+  " let [a, m, r] = GitGutterGetHunkSummary()
+  " return printf('+%d ~%d -%d', a, m, r)
 endfunction
 
 " Status line setup (without plugins)

@@ -6,6 +6,7 @@ hrsh7th/cmp-nvim-lsp-signature-help
 hrsh7th/cmp-path
 hrsh7th/nvim-cmp
 j-hui/fidget.nvim
+lewis6991/gitsigns.nvim
 neovim/nvim-lspconfig
 nvim-lua/plenary.nvim
 nvim-telescope/telescope-fzy-native.nvim

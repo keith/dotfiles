@@ -38,12 +38,20 @@ let g:sleuth_bzl_heuristics = 0
 
 let g:hdevtools_stack = 1
 
-let g:signify_sign_change = '~'
+" mhinz/vim-signify
+" let g:signify_sign_change = '~'
 " nmap [g <plug>(signify-prev-hunk)
 " nmap ]g <plug>(signify-next-hunk)
 
-nmap [g <plug>(GitGutterPrevHunk)
-nmap ]g <plug>(GitGutterNextHunk)
+" airblade/vim-gitgutter
+" nmap [g <plug>(GitGutterPrevHunk)
+" nmap ]g <plug>(GitGutterNextHunk)
+
+" gitsigns.nvim
+nnoremap [g :Gitsigns nav_hunk prev<CR>
+nnoremap ]g :Gitsigns nav_hunk next<CR>
+nnoremap <leader>hs :Gitsigns stage_hunk<CR>
+nnoremap <leader>hu :Gitsigns undo_stage_hunk<CR>
 
 nnoremap [d :lua vim.diagnostic.goto_prev()<CR>
 nnoremap ]d :lua vim.diagnostic.goto_next()<CR>
