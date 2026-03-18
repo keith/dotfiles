@@ -16,7 +16,7 @@ fi
 newest-bzlmod apple_support rules_cc > MODULE.bazel
 
 cat > BUILD.bazel <<EOF
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
 
 cc_library(
     name = "lib",
@@ -32,6 +32,11 @@ cc_binary(
 
 cc_binary(
     name = "main",
+    srcs = ["main.c"],
+)
+
+cc_test(
+    name = "main_test",
     srcs = ["main.c"],
 )
 EOF
