@@ -54,6 +54,10 @@ defaults write NSGlobalDomain NSToolbarTitleViewRolloverDelay -float 0
 # https://mmazzarolo.com/blog/2022-04-16-drag-window-by-clicking-anywhere-on-macos
 defaults write NSGlobalDomain NSWindowShouldDragOnGesture -bool true
 
+# Disable Tahoe menu images
+# https://512pixels.net/2026/03/hide-macos-tahoes-menu-icons-with-this-one-simple-trick
+defaults write NSGlobalDomain NSMenuEnableActionImages -bool false
+
 
 #
 # Desktop & Screen Saver
