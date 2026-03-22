@@ -13,7 +13,6 @@ nvim-telescope/telescope-fzy-native.nvim
 nvim-telescope/telescope.nvim
 nvim-treesitter/nvim-treesitter
 nvim-treesitter/nvim-treesitter-textobjects
-nvim-treesitter/playground
 RRethy/nvim-treesitter-textsubjects
 simrat39/symbols-outline.nvim
 Wansmer/treesj
