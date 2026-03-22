@@ -19,13 +19,8 @@ if [[ ! -e "$HOME/.bashrc" ]]; then
 fi
 
 if ! command -v brew &> /dev/null; then
-  echo "error: you need to install homebrew" >&2
-  exit 1
+  ./bin/install-brew
 fi
-
-# Set correct netrc permissions
-touch "$HOME/.netrc"
-chmod 0600 "$HOME/.netrc"
 
 # Add Terminal.app theme
 open ./osx/parsec.terminal
@@ -33,6 +28,9 @@ open ./osx/parsec.terminal
 # Install some default software
 brew bundle --file="./osx/Brewfile"
 brew bundle --file="./osx/Brewfile.cask"
+
+./bin/install-rustup
+./bin/install-lsps
 
 # Set many default settings
 ./bin/corners enable
