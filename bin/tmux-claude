@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -euo pipefail
+
+usage() {
+  echo "Usage: tmux-claude [-r] <directory>" >&2
+  exit 1
+}
+
+resume_flag=""
+while getopts "r" opt; do
+  case "$opt" in
+    r) resume_flag="-r" ;;
+    *) usage ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [[ $# -ne 1 ]]; then
+  usage
+fi
+
+dir="$(cd "$1" > /dev/null 2>&1 && pwd)" || true
+if [[ -z "$dir" || ! -d "$dir" ]]; then
+  echo "tmux-claude: no such directory: $1" >&2
+  exit 1
+fi
+
+tmux new-window -c "$dir" "claude --dangerously-skip-permissions $resume_flag"
+tmux split-window -h -c "$dir"
+tmux select-pane -t 0
