@@ -25,7 +25,8 @@ export EDITOR=nvim
 # M - Longer prompt
 # R - output colors correctly
 # X - Don't send clear screen signal
-export LESS="ij.5KMRX"
+# -x4 - Use 4 spaces for tabs
+export LESS="ij.5KMRX-x4"
 export MANPAGER="$EDITOR +Man\!"
 # On macOS _something_ is setting this which breaks default behavior like 'man
 # libtool' pointing at Xcode
