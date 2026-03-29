@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+
+import json
+import subprocess
+import sys
+
+
+def _gh_json(args: list[str]) -> list[dict]:
+    result = subprocess.run(
+        ["gh", *args],
+        text=True,
+        check=True,
+        capture_output=True,
+    )
+    return json.loads(result.stdout)
+
+
+def _list_forks() -> list[dict]:
+    result = subprocess.run(
+        [
+            "gh",
+            "repo",
+            "list",
+            "--fork",
+            "--json",
+            "nameWithOwner,url",
+            "--limit",
+            "1000",
+        ],
+        text=True,
+        check=True,
+        capture_output=True,
+    )
+    forks = json.loads(result.stdout)
+    repos = []
+    for fork in forks:
+        full_name = fork["nameWithOwner"]
+        # Fetch parent info separately
+        parent_result = subprocess.run(
+            ["gh", "repo", "view", full_name, "--json", "parent"],
+            text=True,
+            check=False,
+            capture_output=True,
+        )
+        parent_full_name = ""
+        if parent_result.returncode == 0:
+            parent_data = json.loads(parent_result.stdout)
+            parent = parent_data.get("parent")
+            if parent:
+                owner = parent.get("owner", {}).get("login", "")
+                name = parent.get("name", "")
+                if owner and name:
+                    parent_full_name = f"{owner}/{name}"
+
+        repos.append(
+            {
+                "full_name": full_name,
+                "html_url": fork["url"],
+                "parent_full_name": parent_full_name,
+            }
+        )
+    return repos
+
+
+def _has_open_prs_from_fork(fork_full_name: str, parent_full_name: str) -> bool:
+    owner = fork_full_name.split("/")[0]
+    result = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "list",
+            "--repo",
+            parent_full_name,
+            "--author",
+            owner,
+            "--state",
+            "open",
+            "--json",
+            "number",
+            "--limit",
+            "1",
+        ],
+        text=True,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        return False
+
+    prs = json.loads(result.stdout)
+    return len(prs) > 0
+
+
+def _main() -> None:
+    forks = _list_forks()
+    for fork in forks:
+        name = fork["full_name"]
+        parent = fork["parent_full_name"]
+        if not parent:
+            print(f"  {name}: skipping (no parent info)")
+            continue
+
+        if not _has_open_prs_from_fork(name, parent):
+            print(name)
+
+
+if __name__ == "__main__":
+    _main()
