@@ -12,7 +12,7 @@ import sys
 # https://gist.github.com/gruber/8891611
 # https://gist.github.com/brendon-codes/2212479
 _R = re.compile(
-    r"""(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)"""
+    r"""(?i)\b((?:https?://|www\d{0,3}[.])"""
     r"""(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+"""
     r"""(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()"""
     r"""\[\]{};:'".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]))"""
