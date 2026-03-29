@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: setup-bazel-module MODULE_NAME" >&2
+    exit 1
+fi
+
+module="$1"
+bcr_repo="$HOME/dev/bazelbuild/bazel-central-registry"
+
+# Get latest version using newest-bzlmod (which also ensures BCR is up to date)
+# stdout: bazel_dep(name = "module", version = "X.Y.Z")
+bazel_dep=$(newest-bzlmod "$module") || exit 1
+version=$(echo "$bazel_dep" | sed -n 's/.*version = "\([^"]*\)".*/\1/p')
+echo "Using $module@$version" >&2
+
+bcr_module_dir="$bcr_repo/modules/$module/$version"
+source_json="$bcr_module_dir/source.json"
+if [[ ! -f "$source_json" ]]; then
+    echo "error: $source_json not found" >&2
+    exit 1
+fi
+
+url=$(python3 -c "import json,sys; print(json.load(sys.stdin)['url'])" < "$source_json")
+strip_prefix=$(python3 -c "import json,sys; print(json.load(sys.stdin).get('strip_prefix', ''))" < "$source_json")
+patch_strip=$(python3 -c "import json,sys; print(json.load(sys.stdin).get('patch_strip', 0))" < "$source_json")
+
+dest="/tmp/bzlmods/$module/$version"
+if [[ -d "$dest" ]]; then
+    echo "error: $dest already exists, remove it first" >&2
+    exit 1
+fi
+mkdir -p "$dest"
+
+# Download and extract source archive
+echo "Downloading $url" >&2
+archive="/tmp/bzlmods/$module/$version.archive"
+curl -fsSL -o "$archive" "$url"
+
+if [[ -n "$strip_prefix" ]]; then
+    tar -xf "$archive" -C "$dest" --strip-components=1
+else
+    tar -xf "$archive" -C "$dest"
+fi
+rm "$archive"
+
+# Initialize git repo and commit original source
+cd "$dest"
+git init -q
+git add -A
+git commit -q --no-verify -m "Original source $module@$version"
+echo "Committed original source" >&2
+
+# Apply patches first (they expect the original source tree)
+patches_dir="$bcr_module_dir/patches"
+if [[ -d "$patches_dir" ]] && ls "$patches_dir"/*.patch &>/dev/null; then
+    echo "Applying patches from $patches_dir" >&2
+    for patch in "$patches_dir"/*.patch; do
+        echo "  $(basename "$patch")" >&2
+        git apply -p"$patch_strip" "$patch"
+    done
+fi
+
+# Apply overlay files (copied from BCR into the source tree)
+has_overlay=$(python3 -c "import json,sys; o=json.load(sys.stdin).get('overlay',{}); print('yes' if o else 'no')" < "$source_json")
+if [[ "$has_overlay" == "yes" ]]; then
+    overlay_dir="$bcr_module_dir/overlay"
+    if [[ -d "$overlay_dir" ]]; then
+        echo "Applying overlay files from $overlay_dir" >&2
+        cp -r "$overlay_dir"/. "$dest"/
+    fi
+fi
+
+# Apply the BCR MODULE.bazel (this is always present and replaces/provides the module file)
+if [[ -f "$bcr_module_dir/MODULE.bazel" ]]; then
+    cp "$bcr_module_dir/MODULE.bazel" "$dest/MODULE.bazel"
+fi
+
+# Commit BCR changes
+git add -A
+if ! git diff --cached --quiet; then
+    git commit -q --no-verify -m "BCR patches and overlays for $module@$version"
+    echo "Committed BCR changes" >&2
+else
+    echo "No BCR changes to apply" >&2
+fi
+
+echo "$dest"
