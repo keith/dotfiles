@@ -20,9 +20,13 @@ _R = re.compile(
 
 
 def _extract_urls(text):
+    seen = set()
     urls = []
     for match in _R.finditer(text):
-        urls.append(match.group(0))
+        url = match.group(0)
+        if url not in seen:
+            seen.add(url)
+            urls.append(url)
     return urls
 
 
