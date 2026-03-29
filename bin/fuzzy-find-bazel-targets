@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+"""Extract Bazel targets from stdin, select with fzf, print."""
+
+import re
+import subprocess
+import sys
+
+
+# Match Bazel targets like:
+#   @foo
+#   @foo//bar/baz:qux
+#   @@+foo+bar+baz//qux
+#   //foo/bar:baz
+#   //foo/bar
+#   :foo
+_R = re.compile(
+    r"(?:@@?[\w+.-]+(?://[\w/.-]*(?::[\w+.-]+)?)?|(?<!:)//[\w/.-]+(?::[\w+.-]+)?|(?<=\s):[\w+.-]+)"
+)
+
+
+def _extract_targets(text):
+    seen = set()
+    targets = []
+    for match in _R.finditer(text):
+        target = match.group(0)
+        if target not in seen:
+            seen.add(target)
+            targets.append(target)
+    return targets
+
+
+def _main():
+    text = sys.stdin.read()
+    targets = _extract_targets(text)
+
+    if not targets:
+        print("No Bazel targets found", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        with open("/dev/tty", "w") as tty:
+            proc = subprocess.Popen(
+                ["fzf", "--multi", "--disabled", "--bind=j:down,k:up"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=tty,
+                text=True,
+            )
+            stdout, _ = proc.communicate(input="\n".join(targets))
+        if proc.returncode == 0 and stdout:
+            selected = stdout.strip()
+            subprocess.check_call(
+                ["tmux", "send-keys", "-t", "!", "-l", selected],
+                stdin=subprocess.DEVNULL,
+            )
+    except FileNotFoundError:
+        print("fzf not found", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    _main()
