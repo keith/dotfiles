@@ -9,7 +9,7 @@ common:orpycross --override_repository=rules_pycross=~/dev/bazelbuild/rules_pycr
 common:orpro --override_repository=protobuf=~/dev/google/protobuf --override_module=protobuf=~/dev/google/protobuf
 common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib --override_repository=bazel_skylib=~/dev/bazelbuild/bazel-skylib
 common:orsd --override_repository=io_bazel_stardoc=~/dev/bazelbuild/stardoc --override_module=stardoc=~/dev/bazelbuild/stardoc
-common:orrust --override_repository=rules_rust=~/dev/bazellbuild/rules_rust --override_module=rules_rust=~/dev/bazellbuild/rules_rust
+common:orrust --override_repository=rules_rust=~/dev/bazelbuild/rules_rust --override_module=rules_rust=~/dev/bazelbuild/rules_rust
 common:orjava --override_repository=rules_java=~/dev/bazelbuild/rules_java --override_module=rules_java=~/dev/bazelbuild/rules_java
 common:orandk --override_repository=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
 common:ormojo --override_module=rules_mojo=~/dev/modularml/rules_mojo
