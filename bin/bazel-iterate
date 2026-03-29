@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
+import json
+import os
+import shutil
 import subprocess
 import sys
-import json
-import shutil
 
 
 _BUILD_EVENT_JSON = "/tmp/bazel-iterate-build-events.json"
@@ -16,11 +17,11 @@ def _get_failing_label() -> str:
         build_events = [json.loads(line) for line in f if line.strip()]
 
     for event in build_events:
-        target_completed = event.get("id", {}).get("targetCompleted", {})
-        if target_completed:
-            failure_detail = event.get("completed", {}).get("failureDetail", {})
-            if failure_detail:
-                return target_completed["label"]
+        action_completed = event.get("id", {}).get("actionCompleted", {})
+        if action_completed:
+            exit_code = event.get("action", {}).get("exitCode", 0)
+            if exit_code != 0:
+                return action_completed["label"]
 
     raise SystemExit(
         f"error: could not determine failing target, check {build_event_file}"
@@ -48,12 +49,16 @@ def _remove_from_targets(label: str) -> None:
 
 
 def _main(file: str, args: list[str]) -> None:
-    shutil.copy(file, _FILTERED_TARGETS)
+    if os.path.exists(file):
+        shutil.copy(file, _FILTERED_TARGETS)
+    else:
+        with open(_FILTERED_TARGETS, "w") as f:
+            f.write(file + "\n")
 
     specific_target = None
     while True:
         command = (
-            ["bazel"]
+            ["bazel", "build"]
             + args
             + [
                 f"--build_event_json_file={_BUILD_EVENT_JSON}",
@@ -68,7 +73,11 @@ def _main(file: str, args: list[str]) -> None:
             print("\nBuilding all targets in the filtered list\n")
             command.append(f"--target_pattern_file={_FILTERED_TARGETS}")
 
-        result = subprocess.run(command)
+        try:
+            result = subprocess.run(command)
+        except KeyboardInterrupt:
+            print("\nBuild interrupted by user. Exiting.")
+            sys.exit(1)
 
         if result.returncode == 0:
             if specific_target:
@@ -82,14 +91,17 @@ def _main(file: str, args: list[str]) -> None:
         specific_target = _get_failing_label()
         print(f"\nDetermined failing target: {specific_target}")
         while True:
-            response = (
-                input(
-                    f"Do you want to continue building only {specific_target}? [y/s/q]: "
+            try:
+                response = (
+                    input(
+                        f"Do you want to continue building only {specific_target}? [Y/s/q]: "
+                    )
+                    .strip()
+                    .lower()
                 )
-                .strip()
-                .lower()
-            )
-            if response == "y":
+            except KeyboardInterrupt:
+                break
+            if not response or response == "y":
                 break
             elif response == "q":
                 print("Exiting.")
