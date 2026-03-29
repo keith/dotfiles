@@ -222,6 +222,7 @@ require("illuminate").configure {
     "fugitive",
     "log",
     "tablegen",
+    "cpp", -- Too slow for large files like llvm-project/clang/lib/Driver/ToolChains/Clang.cpp
   },
 }
 
