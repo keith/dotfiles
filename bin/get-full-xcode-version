@@ -6,15 +6,19 @@ import http.client
 import json
 import plistlib
 import subprocess
+import sys
 import urllib.request
 from pathlib import Path
 
-xcodes = glob.glob("/Applications/Xcode*.app")
-selected = (
-    subprocess.check_output("fzy", input="\n".join(xcodes).encode())
-    .decode()
-    .strip()
-)
+if len(sys.argv) > 1:
+    selected = sys.argv[1]
+else:
+    xcodes = glob.glob("/Applications/Xcode*.app")
+    selected = (
+        subprocess.check_output("fzy", input="\n".join(xcodes).encode())
+        .decode()
+        .strip()
+    )
 
 plist_path = Path(selected) / "Contents/version.plist"
 with plist_path.open("rb") as f:
