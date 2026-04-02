@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: ldd <binary>" >&2
+  exit 1
+fi
+
+readonly binary="$1"
+
+if [[ ! -f "$binary" ]]; then
+  echo "ldd: $binary: No such file" >&2
+  exit 1
+fi
+
+if [[ -x /usr/bin/ldd ]]; then
+  exec /usr/bin/ldd "$binary"
+fi
+
+magic=$(xxd -p -l 4 "$binary")
+case "$magic" in
+  cffaedfe|feedface|feedfacf|cafebabe)
+    exec otool -L "$binary"
+    ;;
+  7f454c46)
+    exec llvm-readelf -d "$binary"
+    ;;
+  *)
+    echo "ldd: $binary: unknown binary format" >&2
+    exit 1
+    ;;
+esac
