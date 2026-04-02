@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+
+import re
+import subprocess
+import sys
+
+
+def human_size(size):
+    for unit in ("B", "KB", "MB", "GB"):
+        if size < 1024:
+            if size == int(size):
+                return f"{int(size)}{unit}"
+            return f"{size:.1f}{unit}"
+        size /= 1024
+    return f"{size:.1f}TB"
+
+
+def parse_macho(path):
+    output = subprocess.check_output(
+        ["otool", "-l", path], text=True, stderr=subprocess.DEVNULL
+    )
+    sections = []
+    in_section = False
+    name = None
+    for line in output.splitlines():
+        line = line.strip()
+        if line.startswith("Section"):
+            in_section = True
+            name = None
+        elif in_section:
+            if m := re.match(r"sectname\s+(\S+)", line):
+                sectname = m.group(1)
+            elif m := re.match(r"segname\s+(\S+)", line):
+                name = f"{m.group(1)},{sectname}"
+            elif m := re.match(r"size\s+(0x[0-9a-fA-F]+)", line):
+                sections.append((name, int(m.group(1), 16)))
+                in_section = False
+    return sections
+
+
+def parse_elf(path):
+    output = subprocess.check_output(
+        ["llvm", "readelf", "-S", path], text=True, stderr=subprocess.DEVNULL
+    )
+    sections = []
+    for line in output.splitlines():
+        # Match lines like: [ 1] .text PROGBITS 00000000 000000 001234 00
+        m = re.match(
+            r"\s*\[\s*\d+\]\s+(\S+)\s+\S+\s+[0-9a-f]+\s+[0-9a-f]+\s+([0-9a-f]+)",
+            line,
+        )
+        if m:
+            name = m.group(1)
+            size = int(m.group(2), 16)
+            if size > 0:
+                sections.append((name, size))
+    return sections
+
+
+def detect_format(path):
+    with open(path, "rb") as f:
+        magic = f.read(4)
+    if magic[:4] in (b"\xfe\xed\xfa\xce", b"\xfe\xed\xfa\xcf",
+                      b"\xce\xfa\xed\xfe", b"\xcf\xfa\xed\xfe",
+                      b"\xca\xfe\xba\xbe"):
+        return "macho"
+    if magic[:4] == b"\x7fELF":
+        return "elf"
+    return None
+
+
+def main():
+    if len(sys.argv) != 2:
+        print(f"usage: {sys.argv[0]} <binary>", file=sys.stderr)
+        raise SystemExit(1)
+
+    path = sys.argv[1]
+    fmt = detect_format(path)
+    if fmt == "macho":
+        sections = parse_macho(path)
+    elif fmt == "elf":
+        sections = parse_elf(path)
+    else:
+        print("error: not a Mach-O or ELF binary", file=sys.stderr)
+        raise SystemExit(1)
+
+    # Merge duplicate sections (e.g. from multiple load commands in fat binaries)
+    merged = {}
+    for name, size in sections:
+        merged[name] = merged.get(name, 0) + size
+
+    sections = sorted(merged.items(), key=lambda x: x[1], reverse=True)
+    if not sections:
+        print("no sections found", file=sys.stderr)
+        raise SystemExit(1)
+
+    max_name = max(len(name) for name, _ in sections)
+    for name, size in sections:
+        print(f"{name:<{max_name}}  {human_size(size):>8}")
+
+
+if __name__ == "__main__":
+    main()
