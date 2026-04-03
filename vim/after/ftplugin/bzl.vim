@@ -3,8 +3,9 @@ function! s:bzl_includeexpr(fname) abort
   let l:path = l:parts[-1]
   let l:parts = split(l:path, ':')
   let l:last_component = remove(l:parts, -1)
-  if l:last_component =~# '\.bzl$'
-    return join(l:parts + [l:last_component], '/')
+  let l:file_path = join(l:parts + [l:last_component], '/')
+  if l:last_component =~# '\.bzl$' || file_readable(l:file_path)
+    return l:file_path
   else
     let l:path = join(l:parts + ['BUILD.bazel'], '/')
     if file_readable(l:path)
