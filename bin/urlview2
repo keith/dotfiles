@@ -19,12 +19,17 @@ _R = re.compile(
 )
 
 
+_EXCLUDE = {
+    "https://bazel.build/advanced/performance/iteration-speed",
+}
+
+
 def _extract_urls(text):
     seen = set()
     urls = []
     for match in _R.finditer(text):
         url = match.group(0)
-        if url not in seen:
+        if url not in seen and url not in _EXCLUDE:
             seen.add(url)
             urls.append(url)
     return urls
