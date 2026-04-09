@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+stderr=$(mktemp)
+trap 'rm -f "$stderr"' EXIT
+configs=$(bazel cquery -k "kind(cc_toolchain_config, deps(//...))" 2>"$stderr" | awk '{print $1}' | sort -u || true)
+
+if [[ -z "$configs" ]]; then
+  cat "$stderr" >&2
+  echo "error: no cc_toolchain_config targets found" >&2
+  exit 1
+fi
+
+count=$(echo "$configs" | wc -l)
+if [[ "$count" -gt 1 ]]; then
+  selected=$(echo "$configs" | fzf)
+else
+  selected="$configs"
+fi
+
+bazel cquery --output=starlark --starlark:expr 'json.encode(providers(target).get("@@rules_cc+//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo") or providers(target).get("//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo"))' "$selected" | head -1
