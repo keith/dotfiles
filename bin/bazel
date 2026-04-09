@@ -36,6 +36,32 @@ if [[ -n "${DEV3:-}" ]]; then
   exec "$HOME/dev/bazelbuild/bazel3/bazel-bin/src/bazel-dev" "$@"
 fi
 
+
+if [[ -n "${DEV4:-}" ]]; then
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$HOME/dev/bazelbuild/bazel4/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+  fi
+
+  exec "$HOME/dev/bazelbuild/bazel4/bazel-bin/src/bazel-dev" "$@"
+fi
+
+if [[ -n "${DEV5:-}" ]]; then
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$HOME/dev/bazelbuild/bazel5/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+  fi
+
+  exec "$HOME/dev/bazelbuild/bazel5/bazel-bin/src/bazel-dev" "$@"
+fi
+
+if [[ -n "${DEV6:-}" ]]; then
+  if [[ -f "$wrapper" ]]; then
+    BAZEL_REAL="$HOME/dev/bazelbuild/bazel6/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+  fi
+
+  exec "$HOME/dev/bazelbuild/bazel6/bazel-bin/src/bazel-dev" "$@"
+fi
+
+
 if [[ -n "${DEVREL:-}" ]]; then
   if [[ -f "$wrapper" ]]; then
     BAZEL_REAL="$HOME/dev/bazelbuild/bazel-rel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
