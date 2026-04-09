@@ -2,4 +2,8 @@
 
 set -euo pipefail
 
-pre-commit run --all-files "$@"
+if command -v pre-commit &> /dev/null; then
+  exec pre-commit run --all-files "$@"
+else
+  exec uvx pre-commit run --all-files "$@"
+fi
