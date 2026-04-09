@@ -1,6 +1,7 @@
 common:orf --override_repository=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
 common:ort --override_repository=+non_module_deps+xctestrunner=~/dev/bazelbuild/xctestrunner --override_repository=+http_archive+xctestrunner=~/dev/bazelbuild/xctestrunner
 common:orcc --override_repository=rules_cc=~/dev/bazelbuild/rules_cc --override_module=rules_cc=~/dev/bazelbuild/rules_cc
+common:orcc2 --override_repository=rules_cc=~/dev/bazelbuild/rules_cc2 --override_module=rules_cc=~/dev/bazelbuild/rules_cc2
 common:orgo --override_repository=io_bazel_rules_go=~/dev/bazelbuild/rules_go --override_module=rules_go=~/dev/bazelbuild/rules_go
 common:orgaz --override_module=gazelle=~/dev/bazelbuild/bazel-gazelle
 common:orplat --override_repository=platforms=~/dev/bazelbuild/platforms --override_module=platforms=~/dev/bazelbuild/platforms
