@@ -60,6 +60,7 @@
   ctags       = !.git/hooks/ctags
   d           = diff
   dc          = diff --cached
+  dlock       = diff --no-ext-diff -- '*.bazel.lock'
   dm          = !sh -c 'git diff $(git merge-base $(git rev-parse --abbrev-ref $(git main-branch)@{upstream}) $(git name-rev --name-only HEAD)) $@' -
   dstash      = !sh -c 'git stash show -p stash@{${1-0}}' -
   g           = !exec git
@@ -115,6 +116,8 @@
 [diff "zip"]
   textconv = textconv-zip
   cachetextconv = true
+[diff "bazel-lock"]
+  command = true
 [difftool "ksdiff"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "ksdiff"]

@@ -2,3 +2,4 @@
 *.plist diff=plist
 *.swift diff=swift
 *.zip diff=zip
+MODULE.bazel.lock diff=bazel-lock
