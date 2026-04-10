@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly db="/tmp/${USER}-buildbuddy-enterprise.db"
+readonly rc="$HOME/.secrets.bazelrc"
+
+if [[ ! -f "$db" ]]; then
+  echo "Database not found: $db" >&2
+  exit 1
+fi
+
+key=$(sqlite3 "$db" "SELECT value FROM APIKeys LIMIT 1")
+if [[ -z "$key" ]]; then
+  echo "No API key found in $db" >&2
+  exit 1
+fi
+
+line="build:l --remote_header=x-buildbuddy-api-key=${key}"
+
+if [[ -f "$rc" ]]; then
+  grep -v '^build:l --remote_header=x-buildbuddy-api-key=' "$rc" > "$rc.tmp" || true
+  mv "$rc.tmp" "$rc"
+fi
+
+printf '\n%s\n' "$line" >> "$rc"
+echo "Wrote API key to $rc"

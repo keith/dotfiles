@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+dir="$PWD"
+
+tmux new-window -n "$(basename "$dir") bbserver" -c "$dir"
+tmux send-keys "bb --watch --experimental_remote_repo_contents_cache --output_base=/tmp/server_output_base_\$(basename \$PWD) run //enterprise/server -- \$(tools/clickhouse) --remote_execution.olap_reads_enabled=true" Enter
+tmux split-window -v -c "$dir"
+tmux send-keys "bb --watch --experimental_remote_repo_contents_cache --output_base=/tmp/executor_output_base_\$(basename \$PWD) run -- //enterprise/server/cmd/executor --executor.docker_socket=" Enter

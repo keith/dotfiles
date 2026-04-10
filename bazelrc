@@ -63,3 +63,12 @@ build:ktrace --verbose_explanations
 
 build:t --test_output=errors
 build:t --test_summary=terse
+
+build:l --bes_backend=grpc://localhost:1985
+build:l --bes_results_url=http://localhost:8080/invocation/
+build:l --build_metadata=VISIBILITY=PUBLIC
+build:l --experimental_execution_log_compact_file=compact_execution.log
+build:l --experimental_profile_include_primary_output
+build:l --experimental_profile_include_target_label
+build:l --noslim_profile
+build:l --remote_executor=grpc://localhost:1985
