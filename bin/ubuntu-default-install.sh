@@ -3,7 +3,7 @@
 set -euo pipefail
 
 sudo apt-get update
-sudo apt-get install -y ca-certificates gpg wget
+sudo apt-get install -y ca-certificates curl gpg wget
 
 curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
@@ -32,7 +32,6 @@ sudo apt install -y \
   build-essential \
   cmake \
   colordiff \
-  curl \
   fd-find \
   forkstat \
   fzf \
