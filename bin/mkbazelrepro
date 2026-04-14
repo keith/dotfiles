@@ -13,7 +13,7 @@ if [[ -n "$(ls)" ]]; then
   exit 1
 fi
 
-newest-bzlmod apple_support rules_cc > MODULE.bazel
+newest-bzlmod apple_support rules_cc platforms > MODULE.bazel
 
 cat > BUILD.bazel <<EOF
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
