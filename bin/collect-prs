@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+
+import datetime
+import json
+import subprocess
+import sys
+
+
+def get_week_range(last_week=False):
+    today = datetime.date.today()
+    monday = today - datetime.timedelta(days=today.weekday())
+    if last_week:
+        monday -= datetime.timedelta(weeks=1)
+    friday = monday + datetime.timedelta(days=4)
+    return monday, friday
+
+
+def format_repo(url):
+    # https://github.com/owner/repo/pull/123 -> owner/repo
+    parts = url.split("/")
+    return f"{parts[3]}/{parts[4]}"
+
+
+def fetch_prs(user, since, until):
+    result = subprocess.run(
+        [
+            "gh",
+            "search",
+            "prs",
+            "--author",
+            user,
+            "--updated",
+            f"{since}..{until}",
+            "--json",
+            "title,url,repository,state,number,createdAt,closedAt,updatedAt",
+            "--limit",
+            "100",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(f"error: gh search failed: {result.stderr.strip()}", file=sys.stderr)
+        raise SystemExit(1)
+    return json.loads(result.stdout)
+
+
+def latest_commit_date(owner_repo, number):
+    """Return the committer date of the most recent commit on a PR, or None."""
+    result = subprocess.run(
+        [
+            "gh",
+            "api",
+            f"repos/{owner_repo}/pulls/{number}/commits",
+            "--jq",
+            ".[-1].commit.committer.date",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        return None
+    out = result.stdout.strip()
+    if not out:
+        return None
+    return datetime.datetime.fromisoformat(out.replace("Z", "+00:00")).date()
+
+
+def in_range(iso_ts, since, until):
+    if not iso_ts:
+        return False
+    d = datetime.datetime.fromisoformat(iso_ts.replace("Z", "+00:00")).date()
+    return since <= d <= until
+
+
+def is_meaningful(pr, since, until):
+    """A PR counts if it was created, closed, or had a commit pushed in range."""
+    if in_range(pr.get("createdAt"), since, until):
+        return True
+    if in_range(pr.get("closedAt"), since, until):
+        return True
+    repo = format_repo(pr["url"])
+    commit_date = latest_commit_date(repo, pr["number"])
+    return commit_date is not None and since <= commit_date <= until
+
+
+STATUS_COLORS = {
+    "open": "\033[32m",  # green
+    "merged": "\033[35m",  # magenta
+    "closed": "\033[31m",  # red
+}
+RESET = "\033[0m"
+
+
+def status_label(pr):
+    if pr["state"] == "open":
+        status = "open"
+    elif pr["state"] == "merged":
+        status = "merged"
+    else:
+        status = "closed"
+    color = STATUS_COLORS[status]
+    return f"{color}{status}{RESET}"
+
+
+def main():
+    last_week = len(sys.argv) > 1
+    monday, friday = get_week_range(last_week)
+
+    user = subprocess.check_output(
+        ["gh", "api", "user", "--jq", ".login"], text=True
+    ).strip()
+
+    prs = fetch_prs(user, monday.isoformat(), friday.isoformat())
+    prs = [pr for pr in prs if is_meaningful(pr, monday, friday)]
+    if not prs:
+        label = "last week" if last_week else "this week"
+        print(f"No PRs found for {label} ({monday} to {friday})")
+        return
+
+    by_repo = {}
+    for pr in prs:
+        repo = format_repo(pr["url"])
+        by_repo.setdefault(repo, []).append(pr)
+
+    label = "Last week" if last_week else "This week"
+    print(f"{label} ({monday.strftime('%b %d')} - {friday.strftime('%b %d')}):\n")
+
+    for repo in sorted(by_repo):
+        print(f"{repo}:")
+        for pr in sorted(by_repo[repo], key=lambda p: p["number"]):
+            status = status_label(pr)
+            print(f"  [{status}] #{pr['number']} {pr['title']}  {pr['url']}")
+        print()
+
+
+if __name__ == "__main__":
+    main()
