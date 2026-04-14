@@ -14,9 +14,9 @@ fi
 
 count=$(echo "$configs" | wc -l)
 if [[ "$count" -gt 1 ]]; then
-  selected=$(echo "$configs" | fzf)
+  selected=$(echo "$configs" | fzf -1 --query="${1:-}")
 else
   selected="$configs"
 fi
 
-bazel cquery --output=starlark --starlark:expr 'json.encode(providers(target).get("@@rules_cc+//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo") or providers(target).get("//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo"))' "$selected" | head -1
+bazel cquery --output=starlark --starlark:expr 'json.encode(providers(target).get("@@rules_cc+//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo") or providers(target).get("//cc/private/toolchain_config:cc_toolchain_config_info.bzl%CcToolchainConfigInfo"))' "$selected" | head -1 | jq .
