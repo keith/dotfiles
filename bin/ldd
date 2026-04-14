@@ -24,7 +24,7 @@ case "$magic" in
     exec otool -L "$binary"
     ;;
   7f454c46)
-    exec llvm-readelf -d "$binary"
+    exec llvm readelf -d "$binary" | grep NEEDED
     ;;
   *)
     echo "ldd: $binary: unknown binary format" >&2
