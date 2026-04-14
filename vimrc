@@ -180,8 +180,7 @@ endfunction
 " Status line setup (without plugins)
 set laststatus=2 " Always show the statusline
 " Left Side
-set statusline=
-set statusline+=%#IncSearch#%{&paste?'\ \ PASTE\ ':''}%*
+set statusline=%#IncSearch#%{&paste?'\ \ PASTE\ ':''}%*
 set statusline+=\ %f
 set statusline+=\ %m
 set statusline+=\ %r
