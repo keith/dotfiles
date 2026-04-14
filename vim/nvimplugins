@@ -10,7 +10,5 @@ lewis6991/gitsigns.nvim
 neovim/nvim-lspconfig
 nvim-lua/plenary.nvim
 nvim-treesitter/nvim-treesitter
-nvim-treesitter/nvim-treesitter-textobjects
-RRethy/nvim-treesitter-textsubjects
 simrat39/symbols-outline.nvim
 Wansmer/treesj

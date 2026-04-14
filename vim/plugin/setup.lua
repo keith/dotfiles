@@ -143,53 +143,30 @@ vim.lsp.config("lua_ls", {
   },
 })
 
-local function has_highlights(lang)
-  local supported = {
-    c = true,
-    cpp = true,
-  }
-  return supported[lang] ~= nil
-end
-
-require("nvim-treesitter.configs").setup {
-  ensure_installed = "all",
-  ignore_install = {
-    "phpdoc", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2837
-    "zig", -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2049
-  },
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-    is_supported = has_highlights,
-  },
-
-  textsubjects = {
-    enable = true,
-    keymaps = {
-      ["."] = "textsubjects-smart",
-    },
-  },
-
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ic"] = "@call.outer",
-      },
-    },
-
-    lsp_interop = {
-      enable = true,
-      -- TODO: These conflict with deleting things while visually selected
-      -- peek_definition_code = {
-      --   ["df"] = "@function.outer",
-      --   ["dF"] = "@class.outer",
-      -- },
-    },
-  },
+local ignore_install = {
+  phpdoc = true, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2837
+  zig = true, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2049
 }
+
+local parsers = {}
+for _, lang in ipairs(require("nvim-treesitter.config").get_available()) do
+  if not ignore_install[lang] then
+    table.insert(parsers, lang)
+  end
+end
+require("nvim-treesitter").install(parsers)
+
+local highlight_langs = { c = true, cpp = true }
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+    if lang and highlight_langs[lang] then
+      pcall(vim.treesitter.start, args.buf, lang)
+    else
+      pcall(vim.treesitter.stop, args.buf)
+    end
+  end,
+})
 
 require("gitsigns").setup {
   signs = {
