@@ -6,6 +6,11 @@ name=$(basename "$0")
 executable=$(which -a "$name" | sed -n '2p')
 if [[ -x "$executable" ]]; then
   exec "$executable" "$@"
-else
-  exec llvm "$name" "$@"
 fi
+
+brew_path=$(brew --prefix clang-format 2>/dev/null || true)
+if [[ -x "$brew_path/bin/$name" ]]; then
+  exec "$brew_path/bin/$name" "$@"
+fi
+
+exec llvm "$name" "$@"
