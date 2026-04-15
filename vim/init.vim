@@ -7,6 +7,8 @@ if exists("$VIRTUAL_ENV") " TODO: there is some error with this somehow i loaded
   let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
 endif
 
+lua require('plugins')
+
 source ~/.vimrc
 
 set fileignorecase

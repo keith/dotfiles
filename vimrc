@@ -14,9 +14,8 @@ source ~/.vim/before/*.vim
 " Plugin setup
 filetype off
 
-set packpath^=~/.vimplugins/bundle
-if has('nvim')
-  set packpath^=~/.vimplugins/nvimbundle
+if !has('nvim')
+  set packpath^=~/.vimplugins/bundle
 endif
 
 filetype plugin indent on " Re-enable after setup
