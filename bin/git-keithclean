@@ -4,6 +4,7 @@ set -euo pipefail
 
 git clean -ffdx \
  -e .black \
+ -e .jj \
  -e .keithclangformat \
  -e .keithcmakeformat \
  -e .keithenv \
