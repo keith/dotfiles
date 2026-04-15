@@ -28,7 +28,6 @@ vim/black
 !config/awesome
 !config/newsboat
 !config/nixpkgs
-!config/webkitten
 !config/yamllint
 
 !mutt/temp/.gitkeep
