@@ -66,6 +66,7 @@ build:t --test_summary=terse
 
 build:l --bes_backend=grpc://localhost:1985
 build:l --bes_results_url=http://localhost:8080/invocation/
+build:l --build_event_publish_all_actions
 build:l --build_metadata=VISIBILITY=PUBLIC
 build:l --experimental_execution_log_compact_file=compact_execution.log
 build:l --experimental_profile_include_primary_output
