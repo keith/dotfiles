@@ -6,10 +6,10 @@ readonly sock="$HOME/.opener.sock"
 
 if [[ -n "${SSH_CLIENT:-}" ]]; then
   if [[ -S "$sock" ]]; then
-    if [[ -p /dev/stdin ]]; then
-      cat - | nc -U "$sock"
+    if (( $# > 0 )); then
+      printf '%s\n' "$*" | nc -U "$sock"
     else
-      echo "${@}" | nc -U "$sock"
+      cat - | nc -U "$sock"
     fi
 
     exit 0
