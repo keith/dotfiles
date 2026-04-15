@@ -1,81 +1,499 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-set -euo pipefail
+import argparse
+import json
+import shutil
+import subprocess
+import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from typing import Callable, NoReturn, TypedDict, TypeVar
 
-containsElement() {
-  local e
-  local element=$1
-  shift
-  for e in "$@"
-  do
-    [[ "$e" == "$element" ]] && return 0
-  done
-  return 1
-}
 
-update=false
-if [[ "${1:-}" == --update ]]; then
-  update=true
-elif [[ -n "${1:-}" ]]; then
-  echo "error: invalid argument $1" >&2
-  exit 1
-fi
+class LockEntry(TypedDict):
+    repo: str
+    branch: str
+    sha: str
 
-prefixes=("" nvim)
-for prefix in "${prefixes[@]}"
-do
-  file=~/.vim/${prefix}plugins
-  target=~/.vimplugins/${prefix}bundle/start
-  mkdir -p "$target"
 
-  if [[ ! -e "$file" ]]; then
-    echo "$file doesn't exist"
-    exit 1
-  fi
+Lockfile = dict[str, list[LockEntry]]
 
-names=()
-commands=()
-while read -r repo
-do
-  if [[ -z "$repo" ]]; then
-    continue
-  fi
+GROUPS = ["plugins", "nvimplugins"]
 
-  name="${repo#*/}"
-  names+=("$name")
-  path="$target/$name"
-  if [[ -d "$path" ]];then
-    if [[ "$update" == true ]]; then
-      commands+=("echo '$path'; git -C '$path' pull || true")
-    fi
-  else
-    commands+=("git clone --recursive https://github.com/$repo.git '$path'")
-  fi
-done < "$file"
+T = TypeVar("T")
 
-if [[ -n "${commands:-}" ]]; then
-  if command -v parallel &> /dev/null && parallel --version >/dev/null 2>&1;then
-    parallel -j0 ::: "${commands[@]}"
-  elif command -v parallel &> /dev/null; then
-    echo "note: install gnu-parallel instead of moreutils for better output grouping"
-    parallel -- "${commands[@]}"
-  else
-    echo "note: install gnu-parallel to run commands in parallel"
-    for cmd in "${commands[@]}"
-    do
-      eval "$cmd &"
-    done
 
-    wait
-  fi
-fi
+def run_parallel(
+    repos: list[str],
+    fn: Callable[[str], T],
+    jobs: int,
+) -> dict[str, T]:
+    """Run fn for each repo in parallel, returning results keyed by repo."""
+    results: dict[str, T] = {}
+    with ThreadPoolExecutor(max_workers=jobs) as pool:
+        futures = {pool.submit(fn, r): r for r in repos}
+        for future in as_completed(futures):
+            repo = futures[future]
+            try:
+                results[repo] = future.result()
+            except Exception as e:
+                print(f"  {repo}: error: {e}", file=sys.stderr)
+    return results
 
-for dir in "$target"/*
-do
-  name=$(basename "$dir")
-  if ! containsElement "$name" "${names[@]}"; then
-    echo "Removing $dir"
-    rm -rf "$dir"
-  fi
-done
-done
+
+def run_git(
+    *args: str,
+    cwd: Path | None = None,
+    capture: bool = True,
+    check: bool = True,
+) -> str | None:
+    result = subprocess.run(
+        ["git"] + list(args),
+        cwd=cwd,
+        capture_output=capture,
+        text=True,
+    )
+    if check and result.returncode != 0:
+        raise RuntimeError(f"git {' '.join(args)} failed: {result.stderr.strip()}")
+    return result.stdout.strip() if capture else None
+
+
+def read_plugin_file(path: Path) -> list[str]:
+    """Read a plugin definition file, returning list of owner/repo strings."""
+    if not path.exists():
+        print(f"error: {path} doesn't exist", file=sys.stderr)
+        sys.exit(1)
+    repos = []
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if line:
+            repos.append(line)
+    return repos
+
+
+def read_lockfile(path: Path) -> Lockfile:
+    """Read the lockfile."""
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text())
+
+
+def lock_entries_by_repo(entries: list[LockEntry]) -> dict[str, LockEntry]:
+    """Index a list of lock entries by repo name."""
+    return {entry["repo"]: entry for entry in entries}
+
+
+def write_lockfile(path: Path, data: Lockfile) -> None:
+    """Write lockfile, sorting entries within each group."""
+    sorted_data = {
+        key: sorted(entries, key=lambda e: e["repo"].lower())
+        for key, entries in sorted(data.items())
+    }
+    path.write_text(json.dumps(sorted_data, indent=2) + "\n")
+
+
+def resolve_default_branch(url: str) -> str:
+    """Query the remote for its default branch."""
+    output = run_git("ls-remote", "--symref", url, "HEAD")
+    assert output is not None
+    for line in output.splitlines():
+        if line.startswith("ref:"):
+            return line.split("refs/heads/")[1].split()[0]
+    return "main"
+
+
+def resolve_remote_branch(url: str, branch: str) -> str:
+    """Get the sha for a branch from the remote."""
+    output = run_git("ls-remote", url, f"refs/heads/{branch}")
+    if not output:
+        raise RuntimeError(f"branch '{branch}' not found on {url}")
+    return output.split()[0]
+
+
+def repo_url(repo: str) -> str:
+    return f"https://github.com/{repo}.git"
+
+
+def detect_branch(path: Path) -> LockEntry:
+    """Detect the current branch and sha of a cloned repo."""
+    sha = run_git("rev-parse", "HEAD", cwd=path)
+    assert sha is not None
+
+    branch = run_git(
+        "symbolic-ref",
+        "--quiet",
+        "--short",
+        "HEAD",
+        cwd=path,
+        check=False,
+    )
+    if branch:
+        return {"branch": branch, "sha": sha, "repo": ""}
+
+    # Detached HEAD — fall back to the remote default branch.
+    remote_head = run_git(
+        "rev-parse",
+        "--abbrev-ref",
+        "origin/HEAD",
+        cwd=path,
+        check=False,
+    )
+    if remote_head and "/" in remote_head:
+        return {"branch": remote_head.split("/", 1)[1], "sha": sha, "repo": ""}
+
+    return {"branch": "main", "sha": sha, "repo": ""}
+
+
+def sync_plugin(repo: str, entry: LockEntry, target_dir: Path) -> None:
+    """Ensure a plugin is cloned and at the correct sha."""
+    name = repo.split("/")[1]
+    path = target_dir / name
+    sha = entry["sha"]
+    url = repo_url(repo)
+
+    if path.exists():
+        try:
+            run_git("cat-file", "-e", sha, cwd=path)
+        except RuntimeError:
+            run_git("fetch", "--quiet", url, cwd=path)
+        current = run_git("rev-parse", "HEAD", cwd=path)
+        if current != sha:
+            run_git("checkout", "--quiet", sha, cwd=path)
+            run_git("submodule", "update", "--init", "--recursive", cwd=path)
+            print(f"  {name}: checked out {sha[:12]}")
+        else:
+            print(f"  {name}: up to date")
+    else:
+        run_git("clone", "--quiet", "--recursive", url, str(path))
+        run_git("checkout", "--quiet", sha, cwd=path)
+        run_git("submodule", "update", "--init", "--recursive", cwd=path)
+        print(f"  {name}: cloned at {sha[:12]}")
+
+
+def upgrade_plugin(repo: str, lock: dict[str, LockEntry]) -> LockEntry:
+    """Fetch latest sha for the plugin's branch and update the entry."""
+    entry = lock.get(repo)
+    if entry is None:
+        entry = {
+            "repo": repo,
+            "branch": resolve_default_branch(repo_url(repo)),
+            "sha": "",
+        }
+
+    name = repo.split("/")[1]
+    url = repo_url(repo)
+    branch = entry["branch"]
+    old_sha = entry.get("sha", "")
+    new_sha = resolve_remote_branch(url, branch)
+
+    if old_sha == new_sha:
+        print(f"  {name}: up to date on {branch}")
+    else:
+        short_old = old_sha[:12] if old_sha else "none"
+        print(f"  {name}: {short_old} -> {new_sha[:12]} ({branch})")
+
+    return {**entry, "sha": new_sha}
+
+
+def lock_plugin(repo: str, target_dir: Path) -> LockEntry:
+    """Record the current state of a cloned plugin."""
+    name = repo.split("/")[1]
+    path = target_dir / name
+    if not path.exists():
+        raise RuntimeError(f"{name} is not cloned")
+    info = detect_branch(path)
+    info["repo"] = repo
+    print(f"  {name}: {info['sha'][:12]} ({info['branch']})")
+    return info
+
+
+def find_repo_for_plugin(name: str, plugin_dir: Path) -> tuple[str, str] | None:
+    """Find the full owner/repo and group for a plugin by short name."""
+    for group in GROUPS:
+        plugin_file = plugin_dir / group
+        if not plugin_file.exists():
+            continue
+        for repo in read_plugin_file(plugin_file):
+            if repo.split("/")[1] == name or repo == name:
+                return repo, group
+    return None
+
+
+def target_dir_for_group(target_base: Path, group: str) -> Path:
+    return target_base / f"{group.removesuffix('plugins')}bundle" / "start"
+
+
+def prune_plugins(all_repos: list[str], target_dir: Path) -> None:
+    """Remove cloned plugins not in the definition file."""
+    repo_names = {r.split("/")[1] for r in all_repos}
+    for child in target_dir.iterdir():
+        if child.name not in repo_names:
+            print(f"  removing {child.name}")
+            shutil.rmtree(child)
+
+
+def check_outdated(
+    repo: str, lock: dict[str, LockEntry], target_dir: Path, verbose: bool
+) -> str | None:
+    """Check if a plugin's locked sha is behind the remote. Returns output or None."""
+    entry = lock.get(repo)
+    if entry is None:
+        return f"  {repo.split('/')[1]}: not in lockfile"
+    name = repo.split("/")[1]
+    url = repo_url(repo)
+    remote_sha = resolve_remote_branch(url, entry["branch"])
+    if remote_sha == entry["sha"]:
+        return None
+    lines = [f"  {name}: {entry['sha'][:12]} -> {remote_sha[:12]} ({entry['branch']})"]
+    if verbose:
+        path = target_dir / name
+        if path.exists():
+            run_git(
+                "fetch",
+                "--quiet",
+                url,
+                f"+refs/heads/{entry['branch']}:refs/outdated-check",
+                cwd=path,
+            )
+            log = run_git(
+                "log",
+                "--oneline",
+                "--color=always",
+                f"{entry['sha']}..refs/outdated-check",
+                cwd=path,
+                check=False,
+            )
+            run_git(
+                "update-ref",
+                "-d",
+                "refs/outdated-check",
+                cwd=path,
+                check=False,
+            )
+            if log:
+                for line in log.splitlines():
+                    lines.append(f"    {line}")
+    return "\n".join(lines)
+
+
+def cmd_outdated(
+    repos: list[str],
+    lock: dict[str, LockEntry],
+    target_dir: Path,
+    jobs: int,
+    verbose: bool,
+) -> None:
+    if not lock:
+        print(
+            "  error: no lockfile, run 'lock' or 'upgrade' first",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    results = run_parallel(
+        repos,
+        lambda r: check_outdated(r, lock, target_dir, verbose),
+        jobs,
+    )
+    for repo in repos:
+        output = results.get(repo)
+        if output is not None:
+            print(output)
+
+
+def cmd_upgrade(
+    repos: list[str],
+    lock: dict[str, LockEntry],
+    target_dir: Path,
+    jobs: int,
+) -> dict[str, LockEntry]:
+    new_entries = run_parallel(
+        repos,
+        lambda r: upgrade_plugin(r, lock),
+        jobs,
+    )
+    if new_entries:
+        print("  syncing...")
+        run_parallel(
+            list(new_entries),
+            lambda r: sync_plugin(r, new_entries[r], target_dir),
+            jobs,
+        )
+    return new_entries
+
+
+def cmd_sync(
+    repos: list[str],
+    lock: dict[str, LockEntry],
+    target_dir: Path,
+    jobs: int,
+) -> None:
+    if not lock:
+        print(
+            "  error: no lockfile, run 'lock' or 'upgrade' first",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    syncable = []
+    for repo in repos:
+        if repo not in lock:
+            print(
+                f"  {repo}: not in lockfile, run 'upgrade' to add it",
+                file=sys.stderr,
+            )
+        else:
+            syncable.append(repo)
+
+    run_parallel(
+        syncable,
+        lambda r: sync_plugin(r, lock[r], target_dir),
+        jobs,
+    )
+
+
+def process_group(
+    group: str,
+    plugin_dir: Path,
+    target_base: Path,
+    lock: dict[str, LockEntry],
+    command: str,
+    jobs: int,
+    filter_repos: set[str] | None,
+    verbose: bool = False,
+) -> list[LockEntry] | None:
+    plugin_file = plugin_dir / group
+    target_dir = target_dir_for_group(target_base, group)
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    all_repos = read_plugin_file(plugin_file)
+    repos = (
+        [r for r in all_repos if r in filter_repos]
+        if filter_repos is not None
+        else all_repos
+    )
+
+    if not repos and filter_repos is not None:
+        return None
+
+    print(f"[{group}]")
+
+    new_entries = {}
+    if command == "lock":
+        new_entries = run_parallel(
+            repos,
+            lambda r: lock_plugin(r, target_dir),
+            jobs,
+        )
+
+    elif command == "upgrade":
+        new_entries = cmd_upgrade(repos, lock, target_dir, jobs)
+    elif command == "sync":
+        cmd_sync(repos, lock, target_dir, jobs)
+    elif command == "outdated":
+        cmd_outdated(repos, lock, target_dir, jobs, verbose)
+
+    if filter_repos is None and command not in ("outdated",):
+        prune_plugins(all_repos, target_dir)
+
+    return list(new_entries.values()) if new_entries else None
+
+
+def resolve_filter(plugin_names: list[str], plugin_dir: Path) -> set[str]:
+    """Resolve short plugin names to full owner/repo strings."""
+    resolved: set[str] = set()
+    for name in plugin_names:
+        result = find_repo_for_plugin(name, plugin_dir)
+        if result is None:
+            print(
+                f"error: plugin '{name}' not found in any plugin file",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        resolved.add(result[0])
+    return resolved
+
+
+def main() -> NoReturn | None:
+    parser = argparse.ArgumentParser(
+        prog="plugins",
+        description="Manage vim/neovim plugins",
+    )
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    subparsers.add_parser("sync", help="Checkout all plugins to lockfile shas")
+    subparsers.add_parser("lock", help="Record current plugin state to lockfile")
+    outdated_parser = subparsers.add_parser(
+        "outdated",
+        help="Check which plugins are outdated",
+    )
+    outdated_parser.add_argument(
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="Don't show commits between locked and latest sha",
+    )
+
+    upgrade_parser = subparsers.add_parser(
+        "upgrade",
+        help="Upgrade plugins to latest remote commits",
+    )
+    upgrade_parser.add_argument(
+        "plugin",
+        nargs="*",
+        help="Plugin name(s) to upgrade (default: all)",
+    )
+
+    args = parser.parse_args()
+    command = args.command
+
+    plugin_dir = Path.home() / ".vim"
+    target_base = Path.home() / ".vimplugins"
+    lockfile_path = plugin_dir / "plugins.lock.json"
+    jobs = 8
+
+    filter_repos = None
+    if command == "upgrade" and args.plugin:
+        filter_repos = resolve_filter(args.plugin, plugin_dir)
+    verbose = not getattr(args, "quiet", False)
+
+    lockfile = read_lockfile(lockfile_path)
+    new_lockfile: Lockfile = {}
+    upgraded_any = False
+
+    for group in GROUPS:
+        lock = lock_entries_by_repo(lockfile.get(group, []))
+        entries = process_group(
+            group,
+            plugin_dir,
+            target_base,
+            lock,
+            command,
+            jobs,
+            filter_repos,
+            verbose,
+        )
+        if entries is not None:
+            upgraded_any = True
+            if filter_repos is not None:
+                # Merge upgraded entries back into existing lock
+                updated = lock.copy()
+                for entry in entries:
+                    updated[entry["repo"]] = entry
+                new_lockfile[group] = list(updated.values())
+            else:
+                new_lockfile[group] = entries
+        elif group in lockfile and filter_repos is not None:
+            # Preserve existing group when not touched
+            new_lockfile[group] = lockfile[group]
+
+    if command == "upgrade" and not upgraded_any:
+        names = ", ".join(args.plugin) if args.plugin else "any"
+        print(f"error: nothing upgraded ({names})", file=sys.stderr)
+        sys.exit(1)
+
+    if new_lockfile:
+        write_lockfile(lockfile_path, new_lockfile)
+
+
+if __name__ == "__main__":
+    main()
