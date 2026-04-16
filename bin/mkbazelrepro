@@ -67,6 +67,10 @@ int main() {
 }
 EOF
 
+cat > .gitignore <<EOF
+/bazel-*
+EOF
+
 git init
 git add .
 git commit -m "Initial commit"
