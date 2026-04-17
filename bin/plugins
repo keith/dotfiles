@@ -21,11 +21,11 @@ elif [[ -n "${1:-}" ]]; then
   exit 1
 fi
 
-prefixes=("" nvim)
+prefixes=("") # No longer using nvim here
 for prefix in "${prefixes[@]}"
 do
   file=~/.vim/${prefix}plugins
-  target=~/.vimplugins/${prefix}bundle/start
+  target=~/.vimplugins/pack/${prefix}bundle/start
   mkdir -p "$target"
 
   if [[ ! -e "$file" ]]; then
