@@ -14,7 +14,8 @@ if [[ ! -s $patterns ]]; then
   exit 1
 fi
 
-if [[ $(wc -l < "$patterns") -ne 1 ]]; then
+count=$(wc -l < "$patterns")
+if [[ $count -gt 5 ]]; then
   echo "note: more than one test matches '$name':"
   echo
   cat "$patterns"
@@ -25,10 +26,12 @@ if [[ $(wc -l < "$patterns") -ne 1 ]]; then
   if [[ "$answer" != "Y" && "$answer" != "y" && "$answer" != "" ]]; then
     exit 1
   fi
+fi
 
-  args=(--target_pattern_file="$patterns")
-else
+if [[ $count -eq 1 ]]; then
   args=("$(cat "$patterns")")
+else
+  args=(--target_pattern_file="$patterns")
 fi
 
 set -x
