@@ -18,6 +18,7 @@ dev_subdirs=$(printf "%s:" ~/dev/*)
 export CDPATH="${dev_subdirs}$HOME/dev"
 
 export EDITOR=nvim
+export SUDO_EDITOR=vim
 
 # i - Vim's smart case
 # j.5 - Center search results
