@@ -109,6 +109,10 @@ for _, server in ipairs(servers) do
   vim.lsp.enable(server)
 end
 
+vim.lsp.config("sourcekit", {
+  filetypes = { "swift", "objc", "objcpp" },
+})
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 vim.lsp.config("lua_ls", {
   on_init = function(client)
