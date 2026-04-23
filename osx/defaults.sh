@@ -490,6 +490,9 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
+# Open HTML files as plain text
+defaults write com.apple.TextEdit IgnoreHTML -int 1
+
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
 # Open and save files as UTF-8 in TextEdit
