@@ -12,53 +12,24 @@ elif [[ -f .bazeliskrc ]]; then
   fi
 fi
 
+for var in "${!DEV@}"; do
+  if [[ "$var" =~ ^DEV[0-9]+$ ]]; then
+    echo "error: $var is no longer supported, use DEV=${var#DEV} instead" >&2
+    exit 1
+  fi
+done
+
 if [[ -n "${DEV:-}" ]]; then
+  suffix=""
+  if [[ "$DEV" != "1" ]]; then
+    suffix="$DEV"
+  fi
+  bazel_dev="$HOME/dev/bazelbuild/bazel$suffix/bazel-bin/src/bazel-dev"
   if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
+    BAZEL_REAL="$bazel_dev" exec "$wrapper" "$@"
   fi
 
-  exec "$HOME/dev/bazelbuild/bazel/bazel-bin/src/bazel-dev" "$@"
-fi
-
-if [[ -n "${DEV2:-}" ]]; then
-  if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel2/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
-  fi
-
-  exec "$HOME/dev/bazelbuild/bazel2/bazel-bin/src/bazel-dev" "$@"
-fi
-
-if [[ -n "${DEV3:-}" ]]; then
-  if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel3/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
-  fi
-
-  exec "$HOME/dev/bazelbuild/bazel3/bazel-bin/src/bazel-dev" "$@"
-fi
-
-
-if [[ -n "${DEV4:-}" ]]; then
-  if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel4/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
-  fi
-
-  exec "$HOME/dev/bazelbuild/bazel4/bazel-bin/src/bazel-dev" "$@"
-fi
-
-if [[ -n "${DEV5:-}" ]]; then
-  if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel5/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
-  fi
-
-  exec "$HOME/dev/bazelbuild/bazel5/bazel-bin/src/bazel-dev" "$@"
-fi
-
-if [[ -n "${DEV6:-}" ]]; then
-  if [[ -f "$wrapper" ]]; then
-    BAZEL_REAL="$HOME/dev/bazelbuild/bazel6/bazel-bin/src/bazel-dev" exec "$wrapper" "$@"
-  fi
-
-  exec "$HOME/dev/bazelbuild/bazel6/bazel-bin/src/bazel-dev" "$@"
+  exec "$bazel_dev" "$@"
 fi
 
 
