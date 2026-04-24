@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo=~/dev/keith/tag
+if [[ ! -d "$repo" ]]; then
+  logfile=$(mktemp)
+  if ! git clone https://github.com/keith/tag.git "$repo" >"$logfile" 2>&1; then
+    echo "error: $(cat "$logfile")" >&2
+    exit 1
+  fi
+fi
+
+executable=$repo/build/tag
+if [[ ! -x "$executable" ]]; then
+  logfile=$(mktemp)
+  pushd "$repo" > /dev/null
+
+  cmake -B build -S "$repo" -DCMAKE_BUILD_TYPE=Release >"$logfile" 2>&1 || {
+    echo "error: $(cat "$logfile")" >&2
+    exit 1
+  }
+  cmake --build build >"$logfile" 2>&1 || {
+    echo "error: $(cat "$logfile")" >&2
+    exit 1
+  }
+
+  popd > /dev/null
+fi
+
+exec "$executable" "$@"
