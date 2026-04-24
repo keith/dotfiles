@@ -54,6 +54,8 @@ fi
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+export DO_NOT_TRACK=true
+
 # Swift compiler sccache setup
 export SCCACHE_CACHE_SIZE=100G
 export SWIFT_USE_SCCACHE=1
@@ -70,6 +72,7 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 
 export GH_NO_UPDATE_NOTIFIER=1
 export GH_BROWSER=open
+export GH_TELEMETRY=false
 
 export FZF_DEFAULT_OPTS="--layout=reverse --height=11 --bind ctrl-j:accept"
 
