@@ -54,6 +54,9 @@ fi
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 export PIP_DISABLE_PIP_VERSION_CHECK=1
 
+export CLAUDE_CODE_EFFORT_LEVEL=max
+export CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING=1
+
 export DO_NOT_TRACK=true
 
 # Swift compiler sccache setup
