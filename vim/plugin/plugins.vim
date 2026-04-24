@@ -53,8 +53,8 @@ nnoremap ]g :Gitsigns nav_hunk next<CR>
 nnoremap <leader>hs :Gitsigns stage_hunk<CR>
 nnoremap <leader>hu :Gitsigns undo_stage_hunk<CR>
 
-nnoremap [d :lua vim.diagnostic.goto_prev()<CR>
-nnoremap ]d :lua vim.diagnostic.goto_next()<CR>
+nnoremap [d :lua vim.diagnostic.jump({ count = -1 })<CR>
+nnoremap ]d :lua vim.diagnostic.jump({ count = 1 })<CR>
 
 nnoremap <leader>g :Git blame<CR>
 nnoremap <leader>v :.,.GBrowse<CR>
