@@ -33,7 +33,7 @@
       "src": "https://github.com/keith/gist.vim"
     },
     "gitsigns.nvim": {
-      "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
+      "rev": "6d808f99bd63303646794406e270bd553ad7792e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "kotlin-vim": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/udalov/kotlin-vim"
     },
     "llvm.vim": {
-      "rev": "45f37f7244f18f040e5133e03dcb80aeeb7045d7",
+      "rev": "3c7a2f70084fbe7b2e3493cb3cfe596d41986121",
       "src": "https://github.com/llvm/llvm.vim"
     },
     "modulemap-vim": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "8a9378a822719346a0288fa004dab302ca3c0a8f",
+      "rev": "81878de76c0de4ce289513734ad80c31ec7871b8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/majutsushi/tagbar"
     },
     "treesj": {
-      "rev": "26bc2a8432ba3ea79ed6aa346fba780a3d372570",
+      "rev": "5fa4e7ba3517f8fe743bb4488f9e9c7ce83330fc",
       "src": "https://github.com/Wansmer/treesj"
     },
     "vim-abolish": {
