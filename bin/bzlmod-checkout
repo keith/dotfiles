@@ -215,6 +215,15 @@ def _main(module: str, skip_download: bool) -> None:
         else:
             dest.symlink_to(overlay_file)
 
+    # If the source archive has no MODULE.bazel and none was patched/overlaid in,
+    # Bazel uses the registry's MODULE.bazel directly. Symlink it so the local
+    # checkout matches what Bazel sees.
+    module_bazel_dest = extract_dir / "MODULE.bazel"
+    if not module_bazel_dest.exists() and not module_bazel_dest.is_symlink():
+        source_module_bazel = newest_version / "MODULE.bazel"
+        print(f"Symlinking registry MODULE.bazel from {source_module_bazel} ...")
+        module_bazel_dest.symlink_to(source_module_bazel)
+
 
 if __name__ == "__main__":
     args = _build_parser().parse_args()
