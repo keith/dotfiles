@@ -1,5 +1,20 @@
 function! s:bzl_includeexpr(fname) abort
-  let l:parts = split(a:fname, '//')
+  let l:fname = a:fname
+
+  if l:fname =~# '__BAZEL_XCODE_SDKROOT__'
+    if !exists('s:xcode_sdk_root')
+      let s:xcode_sdk_root = trim(system('xcrun --show-sdk-path'))
+    endif
+    let l:fname = substitute(l:fname, '__BAZEL_XCODE_SDKROOT__', '\=s:xcode_sdk_root', 'g')
+  endif
+  if l:fname =~# '__BAZEL_XCODE_DEVELOPER_DIR__'
+    if !exists('s:xcode_developer_dir')
+      let s:xcode_developer_dir = trim(system('xcode-select -p'))
+    endif
+    let l:fname = substitute(l:fname, '__BAZEL_XCODE_DEVELOPER_DIR__', '\=s:xcode_developer_dir', 'g')
+  endif
+
+  let l:parts = split(l:fname, '//')
   let l:path = l:parts[-1]
   let l:parts = split(l:path, ':')
   let l:last_component = remove(l:parts, -1)
