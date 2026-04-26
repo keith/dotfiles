@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+command -v sensors >/dev/null 2>&1 || exit 0
+
+reading=$(sensors 2>/dev/null)
+tdie=$(echo "$reading" | awk '/Tdie:/ {print $2; exit}')
+tctl=$(echo "$reading" | awk '/Tctl:/ {print $2; exit}')
+pkg=$(echo "$reading"  | awk '/Package id 0:/ {print $4; exit}')
+
+if [[ -n "$tdie" && -n "$tctl" && "$tdie" != "$tctl" ]]; then
+  printf "  CPU temp:     %s (real / Tdie)   %s (fan estimate / Tctl)\n" "$tdie" "$tctl"
+elif [[ -n "$tdie" ]]; then
+  printf "  CPU temp:     %s\n" "$tdie"
+elif [[ -n "$tctl" ]]; then
+  printf "  CPU temp:     %s\n" "$tctl"
+elif [[ -n "$pkg" ]]; then
+  printf "  CPU temp:     %s\n" "$pkg"
+fi
+
