@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+#
+# Format the backup drive as ext4, mount it, and add an fstab entry.
+#
+# Usage:
+#   sudo ./setup-drive.sh /dev/sdX
+#
+
+set -euo pipefail
+
+readonly backup_mount="/mnt/backup"
+readonly backup_dir="$backup_mount/snapshots"
+
+# Print the disk that holds a given mount point, or nothing if not mounted.
+get_disk_holding() {
+  local mount_point="$1"
+  if ! mountpoint -q "$mount_point" 2>/dev/null; then
+    return
+  fi
+  local src
+  src=$(findmnt -n -o SOURCE "$mount_point" 2>/dev/null || true)
+  if [[ -z "$src" || ! -b "$src" ]]; then
+    return
+  fi
+  local parent
+  parent=$(lsblk -no PKNAME "$src" 2>/dev/null | tr -d '[:space:]')
+  if [[ -n "$parent" ]]; then
+    echo "/dev/$parent"
+  else
+    echo "$src"
+  fi
+}
+
+if [[ $EUID -ne 0 ]]; then
+  echo "error: run with sudo." >&2
+  exit 1
+fi
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: sudo $0 /dev/sdX" >&2
+  exit 1
+fi
+
+target="$1"
+
+if [[ ! -b "$target" ]]; then
+  echo "error: $target is not a block device." >&2
+  exit 1
+fi
+
+target_type=$(lsblk -no TYPE "$target" 2>/dev/null | head -1)
+if [[ "$target_type" != "disk" ]]; then
+  echo "error: $target must be a whole disk (got type: $target_type)" >&2
+  exit 1
+fi
+
+declare -a system_disks=()
+for system_mount in / /boot /boot/efi; do
+  disk=$(get_disk_holding "$system_mount")
+  if [[ "$disk" == "$target" ]]; then
+    echo "error: $target is a system disk (holds $system_mount)." >&2
+    exit 1
+  else
+    system_disks+=("$disk")
+  fi
+done
+
+echo "All block devices on this system:"
+echo "---------------------------------"
+lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,MOUNTPOINTS
+echo
+echo "System disks (will not be touched):"
+for disk in "${system_disks[@]}"; do
+  echo "  $disk"
+done
+echo
+echo "Target disk for backup (WILL BE WIPED):"
+lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,MOUNTPOINTS "$target"
+echo
+
+echo "WARNING: $target will be reformatted as ext4. All data on it will be lost."
+read -rp "Type the device path ($target) to confirm: " confirm
+if [[ "$confirm" != "$target" ]]; then
+  echo "Aborted. Nothing was changed."
+  exit 1
+fi
+
+umount "$target" 2>/dev/null || true
+# Also unmount any partitions on the target, just in case
+for part in $(lsblk -lnpo NAME "$target" | tail -n +2); do
+  umount "$part" 2>/dev/null || true
+done
+mkfs.ext4 -F -L backup "$target"
+
+mkdir -p "$backup_mount"
+uuid=$(blkid -s UUID -o value "$target")
+
+if ! grep -q "$uuid" /etc/fstab; then
+  cat >> /etc/fstab <<EOF
+# Backup drive (added by setup-drive.sh)
+UUID=$uuid  $backup_mount  ext4  defaults,noatime,nofail  0  2
+EOF
+fi
+
+mount "$backup_mount"
+mkdir -p "$backup_dir"
+
+cat <<EOF
+Drive setup complete.
+
+  Device:          $target
+  Mount point:     $backup_mount
+  Snapshots dir:   $backup_dir
+
+Next: run setup-schedule.sh to install rsync-backup.sh and start the timer.
+EOF

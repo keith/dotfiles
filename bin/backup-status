@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly status_file="/var/lib/backup/status"
+readonly stale_hours=30
+
+if [[ ! -f "$status_file" ]]; then
+  echo "[backup] No backups have run yet."
+  exit 0
+fi
+
+last_run=$(grep '^last_run=' "$status_file" | cut -d= -f2-)
+last_result=$(grep '^last_result=' "$status_file" | cut -d= -f2-)
+last_message=$(grep '^last_message=' "$status_file" | cut -d= -f2-)
+
+last_epoch=$(date -d "$last_run" +%s 2>/dev/null || echo 0)
+now_epoch=$(date +%s)
+hours_since=$(( (now_epoch - last_epoch) / 3600 ))
+
+if [[ "$last_result" == "OK" ]]; then
+  if [[ $hours_since -gt $stale_hours ]]; then
+    echo "[backup] WARNING: last successful backup was ${hours_since}h ago ($last_run)"
+    exit 1
+  fi
+  echo "[backup] OK — last run $last_run"
+  exit 0
+fi
+
+echo "[backup] FAILURE — $last_message ($last_run)"
+echo "[backup] Check: journalctl -u rsync-backup.service -n 50"
+exit 2
