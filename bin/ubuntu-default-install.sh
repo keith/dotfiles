@@ -10,7 +10,8 @@ wget -O - https://repos.azul.com/azul-repo.key 2>/dev/null \
 echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" \
   | sudo tee /etc/apt/sources.list.d/zulu.list >/dev/null
 
-wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
+test -f /usr/share/doc/kitware-archive-keyring/copyright \
+  || wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
   | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
 
 echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" \
@@ -26,6 +27,9 @@ sudo apt-add-repository -y ppa:git-core/ppa
 sudo add-apt-repository -y ppa:longsleep/golang-backports
 
 sudo apt-get update
+
+test -f /usr/share/doc/kitware-archive-keyring/copyright \
+  || sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
 
 sudo apt install -y \
   ansifilter \
@@ -85,7 +89,6 @@ sudo apt install -y \
   zstd \
   zulu24-jdk
 
-sudo rm -f /usr/share/keyrings/kitware-archive-keyring.gpg
 sudo apt autoremove -y
 
 go install github.com/bazelbuild/bazelisk@latest
