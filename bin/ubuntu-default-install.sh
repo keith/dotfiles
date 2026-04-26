@@ -98,10 +98,3 @@ pip3 install pyright
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 "$script_dir"/install-nvim
-
-cd /tmp
-git clone https://github.com/keith/tag
-cd tag
-cmake -B build
-cmake --build build
-sudo cmake --install build
