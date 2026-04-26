@@ -3,10 +3,12 @@
 set -euo pipefail
 
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl gpg wget
+sudo apt-get install -y ca-certificates gpg wget
 
-curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
-echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
+wget -O - https://repos.azul.com/azul-repo.key 2>/dev/null \
+  | gpg --dearmor - | sudo tee /usr/share/keyrings/azul.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" \
+  | sudo tee /etc/apt/sources.list.d/zulu.list >/dev/null
 
 wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
   | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
@@ -30,8 +32,10 @@ sudo apt install -y \
   autoconf \
   bash \
   build-essential \
+  ca-certificates \
   cmake \
   colordiff \
+  curl \
   fd-find \
   forkstat \
   fzf \
@@ -41,6 +45,7 @@ sudo apt install -y \
   gh \
   git \
   golang \
+  gpg \
   htop \
   jq \
   kitware-archive-keyring \
@@ -74,6 +79,7 @@ sudo apt install -y \
   universal-ctags \
   unzip \
   vim \
+  wget \
   zip \
   zsh \
   zstd \
