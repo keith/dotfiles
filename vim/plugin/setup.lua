@@ -113,6 +113,21 @@ vim.lsp.config("sourcekit", {
   filetypes = { "swift", "objc", "objcpp" },
 })
 
+local metals_config = require("metals").bare_config()
+metals_config.capabilities = capabilities
+metals_config.settings = {
+  serverVersion = "2.0.0-M2",
+  automaticImportBuild = "all",
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "scala", "sbt", "java" },
+  callback = function()
+    require("metals").initialize_or_attach(metals_config)
+  end,
+  group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
+})
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 vim.lsp.config("lua_ls", {
   on_init = function(client)

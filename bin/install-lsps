@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+# For https://metals-lsp.org/neovim
+brew install coursier/formulas/coursier
+
 cargo install --git https://github.com/salesforce-misc/bazelrc-lsp
 cargo +nightly-2023-12-06 install --git https://github.com/withered-magic/starpls starpls --locked
 cargo install --git https://github.com/astral-sh/ruff ty --locked

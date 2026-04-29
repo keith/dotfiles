@@ -30,6 +30,7 @@
 .vimrc.local
 .watchman-cookie*
 /.hg/*
+/.metals
 /external
 \#*\#
 bazel_cache

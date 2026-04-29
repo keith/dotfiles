@@ -64,6 +64,10 @@
       "rev": "bf5abe69c1874531f359a822d0cff4d73e26113f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
+    "nvim-metals": {
+      "rev": "4cc98f07ec96bb748a8796831767538e0e4f9be4",
+      "src": "https://github.com/scalameta/nvim-metals"
+    },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
