@@ -5,7 +5,9 @@
 .*.s[a-w][a-z]
 ._*
 .AppleDouble
+.bazelproject
 .black
+.bsp
 .ccls-cache
 .clangd
 .claude/settings.local.json
