@@ -12,6 +12,8 @@ args=(
 
 if command -v sccache >/dev/null; then
   args+=(--sccache)
+else
+  args+=(--sccache false)
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
