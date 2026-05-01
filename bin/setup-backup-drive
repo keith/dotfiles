@@ -3,7 +3,7 @@
 # Format the backup drive as ext4, mount it, and add an fstab entry.
 #
 # Usage:
-#   sudo ./setup-drive.sh /dev/sdX
+#   sudo ./setup-backup-drive /dev/sdX
 #
 
 set -euo pipefail
@@ -97,7 +97,7 @@ uuid=$(blkid -s UUID -o value "$target")
 
 if ! grep -q "$uuid" /etc/fstab; then
   cat >> /etc/fstab <<EOF
-# Backup drive (added by setup-drive.sh)
+# Backup drive (added by setup-backup-drive)
 UUID=$uuid  $backup_mount  ext4  defaults,noatime,nofail  0  2
 EOF
 fi
@@ -112,5 +112,5 @@ Drive setup complete.
   Mount point:     $backup_mount
   Snapshots dir:   $backup_dir
 
-Next: run setup-schedule.sh to install rsync-backup.sh and start the timer.
+Next: run setup-backup-schedule to install rsync-backup and start the timer.
 EOF

@@ -5,8 +5,8 @@
 # to the previous snapshot, so old snapshots cost almost no extra space.
 #
 # Usage:
-#   rsync-backup.sh              # normal run
-#   rsync-backup.sh --dry-run    # show what would change, write nothing
+#   rsync-backup              # normal run
+#   rsync-backup --dry-run    # show what would change, write nothing
 #
 
 set -euo pipefail

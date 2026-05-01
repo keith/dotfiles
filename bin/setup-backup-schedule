@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Create a systemd timer that runs rsync-backup.sh hourly outside of work hours,
+# Create a systemd timer that runs rsync-backup hourly outside of work hours,
 # and surface backup status on SSH login via MOTD.
 #
 
 set -euo pipefail
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
-readonly backup_script_path="$script_dir/rsync-backup.sh"
+readonly backup_script_path="$script_dir/rsync-backup"
 readonly status_script_path="$script_dir/backup-status"
 readonly unit_name="rsync-backup"
 readonly motd_path="/etc/update-motd.d/99-backup-status"
@@ -18,7 +18,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 if [[ ! -x "$backup_script_path" ]]; then
-  echo "error: rsync-backup.sh not found, expected: $backup_script_path" >&2
+  echo "error: rsync-backup not found, expected: $backup_script_path" >&2
   exit 1
 fi
 
