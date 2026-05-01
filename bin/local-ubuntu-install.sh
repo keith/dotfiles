@@ -23,6 +23,7 @@ echo 'Defaults:%sudo env_keep += "EDITOR"' | sudo tee /etc/sudoers.d/env_keep_ed
 echo 'Defaults:%sudo env_keep += "SUDO_EDITOR"' | sudo tee -a /etc/sudoers.d/env_keep_editor
 echo 'Defaults:%sudo env_keep += "PATH"' | sudo tee -a /etc/sudoers.d/env_keep_editor
 echo 'Defaults:%sudo !secure_path' | sudo tee -a /etc/sudoers.d/env_keep_editor
+sudo chmod 0440 /etc/sudoers.d/env_keep_editor
 
 # Needed for gpg-agent forwarding
 echo 'StreamLocalBindUnlink yes' | sudo tee /etc/ssh/sshd_config.d/99_stream_local_bind_unlink.conf
