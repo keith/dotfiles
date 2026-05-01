@@ -17,13 +17,17 @@ sudo usermod -a -G docker "$user"
 echo 'kernel.sysrq=1' | sudo tee /etc/sysctl.d/99-sysrq.conf
 sudo sysctl -p /etc/sysctl.d/99-sysrq.conf
 
-# Keep EDITOR for visudo
 # NOTE: Can't have '.' in the file name
-echo 'Defaults:%sudo env_keep += "EDITOR"' | sudo tee /etc/sudoers.d/env_keep_editor
-echo 'Defaults:%sudo env_keep += "SUDO_EDITOR"' | sudo tee -a /etc/sudoers.d/env_keep_editor
-echo 'Defaults:%sudo env_keep += "PATH"' | sudo tee -a /etc/sudoers.d/env_keep_editor
-echo 'Defaults:%sudo !secure_path' | sudo tee -a /etc/sudoers.d/env_keep_editor
-sudo chmod 0440 /etc/sudoers.d/env_keep_editor
+sudoers_tmp=$(mktemp)
+cat > "$sudoers_tmp" <<'EOF'
+Defaults:%sudo env_keep += "EDITOR"
+Defaults:%sudo env_keep += "SUDO_EDITOR"
+Defaults:%sudo env_keep += "PATH"
+Defaults:%sudo !secure_path
+EOF
+sudo visudo -cf "$sudoers_tmp"
+sudo install -o root -g root -m 0440 "$sudoers_tmp" /etc/sudoers.d/env_keep_editor
+rm -f "$sudoers_tmp"
 
 # Needed for gpg-agent forwarding
 echo 'StreamLocalBindUnlink yes' | sudo tee /etc/ssh/sshd_config.d/99_stream_local_bind_unlink.conf
