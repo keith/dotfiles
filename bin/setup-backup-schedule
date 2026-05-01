@@ -27,6 +27,7 @@ if [[ ! -x "$status_script_path" ]]; then
   exit 1
 fi
 
+sudo rm -f "$motd_path"
 ln -s "$status_script_path" "$motd_path"
 
 cat > "/etc/systemd/system/$unit_name.service" <<EOF
