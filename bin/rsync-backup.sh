@@ -63,15 +63,15 @@ rsync_opts=(
   --exclude=/var/tmp/*
 
   # User caches and trash
-  --exclude=/home/*/.cache/*
+  --exclude=/home/*/.cache
   --exclude=/home/*/.local/share/Trash/*
 
   # Build / language toolchain caches — all regenerable, can be huge
-  --exclude=/home/*/.cargo/*
-  --exclude=/home/*/.ccache/*
-  --exclude=/home/*/.gradle/*
-  --exclude=/home/*/.rustup/*
-  --exclude=/home/*/go/pkg/*
+  --exclude=/home/*/.cargo
+  --exclude=/home/*/.ccache
+  --exclude=/home/*/.gradle
+  --exclude=/home/*/.rustup
+  --exclude=/home/*/go/pkg
 
   # Build output anywhere on disk
   --exclude=*/build/
@@ -82,6 +82,16 @@ rsync_opts=(
 # Hardlink unchanged files to the previous snapshot
 if [[ -d "$latest" ]]; then
   rsync_opts+=(--link-dest="$latest")
+fi
+
+# Show progress when running interactively
+if [[ -t 1 ]]; then
+  rsync_opts+=(--info=progress2)
+fi
+
+# Clean up partial snapshot if interrupted (real runs only — dry-runs write nothing)
+if [[ $dry_run -eq 0 ]]; then
+  trap 'rm -rf -- "$new" 2>/dev/null || true; log_status "FAIL" "Interrupted"; exit 130' INT TERM
 fi
 
 if ionice -c 3 nice -n 19 rsync "${rsync_opts[@]}" "${dry[@]}" / "$new/"; then
