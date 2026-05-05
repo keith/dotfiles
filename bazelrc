@@ -1,31 +1,31 @@
-common:orf --override_repository=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
-common:ort --override_repository=+non_module_deps+xctestrunner=~/dev/bazelbuild/xctestrunner --override_repository=+http_archive+xctestrunner=~/dev/bazelbuild/xctestrunner
-common:orcc --override_repository=rules_cc=~/dev/bazelbuild/rules_cc --override_module=rules_cc=~/dev/bazelbuild/rules_cc
-common:orcc2 --override_repository=rules_cc=~/dev/bazelbuild/rules_cc2 --override_module=rules_cc=~/dev/bazelbuild/rules_cc2
-common:orgo --override_repository=io_bazel_rules_go=~/dev/bazelbuild/rules_go --override_module=rules_go=~/dev/bazelbuild/rules_go
+common:ora  --override_module=rules_apple=~/dev/bazelbuild/rules_apple
+common:ora2  --override_module=rules_apple=~/dev/bazelbuild/rules_apple2
+common:ora3 --override_module=rules_apple=~/dev/bazelbuild/rules_apple3
+common:ora4 --override_module=rules_apple=~/dev/bazelbuild/rules_apple4
+common:ora5 --override_module=rules_apple=~/dev/bazelbuild/rules_apple5
+common:orandk  --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
+common:oras --override_module=apple_support=~/dev/bazelbuild/apple_support
+common:oras2  --override_module=apple_support=~/dev/bazelbuild/apple_support2
+common:orcc  --override_module=rules_cc=~/dev/bazelbuild/rules_cc
+common:orcc2  --override_module=rules_cc=~/dev/bazelbuild/rules_cc2
+common:orf --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
+common:orfeatures --override_module=bazel_features=~/dev/bazelbuild/bazel_features
 common:orgaz --override_module=gazelle=~/dev/bazelbuild/bazel-gazelle
-common:orplat --override_repository=platforms=~/dev/bazelbuild/platforms --override_module=platforms=~/dev/bazelbuild/platforms
-common:orpy --override_repository=rules_python=~/dev/bazelbuild/rules_python --override_module=rules_python=~/dev/bazelbuild/rules_python
-common:orpycross --override_repository=rules_pycross=~/dev/bazelbuild/rules_pycross --override_module=rules_pycross=~/dev/bazelbuild/rules_pycross
-common:orpro --override_repository=protobuf=~/dev/google/protobuf --override_module=protobuf=~/dev/google/protobuf
-common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib --override_repository=bazel_skylib=~/dev/bazelbuild/bazel-skylib
-common:orsd --override_repository=io_bazel_stardoc=~/dev/bazelbuild/stardoc --override_module=stardoc=~/dev/bazelbuild/stardoc
-common:orrust --override_repository=rules_rust=~/dev/bazelbuild/rules_rust --override_module=rules_rust=~/dev/bazelbuild/rules_rust
-common:orjava --override_repository=rules_java=~/dev/bazelbuild/rules_java --override_module=rules_java=~/dev/bazelbuild/rules_java
-common:orandk --override_repository=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
+common:orgo  --override_module=rules_go=~/dev/bazelbuild/rules_go
+common:orjava --override_module=rules_java=~/dev/bazelbuild/rules_java
 common:ormojo --override_module=rules_mojo=~/dev/modularml/rules_mojo
-common:ormulti --override_repository=rules_multirun=~/dev/keith/rules_multirun --override_module=rules_multirun=~/dev/keith/rules_multirun
-
-common:ora --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple --override_module=rules_apple=~/dev/bazelbuild/rules_apple
-common:ora2 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple2 --override_module=rules_apple=~/dev/bazelbuild/rules_apple2
-common:ora3 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple3 --override_module=rules_apple=~/dev/bazelbuild/rules_apple3
-common:ora4 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple4 --override_module=rules_apple=~/dev/bazelbuild/rules_apple4
-common:ora5 --override_repository=build_bazel_rules_apple=~/dev/bazelbuild/rules_apple5 --override_module=rules_apple=~/dev/bazelbuild/rules_apple5
-common:oras --override_repository=build_bazel_apple_support=~/dev/bazelbuild/apple_support --override_module=apple_support=~/dev/bazelbuild/apple_support
-common:oras2 --override_repository=build_bazel_apple_support=~/dev/bazelbuild/apple_support2 --override_module=apple_support=~/dev/bazelbuild/apple_support2
-common:ors --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_swift --override_module=rules_swift=~/dev/bazelbuild/rules_swift
-common:ors2 --override_repository=build_bazel_rules_swift=~/dev/bazelbuild/rules_swift2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
-common:orx --override_repository=rules_xcodeproj=~/dev/mnf/rules_xcodeproj --override_module=rules_xcodeproj=~/dev/mnf/rules_xcodeproj
+common:ormulti --override_module=rules_multirun=~/dev/keith/rules_multirun
+common:orplat --override_module=platforms=~/dev/bazelbuild/platforms
+common:orpro  --override_module=protobuf=~/dev/google/protobuf
+common:orpy  --override_module=rules_python=~/dev/bazelbuild/rules_python
+common:orpycross  --override_module=rules_pycross=~/dev/bazelbuild/rules_pycross
+common:orrust --override_module=rules_rust=~/dev/bazelbuild/rules_rust
+common:ors  --override_module=rules_swift=~/dev/bazelbuild/rules_swift
+common:ors2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
+common:orsd  --override_module=stardoc=~/dev/bazelbuild/stardoc
+common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib
+common:orspm --override_module=rules_swift_package_manager=~/dev/bazelbuild/rules_swift_package_manager
+common:orx --override_module=rules_xcodeproj=~/dev/mnf/rules_xcodeproj
 
 common:oreg --registry=file:///Users/ksmiley/dev/bazelbuild/bazel-central-registry
 
