@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: deploy-xcode-app [APP_NAME]
+
+Build the Xcode project in the current directory (Release configuration) and
+install the resulting .app into /Applications, backing up any prior version
+to /tmp/<APP_NAME>.app.bak so it can be restored with revert-xcode-app.
+
+If APP_NAME is omitted it is inferred from the .xcodeproj basename in the
+current directory. The scheme name is assumed to match APP_NAME.
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+proj_dir="$(pwd)"
+
+if [[ -n "${1:-}" ]]; then
+  app_name="$1"
+  xcodeproj="${proj_dir}/${app_name}.xcodeproj"
+else
+  shopt -s nullglob
+  projects=("${proj_dir}"/*.xcodeproj)
+  shopt -u nullglob
+  if (( ${#projects[@]} != 1 )); then
+    echo "error: expected exactly one .xcodeproj in ${proj_dir}, found ${#projects[@]}" >&2
+    exit 1
+  fi
+  xcodeproj="${projects[0]}"
+  app_name="$(basename "${xcodeproj}" .xcodeproj)"
+fi
+
+if [[ ! -d "${xcodeproj}" ]]; then
+  echo "error: ${xcodeproj} not found" >&2
+  exit 1
+fi
+
+app_path="/Applications/${app_name}.app"
+backup_path="/tmp/${app_name}.app.bak"
+build_dir="${proj_dir}/DerivedData"
+
+echo "Building ${app_name}..."
+xcodebuild -project "${xcodeproj}" \
+  -scheme "${app_name}" \
+  -configuration Release \
+  -derivedDataPath "${build_dir}" \
+  -quiet
+
+built_app="${build_dir}/Build/Products/Release/${app_name}.app"
+if [[ ! -d "${built_app}" ]]; then
+  echo "error: build product not found at ${built_app}" >&2
+  exit 1
+fi
+
+echo "Killing running ${app_name}..."
+killall "${app_name}" 2>/dev/null || true
+
+echo "Backing up ${app_path} to ${backup_path}..."
+rm -rf "${backup_path}"
+if [[ -d "${app_path}" ]]; then
+  mv "${app_path}" "${backup_path}"
+fi
+
+echo "Installing new build to ${app_path}..."
+mv "${built_app}" "${app_path}"
+
+echo "Launching ${app_name}..."
+open "${app_path}"
+
+echo "Done. Backup at ${backup_path}"

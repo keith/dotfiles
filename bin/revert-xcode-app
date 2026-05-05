@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<EOF
+Usage: revert-xcode-app [APP_NAME]
+
+Restore the prior version of /Applications/<APP_NAME>.app from
+/tmp/<APP_NAME>.app.bak (created by deploy-xcode-app).
+
+If APP_NAME is omitted it is inferred from the .xcodeproj basename in the
+current directory.
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ -n "${1:-}" ]]; then
+  app_name="$1"
+else
+  shopt -s nullglob
+  projects=(*.xcodeproj)
+  shopt -u nullglob
+  if (( ${#projects[@]} != 1 )); then
+    echo "error: expected exactly one .xcodeproj in $(pwd), found ${#projects[@]}" >&2
+    exit 1
+  fi
+  app_name="$(basename "${projects[0]}" .xcodeproj)"
+fi
+
+app_path="/Applications/${app_name}.app"
+backup_path="/tmp/${app_name}.app.bak"
+
+if [[ ! -d "${backup_path}" ]]; then
+  echo "error: no backup found at ${backup_path}" >&2
+  exit 1
+fi
+
+echo "Killing running ${app_name}..."
+killall "${app_name}" 2>/dev/null || true
+
+echo "Restoring backup from ${backup_path}..."
+rm -rf "${app_path}"
+mv "${backup_path}" "${app_path}"
+
+echo "Launching ${app_name}..."
+open "${app_path}"
+
+echo "Done. Reverted to previous version."
