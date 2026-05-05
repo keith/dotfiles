@@ -4,29 +4,83 @@ set -euo pipefail
 
 readonly status_file="/var/lib/backup/status"
 readonly stale_hours=30
+readonly timer_unit="rsync-backup.timer"
+readonly service_unit="rsync-backup.service"
+
+humanize_duration() {
+  local s=$1
+  if (( s < 60 )); then
+    echo "${s}s"
+  elif (( s < 3600 )); then
+    echo "$((s / 60))m"
+  elif (( s < 86400 )); then
+    local h=$((s / 3600))
+    local m=$(((s % 3600) / 60))
+    if (( m == 0 )); then echo "${h}h"; else echo "${h}h ${m}m"; fi
+  else
+    local d=$((s / 86400))
+    local h=$(((s % 86400) / 3600))
+    if (( h == 0 )); then echo "${d}d"; else echo "${d}d ${h}h"; fi
+  fi
+}
+
+print_systemd_status() {
+  command -v systemctl >/dev/null 2>&1 || return 0
+  systemctl cat "$timer_unit" >/dev/null 2>&1 || return 0
+
+  local active enabled service_state next_str next_epoch now
+  active=$(systemctl is-active "$timer_unit" 2>/dev/null || true)
+  enabled=$(systemctl is-enabled "$timer_unit" 2>/dev/null || true)
+  service_state=$(systemctl is-active "$service_unit" 2>/dev/null || true)
+
+  if [[ "$service_state" == "activating" || "$service_state" == "active" ]]; then
+    echo "[backup] backup currently running"
+    return 0
+  fi
+
+  if [[ "$active" != "active" || "$enabled" != "enabled" ]]; then
+    echo "[backup] WARNING: timer is $active/$enabled"
+    return 0
+  fi
+
+  next_str=$(systemctl show "$timer_unit" --property=NextElapseUSecRealtime --value 2>/dev/null || true)
+  if [[ -n "$next_str" && "$next_str" != "n/a" ]]; then
+    next_epoch=$(date -d "$next_str" +%s 2>/dev/null || echo 0)
+    now=$(date +%s)
+    if (( next_epoch > now )); then
+      echo "[backup] timer active, next run in $(humanize_duration $((next_epoch - now)))"
+    fi
+  fi
+}
+
+exit_code=0
 
 if [[ ! -f "$status_file" ]]; then
   echo "[backup] No backups have run yet."
-  exit 0
-fi
+else
+  last_run=$(grep '^last_run=' "$status_file" | cut -d= -f2-)
+  last_result=$(grep '^last_result=' "$status_file" | cut -d= -f2-)
+  last_message=$(grep '^last_message=' "$status_file" | cut -d= -f2-)
 
-last_run=$(grep '^last_run=' "$status_file" | cut -d= -f2-)
-last_result=$(grep '^last_result=' "$status_file" | cut -d= -f2-)
-last_message=$(grep '^last_message=' "$status_file" | cut -d= -f2-)
+  last_epoch=$(date -d "$last_run" +%s 2>/dev/null || echo 0)
+  now_epoch=$(date +%s)
+  seconds_since=$(( now_epoch - last_epoch ))
 
-last_epoch=$(date -d "$last_run" +%s 2>/dev/null || echo 0)
-now_epoch=$(date +%s)
-hours_since=$(( (now_epoch - last_epoch) / 3600 ))
+  elapsed=$(humanize_duration "$seconds_since")
 
-if [[ "$last_result" == "OK" ]]; then
-  if [[ $hours_since -gt $stale_hours ]]; then
-    echo "[backup] WARNING: last successful backup was ${hours_since}h ago ($last_run)"
-    exit 1
+  if [[ "$last_result" == "OK" ]]; then
+    if (( seconds_since > stale_hours * 3600 )); then
+      echo "[backup] WARNING: last successful backup was $elapsed ago ($last_run)"
+      exit_code=1
+    else
+      echo "[backup] OK — last run $last_run ($elapsed ago)"
+    fi
+  else
+    echo "[backup] FAILURE — $last_message ($last_run, $elapsed ago)"
+    echo "[backup] Check: journalctl -u $service_unit -n 50"
+    exit_code=2
   fi
-  echo "[backup] OK — last run $last_run"
-  exit 0
 fi
 
-echo "[backup] FAILURE — $last_message ($last_run)"
-echo "[backup] Check: journalctl -u rsync-backup.service -n 50"
-exit 2
+print_systemd_status
+exit $exit_code

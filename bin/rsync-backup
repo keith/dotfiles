@@ -38,7 +38,7 @@ log_status() {
   local result="$1"
   local message="$2"
   cat > "$status_file" <<EOF
-last_run=$(date -Iseconds)
+last_run=$(date '+%Y-%m-%d %H:%M:%S %Z')
 last_result=$result
 last_message=$message
 EOF
