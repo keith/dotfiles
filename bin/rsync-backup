@@ -11,6 +11,11 @@
 
 set -euo pipefail
 
+if [[ $EUID -ne 0 ]]; then
+  echo "error: rsync-backup must be run as root" >&2
+  exit 1
+fi
+
 readonly backup_mount="/mnt/backup"
 readonly backup_dir="$backup_mount/snapshots"
 readonly retention=168 # snapshots to keep (~10 days at this schedule)
