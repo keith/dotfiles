@@ -5,24 +5,35 @@ function! s:Gx()
 python3 << EOF
 from urllib.parse import urlparse, urlunparse
 import re
+import signal
 import subprocess
 import vim
 
 text = vim.eval("expand('<cWORD>')")
 
+def _timeout(signum, frame):
+    raise TimeoutError("gx regex timed out")
+
+signal.signal(signal.SIGALRM, _timeout)
+signal.alarm(2)
+
 # https://daringfireball.net/2010/07/improved_regex_for_matching_urls
 # Daring fireball regex
-match = re.search(
-    r"(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))",
-    text)
+try:
+    match = re.search(
+        r"(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))",
+        text)
+finally:
+    signal.alarm(0)
+
 if match:
     url = urlunparse(urlparse(match.group(0), scheme="https"))
-    subprocess.check_call(["open", url])
 else:
     # TODO: This actually opens virtually anything, but it enables just 'google.com' to work
     text = text.strip("\"'")
     url = urlunparse(urlparse(text, scheme="https"))
-    subprocess.check_call(["open", url])
+
+subprocess.check_call(["open", url])
 EOF
 endfunction
 
@@ -32,4 +43,5 @@ endfunction
 " google.com
 " "google.com"
 " "https://google.com"
+" [nixos.org/download](https://nixos.org/download.html#nixos-pi)
 nnoremap <silent> gx :call <SID>Gx()<CR>
