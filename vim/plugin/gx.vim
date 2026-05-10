@@ -2,6 +2,12 @@
 " The key here is that the second argument is a 0 which means !remote
 " nnoremap gx :call netrw#BrowseX(expand('<cfile>'), 0)<CR>
 function! s:Gx()
+  " Don't stop at parens for URLs
+  let save_isf = &isfname
+  let &isfname .= ',(,)'
+  let s:gx_text = expand('<cfile>')
+  let &isfname = save_isf
+
 python3 << EOF
 from urllib.parse import urlparse, urlunparse
 import re
@@ -9,7 +15,7 @@ import signal
 import subprocess
 import vim
 
-text = vim.eval("expand('<cWORD>')")
+text = vim.eval("s:gx_text")
 
 def _timeout(signum, frame):
     raise TimeoutError("gx regex timed out")
@@ -27,11 +33,13 @@ finally:
     signal.alarm(0)
 
 if match:
-    url = urlunparse(urlparse(match.group(0), scheme="https"))
+    url = match.group(0)
 else:
-    # TODO: This actually opens virtually anything, but it enables just 'google.com' to work
-    text = text.strip("\"'")
-    url = urlunparse(urlparse(text, scheme="https"))
+    # NOTE: This actually opens virtually anything, but it enables just 'google.com' to work
+    url = text.strip("\"'")
+
+if "://" not in url:
+    url = "https://" + url
 
 subprocess.check_call(["open", url])
 EOF
@@ -44,4 +52,6 @@ endfunction
 " "google.com"
 " "https://google.com"
 " [nixos.org/download](https://nixos.org/download.html#nixos-pi)
+" wikipedia.org/#some_(weird)_section
+" https://wikipedia.org/#some_(weird)_section
 nnoremap <silent> gx :call <SID>Gx()<CR>
