@@ -12,6 +12,7 @@
 .clangd
 .claude/settings.local.json
 .clwb
+.derived-data-log*
 .DS_Store
 .hgignore
 .ignore
