@@ -6,7 +6,8 @@ set -euo pipefail
 
 sudo apt-get install -y \
   avahi-daemon \
-  lm-sensors
+  lm-sensors \
+  nmap
 
 user=$USER
 sudo groupadd -f docker
