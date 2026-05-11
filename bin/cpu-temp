@@ -9,6 +9,19 @@ tdie=$(echo "$reading" | awk '/Tdie:/ {print $2; exit}')
 tctl=$(echo "$reading" | awk '/Tctl:/ {print $2; exit}')
 pkg=$(echo "$reading"  | awk '/Package id 0:/ {print $4; exit}')
 
+gpu=$(echo "$reading" | awk '
+  /^$/                              { in_gpu = 0; next }
+  /^(nouveau|amdgpu|radeon)-/       { in_gpu = 1; next }
+  in_gpu && /^(temp1|edge|junction):/ { print $2; exit }
+')
+
+fans=$(echo "$reading" | awk '
+  /^fan[0-9]+:[[:space:]]+[1-9][0-9]*[[:space:]]+RPM/ {
+    name = $1; sub(":", "", name)
+    printf "%s%s %s RPM", (n++ ? ", " : ""), name, $2
+  }
+')
+
 if [[ -n "$tdie" && -n "$tctl" && "$tdie" != "$tctl" ]]; then
   printf "  CPU temp:     %s (real / Tdie)   %s (fan estimate / Tctl)\n" "$tdie" "$tctl"
 elif [[ -n "$tdie" ]]; then
@@ -17,5 +30,13 @@ elif [[ -n "$tctl" ]]; then
   printf "  CPU temp:     %s\n" "$tctl"
 elif [[ -n "$pkg" ]]; then
   printf "  CPU temp:     %s\n" "$pkg"
+fi
+
+if [[ -n "$gpu" ]]; then
+  printf "  GPU temp:     %s\n" "$gpu"
+fi
+
+if [[ -n "$fans" ]]; then
+  printf "  Fans:         %s\n" "$fans"
 fi
 
