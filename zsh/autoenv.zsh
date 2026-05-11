@@ -57,10 +57,14 @@ _dotenv_source_file() {
 }
 
 dotenv_authorize() {
-  _dotenv_authorize "$PWD/.env"
-  _dotenv_authorize "$PWD/.keithenv"
-  source "$PWD/.env"
-  source "$PWD/.keithenv"
+  if [[ -f "$PWD/.env" ]]; then
+    _dotenv_authorize "$PWD/.env"
+    source "$PWD/.env"
+  fi
+  if [[ -f "$PWD/.keithenv" ]]; then
+    _dotenv_authorize "$PWD/.keithenv"
+    source "$PWD/.keithenv"
+  fi
 }
 
 chpwd_functions=($chpwd_functions _dotenv_source_env)
