@@ -29,11 +29,11 @@
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "gist.vim": {
-      "rev": "4f5a91854baaf8dfe8c013348b991372ff09e10d",
+      "rev": "727b100611c6065415e6c796de2b1c5779b0bc9c",
       "src": "https://github.com/keith/gist.vim"
     },
     "gitsigns.nvim": {
-      "rev": "6d808f99bd63303646794406e270bd553ad7792e",
+      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "kotlin-vim": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "bf5abe69c1874531f359a822d0cff4d73e26113f",
+      "rev": "451d4ef9abd4f0f08e379ef0d55d1c391b6125a7",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-metals": {
