@@ -4,6 +4,14 @@ vim.o.termguicolors = false
 vim.lsp.inlay_hint.enable()
 vim.diagnostic.config { virtual_text = true }
 
+vim.api.nvim_create_user_command("PluginUpdate", function()
+  vim.pack.update()
+end, { desc = "Update plugins with vim.pack" })
+
+vim.api.nvim_create_user_command("PluginSync", function()
+  vim.pack.update(nil, { target = "lockfile", force = true })
+end, { desc = "Sync plugins to nvim-pack-lock.json" })
+
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
