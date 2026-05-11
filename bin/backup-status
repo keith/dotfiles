@@ -53,8 +53,6 @@ print_systemd_status() {
   fi
 }
 
-exit_code=0
-
 if [[ ! -f "$status_file" ]]; then
   echo "[backup] No backups have run yet."
 else
@@ -71,16 +69,13 @@ else
   if [[ "$last_result" == "OK" ]]; then
     if (( seconds_since > stale_hours * 3600 )); then
       echo "[backup] WARNING: last successful backup was $elapsed ago ($last_run)"
-      exit_code=1
     else
       echo "[backup] OK — last run $last_run ($elapsed ago)"
     fi
   else
     echo "[backup] FAILURE — $last_message ($last_run, $elapsed ago)"
     echo "[backup] Check: journalctl -u $service_unit -n 50"
-    exit_code=2
   fi
 fi
 
 print_systemd_status
-exit $exit_code
