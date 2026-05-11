@@ -42,6 +42,10 @@ if [[ -n "${DEVREL:-}" ]]; then
 fi
 
 bazelisk_bin=bazelisk
+if command -v bb >/dev/null 2>&1; then
+  bazelisk_bin=bb
+fi
+
 if [[ "${1:-}" == -x86 ]]; then
   shift
   echo "note: using x86_64 bazelisk"

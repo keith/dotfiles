@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+repo="buildbuddy-io/bazel"
+install_dir="${INSTALL_DIR:-$HOME/.local/bin}"
+install_name="${INSTALL_NAME:-bb}"
+
+case "$(uname -s)" in
+  Darwin)
+    os="darwin"
+    ;;
+  Linux)
+    os="linux"
+    ;;
+  *)
+    echo "error: unsupported OS: $(uname -s)" >&2
+    exit 1
+    ;;
+esac
+
+case "$(uname -m)" in
+  arm64 | aarch64)
+    arch="arm64"
+    ;;
+  x86_64 | amd64)
+    arch="x86_64"
+    ;;
+  *)
+    echo "error: unsupported architecture: $(uname -m)" >&2
+    exit 1
+    ;;
+esac
+
+latest_url=$(
+  curl -fsSLI \
+    -o /dev/null \
+    -w "%{url_effective}" \
+    "https://github.com/$repo/releases/latest"
+)
+version="${latest_url##*/}"
+
+if [[ -z "$version" || "$version" == "latest" ]]; then
+  echo "error: failed to determine latest non-draft release" >&2
+  exit 1
+fi
+
+asset="bazel-$version-$os-$arch"
+base_url="https://github.com/$repo/releases/download/$version"
+tmpdir=$(mktemp -d)
+
+cleanup() {
+  rm -rf "$tmpdir"
+}
+trap cleanup EXIT
+
+if ! command -v shasum >/dev/null 2>&1; then
+  echo "error: shasum is required to verify checksum" >&2
+  exit 1
+fi
+
+echo "Downloading $asset"
+curl -fsSLo "$tmpdir/$asset" "$base_url/$asset"
+curl -fsSLo "$tmpdir/$asset.sha256" "$base_url/$asset.sha256"
+
+(
+  cd "$tmpdir"
+  shasum -a 256 -c "$asset.sha256"
+)
+
+mkdir -p "$install_dir"
+install -m 0755 "$tmpdir/$asset" "$install_dir/$install_name"
+
+echo "Installed $install_dir/$install_name"
