@@ -2,10 +2,12 @@
 
 set -euo pipefail
 
-if [[ $# -ne 1 ]]; then
-  echo "Usage: $0 <bazelbuild/bazel-skylib>" >&2
+if [[ $# -lt 1 ]]; then
+  echo "Usage: $0 <bazelbuild/bazel-skylib> [COMMIT]" >&2
   exit 1
 fi
+
+readonly commit="${2:-HEAD}"
 
 # bazelbuild/bazel-skylib
 readonly repo="$1"
@@ -16,7 +18,7 @@ readonly clone_url="https://github.com/$repo"
 mktemp_dir="$(mktemp -d)"
 trap 'rm -rf "$mktemp_dir"' EXIT
 
-git clone --depth 1 "$clone_url" "$mktemp_dir/repo"
+git clone --depth 1 --revision "$commit" "$clone_url" "$mktemp_dir/repo"
 sha="$(git -C "$mktemp_dir/repo" rev-parse HEAD)"
 
 readonly archive_url="$clone_url/archive/$sha.tar.gz"
