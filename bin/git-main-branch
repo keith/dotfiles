@@ -3,7 +3,7 @@
 set -euo pipefail
 
 config_key="$(git rootworktreehash).main-branch"
-if custom_branch=$(git config --local --get --default master "$config_key"); then
+if custom_branch=$(git config --local --get "$config_key"); then
   echo "$custom_branch"
 elif git show-branch origin/main > /dev/null 2>&1; then
   echo main
