@@ -27,6 +27,7 @@
 .rgignore
 .ropeproject
 .rustfmt
+.scala-build
 .Spotlight-V100
 .tags
 .Trashes
