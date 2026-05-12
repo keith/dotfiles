@@ -67,6 +67,14 @@ rsync_opts=(
   --exclude=/var/cache/*
   --exclude=/var/tmp/*
 
+  # Container stuff, can hit errors with hardlinks, likely all reproducible images anyways
+  --exclude=/var/lib/containerd/*
+  --exclude=/var/lib/docker/buildkit/*
+  --exclude=/var/lib/docker/containerd/*
+  --exclude=/var/lib/docker/containers/*
+  --exclude=/var/lib/docker/image/*
+  --exclude=/var/lib/docker/overlay2/*
+
   # User caches and trash
   --exclude=/home/*/.cache
   --exclude=/home/*/.local/share/Trash/*
