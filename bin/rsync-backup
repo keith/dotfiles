@@ -21,6 +21,8 @@ readonly backup_dir="$backup_mount/snapshots"
 readonly retention=168 # snapshots to keep (~10 days at this schedule)
 readonly status_dir="/var/lib/backup"
 readonly status_file="$status_dir/status"
+readonly lock_dir="/run/lock"
+readonly lock_file="$lock_dir/rsync-backup.lock"
 
 readonly latest="$backup_dir/latest"
 new="$backup_dir/$(date +%Y-%m-%d_%H%M%S)"
@@ -33,6 +35,13 @@ if [[ "${1:-}" == "--dry-run" ]]; then
 fi
 
 mkdir -p "$status_dir"
+mkdir -p "$lock_dir"
+
+exec 9>"$lock_file"
+if ! flock -n 9; then
+  echo "rsync-backup is already running; exiting." >&2
+  exit 0
+fi
 
 log_status() {
   local result="$1"
