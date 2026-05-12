@@ -1,8 +1,1 @@
-#!/bin/bash
-
-set -euo pipefail
-
-readonly name=$1
-shift
-
-exec bazel query "attr(name, '$name', ...)" "$@"
+bqr

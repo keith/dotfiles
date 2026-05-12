@@ -1,36 +1,106 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Dispatched by basename: bqg (query), bqr (run), bqt (test), bqb (build).
+# bqg, bqt, bqb are symlinks to this file.
 
 set -euo pipefail
 
-readonly name=$1
-shift
+cmd=$(basename "$0")
 
-patterns=$(mktemp)
-
-bazel query "attr(name, '$name', ...)" > "$patterns"
-
-if [[ ! -s $patterns ]]; then
-  echo "error: no targets matching '$name'" >&2
-  exit 1
-fi
-
-if [[ $(wc -l < "$patterns") -ne 1 ]]; then
-  target=$(fzf < "$patterns")
-  bazel_args=("$target")
-else
-  bazel_args=("$(cat "$patterns")")
-fi
-
-# If the user passes --, pass that and all other args after any bazel args +
-# the target name
+names=()
+flags=()
+rest=()
+seen_dashdash=0
 for arg in "$@"; do
-  if [[ $arg == -- ]]; then
-    break
+  if (( seen_dashdash )); then
+    rest+=("$arg")
+  elif [[ $arg == -- ]]; then
+    seen_dashdash=1
+    rest+=("$arg")
+  elif [[ $arg == -* ]]; then
+    flags+=("$arg")
   else
-    bazel_args+=("$arg")
-    shift
+    names+=("$arg")
   fi
 done
 
-set -x
-bazel run "${bazel_args[@]}" "$@"
+if [[ ${#names[@]} -eq 0 ]]; then
+  echo "error: at least one target name is required" >&2
+  exit 1
+fi
+
+query=""
+label_set=""
+for name in "${names[@]}"; do
+  # Bare names go through attr() as a regex match; anything containing / or :
+  # is treated as a label or target pattern and unioned via set().
+  if [[ $name == */* || $name == *:* ]]; then
+    label_set="${label_set:-} $name"
+  else
+    [[ -n $query ]] && query+=" + "
+    query+="attr(name, '$name', ...)"
+  fi
+done
+
+if [[ -n $label_set ]]; then
+  [[ -n $query ]] && query+=" + "
+  query+="set($label_set)"
+fi
+
+if [[ "$cmd" == bqg ]]; then
+  exec bazel query "$query" ${flags[@]+"${flags[@]}"}
+fi
+
+patterns=$(mktemp)
+bazel query "$query" > "$patterns"
+
+if [[ ! -s $patterns ]]; then
+  echo "error: no targets matching: ${names[*]}" >&2
+  exit 1
+fi
+
+count=$(wc -l < "$patterns")
+
+case "$cmd" in
+  bqr)
+    if [[ $count -ne 1 ]]; then
+      target=$(fzf < "$patterns")
+      targets=("$target")
+    else
+      targets=("$(cat "$patterns")")
+    fi
+    set -x
+    exec bazel run ${flags[@]+"${flags[@]}"} "${targets[@]}" -- ${rest[@]+"${rest[@]}"}
+    ;;
+  bqt|bqb)
+    if [[ "$cmd" == bqt ]]; then
+      subcommand="test"
+    else
+      subcommand="build"
+    fi
+
+    if [[ $count -gt 5 ]]; then
+      echo "note: more than one target matches: ${names[*]}"
+      echo
+      cat "$patterns"
+      echo
+      printf 'Do you want to %s all of them? [Y/n] ' "$subcommand"
+      read -r answer
+      if [[ "$answer" != "Y" && "$answer" != "y" && "$answer" != "" ]]; then
+        exit 1
+      fi
+    fi
+
+    if [[ $count -eq 1 ]]; then
+      targets=("$(cat "$patterns")")
+    else
+      targets=("--target_pattern_file=$patterns")
+    fi
+    set -x
+    exec bazel "$subcommand" ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
+    ;;
+  *)
+    echo "error: $cmd: unknown invocation name (expected bqg, bqr, bqt, or bqb)" >&2
+    exit 1
+    ;;
+esac
