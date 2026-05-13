@@ -22,6 +22,7 @@ common:orpycross  --override_module=rules_pycross=~/dev/bazelbuild/rules_pycross
 common:orrust --override_module=rules_rust=~/dev/bazelbuild/rules_rust
 common:ors  --override_module=rules_swift=~/dev/bazelbuild/rules_swift
 common:ors2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
+common:ors3 --override_module=rules_swift=~/dev/bazelbuild/rules_swift3
 common:orsd  --override_module=stardoc=~/dev/bazelbuild/stardoc
 common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib
 common:orspm --override_module=rules_swift_package_manager=~/dev/bazelbuild/rules_swift_package_manager
