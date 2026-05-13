@@ -1,25 +1,24 @@
-local util = require 'lspconfig.util'
-
 -- copied from upstream clangd.lua to silence output
 local function clangd_alternate()
-  local bufnr = util.validate_bufnr(0)
-  local clangd_client = util.get_active_client_by_name(bufnr, 'clangd')
-  if clangd_client then
-    local params = { uri = vim.uri_from_bufnr(bufnr) }
-    clangd_client.request('textDocument/switchSourceHeader', params, function(err, result)
-      if err then
-        error(tostring(err))
-        return false
-      elseif not result then
-        return false
-      end
-
-      vim.api.nvim_command('edit ' .. vim.uri_to_fname(result))
-      return true
-    end, bufnr)
-  else
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clangd_client = vim.lsp.get_clients({ bufnr = bufnr, name = "clangd" })[1]
+  if not clangd_client then
     return false
   end
+
+  local params = { uri = vim.uri_from_bufnr(bufnr) }
+  local response, err = clangd_client:request_sync("textDocument/switchSourceHeader", params, 1000, bufnr)
+  if err or not response then
+    return false
+  elseif response.err then
+    error(tostring(response.err))
+    return false
+  elseif not response.result then
+    return false
+  end
+
+  vim.cmd.edit(vim.fn.fnameescape(vim.uri_to_fname(response.result)))
+  return true
 end
 
 local function file_exists(path)
