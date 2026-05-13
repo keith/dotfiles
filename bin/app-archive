@@ -12,8 +12,8 @@ app_archive_tmp=""
 usage() {
   cat <<'EOF'
 Usage:
-  app-archive [-o ARCHIVE.tar.zst] APP
-  app-archive archive [-o ARCHIVE.tar.zst] APP
+  app-archive [--dry-run] [-o ARCHIVE.tar.zst] APP
+  app-archive archive [--dry-run] [-o ARCHIVE.tar.zst] APP
   app-archive restore [-y] ARCHIVE.tar.zst
   app-archive list ARCHIVE.tar.zst
 
@@ -113,19 +113,28 @@ require_archive_tools() {
   zstd_path >/dev/null
 }
 
-read_bundle_identifier() {
-  local plist_path="$1"
-  local identifier=""
+read_plist_value() {
+  local key="$1"
+  local plist_path="$2"
+  local value=""
 
   if [[ -x "$plistbuddy" ]]; then
-    identifier=$("$plistbuddy" -c 'print :CFBundleIdentifier' "$plist_path" 2>/dev/null || true)
+    value=$("$plistbuddy" -c "print :$key" "$plist_path" 2>/dev/null || true)
   fi
 
-  if [[ -z "$identifier" ]] && command -v plutil >/dev/null 2>&1; then
-    identifier=$(plutil -extract CFBundleIdentifier raw -o - "$plist_path" 2>/dev/null || true)
+  if [[ -z "$value" ]] && command -v plutil >/dev/null 2>&1; then
+    value=$(plutil -extract "$key" raw -o - "$plist_path" 2>/dev/null || true)
   fi
 
-  printf '%s\n' "$identifier"
+  printf '%s\n' "$value"
+}
+
+read_bundle_identifier() {
+  read_plist_value CFBundleIdentifier "$1"
+}
+
+read_bundle_executable() {
+  read_plist_value CFBundleExecutable "$1"
 }
 
 locate_app() {
@@ -157,14 +166,32 @@ paths=()
 add_path() {
   local path="$1"
   local existing
+  local filtered=()
+  local i
 
   [[ -e "$path" ]] || return 0
+  path=$(strip_trailing_slash "$path")
 
-  for existing in "${paths[@]}"; do
-    if [[ "$existing" == "$path" || ( -e "$existing" && "$existing" -ef "$path" ) ]]; then
+  for ((i = 0; i < ${#paths[@]}; i++)); do
+    existing="${paths[$i]}"
+    if [[ "$existing" == "$path" || ( -e "$existing" && "$existing" -ef "$path" ) || ( -d "$existing" && "$path" == "$existing"/* ) ]]; then
       return 0
     fi
   done
+
+  if [[ -d "$path" ]]; then
+    for ((i = 0; i < ${#paths[@]}; i++)); do
+      existing="${paths[$i]}"
+      if [[ "$existing" == "$path"/* ]]; then
+        continue
+      fi
+      filtered+=("$existing")
+    done
+    paths=()
+    for ((i = 0; i < ${#filtered[@]}; i++)); do
+      paths+=("${filtered[$i]}")
+    done
+  fi
 
   paths+=("$path")
 }
@@ -207,7 +234,232 @@ collect_paths() {
   add_matches "$home/Library/SyncedPreferences/$identifier"*".plist"
   shopt -u nullglob
 
-  add_path "$home/Library/WebKit/$identifier"
+  shopt -s nullglob
+  add_matches "$home/Library/WebKit/$identifier"*
+  add_matches "$home/Library/HTTPStorages/$identifier"*
+  shopt -u nullglob
+}
+
+regex_escape() {
+  printf '%s\n' "$1" | sed 's/[][\\.^$*+?(){}|]/\\&/g'
+}
+
+add_pid() {
+  local pid="$1"
+  local existing
+  local i
+
+  [[ "$pid" =~ ^[0-9]+$ ]] || return 0
+  [[ "$pid" != "$$" ]] || return 0
+
+  for ((i = 0; i < ${#pids[@]}; i++)); do
+    existing="${pids[$i]}"
+    if [[ "$existing" == "$pid" ]]; then
+      return 0
+    fi
+  done
+
+  pids+=("$pid")
+}
+
+find_running_app_pids() {
+  local app_path="$1"
+  local executable="$2"
+  local executable_path
+  local executable_pattern
+  local command
+  local line
+  local pid
+  local pids=()
+  local i
+
+  [[ -n "$executable" ]] || return 0
+
+  executable_path="$app_path/Contents/MacOS/$executable"
+  executable_pattern=$(regex_escape "$executable_path")
+
+  if command -v pgrep >/dev/null 2>&1; then
+    while IFS= read -r pid; do
+      add_pid "$pid"
+    done < <(pgrep -fx "$executable_path" 2>/dev/null || true)
+
+    if [[ "$executable_pattern" != "$executable_path" ]]; then
+      while IFS= read -r pid; do
+        add_pid "$pid"
+      done < <(pgrep -fx "$executable_pattern" 2>/dev/null || true)
+    fi
+
+    while IFS= read -r pid; do
+      add_pid "$pid"
+    done < <(pgrep -f "$executable_pattern" 2>/dev/null || true)
+
+    while IFS= read -r pid; do
+      add_pid "$pid"
+    done < <(pgrep -x "$executable" 2>/dev/null || true)
+  fi
+
+  if command -v ps >/dev/null 2>&1; then
+    while IFS= read -r line; do
+      line="${line#"${line%%[![:space:]]*}"}"
+      pid="${line%%[[:space:]]*}"
+      command="${line#"$pid"}"
+      command="${command#"${command%%[![:space:]]*}"}"
+
+      if [[ "$command" == "$executable_path" || "$command" == "$executable_path "* ]]; then
+        add_pid "$pid"
+      fi
+    done < <(ps -axo pid=,command= 2>/dev/null || true)
+  fi
+
+  for ((i = 0; i < ${#pids[@]}; i++)); do
+    printf '%s\n' "${pids[$i]}"
+  done
+}
+
+prompt_open_app() {
+  local app_path="$1"
+  local appname="$2"
+  local reply
+
+  if [[ ! -t 0 ]]; then
+    echo "$appname is not running; skipping lsof collection" >&2
+    return 1
+  fi
+
+  while true; do
+    if ! read -r -p "$appname is not running. Open it to collect lsof paths? [y/N] " reply; then
+      echo
+      return 1
+    fi
+
+    case "$reply" in
+      [Yy]|[Yy][Ee][Ss])
+        /usr/bin/open "$app_path"
+        return 0
+        ;;
+      ""|[Nn]|[Nn][Oo])
+        return 1
+        ;;
+      *)
+        echo "Please answer yes or no."
+        ;;
+    esac
+  done
+}
+
+bundle_lsof_root() {
+  local home="$1"
+  local identifier="$2"
+  local path="$3"
+  local relative
+  local component
+  local root
+
+  [[ -n "$identifier" ]] || return 1
+  [[ "$path" == "$home/Library/"* ]] || return 1
+
+  relative="${path#"$home/Library/"}"
+  root="$home/Library"
+
+  while [[ "$relative" == */* ]]; do
+    component="${relative%%/*}"
+    root="$root/$component"
+    relative="${relative#*/}"
+
+    if [[ "$component" == "$identifier" || "$component" == "$identifier".* ]]; then
+      printf '%s\n' "$root"
+      return 0
+    fi
+  done
+
+  if [[ -d "$path" && ( "$relative" == "$identifier" || "$relative" == "$identifier".* ) ]]; then
+    printf '%s\n' "$root/$relative"
+    return 0
+  fi
+
+  return 1
+}
+
+add_lsof_path() {
+  local home="$1"
+  local app_path="$2"
+  local identifier="$3"
+  local path="$4"
+  local root
+
+  path="${path% (deleted)}"
+
+  [[ "$path" == /* ]] || return 0
+  [[ -e "$path" ]] || return 0
+
+  case "$path" in
+    "$app_path"|"$app_path"/*)
+      add_path "$app_path"
+      ;;
+    "$home/Library"|"$home/Library"/*)
+      if root=$(bundle_lsof_root "$home" "$identifier" "$path"); then
+        add_path "$root"
+      else
+        add_path "$path"
+      fi
+      ;;
+  esac
+}
+
+collect_lsof_paths() {
+  local home="$1"
+  local app_path="$2"
+  local appname="$3"
+  local identifier="$4"
+  local executable="$5"
+  local lsof_path
+  local line
+  local path
+  local pid
+  local pids=()
+  local found_pid=0
+  local before_count="${#paths[@]}"
+  local i
+
+  if ! lsof_path=$(command -v lsof); then
+    echo "lsof not found; skipping running app paths" >&2
+    return 0
+  fi
+
+  while IFS= read -r pid; do
+    [[ -n "$pid" ]] || continue
+    add_pid "$pid"
+  done < <(find_running_app_pids "$app_path" "$executable")
+
+  if [[ ${#pids[@]} -eq 0 ]] && prompt_open_app "$app_path" "$appname"; then
+    for _ in 1 2 3 4 5 6 7 8 9 10; do
+      sleep 1
+      while IFS= read -r pid; do
+        [[ -n "$pid" ]] || continue
+        add_pid "$pid"
+      done < <(find_running_app_pids "$app_path" "$executable")
+
+      [[ ${#pids[@]} -gt 0 ]] && break
+    done
+  fi
+
+  if [[ ${#pids[@]} -eq 0 ]]; then
+    return 0
+  fi
+
+  for ((i = 0; i < ${#pids[@]}; i++)); do
+    pid="${pids[$i]}"
+    found_pid=1
+    while IFS= read -r line; do
+      [[ "$line" == n* ]] || continue
+      path="${line#n}"
+      add_lsof_path "$home" "$app_path" "$identifier" "$path"
+    done < <("$lsof_path" -n -P -w -F n -p "$pid" 2>/dev/null || true)
+  done
+
+  if [[ "$found_pid" == 1 && ${#paths[@]} -gt "$before_count" ]]; then
+    echo "Added $((${#paths[@]} - before_count)) path(s) from lsof" >&2
+  fi
 }
 
 manifest_destination() {
@@ -260,11 +512,13 @@ extract_archive_file() {
 
 archive_app() {
   local output=""
+  local dry_run=0
   local app=""
   local home
   local app_path
   local plist_path
   local identifier
+  local executable
   local appname
   local safe_appname
   local safe_identifier
@@ -273,6 +527,7 @@ archive_app() {
   local staging
   local manifest
   local path
+  local path_index
   local payload
   local scope
   local destination
@@ -284,6 +539,10 @@ archive_app() {
         [[ $# -ge 2 ]] || usage
         output="$2"
         shift 2
+        ;;
+      -n|--dry-run)
+        dry_run=1
+        shift
         ;;
       -h|--help)
         usage
@@ -303,9 +562,6 @@ archive_app() {
 
   [[ -n "$app" ]] || usage
 
-  require_ditto
-  require_archive_tools
-
   home=$(default_home)
   app_path=$(locate_app "$home" "$app")
   plist_path="${app_path%/}/Contents/Info.plist"
@@ -314,9 +570,11 @@ archive_app() {
 
   identifier=$(read_bundle_identifier "$plist_path")
   [[ -n "$identifier" ]] || die "could not determine bundle identifier"
+  executable=$(read_bundle_executable "$plist_path")
 
   appname=$(basename "${app_path%.app}")
   collect_paths "$home" "$app_path" "$appname" "$identifier"
+  collect_lsof_paths "$home" "$app_path" "$appname" "$identifier" "$executable"
 
   if [[ ${#paths[@]} -eq 0 ]]; then
     die "no files found for $appname"
@@ -329,6 +587,22 @@ archive_app() {
   fi
 
   archive_path=$(absolute_path "$output")
+
+  if [[ "$dry_run" == 1 ]]; then
+    echo "Dry run for $appname ($identifier)"
+    echo "Archive would be written to $archive_path"
+    echo "Paths that would be archived:"
+    for ((path_index = 0; path_index < ${#paths[@]}; path_index++)); do
+      path="${paths[$path_index]}"
+      printf '%s\n' "$path"
+    done
+    echo "Dry run complete (no archive written)."
+    return 0
+  fi
+
+  require_ditto
+  require_archive_tools
+
   mkdir -p "$(dirname "$archive_path")"
 
   tmp=$(mktemp -d "${TMPDIR:-/tmp}/app-archive.XXXXXX")
@@ -342,7 +616,8 @@ archive_app() {
   write_metadata "$staging/metadata" "$appname" "$identifier" "$home"
   printf '# payload\tscope\tdestination\n' > "$manifest"
 
-  for path in "${paths[@]}"; do
+  for ((path_index = 0; path_index < ${#paths[@]}; path_index++)); do
+    path="${paths[$path_index]}"
     payload="payload/$index"
     read -r scope destination < <(manifest_destination "$home" "$path")
     "$ditto" --rsrc --extattr --acl "$path" "$staging/$payload"
