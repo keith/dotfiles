@@ -1,4 +1,3 @@
-" Stop myself from typing print instead of printf
-match ErrorMsg 'print('
+highlight! link @error.cpp ErrorMsg
 
 let b:format_on_save = filereadable('.keithclangformat')
