@@ -693,18 +693,25 @@ confirm_replace() {
     return 0
   fi
 
+  if [[ ! -t 0 ]]; then
+    return 1
+  fi
+
   while true; do
-    if ! read -r -p "Replace $path? " reply; then
+    if ! read -r -p "Overwrite existing $path? [y/N] " reply; then
       echo
       return 1
     fi
 
     case "$reply" in
-      [Yy])
+      [Yy]|[Yy][Ee][Ss])
         return 0
         ;;
-      [Nn])
+      ""|[Nn]|[Nn][Oo])
         return 1
+        ;;
+      *)
+        echo "Please answer yes or no."
         ;;
     esac
   done
@@ -738,6 +745,7 @@ restore_archive() {
   local destination
   local source
   local target
+  local parent
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -787,18 +795,19 @@ restore_archive() {
 
     if [[ -e "$target" ]]; then
       if ! confirm_replace "$target"; then
-        echo "Skipped $target"
+        echo "skipped $target"
         continue
       fi
       rm -rf "$target"
     fi
 
-    mkdir -p "$(dirname "$target")"
+    parent=$(dirname "$target")
+    mkdir -p "$parent"
     "$ditto" --rsrc --extattr --acl "$source" "$target"
     if [[ "$scope" == "home" && "${EUID:-$(id -u)}" -eq 0 ]]; then
       chown -R "$restore_user" "$target"
     fi
-    echo "Restored $target"
+    echo "restored $target"
   done < "$manifest"
 }
 
