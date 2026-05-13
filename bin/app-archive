@@ -1,0 +1,582 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly format_version=1
+readonly ditto=/usr/bin/ditto
+readonly plistbuddy=/usr/libexec/PlistBuddy
+readonly tar=/usr/bin/tar
+
+app_archive_tmp=""
+
+usage() {
+  cat <<'EOF'
+Usage:
+  app-archive [-o ARCHIVE.tar.zst] APP
+  app-archive archive [-o ARCHIVE.tar.zst] APP
+  app-archive restore [-y] ARCHIVE.tar.zst
+  app-archive list ARCHIVE.tar.zst
+
+Archives the files zap would remove for a macOS app, including the .app bundle.
+Set APP_ARCHIVE_HOME to archive or restore a user Library other than the current
+user's home directory. Set APP_ARCHIVE_USER when restoring as root and home
+files should be chowned to a user other than SUDO_USER.
+EOF
+  exit 1
+}
+
+die() {
+  echo "error: $*" >&2
+  exit 1
+}
+
+cleanup_tmp() {
+  if [[ -n "${app_archive_tmp:-}" ]]; then
+    rm -rf "$app_archive_tmp"
+  fi
+}
+
+strip_trailing_slash() {
+  local path="$1"
+
+  while [[ "$path" != "/" && "$path" == */ ]]; do
+    path="${path%/}"
+  done
+
+  printf '%s\n' "$path"
+}
+
+absolute_path() {
+  local path
+  path=$(strip_trailing_slash "$1")
+
+  case "$path" in
+    /*)
+      printf '%s\n' "$path"
+      ;;
+    *)
+      printf '%s/%s\n' "$PWD" "$path"
+      ;;
+  esac
+}
+
+default_home() {
+  local home=""
+
+  if [[ -n "${APP_ARCHIVE_HOME:-}" ]]; then
+    strip_trailing_slash "$APP_ARCHIVE_HOME"
+    return
+  fi
+
+  if [[ "${EUID:-$(id -u)}" -eq 0 && -n "${SUDO_USER:-}" && "$SUDO_USER" != "root" ]]; then
+    if command -v dscl >/dev/null 2>&1; then
+      home=$(dscl . -read "/Users/$SUDO_USER" NFSHomeDirectory 2>/dev/null | awk '{print $2; exit}' || true)
+    fi
+  fi
+
+  if [[ -z "$home" ]]; then
+    home="$HOME"
+  fi
+
+  strip_trailing_slash "$home"
+}
+
+default_user() {
+  if [[ -n "${APP_ARCHIVE_USER:-}" ]]; then
+    printf '%s\n' "$APP_ARCHIVE_USER"
+    return
+  fi
+
+  if [[ "${EUID:-$(id -u)}" -eq 0 && -n "${SUDO_USER:-}" && "$SUDO_USER" != "root" ]]; then
+    printf '%s\n' "$SUDO_USER"
+    return
+  fi
+
+  id -un
+}
+
+require_ditto() {
+  if [[ ! -x "$ditto" ]]; then
+    die "ditto is required at $ditto"
+  fi
+}
+
+zstd_path() {
+  command -v zstd || die "zstd is required"
+}
+
+require_archive_tools() {
+  if [[ ! -x "$tar" ]]; then
+    die "tar is required at $tar"
+  fi
+
+  zstd_path >/dev/null
+}
+
+read_bundle_identifier() {
+  local plist_path="$1"
+  local identifier=""
+
+  if [[ -x "$plistbuddy" ]]; then
+    identifier=$("$plistbuddy" -c 'print :CFBundleIdentifier' "$plist_path" 2>/dev/null || true)
+  fi
+
+  if [[ -z "$identifier" ]] && command -v plutil >/dev/null 2>&1; then
+    identifier=$(plutil -extract CFBundleIdentifier raw -o - "$plist_path" 2>/dev/null || true)
+  fi
+
+  printf '%s\n' "$identifier"
+}
+
+locate_app() {
+  local home="$1"
+  local app="$2"
+  local app_path
+  local app_basename
+  local candidate
+
+  app_path="$app"
+  if [[ -d "$app_path" ]]; then
+    absolute_path "$app_path"
+    return
+  fi
+
+  app_basename="${app%.app}.app"
+  for candidate in "/Applications/$app_basename" "$home/Applications/$app_basename"; do
+    if [[ -d "$candidate" ]]; then
+      printf '%s\n' "$candidate"
+      return
+    fi
+  done
+
+  die "application path must be absolute, relative, or in /Applications or $home/Applications"
+}
+
+paths=()
+
+add_path() {
+  local path="$1"
+  local existing
+
+  [[ -e "$path" ]] || return 0
+
+  for existing in "${paths[@]}"; do
+    if [[ "$existing" == "$path" || ( -e "$existing" && "$existing" -ef "$path" ) ]]; then
+      return 0
+    fi
+  done
+
+  paths+=("$path")
+}
+
+add_matches() {
+  local path
+
+  for path in "$@"; do
+    add_path "$path"
+  done
+}
+
+collect_paths() {
+  local home="$1"
+  local app_path="$2"
+  local appname="$3"
+  local identifier="$4"
+
+  paths=()
+
+  add_path "$app_path"
+  add_path "$home/Library/Application Support/$appname"
+  add_path "$home/Library/Application Support/$identifier"
+
+  shopt -s nullglob
+  add_matches "$home/Library/Containers/$identifier"*
+  shopt -u nullglob
+
+  add_path "$home/Library/Caches/$appname"
+  add_path "$home/Library/Caches/$identifier"
+  add_path "$home/Library/$appname"
+
+  shopt -s nullglob
+  add_matches "$home/Library/Preferences/"*"$identifier"*".plist"
+  shopt -u nullglob
+
+  add_path "$home/Library/Saved Application State/$identifier.savedState"
+
+  shopt -s nullglob
+  add_matches "$home/Library/SyncedPreferences/$identifier"*".plist"
+  shopt -u nullglob
+
+  add_path "$home/Library/WebKit/$identifier"
+}
+
+manifest_destination() {
+  local home="$1"
+  local path="$2"
+
+  if [[ "$path" == "$home"/* ]]; then
+    printf 'home\t%s\n' "${path#"$home"/}"
+  else
+    printf 'absolute\t%s\n' "$path"
+  fi
+}
+
+safe_filename_part() {
+  printf '%s' "$1" | tr -c 'A-Za-z0-9._-' '_'
+}
+
+write_metadata() {
+  local metadata="$1"
+  local appname="$2"
+  local identifier="$3"
+  local home="$4"
+
+  {
+    printf 'format_version=%s\n' "$format_version"
+    printf 'app_name=%s\n' "$appname"
+    printf 'bundle_identifier=%s\n' "$identifier"
+    printf 'archive_home=%s\n' "$home"
+    printf 'created_at=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+  } > "$metadata"
+}
+
+create_archive_file() {
+  local staging="$1"
+  local archive_path="$2"
+  local zstd
+
+  zstd=$(zstd_path)
+  (cd "$staging" && "$tar" --format pax --acls --xattrs -cf - .) | "$zstd" -q -T0 -f -o "$archive_path"
+}
+
+extract_archive_file() {
+  local archive="$1"
+  local tmp="$2"
+  local zstd
+
+  zstd=$(zstd_path)
+  "$zstd" -q -dc "$archive" | "$tar" -xpf - -C "$tmp"
+}
+
+archive_app() {
+  local output=""
+  local app=""
+  local home
+  local app_path
+  local plist_path
+  local identifier
+  local appname
+  local safe_appname
+  local safe_identifier
+  local archive_path
+  local tmp
+  local staging
+  local manifest
+  local path
+  local payload
+  local scope
+  local destination
+  local index=0
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -o|--output)
+        [[ $# -ge 2 ]] || usage
+        output="$2"
+        shift 2
+        ;;
+      -h|--help)
+        usage
+        ;;
+      -*)
+        usage
+        ;;
+      *)
+        if [[ -n "$app" ]]; then
+          usage
+        fi
+        app="$1"
+        shift
+        ;;
+    esac
+  done
+
+  [[ -n "$app" ]] || usage
+
+  require_ditto
+  require_archive_tools
+
+  home=$(default_home)
+  app_path=$(locate_app "$home" "$app")
+  plist_path="${app_path%/}/Contents/Info.plist"
+
+  [[ -f "$plist_path" ]] || die "no plist at $plist_path"
+
+  identifier=$(read_bundle_identifier "$plist_path")
+  [[ -n "$identifier" ]] || die "could not determine bundle identifier"
+
+  appname=$(basename "${app_path%.app}")
+  collect_paths "$home" "$app_path" "$appname" "$identifier"
+
+  if [[ ${#paths[@]} -eq 0 ]]; then
+    die "no files found for $appname"
+  fi
+
+  if [[ -z "$output" ]]; then
+    safe_appname=$(safe_filename_part "$appname")
+    safe_identifier=$(safe_filename_part "$identifier")
+    output="${safe_appname}-${safe_identifier}-$(date '+%Y%m%d%H%M%S').apparchive.tar.zst"
+  fi
+
+  archive_path=$(absolute_path "$output")
+  mkdir -p "$(dirname "$archive_path")"
+
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/app-archive.XXXXXX")
+  app_archive_tmp="$tmp"
+  trap cleanup_tmp EXIT
+
+  staging="$tmp/staging"
+  manifest="$staging/manifest.tsv"
+  mkdir -p "$staging/payload"
+
+  write_metadata "$staging/metadata" "$appname" "$identifier" "$home"
+  printf '# payload\tscope\tdestination\n' > "$manifest"
+
+  for path in "${paths[@]}"; do
+    payload="payload/$index"
+    read -r scope destination < <(manifest_destination "$home" "$path")
+    "$ditto" --rsrc --extattr --acl "$path" "$staging/$payload"
+    printf '%s\t%s\t%s\n' "$payload" "$scope" "$destination" >> "$manifest"
+    echo "Archived $path"
+    index=$((index + 1))
+  done
+
+  create_archive_file "$staging" "$archive_path"
+  echo "Wrote $archive_path"
+}
+
+extract_archive() {
+  local archive="$1"
+  local tmp="$2"
+  local candidate
+
+  require_archive_tools
+
+  [[ -f "$archive" ]] || die "archive not found: $archive"
+  extract_archive_file "$archive" "$tmp"
+
+  if [[ -f "$tmp/manifest.tsv" ]]; then
+    printf '%s\n' "$tmp"
+    return
+  fi
+
+  for candidate in "$tmp"/*/manifest.tsv; do
+    if [[ -f "$candidate" ]]; then
+      dirname "$candidate"
+      return
+    fi
+  done
+
+  die "archive does not contain an app-archive manifest"
+}
+
+validate_archive() {
+  local root="$1"
+  local version=""
+
+  [[ -f "$root/manifest.tsv" ]] || die "archive is missing manifest.tsv"
+
+  if [[ -f "$root/metadata" ]]; then
+    version=$(awk -F= '$1 == "format_version" { print $2; exit }' "$root/metadata")
+    [[ "$version" == "$format_version" ]] || die "unsupported archive format version: ${version:-unknown}"
+  fi
+}
+
+archive_destination() {
+  local home="$1"
+  local scope="$2"
+  local destination="$3"
+
+  case "$scope" in
+    home)
+      printf '%s/%s\n' "$home" "$destination"
+      ;;
+    absolute)
+      printf '%s\n' "$destination"
+      ;;
+    *)
+      die "invalid destination scope in manifest: $scope"
+      ;;
+  esac
+}
+
+confirm_replace() {
+  local path="$1"
+  local reply
+
+  if [[ "${auto_confirm:-0}" == 1 ]]; then
+    return 0
+  fi
+
+  while true; do
+    if ! read -r -p "Replace $path? " reply; then
+      echo
+      return 1
+    fi
+
+    case "$reply" in
+      [Yy])
+        return 0
+        ;;
+      [Nn])
+        return 1
+        ;;
+    esac
+  done
+}
+
+ensure_writable_destination() {
+  local destination="$1"
+  local restore_home="$2"
+  local parent
+
+  parent=$(dirname "$destination")
+  while [[ ! -e "$parent" && "$parent" != "/" ]]; do
+    parent=$(dirname "$parent")
+  done
+
+  if [[ ! -w "$parent" ]]; then
+    die "$destination cannot be restored. Try running with sudo APP_ARCHIVE_HOME=\"$restore_home\""
+  fi
+}
+
+restore_archive() {
+  local auto_confirm=0
+  local archive=""
+  local home
+  local tmp
+  local restore_user
+  local root
+  local manifest
+  local payload
+  local scope
+  local destination
+  local source
+  local target
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -y|--yes)
+        auto_confirm=1
+        shift
+        ;;
+      -h|--help)
+        usage
+        ;;
+      -*)
+        usage
+        ;;
+      *)
+        if [[ -n "$archive" ]]; then
+          usage
+        fi
+        archive="$1"
+        shift
+        ;;
+    esac
+  done
+
+  [[ -n "$archive" ]] || usage
+
+  archive=$(absolute_path "$archive")
+  home=$(default_home)
+  restore_user=$(default_user)
+
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/app-archive.XXXXXX")
+  app_archive_tmp="$tmp"
+  trap cleanup_tmp EXIT
+
+  root=$(extract_archive "$archive" "$tmp")
+  validate_archive "$root"
+  manifest="$root/manifest.tsv"
+
+  while IFS=$'\t' read -r payload scope destination; do
+    [[ -n "$payload" ]] || continue
+    [[ "$payload" == \#* ]] && continue
+
+    source="$root/$payload"
+    [[ -e "$source" ]] || die "archive payload missing: $payload"
+
+    target=$(archive_destination "$home" "$scope" "$destination")
+    ensure_writable_destination "$target" "$home"
+
+    if [[ -e "$target" ]]; then
+      if ! confirm_replace "$target"; then
+        echo "Skipped $target"
+        continue
+      fi
+      rm -rf "$target"
+    fi
+
+    mkdir -p "$(dirname "$target")"
+    "$ditto" --rsrc --extattr --acl "$source" "$target"
+    if [[ "$scope" == "home" && "${EUID:-$(id -u)}" -eq 0 ]]; then
+      chown -R "$restore_user" "$target"
+    fi
+    echo "Restored $target"
+  done < "$manifest"
+}
+
+list_archive() {
+  local archive="$1"
+  local home
+  local tmp
+  local root
+  local payload
+  local scope
+  local destination
+
+  [[ -n "$archive" ]] || usage
+  archive=$(absolute_path "$archive")
+  home=$(default_home)
+
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/app-archive.XXXXXX")
+  app_archive_tmp="$tmp"
+  trap cleanup_tmp EXIT
+
+  root=$(extract_archive "$archive" "$tmp")
+  validate_archive "$root"
+
+  while IFS=$'\t' read -r payload scope destination; do
+    [[ -n "$payload" ]] || continue
+    [[ "$payload" == \#* ]] && continue
+
+    archive_destination "$home" "$scope" "$destination"
+  done < "$root/manifest.tsv"
+}
+
+if [[ $# -lt 1 ]]; then
+  usage
+fi
+
+cmd="$1"
+shift
+
+case "$cmd" in
+  archive)
+    archive_app "$@"
+    ;;
+  restore)
+    restore_archive "$@"
+    ;;
+  list)
+    [[ $# -eq 1 ]] || usage
+    list_archive "$1"
+    ;;
+  -h|--help)
+    usage
+    ;;
+  *)
+    archive_app "$cmd" "$@"
+    ;;
+esac
