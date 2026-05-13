@@ -1,3 +1,7 @@
+local function edit_file(path)
+  vim.cmd.edit(vim.fn.fnameescape(vim.fn.fnamemodify(path, ":.")))
+end
+
 -- copied from upstream clangd.lua to silence output
 local function clangd_alternate()
   local bufnr = vim.api.nvim_get_current_buf()
@@ -17,7 +21,7 @@ local function clangd_alternate()
     return false
   end
 
-  vim.cmd.edit(vim.fn.fnameescape(vim.uri_to_fname(response.result)))
+  edit_file(vim.uri_to_fname(response.result))
   return true
 end
 
@@ -49,7 +53,7 @@ function Alternate()
 
     new_file = swap_extension(file)
     if file_exists(new_file) then
-      vim.cmd.edit(new_file)
+      edit_file(new_file)
       return
     end
 
@@ -73,7 +77,7 @@ function Alternate()
   end
 
   if file_exists(new_file) then
-    vim.cmd.edit(new_file)
+    edit_file(new_file)
   else
     vim.api.nvim_err_writeln("no alternate file found, tried: " .. new_file)
   end
