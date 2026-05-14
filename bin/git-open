@@ -140,7 +140,7 @@ def main(args):
 
         query = f"pulls?q=is%3Aopen+is%3Apr+head%3A{upstream}"
         url = os.path.join(remote_url, query)
-    elif args.argument == "actions":
+    elif args.argument in ("actions", "action"):
         query = "actions"
         if args.argument2:
             workflow = os.path.basename(args.argument2)
