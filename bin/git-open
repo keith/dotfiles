@@ -25,9 +25,7 @@ def _run_git_command(args):
 
 def _get_remotes():
     remotes = set([])
-    lines = [
-        line for line in _run_git_command(["remote", "-v"]).split("\n") if line
-    ]
+    lines = [line for line in _run_git_command(["remote", "-v"]).split("\n") if line]
     for line in lines:
         name, url, _ = line.split()
         remotes.add((name, _convert_to_http(url)))
@@ -169,12 +167,8 @@ def _get_parser():
         type=str,
         help="The name of the remote to open",
     )
-    parser.add_argument(
-        "argument", nargs="?", help="The argument to try and open"
-    )
-    parser.add_argument(
-        "argument2", nargs="?", help="The argument to try and open"
-    )
+    parser.add_argument("argument", nargs="?", help="The argument to try and open")
+    parser.add_argument("argument2", nargs="?", help="The argument to try and open")
     return parser
 
 
