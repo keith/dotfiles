@@ -3,8 +3,26 @@
 set -euo pipefail
 
 repo="buildbuddy-io/bazel"
-install_dir="${INSTALL_DIR:-$HOME/.local/bin}"
-install_name="${INSTALL_NAME:-bb}"
+install_path="$HOME/.local/bin/bb"
+rm -f "$install_path"
+mkdir -p "$(dirname "$install_path")"
+
+if [[ -f "cli/BUILD" ]]; then
+  echo "Installing bb from source in $(pwd)"
+  set -x
+  bazel build --config=release cli
+  set +x
+
+  source_binary="bazel-bin/cli/cmd/bb/bb_/bb"
+  if [[ ! -x "$source_binary" ]]; then
+    echo "error: expected built binary at $source_binary" >&2
+    exit 1
+  fi
+
+  cp "$source_binary" "$install_path"
+  chmod 0755 "$install_path"
+  exit 0
+fi
 
 case "$(uname -s)" in
   Darwin)
@@ -68,7 +86,4 @@ curl -fsSLo "$tmpdir/$asset.sha256" "$base_url/$asset.sha256"
   shasum -a 256 -c "$asset.sha256"
 )
 
-mkdir -p "$install_dir"
-install -m 0755 "$tmpdir/$asset" "$install_dir/$install_name"
-
-echo "Installed $install_dir/$install_name"
+install -m 0755 "$tmpdir/$asset" "$install_path"
