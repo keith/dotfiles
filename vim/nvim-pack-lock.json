@@ -28,6 +28,10 @@
       "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
+    "fzf-lua": {
+      "rev": "23f71140754b9162551dc8ccc1d6346e4275ecc2",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "gist.vim": {
       "rev": "727b100611c6065415e6c796de2b1c5779b0bc9c",
       "src": "https://github.com/keith/gist.vim"

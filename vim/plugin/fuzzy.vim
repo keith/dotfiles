@@ -36,3 +36,5 @@ nnoremap <C-p>p  :call FuzzyFindCommand("edit", expand("%:h"))<cr>
 nnoremap <C-p>pe :call FuzzyFindCommand("edit", expand("%:h"))<cr>
 nnoremap <C-p>pv :call FuzzyFindCommand("vsplit", expand("%:h"))<cr>
 nnoremap <C-p>ps :call FuzzyFindCommand("split", expand("%:h"))<cr>
+
+nnoremap <C-p>g :FzfLua live_grep_native<cr>
