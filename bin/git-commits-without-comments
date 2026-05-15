@@ -22,28 +22,98 @@ def _build_parser() -> argparse.ArgumentParser:
         description="List branch commits that have no GitHub commit comments."
     )
     parser.add_argument(
-        "repo",
-        help="GitHub repository, like 'owner/repo' or 'https://github.com/owner/repo'.",
+        "-r",
+        "--repo",
+        help=(
+            "GitHub repository, like 'owner/repo' or "
+            "'https://github.com/owner/repo'. Defaults to the local git remote."
+        ),
     )
-    parser.add_argument("branch", help="Branch name to inspect.")
     parser.add_argument(
-        "oldest_commit",
+        "-b",
+        "--branch",
+        required=True,
+        help="Branch name to inspect.",
+    )
+    parser.add_argument(
+        "--oldest",
+        dest="oldest_commit",
+        required=True,
         help="Oldest commit SHA/prefix to include before stopping.",
     )
     return parser
 
 
-def _normalize_repo(repo: str) -> str:
-    repo = repo.strip().removesuffix(".git").rstrip("/")
-    match = re.match(r"^(?:https://)?github\.com[:/](?P<repo>[^/]+/[^/]+)$", repo)
-    if match:
-        repo = match.group("repo")
+def _repo_from_string(repo: str) -> str | None:
+    repo = repo.strip().rstrip("/").removesuffix(".git")
+    if re.match(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", repo):
+        return repo
 
-    if repo.count("/") != 1:
+    for pattern in (
+        r"^(?:https://)?github\.com[:/](?P<repo>[^/]+/[^/]+)$",
+        r"^git@github\.com:(?P<repo>[^/]+/[^/]+)$",
+        r"^ssh://git@github\.com/(?P<repo>[^/]+/[^/]+)$",
+    ):
+        match = re.match(pattern, repo)
+        if match:
+            return match.group("repo")
+
+    return None
+
+
+def _normalize_repo(repo: str) -> str:
+    normalized = _repo_from_string(repo)
+    if not normalized:
         raise SystemExit(
             "error: repo must be in 'owner/repo' format or be a github.com repo URL"
         )
-    return repo
+    return normalized
+
+
+def _run_git(args: list[str]) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", *args],
+            text=True,
+            check=False,
+            capture_output=True,
+        )
+    except FileNotFoundError:
+        return None
+
+    if result.returncode != 0:
+        return None
+    output = result.stdout.strip()
+    return output or None
+
+
+def _remote_url(remote: str) -> str | None:
+    return _run_git(["remote", "get-url", remote])
+
+
+def _infer_repo_from_git_remote() -> str:
+    upstream = _run_git(
+        ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"]
+    )
+    if upstream and "/" in upstream:
+        upstream_url = _remote_url(upstream.split("/", 1)[0])
+        if upstream_url and (repo := _repo_from_string(upstream_url)):
+            return repo
+
+    origin_url = _remote_url("origin")
+    if origin_url and (repo := _repo_from_string(origin_url)):
+        return repo
+
+    remotes = _run_git(["remote", "-v"])
+    if remotes:
+        for line in remotes.splitlines():
+            parts = line.split()
+            if len(parts) >= 2 and (repo := _repo_from_string(parts[1])):
+                return repo
+
+    raise SystemExit(
+        "error: could not infer GitHub repo from local git remotes; pass --repo"
+    )
 
 
 def _run_gh_api(repo: str, branch: str, page: int) -> list[dict[str, Any]]:
@@ -239,21 +309,35 @@ def _print_newer_oldest_hint(
     )
 
 
-def _print_oldest_commented_commit(
-    commits: list[dict[str, Any]], now: datetime
-) -> None:
-    oldest_commented = next(
-        (commit for commit in reversed(commits) if _comment_count(commit) > 0),
+def _print_oldest_commented_chunk(commits: list[dict[str, Any]]) -> None:
+    oldest_commented_index = next(
+        (
+            index
+            for index in range(len(commits) - 1, -1, -1)
+            if _comment_count(commits[index]) > 0
+        ),
         None,
     )
-    if not oldest_commented:
+    if oldest_commented_index is None:
         return
 
+    start = oldest_commented_index
+    while start > 0 and _comment_count(commits[start - 1]) > 0:
+        start -= 1
+
+    end = oldest_commented_index
+    while end + 1 < len(commits) and _comment_count(commits[end + 1]) > 0:
+        end += 1
+
+    chunk = commits[start : end + 1]
+    commit_label = "commit" if len(chunk) == 1 else "commits"
     print(
-        "{}# oldest commented commit:{} {}".format(
+        "{}# oldest commented chunk:{} {} {} with comments: {}".format(
             RED,
             RESET,
-            _commit_display(oldest_commented, now),
+            len(chunk),
+            commit_label,
+            _comment_range(chunk),
         )
     )
 
@@ -261,7 +345,7 @@ def _print_oldest_commented_commit(
 def _main() -> None:
     parser = _build_parser()
     args = parser.parse_args()
-    repo = _normalize_repo(args.repo)
+    repo = _normalize_repo(args.repo) if args.repo else _infer_repo_from_git_remote()
 
     now = datetime.now(tz=timezone.utc)
     comment_chunk: list[dict[str, Any]] = []
@@ -276,7 +360,7 @@ def _main() -> None:
         _print_commit(commit, now)
 
     _print_comment_chunk(comment_chunk)
-    _print_oldest_commented_commit(commits, now)
+    _print_oldest_commented_chunk(commits)
     _print_newer_oldest_hint(commits, comment_chunk)
 
 
