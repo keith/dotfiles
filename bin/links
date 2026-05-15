@@ -6,7 +6,12 @@ import sys
 from urllib.parse import urlparse
 
 
-SHA_RE = re.compile(rb"(?<![0-9A-Za-z])([0-9A-Fa-f]{7,40})(?![0-9A-Za-z])")
+ANSI_CSI_RE = rb"(?:\033\[[0-?]*[ -/]*[@-~])*"
+SHA_RE = re.compile(
+    rb"(?<![0-9A-Za-z])(?P<prefix>"
+    + ANSI_CSI_RE
+    + rb")(?P<sha>[0-9A-Fa-f]{7,40})(?![0-9A-Za-z])"
+)
 OSC8_START = b"\033]8;;"
 OSC8_END = b"\033]8;;\033\\"
 OSC8_ST = b"\033\\"
@@ -77,13 +82,14 @@ def _linkify(
     commit_base_url: bytes, line: bytes, full_sha_cache: dict[bytes, bytes | None]
 ) -> bytes:
     def replace(match: re.Match[bytes]) -> bytes:
-        sha = match.group(1)
+        prefix = match.group("prefix")
+        sha = match.group("sha")
         full_sha = _full_sha(sha, full_sha_cache)
         if full_sha is None:
-            return sha
+            return prefix + sha
 
         url = commit_base_url + b"/" + full_sha
-        return OSC8_START + url + OSC8_ST + sha + OSC8_END
+        return prefix + OSC8_START + url + OSC8_ST + sha + OSC8_END
 
     return SHA_RE.sub(replace, line)
 
