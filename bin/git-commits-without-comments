@@ -1,0 +1,284 @@
+#!/usr/bin/env python3
+
+import argparse
+from datetime import datetime, timezone
+import json
+import re
+import subprocess
+import sys
+from typing import Any
+
+
+PER_PAGE = 100
+BLUE = "\033[34m"
+RED = "\033[31m"
+YELLOW = "\033[33m"
+RESET = "\033[0m"
+OSC8_END = "\033]8;;\033\\"
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="List branch commits that have no GitHub commit comments."
+    )
+    parser.add_argument(
+        "repo",
+        help="GitHub repository, like 'owner/repo' or 'https://github.com/owner/repo'.",
+    )
+    parser.add_argument("branch", help="Branch name to inspect.")
+    parser.add_argument(
+        "oldest_commit",
+        help="Oldest commit SHA/prefix to include before stopping.",
+    )
+    return parser
+
+
+def _normalize_repo(repo: str) -> str:
+    repo = repo.strip().removesuffix(".git").rstrip("/")
+    match = re.match(r"^(?:https://)?github\.com[:/](?P<repo>[^/]+/[^/]+)$", repo)
+    if match:
+        repo = match.group("repo")
+
+    if repo.count("/") != 1:
+        raise SystemExit(
+            "error: repo must be in 'owner/repo' format or be a github.com repo URL"
+        )
+    return repo
+
+
+def _run_gh_api(repo: str, branch: str, page: int) -> list[dict[str, Any]]:
+    result = subprocess.run(
+        [
+            "gh",
+            "api",
+            "--method",
+            "GET",
+            f"repos/{repo}/commits",
+            "-f",
+            f"sha={branch}",
+            "-f",
+            f"per_page={PER_PAGE}",
+            "-f",
+            f"page={page}",
+        ],
+        text=True,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        print(result.stderr.strip(), file=sys.stderr)
+        raise SystemExit(result.returncode)
+
+    return json.loads(result.stdout)
+
+
+def _parse_github_date(value: str) -> datetime:
+    return datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+
+def _format_relative_date(value: str, now: datetime) -> str:
+    commit_date = _parse_github_date(value)
+    delta = now - commit_date
+    future = delta.total_seconds() < 0
+    seconds = abs(int(delta.total_seconds()))
+
+    if seconds < 45:
+        return "just now"
+
+    units = (
+        ("year", 365 * 24 * 60 * 60),
+        ("month", 30 * 24 * 60 * 60),
+        ("week", 7 * 24 * 60 * 60),
+        ("day", 24 * 60 * 60),
+        ("hour", 60 * 60),
+        ("minute", 60),
+    )
+    for name, unit_seconds in units:
+        count = seconds // unit_seconds
+        if count:
+            label = name if count == 1 else f"{name}s"
+            if future:
+                return f"in {count} {label}"
+            return f"{count} {label} ago"
+
+    return "just now"
+
+
+def _subject(message: str) -> str:
+    first_line = message.splitlines()[0] if message else "(no commit message)"
+    return first_line.replace("\t", " ")
+
+
+def _author(commit: dict[str, Any]) -> str:
+    commit_author = commit["commit"].get("author") or {}
+    github_author = commit.get("author") or {}
+
+    login = github_author.get("login")
+    if login:
+        return f"@{login}"
+    return commit_author.get("name") or "unknown"
+
+
+def _short_sha(commit: dict[str, Any]) -> str:
+    return commit["sha"][:12]
+
+
+def _osc8(url: str | None, text: str) -> str:
+    if not url:
+        return text
+    return f"\033]8;;{url}\033\\{text}{OSC8_END}"
+
+
+def _colored_short_sha(commit: dict[str, Any]) -> str:
+    return _osc8(commit.get("html_url"), f"{BLUE}{_short_sha(commit)}{RESET}")
+
+
+def _colored_author(commit: dict[str, Any]) -> str:
+    return f"{YELLOW}({_author(commit)}){RESET}"
+
+
+def _date(commit: dict[str, Any]) -> str | None:
+    commit_data = commit["commit"]
+    return (commit_data.get("author") or commit_data.get("committer") or {}).get("date")
+
+
+def _commit_display(commit: dict[str, Any], now: datetime) -> str:
+    commit_data = commit["commit"]
+    date = _date(commit)
+    relative_date = _format_relative_date(date, now) if date else "unknown"
+    return "{} {} {} {}".format(
+        _colored_short_sha(commit),
+        _subject(commit_data.get("message", "")),
+        _colored_author(commit),
+        relative_date,
+    )
+
+
+def _print_commit(commit: dict[str, Any], now: datetime) -> None:
+    print(_commit_display(commit, now))
+
+
+def _comment_range(commits: list[dict[str, Any]]) -> str:
+    if len(commits) == 1:
+        return _colored_short_sha(commits[0])
+    return f"{_colored_short_sha(commits[0])}..{_colored_short_sha(commits[-1])}"
+
+
+def _print_comment_chunk(commits: list[dict[str, Any]]) -> None:
+    if not commits:
+        return
+
+    commit_label = "commit" if len(commits) == 1 else "commits"
+    print(
+        "{}# commented chunk:{} {} {} with comments: {}".format(
+            RED,
+            RESET,
+            len(commits),
+            commit_label,
+            _comment_range(commits),
+        )
+    )
+
+
+def _comment_count(commit: dict[str, Any]) -> int:
+    return commit["commit"].get("comment_count", 0)
+
+
+def _commits_through_oldest(
+    repo: str, branch: str, oldest: str
+) -> list[dict[str, Any]]:
+    page = 1
+    commits: list[dict[str, Any]] = []
+
+    while True:
+        page_commits = _run_gh_api(repo, branch, page)
+        if not page_commits:
+            raise SystemExit(
+                f"error: oldest commit not found on {repo}@{branch}: {oldest}"
+            )
+
+        for commit in page_commits:
+            commits.append(commit)
+            if commit["sha"].startswith(oldest):
+                return commits
+
+        if len(page_commits) < PER_PAGE:
+            raise SystemExit(
+                f"error: oldest commit not found on {repo}@{branch}: {oldest}"
+            )
+
+        page += 1
+
+
+def _print_newer_oldest_hint(
+    commits: list[dict[str, Any]], comment_chunk: list[dict[str, Any]]
+) -> None:
+    if not comment_chunk:
+        return
+
+    comment_start_index = len(commits) - len(comment_chunk)
+    if comment_start_index == 0:
+        replacement = commits[0]
+    else:
+        replacement = commits[comment_start_index - 1]
+
+    if replacement["sha"] == commits[-1]["sha"]:
+        return
+
+    skipped = len(comment_chunk)
+    commit_label = "commit" if skipped == 1 else "commits"
+    print(
+        "{}# oldest hint:{} the oldest {} {} all have comments; "
+        "use {} as oldest for the same uncommented commits".format(
+            RED,
+            RESET,
+            skipped,
+            commit_label,
+            _colored_short_sha(replacement),
+        )
+    )
+
+
+def _print_oldest_commented_commit(
+    commits: list[dict[str, Any]], now: datetime
+) -> None:
+    oldest_commented = next(
+        (commit for commit in reversed(commits) if _comment_count(commit) > 0),
+        None,
+    )
+    if not oldest_commented:
+        return
+
+    print(
+        "{}# oldest commented commit:{} {}".format(
+            RED,
+            RESET,
+            _commit_display(oldest_commented, now),
+        )
+    )
+
+
+def _main() -> None:
+    parser = _build_parser()
+    args = parser.parse_args()
+    repo = _normalize_repo(args.repo)
+
+    now = datetime.now(tz=timezone.utc)
+    comment_chunk: list[dict[str, Any]] = []
+    commits = _commits_through_oldest(repo, args.branch, args.oldest_commit)
+    for commit in commits:
+        if _comment_count(commit) > 0:
+            comment_chunk.append(commit)
+            continue
+
+        _print_comment_chunk(comment_chunk)
+        comment_chunk = []
+        _print_commit(commit, now)
+
+    _print_comment_chunk(comment_chunk)
+    _print_oldest_commented_commit(commits, now)
+    _print_newer_oldest_hint(commits, comment_chunk)
+
+
+if __name__ == "__main__":
+    _main()
