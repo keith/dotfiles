@@ -3,10 +3,11 @@
 import argparse
 from datetime import datetime, timezone
 import json
+from pathlib import Path
 import re
 import subprocess
 import sys
-from typing import Any
+from typing import Any, TextIO
 
 
 PER_PAGE = 100
@@ -42,6 +43,10 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Oldest commit SHA/prefix to include before stopping.",
     )
     return parser
+
+
+def _log(message: str) -> None:
+    print(f"# {message}", file=sys.stderr)
 
 
 def _repo_from_string(repo: str) -> str | None:
@@ -193,6 +198,18 @@ def _short_sha(commit: dict[str, Any]) -> str:
     return commit["sha"][:12]
 
 
+def _safe_filename_part(value: str) -> str:
+    sanitized = re.sub(r"[^A-Za-z0-9._-]+", "-", value.strip()).strip(".-")
+    return sanitized or "unknown"
+
+
+def _text_output_path(repo: str, branch: str) -> Path:
+    return Path("/tmp") / "git-commits-without-comments-{}-{}.txt".format(
+        _safe_filename_part(repo),
+        _safe_filename_part(branch),
+    )
+
+
 def _osc8(url: str | None, text: str) -> str:
     if not url:
         return text
@@ -203,8 +220,20 @@ def _colored_short_sha(commit: dict[str, Any]) -> str:
     return _osc8(commit.get("html_url"), f"{BLUE}{_short_sha(commit)}{RESET}")
 
 
+def _short_sha_display(commit: dict[str, Any], *, color: bool) -> str:
+    if color:
+        return _colored_short_sha(commit)
+    return _short_sha(commit)
+
+
 def _colored_author(commit: dict[str, Any]) -> str:
     return f"{YELLOW}({_author(commit)}){RESET}"
+
+
+def _author_display(commit: dict[str, Any], *, color: bool) -> str:
+    if color:
+        return _colored_author(commit)
+    return f"({_author(commit)})"
 
 
 def _date(commit: dict[str, Any]) -> str | None:
@@ -212,42 +241,64 @@ def _date(commit: dict[str, Any]) -> str | None:
     return (commit_data.get("author") or commit_data.get("committer") or {}).get("date")
 
 
-def _commit_display(commit: dict[str, Any], now: datetime) -> str:
+def _commit_display(commit: dict[str, Any], now: datetime, *, color: bool) -> str:
     commit_data = commit["commit"]
     date = _date(commit)
     relative_date = _format_relative_date(date, now) if date else "unknown"
     return "{} {} {} {}".format(
-        _colored_short_sha(commit),
+        _short_sha_display(commit, color=color),
         _subject(commit_data.get("message", "")),
-        _colored_author(commit),
+        _author_display(commit, color=color),
         relative_date,
     )
 
 
-def _print_commit(commit: dict[str, Any], now: datetime) -> None:
-    print(_commit_display(commit, now))
+class _Output:
+    def __init__(self, plain_file: TextIO) -> None:
+        self.plain_file = plain_file
+
+    def print(self, colored_line: str, plain_line: str) -> None:
+        print(colored_line)
+        print(plain_line, file=self.plain_file)
 
 
-def _comment_range(commits: list[dict[str, Any]]) -> str:
+def _print_commit(commit: dict[str, Any], now: datetime, output: _Output) -> None:
+    output.print(
+        _commit_display(commit, now, color=True),
+        _commit_display(commit, now, color=False),
+    )
+
+
+def _comment_range(commits: list[dict[str, Any]], *, color: bool) -> str:
     if len(commits) == 1:
-        return _colored_short_sha(commits[0])
-    return f"{_colored_short_sha(commits[0])}..{_colored_short_sha(commits[-1])}"
+        return _short_sha_display(commits[0], color=color)
+    return "{}..{}".format(
+        _short_sha_display(commits[0], color=color),
+        _short_sha_display(commits[-1], color=color),
+    )
 
 
-def _print_comment_chunk(commits: list[dict[str, Any]]) -> None:
+def _comment_chunk_display(commits: list[dict[str, Any]], *, color: bool) -> str | None:
     if not commits:
-        return
+        return None
 
     commit_label = "commit" if len(commits) == 1 else "commits"
-    print(
-        "{}# commented chunk:{} {} {} with comments: {}".format(
-            RED,
-            RESET,
-            len(commits),
-            commit_label,
-            _comment_range(commits),
-        )
+    return "{}# commented chunk:{} {} {} with comments: {}".format(
+        RED if color else "",
+        RESET if color else "",
+        len(commits),
+        commit_label,
+        _comment_range(commits, color=color),
     )
+
+
+def _print_comment_chunk(commits: list[dict[str, Any]], output: _Output) -> None:
+    colored_line = _comment_chunk_display(commits, color=True)
+    plain_line = _comment_chunk_display(commits, color=False)
+    if colored_line is None or plain_line is None:
+        return
+
+    output.print(colored_line, plain_line)
 
 
 def _comment_count(commit: dict[str, Any]) -> int:
@@ -281,7 +332,9 @@ def _commits_through_oldest(
 
 
 def _print_newer_oldest_hint(
-    commits: list[dict[str, Any]], comment_chunk: list[dict[str, Any]]
+    commits: list[dict[str, Any]],
+    comment_chunk: list[dict[str, Any]],
+    output: _Output,
 ) -> None:
     if not comment_chunk:
         return
@@ -297,19 +350,44 @@ def _print_newer_oldest_hint(
 
     skipped = len(comment_chunk)
     commit_label = "commit" if skipped == 1 else "commits"
-    print(
+    output.print(
+        _newer_oldest_hint_display(
+            skipped=skipped,
+            commit_label=commit_label,
+            replacement=replacement,
+            color=True,
+        ),
+        _newer_oldest_hint_display(
+            skipped=skipped,
+            commit_label=commit_label,
+            replacement=replacement,
+            color=False,
+        ),
+    )
+
+
+def _newer_oldest_hint_display(
+    *,
+    skipped: int,
+    commit_label: str,
+    replacement: dict[str, Any],
+    color: bool,
+) -> str:
+    return (
         "{}# oldest hint:{} the oldest {} {} all have comments; "
         "use {} as oldest for the same uncommented commits".format(
-            RED,
-            RESET,
+            RED if color else "",
+            RESET if color else "",
             skipped,
             commit_label,
-            _colored_short_sha(replacement),
+            _short_sha_display(replacement, color=color),
         )
     )
 
 
-def _print_oldest_commented_chunk(commits: list[dict[str, Any]]) -> None:
+def _print_oldest_commented_chunk(
+    commits: list[dict[str, Any]], output: _Output
+) -> None:
     oldest_commented_index = next(
         (
             index
@@ -331,14 +409,32 @@ def _print_oldest_commented_chunk(commits: list[dict[str, Any]]) -> None:
 
     chunk = commits[start : end + 1]
     commit_label = "commit" if len(chunk) == 1 else "commits"
-    print(
-        "{}# oldest commented chunk:{} {} {} with comments: {}".format(
-            RED,
-            RESET,
-            len(chunk),
-            commit_label,
-            _comment_range(chunk),
-        )
+    output.print(
+        _oldest_commented_chunk_display(
+            chunk=chunk,
+            commit_label=commit_label,
+            color=True,
+        ),
+        _oldest_commented_chunk_display(
+            chunk=chunk,
+            commit_label=commit_label,
+            color=False,
+        ),
+    )
+
+
+def _oldest_commented_chunk_display(
+    *,
+    chunk: list[dict[str, Any]],
+    commit_label: str,
+    color: bool,
+) -> str:
+    return "{}# oldest commented chunk:{} {} {} with comments: {}".format(
+        RED if color else "",
+        RESET if color else "",
+        len(chunk),
+        commit_label,
+        _comment_range(chunk, color=color),
     )
 
 
@@ -350,18 +446,22 @@ def _main() -> None:
     now = datetime.now(tz=timezone.utc)
     comment_chunk: list[dict[str, Any]] = []
     commits = _commits_through_oldest(repo, args.branch, args.oldest_commit)
-    for commit in commits:
-        if _comment_count(commit) > 0:
-            comment_chunk.append(commit)
-            continue
+    output_path = _text_output_path(repo, args.branch)
+    with output_path.open("w", encoding="utf-8") as plain_file:
+        output = _Output(plain_file)
+        for commit in commits:
+            if _comment_count(commit) > 0:
+                comment_chunk.append(commit)
+                continue
 
-        _print_comment_chunk(comment_chunk)
-        comment_chunk = []
-        _print_commit(commit, now)
+            _print_comment_chunk(comment_chunk, output)
+            comment_chunk = []
+            _print_commit(commit, now, output)
 
-    _print_comment_chunk(comment_chunk)
-    _print_oldest_commented_chunk(commits)
-    _print_newer_oldest_hint(commits, comment_chunk)
+        _print_comment_chunk(comment_chunk, output)
+        _print_oldest_commented_chunk(commits, output)
+        _print_newer_oldest_hint(commits, comment_chunk, output)
+    _log(f"wrote plain output to {output_path}")
 
 
 if __name__ == "__main__":
