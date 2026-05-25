@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+exec op item get "SSH Key" --fields 'public key' > ~/.ssh/1pass.pub
