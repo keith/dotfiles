@@ -25,11 +25,11 @@
       "src": "https://github.com/github/copilot.vim"
     },
     "fidget.nvim": {
-      "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
+      "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "23f71140754b9162551dc8ccc1d6346e4275ecc2",
+      "rev": "fea9eedc6894c44d44cbb772a5cd11c93b82d7a1",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.vim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "451d4ef9abd4f0f08e379ef0d55d1c391b6125a7",
+      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-metals": {
@@ -93,7 +93,7 @@
       "src": "https://github.com/simrat39/symbols-outline.nvim"
     },
     "tagbar": {
-      "rev": "7bfffca1f121afb7a9e38747500bf5270e006bb1",
+      "rev": "b37b05ff1925b0b3931f031ebf88690aa0974375",
       "src": "https://github.com/majutsushi/tagbar"
     },
     "treesj": {
