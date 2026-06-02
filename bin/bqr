@@ -29,22 +29,29 @@ if [[ ${#names[@]} -eq 0 ]]; then
   exit 1
 fi
 
-query=""
-label_set=""
+# Anything with / or : is a label or target pattern that bazel can consume
+# directly. Bare names are resolved through attr(name, ...) via bazel query.
+labels=()
+name_parts=()
 for name in "${names[@]}"; do
-  # Bare names go through attr() as a regex match; anything containing / or :
-  # is treated as a label or target pattern and unioned via set().
   if [[ $name == */* || $name == *:* ]]; then
-    label_set="${label_set:-} $name"
+    labels+=("$name")
   else
-    [[ -n $query ]] && query+=" + "
-    query+="attr(name, '$name', ...)"
+    name_parts+=("attr(name, '$name', ...)")
   fi
 done
 
-if [[ -n $label_set ]]; then
+query=""
+if [[ ${#name_parts[@]} -gt 0 ]]; then
+  for part in "${name_parts[@]}"; do
+    [[ -n $query ]] && query+=" + "
+    query+="$part"
+  done
+fi
+
+if [[ ${#labels[@]} -gt 0 ]]; then
   [[ -n $query ]] && query+=" + "
-  query+="set($label_set)"
+  query+="set(${labels[*]})"
 fi
 
 if [[ "$cmd" == bqg ]]; then
@@ -59,45 +66,42 @@ if [[ ! -s $patterns ]]; then
   exit 1
 fi
 
-count=$(wc -l < "$patterns")
+targets=()
+while IFS= read -r line || [[ -n $line ]]; do
+  [[ -n $line ]] && targets+=("$line")
+done < "$patterns"
+
+count=${#targets[@]}
 
 case "$cmd" in
   bqr)
     if [[ $count -ne 1 ]]; then
-      target=$(fzf < "$patterns")
-      targets=("$target")
+      target=$(printf '%s\n' "${targets[@]}" | fzf)
     else
-      targets=("$(cat "$patterns")")
+      target=${targets[0]}
     fi
     set -x
-    exec bazel run ${flags[@]+"${flags[@]}"} "${targets[@]}" -- ${rest[@]+"${rest[@]}"}
+    exec bazel run ${flags[@]+"${flags[@]}"} "$target" -- ${rest[@]+"${rest[@]}"}
     ;;
-  bqt|bqb)
-    if [[ "$cmd" == bqt ]]; then
-      subcommand="test"
-    else
-      subcommand="build"
-    fi
-
+  bqt)
     if [[ $count -gt 5 ]]; then
       echo "note: more than one target matches: ${names[*]}"
       echo
-      cat "$patterns"
+      printf '%s\n' "${targets[@]}"
       echo
-      printf 'Do you want to %s all of them? [Y/n] ' "$subcommand"
+      echo -n 'Do you want to test all of them? [Y/n] '
       read -r answer
       if [[ "$answer" != "Y" && "$answer" != "y" && "$answer" != "" ]]; then
         exit 1
       fi
     fi
 
-    if [[ $count -eq 1 ]]; then
-      targets=("$(cat "$patterns")")
-    else
-      targets=("--target_pattern_file=$patterns")
-    fi
     set -x
-    exec bazel "$subcommand" ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
+    exec bazel test ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
+    ;;
+  bqb)
+    set -x
+    exec bazel build ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
     ;;
   *)
     echo "error: $cmd: unknown invocation name (expected bqg, bqr, bqt, or bqb)" >&2
