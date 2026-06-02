@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+prefix=$(git rev-parse --show-prefix)
+worktree_dir=$(git pileworktreepath)
+base_sha=$(git rev-parse "@{upstream}")
+
+if [[ ! -d $worktree_dir ]]; then
+  git worktree add --quiet --detach "$worktree_dir" "$base_sha"
+else
+  git -C "$worktree_dir" switch --quiet --detach "$base_sha"
+fi
+
+cache_key=$(printf '%s\n%s\n%s\n' "$worktree_dir" "$base_sha" "$prefix" | git hash-object --stdin)
+old_tests_cache="/tmp/bazel-test-new-$cache_key.txt"
+
+if [[ -n $prefix ]]; then
+  old_dir="$worktree_dir/${prefix%/}"
+else
+  old_dir="$worktree_dir"
+fi
+
+old_tests_tmp=$(mktemp)
+current_tests=$(mktemp)
+new_tests=$(mktemp)
+trap 'rm -f "$old_tests_tmp" "$current_tests" "$new_tests"' EXIT
+
+if [[ ! -f $old_tests_cache ]]; then
+  if [[ -d $old_dir ]]; then
+    (cd "$old_dir" && bazel query -k "tests(...)" > "$old_tests_tmp") || true
+  fi
+  mv "$old_tests_tmp" "$old_tests_cache"
+fi
+
+bazel query -k "tests(...)" > "$current_tests" || true
+
+comm -13 <(sort -u "$old_tests_cache") <(sort -u "$current_tests") > "$new_tests"
+
+if [[ ! -s $new_tests ]]; then
+  echo "no new tests" >&2
+  exit 0
+fi
+
+count=$(wc -l < "$new_tests" | tr -d ' ')
+echo "testing $count new tests"
+set -x
+bazel test "$@" --target_pattern_file="$new_tests"
