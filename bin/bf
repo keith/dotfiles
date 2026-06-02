@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+buildifier --lint=fix -r .
+buildifier --lint=warn -r .
