@@ -2,8 +2,13 @@
 
 set -euo pipefail
 
+args=(run --all-files "$@")
+if [[ "${1:-}" == autoupdate ]]; then
+  args=(autoupdate)
+fi
+
 if command -v pre-commit &> /dev/null; then
-  exec pre-commit run --all-files "$@"
+  exec pre-commit "${args[@]}"
 else
-  exec uvx pre-commit run --all-files "$@"
+  exec uvx pre-commit "${args[@]}"
 fi
