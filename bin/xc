@@ -1,16 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -euo pipefail
+set -x
 
 # This is only complicated because of http://www.openradar.me/35308287
 # Otherwise we could just call `open -a Xcode .`
 
 # Can't use pgrep here since Xcode is the parent of tons of processes
 xcodes=($(ps -axo comm= | grep "Xcode$" | sed "s=/Contents/MacOS/Xcode==" || true))
-
-open_project() {
-  env -u GEM_HOME -u GEM_PATH PATH=/usr/bin:/bin open -a "$1" ./$2
-}
 
 # Open prefers Package.swifts to checked in projects so we have to do this manually FB9092403
 glob=""
@@ -23,21 +20,34 @@ do
   fi
 done
 
-if [[ -z "$glob" ]]; then
-  echo "error: nothing found to open" >&2
-  exit 1
-fi
-
+xcode=""
 case "${#xcodes[@]}" in
   0)
     xcode="$(xcode-select -p | sed "s=/Contents/Developer==")"
-    open_project "$xcode" "$glob"
     ;;
   1)
-    open_project "${xcodes[0]}" "$glob"
+    xcode="${xcodes[0]}"
     ;;
   *)
     xcode=$(printf '%s\n' "${xcodes[@]}" | fzy)
-    open_project "$xcode" "$glob"
     ;;
 esac
+
+args=(
+  -u
+  GEM_HOME
+  -u
+  GEM_PATH
+  PATH=/usr/bin:/bin
+  open
+  -a
+  "$xcode"
+)
+
+if [[ -n "$glob" ]]; then
+  env "${args[@]}" "./$glob"
+else
+  env "${args[@]}" -g
+  echo "error: nothing found to open" >&2
+  exit 1
+fi
