@@ -2,15 +2,40 @@
 
 set -euo pipefail
 
-# For https://metals-lsp.org/neovim
-brew install coursier/formulas/coursier
+only=all
+if [[ $# -gt 0 ]]; then
+  only="$1"
+fi
 
-cargo install --git https://github.com/salesforce-misc/bazelrc-lsp
-cargo install --git https://github.com/astral-sh/ruff ty --locked
+installed=0
 
-starpls_dir="$HOME/dev/starpls"
-if [[ -d "$starpls_dir" ]]; then
-  cargo +nightly-2023-12-06 install --git "file://$starpls_dir" starpls --locked
-else
-  cargo +nightly-2023-12-06 install --git https://github.com/withered-magic/starpls starpls --locked
+if [[ "$only" == "all" || "$only" == "metals" ]]; then
+  # For https://metals-lsp.org/neovim
+  brew install coursier/formulas/coursier
+  installed=1
+fi
+
+if [[ "$only" == "all" || "$only" == "bazelrc-lsp" ]]; then
+  cargo install --git https://github.com/salesforce-misc/bazelrc-lsp --force
+  installed=1
+fi
+
+if [[ "$only" == "all" || "$only" == "ty" ]]; then
+  cargo install --git https://github.com/astral-sh/ruff ty --locked --force
+  installed=1
+fi
+
+if [[ "$only" == "all" || "$only" == "starpls" ]]; then
+  starpls_dir="$HOME/dev/starpls"
+  if [[ -d "$starpls_dir" ]]; then
+    cargo +nightly-2023-12-06 install --path "$starpls_dir/crates/starpls" starpls --locked --force
+  else
+    cargo +nightly-2023-12-06 install --git https://github.com/withered-magic/starpls starpls --locked --force
+  fi
+  installed=1
+fi
+
+if [[ $installed -eq 0 ]]; then
+  echo "error: unknown LSP: $only"
+  exit 1
 fi
