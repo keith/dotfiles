@@ -4,7 +4,7 @@ set -euo pipefail
 
 stderr=$(mktemp)
 trap 'rm -f "$stderr"' EXIT
-configs=$(bazel cquery -k "kind(cc_toolchain_config, deps(//...))" 2>"$stderr" | awk '{print $1}' | sort -u || true)
+configs=$(bazel cquery -k "kind('(cc_toolchain_config|cc_toolchain)', deps(//...))" 2>"$stderr" | awk '{print $1}' | sort -u || true)
 
 if [[ -z "$configs" ]]; then
   cat "$stderr" >&2
