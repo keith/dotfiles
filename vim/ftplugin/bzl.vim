@@ -33,7 +33,8 @@ function! s:UpdateBzlmodDep() abort
     return
   endif
 
-  if empty(matchstr(l:line, printf(l:arg_pattern, 'version')))
+  let l:current_version = matchstr(l:line, printf(l:arg_pattern, 'version'))
+  if empty(l:current_version)
     call s:PrintError("Couldn't find bazel_dep version on this line")
     return
   endif
@@ -51,6 +52,10 @@ function! s:UpdateBzlmodDep() abort
   let l:version = matchstr(l:output[0], printf(l:arg_pattern, 'version'))
   if empty(l:version)
     call s:PrintError('newest-bzlmod produced no version for ' . l:name)
+    return
+  endif
+  if l:version ==# l:current_version
+    echom "Already up to date: " . l:name . "@" . l:version
     return
   endif
 
