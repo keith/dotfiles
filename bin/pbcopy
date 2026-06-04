@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -x /usr/bin/pbcopy ]]; then
+  exec /usr/bin/pbcopy
+fi
+
+if [[ -n "${TMUX:-}" ]]; then
+  exec tmux load-buffer -
+fi
+
+echo "error: no clipboard utility found" >&2
+exit 1
