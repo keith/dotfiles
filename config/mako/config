@@ -1,0 +1,26 @@
+anchor=top-right
+border-size=2
+default-timeout=5000
+group-by=app-name,summary,body
+max-icon-size=32
+outer-margin=20
+padding=10,15
+width=420
+
+font=sans-serif 20px
+format=%s\n%b
+text-alignment=left
+
+# Solarized Dark
+background-color=#002b36ee
+text-color=#eee8d5ff
+border-color=#586e75ff
+progress-color=over #268bd2ff
+
+# red border, stays until dismissed
+[urgency=critical]
+border-color=#dc322fff
+default-timeout=0
+ignore-timeout=1
+
+# vim: set ft=dosini cms=#\ %s:

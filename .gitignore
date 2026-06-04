@@ -28,6 +28,11 @@ vim/black
 !config/newsboat
 !config/nixpkgs
 !config/yamllint
+!config/hypr
+!config/keyd
+!config/mako
+!config/waybar
+config/keyd/*.lock
 
 !mutt/temp/.gitkeep
 mutt/cache

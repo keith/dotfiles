@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+side="${1:-}"
+case "$side" in
+  left | right | max) ;;
+  *)
+    echo "Usage: ${0##*/} {left|right|max}" >&2
+    exit 2
+    ;;
+esac
+
+active_monitor="$(hyprctl -j activewindow | jq -r '.monitor')"
+if [[ -z "$active_monitor" || "$active_monitor" == "null" ]]; then
+  echo "error: no active window" >&2
+  exit 1
+fi
+
+monitor="$(hyprctl -j monitors | jq --argjson id "$active_monitor" '.[] | select(.id == $id)')"
+if [[ -z "$monitor" ]]; then
+  echo "error: active monitor $active_monitor not found" >&2
+  exit 1
+fi
+
+x="$(jq -r '.x' <<<"$monitor")"
+y="$(jq -r '.y' <<<"$monitor")"
+scale="$(jq -r '.scale' <<<"$monitor")"
+width="$(jq -r --argjson scale "$scale" '(.width / $scale) | floor' <<<"$monitor")"
+height="$(jq -r --argjson scale "$scale" '(.height / $scale) | floor' <<<"$monitor")"
+reserved_left="$(jq -r '.reserved[0] // 0' <<<"$monitor")"
+reserved_top="$(jq -r '.reserved[1] // 0' <<<"$monitor")"
+reserved_right="$(jq -r '.reserved[2] // 0' <<<"$monitor")"
+reserved_bottom="$(jq -r '.reserved[3] // 0' <<<"$monitor")"
+readonly titlebar_height=26
+
+work_x="$((x + reserved_left))"
+work_y="$((y + reserved_top + titlebar_height))"
+work_width="$((width - reserved_left - reserved_right))"
+work_height="$((height - reserved_top - reserved_bottom - titlebar_height))"
+half_width="$((work_width / 2))"
+
+if ((half_width <= 0 || work_height <= 0)); then
+  echo "error: calculated invalid snap size ${half_width}x${work_height}" >&2
+  exit 1
+fi
+
+case "$side" in
+  left)
+    target_x="$work_x"
+    target_width="$half_width"
+    ;;
+  right)
+    target_x="$((work_x + half_width))"
+    target_width="$half_width"
+    ;;
+  max)
+    target_x="$work_x"
+    target_width="$work_width"
+    ;;
+esac
+
+hyprctl dispatch "hl.dsp.window.resize({ x = $target_width, y = $work_height, window = \"activewindow\" })"
+hyprctl dispatch "hl.dsp.window.move({ x = $target_x, y = $work_y, window = \"activewindow\" })"

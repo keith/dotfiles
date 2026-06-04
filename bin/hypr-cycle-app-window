@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+direction="${1:-next}"
+case "$direction" in
+  next | prev) ;;
+  *)
+    echo "Usage: ${0##*/} [next|prev]" >&2
+    exit 2
+    ;;
+esac
+
+active_window="$(hyprctl -j activewindow)"
+active_address="$(jq -r '.address // empty' <<<"$active_window")"
+active_class="$(jq -r '.class // empty' <<<"$active_window")"
+active_workspace="$(jq -r '.workspace.id // empty' <<<"$active_window")"
+
+if [[ -z "$active_address" || -z "$active_class" || -z "$active_workspace" ]]; then
+  exit 0
+fi
+
+target_address="$(
+  hyprctl -j clients | jq -r \
+    --arg active_address "$active_address" \
+    --arg active_class "$active_class" \
+    --argjson active_workspace "$active_workspace" \
+    --arg direction "$direction" '
+      [
+        .[]
+        | select(.class == $active_class)
+        | select(.workspace.id == $active_workspace)
+        | select((.mapped // true) == true)
+        | select((.hidden // false) == false)
+        | { address, pid, title }
+      ] as $windows
+      | ($windows | sort_by(.pid, .title, .address) | map(.address)) as $windows
+      | if ($windows | length) <= 1 then
+          empty
+        else
+          ($windows | index($active_address)) as $index
+          | if $index == null then
+              $windows[0]
+            elif $direction == "prev" then
+              $windows[($index - 1 + ($windows | length)) % ($windows | length)]
+            else
+              $windows[($index + 1) % ($windows | length)]
+            end
+        end
+    '
+)"
+
+if [[ -n "$target_address" ]]; then
+  hyprctl dispatch "hl.dsp.focus({ window = \"address:$target_address\" })"
+  hyprctl dispatch "hl.dsp.window.alter_zorder({ mode = \"top\", window = \"address:$target_address\" })"
+fi
