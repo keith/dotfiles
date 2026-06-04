@@ -147,7 +147,7 @@ function TRAPUSR1() {
 # Right prompt + vim mode
 
 # Reduce the lag switching into Normal mode to 0.1s
-export KEYTIMEOUT=1
+export KEYTIMEOUT=10
 
 # Show vim mode on right
 # http://dougblack.io/words/zsh-vi-mode.html
