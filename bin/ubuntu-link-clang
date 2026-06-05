@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cleanup=0
+if [[ "${1:-}" == "--cleanup" ]]; then
+  cleanup=1
+  shift
+fi
+
+if [[ $# -ne 0 ]]; then
+  echo "usage: ${0##*/} [--cleanup]" >&2
+  exit 2
+fi
+
+# shellcheck disable=SC2010
+# shellcheck disable=SC2207
+versions=($(ls /usr/lib | grep llvm- | cut -d- -f2))
+
+for version in "${versions[@]}"; do
+  llvm_dir="/usr/lib/llvm-$version"
+  bin_dir="$llvm_dir/bin"
+  if [[ ! -d "$bin_dir" ]]; then
+    echo "warning: LLVM directory $bin_dir does not exist" >&2
+    continue
+  fi
+
+  echo "note: Linking LLVM $version from $bin_dir"
+  priority=$((version * 100))
+  for bin in "$bin_dir"/*; do
+    name=$(basename "$bin")
+    if [[ "$name" == *"$version"* ]]; then
+      continue
+    fi
+
+    if [[ "$cleanup" -eq 1 ]]; then
+      sudo update-alternatives --quiet --remove-all "$name" 2>&1 | grep -v "no alternatives for" || true
+    else
+      sudo update-alternatives --quiet --install "/usr/bin/$name" "$name" "$bin" "$priority"
+      sudo update-alternatives --quiet --set "$name" "$bin"
+    fi
+  done
+done
+
+if [[ "$cleanup" -eq 1 ]]; then
+  output=$(update-alternatives --get-selections 2>&1 | grep llvm || true)
+  if [[ -n "$output" ]]; then
+    echo "Remaining alternatives after cleanup:"
+    echo "$output"
+  else
+    echo "No LLVM alternatives remain after cleanup."
+  fi
+fi
