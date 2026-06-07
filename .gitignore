@@ -25,7 +25,6 @@ vim/black
 !config/rgrc.conf
 
 !config/alacritty
-!config/awesome
 !config/newsboat
 !config/nixpkgs
 !config/yamllint
