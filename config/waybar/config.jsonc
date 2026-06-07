@@ -1,0 +1,54 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 8,
+
+  "modules-left": [
+    "custom/power"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "network",
+    "pulseaudio",
+    "clock"
+  ],
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff'",
+    "tooltip": false
+  },
+
+  "network": {
+    "interface": "wlan*",
+    "interval": 10,
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-wifi": "{icon}",
+    "format-disconnected": "󰤮",
+    "format-disabled": "󰤮",
+    "tooltip-format-wifi": "{ifname}: {essid} ({signalStrength}%)",
+    "tooltip-format-disconnected": "Wi-Fi disconnected",
+    "tooltip-format-disabled": "Wi-Fi disabled",
+    "on-click": "waybar-wifi-menu"
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "Muted ",
+    "format-icons": {
+        "headphone": "",
+        "default": ["", ""]
+    },
+    "scroll-step": 5,
+    "on-scroll-up": "hyprland-change-volume +",
+    "on-scroll-down": "hyprland-change-volume -",
+    "on-click": "hyprland-change-volume mute"
+  },
+
+  "clock": {
+    "format": "{:%a %b%e %H:%M}",
+    "tooltip": false
+  }
+}

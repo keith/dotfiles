@@ -1,0 +1,39 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: #202020;
+  color: #eeeeee;
+}
+
+#custom-power {
+  padding: 0 12px;
+  color: #ffffff;
+}
+
+#custom-power:hover {
+  background: #a85050;
+}
+
+#clock {
+  padding: 0 12px;
+  color: #eeeeee;
+}
+
+#network {
+  padding: 0 8px;
+  color: #eeeeee;
+}
+
+#network.disconnected {
+  color: #c8a15a;
+}
+
+#network.disabled {
+  color: #888888;
+}
