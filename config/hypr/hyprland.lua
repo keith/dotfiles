@@ -1,5 +1,4 @@
 local mod = "SUPER"
-local terminal = "alacritty"
 local launcher = "wofi --show drun"
 
 hl.monitor {
@@ -85,13 +84,14 @@ hl.bind("CTRL + " .. mod .. " + H", hl.dsp.exec_cmd "hypr-snap-window left")
 hl.bind("CTRL + " .. mod .. " + K", hl.dsp.exec_cmd "hypr-snap-window max")
 hl.bind("CTRL + " .. mod .. " + F", hl.dsp.window.fullscreen { mode = "fullscreen", action = "toggle" })
 
-hl.bind(mod .. " + Return", hl.dsp.exec_cmd(terminal))
+hl.bind(mod .. " + Return", hl.dsp.exec_cmd "alacritty")
+hl.bind("ALT + " .. mod .. " + G", hl.dsp.exec_cmd "google-chrome-stable")
+
 hl.bind(mod .. " + N", hl.dsp.exec_cmd "hypr-new-app-window")
 hl.bind(mod .. " + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
 hl.bind(mod .. " + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
 hl.bind("ALT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
 hl.bind("ALT + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
-hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd "hyprland-change-volume +", { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd "hyprland-change-volume -", { locked = true, repeating = true })
