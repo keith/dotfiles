@@ -93,18 +93,9 @@ hl.bind("ALT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
 hl.bind("ALT + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
 hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 
-hl.bind(
-  "XF86AudioRaiseVolume",
-  hl.dsp.exec_cmd "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
-  { locked = true, repeating = true }
-)
-hl.bind(
-  "XF86AudioLowerVolume",
-  hl.dsp.exec_cmd "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-  { locked = true, repeating = true }
-)
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", { locked = true })
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", { locked = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd "hyprland-change-volume +", { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd "hyprland-change-volume -", { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd "hyprland-change-volume mute", { locked = true })
 
 if hl.plugin and hl.plugin.hyprbars then
   hl.config {

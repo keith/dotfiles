@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ "$1" == "mute" ]]; then
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+else
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+  wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ "5%$1"
+fi
+
+paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga
