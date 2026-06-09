@@ -84,8 +84,9 @@ hl.bind("CTRL + " .. mod .. " + H", hl.dsp.exec_cmd "hypr-snap-window left")
 hl.bind("CTRL + " .. mod .. " + K", hl.dsp.exec_cmd "hypr-snap-window max")
 hl.bind("CTRL + " .. mod .. " + F", hl.dsp.window.fullscreen { mode = "fullscreen", action = "toggle" })
 
-hl.bind(mod .. " + Return", hl.dsp.exec_cmd "alacritty")
-hl.bind("ALT + " .. mod .. " + G", hl.dsp.exec_cmd "google-chrome-stable")
+hl.bind("ALT + " .. mod .. " + G", hl.dsp.exec_cmd "hypr-focus-or-launch google-chrome google-chrome-stable")
+hl.bind("ALT + " .. mod .. " + T", hl.dsp.exec_cmd "hypr-focus-or-launch Alacritty alacritty")
+hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 
 hl.bind(mod .. " + N", hl.dsp.exec_cmd "hypr-new-app-window")
 hl.bind(mod .. " + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")

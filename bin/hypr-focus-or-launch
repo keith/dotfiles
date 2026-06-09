@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if (($# < 2)); then
+  echo "Usage: ${0##*/} <class> <command> [args...]" >&2
+  exit 2
+fi
+
+target_class=$1
+shift
+
+target_address="$(
+  hyprctl -j clients | jq -r \
+    --arg target_class "$target_class" '
+      [
+        .[]
+        | select((.mapped // true) == true)
+        | select((.hidden // false) == false)
+        | select(.class == $target_class or .initialClass == $target_class)
+        | select((.workspace.name // "") | startswith("special:") | not)
+      ]
+      | sort_by(.focusHistoryID // 999999, .pid, .title, .address)
+      | .[0].address // empty
+    '
+)"
+
+if [[ -n "$target_address" ]]; then
+  hyprctl dispatch "hl.dsp.focus({ window = \"address:$target_address\" })"
+  hyprctl dispatch "hl.dsp.window.alter_zorder({ mode = \"top\", window = \"address:$target_address\" })"
+  exit 0
+fi
+
+exec "$@"
