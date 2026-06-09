@@ -18,7 +18,6 @@ sudo usermod -a -G docker "$user"
 echo 'kernel.sysrq=1' | sudo tee /etc/sysctl.d/99-sysrq.conf
 sudo sysctl -p /etc/sysctl.d/99-sysrq.conf
 
-# NOTE: Can't have '.' in the file name
 sudoers_tmp=$(mktemp)
 cat > "$sudoers_tmp" <<'EOF'
 Defaults:%sudo env_keep += "EDITOR"
@@ -27,6 +26,7 @@ Defaults:%sudo env_keep += "PATH"
 Defaults:%sudo !secure_path
 EOF
 sudo visudo -cf "$sudoers_tmp"
+# NOTE: Can't have '.' in the file name
 sudo install -o root -g root -m 0440 "$sudoers_tmp" /etc/sudoers.d/env_keep_editor
 rm -f "$sudoers_tmp"
 
