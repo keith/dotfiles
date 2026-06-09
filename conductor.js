@@ -110,5 +110,7 @@ api.bind('d', ["ctrl", "alt"], function() { toggleApp("Dash"); });
 api.bind('a', ["shift", "alt", "cmd"], function() { api.launch("Activity Monitor"); });
 api.bind('c', ["shift", "alt", "cmd"], function() { api.launch("Console"); });
 api.bind('c', ["ctrl", "cmd"], function() { toggleAppIfOpen("Ivory"); });
+api.bind('g', ["alt", "cmd"], function() { api.launch("Google Chrome"); });
+api.bind('t', ["alt", "cmd"], function() { api.launch("Alacritty"); });
 
 Config.hideMenuBar();
