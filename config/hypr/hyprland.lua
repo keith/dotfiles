@@ -77,6 +77,8 @@ hl.window_rule {
 
 hl.bind("CTRL + ALT + SUPER + M", hl.dsp.exec_cmd "hyprshutdown")
 hl.bind("CTRL + ALT + SUPER + R", hl.dsp.exec_cmd "hyprctl reload && notify-send -t 2000 'Hyprland Reloaded'")
+-- FIXME: laptop config
+-- hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd "loginctl lock-session", { locked = true })
 
 hl.bind(mod .. " + W", hl.dsp.window.close())
 hl.bind("CTRL + " .. mod .. " + L", hl.dsp.exec_cmd "hypr-snap-window right")
