@@ -1,5 +1,7 @@
 [bar]
 location = "top"
+scale = 0.9
+button-label-size = 1.2
 
 [[bar.layout]]
 monitor = "*"
