@@ -11,26 +11,39 @@ right = ["systray", "idle-inhibit", "battery", "network", "volume", "notificatio
 [modules.clock]
 format = "%a %b%e %H:%M"
 icon-show = false
+label-color = "fg-default"
 
 [modules.volume]
 scroll-up = "hyprland-change-volume +"
 scroll-down = "hyprland-change-volume -"
 middle-click = "hyprland-change-volume mute"
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 label-show = false
 
 [modules.notifications]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 label-show = false
 
 [modules.network]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 label-show = false
 
 [modules.battery]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 label-show = false
 
 [modules.idle-inhibit]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 label-show = false
 
 [modules.power]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
 left-click = "dropdown:dashboard"
 
 [modules.dashboard]
@@ -44,3 +57,8 @@ show-special = false
 display-mode = "label"
 label-use-name = false
 numbering = "absolute"
+active-indicator = "underline"
+active-color = "fg-default"
+occupied-color = "fg-default"
+empty-color = "fg-muted"
+container-bg-color = "transparent"
