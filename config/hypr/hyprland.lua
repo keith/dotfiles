@@ -87,6 +87,12 @@ hl.bind("CTRL + " .. mod .. " + H", hl.dsp.exec_cmd "hypr-snap-window left")
 hl.bind("CTRL + " .. mod .. " + K", hl.dsp.exec_cmd "hypr-snap-window max")
 hl.bind("CTRL + " .. mod .. " + F", hl.dsp.window.fullscreen { mode = "fullscreen", action = "toggle" })
 
+hl.bind("CTRL + " .. mod .. " + Left", hl.dsp.focus { workspace = "r-1" })
+hl.bind("CTRL + " .. mod .. " + Right", hl.dsp.focus { workspace = "r+1" })
+for i = 1, 9 do
+  hl.bind("CTRL + " .. mod .. " + " .. i, hl.dsp.window.move { workspace = i })
+end
+
 hl.bind("ALT + " .. mod .. " + G", hl.dsp.exec_cmd "hypr-focus-or-launch google-chrome google-chrome-stable")
 hl.bind("ALT + " .. mod .. " + T", hl.dsp.exec_cmd "hypr-focus-or-launch Alacritty alacritty")
 hl.bind("SHIFT + ALT + " .. mod .. " + A", hl.dsp.exec_cmd "flatpak run io.missioncenter.MissionCenter")
