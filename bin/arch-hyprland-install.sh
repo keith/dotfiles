@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-set -x
 
 hyprland_packages=(
   brightnessctl
@@ -11,12 +10,23 @@ hyprland_packages=(
   hyprlock
   hyprpolkitagent
   hyprshutdown
-  mako
-  waybar
+  libnotify
+  pipewire
+  pipewire-alsa
+  pipewire-audio
+  pipewire-pulse
+  sound-theme-freedesktop # Sounds for testing volume changes
+  wireplumber
   wl-clipboard
+  xdg-desktop-portal-gtk
+  xdg-desktop-portal-hyprland
 )
 
+set -x
 sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"
+yay -S --noconfirm --needed wayle-bin
+
+systemctl --user enable --now pipewire pipewire-pulse wireplumber
 
 hyprpm update
 hyprpm add https://github.com/hyprwm/hyprland-plugins
