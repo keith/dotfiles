@@ -1,1 +1,46 @@
-# Wayle configuration file
+[bar]
+location = "top"
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = ["power", "hyprland-workspaces"]
+center = []
+right = ["systray", "idle-inhibit", "battery", "network", "volume", "notifications", "clock"]
+
+[modules.clock]
+format = "%a %b%e %H:%M"
+icon-show = false
+
+[modules.volume]
+scroll-up = "hyprland-change-volume +"
+scroll-down = "hyprland-change-volume -"
+middle-click = "hyprland-change-volume mute"
+label-show = false
+
+[modules.notifications]
+label-show = false
+
+[modules.network]
+label-show = false
+
+[modules.battery]
+label-show = false
+
+[modules.idle-inhibit]
+label-show = false
+
+[modules.power]
+left-click = "dropdown:dashboard"
+
+[modules.dashboard]
+dropdown-lock-command = "pidof hyprlock >/dev/null || hyprlock"
+dropdown-reboot-command = "hyprshutdown -t 'Restarting...' --post-cmd 'systemctl reboot'"
+dropdown-poweroff-command = "hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff'"
+
+[modules.hyprland-workspaces]
+monitor-specific = true
+show-special = false
+display-mode = "label"
+label-use-name = false
+numbering = "absolute"
