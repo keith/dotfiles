@@ -5,18 +5,21 @@ set -euo pipefail
 hyprland_packages=(
   brightnessctl
   flatpak
+  grim # screenshots
   hypridle
   hyprland
   hyprlock
   hyprpolkitagent
   hyprshutdown
-  libnotify
-  pipewire
-  pipewire-alsa
-  pipewire-audio
-  pipewire-pulse
+  libnotify # notify-send
+  loupe # image viewer
+  pipewire # audio
+  pipewire-alsa # audio
+  pipewire-audio # audio
+  pipewire-pulse # audio
+  slurp # screenshots
   sound-theme-freedesktop # Sounds for testing volume changes
-  wireplumber
+  wireplumber # audio
   wl-clipboard
   xdg-desktop-portal-gtk
   xdg-desktop-portal-hyprland

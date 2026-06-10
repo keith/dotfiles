@@ -104,6 +104,13 @@ hl.bind(mod .. " + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
 hl.bind("ALT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
 hl.bind("ALT + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
 
+hl.bind("SHIFT + " .. mod .. " + 3", hl.dsp.exec_cmd "hyprland-screenshot screen file")
+hl.bind("CTRL + SHIFT + " .. mod .. " + 3", hl.dsp.exec_cmd "hyprland-screenshot screen clipboard")
+hl.bind("SHIFT + " .. mod .. " + 4", hl.dsp.exec_cmd "hyprland-screenshot area file")
+hl.bind("CTRL + SHIFT + " .. mod .. " + 4", hl.dsp.exec_cmd "hyprland-screenshot area clipboard")
+hl.bind("SHIFT + " .. mod .. " + 5", hl.dsp.exec_cmd "hyprland-screenshot window file")
+hl.bind("CTRL + SHIFT + " .. mod .. " + 5", hl.dsp.exec_cmd "hyprland-screenshot window clipboard")
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd "hyprland-change-volume +", { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd "hyprland-change-volume -", { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd "hyprland-change-volume mute", { locked = true })

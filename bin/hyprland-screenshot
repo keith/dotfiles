@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  echo "usage: hyprland-screenshot <screen|area|window> <file|clipboard>" >&2
+  exit 2
+}
+
+[[ $# -eq 2 ]] || usage
+
+target="$1"
+destination="$2"
+
+case "$target" in
+  screen | area | window) ;;
+  *) usage ;;
+esac
+
+case "$destination" in
+  file | clipboard) ;;
+  *) usage ;;
+esac
+
+visible_window_boxes() {
+  local active_workspaces
+
+  active_workspaces="$(hyprctl -j monitors | jq -c '[.[].activeWorkspace.id]')" || return 0
+
+  hyprctl -j clients | jq -r --argjson active_workspaces "$active_workspaces" '
+    .[]
+    | select(.mapped == true)
+    | select(.visible == true)
+    | select((.hidden // false) | not)
+    | select(.workspace.id as $id | $active_workspaces | index($id))
+    | select((.size[0] // 0) > 0 and (.size[1] // 0) > 0)
+    | select((.stableId // "") != "")
+    | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1]) \(.stableId)"
+  ' || return 0
+}
+
+capture_args=()
+if [[ "$target" == "area" ]]; then
+  geometry="$(slurp -f "%x,%y %wx%h")"
+  [[ -n "$geometry" ]] || exit 0
+  capture_args=(-g "$geometry")
+elif [[ "$target" == "window" ]]; then
+  window_boxes="$(visible_window_boxes)"
+  [[ -n "$window_boxes" ]] || exit 0
+  toplevel="$(slurp -r -f "%l" <<<"$window_boxes")"
+  [[ -n "$toplevel" ]] || exit 0
+  capture_args=(-T "$toplevel")
+fi
+
+if [[ "$destination" == "clipboard" ]]; then
+  grim "${capture_args[@]}" - | wl-copy --type image/png
+  notify-send -t 1500 "Screenshot copied"
+  exit 0
+fi
+
+readonly screenshot_dir="$HOME/Pictures/Screenshots"
+mkdir -p "$screenshot_dir"
+
+timestamp="$(date +'%Y-%m-%d at %H.%M.%S')"
+path="$screenshot_dir/Screenshot $timestamp.png"
+
+grim "${capture_args[@]}" "$path"
+action="$(notify-send -t 2500 -A default=Open "Screenshot saved" "$path")"
+if [[ "$action" == "default" ]]; then
+  loupe "$path" >/dev/null 2>&1 &
+fi
