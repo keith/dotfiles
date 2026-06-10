@@ -12,6 +12,7 @@ hyprland_packages=(
   hyprshutdown
   mako
   waybar
+  wl-clipboard
 )
 
 sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"

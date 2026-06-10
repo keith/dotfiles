@@ -6,6 +6,10 @@ if [[ -x /usr/bin/pbpaste ]]; then
   exec /usr/bin/pbpaste
 fi
 
+if [[ -x /usr/bin/wl-paste ]]; then
+  exec /usr/bin/wl-paste
+fi
+
 if [[ -n "${TMUX:-}" ]]; then
   exec tmux show-buffer
 fi

@@ -6,6 +6,10 @@ if [[ -x /usr/bin/pbcopy ]]; then
   exec /usr/bin/pbcopy
 fi
 
+if [[ -x /usr/bin/wl-copy ]]; then
+  exec /usr/bin/wl-copy
+fi
+
 if [[ -n "${TMUX:-}" ]]; then
   exec tmux load-buffer -
 fi
