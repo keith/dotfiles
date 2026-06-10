@@ -30,8 +30,6 @@ vim/black
 !config/yamllint
 !config/hypr
 !config/keyd
-!config/mako
-!config/waybar
 !config/wayle
 config/wayle/**/schema.json
 config/keyd/*.lock
