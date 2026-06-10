@@ -25,6 +25,30 @@ window#waybar {
   color: #eeeeee;
 }
 
+#workspaces {
+  padding: 0 6px;
+}
+
+#workspaces button {
+  padding: 0 7px;
+  color: #aaaaaa;
+  background: transparent;
+}
+
+#workspaces button.visible {
+  color: #dddddd;
+}
+
+#workspaces button.active {
+  color: #ffffff;
+  background: #5f87af;
+}
+
+#workspaces button:hover {
+  color: #ffffff;
+  background: #444444;
+}
+
 #network {
   padding: 0 8px;
   color: #eeeeee;
@@ -36,4 +60,13 @@ window#waybar {
 
 #network.disabled {
   color: #888888;
+}
+
+#systemd-failed-units {
+  padding: 0 8px;
+}
+
+#systemd-failed-units.degraded {
+  color: #ff6b6b;
+  font-weight: bold;
 }

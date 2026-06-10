@@ -5,12 +5,14 @@
   "spacing": 8,
 
   "modules-left": [
-    "custom/power"
+    "custom/power",
+    "hyprland/workspaces"
   ],
   "modules-center": [],
   "modules-right": [
     "network",
     "pulseaudio",
+    "systemd-failed-units",
     "clock"
   ],
 
@@ -18,6 +20,14 @@
     "format": "⏻",
     "on-click": "hyprshutdown -t 'Shutting down...' --post-cmd 'systemctl poweroff'",
     "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "sort-by": "number",
+    "on-click": "activate",
+    "move-to-monitor": true,
+    "show-special": true
   },
 
   "network": {
@@ -45,6 +55,14 @@
     "on-scroll-up": "hyprland-change-volume +",
     "on-scroll-down": "hyprland-change-volume -",
     "on-click": "hyprland-change-volume mute"
+  },
+
+  "systemd-failed-units": {
+    "format": "{nr_failed}",
+    "hide-on-ok": true,
+    "system": true,
+    "user": true,
+    "tooltip": true
   },
 
   "clock": {
