@@ -1,0 +1,12 @@
+toml-version = "v1.1.0"
+
+[schema]
+enabled = true
+
+[[schemas]]
+path = "./schema.json"
+include = ["config.toml", "runtime.toml"]
+
+[[schemas]]
+path = "./themes/schema.json"
+include = ["themes/*.toml"]

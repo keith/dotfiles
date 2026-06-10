@@ -32,6 +32,8 @@ vim/black
 !config/keyd
 !config/mako
 !config/waybar
+!config/wayle
+config/wayle/**/schema.json
 config/keyd/*.lock
 
 !mutt/temp/.gitkeep

@@ -61,9 +61,8 @@ hl.config {
 hl.on("hyprland.start", function()
   hl.exec_cmd "hyprpm reload"
   hl.exec_cmd "keyd-application-mapper -d"
-  hl.exec_cmd "mako"
   hl.exec_cmd "systemctl --user start hyprpolkitagent"
-  hl.exec_cmd "waybar"
+  hl.exec_cmd "wayle shell"
 
   -- Not sure if this needs to be last but feels right
   hl.exec_cmd "dbus-update-activation-environment --systemd --all"
