@@ -81,6 +81,7 @@ hl.bind("CTRL + ALT + SUPER + R", hl.dsp.exec_cmd "hyprctl reload && notify-send
 -- hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd "loginctl lock-session", { locked = true })
 
 hl.bind(mod .. " + W", hl.dsp.window.close())
+hl.bind(mod .. " + Q", hl.dsp.window.close())
 hl.bind("CTRL + " .. mod .. " + L", hl.dsp.exec_cmd "hypr-snap-window right")
 hl.bind("CTRL + " .. mod .. " + H", hl.dsp.exec_cmd "hypr-snap-window left")
 hl.bind("CTRL + " .. mod .. " + K", hl.dsp.exec_cmd "hypr-snap-window max")
