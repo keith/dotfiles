@@ -53,6 +53,7 @@ hl.config {
 
   misc = {
     disable_hyprland_logo = true,
+    disable_splash_rendering = true,
     disable_autoreload = true,
     force_default_wallpaper = 0,
   },
