@@ -5,6 +5,7 @@ set -x
 
 hyprland_packages=(
   brightnessctl
+  flatpak
   hypridle
   hyprland
   hyprlock
@@ -23,3 +24,5 @@ hyprpm add https://github.com/keith/hyprland-modmove
 hyprpm enable hyprbars
 hyprpm enable modmove
 hyprpm reload -n
+
+flatpak install flathub io.missioncenter.MissionCenter
