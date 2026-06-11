@@ -59,6 +59,15 @@ def _repository_url(remote_url: str) -> str:
     return f"https://{host}/{owner}/{repo}"
 
 
+def _commit_base_url() -> bytes | None:
+    remote = _current_remote()
+    try:
+        remote_url = _git(["remote", "get-url", remote])
+        return (_repository_url(remote_url) + "/commit").encode()
+    except (subprocess.CalledProcessError, ValueError):
+        return None
+
+
 def _full_sha(short_sha: bytes, cache: dict[bytes, bytes | None]) -> bytes | None:
     if short_sha in cache:
         return cache[short_sha]
@@ -95,9 +104,12 @@ def _linkify(
 
 
 def _main() -> None:
-    remote = _current_remote()
-    remote_url = _git(["remote", "get-url", remote])
-    commit_base_url = (_repository_url(remote_url) + "/commit").encode()
+    commit_base_url = _commit_base_url()
+    if commit_base_url is None:
+        for line in sys.stdin.buffer:
+            sys.stdout.buffer.write(line)
+        return
+
     full_sha_cache: dict[bytes, bytes | None] = {}
 
     for line in sys.stdin.buffer:
