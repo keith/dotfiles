@@ -45,6 +45,7 @@ MODULE.bazel.lock
 node_modules
 Session.vim
 tags
+tags-ts
 tags.files
 tags.lock
 tags.temp
