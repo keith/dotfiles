@@ -56,7 +56,7 @@ nnoremap <leader>hu :Gitsigns undo_stage_hunk<CR>
 nnoremap [d :lua vim.diagnostic.jump({ count = -1 })<CR>
 nnoremap ]d :lua vim.diagnostic.jump({ count = 1 })<CR>
 
-nnoremap <leader>g :Git blame<CR>
+nnoremap <leader>g :Git blame -w<CR>
 nnoremap <leader>v :.,.GBrowse<CR>
 vnoremap <leader>v :.,.GBrowse<CR>
 
