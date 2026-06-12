@@ -67,36 +67,36 @@ build:ktrace --verbose_explanations
 build:t --test_output=errors
 build:t --test_summary=terse
 
-build:l --bes_backend=grpc://localhost:1985
-build:l --bes_results_url=http://localhost:8080/invocation/
-build:l --build_event_publish_all_actions
-build:l --build_metadata=VISIBILITY=PUBLIC
-build:l --experimental_execution_log_compact_file=compact_execution.log
-build:l --experimental_profile_include_primary_output
-build:l --experimental_profile_include_target_label
-build:l --noslim_profile
-build:l --remote_executor=grpc://localhost:1985
+common:l --bes_backend=grpc://localhost:1985
+common:l --bes_results_url=http://localhost:8080/invocation/
+common:l --build_event_publish_all_actions
+common:l --build_metadata=VISIBILITY=PUBLIC
+common:l --experimental_execution_log_compact_file=compact_execution.log
+common:l --experimental_profile_include_primary_output
+common:l --experimental_profile_include_target_label
+common:l --noslim_profile
+common:l --remote_executor=grpc://localhost:1985
 
 # NOTE: Put this in ~/.secrets.bazelrc
-# build:c --remote_header=x-buildbuddy-api-key=XXX
+# common:c --remote_header=x-buildbuddy-api-key=XXX
 
-build:c --bes_backend=grpcs://buildbuddy.buildbuddy.io
-build:c --bes_results_url=https://buildbuddy.buildbuddy.io/invocation/
-build:c --build_event_publish_all_actions
-build:c --execution_log_compact_file=compact_execution.log
-build:c --experimental_profile_include_primary_output
-build:c --experimental_profile_include_target_label
-build:c --experimental_remote_downloader=grpcs://buildbuddy.buildbuddy.io
-build:c --experimental_remote_downloader_local_fallback
-build:c --noslim_profile
-build:c --remote_cache=grpcs://buildbuddy.buildbuddy.io
-build:c --remote_cache_compression
-build:c --remote_grpc_log=./grpc.log
-build:c --remote_timeout=10m
-build:c --remote_upload_local_results
+common:c --bes_backend=grpcs://buildbuddy.buildbuddy.io
+common:c --bes_results_url=https://buildbuddy.buildbuddy.io/invocation/
+common:c --build_event_publish_all_actions
+common:c --execution_log_compact_file=compact_execution.log
+common:c --experimental_profile_include_primary_output
+common:c --experimental_profile_include_target_label
+common:c --experimental_remote_downloader=grpcs://buildbuddy.buildbuddy.io
+common:c --experimental_remote_downloader_local_fallback
+common:c --noslim_profile
+common:c --remote_cache=grpcs://buildbuddy.buildbuddy.io
+common:c --remote_cache_compression
+common:c --remote_grpc_log=./grpc.log
+common:c --remote_timeout=10m
+common:c --remote_upload_local_results
 
-build:kbes --config=c
-build:kbes --remote_accept_cached=false
+common:kbes --config=c
+common:kbes --remote_accept_cached=false
 
 build:e --config=c
 build:e --jobs=1000
