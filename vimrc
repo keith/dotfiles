@@ -343,6 +343,8 @@ endif
 " Jump to next/previous merge conflict marker
 nnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>zz
 nnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>zz
+xnoremap <silent> ]c /\v^(\<\|\=\|\\|\|\>){7}([^=].+)?$<CR>zz
+xnoremap <silent> [c ?\v^(\<\|\=\|\\|\|\>){7}([^=].+)\?$<CR>zz
 
 " Position resume
 function! s:PositionRecall()
