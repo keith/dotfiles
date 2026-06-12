@@ -6,6 +6,9 @@ common:ora5 --override_module=rules_apple=~/dev/bazelbuild/rules_apple5
 common:orandk  --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
 common:oras --override_module=apple_support=~/dev/bazelbuild/apple_support
 common:oras2  --override_module=apple_support=~/dev/bazelbuild/apple_support2
+common:oras3  --override_module=apple_support=~/dev/bazelbuild/apple_support3
+common:oras4  --override_module=apple_support=~/dev/bazelbuild/apple_support4
+common:oras5  --override_module=apple_support=~/dev/bazelbuild/apple_support5
 common:orcc  --override_module=rules_cc=~/dev/bazelbuild/rules_cc
 common:orcc2  --override_module=rules_cc=~/dev/bazelbuild/rules_cc2
 common:orf --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
