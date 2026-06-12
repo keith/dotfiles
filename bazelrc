@@ -77,6 +77,9 @@ common:l --experimental_profile_include_target_label
 common:l --noslim_profile
 common:l --remote_executor=grpc://localhost:1985
 
+common:lkbes --config=l
+common:lkbes --remote_accept_cached=false
+
 # NOTE: Put this in ~/.secrets.bazelrc
 # common:c --remote_header=x-buildbuddy-api-key=XXX
 
