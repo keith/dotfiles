@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-set -x
 
 # This is only complicated because of http://www.openradar.me/35308287
 # Otherwise we could just call `open -a Xcode .`
@@ -45,7 +44,7 @@ args=(
 )
 
 if [[ -n "$glob" ]]; then
-  env "${args[@]}" "./$glob"
+  env "${args[@]}" ./$glob
 else
   env "${args[@]}" -g
   echo "error: nothing found to open" >&2
