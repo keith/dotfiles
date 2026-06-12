@@ -111,6 +111,7 @@ local servers = {
   "tblgen_lsp_server",
   "terraformls",
   "ty",
+  "ts_ls",
   "zls",
 }
 for _, server in ipairs(servers) do
