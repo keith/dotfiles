@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-"""Extract URLs from stdin, select with fzf, and open it."""
+"""Extract URLs from stdin, select one, and open it."""
 
+import argparse
 import re
 import subprocess
 import sys
@@ -35,13 +36,32 @@ def _extract_urls(text):
     return urls
 
 
+def _open_url(url):
+    subprocess.check_call(
+        ["open", url],
+        stdin=subprocess.DEVNULL,  # Make sure it doesn't try to read original stdin
+    )
+
+
 def _main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--first",
+        action="store_true",
+        help="open the first URL found instead of selecting with fzf",
+    )
+    args = parser.parse_args()
+
     text = sys.stdin.read()
     urls = _extract_urls(text)
 
     if not urls:
         print("No URLs found", file=sys.stderr)
         sys.exit(1)
+
+    if args.first:
+        _open_url(urls[0])
+        return
 
     try:
         with open("/dev/tty", "w") as tty:
@@ -54,10 +74,7 @@ def _main():
             )
             stdout, _ = proc.communicate(input="\n".join(urls))
         if proc.returncode == 0 and stdout:
-            subprocess.check_call(
-                ["open", stdout.strip()],
-                stdin=subprocess.DEVNULL,  # Make sure it doesn't try to read original stdin
-            )
+            _open_url(stdout.strip())
     except FileNotFoundError:
         print("fzf not found", file=sys.stderr)
         sys.exit(1)
