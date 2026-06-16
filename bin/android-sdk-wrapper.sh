@@ -74,7 +74,14 @@ fi
 # See exec uses above
 exec 2>&6 6>&-
 
+executable="$1"
+shift
+if [[ "$executable" == "bz" ]]; then
+  executable="bazel"
+fi
+
 ANDROID_HOME=$android_sdk_unarchived_dir \
   ANDROID_NDK_HOME="$android_sdk_unarchived_dir/ndk/$ndk_version/" \
   PATH="$android_sdk_unarchived_dir/cmdline-tools/latest/bin:$android_sdk_unarchived_dir/platform-tools:$PATH" \
+  "$executable" \
   "$@"
