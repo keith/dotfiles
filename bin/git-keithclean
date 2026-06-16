@@ -3,6 +3,7 @@
 set -euo pipefail
 
 git clean -ffdx \
+ -e *.bazelrc \
  -e .black \
  -e .jj \
  -e .keithclangformat \
