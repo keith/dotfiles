@@ -124,6 +124,7 @@ vim.lsp.config("sourcekit", {
 
 local metals_config = require("metals").bare_config()
 metals_config.capabilities = capabilities
+metals_config.init_options.statusBarProvider = "off"
 metals_config.settings = {
   serverVersion = "2.0.0-M2",
   automaticImportBuild = "all",
