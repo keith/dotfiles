@@ -29,6 +29,7 @@ common:ors4 --override_module=rules_swift=~/dev/bazelbuild/rules_swift4
 common:ors3 --override_module=rules_swift=~/dev/bazelbuild/rules_swift3
 common:orsd  --override_module=stardoc=~/dev/bazelbuild/stardoc
 common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib
+common:orskyg --config=orsky --override_module=bazel_skylib_gazelle_plugin=~/dev/bazelbuild/bazel-skylib/gazelle
 common:orspm --override_module=rules_swift_package_manager=~/dev/bazelbuild/rules_swift_package_manager
 common:orspm2 --override_module=rules_swift_package_manager=~/dev/bazelbuild/rules_swift_package_manager2
 common:orx --override_module=rules_xcodeproj=~/dev/mnf/rules_xcodeproj
