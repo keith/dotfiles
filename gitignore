@@ -1,3 +1,4 @@
+*.bazelproject
 *.log
 *.pyc
 *.un~
@@ -5,6 +6,7 @@
 .*.s[a-w][a-z]
 ._*
 .AppleDouble
+.bazelbsp
 .bazelproject
 .black
 .bsp
