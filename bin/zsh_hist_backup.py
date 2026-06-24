@@ -6,6 +6,11 @@ import os
 import time
 import shutil
 
+# Cron example:
+#
+# */5 * * * * /path/to/zsh_hist_backup.py
+#
+
 # - Create a backup from the current zsh history file
 # - Read all backup history files and create a merged copy using the order from the largest file for duplicate commands
 # - Remove all except some of the newest and largest files
