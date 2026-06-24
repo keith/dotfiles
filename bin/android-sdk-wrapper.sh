@@ -5,7 +5,6 @@ set -euo pipefail
 # https://stackoverflow.com/a/21106592/902968
 exec 6>&2
 exec 2> /tmp/android-stderr.log
-set -x
 
 readonly android_sdk_version="14742923"
 readonly android_sdk_license_hash="24333f8a63b6825ea9c5514f83c2829b004d1fee"
