@@ -25,11 +25,11 @@
       "src": "https://github.com/github/copilot.vim"
     },
     "fidget.nvim": {
-      "rev": "82404b196e73a00b1727a91903beef5ddc319d22",
+      "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "988416cc782dfe28bff3f0da9b8c943b236cd86a",
+      "rev": "b9919229c84bd64d8539367e67e32811cf39a836",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.vim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/keith/gist.vim"
     },
     "gitsigns.nvim": {
-      "rev": "25050e4ed39e628282831d4cbecb1850454ce915",
+      "rev": "2038c666bd9d8a0b7349a0b6ee00dc83104b9ecf",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "kotlin-vim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
+      "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-metals": {
@@ -93,7 +93,7 @@
       "src": "https://github.com/simrat39/symbols-outline.nvim"
     },
     "tagbar": {
-      "rev": "b37b05ff1925b0b3931f031ebf88690aa0974375",
+      "rev": "07cb8247487208124978daff8e13624667635457",
       "src": "https://github.com/majutsushi/tagbar"
     },
     "treesj": {
@@ -105,7 +105,7 @@
       "src": "https://github.com/tpope/vim-abolish"
     },
     "vim-autoformat": {
-      "rev": "34c5309ab11d175c73d8ab7195a4d831b9f502c4",
+      "rev": "38161c4e875cf198789f32e0f773039696a431f0",
       "src": "https://github.com/vim-autoformat/vim-autoformat"
     },
     "vim-commentary": {
@@ -129,7 +129,7 @@
       "src": "https://github.com/fatih/vim-go"
     },
     "vim-graphql": {
-      "rev": "640d32063cd2526e2395db1b67fcd733524099e2",
+      "rev": "d6c0991b70c0d6f4b3fa3283a2838d2ce47635d0",
       "src": "https://github.com/jparise/vim-graphql"
     },
     "vim-gutentags": {
