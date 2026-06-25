@@ -28,4 +28,5 @@ augroup setup_buildifier
   autocmd FileType lua autocmd BufWritePre <buffer> call s:Format(1)
   autocmd FileType nix autocmd BufWritePre <buffer> call s:Format(1)
   autocmd FileType python autocmd BufWritePre <buffer> call s:Format(get(b:, "format_on_save", 0))
+  autocmd FileType typescript,typescriptreact autocmd BufWritePre <buffer> call s:Format(1)
 augroup END
