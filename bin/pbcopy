@@ -11,7 +11,7 @@ if [[ -x /usr/bin/wl-copy ]]; then
 fi
 
 if [[ -n "${TMUX:-}" ]]; then
-  exec tmux load-buffer -
+  exec tmux load-buffer -w -
 fi
 
 echo "error: no clipboard utility found" >&2
