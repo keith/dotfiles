@@ -75,14 +75,16 @@ common:l --bes_backend=grpc://localhost:1985
 common:l --bes_results_url=http://localhost:8080/invocation/
 common:l --build_event_publish_all_actions
 common:l --build_metadata=VISIBILITY=PUBLIC
-common:l --experimental_execution_log_compact_file=compact_execution.log
+common:l --execution_log_compact_file=compact_execution.log
 common:l --experimental_profile_include_primary_output
 common:l --experimental_profile_include_target_label
 common:l --noslim_profile
+common:l --remote_cache=grpc://localhost:1985
 common:l --remote_executor=grpc://localhost:1985
 
 common:lkbes --config=l
 common:lkbes --remote_accept_cached=false
+common:lkbes --remote_executor=
 
 # NOTE: Put this in ~/.secrets.bazelrc
 # common:c --remote_header=x-buildbuddy-api-key=XXX
