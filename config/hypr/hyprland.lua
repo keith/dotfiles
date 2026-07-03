@@ -75,6 +75,19 @@ hl.window_rule {
   float = true,
 }
 
+local speed = 2
+
+hl.curve("snappy", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })
+hl.animation { leaf = "windows", enabled = true, speed = speed, bezier = "snappy", style = "popin 99%" }
+hl.animation { leaf = "windowsIn", enabled = true, speed = speed, bezier = "snappy", style = "popin 99%" }
+hl.animation { leaf = "windowsOut", enabled = true, speed = speed, bezier = "snappy", style = "popin 99%" }
+hl.animation { leaf = "fade", enabled = true, speed = speed, bezier = "snappy" }
+hl.animation { leaf = "fadeIn", enabled = true, speed = speed, bezier = "snappy" }
+hl.animation { leaf = "fadeOut", enabled = true, speed = speed, bezier = "snappy" }
+hl.animation { leaf = "workspaces", enabled = true, speed = speed, bezier = "snappy", style = "fade" }
+hl.animation { leaf = "workspacesIn", enabled = true, speed = speed, bezier = "snappy" }
+hl.animation { leaf = "workspacesOut", enabled = true, speed = speed, bezier = "snappy" }
+
 hl.bind("CTRL + ALT + SUPER + M", hl.dsp.exec_cmd "hyprshutdown")
 hl.bind("CTRL + ALT + SUPER + R", hl.dsp.exec_cmd "hyprctl reload && notify-send -t 2000 'Hyprland Reloaded'")
 -- FIXME: laptop config
