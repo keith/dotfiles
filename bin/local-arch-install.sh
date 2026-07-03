@@ -23,7 +23,6 @@ packages=(
   htop
   hyperfine
   jq
-  keyd
   less
   lldb
   lm_sensors
@@ -82,10 +81,6 @@ go install github.com/bazelbuild/bazelisk@latest
 go install github.com/bazelbuild/buildtools/buildifier@latest
 go install github.com/bazelbuild/buildtools/buildozer@latest
 
-user=$USER
-sudo groupadd -f keyd
-sudo usermod -a -G keyd "$user"
-
 # Setup SysRq key to allow for emergency system commands (e.g., prioritize OOM
 # kill, kill all processes, etc.)
 echo 'kernel.sysrq=1' | sudo tee /etc/sysctl.d/99-sysrq.conf
@@ -110,12 +105,6 @@ echo 'StreamLocalBindUnlink yes' | sudo tee /etc/ssh/sshd_config.d/99_stream_loc
 
 sudo systemctl restart sshd
 
-sudo install -d -o root -g root -m 0755 /etc/keyd
-sudo ln -sfn "$DOTFILES/config/keyd/default.conf" /etc/keyd/default.conf
-sudo keyd check /etc/keyd/default.conf
-sudo systemctl enable --now keyd
-sudo keyd reload
-
 if ! command -v yay 2>/dev/null; then
   rm -rf /tmp/yaysetup
   git clone https://aur.archlinux.org/yay.git /tmp/yaysetup
@@ -128,7 +117,6 @@ fi
 aur_packages=(
   ansifilter
   forkstat
-  google-chrome
   ufw-docker
 )
 

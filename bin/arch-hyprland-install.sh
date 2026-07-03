@@ -12,6 +12,7 @@ hyprland_packages=(
   hyprlock
   hyprpolkitagent
   hyprshutdown
+  keyd
   libnotify # notify-send
   loupe # image viewer
   pipewire # audio
@@ -26,9 +27,23 @@ hyprland_packages=(
   xdg-desktop-portal-hyprland
 )
 
-set -x
 sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"
-yay -S --noconfirm --needed wayle-bin
+
+aur_packages=(
+  google-chrome
+)
+
+yay -S --noconfirm --needed "${aur_packages[@]}"
+
+user=$USER
+sudo groupadd -f keyd
+sudo usermod -a -G keyd "$user"
+
+sudo install -d -o root -g root -m 0755 /etc/keyd
+sudo ln -sfn "$DOTFILES/config/keyd/default.conf" /etc/keyd/default.conf
+sudo keyd check /etc/keyd/default.conf
+sudo systemctl enable --now keyd
+sudo keyd reload
 
 cat <<'EOF' | sudo tee /etc/greetd/config.toml
 [terminal]
