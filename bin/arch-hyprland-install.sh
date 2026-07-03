@@ -5,6 +5,7 @@ set -euo pipefail
 hyprland_packages=(
   brightnessctl
   flatpak
+  greetd-tuigreet # login screen
   grim # screenshots
   hypridle
   hyprland
@@ -28,6 +29,17 @@ hyprland_packages=(
 set -x
 sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"
 yay -S --noconfirm --needed wayle-bin
+
+cat <<'EOF' | sudo tee /etc/greetd/config.toml
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --remember --remember-session --asterisks --greeting 'Arch Linux' --cmd start-hyprland"
+user = "greeter"
+EOF
+
+sudo systemctl enable greetd.service
 
 systemctl --user enable --now pipewire pipewire-pulse wireplumber
 
