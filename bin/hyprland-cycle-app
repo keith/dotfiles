@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+direction="${1:-next}"
+case "$direction" in
+  next | prev) ;;
+  *)
+    echo "Usage: ${0##*/} [next|prev]" >&2
+    exit 2
+    ;;
+esac
+
+state_dir="${XDG_RUNTIME_DIR:-/tmp}/hyprland-cycle-app"
+state_file="$state_dir/state"
+
+mkdir -p "$state_dir"
+
+active_window="$(hyprctl -j activewindow)"
+active_class="$(jq -r '.class // empty' <<<"$active_window")"
+
+apps_json="$(
+  hyprctl -j clients | jq -c \
+    '
+      [
+        .[]
+        | select((.mapped // true) == true)
+        | select((.hidden // false) == false)
+        | select((.class // "") != "")
+        | select((.workspace.name // "") | startswith("special:") | not)
+        | {
+            address,
+            class,
+            title,
+            pid,
+            focusHistoryID: (.focusHistoryID // 999999)
+          }
+      ]
+      | sort_by(.class, .focusHistoryID, .pid, .title, .address)
+      | group_by(.class)
+      | map(sort_by(.focusHistoryID, .pid, .title, .address)[0])
+      | sort_by(.focusHistoryID, .pid, .title, .address)
+    '
+)"
+
+mapfile -t app_classes < <(jq -r '.[].class' <<<"$apps_json")
+
+if ((${#app_classes[@]} <= 1)); then
+  rm -f "$state_file"
+  exit 0
+fi
+
+classes=("${app_classes[@]}")
+index=-1
+
+if [[ -r "$state_file" ]]; then
+  # shellcheck source=/dev/null
+  source "$state_file" || true
+fi
+
+start_class="$active_class"
+if [[ -n "${selected_class:-}" && "$active_class" == "$selected_class" ]]; then
+  start_class="$selected_class"
+fi
+
+for i in "${!classes[@]}"; do
+  if [[ "${classes[$i]}" == "$start_class" ]]; then
+    index=$i
+    break
+  fi
+done
+
+if ((index < 0)); then
+  case "$direction" in
+    next) index=0 ;;
+    prev) index=$((${#classes[@]} - 1)) ;;
+  esac
+else
+  case "$direction" in
+    next)
+      index=$(((index + 1) % ${#classes[@]}))
+      ;;
+    prev)
+      index=$(((index - 1 + ${#classes[@]}) % ${#classes[@]}))
+      ;;
+  esac
+fi
+
+target_class="${classes[$index]}"
+target_address="$(
+  jq -r --arg target_class "$target_class" '
+    [
+      .[]
+      | select(.class == $target_class)
+    ]
+    | sort_by(.focusHistoryID, .pid, .title, .address)
+    | .[0].address // empty
+  ' <<<"$apps_json"
+)"
+
+if [[ -z "$target_address" ]]; then
+  rm -f "$state_file"
+  exit 0
+fi
+
+printf 'selected_class=%q\n' "$target_class" >"$state_file"
+
+hyprctl dispatch "hl.dsp.focus({ window = \"address:$target_address\" })"
+hyprctl dispatch "hl.dsp.window.alter_zorder({ mode = \"top\", window = \"address:$target_address\" })"

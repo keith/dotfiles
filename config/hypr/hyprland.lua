@@ -99,6 +99,8 @@ hl.bind("SHIFT + ALT + " .. mod .. " + A", hl.dsp.exec_cmd "flatpak run io.missi
 hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 
 hl.bind(mod .. " + N", hl.dsp.exec_cmd "hypr-new-app-window")
+hl.bind(mod .. " + Tab", hl.dsp.exec_cmd "hyprland-cycle-app")
+hl.bind(mod .. " + SHIFT + Tab", hl.dsp.exec_cmd "hyprland-cycle-app prev")
 hl.bind(mod .. " + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
 hl.bind(mod .. " + SHIFT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window prev")
 hl.bind("ALT + grave", hl.dsp.exec_cmd "hypr-cycle-app-window")
