@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<'EOF'
+Usage: register-plaintext-extensions [extension ...]
+
+Registers filename extensions as a LaunchServices type that conforms to:
+  public.source-code
+  public.plain-text
+
+Defaults to:
+  bazel bzl
+
+Examples:
+  register-plaintext-extensions
+  register-plaintext-extensions bazel bzl
+  register-plaintext-extensions foo bar
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+extensions=("$@")
+if [[ ${#extensions[@]} -eq 0 ]]; then
+  extensions=(bazel bzl)
+fi
+
+clean_extensions=()
+for extension in "${extensions[@]}"; do
+  extension="${extension#.}"
+  if [[ ! "$extension" =~ ^[A-Za-z0-9][A-Za-z0-9._+-]*$ ]]; then
+    echo "Invalid filename extension: $extension" >&2
+    exit 2
+  fi
+  clean_extensions+=("$extension")
+done
+
+app_name="PlainTextExtensionsUTI"
+bundle_id="dev.local.plaintext-extensions-uti"
+type_id="dev.local.plaintext-source"
+type_description="Plain text source file"
+
+if [[ ${#clean_extensions[@]} -eq 2 &&
+      "${clean_extensions[0]}" == "bazel" &&
+      "${clean_extensions[1]}" == "bzl" ]]; then
+  app_name="BazelPlainTextUTI"
+  bundle_id="dev.local.bazel-plaintext-uti"
+  type_id="dev.local.bazel-source"
+  type_description="Bazel source file"
+fi
+
+app_dir="$HOME/Applications/$app_name.app"
+contents_dir="$app_dir/Contents"
+macos_dir="$contents_dir/MacOS"
+executable="$macos_dir/$app_name"
+plist="$contents_dir/Info.plist"
+lsregister="/System/Library/Frameworks/CoreServices.framework/Versions/Current/Frameworks/LaunchServices.framework/Versions/Current/Support/lsregister"
+
+mkdir -p "$macos_dir"
+
+cat > "$executable" <<'EOF'
+#!/bin/sh
+exit 0
+EOF
+chmod +x "$executable"
+
+{
+  cat <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>$app_name</string>
+	<key>CFBundleIdentifier</key>
+	<string>$bundle_id</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$app_name</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.source-code</string>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>$type_description</string>
+			<key>UTTypeIdentifier</key>
+			<string>$type_id</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+EOF
+  for extension in "${clean_extensions[@]}"; do
+    printf '\t\t\t\t\t<string>%s</string>\n' "$extension"
+  done
+  cat <<'EOF'
+				</array>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
+EOF
+} > "$plist"
+
+plutil -lint "$plist" >/dev/null
+codesign --force --sign - "$app_dir" >/dev/null 2>&1 || true
+"$lsregister" -f "$app_dir"
+
+echo "Registered $app_dir"
+echo "Extensions: ${clean_extensions[*]}"
+
+if command -v swift >/dev/null 2>&1; then
+  for extension in "${clean_extensions[@]}"; do
+    swift -e "import UniformTypeIdentifiers; let u = UTType(filenameExtension: \"$extension\"); print(\"$extension: \\(u?.identifier ?? \"nil\")\"); print(u?.supertypes.map(\\.identifier).sorted() ?? [])"
+  done
+fi
