@@ -13,7 +13,7 @@ import sys
 # https://gist.github.com/gruber/8891611
 # https://gist.github.com/brendon-codes/2212479
 _R = re.compile(
-    r"""(?i)\b((?:https?://|www\d{0,3}[.])"""
+    r"""(?i)\b((?:https?://|www\d{0,3}[.]|github[.]com/)"""
     r"""(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+"""
     r"""(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()"""
     r"""\[\]{};:'".,<>?\u00AB\u00BB\u201C\u201D\u2018\u2019]))"""
@@ -25,11 +25,17 @@ _EXCLUDE = {
 }
 
 
+def _normalize_url(url):
+    if "://" not in url:
+        return "https://" + url
+    return url
+
+
 def _extract_urls(text):
     seen = set()
     urls = []
     for match in _R.finditer(text):
-        url = match.group(0)
+        url = _normalize_url(match.group(0))
         if url not in seen and url not in _EXCLUDE:
             seen.add(url)
             urls.append(url)
