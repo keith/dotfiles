@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+pull=false
+if [[ "${1:-}" == "--pull" ]]; then
+  pull=true
+  shift
+fi
+
 repo=~/dev/keith/tag
 if [[ ! -d "$repo" ]]; then
   logfile=$(mktemp)
@@ -11,7 +17,15 @@ if [[ ! -d "$repo" ]]; then
   fi
 fi
 
+
 executable=$repo/build/tag
+
+if [[ "$pull" == true ]]; then
+  git -C "$repo" pull
+  rm -f "$executable"
+  exit 0
+fi
+
 if [[ ! -x "$executable" ]]; then
   logfile=$(mktemp)
   pushd "$repo" > /dev/null
