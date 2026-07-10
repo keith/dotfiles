@@ -4,7 +4,11 @@ set -euo pipefail
 
 dir="$PWD"
 
-podman run --rm --detach -p 6379:6379 docker.io/library/redis:latest
+if ! podman ps --format "{{.Command}}" | grep -q redis; then
+  echo "Starting Redis container..."
+  podman run --rm --detach -p 6379:6379 docker.io/library/redis:latest
+fi
+
 tmux new-window -n "$(basename "$dir") bbserver" -c "$dir"
 tmux send-keys "bb --watch --experimental_remote_repo_contents_cache --output_base=/tmp/server_output_base_\$(basename \$PWD) run //enterprise/server -- \$(BB_CLICKHOUSE_CONTAINER_RUNNER=podman tools/clickhouse) --remote_execution.olap_reads_enabled=true" Enter
 tmux split-window -v -c "$dir"
