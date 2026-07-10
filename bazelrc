@@ -3,6 +3,7 @@ common:ora2  --override_module=rules_apple=~/dev/bazelbuild/rules_apple2
 common:ora3 --override_module=rules_apple=~/dev/bazelbuild/rules_apple3
 common:ora4 --override_module=rules_apple=~/dev/bazelbuild/rules_apple4
 common:ora5 --override_module=rules_apple=~/dev/bazelbuild/rules_apple5
+common:orand  --override_module=rules_android=~/dev/bazelbuild/rules_android
 common:orandk  --override_module=rules_android_ndk=~/dev/bazelbuild/rules_android_ndk
 common:oran  --override_module=rules_android=~/dev/bazelbuild/rules_android
 common:oras --override_module=apple_support=~/dev/bazelbuild/apple_support
@@ -27,9 +28,10 @@ common:orpycross  --override_module=rules_pycross=~/dev/bazelbuild/rules_pycross
 common:orrust --override_module=rules_rust=~/dev/bazelbuild/rules_rust
 common:ors  --override_module=rules_swift=~/dev/bazelbuild/rules_swift
 common:ors2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
-common:ors4 --override_module=rules_swift=~/dev/bazelbuild/rules_swift4
 common:ors3 --override_module=rules_swift=~/dev/bazelbuild/rules_swift3
+common:ors4 --override_module=rules_swift=~/dev/bazelbuild/rules_swift4
 common:orsd  --override_module=stardoc=~/dev/bazelbuild/stardoc
+common:orshell  --override_module=rules_shell=~/dev/bazelbuild/rules_shell
 common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib
 common:orskyg --config=orsky --override_module=bazel_skylib_gazelle_plugin=~/dev/bazelbuild/bazel-skylib/gazelle
 common:orspm --override_module=rules_swift_package_manager=~/dev/bazelbuild/rules_swift_package_manager
