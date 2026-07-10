@@ -84,6 +84,7 @@ common:l --experimental_profile_include_primary_output
 common:l --experimental_profile_include_target_label
 common:l --noslim_profile
 common:l --remote_cache=grpc://localhost:1985
+common:l --remote_cache_compression
 common:l --remote_executor=grpc://localhost:1985
 
 common:lkbes --config=l
