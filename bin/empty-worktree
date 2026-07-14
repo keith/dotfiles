@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+worktrees=()
+ignored_messages=()
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "error: not in a git repository" >&2
+  exit 1
+fi
+
+current_worktree=$(git rev-parse --show-toplevel)
+if ! git_pile_worktree=$(git pileworktreepath); then
+  echo "error: could not determine the git-pile worktree path" >&2
+  exit 1
+fi
+
+while IFS= read -r line; do
+  case "$line" in
+    "worktree "*)
+      worktree=${line#worktree }
+      case "$worktree" in
+        "$git_pile_worktree"|"$git_pile_worktree"/*) continue ;;
+      esac
+      worktrees+=("$worktree")
+      ;;
+  esac
+done < <(git worktree list --porcelain)
+
+if [[ ${#worktrees[@]} -eq 0 ]]; then
+  echo "error: git did not report any worktrees" >&2
+  exit 1
+fi
+
+for worktree in "${worktrees[@]}"; do
+  if branch=$(git -C "$worktree" symbolic-ref --quiet --short HEAD); then
+    if [[ "$branch" == upstream ]]; then
+      ignored_messages+=("Ignoring $worktree because it is checked out on branch 'upstream'.")
+      continue
+    fi
+  elif tag=$(git -C "$worktree" describe --tags --exact-match HEAD 2>/dev/null); then
+    ignored_messages+=("Ignoring $worktree because it is checked out on tag '$tag'.")
+    continue
+  fi
+
+  if [[ "$worktree" == "$current_worktree" ]]; then
+    continue
+  fi
+
+  if ! status=$(git -C "$worktree" status --porcelain --untracked-files=normal --ignore-submodules=none); then
+    echo "warning: could not inspect $worktree" >&2
+    continue
+  fi
+
+  if [[ -z "$status" ]]; then
+    printf '%s\n' "$worktree"
+    exit 0
+  fi
+done
+
+if ((${#ignored_messages[@]} > 0)); then
+  printf '%s\n' "${ignored_messages[@]}" >&2
+fi
+
+primary=${worktrees[0]}
+primary_parent=$(dirname "$primary")
+primary_name=$(basename "$primary")
+highest_number=1
+
+for worktree in "${worktrees[@]:1}"; do
+  worktree_name=$(basename "$worktree")
+  suffix=${worktree_name#"$primary_name"}
+  if [[ "$worktree_name" != "$primary_name$suffix" || -z "$suffix" || "$suffix" == *[!0-9]* ]]; then
+    continue
+  fi
+
+  suffix_number=$((10#$suffix))
+  if ((suffix_number > highest_number)); then
+    highest_number=$suffix_number
+  fi
+done
+
+new_worktree="$primary_parent/$primary_name$((highest_number + 1))"
+while true; do
+  printf 'No clean worktrees found. Create %s? [y/n] ' "$new_worktree" >&2
+  if ! IFS= read -r answer; then
+    exit 0
+  fi
+
+  case "$answer" in
+    [Yy])
+      break
+      ;;
+    [Nn])
+      exit 0
+      ;;
+    *)
+      ;;
+  esac
+done
+
+if ! git worktree add "$new_worktree" >&2; then
+  echo "error: failed to create $new_worktree" >&2
+  exit 1
+fi
+
+if ! git -C "$new_worktree" setup-main-branch >&2; then
+  echo "error: failed to set up the main branch in $new_worktree" >&2
+  exit 1
+fi
+
+printf '%s\n' "$new_worktree"
