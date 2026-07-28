@@ -3,14 +3,18 @@
 set -euo pipefail
 
 if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <bazelbuild/bazel-skylib> [COMMIT]" >&2
+  echo "Usage: $0 <[ORG/]REPO> [COMMIT]" >&2
   exit 1
 fi
 
 readonly commit="${2:-HEAD}"
 
 # bazelbuild/bazel-skylib
-readonly repo="$1"
+repo="$1"
+if [[ "$repo" != */* ]]; then
+  repo="bazelbuild/$repo"
+fi
+
 repo_name="$(basename "$repo")"
 readonly repo_with_underscores="${repo_name//-/_}"
 
