@@ -177,6 +177,17 @@ def analyze_repo(repo_path):
     }
 
 
+def is_active(status):
+    """Return whether a repo has local state worth calling attention to."""
+    return any(
+        status[key]
+        for key in (
+            "local_changes",
+            "untracked",
+        )
+    )
+
+
 def format_value(value):
     """Format a value for display, showing '-' for None/0."""
     if value is None:
@@ -229,6 +240,12 @@ def main():
         default=".",
         help="Directory to scan (default: current directory)",
     )
+    parser.add_argument(
+        "-a",
+        "--active",
+        action="store_true",
+        help="Only show repositories with local activity",
+    )
     args = parser.parse_args()
 
     base_path = Path(args.directory).expanduser().resolve()
@@ -254,7 +271,8 @@ def main():
         sys.exit(1)
 
     repos_status = [analyze_repo(repo) for repo in repos]
-    repos_status = [s for s in repos_status if any(s.values())]
+    if args.active:
+        repos_status = [status for status in repos_status if is_active(status)]
     if not repos_status:
         print("All repositories are clean")
         sys.exit(0)
