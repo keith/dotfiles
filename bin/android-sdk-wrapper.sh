@@ -20,7 +20,7 @@ else
   exit 1
 fi
 
-readonly android_sdk_root_dir="/tmp/androidbin/sdk"
+readonly android_sdk_root_dir="$HOME/.cache/android-sdk-wrapper/sdk"
 readonly android_sdk_unarchived_dir="$android_sdk_root_dir/android-sdk-$android_sdk_version-unarchived"
 
 if [[ -n "${OLD_NDK:-}" ]]; then
