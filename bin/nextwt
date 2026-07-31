@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if (($# > 0)); then
+  echo "usage: nextwt" >&2
+  exit 1
+fi
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "error: not in a git repository" >&2
+  exit 1
+fi
+
+current_worktree=$(git rev-parse --show-toplevel)
+worktrees=()
+while IFS= read -r line; do
+  case "$line" in
+    "worktree "*) worktrees+=("${line#worktree }") ;;
+  esac
+done < <(git worktree list --porcelain)
+
+if [[ ${#worktrees[@]} -eq 0 ]]; then
+  echo "error: git did not report any worktrees" >&2
+  exit 1
+fi
+
+primary=${worktrees[0]}
+primary_parent=$(dirname "$primary")
+primary_name=$(basename "$primary")
+
+if [[ "$current_worktree" == "$primary" ]]; then
+  current_number=1
+else
+  current_parent=$(dirname "$current_worktree")
+  current_name=$(basename "$current_worktree")
+  suffix=${current_name#"$primary_name"}
+  if [[ "$current_parent" != "$primary_parent" ||
+    "$current_name" != "$primary_name$suffix" ||
+    -z "$suffix" || "$suffix" == *[!0-9]* ]]; then
+    echo "error: current worktree does not have a numbered worktree name: $current_worktree" >&2
+    exit 1
+  fi
+  current_number=$((10#$suffix))
+fi
+
+next_worktree="$primary_parent/$primary_name$((current_number + 1))"
+for worktree in "${worktrees[@]}"; do
+  if [[ "$worktree" == "$next_worktree" ]]; then
+    printf '%s\n' "$next_worktree"
+    exit 0
+  fi
+done
+
+if [[ -e "$next_worktree" || -L "$next_worktree" ]]; then
+  echo "error: $next_worktree exists but is not a registered git worktree" >&2
+  exit 1
+fi
+
+while true; do
+  printf 'Worktree %s does not exist. Create it? [y/n] ' "$next_worktree" >&2
+  if ! IFS= read -r answer; then
+    exit 0
+  fi
+
+  case "$answer" in
+    [Yy]) break ;;
+    [Nn]) exit 0 ;;
+  esac
+done
+
+if ! git worktree add "$next_worktree" >&2; then
+  echo "error: failed to create $next_worktree" >&2
+  exit 1
+fi
+
+if ! git -C "$next_worktree" setup-main-branch >&2; then
+  echo "error: failed to set up the main branch in $next_worktree" >&2
+  exit 1
+fi
+
+printf '%s\n' "$next_worktree"
