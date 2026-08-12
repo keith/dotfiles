@@ -4,8 +4,13 @@ set -euo pipefail
 set -x
 exec 2> /tmp/tmux-resume
 
-index=$(tmux display -p "TMUXPWD_#D" | tr -d "%")
-new_pwd=$(tmux show-environment | grep "$index=" | sed 's/^.*=//' || true)
+# The bindings pass the pane from the "#{pane_id}" format since run-shell
+# commands don't get $TMUX_PANE
+pane_id=$1
+shift
+
+env_line=$(tmux show-environment "TMUXPWD_${pane_id#\%}" || true)
+new_pwd=${env_line#*=}
 if [[ -z "$new_pwd" || ! -d "$new_pwd" ]];then
   if [[ -f "${CURRENT_PROJECT_PATH:-}" ]]; then
     new_pwd="$(cat "$CURRENT_PROJECT_PATH")"
