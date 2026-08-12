@@ -1,7 +1,7 @@
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-  colorflag="--color=auto"
-else # OS X `ls`
+if [[ $OSTYPE == darwin* ]]; then # OS X `ls`
   colorflag="-G"
+else # GNU `ls`
+  colorflag="--color=auto"
 fi
 
 # List all files colorized in long format, including dot files
