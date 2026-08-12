@@ -4,6 +4,7 @@ christoomey/vim-tmux-navigator
 compnerd/modulemap-vim
 czheo/mojo.vim
 fatih/vim-go
+glench/vim-jinja2-syntax
 hashivim/vim-terraform
 jamessan/vim-gnupg
 jparise/vim-graphql

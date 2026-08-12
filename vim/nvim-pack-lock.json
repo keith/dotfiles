@@ -140,6 +140,10 @@
       "rev": "91313e598ca62e110bc71535c49069b66b9883c9",
       "src": "https://github.com/RRethy/vim-illuminate"
     },
+    "vim-jinja2-syntax": {
+      "rev": "2c17843b074b06a835f88587e1023ceff7e2c7d1",
+      "src": "https://github.com/glench/vim-jinja2-syntax"
+    },
     "vim-log-highlighting": {
       "rev": "1037e26f3120e6a6a2c0c33b14a84336dee2a78f",
       "src": "https://github.com/MTDL9/vim-log-highlighting"
