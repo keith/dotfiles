@@ -8,6 +8,7 @@ set -euo pipefail
 cmd=$(basename "$0")
 
 names=()
+startup_flags=()
 flags=()
 rest=()
 seen_dashdash=0
@@ -17,6 +18,8 @@ for arg in "$@"; do
   elif [[ $arg == -- ]]; then
     seen_dashdash=1
     rest+=("$arg")
+  elif [[ $arg == --output_base=* ]]; then
+    startup_flags+=("$arg")
   elif [[ $arg == -* ]]; then
     flags+=("$arg")
   else
@@ -55,7 +58,7 @@ if [[ ${#labels[@]} -gt 0 ]]; then
 fi
 
 if [[ "$cmd" == bqg ]]; then
-  exec bazel query "$query" ${flags[@]+"${flags[@]}"}
+  exec bazel "${startup_flags[@]}" query "$query" ${flags[@]+"${flags[@]}"}
 fi
 
 patterns=$(mktemp)
@@ -81,7 +84,7 @@ case "$cmd" in
       target=${targets[0]}
     fi
     set -x
-    exec bazel run ${flags[@]+"${flags[@]}"} "$target" -- ${rest[@]+"${rest[@]}"}
+    exec bazel "${startup_flags[@]}" run ${flags[@]+"${flags[@]}"} "$target" -- ${rest[@]+"${rest[@]}"}
     ;;
   bqt)
     if [[ $count -gt 5 ]]; then
@@ -97,11 +100,11 @@ case "$cmd" in
     fi
 
     set -x
-    exec bazel test ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
+    exec bazel "${startup_flags[@]}" test ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
     ;;
   bqb)
     set -x
-    exec bazel build ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
+    exec bazel "${startup_flags[@]}" build ${flags[@]+"${flags[@]}"} ${rest[@]+"${rest[@]}"} "${targets[@]}"
     ;;
   *)
     echo "error: $cmd: unknown invocation name (expected bqg, bqr, bqt, or bqb)" >&2
