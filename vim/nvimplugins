@@ -13,4 +13,3 @@ nvim-lua/plenary.nvim
 nvim-treesitter/nvim-treesitter
 scalameta/nvim-metals
 simrat39/symbols-outline.nvim
-Wansmer/treesj

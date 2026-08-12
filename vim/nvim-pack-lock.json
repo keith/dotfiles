@@ -96,10 +96,6 @@
       "rev": "07cb8247487208124978daff8e13624667635457",
       "src": "https://github.com/majutsushi/tagbar"
     },
-    "treesj": {
-      "rev": "79aedb401bbdc7e4202f7881eab5f6feb2105b0a",
-      "src": "https://github.com/Wansmer/treesj"
-    },
     "vim-abolish": {
       "rev": "dcbfe065297d31823561ba787f51056c147aa682",
       "src": "https://github.com/tpope/vim-abolish"
