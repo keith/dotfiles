@@ -59,10 +59,6 @@ fi
 echo "$line_count $hist_stat[size] $hist_stat[inode]" > ~/.hist_line_count
 unset added_line_count hist_stat old_hist_inode old_hist_size old_line_count
 
-if command -v atuin > /dev/null; then
-  eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
-fi
-
 if [[ -n "${ALACRITTY_WINDOW_ID:-}" ]]; then
   set-alacritty-theme
 fi
