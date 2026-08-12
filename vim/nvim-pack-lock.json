@@ -29,7 +29,7 @@
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "532d463f5c83595192fe740572d8fd6902b2217a",
+      "rev": "8671012a7b2a1648595952c655039d51fb301c14",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.vim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/keith/gist.vim"
     },
     "gitsigns.nvim": {
-      "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
+      "rev": "5be654f2232c10ddcad19c1607a67b6b4b78fc29",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "kotlin-vim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "98b0b8a52742afc9e2e2078e2e451f91beef1717",
+      "rev": "d2011e1dd0c27569c551f16b688d86029ae015c9",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-metals": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/scalameta/nvim-metals"
     },
     "nvim-treesitter": {
-      "rev": "7248feaca45e4d944591497964bc19afa89ad1c6",
+      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "plenary.nvim": {
@@ -95,6 +95,10 @@
     "tagbar": {
       "rev": "07cb8247487208124978daff8e13624667635457",
       "src": "https://github.com/majutsushi/tagbar"
+    },
+    "treesj": {
+      "rev": "79aedb401bbdc7e4202f7881eab5f6feb2105b0a",
+      "src": "https://github.com/Wansmer/treesj"
     },
     "vim-abolish": {
       "rev": "dcbfe065297d31823561ba787f51056c147aa682",
@@ -121,11 +125,11 @@
       "src": "https://github.com/jamessan/vim-gnupg"
     },
     "vim-go": {
-      "rev": "d69962d20a2a60e4bdc92a2281e5f0aaaa109635",
+      "rev": "bd1fcfeb79908001ff2a6f4b382a5a55da5ce11e",
       "src": "https://github.com/fatih/vim-go"
     },
     "vim-graphql": {
-      "rev": "d6c0991b70c0d6f4b3fa3283a2838d2ce47635d0",
+      "rev": "642c9931d6a4634f9cf9a1a91f450dc1a52a9d68",
       "src": "https://github.com/jparise/vim-graphql"
     },
     "vim-gutentags": {
