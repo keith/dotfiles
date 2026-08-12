@@ -80,7 +80,9 @@ call s:EnsureDirectory(&viewdir)
 " On quit reset title
 let &titleold=getcwd()
 
-let &background=system("get-appearance")
+if !has('nvim') " nvim sets this in init.vim before sourcing this file
+  let &background=system("get-appearance")
+endif
 silent! colorscheme solarized
 
 set ttyfast                 " Set that we have a fast terminal
@@ -378,7 +380,9 @@ augroup END
 
 augroup theme
   autocmd!
-  autocmd FocusGained * silent! let &background=system("get-appearance")
+  if !has('nvim') " nvim configures an async version of this in init.vim
+    autocmd FocusGained * silent! let &background=system("get-appearance")
+  endif
 augroup END
 
 " Various filetype settings

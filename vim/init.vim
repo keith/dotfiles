@@ -4,16 +4,66 @@ let g:loaded_python_provider = 0
 " Cache compiled Lua modules between launches.
 lua vim.loader.enable()
 
-" Ignore local virtualenvs
-" https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
-if exists("$VIRTUAL_ENV") " TODO: there is some error with this somehow i loaded a virtualenv but the python wasn't in my path correctly
-  let g:python_host_prog=substitute(system("which -a python | head -n2 | tail -n1"), "\n", '', 'g')
-  let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
-endif
+" Start slow subprocess queries now and collect the results further down, so
+" they run while the rest of the config loads instead of blocking startup on
+" each one serially.
+lua << EOF
+local ok, proc = pcall(vim.system, { "get-appearance" }, { text = true })
+local startup_proc = ok and proc or nil
+
+-- Sets 'background' to match the system appearance. The first call below
+-- consumes the query spawned above, by then it has usually finished so this
+-- doesn't block. Later calls (FocusGained) re-query asynchronously.
+function _G.keith_sync_background()
+  if startup_proc then
+    local out = startup_proc:wait()
+    startup_proc = nil
+    vim.o.background = out.stdout
+    return
+  end
+
+  pcall(vim.system, { "get-appearance" }, { text = true }, function(out)
+    if out.code == 0 and (out.stdout == "dark" or out.stdout == "light") then
+      vim.schedule(function()
+        vim.o.background = out.stdout
+      end)
+    end
+  end)
+end
+
+-- Ignore local virtualenvs
+-- https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
+-- TODO: there is some error with this somehow i loaded a virtualenv but the python wasn't in my path correctly
+if vim.env.VIRTUAL_ENV then
+  _G.keith_python_procs = {}
+  for _, python in ipairs { "python", "python3" } do
+    _G.keith_python_procs[python] = vim.system {
+      vim.o.shell,
+      "-c",
+      "which -a " .. python .. " | head -n2 | tail -n1",
+    }
+  end
+end
+EOF
 
 lua require('plugins')
 
+if exists("$VIRTUAL_ENV")
+  lua vim.g.python_host_prog = (_G.keith_python_procs.python:wait().stdout:gsub("\n", ""))
+  lua vim.g.python3_host_prog = (_G.keith_python_procs.python3:wait().stdout:gsub("\n", ""))
+  lua _G.keith_python_procs = nil
+endif
+
+" Set 'background' before the vimrc loads the colorscheme
+call v:lua.keith_sync_background()
+
 source ~/.vimrc
+
+augroup nvim_theme
+  autocmd!
+  " Update asynchronously so regaining focus doesn't block on a subprocess
+  autocmd FocusGained * silent! call v:lua.keith_sync_background()
+augroup END
 
 set fileignorecase
 set guicursor=
