@@ -30,6 +30,11 @@ common:ors  --override_module=rules_swift=~/dev/bazelbuild/rules_swift
 common:ors2 --override_module=rules_swift=~/dev/bazelbuild/rules_swift2
 common:ors3 --override_module=rules_swift=~/dev/bazelbuild/rules_swift3
 common:ors4 --override_module=rules_swift=~/dev/bazelbuild/rules_swift4
+common:ors5 --override_module=rules_swift=~/dev/bazelbuild/rules_swift5
+common:ors6 --override_module=rules_swift=~/dev/bazelbuild/rules_swift6
+common:ors7 --override_module=rules_swift=~/dev/bazelbuild/rules_swift7
+common:ors8 --override_module=rules_swift=~/dev/bazelbuild/rules_swift8
+common:ors9 --override_module=rules_swift=~/dev/bazelbuild/rules_swift9
 common:orsd  --override_module=stardoc=~/dev/bazelbuild/stardoc
 common:orshell  --override_module=rules_shell=~/dev/bazelbuild/rules_shell
 common:orsky --override_module=bazel_skylib=~/dev/bazelbuild/bazel-skylib
