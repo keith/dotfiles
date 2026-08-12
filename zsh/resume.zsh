@@ -9,8 +9,12 @@ if [[ -z "$SSH_CLIENT" ]];then
 fi
 
 cd_to_most_recently_opened_directory() {
-  if [[ -f $CURRENT_PROJECT_PATH && -d "$(cat $CURRENT_PROJECT_PATH)" ]]; then
-    cd "$(cat $CURRENT_PROJECT_PATH)"
+  if [[ -f $CURRENT_PROJECT_PATH ]]; then
+    local recent_directory
+    recent_directory=$(< $CURRENT_PROJECT_PATH)
+    if [[ -d $recent_directory ]]; then
+      cd "$recent_directory"
+    fi
   fi
 }
 
