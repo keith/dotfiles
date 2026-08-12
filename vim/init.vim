@@ -1,5 +1,9 @@
 " Disable python2 support
 let g:loaded_python_provider = 0
+
+" Cache compiled Lua modules between launches.
+lua vim.loader.enable()
+
 " Ignore local virtualenvs
 " https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
 if exists("$VIRTUAL_ENV") " TODO: there is some error with this somehow i loaded a virtualenv but the python wasn't in my path correctly
