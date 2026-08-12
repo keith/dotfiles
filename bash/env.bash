@@ -14,7 +14,7 @@ fi
 #  - /bin
 #  - /sbin
 export PATH="$HOME/dev/keith/knox:$DOTFILES/git-pile/bin:$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-dev_subdirs=$(printf "%s:" ~/dev/*)
+printf -v dev_subdirs "%s:" ~/dev/*
 export CDPATH="${dev_subdirs}$HOME/dev"
 
 export EDITOR=nvim
