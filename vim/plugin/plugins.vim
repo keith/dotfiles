@@ -52,6 +52,7 @@ nnoremap [g :Gitsigns nav_hunk prev<CR>
 nnoremap ]g :Gitsigns nav_hunk next<CR>
 nnoremap <leader>hs :Gitsigns stage_hunk<CR>
 nnoremap <leader>hu :Gitsigns undo_stage_hunk<CR>
+nnoremap <leader>hr :Gitsigns reset_hunk<CR>
 xnoremap <leader>hs :'<,'>Gitsigns stage_hunk<CR>
 xnoremap <leader>hu :'<,'>Gitsigns undo_stage_hunk<CR>
 
