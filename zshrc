@@ -18,7 +18,12 @@ done
 
 # Load autocomplete and other zsh stuff
 autoload -Uz compinit
+zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -s $zcompdump && (! -s $zcompdump.zwc || $zcompdump -nt $zcompdump.zwc) ]]; then
+  zcompile "$zcompdump"
+fi
 compinit -C
+unset zcompdump
 
 for file in ${(M)configs:#*/completions.zsh}
 do
