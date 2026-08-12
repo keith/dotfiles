@@ -12,6 +12,8 @@ dir=$(mktemp -d)
 file="$dir/main.$extension"
 if [[ "$original_extension" == "c" || "$original_extension" == "m" || "$original_extension" == "cpp" ]]; then
   echo "int main() { return 127; }" > "$file"
+elif [[ "$original_extension" == "rs" ]]; then
+  echo 'fn main() {}' > "$file"
 elif [[ "$original_extension" == "swift" ]]; then
   echo 'print("hi")' > "$file"
 elif [[ "$original_extension" == "o" ]]; then
