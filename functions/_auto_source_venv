@@ -1,5 +1,6 @@
 _auto_source_venv() {
   declare -a options
+  declare root_status=-1
   options=("venv" ".venv")
   for dir in "${options[@]}"; do
     if [[ -d "$dir" ]]; then
@@ -7,7 +8,12 @@ _auto_source_venv() {
       return 0
     fi
 
-    if ! root="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+    if [[ $root_status -eq -1 ]]; then
+      root="$(git rev-parse --show-toplevel 2>/dev/null)"
+      root_status=$?
+    fi
+
+    if [[ $root_status -ne 0 ]]; then
       if command -v deactivate > /dev/null; then
         deactivate
       fi
