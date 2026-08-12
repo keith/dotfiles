@@ -9,20 +9,18 @@ fi
 # History settings
 # Save x items to the given history file
 # https://unix.stackexchange.com/questions/568907/why-do-i-lose-my-zsh-history
-export HISTSIZE=50000000
-export SAVEHIST=50000000
-export HISTFILE=$HOME/.keith_zsh_history
+HISTSIZE=50000000
+SAVEHIST=50000000
+HISTFILE=$HOME/.keith_zsh_history
+# Make sure nested bash sessions don't inherit the zsh history file
+# https://michael.stapelberg.ch/posts/2026-08-09-zsh-history-truncation-bug
+typeset +x HISTFILE
 
 # Append history to the zsh_history file
 setopt APPEND_HISTORY
 
 # Write to history after each command
 setopt INC_APPEND_HISTORY
-
-# Write the running time of commands to the history
-# NOTE: the zsh documentation says this and INC_APPEND_HISTORY are mutually
-# exclusive, but this seems to work fine.
-setopt INC_APPEND_HISTORY_TIME
 
 # Ignore duplicates in zsh history
 setopt HIST_IGNORE_ALL_DUPS
