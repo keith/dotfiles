@@ -1,6 +1,10 @@
-let output = system("git rev-parse --show-toplevel")
-if v:shell_error == 0
-  let s:search_root = substitute(output, "\\n", "", "")
+let s:git_marker = finddir('.git', '.;')
+if empty(s:git_marker)
+  let s:git_marker = findfile('.git', '.;')
+endif
+
+if !empty(s:git_marker)
+  let s:search_root = fnamemodify(s:git_marker, ':p:h')
   let s:executable="git"
   let s:arguments="grep --recurse-submodules --line-number {}"
 else
@@ -9,6 +13,7 @@ else
   let s:executable="rg"
   let s:arguments="--vimgrep --case-sensitive {}"
 endif
+unlet s:git_marker
 
 command -nargs=+ -complete=file Grep call <SID>Grep(<q-args>)
 function! s:Grep(args)
