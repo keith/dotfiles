@@ -10,7 +10,8 @@ fi
 unset VIRTUAL_ENV
 
 # Find all zsh files
-configs=($DOTFILES/*/*.bash $DOTFILES/*/*.zsh)
+configs=($DOTFILES/*/*.(bash|zsh))
+configs=(${(M)configs:#*.bash} ${configs:#*.bash})
 for file in ${configs:#*/completions.zsh}
 do
   source "$file"
