@@ -12,5 +12,4 @@ dockutil --add "/Applications/Google Chrome.app"
 dockutil --add "/Applications/Messages.app"
 dockutil --add "/Applications/Alacritty.app"
 
-dockutil --add "/Applications" --view list --display folder --sort name
 dockutil --add "$HOME/Downloads" --view grid --display stack --sort dateadded
