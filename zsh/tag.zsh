@@ -1,4 +1,4 @@
-if (( $+commands[tag] )); then
+if hash tag 2>/dev/null; then
   tag() {
     trap 'source /tmp/tag_aliases 2>/dev/null' SIGINT
     command tag "$@" && source /tmp/tag_aliases 2>/dev/null

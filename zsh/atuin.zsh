@@ -1,4 +1,4 @@
-if (( $+commands[atuin] )); then
+if hash atuin 2>/dev/null; then
   atuin_cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
   atuin_cache_file=$atuin_cache_dir/atuin-init.zsh
   atuin_config_file=$HOME/.config/atuin/config.toml
