@@ -1,5 +1,5 @@
 # Path to dotfiles repo
-export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
+export DOTFILES="${${:-$HOME/.zshrc}:A:h}"
 if [[ $OSTYPE != darwin* ]]; then
   export BREW_PREFIX=/home/linuxbrew/.linuxbrew
 else
@@ -25,16 +25,16 @@ do
   source "$file"
 done
 
-if [[ "$(wc -l ~/.keith_zsh_history | xargs | cut -d " " -f 1)" -lt 1000 ]]; then
+line_count=$(wc -l < ~/.keith_zsh_history)
+if [[ $line_count -lt 1000 ]]; then
   echo "warning: ~/.keith_zsh_history looks borked"
 fi
 
 old_line_count=0
 if [[ -f ~/.hist_line_count ]]; then
-  old_line_count=$(cat ~/.hist_line_count)
+  old_line_count=$(< ~/.hist_line_count)
 fi
 
-line_count=$(wc -l ~/.keith_zsh_history | xargs | cut -d " " -f 1)
 # -some to give some buffer as history isn't always written immediately from old terminals it seems
 if [[ $line_count -lt $((old_line_count - 1000)) ]]; then
   echo "warning: history count just went down, was it truncated? Went from $old_line_count to $line_count"
