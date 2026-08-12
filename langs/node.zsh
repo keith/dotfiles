@@ -19,6 +19,9 @@ _nvm_load() {
 # Resolve local aliases directly so Node is immediately available, then load
 # NVM's shell functions only when the nvm command is first used.
 nvm_version=default
+if [[ ! -r "$NVM_DIR/alias/default" ]]; then
+  nvm_version=system
+fi
 nvm_seen_versions=:
 while [[ -r "$NVM_DIR/alias/$nvm_version" ]]; do
   if [[ $nvm_seen_versions == *":$nvm_version:"* ]]; then
@@ -36,7 +39,11 @@ if [[ -n $nvm_version && $nvm_version != *[^0-9.]* ]]; then
 fi
 nvm_version_dir=$nvm_version_dirs[-1]
 
-if [[ -x "$nvm_version_dir/bin/node" && ${NVM_SYMLINK_CURRENT:-false} != true && -z ${PREFIX:-} ]]; then
+if [[ $nvm_version == system ]]; then
+  nvm() {
+    _nvm_load --no-use && nvm "$@"
+  }
+elif [[ -x "$nvm_version_dir/bin/node" && ${NVM_SYMLINK_CURRENT:-false} != true && -z ${PREFIX:-} ]]; then
   export NVM_BIN="$nvm_version_dir/bin"
   export NVM_INC="$nvm_version_dir/include/node"
   export PATH="$NVM_BIN:$PATH"
