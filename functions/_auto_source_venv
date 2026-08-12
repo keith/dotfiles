@@ -9,8 +9,16 @@ _auto_source_venv() {
     fi
 
     if [[ $root_status -eq -1 ]]; then
-      root="$(git rev-parse --show-toplevel 2>/dev/null)"
-      root_status=$?
+      root=$PWD
+      while [[ $root != / && ! -e "$root/.git" ]]; do
+        root=${root:h}
+      done
+
+      if [[ -e "$root/.git" ]]; then
+        root_status=0
+      else
+        root_status=1
+      fi
     fi
 
     if [[ $root_status -ne 0 ]]; then
