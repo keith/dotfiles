@@ -176,21 +176,25 @@ local ignore_install = {
   zig = true, -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2049
 }
 
-local treesitter = require "nvim-treesitter"
-local installed_parsers = {}
-for _, lang in ipairs(treesitter.get_installed()) do
-  installed_parsers[lang] = true
-end
-
-local missing_parsers = {}
-for _, lang in ipairs(treesitter.get_available()) do
-  if not ignore_install[lang] and not installed_parsers[lang] then
-    table.insert(missing_parsers, lang)
+-- Checking for missing parsers scans the parser directories, defer it past
+-- startup, the install is async anyway
+vim.schedule(function()
+  local treesitter = require "nvim-treesitter"
+  local installed_parsers = {}
+  for _, lang in ipairs(treesitter.get_installed()) do
+    installed_parsers[lang] = true
   end
-end
-if #missing_parsers > 0 then
-  treesitter.install(missing_parsers)
-end
+
+  local missing_parsers = {}
+  for _, lang in ipairs(treesitter.get_available()) do
+    if not ignore_install[lang] and not installed_parsers[lang] then
+      table.insert(missing_parsers, lang)
+    end
+  end
+  if #missing_parsers > 0 then
+    treesitter.install(missing_parsers)
+  end
+end)
 
 local highlight_langs = { c = true, cpp = true }
 vim.api.nvim_create_autocmd("FileType", {
