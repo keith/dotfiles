@@ -158,27 +158,14 @@ sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor.plis
 # Power Settings
 #
 
-# To stop the display from half dimming before full display 'sleep'
-# http://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/pmset.1.html
-sudo pmset -a halfdim 0
-
-# Sleep options
-sudo pmset -a displaysleep 5
-
 # Wake for network access
-sudo pmset -a womp 1
-
-# Don't restart after power failure
-sudo pmset -a autorestart 0
-
-# Wake computer when laptop is opened
-sudo pmset -a lidwake 1
-
-# Don't wake computer when power source changes
-sudo pmset -a acwake 0
+sudo pmset -c womp 1
 
 # Don't dim brightness on any different source
 sudo pmset -a lessbright 0
+
+# Disable smart wake for specific apps
+sudo pmset -a powernap 0
 
 
 #
