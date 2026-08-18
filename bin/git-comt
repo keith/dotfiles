@@ -22,7 +22,15 @@ def _get_tag(line: str) -> Tuple[str, str]:
 
 def _tag_for_file(file: str) -> Tuple[str, str]:
     output = subprocess.check_output(
-        ["git", "log", "--pretty=format:%s", "-1", "--", file], text=True
+        [
+            "git",
+            "log",
+            "--pretty=format:%s",
+            "-1",
+            "--",
+            f":(top,literal){file}",
+        ],
+        text=True,
     ).strip()
     return _get_tag(output)
 
