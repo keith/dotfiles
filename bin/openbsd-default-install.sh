@@ -1,25 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 
 set -euo pipefail
 
-pkg install \
+sudo pkg_add \
+ "jdk%25" \
  bash \
  cmake \
- devel/git \
- fd-find \
+ fd \
+ fzf \
  fzy \
  git \
+ go \
  htop \
  lsblk \
- mkfs \
  neovim \
- perl5 \
+ protobuf \
  readline \
- readline-dev \
  ripgrep \
- sqlite \
  sqlite3 \
- sudo \
- tmux \
- vim \
+ unzip \
+ vim-- \
+ zip \
  zsh
