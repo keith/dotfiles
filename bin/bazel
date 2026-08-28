@@ -45,6 +45,9 @@ bazelisk_bin=bazelisk
 if command -v bb >/dev/null 2>&1; then
   bazelisk_bin=bb
 fi
+if command -v bb-dev >/dev/null 2>&1; then
+  bazelisk_bin=bb-dev
+fi
 
 if [[ "${1:-}" == -x86 ]]; then
   shift

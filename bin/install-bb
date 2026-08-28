@@ -3,9 +3,10 @@
 set -euo pipefail
 
 repo="buildbuddy-io/bazel"
-install_path="$HOME/.local/bin/bb"
-rm -f "$install_path"
-mkdir -p "$(dirname "$install_path")"
+install_dir="$HOME/.local/bin"
+mkdir -p "$install_dir"
+release_binary="$install_dir/bb"
+dev_binary="$install_dir/bb-dev"
 
 release=0
 if [[ "${1:-}" == "--release" ]]; then
@@ -25,8 +26,9 @@ if [[ "$release" == 0 && -f "cli/BUILD" ]]; then
     exit 1
   fi
 
-  cp "$source_binary" "$install_path"
-  chmod 0755 "$install_path"
+  rm -f "$dev_binary"
+  cp "$source_binary" "$dev_binary"
+  chmod 0755 "$dev_binary"
   exit 0
 fi
 
@@ -92,4 +94,4 @@ curl -fsSLo "$tmpdir/$asset.sha256" "$base_url/$asset.sha256"
   shasum -a 256 -c "$asset.sha256"
 )
 
-install -m 0755 "$tmpdir/$asset" "$install_path"
+install -m 0755 "$tmpdir/$asset" "$release_binary"
