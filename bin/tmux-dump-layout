@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# */5 * * * * /home/ksmiley/.bin/tmux-dump-layout
+
+set -euo pipefail
+
+umask 077
+
+readonly tmux_locations=(
+  /home/linuxbrew/.linuxbrew/bin/tmux
+  /opt/homebrew/bin/tmux
+  /usr/local/bin/tmux
+  /usr/bin/tmux
+  /bin/tmux
+)
+
+tmux_bin=
+for location in "${tmux_locations[@]}"; do
+  if [[ -x "$location" ]]; then
+    tmux_bin=$location
+    break
+  fi
+done
+
+if [[ -z "$tmux_bin" ]]; then
+  echo "error: tmux not found" >&2
+  exit 1
+fi
+
+socket_dir="/tmp/tmux-$(id -u)"
+shopt -s nullglob
+
+for socket in "$socket_dir"/*; do
+  [[ -S "$socket" ]] || continue
+
+  server_id=$(
+    "$tmux_bin" -S "$socket" display-message -p '#{pid}' 2>/dev/null
+  ) || continue
+
+  output="/tmp/tmux-layout-${server_id}.txt"
+  temporary=$(mktemp /tmp/.tmux-layout.XXXXXX)
+  if "$tmux_bin" -S "$socket" list-panes -a \
+    -F '#{session_name}:#{window_index}.#{pane_index} #{pane_current_path} #{pane_current_command}' \
+    | tee "$temporary"; then
+    mv -f "$temporary" "$output"
+  else
+    rm -f "$temporary"
+  fi
+done
