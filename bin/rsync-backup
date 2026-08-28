@@ -85,8 +85,13 @@ rsync_opts=(
   --exclude=/var/lib/docker/overlay2/*
 
   # User caches and trash
+  --exclude=/home/linuxbrew
   --exclude=/home/*/.cache
+  --exclude=/home/*/.npm
   --exclude=/home/*/.local/share/Trash/*
+  # Potentially risky but not directories I put code into
+  --exclude=/home/*/go
+  --exclude=/home/*/src
 
   # Build / language toolchain caches — all regenerable, can be huge
   --exclude=/home/*/.cargo
