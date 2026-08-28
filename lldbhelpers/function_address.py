@@ -1,7 +1,7 @@
 import lldb
 import re
 
-SYMBOL_REGEX = re.compile("^([+-])\[([^\s\]\(]+)(\([^\s]+\))?\s+([^\s\]]+)\]$")
+SYMBOL_REGEX = re.compile(r"^([+-])\[([^\s\]\(]+)(\([^\s]+\))?\s+([^\s\]]+)\]$")
 
 
 def _output_for_command(debugger, command):
