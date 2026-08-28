@@ -7,7 +7,13 @@ install_path="$HOME/.local/bin/bb"
 rm -f "$install_path"
 mkdir -p "$(dirname "$install_path")"
 
-if [[ -f "cli/BUILD" ]]; then
+release=0
+if [[ "${1:-}" == "--release" ]]; then
+  release=1
+  shift
+fi
+
+if [[ "$release" == 0 && -f "cli/BUILD" ]]; then
   echo "Installing bb from source in $(pwd)"
   set -x
   bazel build --config=release cli
