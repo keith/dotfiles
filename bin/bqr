@@ -57,6 +57,9 @@ if [[ ${#labels[@]} -gt 0 ]]; then
   query+="set(${labels[*]})"
 fi
 
+excluded_name_pattern='_with_cfg|^(.+)_/\1$'
+query="($query) except attr(name, '$excluded_name_pattern', ($query))"
+
 if [[ "$cmd" == bqg ]]; then
   exec bazel "${startup_flags[@]}" query "$query" ${flags[@]+"${flags[@]}"}
 fi
