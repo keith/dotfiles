@@ -10,8 +10,8 @@ if hash tag 2>/dev/null; then
   alias find="tag find"
 
   function fd() {
-    binary=fd
-    if command -v fdfind >/dev/null 2>&1; then
+    local binary=fd
+    if (( ! $+commands[fd] )) && (( $+commands[fdfind] )); then
       binary=fdfind
     fi
 
