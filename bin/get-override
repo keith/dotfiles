@@ -19,13 +19,15 @@ repo_name="$(basename "$repo")"
 readonly repo_with_underscores="${repo_name//-/_}"
 
 readonly clone_url="https://github.com/$repo"
+actual_url=$(curl -Ls -o /dev/null -w '%{url_effective}\n' "$clone_url")
+
 mktemp_dir="$(mktemp -d)"
 trap 'rm -rf "$mktemp_dir"' EXIT
 
 git clone --depth 1 --revision "$commit" "$clone_url" "$mktemp_dir/repo"
 sha="$(git -C "$mktemp_dir/repo" rev-parse HEAD)"
 
-readonly archive_url="$clone_url/archive/$sha.tar.gz"
+readonly archive_url="$actual_url/archive/$sha.tar.gz"
 curl --location --fail --output "$mktemp_dir/archive.tar.gz" "$archive_url"
 integrity="$(openssl dgst -sha256 -binary "$mktemp_dir/archive.tar.gz" | openssl base64 -A | sed 's/^/sha256-/')"
 
