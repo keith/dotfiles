@@ -4,6 +4,12 @@ set -euo pipefail
 
 dir="$PWD"
 
+if [[ "$OSTYPE" == darwin* ]]; then
+  if [[ "$(podman machine inspect --format '{{.State}}')" != "running" ]]; then
+    podman machine start
+  fi
+fi
+
 if ! podman ps --format "{{.Command}}" | grep -q redis; then
   echo "Starting Redis container..."
   podman run --rm --detach -p 6379:6379 docker.io/library/redis:latest
