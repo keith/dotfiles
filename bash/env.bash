@@ -15,7 +15,7 @@ fi
 #  - /sbin
 export PATH="$HOME/dev/keith/bazelrc-graph:$DOTFILES/git-pile/bin:$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$BREW_PREFIX/bin:$BREW_PREFIX/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 printf -v dev_subdirs "%s:" ~/dev/*
-export CDPATH="${dev_subdirs}$HOME/dev"
+CDPATH="${dev_subdirs}$HOME/dev"
 
 export EDITOR=nvim
 export SUDO_EDITOR=vim
