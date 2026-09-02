@@ -37,7 +37,8 @@ for socket in "$socket_dir"/*; do
     "$tmux_bin" -S "$socket" display-message -p '#{pid}' 2>/dev/null
   ) || continue
 
-  output="/tmp/tmux-layout-${server_id}.txt"
+  output="$HOME/tmux-layouts/${server_id}.txt"
+  mkdir -p "$(dirname "$output")"
   temporary=$(mktemp /tmp/.tmux-layout.XXXXXX)
   if "$tmux_bin" -S "$socket" list-panes -a \
     -F '#{session_name}:#{window_index}.#{pane_index} #{pane_current_path} #{pane_current_command}' \
