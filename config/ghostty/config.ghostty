@@ -1,0 +1,17 @@
+theme = dark:solarized_dark,light:solarized_light
+
+font-family = Monaco
+font-size = 13
+font-style-bold = false
+font-thicken = true
+cursor-style = block
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
+
+maximize = true
+bell-features = false
+copy-on-select = false
+macos-option-as-alt = true
+
+# Disable fullscreen shortcuts.
+keybind = super+ctrl+f=ignore
+keybind = super+enter=ignore
