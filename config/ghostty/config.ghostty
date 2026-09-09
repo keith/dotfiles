@@ -12,6 +12,7 @@ bell-features = false
 copy-on-select = false
 macos-option-as-alt = true
 
-# Disable fullscreen shortcuts.
+# Disable disruptive shortcuts.
 keybind = super+ctrl+f=ignore
 keybind = super+enter=ignore
+keybind = super+k=ignore
