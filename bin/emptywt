@@ -2,6 +2,16 @@
 
 set -euo pipefail
 
+force_add=false
+if (($# > 0)); then
+  if (($# == 1)) && [[ "$1" == --add ]]; then
+    force_add=true
+  else
+    echo "usage: emptywt [--add]" >&2
+    exit 1
+  fi
+fi
+
 worktrees=()
 ignored_messages=()
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
@@ -32,72 +42,81 @@ if [[ ${#worktrees[@]} -eq 0 ]]; then
   exit 1
 fi
 
-for worktree in "${worktrees[@]}"; do
-  if branch=$(git -C "$worktree" symbolic-ref --quiet --short HEAD); then
-    if [[ "$branch" == upstream ]]; then
-      ignored_messages+=("Ignoring $worktree because it is checked out on branch 'upstream'.")
-      continue
-    fi
-  elif tag=$(git -C "$worktree" describe --tags --exact-match HEAD 2>/dev/null); then
-    ignored_messages+=("Ignoring $worktree because it is checked out on tag '$tag'.")
-    continue
-  fi
-
-  if [[ "$worktree" == "$current_worktree" ]]; then
-    continue
-  fi
-
-  if ! status=$(git -C "$worktree" status --porcelain --untracked-files=normal --ignore-submodules=none); then
-    echo "warning: could not inspect $worktree" >&2
-    continue
-  fi
-
-  if [[ -z "$status" ]]; then
-    printf '%s\n' "$worktree"
-    exit 0
-  fi
-done
-
-if ((${#ignored_messages[@]} > 0)); then
-  printf '%s\n' "${ignored_messages[@]}" >&2
-fi
-
 primary=${worktrees[0]}
 primary_parent=$(dirname "$primary")
 primary_name=$(basename "$primary")
-highest_number=1
 
+numbered_worktrees=("$primary")
+highest_number=1
 for worktree in "${worktrees[@]:1}"; do
+  worktree_parent=$(dirname "$worktree")
   worktree_name=$(basename "$worktree")
   suffix=${worktree_name#"$primary_name"}
-  if [[ "$worktree_name" != "$primary_name$suffix" || -z "$suffix" || "$suffix" == *[!0-9]* ]]; then
+  if [[ "$worktree_parent" != "$primary_parent" ||
+    "$worktree_name" != "$primary_name$suffix" ||
+    -z "$suffix" || "$suffix" == *[!0-9]* ]]; then
     continue
   fi
 
+  numbered_worktrees+=("$worktree")
   suffix_number=$((10#$suffix))
   if ((suffix_number > highest_number)); then
     highest_number=$suffix_number
   fi
 done
 
-new_worktree="$primary_parent/$primary_name$((highest_number + 1))"
-while true; do
-  printf 'No clean worktrees found. Create %s? [y/n] ' "$new_worktree" >&2
-  if ! IFS= read -r answer; then
-    exit 0
-  fi
+if [[ "$force_add" == false ]]; then
+  for worktree in "${numbered_worktrees[@]}"; do
+    if branch=$(git -C "$worktree" symbolic-ref --quiet --short HEAD); then
+      if [[ "$branch" == upstream ]]; then
+        ignored_messages+=("Ignoring $worktree because it is checked out on branch 'upstream'.")
+        continue
+      fi
+    elif tag=$(git -C "$worktree" describe --tags --exact-match HEAD 2>/dev/null); then
+      ignored_messages+=("Ignoring $worktree because it is checked out on tag '$tag'.")
+      continue
+    fi
 
-  case "$answer" in
-    [Yy])
-      break
-      ;;
-    [Nn])
+    if [[ "$worktree" == "$current_worktree" ]]; then
+      continue
+    fi
+
+    if ! status=$(git -C "$worktree" status --porcelain --untracked-files=normal --ignore-submodules=none); then
+      echo "warning: could not inspect $worktree" >&2
+      continue
+    fi
+
+    if [[ -z "$status" ]]; then
+      printf '%s\n' "$worktree"
       exit 0
-      ;;
-    *)
-      ;;
-  esac
-done
+    fi
+  done
+
+  if ((${#ignored_messages[@]} > 0)); then
+    printf '%s\n' "${ignored_messages[@]}" >&2
+  fi
+fi
+
+new_worktree="$primary_parent/$primary_name$((highest_number + 1))"
+if [[ "$force_add" == false ]]; then
+  while true; do
+    printf 'No clean worktrees found. Create %s? [y/n] ' "$new_worktree" >&2
+    if ! IFS= read -r answer; then
+      exit 0
+    fi
+
+    case "$answer" in
+      [Yy])
+        break
+        ;;
+      [Nn])
+        exit 0
+        ;;
+      *)
+        ;;
+    esac
+  done
+fi
 
 if ! git worktree add "$new_worktree" >&2; then
   echo "error: failed to create $new_worktree" >&2
