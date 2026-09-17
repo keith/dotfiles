@@ -25,11 +25,11 @@
       "src": "https://github.com/github/copilot.vim"
     },
     "fidget.nvim": {
-      "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
+      "rev": "9e0201673e08e997e7cf52afca5565c70bd117f3",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
     "fzf-lua": {
-      "rev": "8671012a7b2a1648595952c655039d51fb301c14",
+      "rev": "02bc882f208f3481aa959dbbee8ce5edad2fd8b2",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gist.vim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/keith/gist.vim"
     },
     "gitsigns.nvim": {
-      "rev": "5be654f2232c10ddcad19c1607a67b6b4b78fc29",
+      "rev": "8d79f2410c76e62b92e51c28c82e28c1c5a3daeb",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "kotlin-vim": {
@@ -49,7 +49,7 @@
       "src": "https://github.com/llvm/llvm.vim"
     },
     "modulemap-vim": {
-      "rev": "c67f8e4f2660bafe5ba7ce87f4992753182f6737",
+      "rev": "9e4d23b76b1e7c7b4b05128e4425aebe2c6b8f81",
       "src": "https://github.com/compnerd/modulemap-vim"
     },
     "mojo.vim": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/hrsh7th/nvim-cmp"
     },
     "nvim-lspconfig": {
-      "rev": "d2011e1dd0c27569c551f16b688d86029ae015c9",
+      "rev": "98e5981d14057a54cd49a35fb280dfd275ff65f8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-metals": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/scalameta/nvim-metals"
     },
     "nvim-treesitter": {
-      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "rev": "9a168f6357ed21c3a636e1727bc7d382abc451b8",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "plenary.nvim": {
@@ -125,11 +125,11 @@
       "src": "https://github.com/jamessan/vim-gnupg"
     },
     "vim-go": {
-      "rev": "bd1fcfeb79908001ff2a6f4b382a5a55da5ce11e",
+      "rev": "47694979496d4bf2e90ce75d95f1dec3f41cbefb",
       "src": "https://github.com/fatih/vim-go"
     },
     "vim-graphql": {
-      "rev": "642c9931d6a4634f9cf9a1a91f450dc1a52a9d68",
+      "rev": "ebea1e6bc93e85aa71848112b8a42f95468ac566",
       "src": "https://github.com/jparise/vim-graphql"
     },
     "vim-gutentags": {
@@ -137,7 +137,7 @@
       "src": "https://github.com/ludovicchabant/vim-gutentags"
     },
     "vim-illuminate": {
-      "rev": "91313e598ca62e110bc71535c49069b66b9883c9",
+      "rev": "1cc33d347c574c3bd21a4852fc9ffed677c1c58c",
       "src": "https://github.com/RRethy/vim-illuminate"
     },
     "vim-jinja2-syntax": {
@@ -157,7 +157,7 @@
       "src": "https://github.com/LnL7/vim-nix"
     },
     "vim-obsession": {
-      "rev": "ed9dfc7c2cc917ace8b24f4f9f80a91e05614b63",
+      "rev": "5d63e5b50ebf554d378528e357157c89e91313c9",
       "src": "https://github.com/tpope/vim-obsession"
     },
     "vim-oscyank": {
