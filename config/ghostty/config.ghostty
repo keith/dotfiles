@@ -10,9 +10,12 @@ shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 maximize = true
 bell-features = false
 copy-on-select = false
+clipboard-read = allow
 macos-option-as-alt = true
 
 # Disable disruptive shortcuts.
 keybind = super+ctrl+f=ignore
+keybind = super+d=ignore
 keybind = super+enter=ignore
 keybind = super+k=ignore
+keybind = super+shift+d=ignore
