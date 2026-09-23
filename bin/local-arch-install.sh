@@ -13,6 +13,7 @@ packages=(
   colordiff
   ctags
   curl
+  ethtool
   fd
   fzf
   fzy
@@ -40,6 +41,7 @@ packages=(
   openbsd-netcat
   parallel
   patchelf
+  podman
   pre-commit
   protobuf
   pyenv
