@@ -14,6 +14,8 @@ done
 cd "$checkout_root"
 
 args=(
+  --build-subdir .
+  --enable-experimental-string-processing
   --reconfigure
   --release-debuginfo
   --skip-build-benchmarks
@@ -28,9 +30,10 @@ fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   args+=(
+    --llvm-targets-to-build "AArch64;ARM;X86"
     --skip-tvos
     --skip-watchos
-    --swift-darwin-supported-archs "$(uname -m)"
+    --swift-darwin-supported-archs "arm64;x86_64"
   )
 fi
 
