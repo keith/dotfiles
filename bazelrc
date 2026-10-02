@@ -18,6 +18,7 @@ common:orf --override_module=rules_foreign_cc=~/dev/bazelbuild/rules_foreign_cc
 common:orfeatures --override_module=bazel_features=~/dev/bazelbuild/bazel_features
 common:orgaz --override_module=gazelle=~/dev/bazelbuild/bazel-gazelle
 common:orgo  --override_module=rules_go=~/dev/bazelbuild/rules_go
+common:orgo2  --override_module=rules_go=~/dev/bazelbuild/rules_go2
 common:orjava --override_module=rules_java=~/dev/bazelbuild/rules_java
 common:ormojo --override_module=rules_mojo=~/dev/modularml/rules_mojo
 common:ormulti --override_module=rules_multirun=~/dev/keith/rules_multirun
