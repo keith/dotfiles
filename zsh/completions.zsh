@@ -38,4 +38,4 @@ _g () {
 compdef _g git
 compdef '_dispatch git git' g
 
-compdef '_cd' tmux-claude
+compdef '_cd' tmux-claude tmux-codex emptywt
