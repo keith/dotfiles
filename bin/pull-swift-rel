@@ -3,4 +3,14 @@
 set -euo pipefail
 set -x
 
+checkout_root="$PWD"
+while [[ ! -f "$checkout_root/swift/utils/update-checkout" ]]; do
+  if [[ "$checkout_root" == / ]]; then
+    echo "Could not find swift/utils/update-checkout in this directory or its ancestors" >&2
+    exit 1
+  fi
+  checkout_root="$(dirname "$checkout_root")"
+done
+cd "$checkout_root"
+
 ./swift/utils/update-checkout --clone --scheme release/6.4.x

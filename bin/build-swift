@@ -3,6 +3,16 @@
 set -euo pipefail
 set -x
 
+checkout_root="$PWD"
+while [[ ! -f "$checkout_root/swift/utils/build-script" ]]; do
+  if [[ "$checkout_root" == / ]]; then
+    echo "Could not find swift/utils/build-script in this directory or its ancestors" >&2
+    exit 1
+  fi
+  checkout_root="$(dirname "$checkout_root")"
+done
+cd "$checkout_root"
+
 args=(
   --reconfigure
   --release-debuginfo
