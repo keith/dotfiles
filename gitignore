@@ -40,6 +40,7 @@
 /.hg/*
 /.metals
 /external
+4913
 \#*\#
 bazel_cache
 build.noindex
