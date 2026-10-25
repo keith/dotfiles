@@ -29,6 +29,7 @@ hyprland_packages=(
   pipewire-alsa # audio
   pipewire-audio # audio
   pipewire-pulse # audio
+  rtkit # realtime audio scheduling
   slurp # screenshots
   sound-theme-freedesktop # Sounds for testing volume changes
   thunar
