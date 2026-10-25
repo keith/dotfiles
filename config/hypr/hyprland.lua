@@ -35,6 +35,7 @@ hl.config {
       natural_scroll = true,
       tap_to_click = false,
       clickfinger_behavior = true,
+      scroll_factor = 0.2,
     },
   },
 
