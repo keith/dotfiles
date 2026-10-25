@@ -18,6 +18,7 @@ hyprland_packages=(
   keyd
   libnotify # notify-send
   loupe # image viewer
+  pinentry
   pipewire # audio
   pipewire-alsa # audio
   pipewire-audio # audio
