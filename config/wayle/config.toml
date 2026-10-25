@@ -8,7 +8,7 @@ monitor = "*"
 show = true
 left = ["power", "hyprland-workspaces"]
 center = []
-right = ["systray", "idle-inhibit", "battery", "network", "volume", "notifications", "clock"]
+right = ["systray", "idle-inhibit", "battery", "bluetooth", "network", "volume", "notifications", "clock"]
 
 [modules.clock]
 format = "%a %b %e %H:%M"
@@ -34,6 +34,12 @@ icon-bg-color = "transparent"
 label-show = false
 
 [modules.battery]
+icon-color = "fg-default"
+icon-bg-color = "transparent"
+label-show = true
+label-color = "fg-default"
+
+[modules.bluetooth]
 icon-color = "fg-default"
 icon-bg-color = "transparent"
 label-show = false
