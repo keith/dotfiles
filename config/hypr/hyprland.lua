@@ -118,7 +118,7 @@ for i = 1, 9 do
 end
 
 hl.bind("ALT + " .. mod .. " + G", hl.dsp.exec_cmd "hypr-focus-or-launch google-chrome google-chrome-stable")
-hl.bind("ALT + " .. mod .. " + T", hl.dsp.exec_cmd "hypr-focus-or-launch Alacritty alacritty")
+hl.bind("ALT + " .. mod .. " + T", hl.dsp.exec_cmd "hypr-focus-or-launch com.mitchellh.ghostty ghostty")
 hl.bind("SHIFT + ALT + " .. mod .. " + A", hl.dsp.exec_cmd "flatpak run io.missioncenter.MissionCenter")
 hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd(launcher))
 
