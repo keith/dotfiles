@@ -11,11 +11,6 @@ case "$direction" in
     ;;
 esac
 
-state_dir="${XDG_RUNTIME_DIR:-/tmp}/hyprland-cycle-app"
-state_file="$state_dir/state"
-
-mkdir -p "$state_dir"
-
 active_window="$(hyprctl -j activewindow)"
 active_class="$(jq -r '.class // empty' <<<"$active_window")"
 
@@ -39,29 +34,21 @@ apps_json="$(
       | sort_by(.class, .focusHistoryID, .pid, .title, .address)
       | group_by(.class)
       | map(sort_by(.focusHistoryID, .pid, .title, .address)[0])
-      | sort_by(.focusHistoryID, .pid, .title, .address)
+      # Keep app order stable as focus history changes while cycling.
+      | sort_by(.class)
     '
 )"
 
 mapfile -t app_classes < <(jq -r '.[].class' <<<"$apps_json")
 
 if ((${#app_classes[@]} <= 1)); then
-  rm -f "$state_file"
   exit 0
 fi
 
 classes=("${app_classes[@]}")
 index=-1
 
-if [[ -r "$state_file" ]]; then
-  # shellcheck source=/dev/null
-  source "$state_file" || true
-fi
-
 start_class="$active_class"
-if [[ -n "${selected_class:-}" && "$active_class" == "$selected_class" ]]; then
-  start_class="$selected_class"
-fi
 
 for i in "${!classes[@]}"; do
   if [[ "${classes[$i]}" == "$start_class" ]]; then
@@ -99,11 +86,8 @@ target_address="$(
 )"
 
 if [[ -z "$target_address" ]]; then
-  rm -f "$state_file"
   exit 0
 fi
-
-printf 'selected_class=%q\n' "$target_class" >"$state_file"
 
 hyprctl dispatch "hl.dsp.focus({ window = \"address:$target_address\" })"
 hyprctl dispatch "hl.dsp.window.alter_zorder({ mode = \"top\", window = \"address:$target_address\" })"
