@@ -15,9 +15,13 @@ hyprland_packages=(
   hyprlock
   hyprpolkitagent
   hyprshutdown
+  inter-font
   keyd
   libnotify # notify-send
   loupe # image viewer
+  noto-fonts
+  noto-fonts-cjk
+  noto-fonts-emoji
   pinentry
   pipewire # audio
   pipewire-alsa # audio
@@ -26,6 +30,7 @@ hyprland_packages=(
   slurp # screenshots
   sound-theme-freedesktop # Sounds for testing volume changes
   thunar
+  ttf-mona-sans
   wireplumber # audio
   wl-clipboard
   xdg-desktop-portal-gtk
