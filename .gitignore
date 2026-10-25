@@ -19,6 +19,7 @@ vim/black
 /config/*
 
 !config/atuin/config.toml
+!config/darkman
 !config/icecast.xml
 !config/nvim
 !config/redshift.conf

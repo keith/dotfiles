@@ -1,0 +1,6 @@
+# Seattle: calculate sunrise/sunset locally without a location service.
+lat: 47.6
+lng: -122.3
+usegeoclue: false
+# GTK's existing settings portal publishes the preference set by desktop-theme.
+portal: false

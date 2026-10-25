@@ -4,6 +4,7 @@ set -euo pipefail
 
 hyprland_packages=(
   brightnessctl
+  darkman # switch desktop theme at sunrise/sunset
   flatpak
   greetd-tuigreet # login screen
   grim # screenshots
@@ -47,6 +48,9 @@ aur_packages=(
 )
 
 yay -S --noconfirm --needed "${aur_packages[@]}"
+
+systemctl --user daemon-reload
+systemctl --user enable --now darkman.service
 
 user=$USER
 sudo groupadd -f keyd
