@@ -80,11 +80,21 @@ dns=systemd-resolved
 EOF
 sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
+sudo install -d -m 0755 /etc/systemd/resolved.conf.d
+cat <<'EOF' | sudo tee /etc/systemd/resolved.conf.d/90-mdns.conf
+[Resolve]
+# Avahi owns mDNS announcements; resolved still handles .local lookups.
+MulticastDNS=resolve
+EOF
+sudo chmod 0644 /etc/systemd/resolved.conf.d/90-mdns.conf
+
 sudo systemctl disable --now systemd-networkd 2>/dev/null || true
 sudo systemctl enable --now NetworkManager systemd-resolved sshd
 sudo systemctl restart NetworkManager systemd-resolved sshd
 
+# Restart after resolved stops advertising to clear any hostname conflict suffix.
 sudo systemctl enable --now avahi-daemon
+sudo systemctl restart avahi-daemon
 
 go install github.com/bazelbuild/bazelisk@latest
 go install github.com/bazelbuild/buildtools/buildifier@latest
