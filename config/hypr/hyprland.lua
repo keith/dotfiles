@@ -71,8 +71,8 @@ hl.on("hyprland.start", function()
   hl.exec_cmd "wayle shell"
   hl.exec_cmd "ghostty"
 
-  -- Not sure if this needs to be last but feels right
-  hl.exec_cmd "dbus-update-activation-environment --systemd --all"
+  -- Import the session environment before starting idle and lock handling.
+  hl.exec_cmd "dbus-update-activation-environment --systemd --all && systemctl --user start hypridle.service"
 end)
 
 hl.window_rule {
