@@ -70,6 +70,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd "systemctl --user start hyprpolkitagent"
   hl.exec_cmd "wayle shell"
   hl.exec_cmd "vicinae server"
+  hl.exec_cmd "hyprsunset"
   hl.exec_cmd "ghostty"
 
   -- Import the session environment before starting idle and lock handling.

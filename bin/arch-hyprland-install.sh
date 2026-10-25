@@ -15,6 +15,7 @@ hyprland_packages=(
   hyprlock
   hyprpolkitagent
   hyprshutdown
+  hyprsunset
   inter-font
   keyd
   libnotify # notify-send
