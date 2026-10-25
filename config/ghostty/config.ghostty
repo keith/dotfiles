@@ -10,6 +10,7 @@ shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 maximize = true
 bell-features = false
 copy-on-select = false
+app-notifications = no-clipboard-copy
 clipboard-read = allow
 macos-option-as-alt = true
 
