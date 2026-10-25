@@ -68,7 +68,7 @@ cat <<'EOF' | sudo tee /etc/greetd/config.toml
 vt = 1
 
 [default_session]
-command = "tuigreet --time --remember --remember-session --asterisks --greeting 'Arch Linux' --cmd start-hyprland"
+command = "tuigreet --time --remember --asterisks --greeting 'Arch Linux' --cmd \"/usr/bin/zsh -lic 'exec /usr/bin/start-hyprland'\""
 user = "greeter"
 EOF
 
