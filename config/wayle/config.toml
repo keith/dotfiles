@@ -11,7 +11,7 @@ center = []
 right = ["systray", "idle-inhibit", "battery", "network", "volume", "notifications", "clock"]
 
 [modules.clock]
-format = "%a %b%e %H:%M"
+format = "%a %b %e %H:%M"
 icon-show = false
 label-color = "fg-default"
 
