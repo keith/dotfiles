@@ -7,6 +7,9 @@ hyprland_packages=(
   flatpak
   greetd-tuigreet # login screen
   grim # screenshots
+  gvfs
+  gvfs-dnssd
+  gvfs-smb
   hypridle
   hyprland
   hyprlock
@@ -21,6 +24,7 @@ hyprland_packages=(
   pipewire-pulse # audio
   slurp # screenshots
   sound-theme-freedesktop # Sounds for testing volume changes
+  thunar
   wireplumber # audio
   wl-clipboard
   xdg-desktop-portal-gtk
@@ -31,6 +35,7 @@ sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"
 
 aur_packages=(
   google-chrome
+  wayle-bin
 )
 
 yay -S --noconfirm --needed "${aur_packages[@]}"
