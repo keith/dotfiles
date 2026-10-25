@@ -14,8 +14,10 @@ packages=(
   colordiff
   ctags
   curl
+  dmidecode
   ethtool
   fd
+  fwupd
   fzf
   fzy
   gdb
