@@ -11,7 +11,6 @@ files=(\
   colordiffrc \
   conductor.js \
   config \
-  css \
   ctags \
   curlrc \
   gdbearlyinit \
@@ -46,7 +45,6 @@ files=(\
   vim \
   vimrc \
   w3m \
-  weechat \
   xvimrc \
   zshenv \
   zshrc \
