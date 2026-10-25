@@ -39,6 +39,7 @@ packages=(
   nmap
   nodejs
   openbsd-netcat
+  openssh
   parallel
   patchelf
   podman
