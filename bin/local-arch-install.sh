@@ -5,6 +5,7 @@ set -euo pipefail
 packages=(
   arp-scan
   autoconf
+  avahi
   base-devel
   bash
   bash-language-server
@@ -79,6 +80,8 @@ sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 sudo systemctl disable --now systemd-networkd 2>/dev/null || true
 sudo systemctl enable --now NetworkManager systemd-resolved sshd
 sudo systemctl restart NetworkManager systemd-resolved sshd
+
+sudo systemctl enable --now avahi-daemon
 
 go install github.com/bazelbuild/bazelisk@latest
 go install github.com/bazelbuild/buildtools/buildifier@latest
