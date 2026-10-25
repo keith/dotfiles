@@ -17,7 +17,16 @@ if [[ -n "${SSH_CLIENT:-}" ]]; then
 fi
 
 if [[ -x /usr/bin/xdg-open ]]; then
-  /usr/bin/xdg-open "$@"
+  output=$(mktemp)
+  trap 'rm -f "$output"' EXIT
+
+  if /usr/bin/xdg-open "$@" >"$output" 2>&1; then
+    exit 0
+  else
+    status=$?
+    cat "$output" >&2
+    exit "$status"
+  fi
 else
   /usr/bin/open "$@"
 fi
