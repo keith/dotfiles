@@ -140,6 +140,26 @@ hl.bind("CTRL + SHIFT + " .. mod .. " + 5", hl.dsp.exec_cmd "hyprland-screenshot
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd "hyprland-change-volume +", { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd "hyprland-change-volume -", { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd "hyprland-change-volume mute", { locked = true })
+hl.bind(
+  "XF86MonBrightnessUp",
+  hl.dsp.exec_cmd "brightnessctl -c backlight set +6.25%",
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "XF86MonBrightnessDown",
+  hl.dsp.exec_cmd "brightnessctl -c backlight set 6.25%-",
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "ALT + SHIFT + XF86MonBrightnessUp",
+  hl.dsp.exec_cmd "brightnessctl -c backlight set +1.5625%",
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "ALT + SHIFT + XF86MonBrightnessDown",
+  hl.dsp.exec_cmd "brightnessctl -c backlight set 1.5625%-",
+  { locked = true, repeating = true }
+)
 
 if hl.plugin and hl.plugin.hyprbars then
   hl.config {
