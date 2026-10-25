@@ -67,6 +67,7 @@ packages=(
   uv
   vim
   wget
+  wireless-regdb
   zip
   zsh
 )
