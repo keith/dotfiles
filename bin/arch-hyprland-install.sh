@@ -41,6 +41,7 @@ sudo pacman -S --noconfirm --needed "${hyprland_packages[@]}"
 
 aur_packages=(
   google-chrome
+  vicinae-bin
   wayle-bin
 )
 

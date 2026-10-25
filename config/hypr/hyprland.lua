@@ -1,5 +1,5 @@
 local mod = "SUPER"
-local launcher = "wofi --show drun"
+local launcher = "vicinae toggle"
 
 hl.monitor {
   output = "",
@@ -69,6 +69,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd "keyd-application-mapper -d"
   hl.exec_cmd "systemctl --user start hyprpolkitagent"
   hl.exec_cmd "wayle shell"
+  hl.exec_cmd "vicinae server"
   hl.exec_cmd "ghostty"
 
   -- Import the session environment before starting idle and lock handling.
