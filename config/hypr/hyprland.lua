@@ -80,6 +80,12 @@ hl.window_rule {
   float = true,
 }
 
+hl.window_rule {
+  name = "chrome-no-decorations",
+  match = { class = "google-chrome" },
+  decorate = false,
+}
+
 local speed = 2
 
 hl.curve("snappy", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })

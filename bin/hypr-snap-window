@@ -11,7 +11,8 @@ case "$side" in
     ;;
 esac
 
-active_monitor="$(hyprctl -j activewindow | jq -r '.monitor')"
+active_window="$(hyprctl -j activewindow)"
+active_monitor="$(jq -r '.monitor' <<<"$active_window")"
 if [[ -z "$active_monitor" || "$active_monitor" == "null" ]]; then
   echo "error: no active window" >&2
   exit 1
@@ -32,7 +33,12 @@ reserved_left="$(jq -r '.reserved[0] // 0' <<<"$monitor")"
 reserved_top="$(jq -r '.reserved[1] // 0' <<<"$monitor")"
 reserved_right="$(jq -r '.reserved[2] // 0' <<<"$monitor")"
 reserved_bottom="$(jq -r '.reserved[3] // 0' <<<"$monitor")"
-readonly titlebar_height=26
+# Undecorated windows do not need space for a hyprbars title bar.
+window_address="$(jq -r '.address' <<<"$active_window")"
+titlebar_height=0
+if [[ "$(hyprctl getprop "address:$window_address" decorate)" == "true" ]]; then
+  titlebar_height="$(hyprctl -j getoption plugin:hyprbars:bar_height | jq -r '.int // 0')"
+fi
 
 work_x="$((x + reserved_left))"
 work_y="$((y + reserved_top + titlebar_height))"
