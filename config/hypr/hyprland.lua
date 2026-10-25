@@ -25,6 +25,8 @@ hl.config {
   },
 
   input = {
+    repeat_delay = 200,
+    repeat_rate = 35,
     kb_layout = "us",
     kb_options = "caps:escape",
     follow_mouse = 0,
