@@ -141,6 +141,17 @@ hl.bind("CTRL + SHIFT + " .. mod .. " + 5", hl.dsp.exec_cmd "hyprland-screenshot
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd "hyprland-change-volume +", { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd "hyprland-change-volume -", { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd "hyprland-change-volume mute", { locked = true })
+-- Fn+F7/F8 adjust the keyboard backlight; the media keys adjust the display.
+hl.bind(
+  "F7",
+  hl.dsp.exec_cmd "brightnessctl -q -d 'chromeos::kbd_backlight' set 10%-",
+  { locked = true, repeating = true }
+)
+hl.bind(
+  "F8",
+  hl.dsp.exec_cmd "brightnessctl -q -d 'chromeos::kbd_backlight' set +10%",
+  { locked = true, repeating = true }
+)
 hl.bind(
   "XF86MonBrightnessUp",
   hl.dsp.exec_cmd "brightnessctl -c backlight set +6.25%",
