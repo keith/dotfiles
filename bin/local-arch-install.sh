@@ -63,6 +63,7 @@ packages=(
   tree-sitter-cli
   ufw
   unzip
+  usbutils
   uv
   vim
   wget
