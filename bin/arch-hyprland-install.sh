@@ -14,6 +14,7 @@ hyprland_packages=(
   hypridle
   hyprland
   hyprlock
+  hyprpm
   hyprpolkitagent
   hyprshutdown
   hyprsunset
