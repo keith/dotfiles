@@ -74,6 +74,9 @@ packages=(
 
 sudo pacman -S --noconfirm --needed "${packages[@]}"
 
+# Must happen in order for stub-resolv.conf to exist
+sudo systemctl enable --now systemd-resolved
+
 sudo mkdir -p /etc/NetworkManager/conf.d
 cat <<'EOF' | sudo tee /etc/NetworkManager/conf.d/dns.conf
 [main]
@@ -90,8 +93,14 @@ EOF
 sudo chmod 0644 /etc/systemd/resolved.conf.d/90-mdns.conf
 
 sudo systemctl disable --now systemd-networkd 2>/dev/null || true
-sudo systemctl enable --now NetworkManager systemd-resolved sshd
-sudo systemctl restart NetworkManager systemd-resolved sshd
+sudo systemctl enable --now NetworkManager sshd
+sudo systemctl restart NetworkManager sshd
+
+# Wait until DNS actually works
+until getent ahostsv4 github.com >/dev/null 2>&1; do
+  echo "Waiting for DNS..."
+  sleep 2
+done
 
 # Restart after resolved stops advertising to clear any hostname conflict suffix.
 sudo systemctl enable --now avahi-daemon
