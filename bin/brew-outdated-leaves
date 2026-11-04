@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export LC_ALL=C
+
+brew update --quiet
+
+outdated=$(brew outdated --formula -q | sort)
+leaves=$(brew leaves | sort)
+
+comm -12 <(printf '%s\n' "$outdated") <(printf '%s\n' "$leaves")
