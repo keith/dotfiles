@@ -9,10 +9,6 @@ sudo apt-get install -y \
   lm-sensors \
   nmap
 
-user=$USER
-sudo groupadd -f docker
-sudo usermod -a -G docker "$user"
-
 # Setup SysRq key to allow for emergency system commands (e.g., prioritize OOM
 # kill, kill all processes, etc.)
 echo 'kernel.sysrq=1' | sudo tee /etc/sysctl.d/99-sysrq.conf
