@@ -30,10 +30,11 @@ Defaults:%sudo env_keep += "EDITOR"
 Defaults:%sudo env_keep += "SUDO_EDITOR"
 Defaults:%sudo env_keep += "PATH"
 Defaults:%sudo !secure_path
+Defaults !pwfeedback
 EOF
 sudo visudo -cf "$sudoers_tmp"
 # NOTE: Can't have '.' in the file name
-sudo install -o root -g root -m 0440 "$sudoers_tmp" /etc/sudoers.d/env_keep_editor
+sudo install -o root -g root -m 0440 "$sudoers_tmp" /etc/sudoers.d/99-keith-overrides
 rm -f "$sudoers_tmp"
 
 # Needed for gpg-agent forwarding
