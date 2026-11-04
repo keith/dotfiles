@@ -18,6 +18,16 @@ sudo usermod -a -G docker "$user"
 echo 'kernel.sysrq=1' | sudo tee /etc/sysctl.d/99-sysrq.conf
 sudo sysctl -p /etc/sysctl.d/99-sysrq.conf
 
+# Allow a Git FSMonitor instance for each of many repositories and worktrees.
+echo 'fs.inotify.max_user_instances = 1024' | sudo tee /etc/sysctl.d/90-inotify.conf
+sudo sysctl -p /etc/sysctl.d/90-inotify.conf
+
+# Raise open-file limits for new login sessions.
+cat <<EOF | sudo tee "/etc/security/limits.d/90-$USER-nofile.conf"
+$USER soft nofile 65536
+$USER hard nofile 1048576
+EOF
+
 sudoers_tmp=$(mktemp)
 cat > "$sudoers_tmp" <<'EOF'
 Defaults:%sudo env_keep += "EDITOR"
