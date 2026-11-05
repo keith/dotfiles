@@ -43,6 +43,7 @@ packages=(
   nodejs
   openbsd-netcat
   openssh
+  pacman-contrib
   parallel
   patchelf
   podman
