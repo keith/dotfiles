@@ -78,6 +78,15 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # Set login window text
 sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "I'm sorry Dave, I'm afraid I can't do that"
 
+#
+# Displays
+#
+
+# Disable controlling nearby devices
+defaults -currentHost write com.apple.universalcontrol Disable -bool true
+# Disable mouse going off the screen to control something
+defaults -currentHost write com.apple.universalcontrol DisableMagicEdges -bool true
+
 
 #
 # Dock
