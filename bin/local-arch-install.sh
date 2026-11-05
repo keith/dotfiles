@@ -121,6 +121,7 @@ echo 'fs.inotify.max_user_instances = 1024' | sudo tee /etc/sysctl.d/90-inotify.
 sudo sysctl -p /etc/sysctl.d/90-inotify.conf
 
 # Raise open-file limits for new login sessions.
+sudo install -d -m 0755 /etc/security/limits.d
 cat <<EOF | sudo tee "/etc/security/limits.d/90-$USER-nofile.conf"
 $USER soft nofile 65536
 $USER hard nofile 1048576
